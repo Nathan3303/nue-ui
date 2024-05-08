@@ -6,7 +6,8 @@
   "scripts": {
     "play:dev": "pnpm --filter @nue-ui/play run dev",
     "docs:dev": "pnpm --filter @nue-ui/docs run dev",
-    "docs:build": "pnpm --filter @nue-ui/docs run build"
+    "docs:build": "pnpm --filter @nue-ui/docs run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
