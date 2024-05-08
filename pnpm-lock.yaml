@@ -42,6 +42,9 @@ importers:
       '@vue/tsconfig':
         specifier: ^0.5.1
         version: 0.5.1
+      postcss:
+        specifier: ^8.4.38
+        version: 8.4.38
       postcss-color-mix:
         specifier: ^1.1.0
         version: 1.1.0
@@ -97,6 +100,9 @@ importers:
 
   packages/docs:
     devDependencies:
+      postcss:
+        specifier: ^8.4.38
+        version: 8.4.38
       vitepress:
         specifier: ^1.1.4
         version: 1.1.4(@algolia/client-search@4.23.3)(@types/node@20.12.10)(postcss@8.4.38)(search-insights@2.13.0)(typescript@5.4.5)

@@ -1,0 +1,69 @@
+/* Variables */
+
+.nue-badge {
+    --color: white;
+    --font-size: 12px;
+    --font-weight: var(--mainly-font-weight);
+    --font-family: var(--mainly-font-family);
+
+    --background-color: #e96b36;
+    --border-color: #e35011;
+}
+
+/* Original styles */
+
+.nue-badge {
+    user-select: none;
+    transition: all 0.16s ease-in;
+
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .badge-content {
+        color: var(--color);
+        font-size: var(--font-size);
+        font-weight: var(--font-weight);
+        font-family: var(--font-family);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: var(--font-size);
+        padding: 4px 6px;
+        scale: 0.9;
+
+        border: 1px solid var(--border-color);
+        background-color: var(--background-color);
+        border-radius: var(--mainly-square-radius);
+
+        user-select: none;
+        z-index: 1;
+    }
+
+    & > sup {
+        position: absolute;
+        left: calc(100% - 12px);
+        bottom: calc(100% - 12px);
+
+        
+    }
+}
+
+.nue-badge--dot {
+    margin-right: 4px;
+
+    .badge-content {
+        scale: 1;
+        aspect-ratio: 1;
+        width: 13px;
+        padding: 0px;
+        border-radius: 10px;
+        border: 2px solid white;
+    }
+
+    & > sup {
+        left: calc(100% - 8px);
+        bottom: calc(100% - 8px);
+    }
+}

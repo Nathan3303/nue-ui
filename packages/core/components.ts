@@ -1,5 +1,45 @@
-import { NueButton } from "@nue-ui/components";
+import {
+    NueAvatar,
+    NueBadge,
+    NueButton,
+    NueCollapse,
+    NueCollapseItem,
+    NueContainer,
+    NueDiv,
+    NueDivider,
+    NueDrawer,
+    NueFooter,
+    NueHeader,
+    NueIcon,
+    NueInput,
+    NueLink,
+    NueMain,
+    NueMessageWrapper,
+    NuePopupWrapper,
+    NueText,
+    NueTextarea,
+} from "@nue-ui/components";
 
 import type { Plugin } from "vue";
 
-export default [NueButton] as Plugin[];
+export default [
+    NueAvatar,
+    NueBadge,
+    NueButton,
+    NueCollapse,
+    NueCollapseItem,
+    NueContainer,
+    NueDiv,
+    NueDivider,
+    NueDrawer,
+    NueFooter,
+    NueHeader,
+    NueIcon,
+    NueInput,
+    NueLink,
+    NueMain,
+    NueMessageWrapper,
+    NuePopupWrapper,
+    NueText,
+    NueTextarea,
+] as Plugin[];

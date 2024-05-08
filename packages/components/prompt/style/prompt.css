@@ -1,0 +1,115 @@
+/* Animations */
+
+@keyframes fade-in {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.48);
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Variables */
+
+.nue-prompt-inner {
+    --font-family: var(--mainly-font-family);
+}
+
+/* Original styles */
+
+.nue-prompt {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding-top: 8%;
+    background-color: rgba(0, 0, 0, 0.48);
+    overflow: hidden;
+    box-sizing: border-box;
+    animation: fade-in 0.16s ease-in 1 forwards;
+}
+
+.nue-prompt-inner {
+    display: flex;
+    flex-direction: column;
+    width: 32%;
+    min-width: 240px;
+    max-width: 480px;
+    padding: 16px;
+    border-radius: 5px;
+    background-color: #fff;
+    gap: 16px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    font-family: var(--font-family);
+
+    .nue-prompt__header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .nue-button--icon-only {
+            --icon-size: 14px;
+        }
+    }
+
+    .nue-prompt__content {
+        width: 100%;
+        flex: 1 1 auto;
+
+        .nue-prompt__label {
+            margin: 0;
+            margin-bottom: 8px;
+        }
+
+        .nue-prompt__value-error {
+            color: #f44336;
+            font-size: 14px;
+
+            &::before {
+                content: "*";
+            }
+        }
+    }
+
+    .nue-prompt__footer {
+        width: 100%;
+        display: flex;
+        align-self: center;
+        justify-content: end;
+        gap: 8px;
+
+        .nue-button {
+            min-width: 64px;
+        }
+
+        .nue-prompt__cancel-btn {
+            --background-color: #fff;
+            --border-color: #ccc;
+            --font-color: #333;
+            --hover-background-color: #f5f5f5;
+            --hover-border-color: #ccc;
+            --hover-text-color: #333;
+        }
+
+        .nue-prompt__confirm-btn {
+            --font-color: #fff;
+            --border-color: transparent;
+            --background-color: rgba(144, 144, 144, 0.6);
+            --hover-background-color: rgba(144, 144, 144, 0.8);
+            --active-background-color: rgba(144, 144, 144, 1);
+        }
+    }
+}

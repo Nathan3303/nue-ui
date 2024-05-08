@@ -1,0 +1,9 @@
+.nue-collapse {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &:deep(.nue-collapse-item):not(:last-of-type) {
+        border-bottom: none;
+    }
+}

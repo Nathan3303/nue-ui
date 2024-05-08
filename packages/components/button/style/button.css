@@ -1,0 +1,199 @@
+/* Animation */
+
+@-webkit-keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Variables */
+
+.nue-button {
+    --font-size: var(--mainly-font-size);
+    --font-color: var(--mainly-font-color);
+    --font-family: var(--mainly-font-family);
+    --font-weight: var(--mainly-font-weight);
+
+    --icon-size: var(--font-size);
+    --icon-color: var(--font-color);
+    --icon-weight: var(--font-weight);
+
+    --width: auto;
+    --line-height: var(--font-size);
+    --padding-x: var(--font-size);
+    --padding-y: calc(var(--font-size) / 2);
+    --height: calc(
+        var(--line-height) + var(--padding-y) * 2 +
+            calc(var(--border-width) * 2)
+    );
+    --flex: none;
+    --align-y: start;
+    --gap: 6px;
+
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: #cccccc;
+    --border-radius: var(--mainly-square-radius);
+    --background-color: transparent;
+
+    --hover-font-color: var(--font-color);
+    --hover-border-color: var(--border-color);
+    --hover-background-color: #cccccc55;
+
+    --active-font-color: var(--font-color);
+    --active-border-color: var(--border-color);
+    --active-background-color: #cccccc99;
+
+    --actived-font-color: var(--font-color);
+    --actived-border-color: var(--border-color);
+    --actived-background-color: var(--active-background-color);
+
+    --disable-font-color: var(--mainly-disable-font-color);
+    --disable-border-color: var(--border-color);
+    --disable-background-color: #cccccc99;
+}
+
+/* Original styles */
+
+.nue-button {
+    color: var(--font-color);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    font-family: var(--font-family);
+
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: var(--align-y);
+    gap: var(--gap);
+
+    width: var(--width);
+    height: var(--height);
+    line-height: var(--line-height);
+    padding: var(--padding-y) var(--padding-x);
+    flex: var(--flex);
+
+    border: var(--border-width) var(--border-style) var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.16s ease-out;
+    position: relative;
+    overflow: hidden;
+
+    .nue_button__append {
+        display: flex;
+        align-items: center;
+        gap: var(--gap);
+        margin-left: auto;
+    }
+
+    &:hover {
+        color: var(--hover-font-color);
+        background-color: var(--hover-background-color);
+        border-color: var(--hover-border-color);
+    }
+
+    &:active {
+        color: var(--active-font-color);
+        background-color: var(--active-background-color);
+        border-color: var(--active-border-color);
+    }
+
+    & > .loading-icon {
+        animation: 1.2s ease-in-out 0.16s infinite rotation;
+        -webkit-animation: 1.2s ease-in-out 0.16s infinite rotation;
+    }
+}
+
+.nue-button--square {
+    --border-radius: var(--mainly-square-radius);
+}
+
+.nue-button--round {
+    --border-radius: var(--height);
+}
+
+.nue-button--no-border {
+    --border-color: transparent;
+    --border-radius: var(--mainly-square-radius);
+}
+
+.nue-button--square-no-border {
+    --border-color: transparent;
+    --border-radius: var(--mainly-square-radius);
+}
+
+.nue-button--round-no-border {
+    --border-color: transparent;
+    --border-radius: var(--height);
+}
+
+.nue-button--no-shape {
+    --padding-x: 0px;
+    --padding-y: 0px;
+    --border-color: transparent;
+    --background-color: transparent;
+}
+
+.nue-button--disabled {
+    --font-color: var(--disable-font-color);
+    --background-color: var(--hover-background-color);
+    --active-background-color: var(--hover-background-color);
+    cursor: not-allowed;
+}
+
+/* Build-in styles */
+
+.nue-button--icon-only {
+    aspect-ratio: 1;
+    --font-size: 18px;
+    --padding-x: calc(var(--font-size) / 4);
+    --padding-y: calc(var(--font-size) / 4);
+    --border-width: 0px;
+    --border-color: transparent;
+
+    & span {
+        display: none;
+    }
+}
+
+.nue-button--text-only {
+    --padding-y: 2px;
+    --padding-x: 4px;
+    --border-color: transparent;
+    --background-color: transparent;
+
+    & i {
+        display: none;
+    }
+
+    &:hover {
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: var(--padding-y);
+            left: var(--padding-x);
+            width: calc(100% - var(--padding-x) * 2);
+            height: 1px;
+            background-color: var(--font-color);
+        }
+    }
+}
