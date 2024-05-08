@@ -24,7 +24,3 @@ const app = createApp(App);
 app.use(NueUI);
 app.mount("#app");
 ```
-
-## Gitee 仓库
-
-[https://gitee.com/nathan33/nue-uicomp](https://gitee.com/nathan33/nue-uicomp)
