@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "pnpm vite build --config vite.config.ts",
     "play:dev": "pnpm --filter @nue-ui/play dev",
     "docs:dev": "pnpm --filter @nue-ui/docs dev",
     "docs:build": "pnpm --filter @nue-ui/docs build",
