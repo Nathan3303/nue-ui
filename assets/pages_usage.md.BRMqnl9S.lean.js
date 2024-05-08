@@ -1,1 +1,0 @@
-import{_ as s,a,o as i,a9 as e}from"./chunks/framework.BO_MGmtT.js";const g=JSON.parse('{"title":"NueUI","description":"","frontmatter":{},"headers":[],"relativePath":"pages/usage.md","filePath":"pages/usage.md"}'),t={name:"pages/usage.md"},n=e("",9),p=[n];function h(l,k,r,o,d,c){return i(),a("div",null,p)}const E=s(t,[["render",h]]);export{g as __pageData,E as default};
