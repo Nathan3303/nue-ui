@@ -13,35 +13,19 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { parseTheme, parseFlexProp } from "@nue-ui/utils";
-import { type ShapeProp } from "@nue-ui/utils/types";
-import "../style/button.css";
+import type { ButtonPropsType } from "./types";
+import "./button.css";
 
-defineOptions({
-    name: "NueButton",
+defineOptions({ name: "NueButton" });
+
+const props = withDefaults(defineProps<ButtonPropsType>(), {
+    shape: "square",
+    disabled: false,
+    loading: false,
+    loadingIcon: "icon-loading",
+    align: "center",
+    flex: "none",
 });
-
-const props = withDefaults(
-    defineProps<{
-        theme?: string | string[];
-        shape?: ShapeProp;
-        icon?: string;
-        disabled?: boolean;
-        loading?: boolean;
-        loadingIcon?: string;
-        title?: string;
-        align?: string;
-        flex?: string;
-        size?: string;
-    }>(),
-    {
-        shape: "square",
-        disabled: false,
-        loading: false,
-        loadingIcon: "icon-loading",
-        align: "center",
-        flex: "none",
-    }
-);
 
 const style = computed(() => {
     const { flex } = props;
@@ -64,8 +48,7 @@ const classes = computed(() => {
 });
 
 const iconClasses = computed(() => {
-    const list: string[] = [];
-    list.push("iconfont");
+    const list: string[] = ["iconfont"];
     if (props.loading) {
         list.push(props.loadingIcon);
         list.push("loading-icon");

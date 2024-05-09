@@ -1,4 +1,4 @@
 import { withInstall } from "@nue-ui/utils";
-import Button from "./src/button.vue";
+import Button from "./button.vue";
 
 export const NueButton = withInstall(Button);
