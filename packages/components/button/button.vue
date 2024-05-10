@@ -1,60 +1,87 @@
 <template>
-    <button :class="classes" :disabled="disabled" :title="title" :style="style">
-        <i v-if="icon || loading" :class="iconClasses"></i>
-        <span v-if="$slots.default" class="nue_button__text">
+    <button
+        :title="title"
+        :disabled="disabled || loading"
+        :style="buttonStyles"
+        :class="buttonClasses"
+        @click.stop="handleClick">
+        <nue-icon
+            v-if="iconName"
+            :name="iconName"
+            :class="{ 'loading-icon': loading }" />
+        <div v-if="$slots.default" class="nue_button__text">
             <slot></slot>
-        </span>
-        <div v-if="$slots.append" class="nue_button__append">
-            <slot name="append"></slot>
         </div>
+        <slot name="append"></slot>
     </button>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import type { ButtonPropsType, ButtonEmitsType } from "./types";
 import { parseTheme, parseFlexProp } from "@nue-ui/utils";
-import type { ButtonPropsType } from "./types";
+import NueIcon from "../icon/src/icon.vue";
+import { computed, inject } from "vue";
+import { BUTTON_GROUP_CTX_KEY } from "../button-group/constants";
+import type { ButtonGroupCtxType } from "../button-group/types";
+import { throttle } from "@nue-ui/utils";
 import "./button.css";
 
 defineOptions({ name: "NueButton" });
 
+const ButtonGroupCtx = inject(BUTTON_GROUP_CTX_KEY, {} as ButtonGroupCtxType);
 const props = withDefaults(defineProps<ButtonPropsType>(), {
     shape: "square",
     disabled: false,
     loading: false,
-    loadingIcon: "icon-loading",
-    align: "center",
-    flex: "none",
+    loadingIcon: "loading",
+    useThrottle: false,
+    throttleDuration: 200,
+});
+const emit = defineEmits<ButtonEmitsType>();
+
+const iconName = computed(() => {
+    const { loading, loadingIcon, icon } = props;
+    return loading ? loadingIcon : icon;
 });
 
-const style = computed(() => {
-    const { flex } = props;
+const size = computed(() => {
+    return ButtonGroupCtx?.size || props?.size || undefined;
+});
+
+const disabled = computed(() => {
+    return ButtonGroupCtx?.disabled || props.disabled || false;
+});
+
+const buttonStyles = computed(() => {
+    const { flex, align } = props;
     return {
-        "--align-y": props.align,
-        "--font-size": props.size,
-        flex: parseFlexProp(flex),
+        "--align-y": align,
+        "--font-size": size.value,
+        "--flex": flex && parseFlexProp(flex),
     };
 });
 
-const classes = computed(() => {
+const buttonClasses = computed(() => {
+    const { theme, shape } = props;
     let list: string[] = [];
     let themeList: string[] = [];
     const prefix = "nue-button";
-    if (props.theme) themeList = parseTheme(props.theme, prefix);
+    if (theme) themeList = parseTheme(theme, prefix);
     list = [prefix, ...themeList];
-    list.push(`${prefix}--${props.shape}`);
-    if (props.disabled) list.push(`${prefix}--disabled`);
+    list.push(`${prefix}--${shape}`);
+    if (disabled.value) list.push(`${prefix}--disabled`);
     return list;
 });
 
-const iconClasses = computed(() => {
-    const list: string[] = ["iconfont"];
-    if (props.loading) {
-        list.push(props.loadingIcon);
-        list.push("loading-icon");
-        return list;
+const throttledClick = throttle((e: MouseEvent) => {
+    emit("click", e);
+}, props.throttleDuration);
+
+function handleClick(e: MouseEvent) {
+    if (props.useThrottle) {
+        throttledClick(e);
+    } else {
+        emit("click", e);
     }
-    if (props.icon) list.push(props.icon);
-    return list;
-});
+}
 </script>

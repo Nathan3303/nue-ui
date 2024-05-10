@@ -61,17 +61,30 @@ export function hasPercentageSign(value: string | number): boolean {
 }
 
 export function debounce(cb: Function, delay: number): Function {
-    let timer: number | null = null;
+    let timer: NodeJS.Timeout;
     return function (...args: any[]) {
-        if (timer) clearTimeout(timer as number);
+        if (timer) clearTimeout(timer);
         timer = setTimeout(() => {
             if (cb) cb.call(null, ...args);
-            clearTimeout(timer as number);
+            clearTimeout(timer);
+        }, delay);
+    };
+}
+
+export function throttle(cb: Function, delay: number): Function {
+    let timer: NodeJS.Timeout | null;
+    return function (...args: any[]) {
+        if (timer) return;
+        if (cb) cb.call(null, ...args);
+        timer = setTimeout(() => {
+            clearTimeout(timer as NodeJS.Timeout);
             timer = null;
         }, delay);
     };
 }
 
 export function generateId(length: number = 4) {
-    return Math.random().toString(36).slice(2, 2 + length);
+    return Math.random()
+        .toString(36)
+        .slice(2, 2 + length);
 }

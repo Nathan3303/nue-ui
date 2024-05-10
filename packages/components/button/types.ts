@@ -11,4 +11,10 @@ export type ButtonPropsType = {
     align?: string;
     flex?: string;
     size?: string;
+    useThrottle?: boolean;
+    throttleDuration?: number;
+};
+
+export type ButtonEmitsType = {
+    click: [payload: MouseEvent];
 };

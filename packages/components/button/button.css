@@ -97,12 +97,12 @@
     position: relative;
     overflow: hidden;
 
-    .nue_button__append {
+    /* .nue_button__append {
         display: flex;
         align-items: center;
         gap: var(--gap);
         margin-left: auto;
-    }
+    } */
 
     &:hover {
         color: var(--hover-font-color);
@@ -152,7 +152,8 @@
     --background-color: transparent;
 }
 
-.nue-button--disabled {
+.nue-button--disabled,
+.nue-button[disabled] {
     --font-color: var(--disable-font-color);
     --background-color: var(--hover-background-color);
     --active-background-color: var(--hover-background-color);
@@ -169,7 +170,7 @@
     --border-width: 0px;
     --border-color: transparent;
 
-    & span {
+    & .nue_button__text {
         display: none;
     }
 }

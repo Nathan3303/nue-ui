@@ -8,6 +8,10 @@ const changeLoadingState = () => {
         loadingState.value = false;
     }, 3000);
 };
+
+function handleClick() {
+    console.log("handleClick");
+}
 </script>
 <style scoped>
 .nue-button--custom {
@@ -117,16 +121,65 @@ const changeLoadingState = () => {
 :::
 
 <nue-div align="center">
-    <nue-button icon="icon-search">搜索</nue-button>
-    <nue-button icon="icon-mail">消息</nue-button>
+    <nue-button icon="search">搜索</nue-button>
+    <nue-button icon="mail">消息</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div align="center">
-        <nue-button icon="icon-search">搜索</nue-button>
-        <nue-button icon="icon-mail">消息</nue-button>
+        <nue-button icon="search">搜索</nue-button>
+        <nue-button icon="mail">消息</nue-button>
     </nue-div>
+</template>
+```
+
+## 按钮组及统一属性控制
+
+### 按钮组组件
+
+通过 `NueButtonGroup` 组件可以将多个按钮以按钮组的形式排列。
+
+<nue-button-group>
+    <nue-button icon="search">搜索</nue-button>
+    <nue-button icon="plus" disabled>添加</nue-button>
+    <nue-button icon="more">更多</nue-button>
+</nue-button-group>
+
+```vue
+<template>
+    <nue-button-group>
+        <nue-button icon="search">搜索</nue-button>
+        <nue-button icon="plus" disabled>添加</nue-button>
+        <nue-button icon="more">更多</nue-button>
+    </nue-button-group>
+</template>
+```
+
+### 统一属性控制
+
+按钮组组件 `NueButtonGroup` 接收 `size` 和 `disabled` 属性控制组中按钮的属性。
+
+-   `size` 用于控制按钮组中的按钮大小。
+-   `disabled` 用于控制按钮组中的按钮是否禁用。
+
+::: tip
+按钮组组件中对按钮的属性控制优先级高于按钮组组件自身的属性。
+:::
+
+<nue-button-group size="22px" disabled>
+    <nue-button icon="search">搜索</nue-button>
+    <nue-button icon="plus" :disabled="false">添加</nue-button>
+    <nue-button icon="more">更多</nue-button>
+</nue-button-group>
+
+```vue
+<template>
+    <nue-button-group size="22px" disabled>
+        <nue-button icon="search">搜索</nue-button>
+        <nue-button icon="plus" :disabled="false">添加</nue-button>
+        <nue-button icon="more">更多</nue-button>
+    </nue-button-group>
 </template>
 ```
 
@@ -139,7 +192,7 @@ const changeLoadingState = () => {
 `loading` 属性接受 `boolean` 类型的值，`true` 表示显示加载状态，`false` 表示隐藏加载状态。
 
 <nue-button
-icon="icon-search"
+icon="search"
 @click="changeLoadingState"
 :loading="loadingState">
 Search
@@ -148,7 +201,7 @@ Search
 ```vue
 <template>
     <nue-button
-        icon="icon-search"
+        icon="search"
         @click="changeLoadingState"
         :loading="loadingState">
         Search
@@ -164,6 +217,38 @@ const changeLoadingState = () => {
 </script>
 ```
 
+## 节流
+
+通过 `use-throttle` 属性启用节流模式，在一定时间间隔内只触发一次点击事件，默认值为 `false`。
+
+通过 `throttle-duration` 属性设置节流间隔，单位为 `ms`，默认值为 `200` 。
+
+<nue-button
+icon="search"
+use-throttle
+throttle-duration="250"
+@click="handleClick">
+Search
+</nue-button>
+
+```vue
+<template>
+    <nue-button
+        icon="search"
+        use-throttle
+        throttle-duration="250"
+        @click="handleClick">
+        Search
+    </nue-button>
+</template>
+<script setup>
+import { ref } from "vue";
+function handleClick() {
+    console.log("handleClick");
+}
+</script>
+```
+
 ### 自定义加载图标
 
 按钮可以自定义加载图标，通过 `loading-icon` 属性设置。
@@ -175,20 +260,20 @@ const changeLoadingState = () => {
 :::
 
 <nue-button
-icon="icon-search"
+icon="search"
 @click="changeLoadingState"
 :loading="loadingState"
-loading-icon="icon-target" >
+loading-icon="target" >
 Search
 </nue-button>
 
 ```vue
 <template>
     <nue-button
-        icon="icon-search"
+        icon="search"
         @click="changeLoadingState"
         :loading="loadingState"
-        loading-icon="icon-target">
+        loading-icon="target">
         Search
     </nue-button>
 </template>

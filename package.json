@@ -8,6 +8,7 @@
     "play:dev": "pnpm --filter @nue-ui/play dev",
     "docs:dev": "pnpm --filter @nue-ui/docs dev",
     "docs:build": "pnpm --filter @nue-ui/docs build",
+    "storybook": "pnpm --filter @nue-ui/play storybook",
     "test": "echo \"todo\""
   },
   "keywords": [],

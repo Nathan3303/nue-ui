@@ -7,7 +7,7 @@ export default defineConfig({
             entry: "./packages/core/index.ts",
             name: "nue-ui",
             formats: ["es"],
-            fileName: () => "nueui.js",
+            fileName: () => "index.js",
         },
         outDir: "./dist",
         target: "es2015",
