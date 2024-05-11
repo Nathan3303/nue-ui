@@ -12,49 +12,33 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { parseTheme, isNumber, addUnit } from "@nue-ui/utils";
-import "../style/avatar.css";
+import { parseTheme, isString } from "@nue-ui/utils";
+import type { AvatarPropsType, AvatarEmitsType } from "./types";
+import { AVATAR_SIZE_STRINGS_VALUE } from "./constants";
+import "./avatar.css";
 
 defineOptions({ name: "NueAvatar" });
 
-type fitPropType = "fill" | "cover" | "contain" | "none" | "scale-down";
+const props = withDefaults(defineProps<AvatarPropsType>(), {
+    size: "normal",
+    theme: "default",
+    shape: "square",
+    fit: "cover",
+});
+const emit = defineEmits<AvatarEmitsType>();
 
-const props = withDefaults(
-    defineProps<{
-        src?: string;
-        icon?: string;
-        size?: string | number;
-        theme?: string | string[];
-        shape?: "square" | "round";
-        title?: string;
-        fit?: fitPropType;
-    }>(),
-    {
-        size: "normal",
-        theme: "default",
-        shape: "square",
-        fit: "cover",
-    }
-);
-
-const emit = defineEmits(["error"]);
-
-const sizeStrValues: { [key: string]: number } = {
-    small: 24,
-    normal: 32,
-    medium: 40,
-    large: 48,
-};
 const loadError = ref(false);
 
 const size = computed(() => {
-    if (props.size) {
-        if (isNumber(props.size)) {
-            return addUnit(props.size as number);
-        } else {
-            return addUnit(sizeStrValues[props.size as string] as number);
-        }
+    const { size } = props;
+    const normalValue = AVATAR_SIZE_STRINGS_VALUE.normal;
+    let result = normalValue;
+    if (isString(size) && AVATAR_SIZE_STRINGS_VALUE.hasOwnProperty(size)) {
+        result = AVATAR_SIZE_STRINGS_VALUE[size];
+    } else {
+        result = size as number;
     }
+    return `${result}px`;
 });
 
 const wrapperStyle = computed(() => ({ "--size": size.value }));
@@ -67,7 +51,6 @@ const classList = computed(() => {
     let classArray: string[] = [];
     classArray = [prefix, ...parseTheme(theme, prefix)];
     classArray.push(`${prefix}--${shape}`);
-    // console.log(classArray);
     return classArray;
 });
 

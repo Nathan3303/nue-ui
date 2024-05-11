@@ -24,30 +24,28 @@
 
 ## 设置大小
 
-通过 `size` 属性设置头像的大小。
+通过 `size` 属性设置头像的大小。属性接受 `number` 类型以及一些 `string` 类型的可选值。
 
-`size` 属性接受 `string` 以及 `number` 类型的值。
+对于 `number` 类型的值，单位为 `px`，可设置任意大小；对于 `string` 类型的可选值包括 `tiny`、`small`、`normal*`、`medium` 以及 `large`，分别对应转换为 `28px`、`36px`、`42px`、`50px` 以及 `64px`。
 
-对于 `string` 类型的值，可选值为 `small`、`normal*`、`medium`、`large`，分别对应 24px、32px、40px、48px 四种尺寸。
-
-对于 `number` 类型的值，单位为 `px`，可设置任意大小。
+> 带有 `*` 表示为该属性的默认值
 
 <nue-div align="center">
-    <nue-avatar src="https://picsum.photos/200?3" size="small" />
-    <nue-avatar src="https://picsum.photos/200?4" size="normal" />
-    <nue-avatar src="https://picsum.photos/200?5" size="medium" />
-    <nue-avatar src="https://picsum.photos/200?6" size="large" />
-    <nue-avatar src="https://picsum.photos/200?7" :size="72" />
+    <nue-avatar src="https://picsum.photos/200?3" size="tiny" />
+    <nue-avatar src="https://picsum.photos/200?4" size="small" />
+    <nue-avatar src="https://picsum.photos/200?5" size="normal" />
+    <nue-avatar src="https://picsum.photos/200?6" size="medium" />
+    <nue-avatar src="https://picsum.photos/200?7" :size="64" />
 </nue-div>
 
 ```vue
 <template>
     <nue-div align="center">
-        <nue-avatar src="https://picsum.photos/200?3" size="small" />
-        <nue-avatar src="https://picsum.photos/200?4" size="normal" />
-        <nue-avatar src="https://picsum.photos/200?5" size="medium" />
-        <nue-avatar src="https://picsum.photos/200?6" size="large" />
-        <nue-avatar src="https://picsum.photos/200?7" :size="72" />
+        <nue-avatar src="https://picsum.photos/200?3" size="tiny" />
+        <nue-avatar src="https://picsum.photos/200?4" size="small" />
+        <nue-avatar src="https://picsum.photos/200?5" size="normal" />
+        <nue-avatar src="https://picsum.photos/200?6" size="medium" />
+        <nue-avatar src="https://picsum.photos/200?7" :size="64" />
     </nue-div>
 </template>
 ```
@@ -57,8 +55,6 @@
 通过 `shape` 属性设置组件形状。
 
 `shape` 属性接受 `circle`、`square*` 两个可选值，分别对应圆形和方形头像。
-
--   `*` 表示为该属性的默认值
 
 <nue-div>
     <nue-avatar src="https://picsum.photos/200?8" shape="round" />

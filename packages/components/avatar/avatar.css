@@ -1,3 +1,4 @@
+/* Variables */
 .nue-avatar {
     --size: 32px;
     --background-color: #c4c4c4;
@@ -10,7 +11,10 @@
     --icon-color: inherit;
     --icon-size: 14px;
     --icon-weight: normal;
+}
 
+/* Original Styles */
+.nue-avatar {
     box-sizing: border-box;
     aspect-ratio: 1;
 
