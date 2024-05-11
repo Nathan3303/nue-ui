@@ -1,17 +1,15 @@
 <script setup>
 import { ref } from "vue";
 
+const count = ref(0);
 const loadingState = ref(false);
+
 const changeLoadingState = () => {
     loadingState.value = true;
     setTimeout(() => {
         loadingState.value = false;
     }, 3000);
 };
-
-function handleClick() {
-    console.log("handleClick");
-}
 </script>
 <style scoped>
 .nue-button--custom {
@@ -217,38 +215,6 @@ const changeLoadingState = () => {
 </script>
 ```
 
-## 节流
-
-通过 `use-throttle` 属性启用节流模式，在一定时间间隔内只触发一次点击事件，默认值为 `false`。
-
-通过 `throttle-duration` 属性设置节流间隔，单位为 `ms`，默认值为 `200` 。
-
-<nue-button
-icon="search"
-use-throttle
-throttle-duration="250"
-@click="handleClick">
-Search
-</nue-button>
-
-```vue
-<template>
-    <nue-button
-        icon="search"
-        use-throttle
-        throttle-duration="250"
-        @click="handleClick">
-        Search
-    </nue-button>
-</template>
-<script setup>
-import { ref } from "vue";
-function handleClick() {
-    console.log("handleClick");
-}
-</script>
-```
-
 ### 自定义加载图标
 
 按钮可以自定义加载图标，通过 `loading-icon` 属性设置。
@@ -287,6 +253,28 @@ const changeLoadingState = () => {
 </script>
 ```
 
+## 节流
+
+通过 `use-throttle` 属性启用节流模式，默认值为 `false`。
+
+通过 `throttle-duration` 属性设置节流间隔，单位为 `ms`，默认值为 `200` 。
+
+<nue-button use-throttle :throttle-duration="360" @click="count++">
+Count: {{ count }}
+</nue-button>
+
+```vue
+<template>
+    <nue-button use-throttle :throttle-duration="360" @click="count++">
+        Count: {{ count }}
+    </nue-button>
+</template>
+<script setup>
+import { ref } from "vue";
+const count = ref(0);
+</script>
+```
+
 ## 添加自定义类名以及使用预设主题
 
 ### 添加自定义类名
@@ -299,11 +287,11 @@ const changeLoadingState = () => {
 添加后的类名为 `nue-button--` 加上 `theme` 属性的值。如 `theme="custom"`，则该类名为 `nue-button--custom`。
 :::
 
-<nue-button theme="custom" icon="icon-dianzan">点赞</nue-button>
+<nue-button theme="custom" icon="dianzan">点赞</nue-button>
 
 ```vue
 <template>
-    <nue-button theme="custom" icon="icon-dianzan">点赞</nue-button>
+    <nue-button theme="custom" icon="dianzan">点赞</nue-button>
 </template>
 <style scoped>
 .nue-button--custom {
@@ -324,15 +312,15 @@ const changeLoadingState = () => {
 预设主题包括 `icon-only` 和 `text-only`。
 
 <nue-div align="center">
-    <nue-button theme="icon-only" icon="icon-theme">IconOnly</nue-button>
-    <nue-button theme="text-only" icon="icon-theme">TextOnly</nue-button>
+    <nue-button theme="icon-only" icon="theme">IconOnly</nue-button>
+    <nue-button theme="text-only" icon="theme">TextOnly</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div>
-        <nue-button theme="icon-only" icon="icon-theme">IconOnly</nue-button>
-        <nue-button theme="text-only" icon="icon-theme">TextOnly</nue-button>
+        <nue-button theme="icon-only" icon="theme">IconOnly</nue-button>
+        <nue-button theme="text-only" icon="theme">TextOnly</nue-button>
     </nue-div>
 </template>
 ```
