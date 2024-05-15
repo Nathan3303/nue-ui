@@ -62,3 +62,11 @@ export function usePopupWrapper(id: string): popupWrapperFunctions | null {
 
     return { appendChild, removeChild };
 }
+
+export function getPopupWrapper(id: string) {
+    let wrapper = usePopupWrapper(id);
+    if (!wrapper) {
+        wrapper = createPopupWrapper();
+    }
+    return wrapper;
+}
