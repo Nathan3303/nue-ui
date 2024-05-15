@@ -9,7 +9,7 @@
             v-if="iconName"
             :name="iconName"
             :class="{ 'loading-icon': loading }" />
-        <div v-if="$slots.default" class="nue_button__text">
+        <div v-if="$slots.default" class="nue-button__text">
             <slot></slot>
         </div>
         <slot name="append"></slot>

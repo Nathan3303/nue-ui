@@ -120,44 +120,44 @@
         animation: 1.2s ease-in-out 0.16s infinite rotation;
         -webkit-animation: 1.2s ease-in-out 0.16s infinite rotation;
     }
-}
 
-.nue-button--square {
-    --border-radius: var(--mainly-square-radius);
-}
+    .nue-button--square {
+        --border-radius: var(--mainly-square-radius);
+    }
 
-.nue-button--round {
-    --border-radius: var(--height);
-}
+    .nue-button--round {
+        --border-radius: var(--height);
+    }
 
-.nue-button--no-border {
-    --border-color: transparent;
-    --border-radius: var(--mainly-square-radius);
-}
+    .nue-button--no-border {
+        --border-color: transparent;
+        --border-radius: var(--mainly-square-radius);
+    }
 
-.nue-button--square-no-border {
-    --border-color: transparent;
-    --border-radius: var(--mainly-square-radius);
-}
+    .nue-button--square-no-border {
+        --border-color: transparent;
+        --border-radius: var(--mainly-square-radius);
+    }
 
-.nue-button--round-no-border {
-    --border-color: transparent;
-    --border-radius: var(--height);
-}
+    .nue-button--round-no-border {
+        --border-color: transparent;
+        --border-radius: var(--height);
+    }
 
-.nue-button--no-shape {
-    --padding-x: 0px;
-    --padding-y: 0px;
-    --border-color: transparent;
-    --background-color: transparent;
-}
+    .nue-button--no-shape {
+        --padding-x: 0px;
+        --padding-y: 0px;
+        --border-color: transparent;
+        --background-color: transparent;
+    }
 
-.nue-button--disabled,
-.nue-button[disabled] {
-    --font-color: var(--disable-font-color);
-    --background-color: var(--hover-background-color);
-    --active-background-color: var(--hover-background-color);
-    cursor: not-allowed;
+    .nue-button--disabled,
+    .nue-button[disabled] {
+        --font-color: var(--disable-font-color);
+        --background-color: var(--hover-background-color);
+        --active-background-color: var(--hover-background-color);
+        cursor: not-allowed;
+    }
 }
 
 /* Build-in styles */
@@ -165,12 +165,12 @@
 .nue-button--icon-only {
     aspect-ratio: 1;
     --font-size: 18px;
-    --padding-x: calc(var(--font-size) / 4);
-    --padding-y: calc(var(--font-size) / 4);
+    --padding-x: calc(var(--font-size) / 3);
+    --padding-y: calc(var(--font-size) / 3);
     --border-width: 0px;
     --border-color: transparent;
 
-    & .nue_button__text {
+    .nue-button__text {
         display: none;
     }
 }
