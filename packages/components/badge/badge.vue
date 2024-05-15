@@ -12,24 +12,16 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { parseTheme, isString } from "@nue-ui/utils/";
-import "../style/badge.css";
+import type { BadgePropsType } from "./types";
+import "./badge.css";
 
 defineOptions({ name: "NueBadge" });
 
-const props = withDefaults(
-    defineProps<{
-        theme?: string | string[];
-        value?: string | number;
-        max?: number;
-        hidden?: boolean;
-        dot?: boolean;
-    }>(),
-    {
-        theme: "default",
-        hidden: false,
-        dot: false,
-    }
-);
+const props = withDefaults(defineProps<BadgePropsType>(), {
+    theme: "default",
+    hidden: false,
+    dot: false,
+});
 
 const classes = computed(() => {
     const prefix = "nue-badge";
