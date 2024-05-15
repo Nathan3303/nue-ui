@@ -97,13 +97,6 @@
     position: relative;
     overflow: hidden;
 
-    /* .nue_button__append {
-        display: flex;
-        align-items: center;
-        gap: var(--gap);
-        margin-left: auto;
-    } */
-
     &:hover {
         color: var(--hover-font-color);
         background-color: var(--hover-background-color);
@@ -121,38 +114,38 @@
         -webkit-animation: 1.2s ease-in-out 0.16s infinite rotation;
     }
 
-    .nue-button--square {
+    &.nue-button--square {
         --border-radius: var(--mainly-square-radius);
     }
 
-    .nue-button--round {
+    &.nue-button--round {
         --border-radius: var(--height);
     }
 
-    .nue-button--no-border {
+    &.nue-button--no-border {
         --border-color: transparent;
         --border-radius: var(--mainly-square-radius);
     }
 
-    .nue-button--square-no-border {
+    &.nue-button--square-no-border {
         --border-color: transparent;
         --border-radius: var(--mainly-square-radius);
     }
 
-    .nue-button--round-no-border {
+    &.nue-button--round-no-border {
         --border-color: transparent;
         --border-radius: var(--height);
     }
 
-    .nue-button--no-shape {
+    &.nue-button--no-shape {
         --padding-x: 0px;
         --padding-y: 0px;
         --border-color: transparent;
         --background-color: transparent;
     }
 
-    .nue-button--disabled,
-    .nue-button[disabled] {
+    &.nue-button--disabled,
+    &.nue-button[disabled] {
         --font-color: var(--disable-font-color);
         --background-color: var(--hover-background-color);
         --active-background-color: var(--hover-background-color);
@@ -197,4 +190,11 @@
             background-color: var(--font-color);
         }
     }
+}
+
+.nue-button--flat {
+    --border-color: transparent;
+    --background-color: #e2e2e2;
+    --hover-background-color: #d2d2d2;
+    --active-background-color: #c2c2c2;
 }

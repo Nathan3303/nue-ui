@@ -13,6 +13,7 @@ export type ButtonPropsType = {
     size?: string;
     useThrottle?: boolean;
     throttleDuration?: number;
+    flat?: boolean;
 };
 
 export type ButtonEmitsType = {

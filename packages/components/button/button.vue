@@ -62,7 +62,7 @@ const buttonStyles = computed(() => {
 });
 
 const buttonClasses = computed(() => {
-    const { theme, shape } = props;
+    const { theme, shape, flat } = props;
     let list: string[] = [];
     let themeList: string[] = [];
     const prefix = "nue-button";
@@ -70,6 +70,7 @@ const buttonClasses = computed(() => {
     list = [prefix, ...themeList];
     list.push(`${prefix}--${shape}`);
     if (disabled.value) list.push(`${prefix}--disabled`);
+    if (flat) list.push(`${prefix}--flag`);
     return list;
 });
 

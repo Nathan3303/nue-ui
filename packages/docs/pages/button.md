@@ -309,11 +309,12 @@ const count = ref(0);
 
 预设主题的使用依然是通过 `theme` 属性设置。
 
-预设主题包括 `icon-only` 和 `text-only`。
+预设主题包括 `icon-only`、 `text-only` 以及 `flat`。
 
 <nue-div align="center">
     <nue-button theme="icon-only" icon="theme">IconOnly</nue-button>
     <nue-button theme="text-only" icon="theme">TextOnly</nue-button>
+    <nue-button theme="flat" icon="theme">Flat</nue-button>
 </nue-div>
 
 ```vue
@@ -321,6 +322,7 @@ const count = ref(0);
     <nue-div>
         <nue-button theme="icon-only" icon="theme">IconOnly</nue-button>
         <nue-button theme="text-only" icon="theme">TextOnly</nue-button>
+        <nue-button theme="flat" icon="theme">Flat</nue-button>
     </nue-div>
 </template>
 ```
