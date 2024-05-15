@@ -1,0 +1,24 @@
+.nue-div {
+    --flex-direction: row;
+    --align-items: stretch;
+    --justify-content: start;
+    --flex-wrap: no-wrap;
+    --gap: 16px;
+
+    --flex: none;
+    --width: 100%;
+    --height: auto;
+}
+
+.nue-div {
+    display: flex;
+    flex-direction: var(--flex-direction);
+    align-items: var(--align-items);
+    justify-content: var(--justify-content);
+    flex-wrap: var(--flex-wrap);
+    gap: var(--gap);
+
+    flex: var(--flex);
+    width: var(--width);
+    height: var(--height);
+}

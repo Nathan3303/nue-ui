@@ -1,0 +1,56 @@
+/* Variabled */
+
+.nue-text {
+    --font-size: var(--mainly-font-size);
+    --font-color: var(--mainly-font-color);
+    --font-family: var(--mainly-font-family);
+    --font-weight: var(--mainly-font-weight);
+
+    --text-decoration: none;
+    --text-align: left;
+    --word-wrap: break-word;
+    --word-break: break-all;
+
+    --height: calc(
+        var(--line-height) + var(--padding-y) * 2 +
+            calc(var(--border-width) * 2)
+    );
+    --flex: none;
+
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: transparent;
+    --border-radius: var(--mainly-square-radius);
+    --background-color: transparent;
+}
+
+/* Original styles */
+
+.nue-text {
+    color: var(--font-color);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    font-family: var(--font-family);
+
+    text-decoration: var(--text-decoration);
+    text-align: var(--text-align);
+    word-wrap: var(--word-wrap);
+    word-break: var(--word-break);
+
+    height: var(--height);
+    flex: var(--flex);
+
+    border: var(--border-width) var(--border-style) var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+}
+
+/* Buit-in styles */
+
+.nue-text--code {
+    padding: 4px 6px;
+    background-color: #eee;
+    color: rgb(255, 0, 0) !important;
+    font-family: "Consolas";
+    border-radius: 6px;
+}

@@ -1,0 +1,125 @@
+/* Variables */
+
+.nue-link {
+    --font-size: var(--mainly-font-size);
+    --font-color: inherit;
+    --font-family: var(--mainly-font-family);
+    --font-weight: var(--mainly-font-weight);
+
+    --text-decoration: none;
+
+    --hover-font-color: #4141e7;
+    --hover-border-color: transparent;
+    --hover-background-color: transparent;
+    --hover-text-decoration: underline;
+
+    --disable-font-color: var(--mainly-disable-font-color);
+    --disable-border-color: var(--border-color);
+    --disable-background-color: #cccccc99;
+}
+
+.nue-link--btnlike {
+    --icon-size: var(--font-size);
+    --icon-color: var(--font-color);
+    --icon-weight: var(--font-weight);
+
+    --width: auto;
+    --line-height: var(--font-size);
+    --padding-x: calc(var(--font-size));
+    --padding-y: calc(var(--font-size) / 2);
+    --height: calc(
+        var(--line-height) + var(--padding-y) * 2 +
+            calc(var(--border-width) * 2)
+    );
+    --flex: none;
+    --align-y: start;
+
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: transparent;
+    --border-radius: var(--mainly-square-radius);
+    --background-color: transparent;
+
+    --hover-font-color: inherit;
+    --hover-border-color: transparent;
+    --hover-background-color: #cccccc99;
+    --hover-text-decoration: none;
+
+    --active-font-color: var(--font-color);
+    --active-border-color: var(--border-color);
+    --active-background-color: #cccccc99;
+
+    --actived-font-color: var(--font-color);
+    --actived-border-color: var(--border-color);
+    --actived-background-color: var(--active-background-color);
+}
+
+/* Original styles */
+
+.nue-link {
+    color: var(--font-color);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    font-family: var(--font-family);
+
+    cursor: pointer;
+    position: relative;
+    text-decoration: var(--text-decoration);
+
+    &:hover {
+        color: var(--hover-font-color);
+        background-color: var(--hover-background-color);
+        text-decoration: var(--hover-text-decoration);
+    }
+
+    &.nue-link--disabled {
+        --font-color: var(--disable-font-color);
+        --hover-font-color: var(--disable-font-color);
+        --background-color: var(--hover-background-color);
+        --active-background-color: var(--hover-background-color);
+        cursor: not-allowed;
+    }
+}
+
+/* Built-in styles */
+
+.nue-link--btnlike {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: var(--align-y);
+    gap: 6px;
+
+    width: var(--width);
+    height: var(--height);
+    line-height: var(--line-height);
+    padding: var(--padding-y) var(--padding-x);
+    flex: var(--flex);
+
+    border: var(--border-width) var(--border-style) var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+
+    user-select: none;
+    transition: all 0.16s ease-out;
+    overflow: hidden;
+
+    .nue-link__append {
+        display: flex;
+        align-items: center;
+        gap: var(--gap);
+        margin-left: auto;
+    }
+
+    &:active {
+        color: var(--active-font-color);
+        border-color: var(--active-border-color);
+        background-color: var(--active-background-color);
+    }
+
+    &.nue-link--actived {
+        color: var(--actived-font-color);
+        border-color: var(--actived-border-color);
+        background-color: var(--actived-background-color);
+    }
+}

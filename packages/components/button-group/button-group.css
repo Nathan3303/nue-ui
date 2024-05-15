@@ -1,0 +1,25 @@
+/* Variables */
+
+/* Original styles */
+.nue-button-group {
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    & > .nue-button {
+        border-radius: 0px;
+        margin-left: -1px;
+    }
+
+    & > .nue-button:first-child {
+        margin-left: 0px;
+        border-top-left-radius: var(--border-radius);
+        border-bottom-left-radius: var(--border-radius);
+    }
+
+    & > .nue-button:last-child {
+        border-top-right-radius: var(--border-radius);
+        border-bottom-right-radius: var(--border-radius);
+    }
+}

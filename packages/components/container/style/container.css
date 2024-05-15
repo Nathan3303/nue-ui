@@ -1,0 +1,21 @@
+.nue-container {
+    --container-height: 100%;
+    --header-height: 0px;
+    --footer-height: 0px;
+    --main-height: calc(
+        var(--container-height) - var(--header-height) - var(--footer-height)
+    );
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: var(--container-height);
+    overflow: hidden;
+    position: relative;
+
+    .nue-main {
+        flex: 1 1 auto;
+        height: var(--main-height);
+    }
+}
