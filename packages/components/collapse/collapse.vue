@@ -5,9 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import type { CollapsePropsType } from "./collapse";
+import type { CollapseEmitType, CollapsePropsType } from "./types";
 import { useCollapse } from "./collapse";
-import "../style/collapse.css";
 
 defineOptions({ name: "NueCollapse" });
 
@@ -15,9 +14,9 @@ const props = withDefaults(defineProps<CollapsePropsType>(), {
     accordion: false,
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits<CollapseEmitType>();
 
-const { activeItems, registActiveItem } = useCollapse(props, emit);
+const { activedItems, pushActivedItem } = useCollapse(props, emit);
 
-defineExpose({ activeItems, registActiveItem });
+defineExpose({ activedItems, pushActivedItem });
 </script>

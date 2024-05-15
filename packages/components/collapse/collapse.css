@@ -1,3 +1,13 @@
+.nue-collapse {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &:deep(.nue-collapse-item):not(:last-of-type) {
+        border-bottom: none;
+    }
+}
+
 .nue-collapse-item {
     --font-size: var(--mainly-font-size);
     --font-color: inherit;

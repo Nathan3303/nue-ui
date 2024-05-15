@@ -14,7 +14,7 @@
                 </div>
                 <nue-button
                     class="nue-collapse-item__toggle-button"
-                    icon="icon-arrow-down"
+                    icon="arrow-down"
                     shape="no-shape"
                     @click="handleCollapse" />
             </slot>
@@ -33,42 +33,41 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted, onUpdated, inject, computed } from "vue";
-import { NueButton } from "../../index";
-import type { CollapseContextType } from "./collapse";
-import "../style/collapse-item.css";
+import { COLLAPSE_CONTEXT_KEY } from "./constants";
+import NueButton from "../button/button.vue";
+import { generateId } from "@nue-ui/utils";
+import type {
+    CollapseContextType,
+    CollapseItemPropsType,
+    CollapseItemName,
+} from "./types";
 
-defineOptions({
-    name: "NueCollapseItem",
+defineOptions({ name: "NueCollapseItem" });
+
+const props = withDefaults(defineProps<CollapseItemPropsType>(), {
+    title: "",
+    hideWhenEmpty: false,
 });
 
-const props = withDefaults(
-    defineProps<{
-        title?: string;
-        name?: string | number;
-        hideWhenEmpty?: boolean;
-    }>(),
-    {
-        title: "",
-        hideWhenEmpty: false,
-    }
+const { activedItems, pushActivedItem } = inject(
+    COLLAPSE_CONTEXT_KEY,
+    {} as CollapseContextType
 );
-
 const contentRef = ref<HTMLDivElement>();
 const contentInnerRef = ref<HTMLDivElement>();
-const { activeItems, registActiveItem } =
-    inject<CollapseContextType>("collapseContext")!;
 const isHidden = ref(false);
-const timer = ref<number>();
+const timer = ref<NodeJS.Timeout>();
 
 const itemName = computed(() => {
-    return props.name || props.title;
+    const name = props.name || generateId();
+    return name as CollapseItemName;
 });
 const isCollapsed = computed(() => {
-    return !activeItems.value.includes(itemName.value);
+    return !activedItems.value.includes(itemName.value);
 });
 
 function handleCollapse() {
-    registActiveItem(itemName.value);
+    pushActivedItem(itemName.value);
 }
 
 function handleCollapseAnimation() {
@@ -109,5 +108,11 @@ onMounted(() => {
 
 onUpdated(() => {
     handleHideWhenEmpty();
+});
+
+defineExpose({
+    name: itemName,
+    isCollapsed,
+    handleCollapse,
 });
 </script>

@@ -1,5 +1,5 @@
-import Collapse from "./src/collapse.vue";
-import CollapseItem from "./src/collapse-item.vue";
+import Collapse from "./collapse.vue";
+import CollapseItem from "./collapse-item.vue";
 import { withInstall } from "@nue-ui/utils";
 
 export const NueCollapse = withInstall(Collapse);
