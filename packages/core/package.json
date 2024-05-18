@@ -29,17 +29,7 @@
     "build-umd": "vite build --config vite.umd.config.ts",
     "move-style": "move-file dist/es/index.css dist/index.css",
     "build-only": "run-p build-es build-umd",
-    "release": "release-it",
     "build": "run-s clean build-only move-style"
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release v${version}"
-    },
-    "github": {
-      "release": true,
-      "tokenRef": "RELEASE_IT"
-    }
   },
   "keywords": [],
   "author": "Nathan33",
