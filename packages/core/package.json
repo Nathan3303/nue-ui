@@ -1,11 +1,14 @@
 {
   "name": "nue-ui",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "Components library by Vue3 + TS",
   "type": "module",
   "main": "./dist/umd/index.umd.cjs",
   "module": "./dist/es/index.js",
   "types": "./dist/types/core/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "import": "./dist/es/index.js",
@@ -30,7 +33,7 @@
     "build": "run-s clean build-only move-style"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nathan33",
   "license": "ISC",
   "devDependencies": {
     "@nue-ui/components": "workspace:*",
