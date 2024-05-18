@@ -61,7 +61,7 @@ export function hasPercentageSign(value: string | number): boolean {
 }
 
 export function debounce(cb: Function, delay: number): Function {
-    let timer: NodeJS.Timeout;
+    let timer: number;
     return function (...args: any[]) {
         if (timer) clearTimeout(timer);
         timer = setTimeout(() => {
@@ -72,13 +72,12 @@ export function debounce(cb: Function, delay: number): Function {
 }
 
 export function throttle(cb: Function, delay: number): Function {
-    let timer: NodeJS.Timeout | null;
+    let timer: number;
     return function (...args: any[]) {
         if (timer) return;
         if (cb) cb.call(null, ...args);
         timer = setTimeout(() => {
-            clearTimeout(timer as NodeJS.Timeout);
-            timer = null;
+            clearTimeout(timer);
         }, delay);
     };
 }

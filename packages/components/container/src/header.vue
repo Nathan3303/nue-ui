@@ -29,9 +29,7 @@ import { computed } from "vue";
 import { parseWidthAndHeight } from "@nue-ui/utils";
 import "../style/header.css";
 
-defineOptions({
-    name: "NueHeader",
-});
+defineOptions({ name: "NueHeader" });
 
 const props = defineProps({
     height: {
@@ -42,12 +40,8 @@ const props = defineProps({
 
 const height = parseWidthAndHeight(props.height);
 const style = computed(() => {
-    return {
-        height,
-    };
+    return { height };
 });
 
-defineExpose({
-    height,
-});
+defineExpose({ height });
 </script>

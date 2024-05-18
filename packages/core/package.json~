@@ -1,6 +1,6 @@
 {
   "name": "nue-ui",
-  "version": "0.3.2",
+  "version": "0.3.1",
   "description": "Components library by Vue3 + TS",
   "type": "module",
   "main": "./dist/umd/index.umd.cjs",
@@ -21,13 +21,11 @@
     "./dist/index.css"
   ],
   "scripts": {
-    "clean": "rimraf dist",
     "build-es": "vite build --config vite.es.config.ts",
     "build-umd": "vite build --config vite.umd.config.ts",
     "move-style": "move-file dist/es/index.css dist/index.css",
     "build-only": "run-p build-es build-umd",
-    "release": "release-it",
-    "build": "run-s clean build-only move-style"
+    "build": "run-s build-only move-style"
   },
   "keywords": [],
   "author": "",

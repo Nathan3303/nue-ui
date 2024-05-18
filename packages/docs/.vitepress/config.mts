@@ -22,6 +22,7 @@ export default defineConfig({
                 text: "Basic 基础组件",
                 items: [
                     { text: "Button 按钮", link: "/pages/button.md" },
+                    { text: "Container 布局容器", link: "/pages/container.md" },
                     { text: "(Flex)Div 弹性盒", link: "/pages/div.md" },
                     { text: "Link 链接", link: "/pages/link.md" },
                 ],

@@ -6,7 +6,7 @@
                 <nue-button
                     icon="icon-clear"
                     theme="icon-only"
-                    @click.stop="handleClose" />
+                    @click.stop="handleClose()" />
             </slot>
         </div>
         <div class="nue-prompt__content">

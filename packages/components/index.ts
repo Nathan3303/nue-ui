@@ -9,6 +9,7 @@ export * from "./div";
 export * from "./divider";
 export * from "./drawer";
 export * from "./icon";
+export * from "./infinite-scroll";
 export * from "./input";
 export * from "./link";
 export * from "./popup-wrapper";

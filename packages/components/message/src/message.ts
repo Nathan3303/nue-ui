@@ -26,13 +26,13 @@ const wrappers = ref<HTMLElement[]>([]);
 const timer = ref<number>();
 let time = 0;
 
-function removeUselessWrappers() {
-    wrappers.value.forEach((wrapper) => {
-        if (wrapper.dataset.type === "external") {
-            wrapper.remove();
-        }
-    });
-}
+// function removeUselessWrappers() {
+//     wrappers.value.forEach((wrapper) => {
+//         if (wrapper.dataset.type === "external") {
+//             wrapper.remove();
+//         }
+//     });
+// }
 
 function createMessageWrapper(e: HTMLElement) {
     let wrapper: HTMLElement | null = null;

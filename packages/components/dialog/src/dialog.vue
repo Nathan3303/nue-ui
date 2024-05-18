@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { NueButton } from "@nue-ui/components";
+import { NueButton } from "../../button/index";
 
 defineOptions({ name: "NueDialog" });
 

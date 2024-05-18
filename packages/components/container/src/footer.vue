@@ -5,12 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import "../style/footer.css";
 
-defineOptions({
-    name: "NueFooter",
-});
+defineOptions({ name: "NueFooter", });
 
 const props = defineProps({
     height: {
@@ -20,8 +18,6 @@ const props = defineProps({
 });
 
 const style = computed(() => {
-    return {
-        height: props.height,
-    };
+    return { height: props.height, };
 });
 </script>

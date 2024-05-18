@@ -4,5 +4,5 @@ import "@nue-ui/theme/index.css";
 
 const installer = makeInstaller(components);
 
-export * from "@nue-ui/components";
+export * from "../components";
 export default installer;

@@ -56,7 +56,7 @@ const { activedItems, pushActivedItem } = inject(
 const contentRef = ref<HTMLDivElement>();
 const contentInnerRef = ref<HTMLDivElement>();
 const isHidden = ref(false);
-const timer = ref<NodeJS.Timeout>();
+const timer = ref<number>();
 
 const itemName = computed(() => {
     const name = props.name || generateId();
