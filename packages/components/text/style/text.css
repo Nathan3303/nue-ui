@@ -1,7 +1,7 @@
 /* Variabled */
 
 .nue-text {
-    --font-size: var(--mainly-font-size);
+    --font-size: 16px;
     --font-color: var(--mainly-font-color);
     --font-family: var(--mainly-font-family);
     --font-weight: var(--mainly-font-weight);
