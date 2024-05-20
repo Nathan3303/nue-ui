@@ -1,6 +1,8 @@
+/* Variables */
+
 .nue-div {
     --flex-direction: row;
-    --align-items: stretch;
+    --align-items: start;
     --justify-content: start;
     --flex-wrap: no-wrap;
     --gap: 16px;
@@ -10,6 +12,8 @@
     --height: auto;
 }
 
+/* Original styles */
+
 .nue-div {
     display: flex;
     flex-direction: var(--flex-direction);
@@ -17,7 +21,6 @@
     justify-content: var(--justify-content);
     flex-wrap: var(--flex-wrap);
     gap: var(--gap);
-
     flex: var(--flex);
     width: var(--width);
     height: var(--height);
