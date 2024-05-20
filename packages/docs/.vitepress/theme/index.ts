@@ -1,6 +1,5 @@
 import DefaultTheme from "vitepress/theme";
-import nueui from "nue-ui";
-import "nue-ui/dist/index.css";
+import nueui from "../../../core/index";
 
 export default {
     extends: DefaultTheme,

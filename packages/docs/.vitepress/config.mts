@@ -33,6 +33,10 @@ export default defineConfig({
                     { text: "Avatar 头像", link: "/pages/avatar.md" },
                     { text: "Badge 徽标", link: "/pages/badge.md" },
                     { text: "Collapse 折叠面板", link: "/pages/collapse.md" },
+                    {
+                        text: "Infinite Scroll 无限滚动",
+                        link: "/pages/infinite-scroll.md",
+                    },
                 ],
             },
             {
