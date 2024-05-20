@@ -1,99 +1,21 @@
 <template>
     <nue-container>
         <nue-header height="72px">
-            <template #logo>Logo</template>
-            <template #nav>
-                <nue-link>Link1</nue-link>
-                <nue-link>Link2</nue-link>
-                <nue-link>Link3</nue-link>
-                <nue-link>Link4</nue-link>
-            </template>
-            <template #ops>
-                <nue-button icon="search" shape="round" theme="icon-only" />
-            </template>
-            <template #user>
-                <nue-badge :value="4">
-                    <nue-avatar
-                        size="small"
-                        shape="round"
-                        src="https://picsum.photos/64/64" />
-                </nue-badge>
-            </template>
+            <template #logo>NueUI PlayGround</template>
         </nue-header>
-        <nue-main>
-            <template #aside>
-                <nue-text size="medium">Aside</nue-text>
-            </template>
+        <nue-main aside-width="240px">
+            <template #aside>Aside</template>
             <template #content>
-                <nue-div vertical>
-                    <nue-text size="medium">Content</nue-text>
-                    <nue-divider text="NueText" />
-                    <nue-text size="normal">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Aperiam animi maiores, commodi incidunt itaque
-                        doloribus voluptatibus iusto ullam ipsam temporibus.
-                        Eum, molestias. Sequi obcaecati id tenetur! Voluptate ea
-                        ipsum cumque.
-                    </nue-text>
-                    <nue-divider text="NueButton & NueButtonGroup" />
-                    <nue-div>
-                        <nue-button>Hello, World</nue-button>
-                        <nue-button>你好，世界</nue-button>
-                        <nue-button>こんにちは、世界</nue-button>
-                        <nue-button-group>
-                            <nue-button icon="search">Search</nue-button>
-                            <nue-button icon="plus">Add</nue-button>
-                            <nue-button icon="more">More</nue-button>
-                        </nue-button-group>
-                    </nue-div>
-                    <nue-divider text="NueLink" />
-                    <nue-div>
-                        <nue-link href="http://www.baidu.com" />
-                        <nue-link href="http://www.google.com" />
-                    </nue-div>
-                    <nue-divider text="NueAvatar" />
-                    <nue-div>
-                        <nue-avatar src="http://picsum.photos/64/64?1" />
-                        <nue-avatar
-                            shape="round"
-                            src="http://picsum.photos/64/64?2" />
-                    </nue-div>
-                    <nue-divider text="Collapse & CollapseItem" />
-                    <nue-collapse>
-                        <nue-collapse-item title="Item1">
-                            <nue-text size="medium">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Corporis cum quam, libero
-                                laborum repudiandae, iure autem, ipsum
-                                aspernatur illum facilis deserunt illo beatae!
-                                Perspiciatis deserunt dicta non quidem.
-                                Nesciunt, officia.
-                            </nue-text>
-                        </nue-collapse-item>
-                    </nue-collapse>
-                    <nue-divider text="NueInput & NueTextarea" />
-                    <nue-input
-                        width="100%"
-                        v-model="inputValue"
-                        placeholder="Input something here..." />
-                    <nue-textarea
-                        width="100%"
-                        v-model="textareaValue"
-                        placeholder="Input something here..." />
-                    <nue-divider text="NueConfirm & NueMessage & NuePrompt" />
-                    <nue-div>
-                        <nue-button @click="handleConfirm">Confirm</nue-button>
-                        <nue-button @click="handleMessage">Message</nue-button>
-                        <nue-button @click="handlePrompt">Prompt</nue-button>
-                    </nue-div>
-                    <nue-divider text="NueDrawer" />
-                    <nue-button @click="drawerVisible = true"
-                        >Drawer</nue-button
-                    >
-                    <nue-drawer v-model:visible="drawerVisible">
-                        <nue-text size="medium">Drawer Content</nue-text>
-                    </nue-drawer>
-                </nue-div>
+                <nue-collapse v-model="collapseValue">
+                    <nue-collapse-item
+                        title="Basic Components"
+                        name="basic-comp">
+                        <basic-comp></basic-comp>
+                    </nue-collapse-item>
+                    <nue-collapse-item title="Data Components" name="data-comp">
+                        <data-comp></data-comp>
+                    </nue-collapse-item>
+                </nue-collapse>
             </template>
         </nue-main>
         <nue-footer>Footer</nue-footer>
@@ -103,10 +25,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { NueConfirm, NueMessage, NuePrompt } from "nue-ui";
+import BasicComp from "./components/basic-comp.vue";
+import DataComp from "./components/data-comp.vue";
 
 const inputValue = ref("");
 const textareaValue = ref("");
 const drawerVisible = ref(false);
+
+const collapseValue = ref(["basic-comp", "data-comp"]);
 
 function handleConfirm() {
     const confirmOptions = {
