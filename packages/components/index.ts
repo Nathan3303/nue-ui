@@ -5,6 +5,7 @@ export * from "./button-group";
 export * from "./collapse";
 export * from "./confirm";
 export * from "./container";
+export * from "./dialog";
 export * from "./div";
 export * from "./divider";
 export * from "./drawer";

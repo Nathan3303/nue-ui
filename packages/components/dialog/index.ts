@@ -1,3 +1,4 @@
-import NueDialog from "./src/dialog.vue";
+import { withInstall } from "@nue-ui/utils";
+import Dialog from "./dialog.vue";
 
-export { NueDialog };
+export const NueDialog = withInstall(Dialog);

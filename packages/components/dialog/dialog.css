@@ -1,0 +1,93 @@
+/* Variabled */
+
+.nue-dialog-wrapper {
+    --dialog-width: 36%;
+    --dialog-min-width: 360px;
+}
+
+/* Original styles */
+
+.nue-dialog-wrapper {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    padding-top: 120px;
+    background-color: rgba(0, 0, 0, 0.48);
+    overflow: hidden;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: all 0.3s ease;
+
+    .nue-dialog {
+        display: flex;
+        flex-direction: column;
+        width: var(--dialog-width);
+        min-width: var(--dialog-min-width);
+        max-width: var(--dialog-width);
+        padding: 16px;
+        border-radius: 5px;
+        background-color: white;
+        gap: 16px;
+        font-family: var(--font-family);
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(-20px);
+
+        .nue-dialog__header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .nue-button--icon-only {
+                --icon-size: 14px;
+            }
+        }
+
+        .nue-dialog__content {
+            width: 100%;
+            flex: 1 1 auto;
+        }
+
+        .nue-dialog__footer {
+            width: 100%;
+            display: flex;
+            align-self: center;
+            justify-content: end;
+            gap: 8px;
+
+            .cancel-button {
+                --background-color: #fff;
+                --border-color: #ccc;
+                --font-color: #333;
+                --hover-background-color: #f5f5f5;
+                --hover-border-color: #ccc;
+                --hover-text-color: #333;
+            }
+
+            .confirm-button {
+                --font-color: #fff;
+                --border-color: transparent;
+                --background-color: rgba(144, 144, 144, 0.6);
+                --hover-background-color: rgba(144, 144, 144, 0.8);
+                --active-background-color: rgba(144, 144, 144, 1);
+            }
+        }
+    }
+}
+
+/* Animation */
+
+.nue-dialog-wrapper--open {
+    opacity: 1;
+
+    .nue-dialog {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
