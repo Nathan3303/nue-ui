@@ -1,7 +1,7 @@
-import Header from "./src/header.vue";
-import Container from "./src/container.vue";
-import Main from "./src/main.vue";
-import Footer from "./src/footer.vue";
+import Header from "./header.vue";
+import Container from "./container.vue";
+import Main from "./main.vue";
+import Footer from "./footer.vue";
 import { withInstall } from "@nue-ui/utils";
 
 export const NueHeader = withInstall(Header);

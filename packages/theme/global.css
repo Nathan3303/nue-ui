@@ -1,12 +1,12 @@
 :root {
     --mainly-font-size: 14px;
-    --mainly-font-color: #1a1a1b;
+    --mainly-font-color: #252525;
     --mainly-font-family: inherit;
     --mainly-font-weight: 400;
-
     --mainly-square-radius: 6px;
-
     --mainly-disable-font-color: #999999;
+    --mainly-border-color: #8a8a8a;
+
 }
 
 .nue-reset-html {

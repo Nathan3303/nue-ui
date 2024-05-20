@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import "../style/footer.css";
+import "./footer.css";
 
 defineOptions({ name: "NueFooter", });
 

@@ -1,0 +1,47 @@
+/* Variables */
+
+.nue-main {
+    --height: var(--main-height, 100vh);
+    --aside-width: 24%;
+    --aside-max-width: 30%;
+    --content-width: 100%;
+    --padding-x: 16px;
+
+    --aside-grow: 1;
+    --aside-gap: 16px;
+    --aside-border-color: var(--mainly-border-color);
+}
+
+/* Original styles */
+
+.nue-main {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--height);
+
+    .nue-main__aside {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        box-sizing: border-box;
+        flex-grow: var(--aside-grow);
+        gap: var(--aside-gap);
+        width: var(--aside-width);
+        min-width: var(--aside-width);
+        max-width: var(--aside-max-width);
+        padding: var(--padding-x);
+        box-shadow: 0px 1px 1px 0px var(--aside-border-color);
+    }
+
+    .nue-main__content {
+        overflow: auto;
+        box-sizing: border-box;
+        position: relative;
+        width: var(--content-width);
+        height: 100%;
+        padding: var(--padding-x);
+    }
+}
