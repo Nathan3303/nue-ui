@@ -11,9 +11,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "nue-ui": "0.3.4"
-  },
   "devDependencies": {
     "postcss": "^8.4.38",
     "vitepress": "^1.1.4"
