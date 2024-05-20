@@ -7,7 +7,8 @@
                 <nue-infinite-scroll
                     @load-more="loadMore"
                     :loading="loading"
-                    :disabled="disabled">
+                    :disabled="disabled"
+                    triggerHeight="200px">
                     <ul class="list">
                         <li class="node" v-for="i in itemsCount" :key="i">
                             {{ i }}

@@ -1,7 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 
-import nueui from "nue-ui";
-import "nue-ui/dist/index.css";
+import nueui from "../../core/index.ts";
 
 createApp(App).use(nueui).mount("#app");
