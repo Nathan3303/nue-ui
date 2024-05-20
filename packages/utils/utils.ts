@@ -34,6 +34,10 @@ export function isArray(value: any): boolean {
     return Array.isArray(value);
 }
 
+export function isFunction(value: any): boolean {
+    return typeof value === "function" && typeof value.call === "function";
+}
+
 /**
  * Check value is contain 'px' or not
  * @description 检测传入的值是否包含'px'
@@ -67,7 +71,7 @@ export function debounce(cb: Function, delay: number): Function {
         timer = setTimeout(() => {
             if (cb) cb.call(null, ...args);
             clearTimeout(timer);
-            timer = 0
+            timer = 0;
         }, delay) as unknown as number;
     };
 }
