@@ -1,6 +1,6 @@
 <template>
     <nue-div vertical>
-        <nue-button @click="handleOpenDialog">Open Dialog</nue-button>
+        <nue-button @click="dialogVisible = true">Open Dialog</nue-button>
         <nue-dialog
             v-model="dialogVisible"
             :before-confirm="handleBeforeConfirm">
@@ -36,14 +36,10 @@ const dialogData = reactive({
     content: "My Dialog Content",
 });
 
-function handleOpenDialog() {
-    dialogVisible.value = true;
-}
-
 function handleBeforeConfirm(done: () => void) {
     NueConfirm({
         title: "Confirm",
         content: "Are you sure to close the dialog?",
-    }).then(done);
+    }).then(done, () => {});
 }
 </script>

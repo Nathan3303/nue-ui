@@ -1,60 +1,31 @@
 <template>
-    <nue-div class="basic-comp" vertical>
-        <nue-div wrap align="center">
-            <nue-button>Button</nue-button>
-            <nue-button shape="round">Round Button</nue-button>
-            <nue-button disabled>Disblaed Button</nue-button>
-            <nue-button icon="chuangzuo">Icon Button</nue-button>
-            <nue-button
-                icon="search"
-                :loading="isSearching"
-                @click="handleSearch">
-                Loading Button
-            </nue-button>
-            <nue-button
-                use-throttle
-                :throttle-duration="360"
-                @click="handleThrottleClick">
-                Throttle Button ({{ count }})
-            </nue-button>
-            <nue-button-group>
-                <nue-button icon="search">Search</nue-button>
-                <nue-button icon="plus">Add</nue-button>
-                <nue-button icon="more">More</nue-button>
-            </nue-button-group>
-            <nue-link href="http://www.baidu.com" />
-            <nue-link href="http://www.google.com" disabled />
-            <nue-link theme="btnlike" icon="icon-target">Button Link</nue-link>
-            <nue-link :theme="['actived', 'btnlike']" icon="icon-target">
-                Actived Button Link
-            </nue-link>
-            <nue-div vertical>
-                <nue-text size="normal">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Aperiam animi maiores, commodi incidunt itaque doloribus
-                    voluptatibus iusto ullam ipsam temporibus. Eum, molestias.
-                    Sequi obcaecati id tenetur! Voluptate ea ipsum cumque.
-                </nue-text>
-            </nue-div>
+    <nue-div class="basic-comp" vertical :divider="{}">
+        <!-- Button -->
+        <nue-div vertical>
+            <nue-text weight="bold" size="large">Button</nue-text>
+            <button-demo1></button-demo1>
+            <button-demo2></button-demo2>
+            <button-demo3></button-demo3>
+        </nue-div>
+        <!-- Link -->
+        <nue-div vertical>
+            <nue-text weight="bold" size="large">Link</nue-text>
+            <link-demo1></link-demo1>
+            <link-demo2></link-demo2>
+        </nue-div>
+        <!-- Text  -->
+        <nue-div vertical>
+            <nue-text weight="bold" size="large">Text</nue-text>
+            <text-demo1></text-demo1>
         </nue-div>
     </nue-div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-
-const isSearching = ref(false);
-const count = ref(0);
-
-function handleSearch() {
-    isSearching.value = true;
-    setTimeout(() => {
-        isSearching.value = false;
-    }, 2400);
-}
-
-function handleThrottleClick() {
-    // console.log("Throttle button clicked");
-    count.value++;
-}
+import ButtonDemo1 from "../components/button/demo1.vue";
+import ButtonDemo2 from "../components/button/demo2.vue";
+import ButtonDemo3 from "../components/button/demo3.vue";
+import LinkDemo1 from "../components/link/demo1.vue";
+import LinkDemo2 from "../components/link/demo2.vue";
+import TextDemo1 from "../components/text/demo1.vue";
 </script>
