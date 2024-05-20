@@ -13,6 +13,7 @@
 /* Original Styles */
 
 .infinite-scroll-wrapper {
+    width: 100%;
     height: var(--height);
     overflow: auto;
 
