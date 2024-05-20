@@ -1,17 +1,21 @@
 <template>
     <nue-div class="basic-comp" vertical>
         <nue-div wrap align="center">
-            <nue-button>Hello, World</nue-button>
-            <nue-button shape="round">你好，世界</nue-button>
-            <nue-button disabled>こんにちは、世界</nue-button>
+            <nue-button>Button</nue-button>
+            <nue-button shape="round">Round Button</nue-button>
+            <nue-button disabled>Disblaed Button</nue-button>
+            <nue-button icon="chuangzuo">Icon Button</nue-button>
             <nue-button
                 icon="search"
                 :loading="isSearching"
                 @click="handleSearch">
-                Search
+                Loading Button
             </nue-button>
-            <nue-button use-throttle :throttle-duration="360" @click="count++">
-                Count: {{ count }}
+            <nue-button
+                use-throttle
+                :throttle-duration="360"
+                @click="handleThrottleClick">
+                Throttle Button ({{ count }})
             </nue-button>
             <nue-button-group>
                 <nue-button icon="search">Search</nue-button>
@@ -20,7 +24,10 @@
             </nue-button-group>
             <nue-link href="http://www.baidu.com" />
             <nue-link href="http://www.google.com" disabled />
-            <nue-link theme="btnlike" icon="icon-target">Button like</nue-link>
+            <nue-link theme="btnlike" icon="icon-target">Button Link</nue-link>
+            <nue-link :theme="['actived', 'btnlike']" icon="icon-target">
+                Actived Button Link
+            </nue-link>
             <nue-div vertical>
                 <nue-text size="normal">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -44,5 +51,10 @@ function handleSearch() {
     setTimeout(() => {
         isSearching.value = false;
     }, 2400);
+}
+
+function handleThrottleClick() {
+    // console.log("Throttle button clicked");
+    count.value++;
 }
 </script>
