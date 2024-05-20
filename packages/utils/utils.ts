@@ -67,7 +67,7 @@ export function debounce(cb: Function, delay: number): Function {
         timer = setTimeout(() => {
             if (cb) cb.call(null, ...args);
             clearTimeout(timer);
-        }, delay);
+        }, delay) as unknown as number;
     };
 }
 
@@ -78,7 +78,7 @@ export function throttle(cb: Function, delay: number): Function {
         if (cb) cb.call(null, ...args);
         timer = setTimeout(() => {
             clearTimeout(timer);
-        }, delay);
+        }, delay) as unknown as number;
     };
 }
 
