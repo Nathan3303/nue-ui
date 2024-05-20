@@ -3,7 +3,5 @@ import nueui from "../../../core/index";
 
 export default {
     extends: DefaultTheme,
-    enhanceApp({ app }) {
-        app.use(nueui);
-    },
+    enhanceApp({ app }) { app.use(nueui) },
 };
