@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { parseSize, parseTheme } from "@nue-ui/utils";
+import { parseFlex, parseSize, parseTheme } from "@nue-ui/utils";
 import "../style/text.css";
 
 defineOptions({ name: "NueText" });
@@ -19,13 +19,15 @@ const props = withDefaults(
         decoration?: string;
         weight?: string | number;
         align?: string;
+        flex?: string;
     }>(),
     { tag: "span" }
 );
 
 const style = computed(() => {
-    const { color, decoration, weight, align, size } = props;
+    const { color, decoration, weight, align, size, flex } = props;
     let styleObject: {
+        "--flex"?: string;
         "--font-size"?: string | number;
         "--font-color"?: string;
         "--font-weight"?: string | number;
@@ -37,6 +39,7 @@ const style = computed(() => {
     if (weight) styleObject["--font-weight"] = weight;
     if (decoration) styleObject["--text-decoration"] = decoration;
     if (align) styleObject["--text-align"] = align;
+    styleObject["--flex"] = parseFlex(flex as string);
     return styleObject;
 });
 

@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import type { ButtonPropsType, ButtonEmitsType } from "./types";
-import { parseTheme, parseFlexProp } from "@nue-ui/utils";
+import { parseTheme, parseFlex } from "@nue-ui/utils";
 import NueIcon from "../icon/src/icon.vue";
 import { computed, inject } from "vue";
 import { BUTTON_GROUP_CTX_KEY } from "../button-group/constants";
@@ -57,7 +57,7 @@ const buttonStyles = computed(() => {
     return {
         "--align-y": align,
         "--font-size": size.value,
-        "--flex": flex && parseFlexProp(flex),
+        "--flex": flex && parseFlex(flex),
     };
 });
 

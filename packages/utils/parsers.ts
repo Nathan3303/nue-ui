@@ -71,8 +71,12 @@ export function addUnit(value: number): string {
     return `${value}px`;
 }
 
-
-export function parseFlexProp(value: string): string {
+export function parseFlex(value: string): string {
     if (value === "") return "auto";
+    return value;
+}
+
+export function parseFlexWrap(value: string): string {
+    if (value === "") return "wrap";
     return value;
 }

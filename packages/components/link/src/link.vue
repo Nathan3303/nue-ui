@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
-import { parseFlexProp, parseTheme } from "@nue-ui/utils";
+import { parseFlex, parseTheme } from "@nue-ui/utils";
 import "../style/link.css";
 
 defineOptions({ name: "NueLink" });
@@ -70,7 +70,7 @@ const classes = computed(() => {
 const style = computed(() => {
     const { flex, align, size } = props;
     let styleObj: { [key: string]: string | number } = {};
-    if (flex !== undefined) styleObj["--flex"] = parseFlexProp(flex);
+    if (flex !== undefined) styleObj["--flex"] = parseFlex(flex);
     if (align !== undefined) styleObj["--text-align"] = align;
     if (size !== undefined) styleObj["--font-size"] = size;
     return styleObj;

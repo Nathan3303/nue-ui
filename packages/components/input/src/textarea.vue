@@ -35,7 +35,7 @@ import {
     onBeforeUnmount,
     onMounted,
 } from "vue";
-import { parseTheme, debounce, parseFlexProp } from "@nue-ui/utils";
+import { parseTheme, debounce, parseFlex } from "@nue-ui/utils";
 import { type ShapeProp, type InputCounterProp } from "@nue-ui/utils/types";
 import wordCounter from "./word-counter.vue";
 import "../style/textarea.css";
@@ -102,7 +102,7 @@ const style = computed(() => {
         "--textarea-width": width === "auto" ? undefined : width,
         "--resize": resize ? "vertical" : undefined,
         "--font-size": size === "16px" ? undefined : size,
-        "--flex": flex === "none" ? undefined : parseFlexProp(flex),
+        "--flex": flex === "none" ? undefined : parseFlex(flex),
     };
 });
 
