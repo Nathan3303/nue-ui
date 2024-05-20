@@ -1,5 +1,5 @@
 {
-  "name": "nue-ui",
+  "name": "nue-ui-repo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,11 +15,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nue-ui/hooks": "workspace:*",
-    "@nue-ui/theme": "workspace:*",
-    "@nue-ui/utils": "workspace:*",
-    "lodash-es": "^4.17.21",
     "nue-ui": "workspace:*",
+    "@nue-ui/hooks": "workspace:*",
+    "@nue-ui/utils": "workspace:*",
+    "@nue-ui/theme": "workspace:*",
+    "@nue-ui/components": "workspace:*",
+    "lodash-es": "^4.17.21",
     "vue": "^3.4.27"
   },
   "devDependencies": {
@@ -36,7 +37,6 @@
     "postcss-each-variables": "^0.3.0",
     "postcss-for": "^2.1.1",
     "postcss-nested": "^6.0.1",
-    "release-it": "^17.2.1",
     "rimraf": "^5.0.7",
     "typescript": "^5.2.2",
     "vite": "^5.1.4",

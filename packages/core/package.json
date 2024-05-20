@@ -3,12 +3,15 @@
   "version": "0.3.4",
   "description": "Components library by Vue3 + TS",
   "type": "module",
-  "main": "./dist/umd/index.umd.cjs",
-  "module": "./dist/es/index.js",
-  "types": "./dist/types/core/index.d.ts",
   "files": [
     "dist"
   ],
+  "sideEffects": [
+    "./dist/index.css"
+  ],
+  "main": "./dist/umd/index.umd.cjs",
+  "module": "./dist/es/index.js",
+  "types": "./dist/types/core/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/es/index.js",
@@ -20,9 +23,6 @@
       "require": "./dist/"
     }
   },
-  "sideEffects": [
-    "./dist/index.css"
-  ],
   "scripts": {
     "clean": "rimraf dist",
     "build-es": "vite build --config vite.es.config.ts",
@@ -35,7 +35,6 @@
   "author": "Nathan33",
   "license": "ISC",
   "devDependencies": {
-    "@nue-ui/components": "workspace:*",
     "vite-plugin-dts": "^3.9.1"
   },
   "peerDependencies": {
