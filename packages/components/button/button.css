@@ -162,6 +162,7 @@
     --padding-y: calc(var(--font-size) / 3);
     --border-width: 0px;
     --border-color: transparent;
+    --align-y: center;
 
     .nue-button__text {
         display: none;
