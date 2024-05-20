@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { nextTick, ref, watch, computed } from "vue";
-import { NueButton } from "../button/index";
+import { NueButton } from "../button";
 import type { DialogPropsType, DialogEmitsType } from "./types";
 import { isFunction } from "@nue-ui/utils";
 import "./dialog.css";
@@ -71,26 +71,27 @@ function handleCloseAnimation(): Promise<boolean> {
     });
 }
 
-function handleConfirm() {
-    handleCloseAnimation()
-        .then(() => {
-            if (!isFunction(props.beforeConfirm)) return;
-            return new Promise((resolve, reject) => {
-                const done = () => resolve("done");
-                const back = () => reject("back");
-                props.beforeConfirm?.call(null, done, back);
-            });
-        })
-        .catch(() => {})
-        .then(() => {
-            emit("update:modelValue", false);
-        });
-}
-
 function handleCancel() {
     handleCloseAnimation().then(() => {
         emit("update:modelValue", false);
     });
+}
+
+async function handleConfirm() {
+    if (!isFunction(props.beforeConfirm)) {
+        emit("update:modelValue", false);
+        return;
+    }
+    try {
+        await new Promise((resolve) => {
+            const done = () => resolve(null);
+            props.beforeConfirm?.call(null, done);
+        });
+    } catch (e) {
+        e;
+    }
+    emit("confirm");
+    handleCancel();
 }
 
 watch(

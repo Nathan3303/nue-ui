@@ -33,7 +33,6 @@
         border-radius: 5px;
         background-color: white;
         gap: 16px;
-        font-family: var(--font-family);
         transition: all 0.3s ease;
         opacity: 0;
         transform: translateY(-20px);
@@ -51,7 +50,6 @@
 
         .nue-dialog__content {
             width: 100%;
-            flex: 1 1 auto;
         }
 
         .nue-dialog__footer {

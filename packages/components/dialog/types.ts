@@ -1,13 +1,11 @@
-export type DialogBeforeConfirmType = (
-    done: () => void,
-    back: () => void
-) => void;
+export type DialogBeforeConfirmType = (done: () => void) => void;
 
 export type DialogPropsType = {
     title?: string;
     modelValue?: boolean;
     width?: string;
     minWidth?: string;
+    theme?: string;
     beforeConfirm?: DialogBeforeConfirmType;
 };
 
