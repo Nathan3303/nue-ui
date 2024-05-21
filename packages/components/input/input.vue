@@ -1,6 +1,6 @@
 <template>
     <div :class="classes" :style="style">
-        <i v-if="icon" class="iconfont" :class="icon"></i>
+        <nue-icon v-if="icon" :name="icon" />
         <slot name="prefix">{{ prefix }}</slot>
         <input
             ref="inputRef"
@@ -21,17 +21,15 @@
             :mode="counter"
             :length="textLength"
             :maxlength="parseInt(maxlength || '0')" />
-        <div class="button-group" v-if="btnGroupVIF.isShowBtnGroup">
+        <div class="button-group" v-if="buttonGroupVisible">
             <i
                 class="iconfont"
                 :class="isShowPassword ? 'icon-eye' : 'icon-eye-off'"
-                v-if="btnGroupVIF.isShowPasswordShower"
-                v-show="modelValue"
+                v-if="passwordVisible"
                 @click.stop="() => switchIsShowPassword()"></i>
             <i
                 class="iconfont icon-clear"
-                v-if="btnGroupVIF.isShowClearableBtn"
-                v-show="modelValue"
+                v-if="clearButtonVisible"
                 @click.stop="handleClear"></i>
         </div>
     </div>
@@ -39,60 +37,27 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onBeforeUnmount, nextTick } from "vue";
-import { parseTheme, debounce } from "@nue-ui/utils";
+import { parseTheme, debounce, parseFlex } from "@nue-ui/utils";
 import { useBoolState } from "@nue-ui/hooks";
-import {
-    type InputTypeProp,
-    type InputCounterProp,
-    type ShapeProp,
-} from "@nue-ui/utils/types";
+import type { InputPropsType, InputEmitsType } from "./types";
+import { NueIcon } from "../index";
 import WordCounter from "./word-counter.vue";
-import "../style/input.css";
+import "./input.css";
 
-defineOptions({
-    name: "NueInput",
+defineOptions({ name: "NueInput" });
+
+const emit = defineEmits<InputEmitsType>();
+const props = withDefaults(defineProps<InputPropsType>(), {
+    type: "text",
+    shape: "square",
+    counter: "off",
+    debounceTime: 0,
 });
-
-const props = withDefaults(
-    defineProps<{
-        type?: InputTypeProp;
-        modelValue: string | number;
-        id?: string;
-        theme?: string | string[];
-        shape?: ShapeProp;
-        icon?: string;
-        prefix?: string;
-        suffix?: string;
-        placeholder?: string;
-        maxlength?: string;
-        disabled?: boolean;
-        readonly?: boolean;
-        clearable?: boolean;
-        allowShowPassword?: boolean;
-        counter?: InputCounterProp;
-        width?: string;
-        size?: string;
-        debounceTime?: number;
-        flex?: string;
-    }>(),
-    {
-        type: "text",
-        theme: "default",
-        shape: "square",
-        clearable: true,
-        allowShowPassword: true,
-        counter: "off",
-        width: "auto",
-        size: "16px",
-        debounceTime: 0,
-    }
-);
-
-const emit = defineEmits(["update:modelValue", "input", "blur"]);
 
 const inputRef = ref();
 const [isShowPassword, switchIsShowPassword] = useBoolState(false);
 const isComposing = ref(false);
+const textLength = ref(props.modelValue.toString().length);
 
 const classes = computed(() => {
     const prefix = "nue-input";
@@ -107,33 +72,29 @@ const style = computed(() => {
     return {
         "--width": width,
         "--font-size": size,
-        "--flex": flex === "" ? "1" : flex,
+        "--flex": parseFlex(flex),
     };
 });
 
-const btnGroupVIF = computed(() => {
-    const isShowPasswordShower =
-        props.type === "password" && props.allowShowPassword;
-    const isShowClearableBtn =
-        !props.disabled &&
-        !props.readonly &&
-        props.clearable &&
-        props.modelValue !== "";
-    const isShowBtnGroup = isShowPasswordShower || isShowClearableBtn;
-    return {
-        isShowPasswordShower,
-        isShowClearableBtn,
-        isShowBtnGroup,
-    };
+const passwordVisible = computed(() => {
+    const { type, allowShowPassword, modelValue } = props;
+    return type === "password" && allowShowPassword && modelValue !== "";
+});
+const clearButtonVisible = computed(() => {
+    const { disabled, readonly, clearable, modelValue } = props;
+    return !disabled && !readonly && clearable && modelValue !== "";
+});
+const buttonGroupVisible = computed(() => {
+    return passwordVisible.value || clearButtonVisible.value;
 });
 
-const debouncedUMV = debounce(() => {
+const debounceUpdater = debounce(() => {
     emit("update:modelValue", (inputRef.value as HTMLInputElement).value);
 }, props.debounceTime);
 
 function handleInput(e: Event) {
     if (isComposing.value) return;
-    debouncedUMV();
+    debounceUpdater();
     emit("input", e);
 }
 
@@ -143,7 +104,7 @@ function handleCompositionStart() {
 
 function handleCompositionEnd() {
     isComposing.value = false;
-    debouncedUMV();
+    debounceUpdater();
 }
 
 function handleClear() {
@@ -153,14 +114,13 @@ function handleClear() {
     });
 }
 
-const textLength = ref(props.modelValue.toString().length);
-const unWatch = watch(
+watch(
     () => props.modelValue,
     (newValue) => {
         textLength.value = newValue.toString().length;
-        // console.log(newValue);
     }
 );
+
 onBeforeUnmount(() => unWatch());
 
 defineExpose({ innerInputRef: inputRef });

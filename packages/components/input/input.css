@@ -1,0 +1,102 @@
+/* Variabled */
+
+@import url(./common.css);
+
+/* Original styles */
+
+.nue-input {
+    gap: var(--padding-x);
+    overflow: hidden;
+    min-width: var(--min-width);
+    height: var(--height);
+
+    & input {
+        display: flex;
+        flex: auto;
+        align-items: center;
+        min-width: calc(var(--font-size) * 5);
+        height: var(--input-line-height);
+        text-align: var(--text-align);
+    }
+
+    & .button-group {
+        display: flex;
+        align-items: center;
+        gap: var(--padding-x);
+        border-left: 1px solid var(--border-color);
+        padding-left: var(--padding-x);
+
+        & .iconfont {
+            transition: all 0.16s ease;
+            box-sizing: border-box;
+            aspect-ratio: 1;
+            cursor: pointer;
+            font-size: var(--button-size);
+            line-height: var(--button-size);
+            border-radius: 50%;
+            color: var(--button-color);
+            text-align: center;
+
+            &:hover {
+                color: var(--button-hover-color) !important;
+            }
+        }
+    }
+
+    & .word-counter {
+        padding-left: var(--padding-x);
+    }
+}
+
+.nue-input--square {
+    border-radius: var(--square-radius);
+}
+
+.nue-input--round {
+    padding-left: calc(var(--padding-x) + var(--padding-y));
+    padding-right: calc(var(--padding-x) + var(--padding-y));
+    border-radius: var(--height);
+}
+
+.nue-input--no-shape {
+    --width: auto;
+    --padding-x: 0px;
+    --padding-y: 0px;
+    --border-color: transparent;
+    --hover-border-color: transparent;
+    --focus-border-color: transparent;
+    --focus-shadow-color: transparent;
+    --disabled-border-color: transparent;
+}
+
+.nue-input--disabled {
+    color: var(--disabled-color);
+    cursor: not-allowed;
+    user-select: none;
+    background-color: var(--disabled-background-color);
+
+    --hover-border-color: var(--disabled-border-color);
+
+    & * {
+        cursor: not-allowed;
+    }
+}
+
+/* Built-in styles */
+
+.nue-input--linear {
+    --border-width: 0px;
+    --hover-border-color: #8ac7ab;
+    --focus-border-color: #42b983;
+    --focus-shadow-color: transparent;
+    --focus-background-color: transparent;
+
+    transition: all 0.3s;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    border-radius: 0px;
+
+    &:focus-within {
+        border-bottom: 2px solid #42b983;
+    }
+}

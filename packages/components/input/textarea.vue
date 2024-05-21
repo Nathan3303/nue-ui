@@ -35,49 +35,23 @@ import {
     onBeforeUnmount,
     onMounted,
 } from "vue";
+import type { TextareaPropsType } from "./types";
 import { parseTheme, debounce, parseFlex } from "@nue-ui/utils";
-import { type ShapeProp, type InputCounterProp } from "@nue-ui/utils/types";
 import wordCounter from "./word-counter.vue";
-import "../style/textarea.css";
+import "./textarea.css";
 
 defineOptions({ name: "NueTextarea" });
 
-const props = withDefaults(
-    defineProps<{
-        modelValue?: string;
-        id?: string;
-        placeholder?: string;
-        theme?: string | string[];
-        shape?: ShapeProp;
-        disabled?: boolean;
-        readonly?: boolean;
-        rows?: number;
-        resize?: boolean;
-        autosize?: boolean | { minRows?: number; maxRows?: number };
-        maxlength?: string;
-        counter?: InputCounterProp;
-        width?: string;
-        size?: string;
-        debounceTime?: number;
-        flex?: string;
-    }>(),
-    {
-        rows: 3,
-        theme: "default",
-        shape: "square",
-        disabled: false,
-        readonly: false,
-        resize: false,
-        autosize: false,
-        counter: "off",
-        width: "auto",
-        size: "16px",
-        debounceTime: 0,
-        flex: "none",
-    }
-);
-
 const emit = defineEmits(["update:modelValue"]);
+const props = withDefaults(defineProps<TextareaPropsType>(), {
+    shape: "square",
+    disabled: false,
+    readonly: false,
+    resize: false,
+    autosize: false,
+    counter: "off",
+    debounceTime: 0,
+});
 
 const textareaRef = ref();
 const backendTextareaRef = ref();
@@ -96,13 +70,16 @@ const classes = computed(() => {
 
 const style = computed(() => {
     const { width, rows, resize, size, flex } = props;
+    // return {
+    //     // "--overflow": autosize ? "hidden" : "auto",
+    //     "--rows": rows === 0 ? 999 : rows,
+    //     "--textarea-width": width === "auto" ? undefined : width,
+    //     "--resize": resize ? "vertical" : undefined,
+    //     "--font-size": size === "16px" ? undefined : size,
+    //     "--flex": flex === "none" ? undefined : parseFlex(flex),
+    // };
     return {
-        // "--overflow": autosize ? "hidden" : "auto",
-        "--rows": rows === 0 ? 999 : rows,
-        "--textarea-width": width === "auto" ? undefined : width,
-        "--resize": resize ? "vertical" : undefined,
-        "--font-size": size === "16px" ? undefined : size,
-        "--flex": flex === "none" ? undefined : parseFlex(flex),
+        "--rows": rows,
     };
 });
 

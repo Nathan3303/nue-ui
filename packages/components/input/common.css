@@ -1,0 +1,116 @@
+/* Variables */
+
+.nue-input,
+.nue-textarea {
+    --font-size: var(--mainly-font-size);
+    --font-color: inherit;
+    --font-family: var(--mainly-font-family);
+    --font-weight: var(--mainly-font-weight);
+
+    --width: auto;
+    --min-width: 80px;
+
+    --line-height: calc(var(--font-size) + 4px);
+    --padding-y: calc(var(--font-size) / 2);
+    --padding-x: var(--padding-y);
+    --height: calc(
+        var(--line-height) + var(--padding-y) * 2 +
+            calc(var(--border-width) * 2)
+    );
+
+    --border-width: 1px;
+    --border-color: #ccc;
+    --square-radius: 5px;
+    --background-color: transparent;
+    --input-line-height: var(--line-height);
+
+    --flex: none;
+    --text-align: left;
+
+    --hover-border-color: #6d94dd;
+    --hover-background-color: transparent;
+    --hover-shadow-color: transparent;
+
+    --focus-border-color: #6d94dd;
+    --focus-background-color: transparent;
+    --focus-shadow-color: #6d94dd;
+
+    --disabled-color: #999999;
+    --disabled-border-color: #cccccc;
+    --disabled-background-color: #f0f0f0;
+    --disabled-shadow-color: transparent;
+
+    --button-size: var(--font-size);
+    --button-color: var(--border-color);
+    --button-border-color: var(--border-color);
+    --button-hover-color: var(--hover-border-color);
+
+    --word-counter-height: calc(var(--font-size) - 4px);
+}
+
+/* Original styles */
+
+.nue-input,
+.nue-textarea {
+    display: flex;
+    align-items: center;
+    flex: var(--flex);
+    transition: all 0.16s ease;
+    user-select: none;
+    box-sizing: border-box;
+    position: relative;
+    color: var(--color);
+    font-size: var(--font-size);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
+    width: var(--width);
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    padding: var(--padding-y) var(--padding-x);
+
+    &:hover {
+        border-color: var(--hover-border-color);
+    }
+
+    &:focus-within {
+        border: 1px solid var(--focus-border-color);
+        background-color: var(--focus-background-color);
+        box-shadow: 0 0 3px 1px var(--focus-shadow-color);
+    }
+
+    input,
+    textarea {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        font-family: inherit;
+        line-height: var(--line-height);
+
+        &::-ms-reveal {
+            display: none;
+        }
+
+        &::-ms-clear {
+            display: none;
+        }
+
+        &::placeholder {
+            color: inherit;
+            opacity: 0.36;
+        }
+    }
+
+    .word-counter {
+        display: flex;
+        align-items: center;
+        flex: none;
+        opacity: 0.48;
+        font-size: calc(var(--font-size) - 4px);
+        height: var(--line-height);
+    }
+}
