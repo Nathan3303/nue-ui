@@ -1,0 +1,26 @@
+/* Variables */
+
+.nue-icon {
+    --font-size: var(--icon-size);
+    --line-height: var(--font-size);
+}
+
+/* Original styles */
+
+.nue-icon {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size);
+
+    &.iconfont {
+        height: var(--line-height);
+
+        &::before {
+            line-height: var(--line-height);
+            font-size: var(--font-size);
+            color: var(--icon-color);
+            font-weight: var(--icon-weight);
+            vertical-align: top;
+        }
+    }
+}
