@@ -12,6 +12,9 @@
                 <nue-link theme="btnlike" route="/feedback">
                     Feedback 反馈组件
                 </nue-link>
+                <nue-link theme="btnlike" route="/others">
+                    Others 其他组件
+                </nue-link>
             </template>
             <template #content>
                 <router-view></router-view>

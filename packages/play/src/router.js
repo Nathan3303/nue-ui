@@ -21,6 +21,11 @@ const routers = [
         name: "feedback",
         component: () => import("./views/feedback-view.vue"),
     },
+    {
+        path: "/others",
+        name: 'others',
+        component: () => import('./views/others-view.vue')
+    }
 ];
 
 const router = createRouter({
