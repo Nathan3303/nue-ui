@@ -18,6 +18,11 @@
             <nue-text weight="bold" size="large">Text</nue-text>
             <text-demo1></text-demo1>
         </nue-div>
+        <!-- Icon -->
+        <nue-div vertical>
+            <nue-text weight="bold" size="large">Icon</nue-text>
+            <icon-demo1></icon-demo1>
+        </nue-div>
     </nue-div>
 </template>
 
@@ -28,4 +33,5 @@ import ButtonDemo3 from "../components/button/demo3.vue";
 import LinkDemo1 from "../components/link/demo1.vue";
 import LinkDemo2 from "../components/link/demo2.vue";
 import TextDemo1 from "../components/text/demo1.vue";
+import IconDemo1 from "../components/icon/demo1.vue";
 </script>
