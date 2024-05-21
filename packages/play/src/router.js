@@ -25,6 +25,11 @@ const routers = [
         path: "/others",
         name: 'others',
         component: () => import('./views/others-view.vue')
+    },
+    {
+        path: "/form",
+        name: 'form',
+        component: () => import('./views/form-view.vue')
     }
 ];
 
