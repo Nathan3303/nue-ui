@@ -30,17 +30,3 @@
     }
 }
 
-* .iconfont {
-    --font-size: calc(var(--icon-size));
-    --line-height: calc(var(--font-size));
-
-    height: var(--line-height);
-
-    &::before {
-        line-height: var(--line-height);
-        font-size: var(--font-size);
-        color: var(--icon-color);
-        font-weight: var(--icon-weight);
-        vertical-align: top;
-    }
-}
