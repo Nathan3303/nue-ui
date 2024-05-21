@@ -4,14 +4,17 @@
             v-model="searchText"
             icon="search"
             placeholder="Search"
-            clearable />
+            clearable
+            counter="both"
+            maxlength="64" />
         <nue-input
             v-model="password"
             icon="mima"
             type="password"
             placeholder="Password"
             clearable
-            allow-show-password />
+            allow-show-password
+            shape="round" />
     </nue-div>
 </template>
 
