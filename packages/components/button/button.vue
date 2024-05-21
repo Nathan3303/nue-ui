@@ -17,13 +17,12 @@
 </template>
 
 <script setup lang="ts">
-import type { ButtonPropsType, ButtonEmitsType } from "./types";
-import { parseTheme, parseFlex } from "@nue-ui/utils";
-import NueIcon from "../icon/src/icon.vue";
 import { computed, inject } from "vue";
-import { BUTTON_GROUP_CTX_KEY } from "../button-group/constants";
+import type { ButtonPropsType, ButtonEmitsType } from "./types";
 import type { ButtonGroupCtxType } from "../button-group/types";
-import { throttle } from "@nue-ui/utils";
+import { parseTheme, parseFlex, throttle } from "@nue-ui/utils";
+import { BUTTON_GROUP_CTX_KEY } from "../button-group/constants";
+import { NueIcon } from "../icon";
 import "./button.css";
 
 defineOptions({ name: "NueButton" });
