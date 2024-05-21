@@ -3,19 +3,23 @@
         <div
             v-if="visible"
             class="nue-drawer-wrapper"
-            @click.stop="handleClickWrapper">
-            <div ref="drawerRef" class="nue-drawer" @click.stop="">
+            @click.stop="handleClickWrapper"
+            ref="drawerWrapperRef">
+            <div ref="drawerRef" class="nue-drawer" @click.stop>
                 <nue-container>
                     <nue-header>
                         <slot name="header" :close="handleClose">
-                            <nue-text size="medium" class="nue-drawer__title">
+                            <nue-text
+                                size="medium"
+                                class="nue-drawer__title"
+                                flex
+                                weight="bold">
                                 {{ title }}
                             </nue-text>
                             <nue-button
                                 class="edit-button"
-                                icon="icon-clear"
+                                icon="clear"
                                 theme="icon-only"
-                                shape="no-shape"
                                 @click.stop="handleClose" />
                         </slot>
                     </nue-header>
@@ -42,29 +46,22 @@ import {
     NueFooter,
     NueText,
     NueButton,
-} from "../../index";
-import "../style/drawer.css";
+} from "../index";
+import type { DrawerPropsType } from "./types";
+import { useDrawerZIndex } from "./drawer";
+import "./drawer.css";
 
 defineOptions({ name: "NueDrawer" });
 
 const visible = defineModel("visible");
-const props = withDefaults(
-    defineProps<{
-        title?: string;
-        span?: string;
-        minSpan?: string;
-        beforeClose?: (done: () => void) => void;
-        closeByButtonOnly?: boolean;
-        openFrom?: "left" | "right" | "top" | "bottom";
-    }>(),
-    {
-        span: "36%",
-        minSpan: "240px",
-        closeByButtonOnly: false,
-        openFrom: "right",
-    }
-);
+const props = withDefaults(defineProps<DrawerPropsType>(), {
+    span: "36%",
+    minSpan: "240px",
+    closeByButtonOnly: false,
+    openFrom: "right",
+});
 
+const drawerWrapperRef = ref<HTMLDivElement>();
 const drawerRef = ref<HTMLDivElement>();
 
 async function handleClose() {
@@ -181,7 +178,11 @@ function handleAnimation() {
 
 watchEffect(() => {
     if (visible.value) {
-        nextTick(() => handleAnimation());
+        nextTick(() => {
+            const zIndex = useDrawerZIndex();
+            drawerWrapperRef.value.style.zIndex = zIndex.toString();
+            handleAnimation();
+        });
     } else {
         handleAnimation();
     }

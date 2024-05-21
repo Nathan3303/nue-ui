@@ -16,10 +16,7 @@
 
         .nue-header {
             .nue-button--icon-only {
-                --icon-size: 18px;
-                &:hover {
-                    --icon-color: #007aff;
-                }
+                --icon-size: 16px;
             }
         }
     }
