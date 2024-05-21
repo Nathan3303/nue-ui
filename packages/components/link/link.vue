@@ -8,7 +8,7 @@
         :active-class="activeClass"
         v-bind="$attrs"
         :style="style">
-        <i v-if="icon" :class="['iconfont', icon]"></i>
+        <nue-icon v-if="icon" :name="icon"></nue-icon>
         <span>
             <slot>{{ href }}</slot>
         </span>
@@ -21,25 +21,13 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
 import { parseFlex, parseTheme } from "@nue-ui/utils";
-import "../style/link.css";
+import { NueIcon } from "../icon";
+import type { LinkPropsType } from "./types";
+import "./link.css";
 
 defineOptions({ name: "NueLink" });
 
-type RoutePropType = string | { name: string; params?: any } | undefined;
-
-const props = withDefaults(
-    defineProps<{
-        theme?: string | string[];
-        href?: string;
-        disabled?: boolean;
-        icon?: string;
-        route?: RoutePropType;
-        flex?: string;
-        align?: string;
-        size?: string;
-    }>(),
-    { disabled: false }
-);
+const props = withDefaults(defineProps<LinkPropsType>(), { disabled: false });
 
 const tag = ref("a");
 const to = ref<RoutePropType>("");
@@ -69,10 +57,10 @@ const classes = computed(() => {
 
 const style = computed(() => {
     const { flex, align, size } = props;
-    let styleObj: { [key: string]: string | number } = {};
-    if (flex !== undefined) styleObj["--flex"] = parseFlex(flex);
-    if (align !== undefined) styleObj["--text-align"] = align;
-    if (size !== undefined) styleObj["--font-size"] = size;
-    return styleObj;
+    return {
+        "--flex": flex,
+        "--text-align": align,
+        "--font-size": size,
+    };
 });
 </script>
