@@ -6,28 +6,28 @@
     --rows: 3;
     --overflow: auto;
     --resize: none;
-
-    --min-height: calc(var(--textarea-line-height) * var(--rows));
-
-    --textarea-line-height: var(--line-height);
+    --line-height: calc(var(--font-size) + 5px);
+    /* --min-height: calc(var(--line-height) * var(--rows)); */
     --height: calc(
         var(--line-height) * var(--rows) + var(--padding-y) * 2 +
-            calc(var(--border-width) * 2)
+            var(--border-width) * 2
     );
 }
 
 /* Original styles */
 
 .nue-textarea {
+    align-items: stretch;
     flex-direction: column;
     overflow: auto;
+    overflow-x: hidden;
+    height: auto;
 
     & textarea {
-        width: 100%;
-        max-height: calc(var(--line-height) * var(--rows));
         resize: var(--resize);
         overflow: var(--overflow);
-        word-break: break-all;
+        min-height: calc(var(--line-height));
+        max-height: calc(var(--line-height) * var(--rows));
     }
 
     & .backend-textarea {
@@ -35,6 +35,8 @@
         position: absolute;
         top: var(--padding-y);
         left: var(--padding-y);
+        z-index: -1;
+        opacity: 0;
     }
 
     & .word-counter {

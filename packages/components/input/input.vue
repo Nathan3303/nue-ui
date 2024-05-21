@@ -61,9 +61,10 @@ const textLength = ref(props.modelValue.toString().length);
 
 const classes = computed(() => {
     const prefix = "nue-input";
-    let list: string[] = [prefix, ...parseTheme(props.theme, prefix)];
-    list.push(`${prefix}--${props.shape}`);
-    if (props.disabled) list.push(`${prefix}--disabled`);
+    const { theme, shape, disabled } = props;
+    let list: string[] = [prefix, ...parseTheme(theme, prefix)];
+    list.push(`${prefix}--${shape}`);
+    if (disabled) list.push(`${prefix}--disabled`);
     return list;
 });
 
@@ -114,7 +115,7 @@ function handleClear() {
     });
 }
 
-watch(
+const unWatch = watch(
     () => props.modelValue,
     (newValue) => {
         textLength.value = newValue.toString().length;

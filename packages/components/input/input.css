@@ -2,13 +2,25 @@
 
 @import url(./common.css);
 
+.nue-input {
+    --row: 1;
+    --height: calc(
+        var(--line-height) + var(--padding-y) * 2 +
+            calc(var(--border-width) * 2)
+    );
+}
+
 /* Original styles */
 
 .nue-input {
     gap: var(--padding-x);
     overflow: hidden;
     min-width: var(--min-width);
-    height: var(--height);
+    /* height: var(--height); */
+
+    & .nue-icon {
+        --icon-color: var(--border-color);
+    }
 
     & input {
         display: flex;
@@ -17,6 +29,9 @@
         min-width: calc(var(--font-size) * 5);
         height: var(--input-line-height);
         text-align: var(--text-align);
+        -webkit-font-smoothing: antialiased; /* 针对WebKit浏览器 */
+        -moz-osx-font-smoothing: grayscale; /* 针对Firefox浏览器 */
+        text-rendering: optimizeLegibility; /* 通用的字体渲染优化 */
     }
 
     & .button-group {
@@ -46,39 +61,39 @@
     & .word-counter {
         padding-left: var(--padding-x);
     }
-}
 
-.nue-input--square {
-    border-radius: var(--square-radius);
-}
+    &.nue-input--square {
+        border-radius: var(--square-radius);
+    }
 
-.nue-input--round {
-    padding-left: calc(var(--padding-x) + var(--padding-y));
-    padding-right: calc(var(--padding-x) + var(--padding-y));
-    border-radius: var(--height);
-}
+    &.nue-input--round {
+        padding-left: calc(var(--padding-x) + 4px);
+        padding-right: calc(var(--padding-x) + 4px);
+        border-radius: var(--height);
+    }
 
-.nue-input--no-shape {
-    --width: auto;
-    --padding-x: 0px;
-    --padding-y: 0px;
-    --border-color: transparent;
-    --hover-border-color: transparent;
-    --focus-border-color: transparent;
-    --focus-shadow-color: transparent;
-    --disabled-border-color: transparent;
-}
+    &.nue-input--no-shape {
+        --width: auto;
+        --padding-x: 0px;
+        --padding-y: 0px;
+        --border-color: transparent;
+        --hover-border-color: transparent;
+        --focus-border-color: transparent;
+        --focus-shadow-color: transparent;
+        --disabled-border-color: transparent;
+    }
 
-.nue-input--disabled {
-    color: var(--disabled-color);
-    cursor: not-allowed;
-    user-select: none;
-    background-color: var(--disabled-background-color);
-
-    --hover-border-color: var(--disabled-border-color);
-
-    & * {
+    &.nue-input--disabled {
+        color: var(--disabled-color);
         cursor: not-allowed;
+        user-select: none;
+        background-color: var(--disabled-background-color);
+
+        --hover-border-color: var(--disabled-border-color);
+
+        & * {
+            cursor: not-allowed;
+        }
     }
 }
 

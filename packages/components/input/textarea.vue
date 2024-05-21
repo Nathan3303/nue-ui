@@ -78,8 +78,13 @@ const style = computed(() => {
     //     "--font-size": size === "16px" ? undefined : size,
     //     "--flex": flex === "none" ? undefined : parseFlex(flex),
     // };
+    const rowsValue = resize ? 999 : rows === 0 ? 999 : rows;
     return {
-        "--rows": rows,
+        "--rows": rowsValue,
+        "--width": width,
+        "--resize": resize ? "vertical" : undefined,
+        "--font-size": size,
+        "--flex": flex,
     };
 });
 
@@ -90,7 +95,7 @@ const updateModelValue = debounce(
 
 function handleAutosize(textareaValue: string) {
     if (!props.autosize) return;
-    console.log("autosize", textareaValue);
+    // console.log("autosize", textareaValue);
     backendTextareaRef.value.value = textareaValue;
     nextTick(() => {
         textareaRef.value.style.height =
