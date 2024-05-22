@@ -8,6 +8,8 @@ const drawer3Open = ref(false);
 const drawer4Open = ref(false);
 const drawer5Open = ref(false);
 const drawer6Open = ref(false);
+const drawer7Open = ref(false);
+const drawer8Open = ref(false);
 const drawer2From = ref("left");
 
 function handleDrawer2Open(openFrom) {
@@ -292,5 +294,58 @@ function beforeDrawer6Close(finish) {
         .then(() => finish())
         .catch(() => {});
 }
+</script>
+```
+
+## 连续打开多个抽屉
+
+抽屉组件可以连续使用，在同一个页面上可以打开多个抽屉，这些抽屉元素会根据打开顺序进行显示而非文档结构。
+
+<nue-div>
+    <nue-button @click="drawer7Open = true">打开抽屉1</nue-button>
+    <nue-button @click="drawer8Open = true">打开抽屉2</nue-button>
+</nue-div>
+<teleport to="body">
+    <nue-drawer
+        v-model:visible="drawer7Open"
+        title="抽屉1"
+        span="50%"
+        min-span="360px">
+        <nue-button @click="drawer8Open = true">打开抽屉2</nue-button>
+    </nue-drawer>
+    <nue-drawer
+        v-model:visible="drawer8Open"
+        title="抽屉2"
+        open-from="left">
+        <nue-button @click="drawer7Open = true">打开抽屉1</nue-button>
+    </nue-drawer>
+</teleport>
+
+```vue
+<template>
+    <nue-div>
+        <nue-button @click="drawer7Open = true">打开抽屉1</nue-button>
+        <nue-button @click="drawer8Open = true">打开抽屉2</nue-button>
+    </nue-div>
+    <teleport to="body">
+        <nue-drawer
+            v-model:visible="drawer7Open"
+            title="抽屉1"
+            span="50%"
+            min-span="360px">
+            <nue-button @click="drawer8Open = true">打开抽屉2</nue-button>
+        </nue-drawer>
+        <nue-drawer
+            v-model:visible="drawer8Open"
+            title="抽屉2"
+            open-from="left">
+            <nue-button @click="drawer7Open = true">打开抽屉1</nue-button>
+        </nue-drawer>
+    </teleport>
+</template>
+<script>
+import { ref } from "vue";
+const drawer7Open = ref(false);
+const drawer8Open = ref(false);
 </script>
 ```
