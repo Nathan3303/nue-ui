@@ -9,6 +9,7 @@ export * from "./dialog";
 export * from "./div";
 export * from "./divider";
 export * from "./drawer";
+export * from "./dropdown";
 export * from "./icon";
 export * from "./infinite-scroll";
 export * from "./input";
