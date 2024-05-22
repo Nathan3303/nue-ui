@@ -36,7 +36,7 @@ import {
     onMounted,
 } from "vue";
 import type { TextareaPropsType } from "./types";
-import { parseTheme, debounce, parseFlex } from "@nue-ui/utils";
+import { parseTheme, debounce } from "@nue-ui/utils";
 import wordCounter from "./word-counter.vue";
 import "./textarea.css";
 
@@ -45,10 +45,10 @@ defineOptions({ name: "NueTextarea" });
 const emit = defineEmits(["update:modelValue"]);
 const props = withDefaults(defineProps<TextareaPropsType>(), {
     shape: "square",
-    disabled: false,
-    readonly: false,
-    resize: false,
-    autosize: false,
+    // disabled: false,
+    // readonly: false,
+    // resize: false,
+    // autosize: false,
     counter: "off",
     debounceTime: 0,
 });
@@ -61,8 +61,10 @@ const isComposing = ref(false);
 const classes = computed(() => {
     const prefix = "nue-textarea";
     const { theme, shape, disabled, readonly } = props;
-    let list = [prefix, ...parseTheme(theme, prefix)];
+    let list: string[] = [];
+    list.push(prefix);
     list.push(`${prefix}--${shape}`);
+    if (theme) list.push(...parseTheme(theme, prefix));
     if (disabled) list.push(`${prefix}--disabled`);
     if (readonly) list.push(`${prefix}--readonly`);
     return list;

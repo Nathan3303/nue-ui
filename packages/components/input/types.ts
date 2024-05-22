@@ -1,6 +1,6 @@
 import { type ShapeProp } from "@nue-ui/utils/types";
 
-export type InputType = "text" | "password" | "number" | "email" | "url";
+export type InputType = "text" | "password" | "number" | "email" | "textarea";
 export type InputCounterType = "off" | "word-limit" | "word-left" | "both";
 export type InputShapeType = "square" | "round" | "no-shape";
 
@@ -27,9 +27,9 @@ export type InputPropsType = {
 };
 
 export type InputEmitsType = {
-    (e: "update:modelValue", value: string | number): void;
-    (e: "input", value: InputEvent): void;
-    (e: "blur", value: FocusEvent): void;
+    (e: "update:modelValue", value: HTMLInputElement["value"]): void;
+    (e: "input", value: Event): void;
+    (e: "blur", value: Event): void;
 };
 
 export type TextareaPropsType = {

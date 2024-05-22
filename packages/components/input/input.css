@@ -24,8 +24,8 @@
 
     & input {
         display: flex;
-        flex: auto;
         align-items: center;
+        width: 100%;
         min-width: calc(var(--font-size) * 5);
         height: var(--input-line-height);
         text-align: var(--text-align);
@@ -86,6 +86,7 @@
     &.nue-input--disabled {
         color: var(--disabled-color);
         cursor: not-allowed;
+        -webkit-user-select: none;
         user-select: none;
         background-color: var(--disabled-background-color);
 

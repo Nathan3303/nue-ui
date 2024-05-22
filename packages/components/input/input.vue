@@ -1,7 +1,6 @@
 <template>
     <div :class="classes" :style="style">
         <nue-icon v-if="icon" :name="icon" />
-        <slot name="prefix">{{ prefix }}</slot>
         <input
             ref="inputRef"
             :id="id"
@@ -15,23 +14,19 @@
             @blur="emit('blur', $event)"
             @compositionstart="handleCompositionStart"
             @compositionend="handleCompositionEnd" />
-        <slot name="suffix">{{ suffix }}</slot>
         <word-counter
             v-if="type !== 'number' && counter !== 'off'"
             :mode="counter"
             :length="textLength"
             :maxlength="parseInt(maxlength || '0')" />
-        <div class="button-group" v-if="buttonGroupVisible">
-            <i
-                class="iconfont"
-                :class="isShowPassword ? 'icon-eye' : 'icon-eye-off'"
-                v-if="passwordVisible"
-                @click.stop="() => switchIsShowPassword()"></i>
-            <i
-                class="iconfont icon-clear"
-                v-if="clearButtonVisible"
-                @click.stop="handleClear"></i>
-        </div>
+        <nue-icon
+            v-if="passwordVisible"
+            :name="isShowPassword ? 'eye-off' : 'eye'"
+            @click.stop="() => switchIsShowPassword()" />
+        <nue-icon
+            v-if="clearButtonVisible"
+            name="clear"
+            @click.stop="handleClear" />
     </div>
 </template>
 
@@ -54,16 +49,18 @@ const props = withDefaults(defineProps<InputPropsType>(), {
     debounceTime: 0,
 });
 
-const inputRef = ref();
+const inputRef = ref<HTMLInputElement>();
 const [isShowPassword, switchIsShowPassword] = useBoolState(false);
 const isComposing = ref(false);
-const textLength = ref(props.modelValue.toString().length);
+const textLength = ref(0);
 
 const classes = computed(() => {
     const prefix = "nue-input";
     const { theme, shape, disabled } = props;
-    let list: string[] = [prefix, ...parseTheme(theme, prefix)];
+    let list: string[] = [];
+    list.push(prefix);
     list.push(`${prefix}--${shape}`);
+    if (theme) list.push(...parseTheme(theme, prefix));
     if (disabled) list.push(`${prefix}--disabled`);
     return list;
 });
@@ -73,7 +70,7 @@ const style = computed(() => {
     return {
         "--width": width,
         "--font-size": size,
-        "--flex": parseFlex(flex),
+        "--flex": flex ? parseFlex(flex) : undefined,
     };
 });
 
@@ -85,12 +82,10 @@ const clearButtonVisible = computed(() => {
     const { disabled, readonly, clearable, modelValue } = props;
     return !disabled && !readonly && clearable && modelValue !== "";
 });
-const buttonGroupVisible = computed(() => {
-    return passwordVisible.value || clearButtonVisible.value;
-});
 
 const debounceUpdater = debounce(() => {
-    emit("update:modelValue", (inputRef.value as HTMLInputElement).value);
+    if (!inputRef.value) return;
+    emit("update:modelValue", inputRef.value.value);
 }, props.debounceTime);
 
 function handleInput(e: Event) {
@@ -111,14 +106,15 @@ function handleCompositionEnd() {
 function handleClear() {
     emit("update:modelValue", "");
     nextTick(() => {
-        (inputRef.value as HTMLInputElement).focus();
+        if (!inputRef.value) return;
+        inputRef.value.focus();
     });
 }
 
 const unWatch = watch(
     () => props.modelValue,
     (newValue) => {
-        textLength.value = newValue.toString().length;
+        textLength.value = (newValue as string).length;
     }
 );
 

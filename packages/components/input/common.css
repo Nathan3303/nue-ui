@@ -15,7 +15,7 @@
     --padding-x: var(--padding-y);
 
     --border-width: 1px;
-    --border-color: #d9d9d9;
+    --border-color: #c6c6c6;
     --square-radius: 5px;
     --background-color: transparent;
     --input-line-height: var(--line-height);
@@ -52,6 +52,7 @@
     align-items: center;
     flex: var(--flex);
     transition: all 0.16s ease;
+    -webkit-user-select: none;
     user-select: none;
     box-sizing: border-box;
     position: relative;

@@ -4,15 +4,13 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { type InputCounterProp } from "@nue-ui/utils/types";
+import type { InputCounterType } from "./types";
 
-defineOptions({
-    name: "WordCounter",
-});
+defineOptions({ name: "WordCounter" });
 
 const props = withDefaults(
     defineProps<{
-        mode: InputCounterProp;
+        mode: InputCounterType;
         length: number;
         maxlength: number;
     }>(),
