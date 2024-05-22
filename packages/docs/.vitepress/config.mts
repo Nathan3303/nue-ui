@@ -40,6 +40,12 @@ export default defineConfig({
                 ],
             },
             {
+                text: "Navigation 导航组件",
+                items: [
+                    { text: "Dropdown 下拉菜单", link: "/pages/dropdown.md" },
+                ],
+            },
+            {
                 text: "Form 表单组件",
                 items: [
                     { text: "Input 输入框", link: "/pages/input.md" },
