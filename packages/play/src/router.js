@@ -23,14 +23,19 @@ const routers = [
     },
     {
         path: "/others",
-        name: 'others',
-        component: () => import('./views/others-view.vue')
+        name: "others",
+        component: () => import("./views/others-view.vue"),
     },
     {
         path: "/form",
-        name: 'form',
-        component: () => import('./views/form-view.vue')
-    }
+        name: "form",
+        component: () => import("./views/form-view.vue"),
+    },
+    {
+        path: "/navigation",
+        name: "navigation",
+        component: () => import("./views/navigation-view.vue"),
+    },
 ];
 
 const router = createRouter({

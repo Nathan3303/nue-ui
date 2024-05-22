@@ -8,8 +8,11 @@
                 <nue-link theme="btnlike" route="/basic">
                     Basic 基础组件
                 </nue-link>
-                <nue-link theme="btnlike" route="/data">Data 数据组件</nue-link>
                 <nue-link theme="btnlike" route="/form">Form 表单组件</nue-link>
+                <nue-link theme="btnlike" route="/data">Data 数据组件</nue-link>
+                <nue-link theme="btnlike" route="/navigation">
+                    Navigation 导航组件
+                </nue-link>
                 <nue-link theme="btnlike" route="/feedback">
                     Feedback 反馈组件
                 </nue-link>
