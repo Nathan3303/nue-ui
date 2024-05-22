@@ -4,6 +4,8 @@
         <div v-if="$slots.aside" class="nue-main__aside">
             <slot name="aside"></slot>
         </div>
+        <!-- Divider -->
+        <!-- <nue-divider direction="vertical" /> -->
         <!-- Content -->
         <div v-if="$slots.content" class="nue-main__content">
             <slot name="content"></slot>
@@ -14,37 +16,19 @@
 </template>
 
 <script setup lang="ts">
-import { useSlots, computed } from "vue";
+import { computed } from "vue";
+// import { NueDivider } from "../divider";
+import type { MainPropsType } from "./types";
 import "./main.css";
 
-defineOptions({
-    name: "NueMain",
-});
+defineOptions({ name: "NueMain" });
 
-const props = withDefaults(
-    defineProps<{
-        asideWidth?: string;
-        contentPadding?: string;
-    }>(),
-    {
-        asideWidth: "256px",
-        contentPadding: "16px",
-    }
-);
-
-const slots = useSlots();
-
-const asideWidth = computed(() => {
-    if (slots.aside) {
-        return props.asideWidth;
-    } else {
-        return "0px";
-    }
-});
+const props = withDefaults(defineProps<MainPropsType>(), {});
 
 const style = computed(() => {
+    const { asideWidth } = props;
     return {
-        "--aside-width": asideWidth.value,
+        "--aside-width": asideWidth,
         "--content-padding": props.contentPadding,
     };
 });

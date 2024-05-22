@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import type { ContainerPropsType } from "./types";
 import { generateId } from "@nue-ui/utils";
 import "./container.css";

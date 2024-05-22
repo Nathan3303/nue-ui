@@ -1,4 +1,4 @@
-/* Variables  */
+/* Variables */
 
 .nue-header {
     --height: 60px;
@@ -13,7 +13,9 @@
     flex: none;
     align-items: center;
     padding: 0px var(--padding-x);
-    box-shadow: 1px 0px 1px 0px var(--border-color);
+    border: none;
+    box-shadow: none;
+    border-bottom: 1px solid var(--border-color);
     box-sizing: border-box;
     height: var(--height);
     width: 100%;

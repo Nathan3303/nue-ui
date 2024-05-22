@@ -16,11 +16,13 @@
 
 .nue-main {
     display: flex;
+    align-items: stretch;
     flex-wrap: nowrap;
     overflow: hidden;
     box-sizing: border-box;
     width: 100%;
     height: var(--height);
+    position: relative;
 
     .nue-main__aside {
         display: flex;
@@ -33,8 +35,18 @@
         min-width: var(--aside-width);
         max-width: var(--aside-max-width);
         padding: var(--padding-x);
-        box-shadow: 0px 1px 1px 0px var(--aside-border-color);
+        border-right: 1px solid var(--aside-border-color);
     }
+
+    /* .nue-divider {
+        position: absolute;
+        left: calc(var(--aside-width) - 4px);
+        height: 100%;
+        padding: 0px 4px;
+        background-color: var(--mainly-border-color);
+        cursor: col-resize;
+        z-index: 12;
+    } */
 
     .nue-main__content {
         overflow: auto;

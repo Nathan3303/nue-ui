@@ -12,5 +12,6 @@ export type HeaderPropsType = {
 };
 
 export type MainPropsType = {
-    
-}
+    asideWidth?: string;
+    contentPadding?: string;
+};
