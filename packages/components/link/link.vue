@@ -22,7 +22,7 @@
 import { ref, computed, watch } from "vue";
 import { parseFlex, parseTheme } from "@nue-ui/utils";
 import { NueIcon } from "../icon";
-import type { LinkPropsType } from "./types";
+import type { LinkPropsType, RoutePropType } from "./types";
 import "./link.css";
 
 defineOptions({ name: "NueLink" });
@@ -58,7 +58,7 @@ const classes = computed(() => {
 const style = computed(() => {
     const { flex, align, size } = props;
     return {
-        "--flex": flex,
+        "--flex": flex ? parseFlex(flex) : undefined,
         "--text-align": align,
         "--font-size": size,
     };

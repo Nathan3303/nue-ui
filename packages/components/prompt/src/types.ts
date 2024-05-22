@@ -1,4 +1,4 @@
-import type { InputTypeProp } from "@nue-ui/utils";
+import type { InputType } from "../../input/types";
 
 export type CallbackType = (isConfirmed: boolean, payload: any) => void;
 export type ValidatorType = (value: any) => boolean;
@@ -8,7 +8,7 @@ export type PromptInnerPropsType = {
     title?: string;
     label?: string;
     placeholder?: string;
-    inputType?: InputTypeProp;
+    inputType?: InputType;
     confirmButtonText?: string;
     cancelButtonText?: string;
     callback: CallbackType;
@@ -20,7 +20,7 @@ export type PayloadType = {
     wrapperId?: string;
     title?: string;
     label?: string;
-    inputType?: InputTypeProp;
+    inputType?: InputType;
     placeholder?: string;
     confirmButtonText?: string;
     cancelButtonText?: string;

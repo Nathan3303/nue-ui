@@ -12,7 +12,7 @@
                             <nue-text
                                 size="medium"
                                 class="nue-drawer__title"
-                                flex
+                                flex="1"
                                 weight="bold">
                                 {{ title }}
                             </nue-text>
@@ -177,10 +177,11 @@ function handleAnimation() {
 }
 
 watchEffect(() => {
+    if (!drawerWrapperRef.value) return;
     if (visible.value) {
         nextTick(() => {
             const zIndex = useDrawerZIndex();
-            drawerWrapperRef.value.style.zIndex = zIndex.toString();
+            drawerWrapperRef.value!.style.zIndex = zIndex.toString();
             handleAnimation();
         });
     } else {
