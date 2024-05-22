@@ -4,7 +4,7 @@
         :disabled="disabled || loading"
         :style="buttonStyles"
         :class="buttonClasses"
-        @click.stop="handleClick">
+        @click="handleClick">
         <nue-icon
             v-if="iconName"
             :name="iconName"
