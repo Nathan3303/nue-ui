@@ -48,7 +48,7 @@ import {
     NueButton,
 } from "../index";
 import type { DrawerPropsType } from "./types";
-import { useDrawerZIndex } from "./drawer";
+import { useDrawer } from "./drawer";
 import "./drawer.css";
 
 defineOptions({ name: "NueDrawer" });
@@ -63,6 +63,7 @@ const props = withDefaults(defineProps<DrawerPropsType>(), {
 
 const drawerWrapperRef = ref<HTMLDivElement>();
 const drawerRef = ref<HTMLDivElement>();
+const { setOpened, setClosed } = useDrawer();
 
 async function handleClose() {
     const { beforeClose } = props;
@@ -180,11 +181,11 @@ watchEffect(() => {
     if (!drawerWrapperRef.value) return;
     if (visible.value) {
         nextTick(() => {
-            const zIndex = useDrawerZIndex();
-            drawerWrapperRef.value!.style.zIndex = zIndex.toString();
+            setOpened(drawerWrapperRef.value!);
             handleAnimation();
         });
     } else {
+        setClosed(drawerWrapperRef.value!);
         handleAnimation();
     }
 });

@@ -11,5 +11,5 @@
 }
 
 .nue-popup-wrapper--actived {
-    z-index: 40;
+    z-index: 99;
 }
