@@ -21,7 +21,7 @@
             :maxlength="parseInt(maxlength || '0')" />
         <nue-icon
             v-if="passwordVisible"
-            :name="isShowPassword ? 'eye-off' : 'eye'"
+            :name="isShowPassword ? 'eye-close' : 'eye'"
             @click.stop="() => switchIsShowPassword()" />
         <nue-icon
             v-if="clearButtonVisible"

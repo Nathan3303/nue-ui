@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4165854 */
-  src: url('iconfont.woff2?t=1713023570025') format('woff2'),
-       url('iconfont.woff?t=1713023570025') format('woff'),
-       url('iconfont.ttf?t=1713023570025') format('truetype');
+  src: url('iconfont.woff2?t=1716738375462') format('woff2'),
+       url('iconfont.woff?t=1716738375462') format('woff'),
+       url('iconfont.ttf?t=1716738375462') format('truetype');
 }
 
 .iconfont {
@@ -13,15 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-in_progress:before {
-  content: "\eda7";
-}
-
-.icon-circle-half-dotted-check:before {
+.icon-in-progress:before {
   content: "\ea18";
 }
 
-.icon-nu:before {
+.icon-logo:before {
   content: "\e62b";
 }
 
@@ -29,7 +25,7 @@
   content: "\e9f6";
 }
 
-.icon-mima:before {
+.icon-lock:before {
   content: "\e8c7";
 }
 
@@ -45,15 +41,15 @@
   content: "\e630";
 }
 
-.icon-header-projects:before {
+.icon-projects:before {
   content: "\e600";
 }
 
-.icon-header-dashboard:before {
+.icon-board:before {
   content: "\e7dd";
 }
 
-.icon-header-drive:before {
+.icon-drive:before {
   content: "\e9f4";
 }
 
@@ -61,47 +57,47 @@
   content: "\e694";
 }
 
-.icon-header-todo:before {
+.icon-todo:before {
   content: "\e981";
 }
 
-.icon-chuangzuo:before {
+.icon-write:before {
   content: "\e8b3";
 }
 
-.icon-dingwei:before {
+.icon-location:before {
   content: "\e8b8";
 }
 
-.icon-xiazai:before {
+.icon-download:before {
   content: "\e8c5";
 }
 
-.icon-shangchuan:before {
+.icon-upload:before {
   content: "\e8c6";
 }
 
-.icon-tupian:before {
+.icon-picture:before {
   content: "\e8c2";
 }
 
-.icon-bofangjilu:before {
+.icon-history:before {
   content: "\e8b2";
 }
 
-.icon-taolunqu:before {
+.icon-chat:before {
   content: "\e8c1";
 }
 
-.icon-dianzan:before {
+.icon-subscribe:before {
   content: "\e8b1";
 }
 
-.icon-shuaxin:before {
+.icon-refresh:before {
   content: "\e8bc";
 }
 
-.icon-tanhao:before {
+.icon-warning:before {
   content: "\e8bd";
 }
 
@@ -121,7 +117,7 @@
   content: "\e64e";
 }
 
-.icon-shibai:before {
+.icon-fail:before {
   content: "\e8ba";
 }
 
@@ -145,7 +141,7 @@
   content: "\e8ad";
 }
 
-.icon-checked:before {
+.icon-success:before {
   content: "\e8ae";
 }
 
@@ -161,7 +157,7 @@
   content: "\e8b4";
 }
 
-.icon-daily-check:before {
+.icon-calendar-wrap:before {
   content: "\e8b5";
 }
 
@@ -169,7 +165,7 @@
   content: "\e8b6";
 }
 
-.icon-shanchu:before {
+.icon-delete:before {
   content: "\e8b7";
 }
 
@@ -177,7 +173,7 @@
   content: "\e8b9";
 }
 
-.icon-uncheck:before {
+.icon-circle:before {
   content: "\e8bb";
 }
 
@@ -185,7 +181,7 @@
   content: "\e8be";
 }
 
-.icon-add:before {
+.icon-plus-circle:before {
   content: "\e8c0";
 }
 
@@ -193,7 +189,7 @@
   content: "\e8c3";
 }
 
-.icon-checked-fill:before {
+.icon-success-fill:before {
   content: "\e8c4";
 }
 
@@ -205,7 +201,7 @@
   content: "\e657";
 }
 
-.icon-add-fill:before {
+.icon-plus-circle-fill:before {
   content: "\e62a";
 }
 
@@ -221,11 +217,11 @@
   content: "\e618";
 }
 
-.icon-target:before {
+.icon-scan:before {
   content: "\e62f";
 }
 
-.icon-eye-off:before {
+.icon-eye-close:before {
   content: "\e629";
 }
 
@@ -237,7 +233,7 @@
   content: "\e64c";
 }
 
-.icon-todo-logo:before {
+.icon-logo2:before {
   content: "\e9cb";
 }
 

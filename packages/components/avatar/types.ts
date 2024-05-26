@@ -1,3 +1,5 @@
+import type { IconNameType } from "../icon";
+
 export type FitType = "fill" | "cover" | "contain" | "none" | "scale-down";
 
 export type SizeType =
@@ -17,7 +19,7 @@ export type SizeStringsValueType = Exclude<
 
 export type AvatarPropsType = {
     src?: string;
-    icon?: string;
+    icon?: IconNameType;
     size?: SizeType;
     theme?: string | string[];
     shape?: "square" | "round";

@@ -12,7 +12,7 @@
                         <span>{{ title }}</span>
                         <nue-button
                             theme="icon-only"
-                            icon="icon-clear"
+                            icon="clear"
                             @click.stop="handleCancel" />
                     </slot>
                 </div>

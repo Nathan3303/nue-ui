@@ -1,12 +1,13 @@
 import { type ShapeProp } from "@nue-ui/utils/types";
+import type { IconNameType } from "../icon";
 
 export type ButtonPropsType = {
     theme?: string | string[];
     shape?: ShapeProp;
-    icon?: string;
+    icon?: IconNameType;
     disabled?: boolean;
     loading?: boolean;
-    loadingIcon?: string;
+    loadingIcon?: IconNameType;
     title?: string;
     align?: string;
     flex?: string;

@@ -5,8 +5,8 @@
             :src="src"
             @error="errorHandler($event)"
             :style="imageStyle" />
-        <i v-else-if="icon" :class="`iconfont ${icon}`" :style="iconStyle"></i>
-        <slot v-else />
+        <nue-icon v-else-if="icon" :name="icon" :size="iconSize" />
+        <slot v-else></slot>
     </div>
 </template>
 
@@ -15,6 +15,7 @@ import { ref, computed } from "vue";
 import { parseTheme, isString } from "@nue-ui/utils";
 import type { AvatarPropsType, AvatarEmitsType } from "./types";
 import { AVATAR_SIZE_STRINGS_VALUE } from "./constants";
+import { NueIcon } from "../icon";
 import "./avatar.css";
 
 defineOptions({ name: "NueAvatar" });
@@ -38,12 +39,12 @@ const size = computed(() => {
     } else {
         result = size as number;
     }
-    return `${result}px`;
+    return result;
 });
 
-const wrapperStyle = computed(() => ({ "--size": size.value }));
+const wrapperStyle = computed(() => ({ "--size": size.value + "px" }));
 const imageStyle = computed(() => ({ objectFit: props.fit }));
-const iconStyle = computed(() => ({ fontSize: `calc(${size.value} / 2.5)` }));
+const iconSize = computed(() => size.value / 2.5 + "px");
 
 const classList = computed(() => {
     const prefix = "nue-avatar";

@@ -4,7 +4,7 @@
             <slot name="header">
                 <text>{{ title }}</text>
                 <nue-button
-                    icon="icon-clear"
+                    icon="clear"
                     theme="icon-only"
                     @click.stop="handleClose()" />
             </slot>
