@@ -1,25 +1,13 @@
 <template>
     <nue-div vertical>
-        <nue-div align="center" wrap>
-            <nue-avatar src="https://picsum.photos/150" />
-            <nue-avatar src="https://picsum.photos/150" shape="round" />
-            <nue-avatar
-                src="https://picsum.photos/150"
-                shape="round"
-                size="large" />
-            <nue-avatar icon="icon-dingwei" />
-            <nue-avatar shape="round">N</nue-avatar>
+        <nue-div vertical>
+            <nue-text size="large">Avatar</nue-text>
+            <avatar-demo1></avatar-demo1>
         </nue-div>
-        <nue-div gap="36px" wrap>
-            <nue-badge value="New">
-                <nue-button>Button</nue-button>
-            </nue-badge>
-            <nue-badge :value="100" :max="99">
-                <nue-button icon="mail">Mail</nue-button>
-            </nue-badge>
-            <nue-badge dot>
-                <nue-button icon="mail">Mail</nue-button>
-            </nue-badge>
+        <nue-div vertical>
+            <nue-text size="large">Badge</nue-text>
+            <badge-demo1></badge-demo1>
+            <badge-demo2></badge-demo2>
         </nue-div>
         <nue-infinite-scroll
             @load-more="loadMore"
@@ -38,6 +26,9 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import AvatarDemo1 from "../components/avatar/demo1.vue";
+import BadgeDemo1 from "../components/badge/demo1.vue";
+import BadgeDemo2 from "../components/badge/demo2.vue";
 
 const itemsCount = ref(10);
 const loading = ref(false);
