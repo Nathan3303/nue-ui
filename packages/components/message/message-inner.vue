@@ -12,8 +12,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
 import { handlePop } from "./message";
-import type { MessageNodeProps } from "./message";
-import "../style/message-inner.css";
+import type { MessageNodeProps } from "./types";
+import "./message-inner.css";
 
 defineOptions({
     name: "MessageNode",

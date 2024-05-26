@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { onMounted, ref, onBeforeUnmount } from "vue";
 import { useMessageWrapper } from "./message";
-import "../style/message-wrapper.css";
+import "./message-wrapper.css";
 
 defineOptions({
     name: "NueMessageWrapper",

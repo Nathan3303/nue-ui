@@ -1,38 +1,13 @@
 import { ref, createVNode, render } from "vue";
 import MessageNodeInner from "./message-inner.vue";
 import { generateId } from "@nue-ui/utils";
-import type { SizeProp } from "@nue-ui/utils";
-
-export type MessageType = "success" | "error" | "warning" | "info" | "log";
-export type MessageNodeProps = {
-    wrapper: HTMLElement;
-    node: HTMLElement;
-    icon?: string;
-    type?: MessageType;
-    size?: SizeProp;
-    message?: string;
-    duration?: number;
-};
-export type MessagePayloadType = {
-    message: string;
-    type?: MessageType;
-    duration?: number;
-    icon?: string;
-};
+import type { MessagePayloadType, NueMessageType } from "./types";
 
 const wrapperRef = ref<HTMLElement | null>(null);
 const externalWrapperRef = ref<HTMLElement | null>(null);
 const wrappers = ref<HTMLElement[]>([]);
 const timer = ref<number>();
 let time = 0;
-
-// function removeUselessWrappers() {
-//     wrappers.value.forEach((wrapper) => {
-//         if (wrapper.dataset.type === "external") {
-//             wrapper.remove();
-//         }
-//     });
-// }
 
 function createMessageWrapper(e: HTMLElement) {
     let wrapper: HTMLElement | null = null;
@@ -61,7 +36,23 @@ export function useMessageWrapper(e: HTMLElement) {
     };
 }
 
-export default (payload: MessagePayloadType) => {
+export function handlePop(node: HTMLElement, wrapper: HTMLElement) {
+    time = timer.value ? time + 24 : 0;
+    timer.value = setTimeout(() => {
+        try {
+            wrapper.removeChild(node);
+            if (wrapper.children.length === 0) {
+                const dom = document.getElementById(wrapper.id);
+                if (!dom && wrapper.dataset.type === "external") {
+                    externalWrapperRef.value = null;
+                    wrapperRef.value = null;
+                }
+            }
+        } catch (e) {}
+    }, time) as unknown as number;
+}
+
+function NueMessage(payload: MessagePayloadType) {
     if (!wrapperRef.value) {
         if (!externalWrapperRef.value) {
             let target = document.getElementById("app");
@@ -84,20 +75,51 @@ export default (payload: MessagePayloadType) => {
         wrapper: wrapperRef.value,
     });
     render(vnode, div);
+}
+
+NueMessage.success = (message: string, duration: number, icon: string) => {
+    NueMessage({
+        message,
+        type: "success",
+        duration,
+        icon,
+    } as MessagePayloadType);
 };
 
-export function handlePop(node: HTMLElement, wrapper: HTMLElement) {
-    time = timer.value ? time + 24 : 0;
-    timer.value = setTimeout(() => {
-        try {
-            wrapper.removeChild(node);
-            if (wrapper.children.length === 0) {
-                const dom = document.getElementById(wrapper.id);
-                if (!dom && wrapper.dataset.type === "external") {
-                    externalWrapperRef.value = null;
-                    wrapperRef.value = null;
-                }
-            }
-        } catch (e) {}
-    }, time);
-}
+NueMessage.error = (message: string, duration: number, icon: string) => {
+    NueMessage({
+        message,
+        type: "error",
+        duration,
+        icon,
+    } as MessagePayloadType);
+};
+
+NueMessage.warn = (message: string, duration: number, icon: string) => {
+    NueMessage({
+        message,
+        type: "warning",
+        duration,
+        icon,
+    } as MessagePayloadType);
+};
+
+NueMessage.info = (message: string, duration: number, icon: string) => {
+    NueMessage({
+        message,
+        type: "info",
+        duration,
+        icon,
+    } as MessagePayloadType);
+};
+
+NueMessage.log = (message: string, duration: number, icon: string) => {
+    NueMessage({
+        message,
+        type: "log",
+        duration,
+        icon,
+    } as MessagePayloadType);
+};
+
+export default NueMessage as NueMessageType;
