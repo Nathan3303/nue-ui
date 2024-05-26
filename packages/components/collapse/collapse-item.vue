@@ -81,7 +81,7 @@ function handleCollapseAnimation() {
             timer.value = setTimeout(
                 () => (contentRef.value!.style.height = "max-content"),
                 300
-            );
+            ) as unknown as number;
         }
     }
 }
