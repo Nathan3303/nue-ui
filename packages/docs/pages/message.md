@@ -35,7 +35,7 @@ function showMsgWithDuration(duration) {
 <template>
     <nue-button @click="showMsg">创建一个消息提示</nue-button>
 </template>
-<script>
+<script setup>
 import { NueMessage } from "nue-ui";
 
 function showMsg() {
@@ -66,12 +66,41 @@ function showMsg() {
         <nue-button @click="showTypedMsg('log')">日志</nue-button>
     </nue-div>
 </template>
-<script>
+<script setup>
 import { NueMessage } from "nue-ui";
 
 function showTypedMsg(type) {
     NueMessage({ message: "创建Message成功", type });
 }
+</script>
+```
+
+## 确定类型的快速使用
+
+通过 `NueMessage` 中的子方法 `success`、`info`、`warn`、`error`、`log` 可以快速创建不同类型的消息提示。这些子方法都拥有同样的形参，包括 `message`、`duration` 以及 `icon` 。
+
+<nue-div>
+    <nue-button @click="NueMessage.success('成功', 5000, 'icon-checked')">
+        成功
+    </nue-button>
+    <nue-button @click="NueMessage.error('错误', 5000, 'icon-clear')">
+        错误
+    </nue-button>
+</nue-div>
+
+```vue
+<template>
+    <nue-div>
+        <nue-button @click="NueMessage.success('成功', 5000, 'icon-checked')">
+            成功
+        </nue-button>
+        <nue-button @click="NueMessage.error('错误', 5000, 'icon-clear')">
+            错误
+        </nue-button>
+    </nue-div>
+</template>
+<script setup>
+import { NueMessage } from "nue-ui";
 </script>
 ```
 
@@ -93,7 +122,7 @@ function showTypedMsg(type) {
         创建一个带图标的消息提示
     </nue-button>
 </template>
-<script>
+<script setup>
 import { NueMessage } from "nue-ui";
 
 function showMsgWithIcon(icon) {
@@ -132,7 +161,7 @@ function showMsgWithIcon(icon) {
         </nue-button>
     </nue-div>
 </template>
-<script>
+<script setup>
 import { NueMessage } from "nue-ui";
 
 function showMsgWithDuration() {
