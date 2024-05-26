@@ -13,6 +13,7 @@
 /* Original styles */
 
 .nue-badge {
+    -webkit-user-select: none;
     user-select: none;
     transition: all 0.16s ease-in;
 
@@ -31,39 +32,55 @@
         justify-content: center;
         line-height: var(--font-size);
         padding: 4px 6px;
-        scale: 0.9;
-
         border: 1px solid var(--border-color);
         background-color: var(--background-color);
         border-radius: var(--mainly-square-radius);
 
-        user-select: none;
         z-index: 1;
+        transform: scale(0.88);
     }
 
     & > sup {
         position: absolute;
         left: calc(100% - 12px);
         bottom: calc(100% - 12px);
-
-        
     }
 }
 
 .nue-badge--dot {
-    margin-right: 4px;
+    padding: 0px;
 
     .badge-content {
-        scale: 1;
         aspect-ratio: 1;
-        width: 13px;
+        width: 12px;
         padding: 0px;
         border-radius: 10px;
         border: 2px solid white;
+        transform: scale(0.88);
     }
 
     & > sup {
-        left: calc(100% - 8px);
-        bottom: calc(100% - 8px);
+        left: calc(100% - 9px);
+        bottom: calc(100% - 9px);
+    }
+}
+
+.nue-badge--inner {
+    .badge-content {
+        --font-weight: bold;
+
+        padding: 0px;
+        border: none;
+        background-color: transparent;
+        color: var(--background-color);
+        transform: scale(1);
+
+        &::before {
+            content: "(";
+        }
+
+        &::after {
+            content: ")";
+        }
     }
 }

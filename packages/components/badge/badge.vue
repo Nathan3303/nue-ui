@@ -10,23 +10,27 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, useSlots } from "vue";
 import { parseTheme, isString } from "@nue-ui/utils/";
 import type { BadgePropsType } from "./types";
 import "./badge.css";
 
 defineOptions({ name: "NueBadge" });
 
+const slots = useSlots();
 const props = withDefaults(defineProps<BadgePropsType>(), {
-    theme: "default",
     hidden: false,
     dot: false,
 });
 
 const classes = computed(() => {
     const prefix = "nue-badge";
-    let list: string[] = [prefix, ...parseTheme(props.theme, prefix)];
-    if (props.dot) list.push(`${prefix}--dot`);
+    const { theme, dot } = props;
+    let list: string[] = [];
+    list.push(prefix);
+    if (theme) list.push(...parseTheme(theme, prefix));
+    if (dot) list.push(`${prefix}--dot`);
+    if (!slots.default && !dot) list.push(`${prefix}--inner`);
     return list;
 });
 
