@@ -1,8 +1,31 @@
+/* Animation */
+
+@-webkit-keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* Variables */
 
 .nue-icon {
     --font-size: var(--icon-size);
     --line-height: var(--font-size);
+    --spin-speed: 2s;
 }
 
 /* Original styles */
@@ -23,4 +46,8 @@
             vertical-align: top;
         }
     }
+}
+
+.nue-icon--spin {
+    animation: rotation var(--spin-speed) infinite linear;
 }

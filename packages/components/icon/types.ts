@@ -61,4 +61,7 @@ export type IconPropsType = {
     name: IconNameType;
     size?: string;
     color?: string;
+    spin?: boolean;
+    spinSpeed?: string;
+    theme?: string | string[];
 };

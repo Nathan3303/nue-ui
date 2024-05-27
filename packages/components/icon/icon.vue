@@ -4,23 +4,30 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { parseTheme } from "@nue-ui/utils";
 import type { IconPropsType } from "./types";
 import "./icon.css";
 
 defineOptions({ name: "NueIcon" });
 
-const props = withDefaults(defineProps<IconPropsType>(), {});
+const props = withDefaults(defineProps<IconPropsType>(), {
+    spin: false,
+});
 
 const classes = computed(() => {
-    const { name } = props;
-    return ["nue-icon", "iconfont", `icon-${name}`];
+    const prefix = "nue-icon";
+    const { name, spin, theme } = props;
+    let themeClasses = [];
+    if (theme) themeClasses = parseTheme(theme, prefix);
+    return [prefix, "iconfont", `icon-${name}`, { "nue-icon--spin": spin }];
 });
 
 const styles = computed(() => {
-    const { size, color } = props;
+    const { size, color, spinSpeed } = props;
     return {
         "--icon-size": size,
         "--icon-color": color,
+        "--spin-speed": spinSpeed,
     };
 });
 </script>
