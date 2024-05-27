@@ -1,5 +1,5 @@
 import ConfirmNode from "./confirm.vue";
-import { getPopupWrapper } from "../popup-wrapper/src/popup-wrapper";
+import { getPopupWrapper } from "../popup-wrapper";
 import { createVNode, render } from "vue";
 import type { ConfirmPayloadType } from "./types";
 import "./confirm.css";

@@ -1,9 +1,5 @@
 import { generateId } from "@nue-ui/utils";
-
-export interface popupWrapperFunctions {
-    appendChild: (element: HTMLElement) => void;
-    removeChild: (element: HTMLElement) => void;
-}
+import type { popupWrapperFunctions } from "./types";
 
 const popupWrappers = new Map<string, HTMLElement>();
 
@@ -12,7 +8,7 @@ export function createPopupWrapper() {
     element.classList.add("nue-popup-wrapper");
     registerPopupWrapper(element);
     document.body.appendChild(element);
-    return usePopupWrapper(element.id)!;
+    return element;
 }
 
 export function removePopupWrapper(id: string) {
@@ -30,13 +26,14 @@ export function removePopupWrapper(id: string) {
 export function registerPopupWrapper(element: HTMLDivElement, id?: string) {
     element.id = id || generateId();
     popupWrappers.set(element.id, element);
-    // console.log("registerPopupWrapper", popupWrappers);
 }
 
-export function usePopupWrapper(id: string): popupWrapperFunctions | null {
-    const element = popupWrappers.get(id);
+export function usePopupWrapper(id: string) {
+    let element = popupWrappers.get(id);
 
-    if (!element) return null;
+    if (!element) {
+        element = createPopupWrapper();
+    }
 
     function setZIndex() {
         const hasChildren = element?.childNodes.length;
@@ -48,25 +45,24 @@ export function usePopupWrapper(id: string): popupWrapperFunctions | null {
         }
     }
 
-    function appendChild(child: HTMLElement) {
+    const appendChild = (child: HTMLElement) => {
         element?.appendChild(child);
         setZIndex();
-        // document.body.style.overflow = "hidden";
-    }
+    };
 
-    function removeChild(child: HTMLElement) {
+    const removeChild = (child: HTMLElement) => {
         element?.removeChild(child);
         setZIndex();
-        // document.body.style.overflow = "auto";
-    }
+    };
 
-    return { appendChild, removeChild };
+    return { appendChild, removeChild } as popupWrapperFunctions;
 }
 
 export function getPopupWrapper(id: string) {
-    let wrapper = usePopupWrapper(id);
+    const wrapper = usePopupWrapper(id);
     if (!wrapper) {
-        wrapper = createPopupWrapper();
+        const newWrapper = createPopupWrapper();
+        return usePopupWrapper(newWrapper.id);
     }
     return wrapper;
 }

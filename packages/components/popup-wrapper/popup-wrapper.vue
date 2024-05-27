@@ -5,13 +5,11 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { registerPopupWrapper } from "./popup-wrapper";
-import "../style/popup-wrapper.css";
+import "./popup-wrapper.css";
 
 defineOptions({ name: "NuePopupWrapper" });
 
-const props = defineProps<{
-    id?: string;
-}>();
+const props = defineProps<{ id?: string }>();
 
 const popupWrapperRef = ref<HTMLDivElement>();
 
