@@ -1,18 +1,31 @@
 /* Animation */
 
-@keyframes nue-marquee-slide {
-    0% {
+@keyframes marquee-infinite-slide {
+    from {
         transform: translateX(0);
     }
+    to {
+        transform: translateX(
+            calc(0px - (var(--marquee-track-width) + var(--marquee-gap)) / 2)
+        );
+    }
+}
 
-    100% {
-        transform: translateX(calc(var(--marquee-transform-offset)));
+@keyframes marquee-slide {
+    from {
+        transform: translateX(var(--marquee-width));
+    }
+    to {
+        transform: translateX(calc(0px - var(--marquee-track-width)));
     }
 }
 
 /* Variables */
 
 .nue-marquee {
+    --marquee-gap: 36px;
+    --marquee-width: 0;
+    --marquee-track-width: 0;
     --marquee-transform-offset: 0;
 }
 
@@ -27,15 +40,22 @@
         display: flex;
         align-items: center;
         gap: 36px;
-        animation: nue-marquee-slide linear infinite;
+        animation-name: marquee-slide;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
 
-        .nue-marquee-item {
-            width: 128px;
-            aspect-ratio: 3 / 4;
-            background-color: #efefef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        &.nue-marquee__track--infinite {
+            animation-name: marquee-infinite-slide !important;
         }
+    }
+
+    .nue-marquee-item {
+        width: 128px;
+        aspect-ratio: 3 / 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #efefef;
+        border-radius: 12px;
     }
 }

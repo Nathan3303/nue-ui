@@ -1,33 +1,50 @@
 <template>
     <div ref="marqueeRef" class="nue-marquee">
-        <div ref="marqueeTrackRef" class="nue-marquee__track">
-            <div class="nue-marquee-item" v-for="(item, idx) in 12" :key="idx">
-                {{ item }}
-            </div>
-            <div class="nue-marquee-item" v-for="(item, idx) in 12" :key="idx">
-                {{ item }}
-            </div>
+        <div
+            ref="marqueeTrackRef"
+            class="nue-marquee__track"
+            :class="trackClasses"
+            :style="{
+                animationPlayState: $slots.default ? 'running' : 'paused',
+            }">
+            <slot></slot>
+            <slot v-if="infinite"></slot>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
+import type { MarqueePropsType } from "./types";
 import "./marquee.css";
 
 defineOptions({ name: "NueMarquee" });
 
+const props = withDefaults(defineProps<MarqueePropsType>(), {
+    direction: "left",
+    speedRatio: 1,
+    infinite: false,
+});
+
 const marqueeRef = ref<HTMLDivElement>();
 const marqueeTrackRef = ref<HTMLDivElement>();
 
+const trackClasses = computed(() => {
+    return {
+        "nue-marquee__track--infinite": props.infinite,
+    };
+});
+
 onMounted(() => {
-    if (!marqueeTrackRef.value && !marqueeRef.value) return;
+    const marqueeWidth = marqueeRef.value!.offsetWidth;
     const marqueeTrackWidth = marqueeTrackRef.value!.offsetWidth;
-    const animationTime = marqueeTrackRef.value!.children.length * 1.5;
+    const animationDuration =
+        marqueeTrackRef.value!.children.length * props.speedRatio;
+    marqueeRef.value!.style.setProperty("--marquee-width", `${marqueeWidth}px`);
     marqueeRef.value!.style.setProperty(
-        "--marquee-transform-offset",
-        `-${(marqueeTrackWidth + 36) / 2}px`
+        "--marquee-track-width",
+        `${marqueeTrackWidth}px`
     );
-    marqueeTrackRef.value!.style.animationDuration = `${animationTime}s`;
+    marqueeTrackRef.value!.style.animationDuration = `${animationDuration}s`;
 });
 </script>
