@@ -1,0 +1,41 @@
+/* Animation */
+
+@keyframes nue-marquee-slide {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(var(--marquee-transform-offset)));
+    }
+}
+
+/* Variables */
+
+.nue-marquee {
+    --marquee-transform-offset: 0;
+}
+
+/* Original styles */
+
+.nue-marquee {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+
+    .nue-marquee__track {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        animation: nue-marquee-slide linear infinite;
+
+        .nue-marquee-item {
+            width: 128px;
+            aspect-ratio: 3 / 4;
+            background-color: #efefef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
