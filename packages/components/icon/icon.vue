@@ -17,9 +17,15 @@ const props = withDefaults(defineProps<IconPropsType>(), {
 const classes = computed(() => {
     const prefix = "nue-icon";
     const { name, spin, theme } = props;
-    let themeClasses = [];
+    let themeClasses: string[] = [];
     if (theme) themeClasses = parseTheme(theme, prefix);
-    return [prefix, "iconfont", `icon-${name}`, { "nue-icon--spin": spin }];
+    return [
+        prefix,
+        "iconfont",
+        `icon-${name}`,
+        { "nue-icon--spin": spin },
+        ...themeClasses,
+    ];
 });
 
 const styles = computed(() => {
