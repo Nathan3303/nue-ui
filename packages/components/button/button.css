@@ -33,7 +33,7 @@
     --icon-weight: var(--font-weight);
 
     --width: auto;
-    --line-height: var(--font-size);
+    --line-height: calc(var(--font-size) + 3px);
     --padding-x: var(--font-size);
     --padding-y: calc(var(--font-size) / 2);
     --height: calc(
@@ -92,6 +92,7 @@
     background-color: var(--background-color);
 
     cursor: pointer;
+    -webkit-user-select: none;
     user-select: none;
     transition: all 0.16s ease-out;
     position: relative;
@@ -110,8 +111,8 @@
     }
 
     & > .loading-icon {
-        animation: 1.2s ease-in-out 0.16s infinite rotation;
         -webkit-animation: 1.2s ease-in-out 0.16s infinite rotation;
+        animation: 1.2s ease-in-out 0.16s infinite rotation;
     }
 
     &.nue-button--square {
