@@ -25,6 +25,7 @@ export type InputPropsType = {
     size?: string;
     debounceTime?: number;
     flex?: string;
+    name?: string;
 };
 
 export type InputEmitsType = {

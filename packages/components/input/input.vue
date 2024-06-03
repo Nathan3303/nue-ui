@@ -10,6 +10,7 @@
             :maxlength="maxlength"
             :disabled="disabled"
             :readonly="!disabled && readonly"
+            :name="name"
             @input="handleInput($event)"
             @blur="emit('blur', $event)"
             @compositionstart="handleCompositionStart"
