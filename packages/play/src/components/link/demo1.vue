@@ -1,7 +1,12 @@
 <template>
     <nue-div>
-        <nue-link href="http://www.baidu.com" />
-        <nue-link href="http://www.google.com" disabled />
+        <nue-text>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
+            possimus hic eos minus, Go
+            <nue-link href="https://www.baidu.com"></nue-link>
+            qui ipsa numquam. Vel sequi, pariatur ab dolor reprehenderit
+            sapiente facilis, molestiae quae doloribus a voluptate consectetur!
+        </nue-text>
     </nue-div>
 </template>
 

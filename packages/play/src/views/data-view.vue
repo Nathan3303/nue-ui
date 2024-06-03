@@ -1,23 +1,23 @@
 <template>
-    <nue-div vertical :divider="{}">
-        <nue-div vertical>
+    <div class="view-container">
+        <nue-div vertical theme="card">
             <nue-text size="large">Avatar</nue-text>
             <avatar-demo1></avatar-demo1>
         </nue-div>
-        <nue-div vertical>
+        <nue-div vertical theme="card">
             <nue-text size="large">Badge</nue-text>
             <badge-demo1></badge-demo1>
             <badge-demo2></badge-demo2>
         </nue-div>
-        <nue-div vertical>
+        <nue-div vertical theme="card">
             <nue-text size="large">Marquee</nue-text>
             <marquee-demo1></marquee-demo1>
         </nue-div>
-        <nue-div vertical>
+        <nue-div vertical theme="card">
             <nue-text size="large">Infinite Scroll</nue-text>
             <infinite-scroll-demo1></infinite-scroll-demo1>
         </nue-div>
-    </nue-div>
+    </div>
 </template>
 
 <script setup lang="ts">

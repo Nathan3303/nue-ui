@@ -3,37 +3,39 @@
         <nue-header height="72px">
             <template #logo>NueUI PlayGround</template>
         </nue-header>
-        <nue-main aside-width="240px">
+        <nue-main aside-width="160px">
             <template #aside>
-                <nue-link theme="btnlike" route="/basic">
-                    Basic 基础组件
-                </nue-link>
-                <nue-link theme="btnlike" route="/form">Form 表单组件</nue-link>
-                <nue-link theme="btnlike" route="/data">Data 数据组件</nue-link>
+                <!-- <nue-text>Category</nue-text> -->
+                <nue-link theme="btnlike" route="/basic">Basic</nue-link>
+                <nue-link theme="btnlike" route="/form">Form</nue-link>
+                <nue-link theme="btnlike" route="/data">Data</nue-link>
                 <nue-link theme="btnlike" route="/navigation">
-                    Navigation 导航组件
+                    Navigation
                 </nue-link>
                 <nue-link theme="btnlike" route="/feedback">
-                    Feedback 反馈组件
+                    Feedback
                 </nue-link>
-                <nue-link theme="btnlike" route="/others">
-                    Others 其他组件
-                </nue-link>
+                <nue-link theme="btnlike" route="/others">Others</nue-link>
             </template>
             <template #content>
                 <router-view></router-view>
             </template>
         </nue-main>
-        <nue-footer>Footer</nue-footer>
     </nue-container>
 </template>
 
 <style scoped>
 .nue-main {
     --aside-gap: 8px;
-}
 
-.nue-link--btnlike {
-    --height: 36px;
+    .view-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+        gap: 16px;
+
+        &:deep(.nue-div--card) {
+            height: 100%;
+        }
+    }
 }
 </style>

@@ -1,19 +1,19 @@
 <template>
-    <nue-div vertical :divider="{}">
-        <nue-div vertical>
+    <div class="view-container">
+        <nue-div vertical theme="card">
             <nue-text size="large">Dialog</nue-text>
             <dialog-demo1></dialog-demo1>
         </nue-div>
-        <nue-div vertical>
+        <nue-div vertical theme="card">
             <nue-text size="large">Drawer</nue-text>
             <drawer-demo1></drawer-demo1>
         </nue-div>
-        <nue-div vertical>
+        <nue-div vertical theme="card">
             <nue-text size="large">Message</nue-text>
             <message-demo1></message-demo1>
             <message-demo2></message-demo2>
         </nue-div>
-    </nue-div>
+    </div>
 </template>
 
 <script setup lang="ts">
