@@ -1,5 +1,6 @@
 <template>
     <button
+        :type="type"
         :title="title"
         :disabled="disabled || loading"
         :style="buttonStyles"
@@ -29,6 +30,7 @@ defineOptions({ name: "NueButton" });
 
 const ButtonGroupCtx = inject(BUTTON_GROUP_CTX_KEY, {} as ButtonGroupCtxType);
 const props = withDefaults(defineProps<ButtonPropsType>(), {
+    type: "button",
     shape: "square",
     disabled: false,
     loading: false,

@@ -15,6 +15,7 @@ export type ButtonPropsType = {
     useThrottle?: boolean;
     throttleDuration?: number;
     flat?: boolean;
+    type?: "submit" | "reset" | "button";
 };
 
 export type ButtonEmitsType = {
