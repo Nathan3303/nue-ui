@@ -35,6 +35,7 @@ import { ref, computed } from "vue";
 import { NueButton } from "../button";
 import type { DropdownPropsType, DropdownEmitsType } from "./types";
 import "./dropdown.css";
+import { parseTheme } from "@nue-ui/utils";
 
 defineOptions({ name: "NueDropdown" });
 
@@ -54,8 +55,10 @@ let timer: number = 0;
 
 const classes = computed(() => {
     let list: string[] = [];
+    const { theme, align } = props;
     list.push("nue-dropdown");
-    if (props.align) list.push(`nue-dropdown--align-${props.align}`);
+    if (theme) list.push(...parseTheme(theme, "nue-dropdown"));
+    if (align) list.push(`nue-dropdown--align-${align}`);
     return list;
 });
 
