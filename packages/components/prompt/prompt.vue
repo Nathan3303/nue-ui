@@ -1,5 +1,5 @@
 <template>
-    <div ref="promptInner" class="nue-prompt-inner">
+    <div ref="promptRef" class="nue-prompt">
         <div class="nue-prompt__header">
             <slot name="header">
                 <text>{{ title }}</text>
@@ -42,12 +42,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-import { NueButton, NueInput, NueTextarea } from "../../index";
-import type { PromptInnerPropsType } from "./types";
+import { NueButton, NueInput, NueTextarea } from "../index";
+import type { PromptPropsType } from "./types";
 
-defineOptions({ name: "NuePromptNodeInner" });
+defineOptions({ name: "NuePromptNode" });
 
-const props = withDefaults(defineProps<PromptInnerPropsType>(), {
+const props = withDefaults(defineProps<PromptPropsType>(), {
     title: "Prompt",
     placeholder: "Please input",
     inputType: "text",
@@ -55,7 +55,7 @@ const props = withDefaults(defineProps<PromptInnerPropsType>(), {
     cancelButtonText: "No",
 });
 
-const promptInner = ref<HTMLDivElement>();
+const promptRef = ref<HTMLDivElement>();
 const promptInputRef = ref();
 const inputValue = ref("");
 const inputValueError = ref(false);
@@ -92,8 +92,8 @@ onMounted(() => {
         promptInputRef.value!.innerInputRef.focus();
 
         requestAnimationFrame(() => {
-            promptInner.value!.style.marginTop = "0px";
-            promptInner.value!.style.opacity = "1";
+            promptRef.value!.style.marginTop = "0px";
+            promptRef.value!.style.opacity = "1";
         });
     });
 });

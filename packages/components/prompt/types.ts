@@ -1,10 +1,11 @@
-import type { InputType } from "../../input/types";
+import type { InputType } from "../input";
+import type { Optional } from "@nue-ui/utils";
 
 export type CallbackType = (isConfirmed: boolean, payload: any) => void;
 export type ValidatorType = (value: any) => boolean;
 export type BeforeConfirmType = (value: any) => Promise<any> | boolean;
 
-export type PromptInnerPropsType = {
+export type PromptPropsType = {
     title?: string;
     label?: string;
     placeholder?: string;
@@ -16,14 +17,6 @@ export type PromptInnerPropsType = {
     beforeConfirm?: BeforeConfirmType;
 };
 
-export type PayloadType = {
+export interface PromptPayloadType extends Optional<PromptPropsType> {
     wrapperId?: string;
-    title?: string;
-    label?: string;
-    inputType?: InputType;
-    placeholder?: string;
-    confirmButtonText?: string;
-    cancelButtonText?: string;
-    validator?: ValidatorType;
-    beforeConfirm?: BeforeConfirmType;
-};
+}
