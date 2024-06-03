@@ -1,13 +1,11 @@
 /* Variabled */
 
 .nue-text {
+    --padding-x: 0px;
+    --padding-y: 0px;
     --word-wrap: break-word;
     --word-break: break-all;
-    --flex: none;
-    --border-width: 1px;
-    --border-style: solid;
-    --border-color: transparent;
-    --border-radius: var(--mainly-square-radius);
+    --flex: 0 1 auto;
     --background-color: transparent;
 }
 
@@ -23,17 +21,18 @@
     word-wrap: var(--word-wrap);
     word-break: var(--word-break);
     flex: var(--flex);
-    border: var(--border-width) var(--border-style) var(--border-color);
-    border-radius: var(--border-radius);
+    padding: var(--padding-y) var(--padding-x);
     background-color: var(--background-color);
+    font-family: var(--font-family, inherit);
 }
 
 /* Buit-in styles */
 
 .nue-text--code {
-    padding: 4px 6px;
-    background-color: #eee;
-    color: rgb(255, 0, 0) !important;
-    font-family: "Consolas";
+    --padding-x: 4px;
+    --padding-y: 2px;
+    --background-color: #eeeeee;
+    --color: var(--error-color);
+    --font-family: "Consolas";
     border-radius: 6px;
 }
