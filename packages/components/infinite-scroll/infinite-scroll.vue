@@ -28,6 +28,7 @@ const props = withDefaults(defineProps<InfiniteScrollPropsType>(), {
     triggerHeight: "150px",
     disabled: false,
     loading: false,
+    viewport: null,
 });
 
 const emit = defineEmits<InfiniteScrollEmitsType>();
@@ -45,6 +46,7 @@ const styles = computed(() => {
 
 onMounted(() => {
     const triggerBar = triggerBarRef.value;
+    const { root, rootMargin, threshold } = props;
     if (triggerBar) {
         observer.value = new IntersectionObserver(
             (entries) => {
@@ -53,7 +55,11 @@ onMounted(() => {
                 emit("loadMore");
                 console.log("loadMore");
             },
-            { root: wrapperRef.value }
+            {
+                root: root === "wrapper" ? wrapperRef.value : root,
+                rootMargin,
+                threshold,
+            }
         );
         observer.value.observe(triggerBar);
     }
