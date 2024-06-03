@@ -1,0 +1,1 @@
+import{_ as s,a as i,o as a,ab as t}from"./chunks/framework.DgSqfNAD.js";const E=JSON.parse('{"title":"NueUI","description":"","frontmatter":{},"headers":[],"relativePath":"pages/usage.md","filePath":"pages/usage.md"}'),e={name:"pages/usage.md"},n=t("",7),p=[n];function l(h,k,r,d,o,c){return a(),i("div",null,p)}const g=s(e,[["render",l]]);export{E as __pageData,g as default};
