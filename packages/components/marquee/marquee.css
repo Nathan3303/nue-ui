@@ -40,6 +40,7 @@
         display: flex;
         align-items: center;
         gap: 36px;
+        background: transparent;
         animation-name: marquee-slide;
         animation-timing-function: linear;
         animation-iteration-count: infinite;
