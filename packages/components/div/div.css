@@ -4,9 +4,8 @@
     --flex-direction: row;
     --align-items: start;
     --justify-content: start;
-    --flex-wrap: no-wrap;
+    --flex-wrap: wrap;
     --gap: 16px;
-
     --flex: none;
     --width: 100%;
     --height: auto;
@@ -24,4 +23,14 @@
     flex: var(--flex);
     width: var(--width);
     height: var(--height);
+    box-sizing: border-box;
+}
+
+/* Built-in styles */
+
+.nue-div--card {
+    border: 1px solid var(--divider-color);
+    border-radius: var(--primary-radius);
+    box-shadow: var(--secondary-shadow);
+    padding: var(--primary-padding);
 }

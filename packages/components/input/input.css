@@ -2,24 +2,16 @@
 
 @import url(./common.css);
 
-.nue-input {
-    --row: 1;
-    --height: calc(
-        var(--line-height) + var(--padding-y) * 2 +
-            calc(var(--border-width) * 2)
-    );
-}
-
 /* Original styles */
 
 .nue-input {
-    gap: var(--padding-x);
+    gap: var(--secondary-gap);
     overflow: hidden;
     min-width: var(--min-width);
-    /* height: var(--height); */
+    height: 32px;
 
     & .nue-icon {
-        --icon-color: var(--border-color);
+        --icon-color: var(--dark-primary-color);
     }
 
     & input {
@@ -29,9 +21,6 @@
         min-width: calc(var(--font-size) * 5);
         height: var(--input-line-height);
         text-align: var(--text-align);
-        -webkit-font-smoothing: antialiased; /* 针对WebKit浏览器 */
-        -moz-osx-font-smoothing: grayscale; /* 针对Firefox浏览器 */
-        text-rendering: optimizeLegibility; /* 通用的字体渲染优化 */
     }
 
     & .button-group {
@@ -67,9 +56,8 @@
     }
 
     &.nue-input--round {
-        padding-left: calc(var(--padding-x) + 4px);
-        padding-right: calc(var(--padding-x) + 4px);
-        border-radius: var(--height);
+        padding-right: calc(var(--padding-x) + 2px);
+        border-radius: 999px;
     }
 
     &.nue-input--no-shape {

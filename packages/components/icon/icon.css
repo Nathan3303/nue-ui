@@ -24,30 +24,22 @@
 
 .nue-icon {
     --font-size: var(--icon-size);
-    --line-height: calc(var(--font-size) + 3px);
+    --line-height: var(--font-size);
     --spin-speed: 2s;
 }
 
 /* Original styles */
 
 .nue-icon {
-    display: flex;
-    align-items: center;
-    font-size: var(--font-size);
-
-    &.iconfont {
-        height: var(--line-height);
-
-        &::before {
-            line-height: var(--line-height);
-            font-size: var(--font-size);
-            color: var(--icon-color);
-            font-weight: var(--icon-weight);
-            vertical-align: top;
-        }
+    &.iconfont::before {
+        display: block;
+        font-size: var(--icon-size);
+        color: var(--icon-color);
+        font-weight: var(--icon-weight);
+        aspect-ratio: 1 / 1;
     }
-}
 
-.nue-icon--spin {
-    animation: rotation var(--spin-speed) infinite linear;
+    &.nue-icon--spin {
+        animation: rotation var(--spin-speed) infinite linear;
+    }
 }

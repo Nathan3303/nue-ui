@@ -1,19 +1,81 @@
-:root {
-    --mainly-font-size: 14px;
-    --mainly-font-color: #252525;
-    --mainly-font-family: inherit;
-    --mainly-font-weight: 400;
-    --mainly-square-radius: 6px;
-    --mainly-disable-font-color: #999999;
-    --mainly-border-color: #d7d7d7;
+/* Colors */
 
+:root {
+    --primary-color-50: #fafafa;
+    --primary-color-100: #f5f5f5;
+    --primary-color-200: #eeeeee;
+    --primary-color-300: #e0e0e0;
+    --primary-color-400: #bdbdbd;
+    --primary-color-500: #9e9e9e;
+    --primary-color-600: #757575;
+    --primary-color-700: #616161;
+    --primary-color-800: #424242;
+    --primary-color-900: #212121;
+    --primary-color-a100: #82b1ff;
+    --primary-color-a200: #448aff;
+    --primary-color-a400: #2979ff;
+    --primary-color-a700: #2962ff;
+
+    --primary-color: #9e9e9e;
+    --dark-primary-color: #616161;
+    --light-primary-color: #f5f5f5;
+
+    --primary-text-color: #212121;
+    --secondary-text-color: #757575;
+
+    --divider-color: #e4e4e7;
+    --disabled-color: #9e9e9e;
+    --accent-color: #607d8b;
+
+    --error-color: #f44336;
+    --success-color: #4caf50;
+    --warning-color: #ffc107;
 }
+
+/* Sizes */
+
+:root {
+    --primary-padding: 16px;
+    --secondary-padding: 8px;
+    --primary-gap: 16px;
+    --secondary-gap: 8px;
+    --primary-radius: 6px;
+
+    --primary-font-size: 14px;
+    --primary-line-height: 1.5;
+
+    --text-xxs: 0.5rem;
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-md: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-xxl: 1.5rem;
+    --text-xxxl: 2rem;
+}
+
+/* Others */
+
+:root {
+    --primary-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14),
+        0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    --secondary-shadow: 1px 1px 3px rgba(200, 200, 200, 0.2);
+}
+
+/* Reset HTML */
 
 .nue-reset-html {
     width: 100vw;
     height: 100vh;
     margin: 0;
     padding: 0;
+
+    color: var(--primary-text-color);
+    font-size: var(--primary-font-size);
+    font-weight: 500;
+    line-height: var(--primary-line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     & body {
         width: 100%;
@@ -30,3 +92,17 @@
     }
 }
 
+/* Set default styles for all components */
+
+.nue-button,
+.nue-link,
+.nue-text,
+.nue-input,
+.nue-textarea,
+.nue-divider {
+    /* --font-size: var(--primary-font-size); */
+    --font-weight: 600;
+    --line-height: var(--primary-line-height);
+    font-family: Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+}

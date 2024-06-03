@@ -1,7 +1,7 @@
 import { computed, createVNode, defineComponent } from "vue";
 import type { VNode } from "vue";
 import { NueDivider } from "../divider";
-import { parseFlex, parseFlexWrap } from "@nue-ui/utils";
+import { parseFlex, parseFlexWrap, parseTheme } from "@nue-ui/utils";
 import "./div.css";
 
 export default defineComponent({
@@ -17,6 +17,7 @@ export default defineComponent({
         width: String,
         height: String,
         divider: { type: [String, Number, Boolean, Object], default: null },
+        theme: [String, Array],
     },
     setup(props, { slots }) {
         function getDirection() {
@@ -36,6 +37,15 @@ export default defineComponent({
                 "--width": width,
                 "--height": height,
             };
+        });
+
+        const classes = computed(() => {
+            const list = [];
+            const { theme } = props;
+            list.push("nue-div");
+            if (theme)
+                list.push(...parseTheme(theme as string | string[], "nue-div"));
+            return list;
         });
 
         function createDivider() {
@@ -69,7 +79,7 @@ export default defineComponent({
         }
 
         return () => {
-            const options = { class: "nue-div", style: style.value };
+            const options = { class: classes.value, style: style.value };
             if (props.divider !== null) {
                 const defaultSlot = slots.default!();
                 const divider = createDivider();

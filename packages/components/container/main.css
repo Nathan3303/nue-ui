@@ -9,7 +9,7 @@
 
     --aside-grow: 1;
     --aside-gap: 16px;
-    --aside-border-color: var(--mainly-border-color);
+    --aside-border-color: var(--divider-color);
 }
 
 /* Original styles */

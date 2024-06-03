@@ -6,10 +6,7 @@
         :style="buttonStyles"
         :class="buttonClasses"
         @click="handleClick">
-        <nue-icon
-            v-if="iconName"
-            :name="iconName"
-            :class="{ 'loading-icon': loading }" />
+        <nue-icon v-if="iconName" :name="iconName" :spin="loading" />
         <div v-if="$slots.default" class="nue-button__text">
             <slot></slot>
         </div>
