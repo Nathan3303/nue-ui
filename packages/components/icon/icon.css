@@ -24,7 +24,7 @@
 
 .nue-icon {
     --font-size: var(--icon-size);
-    --line-height: var(--font-size);
+    --line-height: calc(var(--font-size) + 3px);
     --spin-speed: 2s;
 }
 
