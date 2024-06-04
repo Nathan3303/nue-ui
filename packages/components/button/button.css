@@ -109,10 +109,9 @@
     aspect-ratio: 1;
     --border-width: 0px;
     --justify-content: center;
-
-    .nue-button__text {
-        display: none;
-    }
+    --border-color: transparent;
+    --icon-size: var(--text-lg);
+    box-shadow: none;
 }
 
 .nue-button--primary {
