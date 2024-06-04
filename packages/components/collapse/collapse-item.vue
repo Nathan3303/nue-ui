@@ -15,7 +15,7 @@
                 <nue-button
                     class="nue-collapse-item__toggle-button"
                     icon="arrow-down"
-                    shape="no-shape"
+                    theme="pure"
                     @click="handleCollapse" />
             </slot>
         </div>

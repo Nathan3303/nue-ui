@@ -8,12 +8,10 @@
 
 .nue-message-node-inner {
     --color: #363636;
-    --font-size: 14px;
-    --font-family: var(--mainly-font-family);
+    --font-size: var(--primary-font-size);
     --icon-size: var(--font-size);
-    --line-height: var(--font-size);
-    --padding-x: var(--font-size);
-    --padding-y: calc(var(--font-size) - 5px);
+    --padding-y: 8px;
+    --padding-x: 16px;
     --border-color: #5e5e5e;
     --background-color: #e5e5e5;
     --shadow-color: rgba(0, 0, 0, 0.1);
@@ -33,18 +31,6 @@
     margin-top: -48px;
     margin-bottom: 8px;
     opacity: 0;
-
-    .iconfont {
-        --icon-size: var(--font-size);
-        cursor: pointer;
-    }
-
-    text {
-        line-height: var(--line-height);
-        font-family: var(--font-family);
-        word-wrap: break-word;
-        word-break: break-all;
-    }
 }
 
 .nue-message-node-inner--push {

@@ -14,12 +14,12 @@ import "./text.css";
 defineOptions({ name: "NueText" });
 
 const props = withDefaults(defineProps<TextProps>(), {
-    size: "normal",
     tag: "span",
 });
 
 const size = computed(() => {
     const { size } = props;
+    if (!size) return null;
     const isPresetValue = TEXT_SIZE_VALUES[size];
     return isPresetValue ? isPresetValue : size;
 });

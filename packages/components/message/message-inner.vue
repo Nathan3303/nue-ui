@@ -1,23 +1,23 @@
 <template>
     <div ref="nodeInnerRef" :class="classes">
-        <i v-if="icon" class="iconfont" :class="icon"></i>
-        <text>{{ message }}</text>
-        <i
+        <nue-icon v-if="icon" :name="icon" />
+        <nue-text>{{ message }}</nue-text>
+        <nue-icon
             v-if="!duration"
-            class="iconfont icon-clear"
-            @click.stop="handlePopAnimation"></i>
+            name="clear"
+            @click="handlePopAnimation"
+            style="cursor: pointer" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
+import { NueText, NueIcon } from "../";
 import { handlePop } from "./message";
 import type { MessageNodeProps } from "./types";
 import "./message-inner.css";
 
-defineOptions({
-    name: "MessageNode",
-});
+defineOptions({ name: "MessageNode" });
 
 const props = withDefaults(defineProps<MessageNodeProps>(), {
     type: "info",
@@ -54,7 +54,7 @@ function handlePopAnimation() {
 
 watch(
     () => timer.value,
-    (newValue, oldValue) => {
+    (_, oldValue) => {
         if (oldValue) clearTimeout(oldValue);
     }
 );

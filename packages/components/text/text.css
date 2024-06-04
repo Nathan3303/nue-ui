@@ -28,11 +28,15 @@
 
 /* Buit-in styles */
 
-.nue-text--code {
+.nue-text.nue-text--code {
     --padding-x: 4px;
     --padding-y: 2px;
     --background-color: #eeeeee;
     --color: var(--error-color);
     --font-family: "Consolas";
     border-radius: 6px;
+}
+
+.nue-text.nue-text--h3 {
+    --font-size: var(--text-xl);
 }

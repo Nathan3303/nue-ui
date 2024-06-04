@@ -9,17 +9,12 @@
                 <nue-container>
                     <nue-header>
                         <slot name="header" :close="handleClose">
-                            <nue-text
-                                size="medium"
-                                class="nue-drawer__title"
-                                flex="1"
-                                weight="bold">
+                            <nue-text class="nue-drawer__title" flex>
                                 {{ title }}
                             </nue-text>
                             <nue-button
-                                class="edit-button"
                                 icon="clear"
-                                theme="icon-only"
+                                theme="pure"
                                 @click.stop="handleClose" />
                         </slot>
                     </nue-header>

@@ -1,21 +1,23 @@
 <template>
     <div ref="confirmRef" class="nue-confirm">
         <div class="nue-confirm__header">
-            <span>{{ title }}</span>
+            <nue-text>{{ title }}</nue-text>
             <nue-button
                 icon="clear"
-                theme="icon-only"
-                shape="no-border"
-                @click.stop="handleClose()" />
+                theme="pure"
+                @click.stop="handleClose(false)" />
         </div>
-        <div class="nue-confirm__content">{{ content }}</div>
+        <div class="nue-confirm__content">
+            <nue-text>{{ content }}</nue-text>
+        </div>
         <div class="nue-confirm__footer">
             <nue-button
                 class="nue-confirm__cancel-btn"
-                @click.stop="handleClose()">
+                @click.stop="handleClose(false)">
                 {{ cancelButtonText }}
             </nue-button>
             <nue-button
+                theme="primary"
                 class="nue-confirm__confirm-btn"
                 @click.stop="handleClose(true)">
                 {{ confirmButtonText }}
@@ -26,7 +28,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { NueButton } from "../button/index";
+import { NueButton, NueText } from "../index";
 import type { ConfirmPropsType } from "./types";
 
 defineOptions({ name: "NueConfirmNodeInner" });
