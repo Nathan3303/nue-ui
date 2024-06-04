@@ -5,16 +5,18 @@
 </template>
 
 <script setup lang="ts">
-import { NueConfirm, NueMessage } from "nue-ui";
+import { NueConfirm, NueMessage } from "../../../../core/index";
 
-async function openConfirm() {
-    await NueConfirm({
+function openConfirm() {
+    NueConfirm({
         title: "Confirm",
         content: "Are you sure to delete this item?",
         confirmButtonText: "Yes",
         cancelButtonText: "No",
-    });
-    NueMessage.success("Confirmed!");
+    }).then(
+        () => NueMessage.success("Confirmed!"),
+        () => {}
+    );
 }
 </script>
 

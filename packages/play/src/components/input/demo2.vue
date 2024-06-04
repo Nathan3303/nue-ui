@@ -12,6 +12,12 @@
             placeholder="Enter description"
             resize
             :rows="0" />
+        <nue-textarea
+            disabled
+            v-model="description"
+            placeholder="Enter description"
+            resize
+            :rows="0" />
     </nue-div>
 </template>
 

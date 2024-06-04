@@ -1,16 +1,15 @@
 <template>
     <nue-div align="center">
-        <nue-dropdown trigger="hover" text="Open dropdown (hover)">
+        <nue-dropdown trigger="hover" text="Hover">
             <template #dropdown>
                 <li>trigger="hover"</li>
-                <li>text="Open dropdown (hover)"</li>
+                <li>text="Hover"</li>
             </template>
         </nue-dropdown>
-        <nue-dropdown trigger="click" text="Open dropdown (click)">
+        <nue-dropdown trigger="click" text="Click">
             <template #dropdown>
                 <li>trigger="click"</li>
-                <li>text="Open dropdown (click)"</li>
-                <li>shape="no-shape"</li>
+                <li>text="Click"</li>
             </template>
         </nue-dropdown>
     </nue-div>
