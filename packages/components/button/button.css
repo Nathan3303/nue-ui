@@ -122,3 +122,14 @@
     --hover-background-color: var(--primary-color-800);
     --active-background-color: var(--primary-color-800);
 }
+
+.nue-button--pure {
+    box-shadow: none;
+    padding: 0px;
+    --height: fit-content;
+    --hover-background-color: transparent;
+    --active-background-color: transparent;
+    --hover-color: var(--secondary-text-color);
+    --active-color: var(--secondary-text-color);
+    --border-color: transparet;
+}
