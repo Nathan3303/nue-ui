@@ -8,7 +8,7 @@
     gap: var(--secondary-gap);
     overflow: hidden;
     min-width: var(--min-width);
-    height: 32px;
+    height: 36px;
 
     & .nue-icon {
         --icon-color: var(--dark-primary-color);
@@ -21,6 +21,7 @@
         min-width: calc(var(--font-size) * 5);
         height: var(--input-line-height);
         text-align: var(--text-align);
+        line-height: normal;
     }
 
     & .button-group {
@@ -72,14 +73,15 @@
     }
 
     &.nue-input--disabled {
-        color: var(--disabled-color);
+        --hover-border-color: var(--disabled-border-color);
+        --hover-background-color: var(--disabled-background-color);
+
+        color: var(--disabled-color) !important;
+        border-color: var(--disabled-border-color);
+        background-color: var(--disabled-background-color);
         cursor: not-allowed;
         -webkit-user-select: none;
         user-select: none;
-        background-color: var(--disabled-background-color);
-
-        --hover-border-color: var(--disabled-border-color);
-
         & * {
             cursor: not-allowed;
         }

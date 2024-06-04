@@ -71,7 +71,7 @@ const classes = computed(() => {
 });
 
 const style = computed(() => {
-    const { width, rows, resize, size, flex } = props;
+    const { width, rows, resize, size, flex, disabled } = props;
     // return {
     //     // "--overflow": autosize ? "hidden" : "auto",
     //     "--rows": rows === 0 ? 999 : rows,
@@ -84,7 +84,7 @@ const style = computed(() => {
     return {
         "--rows": rowsValue,
         "--width": width,
-        "--resize": resize ? "vertical" : undefined,
+        "--resize": resize && !disabled ? "vertical" : undefined,
         "--font-size": size,
         "--flex": flex,
     };

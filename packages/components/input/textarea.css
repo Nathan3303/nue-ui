@@ -7,7 +7,6 @@
     --overflow: auto;
     --resize: none;
     --line-height: calc(var(--font-size) + 5px);
-    /* --min-height: calc(var(--line-height) * var(--rows)); */
     --height: calc(
         var(--line-height) * var(--rows) + var(--padding-y) * 2 +
             var(--border-width) * 2
@@ -68,13 +67,14 @@
 }
 
 .nue-textarea--disabled {
-    color: var(--disabled-color);
-    cursor: not-allowed;
-    user-select: none;
-    background-color: var(--disabled-background-color);
     --hover-border-color: var(--disabled-border-color);
-    --focus-border-color: var(--disabled-border-color);
+    --hover-background-color: var(--disabled-background-color);
 
+    border-color: var(--disabled-border-color);
+    background-color: var(--disabled-background-color);
+    cursor: not-allowed;
+    -webkit-user-select: none;
+    user-select: none;
     & * {
         cursor: not-allowed;
     }
