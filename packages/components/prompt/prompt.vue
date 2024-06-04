@@ -60,41 +60,37 @@ const promptInputRef = ref();
 const inputValue = ref("");
 const inputValueError = ref(false);
 
-function handleClose(isPositive: boolean = false) {
-    if (isPositive) {
-        if (props.validator) {
-            const validateResult = props.validator(inputValue.value);
+function handleClose(isConfirmed: boolean) {
+    const { close, validator, beforeConfirm } = props;
+    if (isConfirmed) {
+        if (validator) {
+            const validateResult = validator(inputValue.value);
             inputValueError.value = !validateResult;
             if (!validateResult) return;
         }
-        if (props.beforeConfirm) {
-            const beforeConfirmResult = props.beforeConfirm(inputValue.value);
+        if (beforeConfirm) {
+            const beforeConfirmResult = beforeConfirm(inputValue.value);
             if (beforeConfirmResult instanceof Promise) {
                 beforeConfirmResult
                     .then((value) => {
                         const _value = value || inputValue.value;
-                        props.callback(isPositive, _value);
+                        close(isConfirmed, _value);
                     })
                     .catch((err) => console.log(err));
                 return;
             } else {
                 if (beforeConfirmResult) {
-                    props.callback(isPositive, inputValue.value);
+                    close(isConfirmed, inputValue.value);
                 }
             }
         }
     }
-    props.callback(isPositive, inputValue.value);
+    close(isConfirmed, inputValue.value);
 }
 
 onMounted(() => {
     requestAnimationFrame(() => {
         promptInputRef.value!.innerInputRef.focus();
-
-        requestAnimationFrame(() => {
-            promptRef.value!.style.marginTop = "0px";
-            promptRef.value!.style.opacity = "1";
-        });
     });
 });
 

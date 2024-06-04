@@ -1,26 +1,25 @@
 import PromptNode from "./prompt.vue";
 import { createVNode, render } from "vue";
-import { getPopupWrapper } from "../popup-wrapper";
-import type { PromptPayloadType } from "./types";
+import { usePopupWrapper } from "../popup-wrapper";
+import type { PromptClose, PromptPayloadType } from "./types";
 import "./prompt.css";
 
 export default (payload: PromptPayloadType) => {
-    const popupWrapper = getPopupWrapper(payload.wrapperId ?? "");
+    const popupWrapper = usePopupWrapper(payload.wrapperId);
 
     return new Promise((resolve, reject) => {
-        const confirmNode = document.createElement("div");
-        confirmNode.classList.add("nue-prompt-wrapper");
-        popupWrapper.appendChild(confirmNode);
+        const promptWrapper = document.createElement("div");
+        promptWrapper.classList.add("nue-prompt-wrapper");
+        popupWrapper.appendChild(promptWrapper);
 
-        function callback(isConfirmed: boolean, payload: any) {
-            if (isConfirmed) {
-                resolve(payload);
-            } else {
-                reject(payload);
-            }
-            popupWrapper.removeChild(confirmNode);
-        }
+        const close: PromptClose = (isConfirmed, payload) => {
+            promptWrapper.dataset.leaving = "true";
+            isConfirmed ? resolve(payload) : reject(payload);
+            setTimeout(() => {
+                popupWrapper.removeChild(promptWrapper);
+            }, 240);
+        };
 
-        render(createVNode(PromptNode, { ...payload, callback }), confirmNode);
+        render(createVNode(PromptNode, { ...payload, close }), promptWrapper);
     });
 };
