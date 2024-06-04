@@ -1,28 +1,6 @@
-/* Animations */
-
-@keyframes fade-in {
-    from {
-        background-color: rgba(0, 0, 0, 0);
-    }
-    to {
-        background-color: rgba(0, 0, 0, 0.48);
-    }
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
 /* Variables */
 
-.nue-confirm-inner {
-    --font-family: var(--mainly-font-family);
-}
+/* .nue-confirm-inner {} */
 
 /* Original styles */
 
@@ -37,7 +15,7 @@
     background-color: rgba(0, 0, 0, 0.48);
     overflow: hidden;
     box-sizing: border-box;
-    animation: fade-in 0.16s ease-in 1 forwards;
+    animation: fade-in 0.24s linear;
 
     .nue-confirm {
         display: flex;
@@ -48,10 +26,7 @@
         border-radius: 5px;
         background-color: #fff;
         gap: 16px;
-        transition: all 0.3s ease;
-        opacity: 0;
-        font-family: var(--font-family);
-        color: var(--mainly-font-color);
+        animation: slide-in-from-top 0.24s linear;
 
         .nue-confirm__header {
             width: 100%;
@@ -75,6 +50,14 @@
             align-self: center;
             justify-content: end;
             gap: 8px;
+        }
+    }
+
+    &[data-leaving="true"] {
+        animation: fade-out 0.24s linear;
+
+        .nue-confirm {
+            animation: slide-out-to-top 0.24s linear;
         }
     }
 }
