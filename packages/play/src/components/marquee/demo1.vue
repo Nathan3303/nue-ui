@@ -6,7 +6,7 @@
         </div>
     </nue-marquee>
     <nue-text>One-time Marquee</nue-text>
-    <nue-marquee>
+    <nue-marquee :speed-ratio="2">
         <div class="marquee-item" v-for="(item, idx) in 12" :key="idx">
             {{ item }}
         </div>

@@ -17,6 +17,32 @@
             <nue-text size="large">Infinite Scroll</nue-text>
             <infinite-scroll-demo1></infinite-scroll-demo1>
         </nue-div>
+        <nue-div vertical theme="card">
+            <nue-text size="large">Collapse</nue-text>
+            <nue-collapse>
+                <nue-collapse-item title="Collapse Item 1">
+                    <nue-text>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Asperiores natus aspernatur facere dolores eos itaque
+                        cupiditate eveniet perspiciatis dolorem?
+                    </nue-text>
+                </nue-collapse-item>
+                <nue-collapse-item>
+                    <template #header="{ collapse, state }">
+                        <nue-button
+                            theme="pure"
+                            @click="collapse"
+                            :icon="`arrow-${state ? 'right' : 'down'}`">
+                            Collapse Item 2
+                        </nue-button>
+                    </template>
+                    <nue-text>
+                        Illo neque, numquam amet rem veniam dolorum iste aperiam
+                        laudantium fugiat.
+                    </nue-text>
+                </nue-collapse-item>
+            </nue-collapse>
+        </nue-div>
     </div>
 </template>
 
