@@ -6,10 +6,10 @@
             <button-demo1></button-demo1>
             <button-demo2></button-demo2>
             <button-demo3></button-demo3>
-            <nue-div>
+            <nue-div align="center" :divider="{}">
                 <nue-button theme="icon-only" icon="search" />
-                <nue-button theme="primary">Button</nue-button>
-                <nue-button theme="pure" icon="search"></nue-button>
+                <nue-button theme="primary" icon="search">Search</nue-button>
+                <nue-button theme="pure" icon="search">Search</nue-button>
             </nue-div>
         </nue-div>
         <!-- Link -->
