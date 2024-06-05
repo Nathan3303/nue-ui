@@ -1,7 +1,5 @@
 /* Variables */
 
-@import url(./common.css);
-
 .nue-textarea {
     --rows: 3;
     --overflow: auto;
@@ -36,47 +34,49 @@
         left: var(--padding-y);
         z-index: -1;
         opacity: 0;
+        width: calc(100% - var(--padding-x) * 2);
     }
 
     & .word-counter {
         position: absolute;
         right: var(--padding-x);
         bottom: var(--padding-y);
+        line-height: normal;
     }
-}
 
-.nue-textarea--square {
-    border-radius: 5px;
-}
+    &.nue-textarea--square {
+        border-radius: 5px;
+    }
 
-.nue-textarea--round {
-    border-radius: var(--font-size);
-    padding-left: calc(var(--padding-y) + var(--padding-x));
-    padding-right: calc(var(--padding-y) + var(--padding-x));
-}
+    &.nue-textarea--round {
+        border-radius: var(--font-size);
+        padding-left: calc(var(--padding-y) + var(--padding-x));
+        padding-right: calc(var(--padding-y) + var(--padding-x));
+    }
 
-.nue-textarea--no-shape {
-    --width: auto;
-    --padding-x: 0px;
-    --padding-y: 0px;
-    --border-color: transparent;
-    --hover-border-color: transparent;
-    --focus-border-color: transparent;
-    --focus-shadow-color: transparent;
-    --disabled-border-color: transparent;
-}
+    &.nue-textarea--no-shape {
+        --width: auto;
+        --padding-x: 0px;
+        --padding-y: 0px;
+        --border-color: transparent;
+        --hover-border-color: transparent;
+        --focus-border-color: transparent;
+        --focus-shadow-color: transparent;
+        --disabled-border-color: transparent;
+    }
 
-.nue-textarea--disabled {
-    --hover-border-color: var(--disabled-border-color);
-    --hover-background-color: var(--disabled-background-color);
+    &.nue-textarea--disabled {
+        --hover-border-color: var(--disabled-border-color);
+        --hover-background-color: var(--disabled-background-color);
 
-    border-color: var(--disabled-border-color);
-    background-color: var(--disabled-background-color);
-    cursor: not-allowed;
-    -webkit-user-select: none;
-    user-select: none;
-    & * {
+        border-color: var(--disabled-border-color);
+        background-color: var(--disabled-background-color);
         cursor: not-allowed;
+        -webkit-user-select: none;
+        user-select: none;
+        & * {
+            cursor: not-allowed;
+        }
     }
 }
 
