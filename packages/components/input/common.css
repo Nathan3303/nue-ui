@@ -98,11 +98,8 @@
     }
 
     .word-counter {
-        display: flex;
-        align-items: center;
         flex: none;
-        opacity: 0.48;
+        color: var(--primary-color-400);
         font-size: var(--text-xs);
-        height: var(--line-height);
     }
 }
