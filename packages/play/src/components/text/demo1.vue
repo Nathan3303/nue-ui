@@ -1,9 +1,12 @@
 <template>
     <nue-div>
         <nue-text size="normal" flex>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam
-            animi maiores, commodi incidunt itaque doloribus voluptatibus iusto
-            ullam ipsam temporibus. Eum, molestias. Sequi obcaecati id tenetur!
+            Lorem ipsum dolor,
+            <nue-text decoration="underline">sit amet consectetur</nue-text>
+            adipisicing elit. Aperiam animi maiores,commodi incidunt itaque
+            <nue-text color="orange"> doloribus voluptatibus iusto </nue-text>
+            ullam ipsam temporibus.Eum, molestias.
+            <nue-text size="xlarge">Sequi obcaecati</nue-text> id tenetur!
             Voluptate ea ipsum cumque.
         </nue-text>
     </nue-div>

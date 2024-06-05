@@ -17,7 +17,7 @@
             </nue-button>
         </slot>
         <!-- Dropdown -->
-        <transition name="dropdown-fade">
+        <transition name="fade">
             <ul
                 v-show="visible"
                 :class="classes"

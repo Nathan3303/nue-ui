@@ -1,0 +1,42 @@
+/* Variabled */
+
+.nue-text {
+    --padding-x: 0px;
+    --padding-y: 0px;
+    --word-wrap: break-word;
+    --word-break: break-all;
+    --flex: 0 1 auto;
+    --background-color: transparent;
+}
+
+/* Original styles */
+
+.nue-text {
+    color: var(--color, inherit);
+    font-size: var(--font-size, inherit);
+    font-weight: var(--font-weight, inherit);
+    font-family: var(--font-family, inherit);
+    text-decoration: var(--text-decoration, inherit);
+    text-align: var(--text-align, inherit);
+    word-wrap: var(--word-wrap);
+    word-break: var(--word-break);
+    flex: var(--flex);
+    padding: var(--padding-y) var(--padding-x);
+    background-color: var(--background-color);
+    font-family: var(--font-family, inherit);
+}
+
+/* Buit-in styles */
+
+.nue-text.nue-text--code {
+    --padding-x: 4px;
+    --padding-y: 2px;
+    --background-color: #eeeeee;
+    --color: var(--error-color);
+    --font-family: "Consolas";
+    border-radius: 6px;
+}
+
+.nue-text.nue-text--h3 {
+    --font-size: var(--text-xl);
+}

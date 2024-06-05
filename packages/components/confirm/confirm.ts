@@ -1,29 +1,25 @@
 import ConfirmNode from "./confirm.vue";
-import { getPopupWrapper } from "../popup-wrapper";
+import { usePopupWrapper } from "../popup-wrapper";
 import { createVNode, render } from "vue";
-import type { ConfirmPayloadType } from "./types";
+import type { ConfirmClose, ConfirmPayloadType } from "./types";
 import "./confirm.css";
 
 export default function (payload: ConfirmPayloadType) {
-    const popupWrapper = getPopupWrapper(payload.wrapperId ?? "");
+    const popupWrapper = usePopupWrapper(payload.wrapperId);
 
     return new Promise((resolve, reject) => {
         const confirmWrapper = document.createElement("div");
         confirmWrapper.classList.add("nue-confirm-wrapper");
         popupWrapper.appendChild(confirmWrapper);
 
-        function callback(isConfirmed: boolean, payload: any) {
-            if (isConfirmed) {
-                resolve(payload);
-            } else {
-                reject(payload);
-            }
-            popupWrapper.removeChild(confirmWrapper);
-        }
+        const close: ConfirmClose = (isConfirmed) => {
+            confirmWrapper.dataset.leaving = "true";
+            isConfirmed ? resolve(true) : reject(false);
+            setTimeout(() => {
+                popupWrapper.removeChild(confirmWrapper);
+            }, 240);
+        };
 
-        render(
-            createVNode(ConfirmNode, { ...payload, callback }),
-            confirmWrapper
-        );
+        render(createVNode(ConfirmNode, { ...payload, close }), confirmWrapper);
     });
 }

@@ -4,8 +4,8 @@
 .nue-button-group {
     display: flex;
     align-items: center;
-
     overflow: hidden;
+    box-shadow: var(--secondary-shadow);
 
     & > .nue-button {
         border-radius: 0px;
@@ -16,10 +16,12 @@
         margin-left: 0px;
         border-top-left-radius: var(--border-radius);
         border-bottom-left-radius: var(--border-radius);
+        box-shadow: none;
     }
 
     & > .nue-button:last-child {
         border-top-right-radius: var(--border-radius);
         border-bottom-right-radius: var(--border-radius);
+        box-shadow: none;
     }
 }

@@ -9,12 +9,16 @@
             maxlength="64" />
         <nue-input
             v-model="password"
-            icon="mima"
+            icon="lock"
             type="password"
             placeholder="Password"
             clearable
             allow-show-password
             shape="round" />
+        <nue-input
+            placeholder="Disabled input"
+            v-model="description"
+            disabled />
     </nue-div>
 </template>
 
@@ -23,6 +27,7 @@ import { ref } from "vue";
 
 const searchText = ref("");
 const password = ref("");
+const description = ref("This is a description");
 </script>
 
 <style scoped></style>

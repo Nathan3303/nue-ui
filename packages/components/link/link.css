@@ -1,82 +1,74 @@
 /* Variables */
 
 .nue-link {
-    --font-size: var(--mainly-font-size);
-    --font-color: inherit;
-    --font-family: var(--mainly-font-family);
-    --font-weight: var(--mainly-font-weight);
+    --font-size: var(--primary-font-size);
+    --font-weight: 500;
 
     --text-decoration: none;
-
-    --hover-font-color: #4141e7;
-    --hover-border-color: transparent;
-    --hover-background-color: transparent;
     --hover-text-decoration: underline;
 
-    --disable-font-color: var(--mainly-disable-font-color);
-    --disable-border-color: var(--border-color);
+    --color: var(--primary-color-a200);
+    --hover-color: var(--primary-color-a700);
+    --disable-color: var(--disabled-color);
+
+    --hover-border-color: transparent;
+    --disable-border-color: transparent;
+
+    --background-color: transparent;
+    --hover-background-color: transparent;
     --disable-background-color: #cccccc99;
 }
 
 .nue-link--btnlike {
-    --icon-size: var(--font-size);
-    --icon-color: var(--font-color);
-    --icon-weight: var(--font-weight);
-
     --width: auto;
-    --line-height: var(--font-size);
-    --padding-x: calc(var(--font-size));
-    --padding-y: calc(var(--font-size) / 2);
-    --height: calc(
-        var(--line-height) + var(--padding-y) * 2 +
-            calc(var(--border-width) * 2)
-    );
+    --height: 36px;
+    --line-height: var(--primary-line-height);
+    --padding-x: var(--font-size);
+    --padding-y: var(--secondary-padding);
     --flex: none;
-    --align-y: start;
-
-    --border-width: 1px;
-    --border-style: solid;
-    --border-color: transparent;
-    --border-radius: var(--mainly-square-radius);
-    --background-color: transparent;
-
-    --hover-font-color: inherit;
-    --hover-border-color: transparent;
-    --hover-background-color: #cccccc99;
+    --justify-content: start;
+    --gap: var(--secondary-gap);
+    --font-size: var(--text-sm);
+    --border-radius: var(--primary-radius);
     --hover-text-decoration: none;
 
-    --active-font-color: var(--font-color);
-    --active-border-color: var(--border-color);
-    --active-background-color: #cccccc99;
+    --color: var(--primary-text-color);
+    --hover-color: var(--color);
+    --active-color: var(--color);
+    --disable-color: var(--color);
+    --actived-color: var(--primary-color-50);
 
-    --actived-font-color: var(--font-color);
-    --actived-border-color: var(--border-color);
-    --actived-background-color: var(--active-background-color);
+    --border-color: white;
+    --hover-border-color: var(--border-color);
+    --active-border-color: var(--border-color);
+    --disable-border-color: var(--border-color);
+    --actived-border-color: var(--active-border-color);
+
+    --hover-background-color: var(--primary-color-300);
+    --active-background-color: var(--primary-color-300);
+    --disable-background-color: var(--primary-color-200);
+    --actived-background-color: var(--primary-text-color);
 }
 
 /* Original styles */
 
 .nue-link {
-    color: var(--font-color);
+    color: var(--color);
     font-size: var(--font-size);
     font-weight: var(--font-weight);
-    font-family: var(--font-family);
-
     cursor: pointer;
-    position: relative;
     text-decoration: var(--text-decoration);
+    transition: all 0.16s ease-out;
 
     &:hover {
-        color: var(--hover-font-color);
+        color: var(--hover-color);
         background-color: var(--hover-background-color);
         text-decoration: var(--hover-text-decoration);
     }
 
     &.nue-link--disabled {
-        --font-color: var(--disable-font-color);
-        --hover-font-color: var(--disable-font-color);
-        --background-color: var(--hover-background-color);
-        --active-background-color: var(--hover-background-color);
+        color: var(--disable-color);
+        background-color: var(--hover-background-color);
         cursor: not-allowed;
     }
 }
@@ -87,19 +79,20 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: var(--align-y);
-    gap: 6px;
+    justify-content: var(--justify-content);
+    gap: var(--gap);
 
     width: var(--width);
     height: var(--height);
     line-height: var(--line-height);
-    padding: var(--padding-y) var(--padding-x);
+    padding: var(--padding-y, 0px) var(--padding-x, 0px);
     flex: var(--flex);
 
-    border: var(--border-width) var(--border-style) var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     background-color: var(--background-color);
 
+    -webkit-user-select: none;
     user-select: none;
     transition: all 0.16s ease-out;
     overflow: hidden;
@@ -112,13 +105,13 @@
     }
 
     &:active {
-        color: var(--active-font-color);
+        color: var(--active-color);
         border-color: var(--active-border-color);
         background-color: var(--active-background-color);
     }
 
     &.nue-link--actived {
-        color: var(--actived-font-color);
+        color: var(--actived-color);
         border-color: var(--actived-border-color);
         background-color: var(--actived-background-color);
     }

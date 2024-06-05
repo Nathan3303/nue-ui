@@ -3,11 +3,8 @@
         <nue-button @click="dialogVisible = true">Open Dialog</nue-button>
         <nue-dialog
             v-model="dialogVisible"
-            :before-confirm="handleBeforeConfirm">
-            <template #header="{ close }">
-                <nue-text>My Dialog Title</nue-text>
-                <nue-button icon="clear" theme="icon-only" @click="close" />
-            </template>
+            :before-confirm="handleBeforeConfirm"
+            title="Dialog Title">
             <template #default>
                 <nue-div vertical align="stretch">
                     <nue-input v-model="dialogData.title" />
@@ -15,12 +12,10 @@
                 </nue-div>
             </template>
             <template #footer="{ cancel, confirm }">
-                <nue-button class="cancel-button" @click.stop="cancel"
-                    >Cancel</nue-button
-                >
-                <nue-button class="confirm-button" @click.stop="confirm"
-                    >Confirm</nue-button
-                >
+                <nue-button @click.stop="cancel"> Cancel </nue-button>
+                <nue-button theme="primary" @click.stop="confirm">
+                    Confirm
+                </nue-button>
             </template>
         </nue-dialog>
     </nue-div>

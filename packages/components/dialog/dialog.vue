@@ -9,11 +9,11 @@
             <div class="nue-dialog" @click.stop>
                 <div class="nue-dialog__header">
                     <slot name="header" :close="handleCancel">
-                        <span>{{ title }}</span>
+                        <nue-text>{{ title }}</nue-text>
                         <nue-button
-                            theme="icon-only"
                             icon="clear"
-                            @click.stop="handleCancel" />
+                            theme="pure"
+                            @click="handleCancel" />
                     </slot>
                 </div>
                 <div class="nue-dialog__content">
@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { nextTick, ref, watch, computed } from "vue";
-import { NueButton } from "../button";
+import { NueButton, NueText } from "../";
 import type { DialogPropsType, DialogEmitsType } from "./types";
 import { isFunction } from "@nue-ui/utils";
 import "./dialog.css";

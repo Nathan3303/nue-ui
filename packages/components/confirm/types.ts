@@ -1,14 +1,14 @@
 import type { VNode } from "vue";
 import type { Optional } from "@nue-ui/utils";
 
-export type ConfirmCallbackType = (isConfirmed: boolean, payload: any) => void;
+export type ConfirmClose = (isConfirmed: boolean) => void;
 
 export type ConfirmPropsType = {
     title?: string;
     content?: string | VNode;
     confirmButtonText?: string;
     cancelButtonText?: string;
-    callback: ConfirmCallbackType;
+    close: ConfirmClose;
 };
 
 export interface ConfirmPayloadType extends Optional<ConfirmPropsType> {

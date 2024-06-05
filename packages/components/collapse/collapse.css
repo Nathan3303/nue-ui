@@ -26,6 +26,7 @@
         justify-content: var(--collapse-item-header-justify);
         padding: 8px 0px;
         border-bottom: none;
+        -webkit-user-select: none;
         user-select: none;
         box-shadow: 0px -1px #eee;
         border-bottom: 1px solid transparent;
@@ -37,9 +38,9 @@
 
         .nue-collapse-item__toggle-button,
         .outter-toggle-button {
-            --icon-color: #666;
-            --icon-size: 14px;
-            height: max-content;
+            /* --icon-color: #666; */
+            /* --icon-size: 14px; */
+            --height: max-content;
             transform: rotate(360deg);
             transition: 0.3s ease-out;
         }

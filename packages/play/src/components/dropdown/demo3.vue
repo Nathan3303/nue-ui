@@ -1,16 +1,13 @@
 <template>
     <nue-div align="center">
-        <nue-dropdown
-            trigger="hover"
-            @execute="handleExecute"
-            hide-on-click
-            align="center">
+        <nue-dropdown trigger="hover" @execute="handleExecute" hide-on-click>
             <template #default>
-                <nue-div align="center" gap="6px">
+                <nue-div align="center" gap="8px">
                     <nue-avatar
                         src="https://picsum.photos/id/237/200/200"
-                        shape="round" />
-                    <nue-button shape="no-shape">
+                        shape="round"
+                        size="tiny" />
+                    <nue-button theme="pure">
                         Username
                         <template #append>
                             <nue-icon

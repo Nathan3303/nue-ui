@@ -1,10 +1,10 @@
 <template>
-    <nue-div vertical :divider="{}">
-        <nue-div vertical>
+    <div class="view-container">
+        <nue-div vertical theme="card">
             <nue-text size="large">Divider</nue-text>
             <divider-demo-1></divider-demo-1>
         </nue-div>
-    </nue-div>
+    </div>
 </template>
 
 <script setup lang="ts">

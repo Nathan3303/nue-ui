@@ -1,19 +1,27 @@
 <template>
-    <div ref="popupWrapperRef" class="nue-popup-wrapper"></div>
+    <div ref="popupWrapperRef" :id="id" class="nue-popup-wrapper"></div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { registerPopupWrapper } from "./popup-wrapper";
+import { onMounted, onBeforeUnmount, ref } from "vue";
+import { registerPopupWrapper, unregisterPopupWrapper } from "./popup-wrapper";
 import "./popup-wrapper.css";
 
 defineOptions({ name: "NuePopupWrapper" });
 
-const props = defineProps<{ id?: string }>();
+defineProps<{ id?: string }>();
 
 const popupWrapperRef = ref<HTMLDivElement>();
 
 onMounted(() => {
-    registerPopupWrapper(popupWrapperRef.value!, props.id);
+    if (popupWrapperRef.value) {
+        registerPopupWrapper(popupWrapperRef.value);
+    }
 });
+
+onBeforeUnmount(() => {
+    if (popupWrapperRef.value) {
+        unregisterPopupWrapper(popupWrapperRef.value);
+    }
+})
 </script>

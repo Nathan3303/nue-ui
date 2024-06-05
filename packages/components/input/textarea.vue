@@ -45,10 +45,6 @@ defineOptions({ name: "NueTextarea" });
 const emit = defineEmits(["update:modelValue"]);
 const props = withDefaults(defineProps<TextareaPropsType>(), {
     shape: "square",
-    // disabled: false,
-    // readonly: false,
-    // resize: false,
-    // autosize: false,
     counter: "off",
     debounceTime: 0,
 });
@@ -71,22 +67,15 @@ const classes = computed(() => {
 });
 
 const style = computed(() => {
-    const { width, rows, resize, size, flex } = props;
-    // return {
-    //     // "--overflow": autosize ? "hidden" : "auto",
-    //     "--rows": rows === 0 ? 999 : rows,
-    //     "--textarea-width": width === "auto" ? undefined : width,
-    //     "--resize": resize ? "vertical" : undefined,
-    //     "--font-size": size === "16px" ? undefined : size,
-    //     "--flex": flex === "none" ? undefined : parseFlex(flex),
-    // };
+    const { autosize, width, rows, resize, size, flex, disabled } = props;
     const rowsValue = resize ? 999 : rows === 0 ? 999 : rows;
     return {
         "--rows": rowsValue,
         "--width": width,
-        "--resize": resize ? "vertical" : undefined,
+        "--resize": resize && !disabled ? "vertical" : undefined,
         "--font-size": size,
         "--flex": flex,
+        "--overflow": autosize ? "hidden" : "auto",
     };
 });
 
@@ -97,7 +86,6 @@ const updateModelValue = debounce(
 
 function handleAutosize(textareaValue: string) {
     if (!props.autosize) return;
-    // console.log("autosize", textareaValue);
     backendTextareaRef.value.value = textareaValue;
     nextTick(() => {
         textareaRef.value.style.height =

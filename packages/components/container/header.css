@@ -2,7 +2,7 @@
 
 .nue-header {
     --height: 60px;
-    --border-color: var(--mainly-border-color);
+    --border-color: var(--divider-color);
     --padding-x: 16px;
 }
 

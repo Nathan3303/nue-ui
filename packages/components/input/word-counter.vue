@@ -1,28 +1,23 @@
 <template>
-    <div class="word-counter">{{ wordCounterText }}</div>
+    <div class="word-counter">
+        <nue-text>{{ wordCounterText }}</nue-text>
+    </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { InputCounterType } from "./types";
+import { NueText } from "../index";
+import type { WordCounterProps } from "./types";
 
 defineOptions({ name: "WordCounter" });
 
-const props = withDefaults(
-    defineProps<{
-        mode: InputCounterType;
-        length: number;
-        maxlength: number;
-    }>(),
-    {
-        mode: "both",
-        maxlength: 0,
-    }
-);
+const props = withDefaults(defineProps<WordCounterProps>(), {
+    mode: "both",
+    maxlength: 0,
+});
 
 const wordCounterText = computed(() => {
     const { mode, maxlength, length } = props;
-    // console.log(mode, maxlength, length);
     if (mode === "off") return false;
     let result = "";
     const max = maxlength !== -1 && maxlength;

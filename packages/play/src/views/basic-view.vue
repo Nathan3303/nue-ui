@@ -1,29 +1,34 @@
 <template>
-    <nue-div class="basic-comp" vertical :divider="{}">
+    <div class="view-container">
         <!-- Button -->
-        <nue-div vertical>
+        <nue-div vertical theme="card" :divider="{}">
             <nue-text weight="bold" size="large">Button</nue-text>
             <button-demo1></button-demo1>
             <button-demo2></button-demo2>
             <button-demo3></button-demo3>
+            <nue-div align="center" :divider="{}">
+                <nue-button theme="icon-only" icon="search" />
+                <nue-button theme="primary" icon="search">Search</nue-button>
+                <nue-button theme="pure" icon="search">Search</nue-button>
+            </nue-div>
         </nue-div>
         <!-- Link -->
-        <nue-div vertical>
+        <nue-div vertical theme="card" :divider="{}">
             <nue-text weight="bold" size="large">Link</nue-text>
             <link-demo1></link-demo1>
             <link-demo2></link-demo2>
         </nue-div>
         <!-- Text  -->
-        <nue-div vertical>
+        <nue-div vertical theme="card" :divider="{}">
             <nue-text weight="bold" size="large">Text</nue-text>
             <text-demo1></text-demo1>
         </nue-div>
         <!-- Icon -->
-        <nue-div vertical>
+        <nue-div vertical theme="card" :divider="{}">
             <nue-text weight="bold" size="large">Icon</nue-text>
             <icon-demo1></icon-demo1>
         </nue-div>
-    </nue-div>
+    </div>
 </template>
 
 <script setup lang="ts">

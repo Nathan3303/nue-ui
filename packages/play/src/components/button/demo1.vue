@@ -3,7 +3,7 @@
         <nue-button>Button</nue-button>
         <nue-button shape="round">Round Button</nue-button>
         <nue-button disabled>Disblaed Button</nue-button>
-        <nue-button icon="chuangzuo">Icon Button</nue-button>
+        <nue-button icon="theme">Icon Button</nue-button>
     </nue-div>
 </template>
 

@@ -42,14 +42,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
-            .nue-button--icon-only {
-                --icon-size: 14px;
-            }
         }
 
         .nue-dialog__content {
             width: 100%;
+            margin-bottom: 12px;
         }
 
         .nue-dialog__footer {
@@ -60,20 +57,20 @@
             gap: 8px;
 
             .cancel-button {
-                --background-color: #fff;
+                --color: #333;
                 --border-color: #ccc;
-                --font-color: #333;
-                --hover-background-color: #f5f5f5;
+                --background-color: #fff;
+                --hover-color: #333;
                 --hover-border-color: #ccc;
-                --hover-text-color: #333;
+                --hover-background-color: #f5f5f5;
             }
 
             .confirm-button {
-                --font-color: #fff;
+                --color: #fff;
                 --border-color: transparent;
-                --background-color: rgba(144, 144, 144, 0.6);
-                --hover-background-color: rgba(144, 144, 144, 0.8);
-                --active-background-color: rgba(144, 144, 144, 1);
+                --background-color: #90909099;
+                --hover-background-color: #909090cc;
+                --active-background-color: #909090;
             }
         }
     }

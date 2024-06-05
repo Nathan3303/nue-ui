@@ -17,6 +17,8 @@ dist/*
 /cyperss/videos/
 /cypress/srceenshots/
 
+packages/core/package.json
+
 .vitepress
 .vitepress/dist
 .vitepress/cache

@@ -1,11 +1,9 @@
 /* Variables */
 
 .infinite-scroll-wrapper {
-    --font-color: var(--mainly-color);
-    --font-size: var(--mainly-font-size);
-    --font-weight: var(--mainly-font-weight);
-    --font-family: var(--mainly-font-family);
-
+    --font-color: var(--primary-text-color);
+    --font-size: var(--primary-font-size);
+    --font-weight: var(--primary-font-weight);
     --height: 100%;
     --trigger-bar-height: 50px;
 }
@@ -49,8 +47,8 @@
         }
 
         .infinite-scroll__disabled {
-            color: #696969;
-            background-color: #f9f9f9;
+            color: var(--disabled-color);
+            background-color: var(--primary-color-200);
         }
     }
 }

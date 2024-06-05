@@ -15,6 +15,9 @@
     align-items: center;
     justify-content: var(--justify-content);
     position: relative;
+    color: var(--color);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight);
 
     .nue-divider__line {
         box-sizing: border-box;

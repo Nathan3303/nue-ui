@@ -21,7 +21,7 @@ function createMessage() {
 function createMessageWithIcon() {
     NueMessage({
         message: "This is a message with icon",
-        icon: "icon-checked",
+        icon: "success",
     });
 }
 
