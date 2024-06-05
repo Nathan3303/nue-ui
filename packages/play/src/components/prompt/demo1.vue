@@ -13,18 +13,19 @@ defineOptions({ name: "PromptDemo1" });
 
 function showPromptWithBeforeConfirm() {
     NuePrompt({
-        title: "输入确认",
-        placeholder: "请输入手机号码",
+        title: "Prompt",
+        placeholder: "Input your phone number here...",
         validator: (value: string) => {
             const regExp = new RegExp(/^(?:(?:\+|00)86)?1[3456789]\d{9}$/);
             return regExp.test(value);
         },
         beforeConfirm: async (value: unknown) => {
-            await NueConfirm({ content: "确认提交吗？" });
+            await NueConfirm({ content: "Are you sure to submit?" });
             return (value as string).toUpperCase();
         },
     }).then(
-        (value: unknown) => NueMessage.success(`Value is: ${value as string}`),
+        (value: unknown) =>
+            NueMessage.success(`Your phone number is: ${value as string}`),
         () => NueMessage.warn("Cancelled!")
     );
 }
