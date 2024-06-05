@@ -1,6 +1,6 @@
-/* Variabled */
+/* Variables */
 
-@import url(./common.css);
+@import url("./common.css");
 
 /* Original styles */
 
@@ -24,32 +24,12 @@
         line-height: normal;
     }
 
-    & .button-group {
-        display: flex;
-        align-items: center;
-        gap: var(--padding-x);
-        border-left: 1px solid var(--border-color);
-        padding-left: var(--padding-x);
-
-        & .iconfont {
-            transition: all 0.16s ease;
-            box-sizing: border-box;
-            aspect-ratio: 1;
-            cursor: pointer;
-            font-size: var(--button-size);
-            line-height: var(--button-size);
-            border-radius: 50%;
-            color: var(--button-color);
-            text-align: center;
-
-            &:hover {
-                color: var(--button-hover-color) !important;
-            }
-        }
-    }
-
     & .word-counter {
         padding-left: var(--padding-x);
+    }
+
+    &.icon-button {
+        cursor: pointer;
     }
 
     &.nue-input--square {
@@ -57,6 +37,7 @@
     }
 
     &.nue-input--round {
+        padding-left: calc(var(--padding-x) + 2px);
         padding-right: calc(var(--padding-x) + 2px);
         border-radius: 999px;
     }
