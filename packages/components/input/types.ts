@@ -52,3 +52,9 @@ export type TextareaPropsType = {
     debounceTime?: number;
     flex?: string;
 };
+
+export type WordCounterProps = {
+    mode: InputCounterType;
+    length: number;
+    maxlength: number;
+};
