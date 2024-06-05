@@ -3,7 +3,7 @@
         @load-more="loadMore"
         :loading="loading"
         :disabled="disabled"
-        trigger-height="128px"
+        trigger-height="1px"
         height="256px">
         <ul class="list">
             <li class="node" v-for="i in itemsCount" :key="i">
@@ -34,15 +34,15 @@ function loadMore() {
     margin: 0;
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     gap: 16px;
 
     .node {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100px;
-        background-color: #f0f0f0;
+        height: 80px;
+        background-color: #e4e4e7;
         border-radius: 12px;
         margin: 0px;
         padding: 0px;
