@@ -41,9 +41,9 @@
     --secondary-gap: 8px;
     --primary-radius: 6px;
 
-    --primary-font-size: 14px;
-    --primary-line-height: 1.5;
     --primary-font-weight: 500;
+    --primary-font-family: "Poppins", monospace;
+    --primary-line-height: 1;
 
     --text-xxs: 0.5rem;
     --text-xs: 0.75rem;
