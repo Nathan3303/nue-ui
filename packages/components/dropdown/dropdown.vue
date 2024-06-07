@@ -6,7 +6,7 @@
         @mouseleave="handleHoverTrigger">
         <!-- Default slot -->
         <slot :switchVisible="switchVisible" :visible="visible">
-            <nue-button :shape="shape" @click="handleClickTrigger">
+            <nue-button @click="handleClickTrigger">
                 {{ text ?? "Open dropdown" }}
                 <template #append>
                     <nue-icon
@@ -54,10 +54,11 @@ const visible = ref(false);
 let timer: number = 0;
 
 const classes = computed(() => {
-    let list: string[] = [];
     const { theme, align } = props;
-    list.push("nue-dropdown");
-    if (theme) list.push(...parseTheme(theme, "nue-dropdown"));
+    let list: string[] = [];
+    const prefix = "nue-dropdown";
+    list.push(prefix);
+    if (theme) list = list.concat(parseTheme(theme, prefix));
     if (align) list.push(`nue-dropdown--align-${align}`);
     return list;
 });
