@@ -2,30 +2,28 @@
     <div class="view-container">
         <!-- Button -->
         <nue-div vertical theme="card" :divider="{}">
-            <nue-text weight="bold" size="large">Button</nue-text>
+            <nue-text size="24px">Button</nue-text>
             <button-demo1></button-demo1>
-            <button-demo2></button-demo2>
-            <button-demo3></button-demo3>
-            <nue-div align="center" :divider="{}">
-                <nue-button theme="icon-only" icon="search" />
-                <nue-button theme="primary" icon="search">Search</nue-button>
-                <nue-button theme="pure" icon="search">Search</nue-button>
-            </nue-div>
+        </nue-div>
+        <!-- ButtonGroup -->
+        <nue-div vertical theme="card" :divider="{}">
+            <nue-text size="24px">ButtonGroup</nue-text>
+            <button-group-demo1></button-group-demo1>
         </nue-div>
         <!-- Link -->
         <nue-div vertical theme="card" :divider="{}">
-            <nue-text weight="bold" size="large">Link</nue-text>
+            <nue-text size="24px">Link</nue-text>
             <link-demo1></link-demo1>
             <link-demo2></link-demo2>
         </nue-div>
         <!-- Text  -->
         <nue-div vertical theme="card" :divider="{}">
-            <nue-text weight="bold" size="large">Text</nue-text>
+            <nue-text size="24px">Text</nue-text>
             <text-demo1></text-demo1>
         </nue-div>
         <!-- Icon -->
         <nue-div vertical theme="card" :divider="{}">
-            <nue-text weight="bold" size="large">Icon</nue-text>
+            <nue-text size="24px">Icon</nue-text>
             <icon-demo1></icon-demo1>
         </nue-div>
     </div>
@@ -33,8 +31,7 @@
 
 <script setup lang="ts">
 import ButtonDemo1 from "../components/button/demo1.vue";
-import ButtonDemo2 from "../components/button/demo2.vue";
-import ButtonDemo3 from "../components/button/demo3.vue";
+import ButtonGroupDemo1 from "../components/button-group/demo1.vue";
 import LinkDemo1 from "../components/link/demo1.vue";
 import LinkDemo2 from "../components/link/demo2.vue";
 import TextDemo1 from "../components/text/demo1.vue";

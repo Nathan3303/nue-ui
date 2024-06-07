@@ -4,9 +4,9 @@
             <template #default>
                 <nue-div align="center" gap="8px">
                     <nue-avatar
-                        src="https://picsum.photos/id/237/200/200"
-                        shape="round"
-                        size="tiny" />
+                        src="https://picsum.photos/id/242/64/64"
+                        theme="rounded"
+                        size="28px" />
                     <nue-button theme="pure">
                         Username
                         <template #append>

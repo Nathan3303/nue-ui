@@ -1,24 +1,24 @@
 <template>
     <div class="view-container">
         <nue-div vertical theme="card">
-            <nue-text size="large">Avatar</nue-text>
+            <nue-text size="24px">Avatar</nue-text>
             <avatar-demo1></avatar-demo1>
         </nue-div>
-        <nue-div vertical theme="card">
-            <nue-text size="large">Badge</nue-text>
+        <nue-div vertical theme="card" gap="24px">
+            <nue-text size="24px">Badge</nue-text>
             <badge-demo1></badge-demo1>
             <badge-demo2></badge-demo2>
         </nue-div>
         <nue-div vertical theme="card">
-            <nue-text size="large">Marquee</nue-text>
+            <nue-text size="24px">Marquee</nue-text>
             <marquee-demo1></marquee-demo1>
         </nue-div>
         <nue-div vertical theme="card">
-            <nue-text size="large">Infinite Scroll</nue-text>
+            <nue-text size="24px">Infinite Scroll</nue-text>
             <infinite-scroll-demo1></infinite-scroll-demo1>
         </nue-div>
         <nue-div vertical theme="card">
-            <nue-text size="large">Collapse</nue-text>
+            <nue-text size="24px">Collapse</nue-text>
             <collapse-demo1></collapse-demo1>
         </nue-div>
     </div>

@@ -3,10 +3,7 @@
         <nue-div align="center">
             <nue-button theme="icon-only" icon="arrow-left" />
             <nue-divider direction="vertical" />
-            <nue-avatar
-                size="small"
-                src="https://placehold.co/150x150"
-                shape="round" />
+            <nue-avatar src="https://placehold.co/64x64?text=C" theme="rounded" size="36px" />
             <nue-text style="margin-right: auto">Custom Title</nue-text>
             <nue-divider direction="vertical" />
             <nue-button theme="icon-only" icon="search" />

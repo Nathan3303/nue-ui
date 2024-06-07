@@ -11,13 +11,12 @@
             v-model="description"
             placeholder="Enter description"
             resize
-            :rows="0" />
+            :rows="0"
+            theme="rounded" />
         <nue-textarea
             disabled
             v-model="description"
-            placeholder="Enter description"
-            resize
-            :rows="0" />
+            placeholder="Enter description" />
     </nue-div>
 </template>
 

@@ -1,11 +1,11 @@
 <template>
     <div class="view-container">
         <nue-div vertical theme="card">
-            <nue-text weight="bold" size="large">Input</nue-text>
+            <nue-text size="24px">Input</nue-text>
             <input-demo1></input-demo1>
         </nue-div>
         <nue-div vertical theme="card">
-            <nue-text weight="bold" size="large">Textarea</nue-text>
+            <nue-text size="24px">Textarea</nue-text>
             <input-demo2></input-demo2>
         </nue-div>
     </div>

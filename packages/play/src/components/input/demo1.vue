@@ -3,10 +3,15 @@
         <nue-input
             v-model="searchText"
             icon="search"
-            placeholder="Search"
+            placeholder="Search with debounce"
             clearable
             counter="both"
+            :debounce-time="256"
             maxlength="64" />
+        <nue-input
+            v-model="searchText"
+            placeholder="Search value (readonly)"
+            readonly />
         <nue-input
             v-model="password"
             icon="lock"
@@ -14,7 +19,7 @@
             placeholder="Password"
             clearable
             allow-show-password
-            shape="round" />
+            theme="rounded" />
         <nue-input
             placeholder="Disabled input"
             v-model="description"
