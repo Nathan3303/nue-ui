@@ -9,11 +9,6 @@
 }
 
 .nue-collapse-item {
-    --font-size: var(--mainly-font-size);
-    --font-color: inherit;
-    --font-family: var(--mainly-font-family);
-    --font-weight: var(--mainly-font-weight);
-
     --collapse-item-header-justify: space-between;
 
     display: flex;
@@ -30,10 +25,15 @@
         user-select: none;
         box-shadow: 0px -1px #eee;
         border-bottom: 1px solid transparent;
+        min-height: 36px;
 
         .nue-collapse-item__title {
             display: flex;
             align-items: center;
+            font-size: var(--text-sm);
+            font-weight: var(--primary-font-weight);
+            font-family: var(--primary-font-family);
+            line-height: 1;
         }
 
         .nue-collapse-item__toggle-button,
