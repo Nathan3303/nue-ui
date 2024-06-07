@@ -84,6 +84,7 @@
         font-size: inherit;
         font-weight: inherit;
         font-family: inherit;
+        padding: 0px;
 
         &::-ms-reveal {
             display: none;
@@ -144,6 +145,7 @@
     min-height: 28px;
     --height: 28px;
     padding: 0px 6px;
+    gap: 6px;
 }
 
 .nue-input--large {
