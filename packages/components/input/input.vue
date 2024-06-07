@@ -58,9 +58,10 @@ const textLength = ref(0);
 
 const classes = computed(() => {
     const prefix = "nue-input";
-    const { theme, shape, disabled } = props;
+    const { size, theme, shape, disabled } = props;
     let list: string[] = [];
     list.push(prefix);
+    if (size) list.push(`${prefix}--${size}`);
     if (shape) list.push(`${prefix}--${shape}`);
     if (theme) list.push(...parseTheme(theme, prefix));
     if (disabled) list.push(`${prefix}--disabled`);
