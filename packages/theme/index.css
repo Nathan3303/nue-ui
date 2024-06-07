@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("./iconfont/iconfont.css");
 @import url("./reset.css");
 @import url("./variables.css");
@@ -8,13 +9,6 @@
     height: 100vh;
     margin: 0;
     padding: 0;
-
-    color: var(--primary-text-color);
-    font-size: var(--primary-font-size);
-    font-weight: 500;
-    line-height: var(--primary-line-height);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 
     & body {
         width: 100%;
@@ -29,17 +23,4 @@
             height: 100%;
         }
     }
-}
-
-.nue-button,
-.nue-link,
-.nue-text,
-.nue-input,
-.nue-textarea,
-.nue-divider {
-    /* --font-size: var(--primary-font-size); */
-    --font-weight: 600;
-    --line-height: var(--primary-line-height);
-    font-family: Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-        sans-serif;
 }
