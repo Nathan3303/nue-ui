@@ -22,7 +22,7 @@ export type InputPropsType = {
     allowShowPassword?: boolean;
     counter?: InputCounterType;
     width?: string;
-    size?: string;
+    size?: "small" | "large";
     debounceTime?: number;
     flex?: string;
     name?: string;
@@ -48,7 +48,7 @@ export type TextareaPropsType = {
     maxlength?: string;
     counter?: InputCounterType;
     width?: string;
-    size?: string;
+    size?: "small" | "large";
     debounceTime?: number;
     flex?: string;
 };

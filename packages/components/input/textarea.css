@@ -143,6 +143,17 @@
     --disabled-border-color: transparent;
 }
 
+.nue-textarea--small {
+    min-height: 28px;
+    padding: 4px 6px 5px 6px;
+}
+
+.nue-textarea--large {
+    min-height: 48px;
+    padding: 8px 12px 9px 12px;
+    font-size: var(--text-md);
+}
+
 .nue-textarea--linear {
     transition: all 0.3s;
     border: none;

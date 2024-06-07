@@ -55,9 +55,10 @@ const isComposing = ref(false);
 
 const classes = computed(() => {
     const prefix = "nue-textarea";
-    const { theme, shape, disabled, readonly } = props;
+    const { size, theme, shape, disabled, readonly } = props;
     let list: string[] = [];
     list.push(prefix);
+    if (size) list.push(`${prefix}--${size}`);
     if (shape) list.push(`${prefix}--${shape}`);
     if (theme) list.push(...parseTheme(theme, prefix));
     if (disabled) list.push(`${prefix}--disabled`);
