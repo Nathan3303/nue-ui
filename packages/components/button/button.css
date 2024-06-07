@@ -47,7 +47,7 @@
     font-size: var(--text-sm);
     font-weight: var(--primary-font-weight);
     font-family: var(--primary-font-family);
-    line-height: 1;
+    line-height: normal;
 
     .nue-icon {
         --icon-size: var(--text-sm);
@@ -95,7 +95,7 @@
     aspect-ratio: 1;
     --justify-content: center;
     --border-color: transparent;
-    --icon-size: var(--text-lg);
+    /* --icon-size: var(--text-lg); */
     --height: 36px;
     box-shadow: none;
 }
