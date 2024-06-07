@@ -1,19 +1,17 @@
 /* Variables */
-
 .nue-icon {
-    --font-size: var(--icon-size);
-    --line-height: var(--font-size);
     --spin-speed: 2s;
 }
 
 /* Original styles */
-
 .nue-icon {
+    aspect-ratio: 1 / 1;
+
     &.iconfont::before {
         display: block;
-        font-size: var(--icon-size);
-        color: var(--icon-color);
-        font-weight: var(--icon-weight);
+        color: var(--icon-color, inherit);
+        font-size: var(--icon-size, inherit);
+        font-weight: var(--icon-weight, 500);
         aspect-ratio: 1 / 1;
     }
 
