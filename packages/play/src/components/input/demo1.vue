@@ -28,7 +28,7 @@
             theme="noshape"
             placeholder="This is a noshape input"
             v-model="noshape" />
-        <nue-input theme="small" placeholder="Small input" v-model="small" />
+        <nue-input theme="small" placeholder="Small input" v-model="small" icon="search" />
         <nue-input theme="large" placeholder="Large input" v-model="large" />
     </nue-div>
 </template>
