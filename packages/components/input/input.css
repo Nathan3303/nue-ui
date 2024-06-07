@@ -139,6 +139,19 @@
     --disabled-border-color: transparent;
 }
 
+.nue-input--small {
+    min-height: 28px;
+    --height: 28px;
+    padding: 0px 6px;
+}
+
+.nue-input--large {
+    min-height: 42px;
+    --height: 42px;
+    padding: 0px 12px;
+    font-size: var(--text-md);
+}
+
 .nue-input--linear {
     --border-width: 0px;
     --hover-border-color: #8ac7ab;
