@@ -2,6 +2,7 @@
 .nue-input {
     --width: auto;
     --height: auto;
+    --padding-x: 12px;
     --border-color: var(--divider-color);
     --background-color: transparent;
     --flex: none;
@@ -28,7 +29,7 @@
     min-width: var(--min-width);
     height: var(--height);
     min-height: 36px;
-    padding: 0px 12px;
+    padding: 0px var(--padding-x);
     border: 1px solid var(--border-color);
     border-radius: var(--primary-radius);
     background-color: var(--background-color);
@@ -51,7 +52,7 @@
     }
 
     &:focus-within {
-        border: 1px solid var(--focus-border-color);
+        border-color: var(--focus-border-color);
         background-color: var(--focus-background-color);
         box-shadow: var(--focus-shadow);
     }
@@ -153,19 +154,20 @@
 }
 
 .nue-input--linear {
+    transition: all 0.3s;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    border-radius: 0px;
+
     --border-width: 0px;
+    --padding-y: 4px;
     --hover-border-color: #8ac7ab;
     --focus-border-color: #42b983;
     --focus-shadow-color: transparent;
     --focus-background-color: transparent;
 
-    transition: all 0.3s;
-    border: none;
-    border-bottom: 2px solid #cccccc;
-    border-radius: 0px;
-    box-shadow: none;
-
     &:focus-within {
+        border: none;
         border-bottom: 2px solid #42b983;
     }
 }
