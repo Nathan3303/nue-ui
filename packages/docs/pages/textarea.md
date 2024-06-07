@@ -254,13 +254,21 @@ const val10 = ref("");
 
 ### 输入框尺寸
 
-通过 `size` 属性设置输入框尺寸，接收 `string` 类型。`size` 属性值最终会应用到输入框的 CSS 属性 `font-size` 上，根据这个属性值自动计算文本框大小。
+富文本输入框拥有小、正常、大三种尺寸，通过 `size` 属性设置，小和大分别对应 `size` 值中的 `small` 和 `large`，不指定 `size` 则表示正常尺寸。
 
-<nue-textarea v-model="val11" placeholder="请输入内容" size="24px" />
+<nue-div>
+    <nue-textarea v-model="val11" placeholder="请输入" size="small" />
+    <nue-textarea v-model="val11" placeholder="请输入" />
+    <nue-textarea v-model="val11" placeholder="请输入" size="large" />
+</nue-div>
 
 ```vue
 <template>
-    <nue-textarea v-model="val11" placeholder="请输入内容" size="24px" />
+    <nue-div>
+        <nue-textarea v-model="val11" placeholder="请输入" size="small" />
+        <nue-textarea v-model="val11" placeholder="请输入" />
+        <nue-textarea v-model="val11" placeholder="请输入" size="large" />
+    </nue-div>
 </template>
 <script setup>
 import { ref } from "vue";
@@ -270,24 +278,17 @@ const val11 = ref("");
 
 ### 输入框外形
 
-通过 `shape` 属性设置输入框外形，接收 `square*`、`round` 以及 `no-shape` 三个值之一。
+通过 `shape` 属性设置输入框外形，接收 `rounded` 和 `noshape` 之一。
 
 <nue-div align="center">
     <nue-textarea
         v-model="val12"
         placeholder="请输入内容"
-        shape="square"
-        flex />
+        shape="rounded" />
     <nue-textarea
         v-model="val12"
         placeholder="请输入内容"
-        shape="round"
-        flex />
-    <nue-textarea
-        v-model="val12"
-        placeholder="请输入内容"
-        shape="no-shape"
-        flex />
+        shape="noshape" />
 </nue-div>
 
 ```vue
@@ -296,18 +297,11 @@ const val11 = ref("");
         <nue-textarea
             v-model="val12"
             placeholder="请输入内容"
-            shape="square"
-            flex />
+            shape="rounded" />
         <nue-textarea
             v-model="val12"
             placeholder="请输入内容"
-            shape="round"
-            flex />
-        <nue-textarea
-            v-model="val12"
-            placeholder="请输入内容"
-            shape="no-shape"
-            flex />
+            shape="noshape" />
     </nue-div>
 </template>
 <script setup>
@@ -342,26 +336,26 @@ const val12 = ref("");
         autosize
         :rows="0" />
 </template>
-
 <script setup>
 import { ref } from "vue";
 const val13 = ref("");
 </script>
-
 <style scoped>
 .nue-textarea--linear {
-    --border-width: 0px;
-    --hovered-border-color: #8ac7ab;
-    --focused-border-color: #42b983;
-    --focused-shadow-color: transparent;
-    --focused-background-color: transparent;
-
     transition: all 0.3s;
     border: none;
     border-bottom: 2px solid #cccccc;
     border-radius: 0px;
 
+    --border-width: 0px;
+    --padding-y: 4px;
+    --hover-border-color: #8ac7ab;
+    --focus-border-color: #42b983;
+    --focus-shadow-color: transparent;
+    --focus-background-color: transparent;
+
     &:focus-within {
+        border: none;
         border-bottom: 2px solid #42b983;
     }
 }

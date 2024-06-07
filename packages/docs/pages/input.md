@@ -84,11 +84,11 @@ const val3 = ref("");
 目前 `icon` 属性值仅支持库内的图标，暂不支持自定义图标。
 :::
 
-<nue-input v-model="val4" placeholder="搜索" icon="icon-search" />
+<nue-input v-model="val4" placeholder="搜索" icon="search" />
 
 ```vue
 <template>
-    <nue-input v-model="val4" placeholder="搜索" icon="icon-search" />
+    <nue-input v-model="val4" placeholder="搜索" icon="search" />
 </template>
 <script setup>
 import { ref } from "vue";
@@ -100,18 +100,18 @@ const val4 = ref("");
 
 ### 清除控制
 
-通过 `clearable` 属性设置是否显示清除按钮，接收 `boolean` 类型，默认开启。
+通过 `clearable` 属性设置是否显示清除按钮，接收 `boolean` 类型。
 
+::: raw
 <nue-div vertical align="stretch">
-    <nue-input v-model="val5" placeholder="请输入内容" />
-    <nue-input v-model="val5" placeholder="请输入内容" :clearable="false" />
+    <nue-input v-model="val5" placeholder="请输入内容" clearable/>
 </nue-div>
+:::
 
 ```vue
 <template>
     <nue-div vertical align="stretch">
-        <nue-input v-model="val5" placeholder="请输入内容" />
-        <nue-input v-model="val5" placeholder="请输入内容" :clearable="false" />
+        <nue-input v-model="val5" placeholder="请输入内容" clearable />
     </nue-div>
 </template>
 <script setup>
@@ -122,30 +122,28 @@ const val5 = ref("text...");
 
 ### 密码显示控制
 
-通过 `allow-show-password` 属性设置是否显示密码，接收 `boolean` 类型，默认开启。
+通过 `allow-show-password` 属性设置是否显示密码，接收 `boolean` 类型。
 
 ::: tip
 `allow-show-password` 属性仅在 `type` 属性为 `password` 时生效。
 :::
 
 <nue-div vertical align="stretch">
-    <nue-input v-model="val6" type="password" placeholder="请输入密码" />
     <nue-input
         v-model="val6"
         type="password"
         placeholder="请输入密码"
-        :allow-show-password="false" />
+        allow-show-password />
 </nue-div>
 
 ```vue
 <template>
     <nue-div vertical align="stretch">
-        <nue-input v-model="val6" type="password" placeholder="请输入密码" />
         <nue-input
             v-model="val6"
             type="password"
             placeholder="请输入密码"
-            :allow-show-password="false" />
+            allow-show-password />
     </nue-div>
 </template>
 <script setup>
@@ -257,13 +255,21 @@ const val9 = ref("");
 
 ### 输入框尺寸
 
-通过 `size` 属性设置输入框尺寸，接收 `string` 类型。`size` 属性值最终会应用到输入框的 CSS 属性 `font-size` 上，根据这个属性值自动计算文本框大小。
+输入框拥有小、正常、大三种尺寸，通过 `size` 属性设置，小和大分别对应 `size` 值中的 `small` 和 `large`，不指定 `size` 则表示正常尺寸。
 
-<nue-input v-model="val10" placeholder="请输入内容" size="18px" />
+<nue-div>
+    <nue-input v-model="val10" placeholder="请输入" size="small" />
+    <nue-input v-model="val10" placeholder="请输入" />
+    <nue-input v-model="val10" placeholder="请输入" size="large" />
+</nue-div>
 
 ```vue
 <template>
-    <nue-input v-model="val10" placeholder="请输入内容" size="18px" />
+    <nue-div>
+        <nue-input v-model="val10" placeholder="请输入" size="small" />
+        <nue-input v-model="val10" placeholder="请输入" />
+        <nue-input v-model="val10" placeholder="请输入" size="large" />
+    </nue-div>
 </template>
 <script setup>
 import { ref } from "vue";
@@ -273,24 +279,17 @@ const val10 = ref("");
 
 ### 输入框外形
 
-通过 `shape` 属性设置输入框外形，接收 `square*`、`round` 以及 `no-shape` 三个值之一。
+通过 `shape` 属性设置输入框外形，接收 `rounded` 或 `noshape`。
 
 <nue-div align="center">
     <nue-input
         v-model="val11"
         placeholder="请输入内容"
-        shape="square"
-        flex />
+        shape="rounded" />
     <nue-input
         v-model="val11"
         placeholder="请输入内容"
-        shape="round"
-        flex />
-    <nue-input
-        v-model="val11"
-        placeholder="请输入内容"
-        shape="no-shape"
-        flex />
+        shape="noshape" />
 </nue-div>
 
 ```vue
@@ -299,18 +298,11 @@ const val10 = ref("");
         <nue-input
             v-model="val11"
             placeholder="请输入内容"
-            shape="square"
-            flex />
+            shape="rounded" />
         <nue-input
             v-model="val11"
             placeholder="请输入内容"
-            shape="round"
-            flex />
-        <nue-input
-            v-model="val11"
-            placeholder="请输入内容"
-            shape="no-shape"
-            flex />
+            shape="noshape" />
     </nue-div>
 </template>
 <script setup>
@@ -332,13 +324,8 @@ const val11 = ref("");
 <nue-div vertical align="stretch">
     <nue-input
         v-model="val12"
-        placeholder="请输入内容"
-        prefix="Username"
-        theme="linear" />
-    <nue-input
-        v-model="val12"
-        placeholder="请输入内容"
-        icon="icon-search"
+        placeholder="搜索"
+        icon="search"
         theme="linear" />
 </nue-div>
 
@@ -347,36 +334,31 @@ const val11 = ref("");
     <nue-div vertical align="stretch">
         <nue-input
             v-model="val12"
-            placeholder="请输入内容"
-            prefix="Username"
-            theme="linear" />
-        <nue-input
-            v-model="val12"
-            placeholder="请输入内容"
-            icon="icon-search"
+            placeholder="搜索"
+            icon="search"
             theme="linear" />
     </nue-div>
 </template>
-
 <script setup>
 import { ref } from "vue";
 const val12 = ref("");
 </script>
-
 <style scoped>
 .nue-input--linear {
-    --border-width: 0px;
-    --hovered-border-color: #8ac7ab;
-    --focused-border-color: #42b983;
-    --focused-shadow-color: transparent;
-    --focused-background-color: transparent;
-
     transition: all 0.3s;
     border: none;
     border-bottom: 2px solid #cccccc;
     border-radius: 0px;
 
+    --border-width: 0px;
+    --padding-y: 4px;
+    --hover-border-color: #8ac7ab;
+    --focus-border-color: #42b983;
+    --focus-shadow-color: transparent;
+    --focus-background-color: transparent;
+
     &:focus-within {
+        border: none;
         border-bottom: 2px solid #42b983;
     }
 }

@@ -112,6 +112,7 @@ function handleExecute(id) {
 
 <nue-dropdown text="打开下拉菜单" @execute="handleExecute">
 <template #dropdown>
+
 <li data-executeid="Coding">Coding</li>
 <li data-executeid="Testing">Testing</li>
 <li data-executeid="Maintaining">Maintaining</li>
@@ -147,7 +148,6 @@ function handleExecute(id) {
     <template #default="{ switchVisible }">
         <nue-avatar
             src="https://picsum.photos/200/200"
-            size="small"
             @click="switchVisible" />
     </template>
     <template #dropdown>
@@ -162,7 +162,6 @@ function handleExecute(id) {
         <template #default="{ switchVisible }">
             <nue-avatar
                 src="https://picsum.photos/200/200"
-                size="small"
                 @click="switchVisible" />
         </template>
         <template #dropdown>
