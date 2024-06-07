@@ -1,32 +1,18 @@
+import type { GlobalProps } from "@nue-ui/utils";
 import type { IconNameType } from "../icon";
 
-export type FitType = "fill" | "cover" | "contain" | "none" | "scale-down";
+export type ObjectFit = "fill" | "cover" | "contain" | "none" | "scale-down";
 
-export type SizeType =
-    | "tiny"
-    | "small"
-    | "normal"
-    | "medium"
-    | "large"
-    | number;
-
-export type SizeStringsValueType = Exclude<
-    {
-        [key in SizeType]: number;
-    },
-    number
->;
-
-export type AvatarPropsType = {
+export interface AvatarProps extends GlobalProps {
     src?: string;
     icon?: IconNameType;
-    size?: SizeType;
-    theme?: string | string[];
-    shape?: "square" | "round";
+    size?: string;
     title?: string;
-    fit?: FitType;
-};
+    fit?: ObjectFit;
+    rounded?: boolean;
+    alt?: string;
+}
 
-export type AvatarEmitsType = {
+export type AvatarEmits = {
     (e: "error", val: Event): void;
 };

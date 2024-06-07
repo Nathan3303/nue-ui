@@ -1,62 +1,34 @@
 /* Variables */
 .nue-avatar {
-    --size: 32px;
-    --background-color: #c4c4c4;
-
-    --color: white;
-    --font-size: 14px;
-    --font-weight: normal;
-    --font-family: inherit;
-
-    --icon-color: inherit;
-    --icon-size: 14px;
-    --icon-weight: normal;
+    --size: 36px;
+    --object-fit: cover;
+    --background-color: var(--primary-color-400);
 }
 
 /* Original Styles */
 .nue-avatar {
-    box-sizing: border-box;
-    aspect-ratio: 1;
-
     flex: none;
     width: var(--size);
     height: var(--size);
     line-height: var(--size);
     text-align: center;
     overflow: hidden;
-
+    box-sizing: border-box;
+    aspect-ratio: 1;
     border: none;
+    border-radius: var(--border-radius, 4px);
     background-color: var(--background-color);
-
-    color: var(--color);
-    font-size: var(--font-size);
-    font-weight: var(--font-weight);
-    font-family: var(--font-family);
+    color: var(--primary-color-50);
 
     & img {
-        display: block;
         width: 100%;
         height: 100%;
+        object-fit: var(--object-fit);
     }
+}
 
-    & > .iconfont {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+/* Built-in styles */
 
-        width: 100%;
-        height: 100%;
-
-        color: var(--icon-color);
-        font-size: var(--icon-size);
-        font-weight: var(--icon-weight);
-    }
-
-    &.nue-avatar--square {
-        border-radius: 4px;
-    }
-
-    &.nue-avatar--round {
-        border-radius: 50%;
-    }
+.nue-avatar--rounded {
+    border-radius: 50%;
 }
