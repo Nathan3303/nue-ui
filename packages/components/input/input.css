@@ -9,6 +9,7 @@
     --hover-background-color: transparent;
     --focus-border-color: var(--dark-primary-color);
     --focus-background-color: transparent;
+    --focus-shadow: var(--primary-shadow);
     --disabled-color: #9e9e9e;
     --disabled-border-color: var(--divider-color);
     --disabled-background-color: var(--primary-color-100);
@@ -52,7 +53,7 @@
     &:focus-within {
         border: 1px solid var(--focus-border-color);
         background-color: var(--focus-background-color);
-        box-shadow: var(--primary-shadow);
+        box-shadow: var(--focus-shadow);
     }
 
     .nue-icon {
@@ -129,10 +130,12 @@
 
 .nue-input--noshape {
     padding: 0px;
+    box-shadow: none;
     --border-color: transparent;
+    --background-color: transparent;
     --hover-border-color: transparent;
     --focus-border-color: transparent;
-    --focus-shadow-color: transparent;
+    --focus-shadow: none;
     --disabled-border-color: transparent;
 }
 
