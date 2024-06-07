@@ -28,6 +28,8 @@
             theme="noshape"
             placeholder="This is a noshape input"
             v-model="noshape" />
+        <nue-input theme="small" placeholder="Small input" v-model="small" />
+        <nue-input theme="large" placeholder="Large input" v-model="large" />
     </nue-div>
 </template>
 
@@ -38,6 +40,8 @@ const searchText = ref("");
 const password = ref("");
 const description = ref("This is a description");
 const noshape = ref("This is a noshape input");
+const small = ref("This is a small input");
+const large = ref("This is a large input");
 </script>
 
 <style scoped></style>
