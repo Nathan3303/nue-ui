@@ -1,5 +1,4 @@
 /* Variabled */
-
 .nue-divider {
     --border-width: 1px;
     --border-type: solid;
@@ -9,15 +8,11 @@
 }
 
 /* Original styles */
-
 .nue-divider {
     display: flex;
     align-items: center;
     justify-content: var(--justify-content);
     position: relative;
-    color: var(--color);
-    font-size: var(--text-sm);
-    font-weight: var(--font-weight);
 
     .nue-divider__line {
         box-sizing: border-box;
@@ -29,6 +24,10 @@
         z-index: 2;
         margin: 0px 16px;
         background-color: white;
+        color: var(--primary-text-color);
+        font-size: var(--text-sm);
+        font-weight: var(--primary-font-weight);
+        font-family: var(--primary-font-family);
 
         .nue-divider__text__inner {
             padding: 0px 16px;
