@@ -24,6 +24,10 @@
             placeholder="Disabled input"
             v-model="description"
             disabled />
+        <nue-input
+            theme="noshape"
+            placeholder="This is a noshape input"
+            v-model="noshape" />
     </nue-div>
 </template>
 
@@ -33,6 +37,7 @@ import { ref } from "vue";
 const searchText = ref("");
 const password = ref("");
 const description = ref("This is a description");
+const noshape = ref("This is a noshape input");
 </script>
 
 <style scoped></style>
