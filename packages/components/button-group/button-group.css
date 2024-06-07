@@ -1,4 +1,8 @@
 /* Variables */
+.nue-button-group {
+    --flex: none;
+    --border-radius: var(--primary-radius);
+}
 
 /* Original styles */
 .nue-button-group {
@@ -6,10 +10,12 @@
     align-items: center;
     overflow: hidden;
     box-shadow: var(--secondary-shadow);
+    flex: var(--flex);
 
     & > .nue-button {
         border-radius: 0px;
         margin-left: -1px;
+        box-shadow: none;
     }
 
     & > .nue-button:first-child {
