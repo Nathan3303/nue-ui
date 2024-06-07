@@ -5,6 +5,7 @@
 
 /* Original styles */
 .nue-icon {
+    line-height: 1;
     aspect-ratio: 1 / 1;
 
     &.iconfont::before {
@@ -13,6 +14,7 @@
         font-size: var(--icon-size, inherit);
         font-weight: var(--icon-weight, 500);
         aspect-ratio: 1 / 1;
+        line-height: inherit;
     }
 
     &.nue-icon--spin {
