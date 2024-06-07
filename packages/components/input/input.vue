@@ -47,7 +47,6 @@ defineOptions({ name: "NueInput" });
 const emit = defineEmits<InputEmitsType>();
 const props = withDefaults(defineProps<InputPropsType>(), {
     type: "text",
-    shape: "square",
     counter: "off",
     debounceTime: 0,
 });
@@ -62,7 +61,7 @@ const classes = computed(() => {
     const { theme, shape, disabled } = props;
     let list: string[] = [];
     list.push(prefix);
-    list.push(`${prefix}--${shape}`);
+    if (shape) list.push(`${prefix}--${shape}`);
     if (theme) list.push(...parseTheme(theme, prefix));
     if (disabled) list.push(`${prefix}--disabled`);
     return list;

@@ -44,7 +44,6 @@ defineOptions({ name: "NueTextarea" });
 
 const emit = defineEmits(["update:modelValue"]);
 const props = withDefaults(defineProps<TextareaPropsType>(), {
-    shape: "square",
     counter: "off",
     debounceTime: 0,
 });
@@ -59,7 +58,7 @@ const classes = computed(() => {
     const { theme, shape, disabled, readonly } = props;
     let list: string[] = [];
     list.push(prefix);
-    list.push(`${prefix}--${shape}`);
+    if (shape) list.push(`${prefix}--${shape}`);
     if (theme) list.push(...parseTheme(theme, prefix));
     if (disabled) list.push(`${prefix}--disabled`);
     if (readonly) list.push(`${prefix}--readonly`);
@@ -67,13 +66,12 @@ const classes = computed(() => {
 });
 
 const style = computed(() => {
-    const { autosize, width, rows, resize, size, flex, disabled } = props;
+    const { autosize, width, rows, resize, flex, disabled } = props;
     const rowsValue = resize ? 999 : rows === 0 ? 999 : rows;
     return {
         "--rows": rowsValue,
         "--width": width,
         "--resize": resize && !disabled ? "vertical" : undefined,
-        "--font-size": size,
         "--flex": flex,
         "--overflow": autosize ? "hidden" : "auto",
     };
