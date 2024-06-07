@@ -1,12 +1,9 @@
 <template>
-    <div class="word-counter">
-        <nue-text>{{ wordCounterText }}</nue-text>
-    </div>
+    <div class="word-counter">{{ wordCounterText }}</div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { NueText } from "../index";
 import type { WordCounterProps } from "./types";
 
 defineOptions({ name: "WordCounter" });

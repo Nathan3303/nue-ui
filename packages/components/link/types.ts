@@ -1,9 +1,12 @@
+import type { GlobalProps } from "@nue-ui/utils";
 import type { IconNameType } from "../icon";
 
-export type RoutePropType = string | { name: string; params?: any, query?: any } | undefined;
+export type RoutePropType =
+    | string
+    | { name: string; params?: any; query?: any; meta?: any }
+    | undefined;
 
-export type LinkPropsType = {
-    theme?: string | string[];
+export interface LinkProps extends GlobalProps {
     href?: string;
     disabled?: boolean;
     icon?: IconNameType;
@@ -11,4 +14,4 @@ export type LinkPropsType = {
     flex?: string;
     align?: string;
     size?: string;
-};
+}

@@ -1,6 +1,6 @@
 import { withInstall } from "@nue-ui/utils";
 import Avatar from "./avatar.vue";
-import type { AvatarPropsType, AvatarEmitsType } from "./types";
+import type { AvatarProps, AvatarEmits } from "./types";
 
 export const NueAvatar = withInstall(Avatar);
-export type { AvatarPropsType, AvatarEmitsType };
+export type { AvatarProps, AvatarEmits };

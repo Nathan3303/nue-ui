@@ -6,8 +6,7 @@
         <div class="nue-collapse-item__header">
             <slot name="header" :collapse="handleCollapse" :state="isCollapsed">
                 <div
-                    class="nue-collapse-item__title"
-                    @dblclick.stop.prevent="handleCollapse">
+                    class="nue-collapse-item__title">
                     <slot name="title">
                         <span>{{ title }}</span>
                     </slot>

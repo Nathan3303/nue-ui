@@ -1,6 +1,10 @@
 /* Variabled */
 
 .nue-text {
+    --color: var(--primary-text-color);
+    --font-size: var(--text-md);
+    --font-weight: var(--primary-font-weight);
+    --font-family: var(--primary-font-family);
     --padding-x: 0px;
     --padding-y: 0px;
     --word-wrap: break-word;

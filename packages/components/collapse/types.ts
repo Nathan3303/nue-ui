@@ -1,12 +1,13 @@
+import type { GlobalProps } from "@nue-ui/utils";
 import type { Ref } from "vue";
 
 export type CollapseItemName = string;
 export type ActivedCollpaseItems = CollapseItemName | CollapseItemName[];
 
-export type CollapsePropsType = {
+export interface CollapsePropsType extends GlobalProps {
     modelValue?: ActivedCollpaseItems;
     accordion?: boolean;
-};
+}
 
 export type CollapseItemPropsType = {
     title?: string;

@@ -28,9 +28,12 @@
     --flex: none;
     --justify-content: start;
     --gap: var(--secondary-gap);
-    --font-size: var(--text-sm);
     --border-radius: var(--primary-radius);
     --hover-text-decoration: none;
+
+    --font-size: var(--text-sm);
+    --font-weight: var(--primary-font-weight);
+    --font-family: var(--primary-font-family);
 
     --color: var(--primary-text-color);
     --hover-color: var(--color);
@@ -81,21 +84,23 @@
     align-items: center;
     justify-content: var(--justify-content);
     gap: var(--gap);
-
     width: var(--width);
     height: var(--height);
     line-height: var(--line-height);
     padding: var(--padding-y, 0px) var(--padding-x, 0px);
     flex: var(--flex);
-
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     background-color: var(--background-color);
-
     -webkit-user-select: none;
     user-select: none;
     transition: all 0.16s ease-out;
     overflow: hidden;
+
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    font-family: var(--font-family);
+    line-height: normal;
 
     .nue-link__append {
         display: flex;

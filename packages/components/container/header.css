@@ -27,6 +27,8 @@
 
         &.item-logo {
             font-size: 24px;
+            font-weight: var(--primary-font-weight);
+            font-family: var(--primary-font-family);
             flex: none;
         }
 

@@ -1,7 +1,7 @@
 <template>
     <div class="view-container">
         <nue-div vertical theme="card">
-            <nue-text size="large" weight="bold">Dropdown</nue-text>
+            <nue-text size="24px">Dropdown</nue-text>
             <dropdown-demo1></dropdown-demo1>
             <dropdown-demo2></dropdown-demo2>
             <dropdown-demo3></dropdown-demo3>

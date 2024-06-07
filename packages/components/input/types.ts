@@ -2,8 +2,10 @@ import { type ShapeProp } from "@nue-ui/utils/types";
 import type { IconNameType } from "../icon";
 
 export type InputType = "text" | "password" | "number" | "email" | "textarea";
+
 export type InputCounterType = "off" | "word-limit" | "word-left" | "both";
-export type InputShapeType = "square" | "round" | "no-shape";
+
+export type InputShapeType = "rounded" | "noshape";
 
 export type InputPropsType = {
     type?: InputType;
@@ -12,8 +14,6 @@ export type InputPropsType = {
     theme?: string | string[];
     shape?: ShapeProp;
     icon?: IconNameType;
-    prefix?: string;
-    suffix?: string;
     placeholder?: string;
     maxlength?: string;
     disabled?: boolean;
@@ -39,7 +39,7 @@ export type TextareaPropsType = {
     id?: string;
     placeholder?: string;
     theme?: string | string[];
-    shape?: ShapeProp;
+    shape?: InputShapeType;
     disabled?: boolean;
     readonly?: boolean;
     rows?: number;

@@ -1,9 +1,9 @@
-export type ButtonGroupPropsType = {
-    size?: string;
-    disabled?: boolean;
-};
+import type { ButtonSize } from "../button";
+import type { GlobalProps } from "@nue-ui/utils";
 
-export type ButtonGroupCtxType = {
-    size?: string;
+export interface ButtonGroupCtxType {
+    size?: ButtonSize;
     disabled?: boolean;
-};
+}
+
+export interface ButtonGroupProps extends ButtonGroupCtxType, GlobalProps {}

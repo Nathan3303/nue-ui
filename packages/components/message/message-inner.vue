@@ -1,7 +1,7 @@
 <template>
     <div ref="nodeInnerRef" :class="classes">
         <nue-icon v-if="icon" :name="icon" />
-        <nue-text>{{ message }}</nue-text>
+        <span>{{ message }}</span>
         <nue-icon
             v-if="!duration"
             name="clear"
@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
-import { NueText, NueIcon } from "../";
+import { NueIcon } from "../";
 import { handlePop } from "./message";
 import type { MessageNodeProps } from "./types";
 import "./message-inner.css";

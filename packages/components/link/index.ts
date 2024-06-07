@@ -1,6 +1,6 @@
 import { withInstall } from "@nue-ui/utils";
 import Link from "./link.vue";
-import type { LinkPropsType } from "./types";
+import type { LinkProps } from "./types";
 
 export const NueLink = withInstall(Link);
-export type { LinkPropsType };
+export type { LinkProps };
