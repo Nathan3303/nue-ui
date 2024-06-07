@@ -2,9 +2,9 @@
     <button
         :type="type"
         :title="title"
-        :disabled="disabled || loading"
-        :style="buttonStyles"
-        :class="buttonClasses"
+        :disabled="disabled"
+        :style="styles"
+        :class="classes"
         @click="handleClick">
         <nue-icon v-if="iconName" :name="iconName" :spin="loading" />
         <div v-if="$slots.default" class="nue-button__text">
@@ -26,49 +26,40 @@ import "./button.css";
 defineOptions({ name: "NueButton" });
 
 const ButtonGroupCtx = inject(BUTTON_GROUP_CTX_KEY, {} as ButtonGroupCtxType);
+const emit = defineEmits<ButtonEmitsType>();
 const props = withDefaults(defineProps<ButtonPropsType>(), {
     type: "button",
-    shape: "square",
-    disabled: false,
-    loading: false,
     loadingIcon: "loading",
-    useThrottle: false,
     throttleDuration: 200,
 });
-const emit = defineEmits<ButtonEmitsType>();
 
 const iconName = computed(() => {
     const { loading, loadingIcon, icon } = props;
     return loading ? loadingIcon : icon;
 });
 
-const size = computed(() => {
-    return ButtonGroupCtx?.size || props?.size || undefined;
-});
-
 const disabled = computed(() => {
-    return ButtonGroupCtx?.disabled || props.disabled || false;
+    const { disabled, loading } = props;
+    return ButtonGroupCtx?.disabled || disabled || loading;
 });
 
-const buttonStyles = computed(() => {
+const styles = computed(() => {
     const { flex, align } = props;
     return {
         "--align-y": align,
-        "--font-size": size.value,
         "--flex": flex && parseFlex(flex),
     };
 });
 
-const buttonClasses = computed(() => {
-    const { theme, shape, flat } = props;
+const classes = computed(() => {
+    const { theme, flat, size } = props;
     let list: string[] = [];
-    let themeList: string[] = [];
     const prefix = "nue-button";
-    if (theme) themeList = parseTheme(theme, prefix);
-    list = [prefix, ...themeList];
-    list.push(`${prefix}--${shape}`);
+    list.push(prefix);
+    if (theme) list = list.concat(parseTheme(theme, prefix));
+    if (size) list.push(`${prefix}--${size}`);
     if (disabled.value) list.push(`${prefix}--disabled`);
-    if (flat) list.push(`${prefix}--flag`);
+    if (flat) list.push(`${prefix}--flat`);
     return list;
 });
 

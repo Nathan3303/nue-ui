@@ -1,67 +1,58 @@
 /* Variables */
-
 .nue-button {
     --width: auto;
-    --height: 36px;
-    /* --padding-y: 8px; */
-    --padding-x: 16px;
+    --height: auto;
     --flex: none;
     --justify-content: start;
-    --gap: var(--secondary-gap);
-    --border-radius: var(--primary-radius);
-
-    --font-size: var(--text-sm);
-    --icon-size: var(--font-size);
-    --line-height: 1.1;
-
     --color: var(--primary-text-color);
     --border-color: var(--divider-color);
-    --background-color: white;
-
+    --background-color: transparent;
     --hover-color: var(--color);
     --hover-border-color: var(--border-color);
     --hover-background-color: var(--primary-color-100);
-
     --active-color: var(--color);
     --active-border-color: var(--border-color);
     --active-background-color: var(--primary-color-200);
-
     --disable-color: var(--disabled-color);
     --disable-border-color: var(--border-color);
     --disable-background-color: var(--primary-color-200);
 }
 
 /* Original styles */
-
 .nue-button {
-    color: var(--color);
-    font-size: var(--font-size);
-    font-weight: var(--font-weight);
-    line-height: var(--line-height);
+    justify-content: var(--justify-content);
+    width: var(--width);
+    height: var(--height);
+    flex: var(--flex);
+    border: 1px solid var(--border-color);
+    border-radius: var(--primary-radius);
+    background-color: var(--background-color);
+    box-shadow: var(--secondary-shadow);
 
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: var(--justify-content);
-    gap: var(--gap);
-
-    width: var(--width);
-    height: var(--height);
-    line-height: var(--line-height);
-    padding: var(--padding-y, 0px) var(--padding-x);
-    flex: var(--flex);
-
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    background-color: var(--background-color);
-    box-shadow: var(--secondary-shadow);
-
+    gap: 6px;
+    min-height: 36px;
+    line-height: 1;
+    padding: 8px 16px;
     cursor: pointer;
     -webkit-user-select: none;
     user-select: none;
     transition: all 0.16s ease-out;
     position: relative;
     overflow: hidden;
+
+    color: var(--color);
+    font-size: var(--text-sm);
+    font-weight: var(--primary-font-weight);
+    font-family: var(--primary-font-family);
+    line-height: 1;
+
+    .nue-icon {
+        --icon-size: var(--text-sm);
+        --icon-weight: 600;
+    }
 
     &:hover {
         color: var(--hover-color);
@@ -75,28 +66,7 @@
         border-color: var(--active-border-color);
     }
 
-    &.nue-button--round {
-        --border-radius: 999px;
-    }
-
-    &.nue-button--no-border {
-        --border-color: transparent;
-    }
-
-    &.nue-button--round-no-border {
-        --border-color: transparent;
-        --border-radius: 999px;
-    }
-
-    &.nue-button--no-shape {
-        --padding-x: 0px;
-        --padding-y: 0px;
-        --border-color: transparent;
-        --background-color: transparent;
-    }
-
-    &.nue-button--disabled,
-    &.nue-button[disabled] {
+    &.nue-button--disabled {
         color: var(--disable-color);
         background-color: var(--disable-background-color);
         cursor: not-allowed;
@@ -105,12 +75,28 @@
 
 /* Build-in styles */
 
+.nue-button--small {
+    min-height: 28px;
+    padding: 4px 8px;
+    font-size: var(--text-xs);
+}
+
+.nue-button--large {
+    min-height: 42px;
+    padding: 12px 24px;
+    font-size: var(--text-lg);
+}
+
+.nue-button--round {
+    border-radius: 999px;
+}
+
 .nue-button--icon-only {
     aspect-ratio: 1;
-    --border-width: 0px;
     --justify-content: center;
     --border-color: transparent;
     --icon-size: var(--text-lg);
+    --height: 36px;
     box-shadow: none;
 }
 
@@ -125,7 +111,7 @@
 .nue-button--pure {
     box-shadow: none;
     padding: 0px;
-    --height: fit-content;
+    min-height: max-content;
     --hover-background-color: transparent;
     --active-background-color: transparent;
     --hover-color: var(--secondary-text-color);
