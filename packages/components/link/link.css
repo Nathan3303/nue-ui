@@ -74,6 +74,10 @@
         background-color: var(--hover-background-color);
         cursor: not-allowed;
     }
+
+    & .nue-icon.iconfont::before {
+        display: inline !important;
+    }
 }
 
 /* Built-in styles */
