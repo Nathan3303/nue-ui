@@ -49,10 +49,8 @@
     font-family: var(--primary-font-family);
     line-height: normal;
 
-    .nue-icon {
-        --icon-size: var(--text-sm);
-        --icon-weight: 600;
-    }
+    --icon-size: var(--text-sm);
+    --icon-weight: 600;
 
     &:hover {
         color: var(--hover-color);
@@ -85,6 +83,7 @@
     min-height: 42px;
     padding: 12px 24px;
     font-size: var(--text-lg);
+    --icon-size: var(--text-lg);
 }
 
 .nue-button--round {
