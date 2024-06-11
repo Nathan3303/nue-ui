@@ -5,8 +5,7 @@
         :data-collapse="isCollapsed">
         <div class="nue-collapse-item__header">
             <slot name="header" :collapse="handleCollapse" :state="isCollapsed">
-                <div
-                    class="nue-collapse-item__title">
+                <div class="nue-collapse-item__title">
                     <slot name="title">
                         <span>{{ title }}</span>
                     </slot>
@@ -21,9 +20,13 @@
         <div ref="contentRef" class="nue-collapse-item__content">
             <div ref="contentInnerRef" class="nue-collapse-item__inner">
                 <slot>
-                    <p v-if="!hideWhenEmpty" class="nue-collapse-item__empty">
+                    <nue-text
+                        v-if="!hideWhenEmpty"
+                        class="nue-collapse-item__empty"
+                        size="12px"
+                        color="gray">
                         Empty
-                    </p>
+                    </nue-text>
                 </slot>
             </div>
         </div>
