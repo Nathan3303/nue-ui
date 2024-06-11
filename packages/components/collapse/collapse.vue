@@ -23,6 +23,7 @@ const classes = computed(() => {
     const { theme } = props;
     let list: string[] = [];
     const prefix = "nue-collapse";
+    list.push(prefix);
     if (theme) list = list.concat(parseTheme(theme, prefix));
     return list;
 });
