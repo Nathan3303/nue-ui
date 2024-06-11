@@ -37,10 +37,10 @@
             margin-right: auto;
 
             .nue-link {
-                display: block;
+                /* display: block; */
                 height: 100%;
                 padding: 4px 8px;
-                border-radius: 5px;
+                /* border-radius: 5px; */
             }
         }
 
