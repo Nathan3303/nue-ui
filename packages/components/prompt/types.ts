@@ -17,6 +17,10 @@ export type PromptPropsType = {
     beforeConfirm?: PromptBeforeConfirm;
 };
 
-export interface PromptPayloadType extends Optional<PromptPropsType> {
+// export interface PromptPayloadType extends Optional<PromptPropsType> {
+//     wrapperId?: string;
+// }
+
+export type PromptPayloadType = {
     wrapperId?: string;
-}
+} & Optional<PromptPropsType>;
