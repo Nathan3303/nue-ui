@@ -24,6 +24,7 @@
         gap: var(--secondary-gap);
         position: absolute;
         min-width: 100%;
+        width: max-content;
         margin: 0;
         padding: var(--secondary-padding);
         background-color: white;
