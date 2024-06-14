@@ -13,7 +13,7 @@
             <nue-text size="24px">Marquee</nue-text>
             <marquee-demo1></marquee-demo1>
         </nue-div>
-        <nue-div vertical theme="card">
+        <nue-div vertical theme="card" wrap="nowrap">
             <nue-text size="24px">Infinite Scroll</nue-text>
             <infinite-scroll-demo1></infinite-scroll-demo1>
         </nue-div>

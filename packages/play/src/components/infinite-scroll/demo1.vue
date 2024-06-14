@@ -4,7 +4,7 @@
         :loading="loading"
         :disabled="disabled"
         trigger-height="1px"
-        height="256px">
+        height="360px">
         <ul class="list">
             <li class="node" v-for="i in itemsCount" :key="i">
                 {{ i }}
@@ -16,7 +16,7 @@
 <script setup>
 import { ref, computed } from "vue";
 
-const itemsCount = ref(10);
+const itemsCount = ref(15);
 const loading = ref(false);
 const disabled = computed(() => loading.value || itemsCount.value >= 64);
 function loadMore() {
