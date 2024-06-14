@@ -13,8 +13,10 @@ export interface SelectProps extends GlobalProps {
     modelValue?: string;
     placeholder?: string;
     size?: "small" | "large";
+    disabled?: boolean;
 }
 
 export type SelectEmits = {
     (e: "update:modelValue", value: unknown): void;
+    (e: "change", value: unknown): void;
 };

@@ -1,11 +1,15 @@
 <template>
     <nue-dropdown @execute="handleExecute">
-        <template #default="{ switchVisible }">
-            <nue-button :theme="size" @click="switchVisible" style="gap: 16px">
+        <template #default="{ clickTrigger }">
+            <nue-button
+                :theme="size"
+                @click="() => clickTrigger()"
+                style="gap: 16px"
+                :disabled="disabled">
                 <template #default>
-                    <nue-text v-if="buttonText" size="12px">
+                    <template v-if="buttonText" size="12px">
                         {{ buttonText }}
-                    </nue-text>
+                    </template>
                     <nue-text v-else color="gray" size="12px">
                         Select an option
                     </nue-text>
@@ -17,24 +21,26 @@
         </template>
         <template #dropdown>
             <slot>
-                <li data-executeid="Option 1">Option 1</li>
-                <li data-executeid="Option 2">Option 2</li>
-                <li data-executeid="Option 3">Option 3</li>
+                <nue-text color="gray" size="12px" align="center">
+                    No options
+                </nue-text>
             </slot>
         </template>
     </nue-dropdown>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { NueDropdown } from "../index";
+import { ref, computed, watch } from "vue";
+import { NueDropdown, NueButton, NueIcon, NueText } from "../index";
 import type { SelectProps, SelectEmits } from "./types";
 import "./select.css";
 
 defineOptions({ name: "NueSelect" });
 
 const emit = defineEmits<SelectEmits>();
-const props = defineProps<SelectProps>();
+const props = withDefaults(defineProps<SelectProps>(), {
+    placeholder: "Select an option",
+});
 
 const currentSelection = ref("");
 
@@ -48,4 +54,9 @@ const buttonText = computed(() => {
 function handleExecute(executeId: string) {
     currentSelection.value = executeId;
 }
+
+watch(
+    () => currentSelection.value,
+    (newValue) => emit("change", newValue)
+);
 </script>
