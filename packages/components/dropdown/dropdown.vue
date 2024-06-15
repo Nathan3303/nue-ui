@@ -82,9 +82,9 @@ function checkVisible() {
     if (!dropdownRef.value) return;
     const { clientHeight: viewportHeight } =
         document.getElementsByTagName("body")[0];
-    const { offsetTop, clientHeight } = dropdownRef.value;
-    // console.log(offsetTop, clientHeight);
-    const dropdownBottom = offsetTop + clientHeight;
+    const { y: dropdownY, height: dropdownHeight } =
+        dropdownRef.value.getBoundingClientRect();
+    const dropdownBottom = dropdownY + dropdownHeight;
     nextTick(() => {
         if (!dropdownListRef.value) return;
         const { clientHeight: listHeight } = dropdownListRef.value;

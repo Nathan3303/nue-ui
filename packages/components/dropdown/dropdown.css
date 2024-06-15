@@ -1,7 +1,7 @@
 /* Variables */
 
 .nue-dropdown-wrapper {
-    --offset-top: 8px;
+    --dropdown-gap: 8px;
 }
 
 /* Original styles */
@@ -66,12 +66,12 @@
             transform-origin: 100% 0;
         }
 
-        &[data-direction="button"] {
-            top: calc(100% + var(--offset-top));
+        &[data-direction="bottom"] {
+            top: calc(100% + var(--dropdown-gap));
         }
 
         &[data-direction="top"] {
-            bottom: calc(100% + var(--offset-top));
+            bottom: calc(100% + var(--dropdown-gap));
         }
     }
 }
