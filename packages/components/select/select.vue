@@ -1,19 +1,12 @@
 <template>
-    <nue-dropdown @execute="handleExecute">
+    <nue-dropdown :class="classes" @execute="handleExecute">
         <template #default="{ clickTrigger }">
             <nue-button
                 :theme="size"
                 @click="() => clickTrigger()"
                 style="gap: 16px"
                 :disabled="disabled">
-                <template #default>
-                    <template v-if="buttonText" size="12px">
-                        {{ buttonText }}
-                    </template>
-                    <nue-text v-else color="gray" size="12px">
-                        Select an option
-                    </nue-text>
-                </template>
+                <template #default> {{ label }} </template>
                 <template #append>
                     <nue-icon name="select"></nue-icon>
                 </template>
@@ -30,10 +23,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, provide, onMounted } from "vue";
 import { NueDropdown, NueButton, NueIcon, NueText } from "../index";
-import type { SelectProps, SelectEmits } from "./types";
-import "./select.css";
+import { parseTheme } from "@nue-ui/utils";
+import type {
+    SelectProps,
+    SelectEmits,
+    SelectOption,
+    SelectOptions,
+    SelectContext,
+} from "./types";
 
 defineOptions({ name: "NueSelect" });
 
@@ -42,21 +41,61 @@ const props = withDefaults(defineProps<SelectProps>(), {
     placeholder: "Select an option",
 });
 
-const currentSelection = ref("");
+const options = ref<SelectOptions>([]);
+const selectedOption = ref<SelectOption>();
 
-const buttonText = computed(() => {
-    if (currentSelection.value && currentSelection.value !== "") {
-        return currentSelection.value;
-    }
-    return props.placeholder;
+const classes = computed(() => {
+    const { theme } = props;
+    let list: string[] = [];
+    const prefix = "nue-select";
+    list.push(prefix);
+    if (theme) list = list.concat(parseTheme(theme, prefix));
+    return list;
 });
 
-function handleExecute(executeId: string) {
-    currentSelection.value = executeId;
+const label = computed(() => {
+    return selectedOption.value
+        ? selectedOption.value.label
+        : props.placeholder;
+});
+
+function optionRegister(option: SelectOption) {
+    options.value.push(option);
+}
+
+function handleExecute(executeId: unknown) {
+    // console.log(executeId);
+    let _option: SelectOption | null = null;
+    for (const option of options.value) {
+        if (option.value === executeId) {
+            _option = option;
+            break;
+        }
+    }
+    if (!_option) {
+        let _id = executeId as string;
+        _option = { label: _id, value: _id };
+    }
+    selectedOption.value = _option as SelectOption;
 }
 
 watch(
-    () => currentSelection.value,
-    (newValue) => emit("change", newValue)
+    () => selectedOption.value,
+    (newValue) => {
+        const _nv = newValue ? newValue.value : null;
+        emit("update:modelValue", _nv);
+        emit("change", _nv);
+    }
 );
+
+onMounted(() => {
+    if (props.modelValue) {
+        handleExecute(props.modelValue);
+    }
+});
+
+provide<SelectContext>("SelectContext", {
+    optionRegister,
+    selectedOption,
+});
 </script>

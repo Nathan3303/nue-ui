@@ -1,0 +1,13 @@
+.nue-select__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 64px;
+    gap: 16px;
+
+    &[data-selected="true"] {
+        transition: all 0.2s ease-in-out;
+        background-color: var(--light-primary-color);
+        border-radius: var(--primary-radius);
+    }
+}
