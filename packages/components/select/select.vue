@@ -80,18 +80,17 @@ function handleExecute(executeId: unknown) {
 }
 
 watch(
+    () => props.modelValue,
+    (newValue) => handleExecute(newValue),
+    { immediate: true }
+);
+
+watch(
     () => selectedOption.value,
     (newValue) => {
         const _nv = newValue ? newValue.value : null;
         emit("update:modelValue", _nv);
         emit("change", _nv);
-    }
-);
-
-watch(
-    () => props.modelValue,
-    (newValue) => {
-        handleExecute(newValue);
     }
 );
 
