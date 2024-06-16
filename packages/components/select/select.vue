@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, provide, onMounted } from "vue";
+import { ref, computed, watch, provide } from "vue";
 import { NueDropdown, NueButton, NueIcon, NueText } from "../index";
 import { parseTheme } from "@nue-ui/utils";
 import type {
@@ -88,11 +88,12 @@ watch(
     }
 );
 
-onMounted(() => {
-    if (props.modelValue) {
-        handleExecute(props.modelValue);
+watch(
+    () => props.modelValue,
+    (newValue) => {
+        handleExecute(newValue);
     }
-});
+);
 
 provide<SelectContext>("SelectContext", {
     optionRegister,
