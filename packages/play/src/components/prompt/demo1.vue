@@ -3,6 +3,9 @@
         <nue-button @click="showPromptWithBeforeConfirm">
             Open Prompt
         </nue-button>
+        <nue-button @click="showPromptWithInitialValue">
+            Open Prompt (with initial value)
+        </nue-button>
     </nue-div>
 </template>
 
@@ -26,6 +29,21 @@ function showPromptWithBeforeConfirm() {
     }).then(
         (value: unknown) =>
             NueMessage.success(`Your phone number is: ${value as string}`),
+        () => NueMessage.warn("Cancelled!")
+    );
+}
+
+function showPromptWithInitialValue() {
+    NuePrompt({
+        title: "Prompt",
+        placeholder: "Input your name here...",
+        inputValue: "John",
+        validator: (value: string) => {
+            return value.length > 0;
+        },
+    }).then(
+        (value: unknown) =>
+            NueMessage.success(`Your name is: ${value as string}`),
         () => NueMessage.warn("Cancelled!")
     );
 }
