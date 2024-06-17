@@ -1,4 +1,4 @@
-import type { InputType } from "../input";
+import type { InputPropsType, InputType, TextareaPropsType } from "../input";
 import type { Optional } from "@nue-ui/utils";
 
 export type PromptClose = (isConfirmed: boolean, payload: unknown) => void;
@@ -10,6 +10,7 @@ export type PromptPropsType = {
     label?: string;
     placeholder?: string;
     inputType?: InputType;
+    inputValue?: InputPropsType["modelValue"] | TextareaPropsType["modelValue"];
     confirmButtonText?: string;
     cancelButtonText?: string;
     close: PromptClose;

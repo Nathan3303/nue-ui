@@ -51,13 +51,14 @@ const props = withDefaults(defineProps<PromptPropsType>(), {
     title: "Prompt",
     placeholder: "Please input",
     inputType: "text",
+    inputValue: "",
     confirmButtonText: "Yes",
     cancelButtonText: "No",
 });
 
 const promptRef = ref<HTMLDivElement>();
 const promptInputRef = ref();
-const inputValue = ref("");
+const inputValue = ref(props.inputValue);
 const inputValueError = ref(false);
 
 function handleClose(isConfirmed: boolean) {
