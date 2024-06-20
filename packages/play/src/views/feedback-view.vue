@@ -2,7 +2,10 @@
     <div class="view-container">
         <nue-div vertical theme="card">
             <nue-text size="large">Dialog</nue-text>
-            <dialog-demo1></dialog-demo1>
+            <nue-div>
+                <dialog-demo1></dialog-demo1>
+                <dialog-demo2></dialog-demo2>
+            </nue-div>
         </nue-div>
         <nue-div vertical theme="card">
             <nue-text size="large">Drawer</nue-text>
@@ -26,6 +29,7 @@
 
 <script setup lang="ts">
 import DialogDemo1 from "../components/dialog/demo1.vue";
+import DialogDemo2 from "../components/dialog/demo2.vue";
 import DrawerDemo1 from "../components/drawer/demo1.vue";
 import MessageDemo1 from "../components/message/demo1.vue";
 import MessageDemo2 from "../components/message/demo2.vue";

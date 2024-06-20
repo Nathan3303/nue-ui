@@ -1,24 +1,22 @@
 <template>
-    <nue-div vertical>
-        <nue-button @click="dialogVisible = true">Open Dialog</nue-button>
-        <nue-dialog
-            v-model="dialogVisible"
-            :before-confirm="handleBeforeConfirm"
-            title="Dialog Title">
-            <template #default>
-                <nue-div vertical align="stretch">
-                    <nue-input v-model="dialogData.title" />
-                    <nue-textarea v-model="dialogData.content" />
-                </nue-div>
-            </template>
-            <template #footer="{ cancel, confirm }">
-                <nue-button @click.stop="cancel"> Cancel </nue-button>
-                <nue-button theme="primary" @click.stop="confirm">
-                    Confirm
-                </nue-button>
-            </template>
-        </nue-dialog>
-    </nue-div>
+    <nue-button @click="dialogVisible = true">Open Dialog</nue-button>
+    <nue-dialog
+        v-model="dialogVisible"
+        :before-confirm="handleBeforeConfirm"
+        title="Dialog Title">
+        <template #default>
+            <nue-div vertical align="stretch">
+                <nue-input v-model="dialogData.title" />
+                <nue-textarea v-model="dialogData.content" />
+            </nue-div>
+        </template>
+        <template #footer="{ cancel, confirm }">
+            <nue-button @click.stop="cancel"> Cancel </nue-button>
+            <nue-button theme="primary" @click.stop="confirm">
+                Confirm
+            </nue-button>
+        </template>
+    </nue-dialog>
 </template>
 
 <script setup lang="ts">
