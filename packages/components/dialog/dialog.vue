@@ -78,17 +78,14 @@ function handleCancel() {
 }
 
 async function handleConfirm() {
-    if (!isFunction(props.beforeConfirm)) {
-        emit("update:modelValue", false);
-        return;
-    }
-    try {
-        await new Promise((resolve) => {
-            const done = () => resolve(null);
-            props.beforeConfirm?.call(null, done);
-        });
-    } catch (e) {
-        e;
+    if (isFunction(props.beforeConfirm)) {
+        try {
+            await new Promise((resolve) =>
+                props.beforeConfirm?.call(null, () => resolve(null))
+            );
+        } catch (e) {
+            throw new Error(e as string);
+        }
     }
     emit("confirm");
     handleCancel();
