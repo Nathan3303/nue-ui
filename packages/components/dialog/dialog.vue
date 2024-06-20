@@ -71,10 +71,10 @@ function handleCloseAnimation(): Promise<boolean> {
     });
 }
 
-function handleCancel() {
-    handleCloseAnimation().then(() => {
-        emit("update:modelValue", false);
-    });
+async function handleCancel() {
+    await handleCloseAnimation();
+    emit("update:modelValue", false);
+    return true;
 }
 
 async function handleConfirm() {
@@ -101,4 +101,6 @@ watch(
         }
     }
 );
+
+defineExpose({ close: handleCancel });
 </script>
