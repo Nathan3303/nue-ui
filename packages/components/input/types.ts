@@ -53,6 +53,12 @@ export type TextareaPropsType = {
     flex?: string;
 };
 
+export type TextareaEmitsType = {
+    (e: "update:modelValue", value: HTMLTextAreaElement["value"]): void;
+    (e: "input", value: Event): void;
+    (e: "blur", value: Event): void;
+};
+
 export type WordCounterProps = {
     mode: InputCounterType;
     length: number;

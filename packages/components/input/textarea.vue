@@ -10,6 +10,7 @@
             :disabled="disabled"
             :maxlength="maxlength"
             @input="handleInput"
+            @blur="emit('blur', $event)"
             @compositionstart="handleCompositionStart"
             @compositionend="handleCompositionEnd"></textarea>
         <textarea
@@ -35,14 +36,14 @@ import {
     onBeforeUnmount,
     onMounted,
 } from "vue";
-import type { TextareaPropsType } from "./types";
+import type { TextareaPropsType, TextareaEmitsType } from "./types";
 import { parseTheme, debounce } from "@nue-ui/utils";
 import wordCounter from "./word-counter.vue";
 import "./textarea.css";
 
 defineOptions({ name: "NueTextarea" });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits<TextareaEmitsType>();
 const props = withDefaults(defineProps<TextareaPropsType>(), {
     counter: "off",
     debounceTime: 0,
@@ -79,7 +80,7 @@ const style = computed(() => {
 });
 
 const updateModelValue = debounce(
-    (value: string | number) => emit("update:modelValue", value),
+    (value: string) => emit("update:modelValue", value),
     props.debounceTime
 );
 
