@@ -6,7 +6,15 @@
                 @click="() => clickTrigger()"
                 style="gap: 16px"
                 :disabled="disabled">
-                <template #default> {{ label }} </template>
+                <template #default>
+                    <template v-if="label">{{ label }}</template>
+                    <nue-text
+                        v-else
+                        color="gray"
+                        style="font-size: inherit !important"
+                        >{{ placeholder }}</nue-text
+                    >
+                </template>
                 <template #append>
                     <nue-icon name="select"></nue-icon>
                 </template>
@@ -23,14 +31,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, provide } from "vue";
+import { ref, computed, watch, provide, onMounted } from "vue";
 import { NueDropdown, NueButton, NueIcon, NueText } from "../index";
 import { parseTheme } from "@nue-ui/utils";
 import type {
     SelectProps,
     SelectEmits,
     SelectOption,
-    SelectOptions,
     SelectContext,
 } from "./types";
 
@@ -38,10 +45,10 @@ defineOptions({ name: "NueSelect" });
 
 const emit = defineEmits<SelectEmits>();
 const props = withDefaults(defineProps<SelectProps>(), {
-    placeholder: "Select an option",
+    placeholder: "Select",
 });
 
-const options = ref<SelectOptions>([]);
+const options = ref<SelectOption[]>([]);
 const selectedOption = ref<SelectOption>();
 
 const classes = computed(() => {
@@ -54,35 +61,50 @@ const classes = computed(() => {
 });
 
 const label = computed(() => {
-    return selectedOption.value
-        ? selectedOption.value.label
-        : props.placeholder;
+    return selectedOption && selectedOption.value?.label;
 });
 
 function optionRegister(option: SelectOption) {
     options.value.push(option);
 }
 
-function handleExecute(executeId: unknown) {
+function handleExecute(executeId: string) {
     // console.log(executeId);
-    let _option: SelectOption | null = null;
-    for (const option of options.value) {
-        if (option.value === executeId) {
-            _option = option;
-            break;
+    handleSelect(executeId);
+}
+
+function handleSelect(payload: unknown, isParseMV = false) {
+    let _option: SelectOption | undefined = void 0;
+    if (isParseMV) {
+        if (selectedOption.value && payload === selectedOption.value.value) {
+            return;
+        }
+        for (const option of options.value) {
+            if (payload === option.value) {
+                _option = option;
+                break;
+            }
+        }
+    } else {
+        if (
+            selectedOption.value &&
+            payload === selectedOption.value.executeId
+        ) {
+            return;
+        }
+        for (const option of options.value) {
+            if ((payload as string) === option.executeId) {
+                _option = option;
+                break;
+            }
         }
     }
-    if (!_option) {
-        let _id = executeId as string;
-        _option = { label: _id, value: _id };
-    }
-    selectedOption.value = _option as SelectOption;
+    selectedOption.value = _option || void 0;
 }
 
 watch(
     () => props.modelValue,
-    (newValue) => handleExecute(newValue),
-    { immediate: true }
+    (newValue) => handleSelect(newValue, true)
 );
 
 watch(
@@ -93,6 +115,10 @@ watch(
         emit("change", _nv);
     }
 );
+
+onMounted(() => {
+    handleSelect(props.modelValue, true);
+});
 
 provide<SelectContext>("SelectContext", {
     optionRegister,
