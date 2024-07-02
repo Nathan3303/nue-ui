@@ -63,7 +63,10 @@ export type IconNameType =
     | "priority-3"
     | "timer"
     | "switch"
-    | "connection";
+    | "connection"
+    | "square"
+    | "square-check"
+    | "square-check-fill";
 
 export type IconPropsType = {
     name: IconNameType;
