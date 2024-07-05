@@ -98,6 +98,8 @@ function handleSelect(payload: unknown, isParseMV = false) {
                 break;
             }
         }
+        emit("update:modelValue", _option?.value);
+        emit("change", _option?.value);
     }
     selectedOption.value = _option || void 0;
 }
@@ -107,14 +109,12 @@ watch(
     (newValue) => handleSelect(newValue, true)
 );
 
-watch(
-    () => selectedOption.value,
-    (newValue) => {
-        const _nv = newValue ? newValue.value : null;
-        emit("update:modelValue", _nv);
-        emit("change", _nv);
-    }
-);
+// watch(
+//     () => selectedOption.value,
+//     (newValue) => {
+//         const _nv = newValue ? newValue.value : null;
+//     }
+// );
 
 onMounted(() => {
     handleSelect(props.modelValue, true);
