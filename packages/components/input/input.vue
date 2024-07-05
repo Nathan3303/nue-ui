@@ -13,6 +13,7 @@
             :name="name"
             @input="handleInput($event)"
             @blur="emit('blur', $event)"
+            @change="emit('change', $event)"
             @compositionstart="handleCompositionStart"
             @compositionend="handleCompositionEnd" />
         <word-counter

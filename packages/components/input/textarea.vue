@@ -11,6 +11,7 @@
             :maxlength="maxlength"
             @input="handleInput"
             @blur="emit('blur', $event)"
+            @change="emit('change', $event)"
             @compositionstart="handleCompositionStart"
             @compositionend="handleCompositionEnd"></textarea>
         <textarea
