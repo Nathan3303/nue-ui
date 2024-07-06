@@ -11,6 +11,7 @@
     overflow: hidden;
     box-shadow: var(--secondary-shadow);
     flex: var(--flex);
+    width: fit-content;
 
     & > .nue-button {
         border-radius: 0px;
