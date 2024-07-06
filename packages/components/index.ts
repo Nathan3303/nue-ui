@@ -16,7 +16,7 @@ export * from "./input";
 export * from "./link";
 export * from "./popup-wrapper";
 export * from "./prompt";
+export * from "./select";
 export * from "./text";
-export * from './marquee';
+export * from "./marquee";
 export * from "./message";
-

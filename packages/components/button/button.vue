@@ -57,7 +57,10 @@ const classes = computed(() => {
     const prefix = "nue-button";
     list.push(prefix);
     if (theme) list = list.concat(parseTheme(theme, prefix));
-    if (size) list.push(`${prefix}--${size}`);
+    if (size || ButtonGroupCtx.size) {
+        let _size = size || ButtonGroupCtx.size;
+        list.push(`${prefix}--${_size}`);
+    }
     if (disabled.value) list.push(`${prefix}--disabled`);
     if (flat) list.push(`${prefix}--flat`);
     return list;

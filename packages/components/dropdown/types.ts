@@ -1,5 +1,8 @@
 import type { GlobalProps } from "@nue-ui/utils";
 
+export type DropdownDirection = "top" | "bottom";
+export type DropdownAlign = "left" | "center" | "right";
+
 export interface DropdownPropsType extends GlobalProps {
     maxHeight?: string;
     disabled?: boolean;
@@ -7,7 +10,7 @@ export interface DropdownPropsType extends GlobalProps {
     text?: string;
     actionDelay?: number;
     hideOnClick?: boolean;
-    align?: "left" | "center" | "right";
+    align?: DropdownAlign;
 }
 
 export type DropdownEmitsType = {

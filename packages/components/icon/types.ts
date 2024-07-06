@@ -55,7 +55,18 @@ export type IconNameType =
     | "arrow-left"
     | "logo2"
     | "arrow-down"
-    | "arrow-up";
+    | "arrow-up"
+    | "select"
+    | "check"
+    | "priority-1"
+    | "priority-2"
+    | "priority-3"
+    | "timer"
+    | "switch"
+    | "connection"
+    | "square"
+    | "square-check"
+    | "square-check-fill";
 
 export type IconPropsType = {
     name: IconNameType;

@@ -37,11 +37,11 @@ const style = computed(() => {
 });
 
 const classes = computed(() => {
+    const { theme } = props;
     const prefix = "nue-text";
     let list: string[] = [];
-    let themeList: string[] = [];
-    if (props.theme) themeList = parseTheme(props.theme, prefix);
-    list = [prefix, ...themeList];
+    list.push(prefix);
+    if (theme) list = list.concat(parseTheme(theme, prefix));
     return list;
 });
 </script>

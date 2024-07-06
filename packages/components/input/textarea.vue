@@ -10,6 +10,8 @@
             :disabled="disabled"
             :maxlength="maxlength"
             @input="handleInput"
+            @blur="emit('blur', $event)"
+            @change="emit('change', $event)"
             @compositionstart="handleCompositionStart"
             @compositionend="handleCompositionEnd"></textarea>
         <textarea
@@ -35,14 +37,14 @@ import {
     onBeforeUnmount,
     onMounted,
 } from "vue";
-import type { TextareaPropsType } from "./types";
+import type { TextareaPropsType, TextareaEmitsType } from "./types";
 import { parseTheme, debounce } from "@nue-ui/utils";
 import wordCounter from "./word-counter.vue";
 import "./textarea.css";
 
 defineOptions({ name: "NueTextarea" });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits<TextareaEmitsType>();
 const props = withDefaults(defineProps<TextareaPropsType>(), {
     counter: "off",
     debounceTime: 0,
@@ -55,9 +57,10 @@ const isComposing = ref(false);
 
 const classes = computed(() => {
     const prefix = "nue-textarea";
-    const { theme, shape, disabled, readonly } = props;
+    const { size, theme, shape, disabled, readonly } = props;
     let list: string[] = [];
     list.push(prefix);
+    if (size) list.push(`${prefix}--${size}`);
     if (shape) list.push(`${prefix}--${shape}`);
     if (theme) list.push(...parseTheme(theme, prefix));
     if (disabled) list.push(`${prefix}--disabled`);
@@ -78,7 +81,7 @@ const style = computed(() => {
 });
 
 const updateModelValue = debounce(
-    (value: string | number) => emit("update:modelValue", value),
+    (value: string) => emit("update:modelValue", value),
     props.debounceTime
 );
 

@@ -22,7 +22,7 @@ export type InputPropsType = {
     allowShowPassword?: boolean;
     counter?: InputCounterType;
     width?: string;
-    size?: string;
+    size?: "small" | "large";
     debounceTime?: number;
     flex?: string;
     name?: string;
@@ -32,6 +32,7 @@ export type InputEmitsType = {
     (e: "update:modelValue", value: HTMLInputElement["value"]): void;
     (e: "input", value: Event): void;
     (e: "blur", value: Event): void;
+    (e: "change", value: Event): void;
 };
 
 export type TextareaPropsType = {
@@ -48,9 +49,16 @@ export type TextareaPropsType = {
     maxlength?: string;
     counter?: InputCounterType;
     width?: string;
-    size?: string;
+    size?: "small" | "large";
     debounceTime?: number;
     flex?: string;
+};
+
+export type TextareaEmitsType = {
+    (e: "update:modelValue", value: HTMLTextAreaElement["value"]): void;
+    (e: "input", value: Event): void;
+    (e: "blur", value: Event): void;
+    (e: "change", value: Event): void;
 };
 
 export type WordCounterProps = {

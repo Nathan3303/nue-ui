@@ -71,24 +71,21 @@ function handleCloseAnimation(): Promise<boolean> {
     });
 }
 
-function handleCancel() {
-    handleCloseAnimation().then(() => {
-        emit("update:modelValue", false);
-    });
+async function handleCancel() {
+    await handleCloseAnimation();
+    emit("update:modelValue", false);
+    return true;
 }
 
 async function handleConfirm() {
-    if (!isFunction(props.beforeConfirm)) {
-        emit("update:modelValue", false);
-        return;
-    }
-    try {
-        await new Promise((resolve) => {
-            const done = () => resolve(null);
-            props.beforeConfirm?.call(null, done);
-        });
-    } catch (e) {
-        e;
+    if (isFunction(props.beforeConfirm)) {
+        try {
+            await new Promise((resolve) =>
+                props.beforeConfirm?.call(null, () => resolve(null))
+            );
+        } catch (e) {
+            throw new Error(e as string);
+        }
     }
     emit("confirm");
     handleCancel();
@@ -104,4 +101,6 @@ watch(
         }
     }
 );
+
+defineExpose({ close: handleCancel });
 </script>

@@ -3,7 +3,7 @@ import {ref} from 'vue'
 
 const inputValue = ref('')
 </script>
-<style>
+<style scoped>
     .nue-container {
         border: 1px solid #efefef;
         border-radius: 6px;
@@ -50,27 +50,7 @@ const inputValue = ref('')
 组件拥有四个具名插槽，分别是 `logo`、`nav`、`default`、`ops` 以及 `user`，对应常见头部的 “网站Logo区域”、“导航链接区域”、“中间区域”、“搜索或操作按钮区域” 以及 “用户信息区域”。
 
 ::: raw
-<nue-header height="72px">
-<template #logo>Logo</template>
-<template #nav>
-<nue-link>Link1</nue-link>
-<nue-link>Link2</nue-link>
-<nue-link>Link3</nue-link>
-</template>
-<template #ops>
-<nue-button theme="icon-only" icon="search" />
-</template>
-<template #user>
-<nue-avatar src="https://picsum.photos/id/237/200/200" shape="round"/>
-</template>
-<template #default>
-<nue-text>Default slot</nue-text>
-</template>
-</nue-header>
-:::
-
-```vue
-<template>
+<nue-container>
     <nue-header height="72px">
         <template #logo>Logo</template>
         <template #nav>
@@ -82,14 +62,38 @@ const inputValue = ref('')
             <nue-button theme="icon-only" icon="search" />
         </template>
         <template #user>
-            <nue-avatar
-                src="https://picsum.photos/id/237/200/200"
-                shape="round" />
+            <nue-avatar src="https://picsum.photos/id/237/200/200" shape="round"/>
         </template>
         <template #default>
             <nue-text>Default slot</nue-text>
         </template>
     </nue-header>
+</nue-container>
+:::
+
+```vue
+<template>
+    <nue-container>
+        <nue-header height="72px">
+            <template #logo>Logo</template>
+            <template #nav>
+                <nue-link>Link1</nue-link>
+                <nue-link>Link2</nue-link>
+                <nue-link>Link3</nue-link>
+            </template>
+            <template #ops>
+                <nue-button theme="icon-only" icon="search" />
+            </template>
+            <template #user>
+                <nue-avatar
+                    src="https://picsum.photos/id/237/200/200" 
+                    shape="round"/>
+            </template>
+            <template #default>
+                <nue-text>Default slot</nue-text>
+            </template>
+        </nue-header>
+    </nue-container>
 </template>
 ```
 
@@ -102,18 +106,22 @@ const inputValue = ref('')
 通过属性 `aside-width` 设置侧边栏宽度，接收 CSS `width` 属性值类型。
 
 ::: raw
-<nue-main aside-width="30%">
-<template #aside>Aside</template>
-<template #content>Content</template>
-</nue-main>
-:::
-
-```vue
-<template>
+<nue-container height="512px">
     <nue-main aside-width="30%">
         <template #aside>Aside</template>
         <template #content>Content</template>
     </nue-main>
+</nue-container>
+:::
+
+```vue
+<template>
+    <nue-container height="512px">
+        <nue-main aside-width="30%">
+            <template #aside>Aside</template>
+            <template #content>Content</template>
+        </nue-main>
+    </nue-container>
 </template>
 ```
 
@@ -124,15 +132,19 @@ const inputValue = ref('')
 组件拥有默认插槽。
 
 ::: raw
-<nue-footer height="72px">
-<nue-text>Footer content</nue-text>
-</nue-footer>
+<nue-container>
+    <nue-footer height="72px">
+        <nue-text>Footer content</nue-text>
+    </nue-footer>
+</nue-container>
 :::
 
 ```vue
 <template>
-    <nue-footer height="72px">
-        <nue-text>Footer content</nue-text>
-    </nue-footer>
+    <nue-container>
+        <nue-footer height="72px">
+            <nue-text>Footer content</nue-text>
+        </nue-footer>
+    </nue-container>
 </template>
 ```

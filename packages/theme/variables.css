@@ -42,7 +42,7 @@
     --primary-radius: 6px;
 
     --primary-font-weight: 500;
-    --primary-font-family: "Poppins", monospace;
+    --primary-font-family: "Poppins", "Noto Sans", sans-serif;
     --primary-line-height: 1;
 
     --text-xxs: 0.5rem;

@@ -1,13 +1,18 @@
 <template>
     <div
+        ref="dropdownRef"
         class="nue-dropdown-wrapper"
         :class="{ 'nue-dropdown--droped': visible }"
         @mouseenter="handleHoverTrigger"
         @mouseleave="handleHoverTrigger">
         <!-- Default slot -->
-        <slot :switchVisible="switchVisible" :visible="visible">
+        <slot
+            :switchVisible="switchVisible"
+            :clickTrigger="handleClickTrigger"
+            :hoverTrigger="handleHoverTrigger"
+            :visible="visible">
             <nue-button @click="handleClickTrigger">
-                {{ text ?? "Open dropdown" }}
+                {{ text }}
                 <template #append>
                     <nue-icon
                         class="state-icon"
@@ -19,8 +24,11 @@
         <!-- Dropdown -->
         <transition name="fade">
             <ul
+                ref="dropdownListRef"
                 v-show="visible"
                 :class="classes"
+                :data-direction="direction"
+                :data-align="align"
                 @click="handleExecute"
                 @mouseenter="handleEnterMenu"
                 @mouseleave="handleHoverTrigger">
@@ -31,9 +39,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, nextTick } from "vue";
 import { NueButton } from "../button";
-import type { DropdownPropsType, DropdownEmitsType } from "./types";
+import type {
+    DropdownPropsType,
+    DropdownEmitsType,
+    DropdownDirection,
+} from "./types";
 import "./dropdown.css";
 import { parseTheme } from "@nue-ui/utils";
 
@@ -50,7 +62,10 @@ const props = withDefaults(defineProps<DropdownPropsType>(), {
     align: "left",
 });
 
+const dropdownRef = ref<HTMLDivElement>();
+const dropdownListRef = ref<HTMLUListElement>();
 const visible = ref(false);
+const direction = ref<DropdownDirection>("bottom");
 let timer: number = 0;
 
 const classes = computed(() => {
@@ -63,12 +78,28 @@ const classes = computed(() => {
     return list;
 });
 
+function checkVisible() {
+    if (!dropdownRef.value) return;
+    const { clientHeight: viewportHeight } =
+        document.getElementsByTagName("body")[0];
+    const { y: dropdownY, height: dropdownHeight } =
+        dropdownRef.value.getBoundingClientRect();
+    const dropdownBottom = dropdownY + dropdownHeight;
+    nextTick(() => {
+        if (!dropdownListRef.value) return;
+        const { clientHeight: listHeight } = dropdownListRef.value;
+        direction.value =
+            dropdownBottom + listHeight > viewportHeight ? "top" : "bottom";
+    });
+}
+
 function switchVisible(delay: number = 0) {
     return new Promise((resolve) => {
         if (timer) clearTimeout(timer);
         timer = setTimeout(() => {
             visible.value = !visible.value;
             timer = 0;
+            checkVisible();
             resolve(visible.value);
         }, delay) as unknown as number;
     });

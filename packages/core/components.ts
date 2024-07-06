@@ -21,6 +21,8 @@ import {
     NueMarquee,
     NueMessageWrapper,
     NuePopupWrapper,
+    NueSelect,
+    NueSelectOption,
     NueText,
     NueTextarea,
 } from "@nue-ui/components";
@@ -50,6 +52,8 @@ export default [
     NueMarquee,
     NueMessageWrapper,
     NuePopupWrapper,
+    NueSelect,
+    NueSelectOption,
     NueText,
     NueTextarea,
 ] as Plugin[];

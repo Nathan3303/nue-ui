@@ -16,8 +16,8 @@
 <nue-collapse>
     <nue-collapse-item title="折叠面板标题">
         <nue-text>
-            折叠面板内容：lorem ipsum dolor sit amet, consectetur adipiscing
-            elit.
+            折叠面板内容：lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.
         </nue-text>
     </nue-collapse-item>
 </nue-collapse>
@@ -27,8 +27,8 @@
     <nue-collapse>
         <nue-collapse-item title="折叠面板标题">
             <nue-text>
-                折叠面板内容：lorem ipsum dolor sit amet, consectetur adipiscing
-                elit.
+                折叠面板内容：lorem ipsum dolor sit amet,
+                consectetur adipiscing elit.
             </nue-text>
         </nue-collapse-item>
     </nue-collapse>

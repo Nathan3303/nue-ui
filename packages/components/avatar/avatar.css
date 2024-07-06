@@ -25,6 +25,10 @@
         height: 100%;
         object-fit: var(--object-fit);
     }
+
+    .nue-icon {
+        line-height: var(--size);
+    }
 }
 
 /* Built-in styles */

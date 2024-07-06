@@ -11,6 +11,6 @@ export type ConfirmPropsType = {
     close: ConfirmClose;
 };
 
-export interface ConfirmPayloadType extends Optional<ConfirmPropsType> {
+export type ConfirmPayloadType = {
     wrapperId?: string;
-}
+} & Optional<ConfirmPropsType>;

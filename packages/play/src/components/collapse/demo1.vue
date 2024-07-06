@@ -21,10 +21,12 @@
                 laudantium fugiat.
             </nue-text>
         </nue-collapse-item>
+        <nue-collapse-item name="c3" title="Collapse Item 3">
+        </nue-collapse-item>
     </nue-collapse>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-const activeNames = ref(["c1", "c2"]);
+const activeNames = ref(["c1", "c2", "c3"]);
 </script>
