@@ -80,10 +80,6 @@ const val3 = ref("");
 
 通过 `icon` 属性设置图标，接收 `string` 类型。
 
-::: tip
-目前 `icon` 属性值仅支持库内的图标，暂不支持自定义图标。
-:::
-
 <nue-input v-model="val4" placeholder="搜索" icon="search" />
 
 ```vue
@@ -257,7 +253,7 @@ const val9 = ref("");
 
 输入框拥有小、正常、大三种尺寸，通过 `size` 属性设置，小和大分别对应 `size` 值中的 `small` 和 `large`，不指定 `size` 则表示正常尺寸。
 
-<nue-div>
+<nue-div align="center" wrap="nowrap" gap="12px">
     <nue-input v-model="val10" placeholder="请输入" size="small" />
     <nue-input v-model="val10" placeholder="请输入" />
     <nue-input v-model="val10" placeholder="请输入" size="large" />
@@ -265,7 +261,7 @@ const val9 = ref("");
 
 ```vue
 <template>
-    <nue-div>
+    <nue-div align="center" wrap="nowrap" gap="12px">
         <nue-input v-model="val10" placeholder="请输入" size="small" />
         <nue-input v-model="val10" placeholder="请输入" />
         <nue-input v-model="val10" placeholder="请输入" size="large" />

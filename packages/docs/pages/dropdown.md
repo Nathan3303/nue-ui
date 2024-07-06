@@ -67,17 +67,17 @@ function handleExecute(id) {
 <nue-div>
     <nue-dropdown text="打开左对齐的下拉菜单" align="left">
         <template #dropdown>
-            <li>Item 1</li>
+            <li style="width: 200px">Dropdown item</li>
         </template>
     </nue-dropdown>
     <nue-dropdown text="打开居中的下拉菜单" align="center">
         <template #dropdown>
-            <li>Item 1</li>
+            <li style="width: 200px">Dropdown item</li>
         </template>
     </nue-dropdown>
     <nue-dropdown text="打开右对齐的下拉菜单" align="right">
         <template #dropdown>
-            <li>Item 1</li>
+            <li style="width: 200px">Dropdown item</li>
         </template>
     </nue-dropdown>
 </nue-div>
@@ -87,17 +87,17 @@ function handleExecute(id) {
     <nue-div>
         <nue-dropdown text="打开左对齐的下拉菜单" align="left">
             <template #dropdown>
-                <li>Item 1</li>
+                <li style="width: 200px">Dropdown item</li>
             </template>
         </nue-dropdown>
         <nue-dropdown text="打开居中的下拉菜单" align="center">
             <template #dropdown>
-                <li>Item 1</li>
+                <li style="width: 200px">Dropdown item</li>
             </template>
         </nue-dropdown>
         <nue-dropdown text="打开右对齐的下拉菜单" align="right">
             <template #dropdown>
-                <li>Item 1</li>
+                <li style="width: 200px">Dropdown item</li>
             </template>
         </nue-dropdown>
     </nue-div>
@@ -111,12 +111,11 @@ function handleExecute(id) {
 在 `dropdown` 插槽内，通过给对应的元素添加 `data-executeid` 属性来指定可执行选项的动作标识，并在 `execute` 事件所传递的 `id` 参数中获取该标识，根据标识执行对应的动作。
 
 <nue-dropdown text="打开下拉菜单" @execute="handleExecute">
-<template #dropdown>
-
-<li data-executeid="Coding">Coding</li>
-<li data-executeid="Testing">Testing</li>
-<li data-executeid="Maintaining">Maintaining</li>
-</template>
+    <template #dropdown>
+        <li data-executeid="Coding">Coding</li>
+        <li data-executeid="Testing">Testing</li>
+        <li data-executeid="Maintaining">Maintaining</li>
+    </template>
 </nue-dropdown>
 
 ```vue
@@ -142,13 +141,13 @@ function handleExecute(id) {
 
 通过默认插槽指定下拉菜单的触发元素。
 
-通过插槽传递出来的 `switchVisible` 方法来控制下拉菜单的显示。
+通过插槽传递出来的 `clickTrigger` 方法来控制下拉菜单的显示。
 
 <nue-dropdown align="center">
-    <template #default="{ switchVisible }">
+    <template #default="{ clickTrigger }">
         <nue-avatar
             src="https://picsum.photos/200/200"
-            @click="switchVisible" />
+            @click="clickTrigger" />
     </template>
     <template #dropdown>
         <li>Profile</li>
@@ -159,10 +158,10 @@ function handleExecute(id) {
 ```vue
 <template>
     <nue-dropdown align="center">
-        <template #default="{ switchVisible }">
+        <template #default="{ clickTrigger }">
             <nue-avatar
                 src="https://picsum.photos/200/200"
-                @click="switchVisible" />
+                @click="clickTrigger" />
         </template>
         <template #dropdown>
             <li>Profile</li>

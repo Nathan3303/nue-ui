@@ -80,10 +80,10 @@ function showTypedMsg(type) {
 通过 `NueMessage` 中的子方法 `success`、`info`、`warn`、`error`、`log` 可以快速创建不同类型的消息提示。这些子方法都拥有同样的形参，包括 `message`、`duration` 以及 `icon` 。
 
 <nue-div>
-    <nue-button @click="NueMessage.success('成功', 5000, 'icon-checked')">
+    <nue-button @click="NueMessage.success('成功', 5000, 'success')">
         成功
     </nue-button>
-    <nue-button @click="NueMessage.error('错误', 5000, 'icon-clear')">
+    <nue-button @click="NueMessage.error('错误', 5000, 'clear')">
         错误
     </nue-button>
 </nue-div>
@@ -91,10 +91,10 @@ function showTypedMsg(type) {
 ```vue
 <template>
     <nue-div>
-        <nue-button @click="NueMessage.success('成功', 5000, 'icon-checked')">
+        <nue-button @click="NueMessage.success('成功', 5000, 'checked')">
             成功
         </nue-button>
-        <nue-button @click="NueMessage.error('错误', 5000, 'icon-clear')">
+        <nue-button @click="NueMessage.error('错误', 5000, 'clear')">
             错误
         </nue-button>
     </nue-div>
@@ -112,13 +112,13 @@ import { NueMessage } from "nue-ui";
 目前 `icon` 属性仅支持库中内置的 iconfont 图标库。
 :::
 
-<nue-button @click="showMsgWithIcon('icon-completed')">
+<nue-button @click="showMsgWithIcon('completed')">
 创建一个带图标的消息提示
 </nue-button>
 
 ```vue
 <template>
-    <nue-button @click="showMsgWithIcon('icon-completed')">
+    <nue-button @click="showMsgWithIcon('completed')">
         创建一个带图标的消息提示
     </nue-button>
 </template>

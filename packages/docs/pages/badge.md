@@ -15,17 +15,17 @@
 
 通过 `value` 属性来设置徽标显示的文字或数字，该属性接收 `string` 和 `number` 两种类型的值。
 
-<nue-div align="center">
-    <nue-badge :value="456">
-        <nue-button>Messages</nue-button>
+<nue-div>
+    <nue-badge :value="100">
+        <nue-button>按钮</nue-button>
     </nue-badge>
 </nue-div>
 
 ```vue
 <template>
-    <nue-div align="center">
-        <nue-badge :value="456">
-            <nue-button>Messages</nue-button>
+    <nue-div>
+        <nue-badge :value="100">
+            <nue-button>按钮</nue-button>
         </nue-badge>
     </nue-div>
 </template>
@@ -40,17 +40,17 @@
 -   当 `value` 为数字字符串时，组件内部会尝试通过 `parseInt` 方法转换为数字，转换失败时 `max` 属性设置不生效。
 :::
 
-<nue-div align="center" style="margin-top: 36px;">
+<nue-div style="margin-top: 36px;">
     <nue-badge :value="123" :max="99">
-        <nue-text>Text ...</nue-text>
+        <nue-button>按钮</nue-button>
     </nue-badge>
 </nue-div>
 
 ```vue
 <template>
-    <nue-div align="center" style="margin-top: 36px;">
+    <nue-div style="margin-top: 36px;">
         <nue-badge :value="123" :max="99">
-            <nue-text>Text ...</nue-text>
+            <nue-button>按钮</nue-button>
         </nue-badge>
     </nue-div>
 </template>
@@ -69,7 +69,7 @@
 ::: raw
 <nue-div align="center">
     <nue-badge dot>
-        <nue-button>Message</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-badge>
 </nue-div>
 :::
@@ -78,7 +78,7 @@
 <template>
     <nue-div align="center">
         <nue-badge dot>
-            <nue-button>Message</nue-button>
+            <nue-button>按钮</nue-button>
         </nue-badge>
     </nue-div>
 </template>
@@ -88,20 +88,20 @@
 
 通过 `hidden` 属性控制徽标是否隐藏。
 
-<nue-div align="center">
+<nue-div style="margin-top: 36px;">
     <nue-badge value="New" :hidden="visible">
-        <nue-button @click="setVisible">
-            Click to {{ !visible ? 'hide' : 'show' }} the badge
+        <nue-button @click="visible = !visible">
+            点击{{ !visible ? '隐藏' : '显示' }}徽标
         </nue-button>
     </nue-badge>
 </nue-div>
 
 ```vue
 <template>
-    <nue-div align="center">
+    <nue-div style="margin-top: 36px;">
         <nue-badge value="New" :hidden="visible">
-            <nue-button @click="setVisible">
-                Click to {{ !visible ? "hide" : "show" }} the badge
+            <nue-button @click="visible = !visible">
+                点击{{ !visible ? '隐藏' : '显示' }}徽标
             </nue-button>
         </nue-badge>
     </nue-div>
@@ -109,7 +109,6 @@
 <script setup>
 import { ref } from "vue";
 const visible = ref(true);
-const setVisible = () => (visible.value = !visible.value);
 </script>
 ```
 
@@ -117,24 +116,20 @@ const setVisible = () => (visible.value = !visible.value);
 
 当 `NueBadge` 组件没有内容时，徽标部分将不会定位到右上角，而是水平展示，这使得组件可以在 `NueButton`、`NueLink` 等组件的内部使用。
 
-<nue-div align="center">
-    <nue-button>
-        <nue-div align="center" gap="8px">
-            Button
-            <nue-badge value="New"></nue-badge>
-        </nue-div>
-    </nue-button>
-</nue-div>
+<nue-button>
+    Button
+    <template #append>
+        <nue-badge value="New" />
+    </template>
+</nue-button>
 
 ```vue
 <template>
-    <nue-div align="center">
-        <nue-button>
-            <nue-div align="center" gap="8px">
-                Button
-                <nue-badge value="New"></nue-badge>
-            </nue-div>
-        </nue-button>
-    </nue-div>
+    <nue-button>
+        Button
+        <template #append>
+            <nue-badge value="New" />
+        </template>
+    </nue-button>
 </template>
 ```

@@ -13,17 +13,17 @@ import { ref } from "vue";
 默认的布局方向 `flex-direction` 为 `row`。
 
 <nue-div>
-    <nue-button>Button</nue-button>
-    <nue-button>Button</nue-button>
-    <nue-button>Button</nue-button>
+    <nue-button>按钮</nue-button>
+    <nue-button>按钮</nue-button>
+    <nue-button>按钮</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div>
-        <nue-button>Button</nue-button>
-        <nue-button>Button</nue-button>
-        <nue-button>Button</nue-button>
+        <nue-button>按钮</nue-button>
+        <nue-button>按钮</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-div>
 </template>
 ```
@@ -33,17 +33,17 @@ import { ref } from "vue";
 通过属性 `vertical` 设置布局方向 `flex-direction` 为 `column`。属性接收 `boolean` 类型。
 
 <nue-div vertical>
-    <nue-button>Button</nue-button>
-    <nue-button>Button</nue-button>
-    <nue-button>Button</nue-button>
+    <nue-button>按钮</nue-button>
+    <nue-button>按钮</nue-button>
+    <nue-button>按钮</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div vertical>
-        <nue-button>Button</nue-button>
-        <nue-button>Button</nue-button>
-        <nue-button>Button</nue-button>
+        <nue-button>按钮</nue-button>
+        <nue-button>按钮</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-div>
 </template>
 ```
@@ -56,14 +56,12 @@ import { ref } from "vue";
 
 <nue-div vertical>
     <nue-div align="center">
-        <nue-button>Button</nue-button>
-        align="center"
-        <nue-button>Button</nue-button>
+        <nue-button size="small">按钮</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-div>
-    <nue-div justify="space-between" width="100%">
-        <nue-button>Button</nue-button>
-        justify="space-between"
-        <nue-button>Button</nue-button>
+    <nue-div align="center" justify="space-between" width="100%">
+        <nue-button>按钮</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-div>
 </nue-div>
 
@@ -71,14 +69,12 @@ import { ref } from "vue";
 <template>
     <nue-div vertical>
         <nue-div align="center">
-            <nue-button>Button</nue-button>
-            align="center"
-            <nue-button>Button</nue-button>
+            <nue-button size="small">按钮</nue-button>
+            <nue-button>按钮</nue-button>
         </nue-div>
-        <nue-div justify="space-between" width="100%">
-            <nue-button>Button</nue-button>
-            justify="space-between"
-            <nue-button>Button</nue-button>
+        <nue-div align="center" justify="space-between" width="100%">
+            <nue-button>按钮</nue-button>
+            <nue-button>按钮</nue-button>
         </nue-div>
     </nue-div>
 </template>
@@ -89,13 +85,13 @@ import { ref } from "vue";
 通过 `wrap` 属性设置是否断行，具体应用到 CSS 的 `flex-wrap` 样式。
 
 <nue-div wrap>
-    <nue-button v-for="i in 12" :key="i">Button</nue-button>
+    <nue-button v-for="i in 10" :key="i">按钮</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div wrap>
-        <nue-button v-for="i in 12" :key="i">Button</nue-button>
+        <nue-button v-for="i in 10" :key="i">按钮</nue-button>
     </nue-div>
 </template>
 ```
@@ -113,9 +109,9 @@ import { ref } from "vue";
 
 <nue-div vertical>
     <nue-div align="center" divider="|">
-        <nue-button>Button</nue-button>
-        <nue-button>Button</nue-button>
-        <nue-button>Button</nue-button>
+        <nue-button>按钮</nue-button>
+        <nue-button>按钮</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-div>
     <nue-div
         vertical
@@ -126,9 +122,9 @@ import { ref } from "vue";
             borderColor: '#a72230',
         }"
         align="center">
-        <nue-button>Button</nue-button>
-        <nue-button>Button</nue-button>
-        <nue-button>Button</nue-button>
+        <nue-button>按钮</nue-button>
+        <nue-button>按钮</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-div>
 </nue-div>
 
@@ -136,9 +132,9 @@ import { ref } from "vue";
 <template>
     <nue-div vertical>
         <nue-div align="center" divider="|">
-            <nue-button>Button</nue-button>
-            <nue-button>Button</nue-button>
-            <nue-button>Button</nue-button>
+            <nue-button>按钮</nue-button>
+            <nue-button>按钮</nue-button>
+            <nue-button>按钮</nue-button>
         </nue-div>
         <nue-div
             vertical
@@ -149,9 +145,9 @@ import { ref } from "vue";
                 borderType: 'dashed',
                 borderColor: '#a72230',
             }">
-            <nue-button>Button</nue-button>
-            <nue-button>Button</nue-button>
-            <nue-button>Button</nue-button>
+            <nue-button>按钮</nue-button>
+            <nue-button>按钮</nue-button>
+            <nue-button>按钮</nue-button>
         </nue-div>
     </nue-div>
 </template>

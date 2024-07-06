@@ -10,10 +10,6 @@ npm install nue-ui
 
 ## 使用
 
-::: tip
-目前仅支持完全导入。
-:::
-
 ```js
 import { createApp } from "vue";
 

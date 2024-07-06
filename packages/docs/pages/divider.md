@@ -19,17 +19,17 @@ import { ref } from "vue";
 :::
 
 <nue-div align="center">
-  <nue-button>Button 1</nue-button>
+  <nue-button>按钮</nue-button>
   <nue-divider direction="vertical" />
-  <nue-button>Button 2</nue-button>
+  <nue-button>按钮</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div align="center">
-        <nue-button>Button 1</nue-button>
+        <nue-button>按钮</nue-button>
         <nue-divider direction="vertical" />
-        <nue-button>Button 2</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-div>
 </template>
 ```
@@ -41,17 +41,17 @@ import { ref } from "vue";
 通过 `text` 属性设置分隔符的文本内容。
 
 <nue-div vertical>
-    <nue-button>Button 1</nue-button>
-    <nue-divider text="abc"/>
-    <nue-button>Button 2</nue-button>
+    <nue-button>按钮</nue-button>
+    <nue-divider text="文字"/>
+    <nue-button>按钮</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div vertical>
-        <nue-button>Button 1</nue-button>
-        <nue-divider text="abc" />
-        <nue-button>Button 2</nue-button>
+        <nue-button>按钮</nue-button>
+        <nue-divider text="文字" />
+        <nue-button>按钮</nue-button>
     </nue-div>
 </template>
 ```
@@ -61,17 +61,17 @@ import { ref } from "vue";
 通过 `align` 属性设置分隔符的对齐方式，可选值为 `left*`、`center`、`right`。
 
 <nue-div vertical>
-    <nue-button>Button 1</nue-button>
-    <nue-divider text="abc" align="center"/>
-    <nue-button>Button 2</nue-button>
+    <nue-button>按钮</nue-button>
+    <nue-divider text="文字" align="center"/>
+    <nue-button>按钮</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div vertical>
-        <nue-button>Button 1</nue-button>
-        <nue-divider text="abc" align="center" />
-        <nue-button>Button 2</nue-button>
+        <nue-button>按钮</nue-button>
+        <nue-divider text="文字" align="center" />
+        <nue-button>按钮</nue-button>
     </nue-div>
 </template>
 ```
@@ -83,17 +83,17 @@ import { ref } from "vue";
 通过 `border-color` 属性设置分割线的颜色。
 
 <nue-div vertical>
-    <nue-button>Button 1</nue-button>
+    <nue-button>按钮</nue-button>
     <nue-divider border-color="#f30"/>    
-    <nue-button>Button 2</nue-button>
+    <nue-button>按钮</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div vertical>
-        <nue-button>Button 1</nue-button>
+        <nue-button>按钮</nue-button>
         <nue-divider border-color="#f30" />
-        <nue-button>Button 2</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-div>
 </template>
 ```
@@ -103,17 +103,17 @@ import { ref } from "vue";
 通过 `border-width` 属性设置分割线的高度，接收 `string` 类型的 CSS 长度值，默认 `1px`。
 
 <nue-div vertical>
-    <nue-button>Button 1</nue-button>
+    <nue-button>按钮</nue-button>
     <nue-divider border-width="3px"/>
-    <nue-button>Button 2</nue-button>
+    <nue-button>按钮</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div vertical>
-        <nue-button>Button 1</nue-button>
+        <nue-button>按钮</nue-button>
         <nue-divider border-width="3px" />
-        <nue-button>Button 2</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-div>
 </template>
 ```
@@ -123,17 +123,17 @@ import { ref } from "vue";
 通过 `border-type` 属性设置分割线的类型，可选值为 `solid*`、`dashed` 以及 `dotted`。
 
 <nue-div vertical>
-    <nue-button>Button 1</nue-button>
+    <nue-button>按钮</nue-button>
     <nue-divider border-color="#f40" border-type="dashed"/>
-    <nue-button>Button 2</nue-button>
+    <nue-button>按钮</nue-button>
 </nue-div>
 
 ```vue
 <template>
     <nue-div vertical>
-        <nue-button>Button 1</nue-button>
+        <nue-button>按钮</nue-button>
         <nue-divider border-color="#f40" border-type="dashed" />
-        <nue-button>Button 2</nue-button>
+        <nue-button>按钮</nue-button>
     </nue-div>
 </template>
 ```

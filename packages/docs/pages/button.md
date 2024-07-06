@@ -72,23 +72,13 @@ const changeLoadingState = () => {
 
 ## 图标按钮
 
-按钮可以添加图标，通过 `icon` 属性设置。
+通过 `icon` 属性设置按钮图标。
 
-::: tip
-目前 `icon` 属性仅支持 `nue-ui` 中的 iconfont 图标。
-:::
-
-<nue-div align="center">
-    <nue-button icon="search">搜索</nue-button>
-    <nue-button icon="mail">消息</nue-button>
-</nue-div>
+<nue-button icon="search">搜索</nue-button>
 
 ```vue
 <template>
-    <nue-div align="center">
-        <nue-button icon="search">搜索</nue-button>
-        <nue-button icon="mail">消息</nue-button>
-    </nue-div>
+    <nue-button icon="search">搜索</nue-button>
 </template>
 ```
 
@@ -100,7 +90,7 @@ const changeLoadingState = () => {
 
 <nue-button-group>
     <nue-button icon="search">搜索</nue-button>
-    <nue-button icon="plus" disabled>添加</nue-button>
+    <nue-button icon="plus">添加</nue-button>
     <nue-button icon="more">更多</nue-button>
 </nue-button-group>
 
@@ -125,17 +115,19 @@ const changeLoadingState = () => {
 按钮组组件中对按钮的属性控制优先级高于按钮组组件自身的属性。
 :::
 
-<nue-button-group size="small" disabled>
-    <nue-button icon="search">搜索</nue-button>
-    <nue-button icon="plus-circle">添加</nue-button>
-    <nue-button icon="more">更多</nue-button>
-</nue-button-group>
+<nue-div>
+    <nue-button-group size="small" disabled>
+        <nue-button icon="search">搜索</nue-button>
+        <nue-button icon="plus">添加</nue-button>
+        <nue-button icon="more">更多</nue-button>
+    </nue-button-group>
+</nue-div>
 
 ```vue
 <template>
     <nue-button-group size="small" disabled>
         <nue-button icon="search">搜索</nue-button>
-        <nue-button icon="plus-circle">添加</nue-button>
+        <nue-button icon="plus">添加</nue-button>
         <nue-button icon="more">更多</nue-button>
     </nue-button-group>
 </template>
@@ -149,10 +141,7 @@ const changeLoadingState = () => {
 
 `loading` 属性接受 `boolean` 类型的值，`true` 表示显示加载状态，`false` 表示隐藏加载状态。
 
-<nue-button
-icon="search"
-@click="changeLoadingState"
-:loading="loadingState">
+<nue-button icon="search" @click="changeLoadingState" :loading="loadingState">
 搜索
 </nue-button>
 
@@ -179,18 +168,8 @@ const changeLoadingState = () => {
 
 按钮可以自定义加载图标，通过 `loading-icon` 属性设置。
 
-`loading-icon` 属性接受 `string` 类型的值，表示自定义的加载图标的类名。
-
-::: tip
-目前 `loading-icon` 属性仅支持 `nue-ui` 中的 iconfont 图标。
-:::
-
-<nue-button
-icon="search"
-@click="changeLoadingState"
-:loading="loadingState"
-loading-icon="scan" >
-Search
+<nue-button icon="search" @click="changeLoadingState" :loading="loadingState" loading-icon="scan" >
+    搜索
 </nue-button>
 
 ```vue
@@ -200,7 +179,7 @@ Search
         @click="changeLoadingState"
         :loading="loadingState"
         loading-icon="scan">
-        Search
+        搜索
     </nue-button>
 </template>
 <script setup>
@@ -220,13 +199,13 @@ const changeLoadingState = () => {
 通过 `throttle-duration` 属性设置节流间隔，单位为 `ms`，默认值为 `200` 。
 
 <nue-button use-throttle :throttle-duration="360" @click="count++">
-Count: {{ count }}
+    计数: {{ count }}
 </nue-button>
 
 ```vue
 <template>
     <nue-button use-throttle :throttle-duration="360" @click="count++">
-        Count: {{ count }}
+        计数: {{ count }}
     </nue-button>
 </template>
 <script setup>
