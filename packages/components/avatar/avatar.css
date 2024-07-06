@@ -27,7 +27,7 @@
     }
 
     .nue-icon {
-        line-height: inherit;
+        line-height: var(--size);
     }
 }
 
