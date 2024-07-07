@@ -37,6 +37,7 @@ export default defineConfig({
                         text: "Infinite Scroll 无限滚动",
                         link: "/pages/infinite-scroll.md",
                     },
+                    { text: "Marquee 跑马灯", link: "/pages/marquee.md" },
                 ],
             },
             {
@@ -53,6 +54,7 @@ export default defineConfig({
                         text: "Textarea 富文本输入框",
                         link: "/pages/textarea.md",
                     },
+                    { text: "Select 选择器", link: "/pages/select.md" },
                 ],
             },
             {
