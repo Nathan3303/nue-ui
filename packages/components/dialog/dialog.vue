@@ -3,7 +3,6 @@
         <div
             v-if="modelValue"
             class="nue-dialog-wrapper"
-            @click.stop="handleCancel"
             ref="dialogWrapperRef"
             :style="styles">
             <div class="nue-dialog" @click.stop>
