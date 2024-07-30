@@ -21,7 +21,6 @@ defineOptions({ name: "MessageNode" });
 
 const props = withDefaults(defineProps<MessageNodeProps>(), {
     type: "info",
-    size: "normal",
     message: "",
     duration: 3000,
 });
@@ -30,8 +29,10 @@ const nodeInnerRef = ref();
 const timer = ref<number | null>(null);
 
 const classes = computed(() => {
+    const { size } = props;
     let list = ["nue-message-node-inner"];
     list.push(`type--${props.type}`);
+    if (size) list.push(`nue-message-node-inner--${size}`);
     return list;
 });
 

@@ -8,13 +8,12 @@
 
 .nue-message-node-inner {
     --color: #363636;
-    --font-size: var(--primary-font-size);
+    --font-size: var(--text-sm);
     --icon-size: var(--font-size);
     --padding-y: 8px;
     --padding-x: 16px;
     --border-color: #5e5e5e;
     --background-color: #e5e5e5;
-    --shadow-color: rgba(0, 0, 0, 0.1);
 
     display: flex;
     align-items: center;
@@ -34,15 +33,15 @@
 
     span {
         color: inherit;
-        font-size: var(--text-sm);
+        font-size: var(--font-size);
         font-weight: var(--primary-font-weight);
         font-family: inherit;
     }
 
     .nue-icon {
         --icon-color: inherit;
-        --icon-size: var(--text-sm);
-        --icon-weight: 600;
+        --icon-size: var(--font-size);
+        --icon-weight: var(--primary-font-weight);
     }
 }
 
@@ -51,6 +50,22 @@
     margin-top: 4px !important;
     opacity: 1;
 }
+
+/* Message sizes */
+
+.nue-message-node-inner--small {
+    --padding-y: 6px;
+    --padding-x: 12px;
+    --font-size: var(--text-xs);
+}
+
+.nue-message-node-inner--large {
+    --padding-y: 10px;
+    --padding-x: 20px;
+    --font-size: var(--text-md);
+}
+
+/* Message types */
 
 .nue-message-node-inner.type--success {
     color: #28a745;
@@ -81,8 +96,8 @@
 }
 
 .nue-message-node-inner.type--log {
-    color: #000;
-    --background-color: #f8f9fa;
-    --border-color: #000;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    color: #131313;
+    --background-color: #ededed;
+    --border-color: #363636;
+    --shadow-color: rgba(0, 0, 0, 0.2);
 }
