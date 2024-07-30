@@ -9,6 +9,12 @@
         <nue-button icon="mail">
             Mail
             <template #append>
+                <nue-badge value="123"></nue-badge>
+            </template>
+        </nue-button>
+        <nue-button icon="mail">
+            Mail
+            <template #append>
                 <nue-badge dot />
             </template>
         </nue-button>
