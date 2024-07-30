@@ -108,6 +108,7 @@
         right: 8px;
         background: white;
         color: var(--primary-color-500);
+        font-size: var(--text-xs);
     }
 
     &.nue-textarea--disabled {
@@ -146,6 +147,7 @@
 .nue-textarea--small {
     min-height: 28px;
     padding: 4px 6px 5px 6px;
+    font-size: var(--text-xs);
 }
 
 .nue-textarea--large {
