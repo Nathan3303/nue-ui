@@ -26,8 +26,8 @@
         object-fit: var(--object-fit);
     }
 
-    .nue-icon {
-        line-height: var(--size);
+    .nue-icon.iconfont::before {
+        display: initial;
     }
 }
 
