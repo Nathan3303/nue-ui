@@ -34,7 +34,6 @@
     align-items: center;
     gap: 6px;
     min-height: 36px;
-    line-height: 1;
     padding: 8px 16px;
     cursor: pointer;
     -webkit-user-select: none;
@@ -47,10 +46,9 @@
     font-size: var(--text-sm);
     font-weight: var(--primary-font-weight);
     font-family: var(--primary-font-family);
-    line-height: normal;
 
     --icon-size: var(--text-sm);
-    --icon-weight: 600;
+    --icon-weight: var(--primary-font-weight);
 
     &:hover {
         color: var(--hover-color);
