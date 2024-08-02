@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { NueMessage } from "../../../../core";
+import { NueMessage } from "nue-ui";
 
 function createMessage() {
     NueMessage({ message: "This is a message" });

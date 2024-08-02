@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { NueMessage, NueConfirm, NuePrompt } from "../../../../core/index.ts";
+import { NueMessage, NueConfirm, NuePrompt } from "nue-ui";
 
 defineOptions({ name: "PromptDemo1" });
 

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { NueConfirm, NueMessage } from "../../../../core/index";
+import { NueConfirm, NueMessage } from "nue-ui";
 
 function openConfirm() {
     NueConfirm({
