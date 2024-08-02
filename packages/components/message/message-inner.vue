@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
-import { NueIcon } from "../";
+import NueIcon from "../icon/icon.vue";
 import { handlePop } from "./message";
 import type { MessageNodeProps } from "./types";
 import "./message-inner.css";

@@ -42,7 +42,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-import { NueButton, NueInput, NueTextarea, NueText } from "../index";
+import NueButton from "../button/button.vue";
+import NueInput from "../input/input.vue";
+import NueTextarea from "../input/textarea.vue";
+import NueText from "../text/text.vue";
 import type { PromptPropsType } from "./types";
 
 defineOptions({ name: "NuePromptNode" });
