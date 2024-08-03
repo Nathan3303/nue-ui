@@ -71,7 +71,6 @@
         width: var(--content-width);
         height: 100%;
         padding: var(--padding-x);
-        z-index: 1;
     }
 
     .nue-main--resizing {
