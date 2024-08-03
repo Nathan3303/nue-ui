@@ -4,7 +4,7 @@
     --height: var(--main-height, 100vh);
     --aside-width: 200px;
     --aside-min-width: unset;
-    --aside-max-width: unset;
+    --aside-max-width: 50%;
     --content-width: 100%;
     --padding-x: 16px;
 
@@ -46,12 +46,13 @@
             content: "";
             display: block;
             width: 3px;
-            height: 14px;
+            height: 16px;
             position: absolute;
-            right: 0px;
+            right: 3px;
             top: 50%;
             transform: translateY(-50%);
-            border-left: 2px solid #ccc;
+            background-color: var(--primary-color-500);
+            border-radius: var(--primary-radius);
             cursor: col-resize;
             opacity: 0;
             transition: all 0.16s;
@@ -73,8 +74,8 @@
         padding: var(--padding-x);
     }
 
-    .nue-main--resizing {
-        & * {
+    &.nue-main--resizing {
+        * {
             -webkit-user-select: none;
             user-select: none;
         }
