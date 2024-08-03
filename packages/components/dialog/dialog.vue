@@ -67,7 +67,7 @@ function handleCloseAnimation(): Promise<boolean> {
     return new Promise((resolve) => {
         if (!dialogWrapperRef.value) return;
         dialogWrapperRef.value.classList.remove("nue-dialog-wrapper--open");
-        setTimeout(() => resolve(true), 300);
+        setTimeout(() => resolve(true), 160);
     });
 }
 
