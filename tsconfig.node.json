@@ -1,6 +1,6 @@
 {
     "extends": "@tsconfig/node18/tsconfig.json",
-    "include": ["packages/**/**.config.ts"],
+    "include": ["env.d.ts", "packages/**/**.config.ts"],
     "compilerOptions": {
         "composite": true,
         "module": "ESNext",

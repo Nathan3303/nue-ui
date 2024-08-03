@@ -31,9 +31,10 @@
 
 <script setup lang="ts">
 import { nextTick, ref, watch, computed } from "vue";
-import { NueButton, NueText } from "../";
-import type { DialogPropsType, DialogEmitsType } from "./types";
+import NueButton from "../button/button.vue";
+import NueText from "../text/text.vue";
 import { isFunction } from "@nue-ui/utils";
+import type { DialogPropsType, DialogEmitsType } from "./types";
 import "./dialog.css";
 
 defineOptions({ name: "NueDialog" });

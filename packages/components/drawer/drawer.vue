@@ -39,9 +39,9 @@ import {
     NueHeader,
     NueMain,
     NueFooter,
-    NueText,
-    NueButton,
-} from "../index";
+} from "../container/index";
+import NueButton from "../button/button.vue";
+import NueText from "../text/text.vue";
 import type { DrawerPropsType } from "./types";
 import { useDrawer } from "./drawer";
 import "./drawer.css";

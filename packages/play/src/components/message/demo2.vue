@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { NueMessage } from "../../../../core";
+import { NueMessage } from "nue-ui";
 
 function createSuccessMessage() {
     NueMessage.success("This is a success message.");

@@ -2,10 +2,7 @@
     <div ref="confirmRef" class="nue-confirm">
         <div class="nue-confirm__header">
             <nue-text>{{ title }}</nue-text>
-            <nue-button
-                icon="clear"
-                theme="pure"
-                @click.stop="close(false)" />
+            <nue-button icon="clear" theme="pure" @click.stop="close(false)" />
         </div>
         <div class="nue-confirm__content">
             <nue-text>{{ content }}</nue-text>
@@ -22,7 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import { NueButton, NueText } from "../index";
+import NueButton from "../button/button.vue";
+import NueText from "../text/text.vue";
 import type { ConfirmPropsType } from "./types";
 
 defineOptions({ name: "NueConfirmNodeInner" });
