@@ -2,8 +2,9 @@
 
 .nue-main {
     --height: var(--main-height, 100vh);
-    --aside-width: 24%;
-    --aside-max-width: 30%;
+    --aside-width: 200px;
+    --aside-min-width: unset;
+    --aside-max-width: unset;
     --content-width: 100%;
     --padding-x: 16px;
 
@@ -27,26 +28,41 @@
     .nue-main__aside {
         display: flex;
         flex-direction: column;
-        overflow: auto;
+        overflow: hidden;
+        overflow-y: auto;
         box-sizing: border-box;
         flex-grow: var(--aside-grow);
+        flex-shrink: 0;
+        flex-basis: unset;
         gap: var(--aside-gap);
         width: var(--aside-width);
-        min-width: var(--aside-width);
+        min-width: var(--aside-min-width);
         max-width: var(--aside-max-width);
         padding: var(--padding-x);
         border-right: 1px solid var(--aside-border-color);
-    }
+        position: relative;
 
-    /* .nue-divider {
-        position: absolute;
-        left: calc(var(--aside-width) - 4px);
-        height: 100%;
-        padding: 0px 4px;
-        background-color: var(--mainly-border-color);
-        cursor: col-resize;
-        z-index: 12;
-    } */
+        .nue-main__aside__resizer {
+            content: "";
+            display: block;
+            width: 3px;
+            height: 14px;
+            position: absolute;
+            right: 0px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 2px solid #ccc;
+            cursor: col-resize;
+            opacity: 0;
+            transition: all 0.16s;
+        }
+
+        &:hover {
+            .nue-main__aside__resizer {
+                opacity: 1;
+            }
+        }
+    }
 
     .nue-main__content {
         overflow: auto;
@@ -55,5 +71,17 @@
         width: var(--content-width);
         height: 100%;
         padding: var(--padding-x);
+        z-index: 1;
+    }
+
+    .nue-main--resizing {
+        & * {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .nue-main__aside__resizer {
+            opacity: 1 !important;
+        }
     }
 }
