@@ -1,0 +1,1 @@
+import{_ as s,a as i,o as a,ac as t}from"./chunks/framework.DE8mnBfG.js";const E=JSON.parse('{"title":"NueUI","description":"","frontmatter":{},"headers":[],"relativePath":"pages/usage.md","filePath":"pages/usage.md"}'),e={name:"pages/usage.md"},n=t("",6),p=[n];function h(l,k,r,d,o,c){return a(),i("div",null,p)}const g=s(e,[["render",h]]);export{E as __pageData,g as default};
