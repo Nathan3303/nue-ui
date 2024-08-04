@@ -25,23 +25,24 @@ const size = computed(() => {
 });
 
 const style = computed(() => {
-    const { color, decoration, weight, align, flex } = props;
+    const { color, decoration, weight, align, clamped } = props;
     return {
         "--color": color,
         "--font-size": size.value,
         "--font-weight": weight,
         "--text-decoration": decoration,
         "--text-align": align,
-        "--flex": parseFlex(flex as string),
+        "--clamped-lines": clamped,
     };
 });
 
 const classes = computed(() => {
-    const { theme } = props;
+    const { theme, clamped } = props;
     const prefix = "nue-text";
     let list: string[] = [];
     list.push(prefix);
     if (theme) list = list.concat(parseTheme(theme, prefix));
+    if (clamped) list.push(`${prefix}--clamped`);
     return list;
 });
 </script>
