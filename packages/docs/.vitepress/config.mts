@@ -29,6 +29,7 @@ export default defineConfig({
                     { text: "Container 布局容器", link: "/pages/container.md" },
                     { text: "(Flex)Div 弹性盒", link: "/pages/div.md" },
                     { text: "Link 链接", link: "/pages/link.md" },
+                    { text: "Text 文本", link: "/pages/text.md" },
                 ],
             },
             {
