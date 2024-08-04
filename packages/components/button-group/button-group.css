@@ -12,6 +12,7 @@
     box-shadow: var(--secondary-shadow);
     flex: var(--flex);
     width: fit-content;
+    border-radius: var(--border-radius);
 
     & > .nue-button {
         border-radius: 0px;
