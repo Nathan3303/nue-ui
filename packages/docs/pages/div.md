@@ -1,8 +1,4 @@
-<script setup>
-import { ref } from "vue";
-</script>
-
-# (Flex)Div 弹性盒
+# FlexDiv 弹性盒
 
 使用 `Flex` 布局方式的弹性盒组件。
 
@@ -12,41 +8,17 @@ import { ref } from "vue";
 
 默认的布局方向 `flex-direction` 为 `row`。
 
-<nue-div>
-    <nue-button>按钮</nue-button>
-    <nue-button>按钮</nue-button>
-    <nue-button>按钮</nue-button>
-</nue-div>
-
-```vue
-<template>
-    <nue-div>
-        <nue-button>按钮</nue-button>
-        <nue-button>按钮</nue-button>
-        <nue-button>按钮</nue-button>
-    </nue-div>
-</template>
-```
+::: preview
+demo-preview=../demos/div/basic.vue
+:::
 
 ## 垂直排列
 
 通过属性 `vertical` 设置布局方向 `flex-direction` 为 `column`。属性接收 `boolean` 类型。
 
-<nue-div vertical>
-    <nue-button>按钮</nue-button>
-    <nue-button>按钮</nue-button>
-    <nue-button>按钮</nue-button>
-</nue-div>
-
-```vue
-<template>
-    <nue-div vertical>
-        <nue-button>按钮</nue-button>
-        <nue-button>按钮</nue-button>
-        <nue-button>按钮</nue-button>
-    </nue-div>
-</template>
-```
+::: preview
+demo-preview=../demos/div/vertical.vue
+:::
 
 ## 设置元素对齐方式
 
@@ -54,47 +26,17 @@ import { ref } from "vue";
 
 通过 `justify` 和 `align` 属性设置主轴和副轴的对齐方式。它们的值类型都为 `string`，可选值与 CSS 一致。
 
-<nue-div vertical>
-    <nue-div align="center">
-        <nue-button size="small">按钮</nue-button>
-        <nue-button>按钮</nue-button>
-    </nue-div>
-    <nue-div align="center" justify="space-between" width="100%">
-        <nue-button>按钮</nue-button>
-        <nue-button>按钮</nue-button>
-    </nue-div>
-</nue-div>
-
-```vue
-<template>
-    <nue-div vertical>
-        <nue-div align="center">
-            <nue-button size="small">按钮</nue-button>
-            <nue-button>按钮</nue-button>
-        </nue-div>
-        <nue-div align="center" justify="space-between" width="100%">
-            <nue-button>按钮</nue-button>
-            <nue-button>按钮</nue-button>
-        </nue-div>
-    </nue-div>
-</template>
-```
+::: preview
+demo-preview=../demos/div/justify-align.vue
+:::
 
 ## 断行
 
 通过 `wrap` 属性设置是否断行，具体应用到 CSS 的 `flex-wrap` 样式。
 
-<nue-div wrap>
-    <nue-button v-for="i in 10" :key="i">按钮</nue-button>
-</nue-div>
-
-```vue
-<template>
-    <nue-div wrap>
-        <nue-button v-for="i in 10" :key="i">按钮</nue-button>
-    </nue-div>
-</template>
-```
+::: preview
+demo-preview=../demos/div/wrap.vue
+:::
 
 ## 设置元素分隔符
 
@@ -107,48 +49,6 @@ import { ref } from "vue";
 组件具体的 props 请参考 [`NueDivider`](/pages/divider.html) 文档。
 :::
 
-<nue-div vertical>
-    <nue-div align="center" divider="|">
-        <nue-button>按钮</nue-button>
-        <nue-button>按钮</nue-button>
-        <nue-button>按钮</nue-button>
-    </nue-div>
-    <nue-div
-        vertical
-        :divider="{
-            text: 'NueDivider',
-            borderWidth: '2px',
-            borderType: 'dashed',
-            borderColor: '#a72230',
-        }"
-        align="center">
-        <nue-button>按钮</nue-button>
-        <nue-button>按钮</nue-button>
-        <nue-button>按钮</nue-button>
-    </nue-div>
-</nue-div>
-
-```vue
-<template>
-    <nue-div vertical>
-        <nue-div align="center" divider="|">
-            <nue-button>按钮</nue-button>
-            <nue-button>按钮</nue-button>
-            <nue-button>按钮</nue-button>
-        </nue-div>
-        <nue-div
-            vertical
-            align="center"
-            :divider="{
-                text: 'NueDivider',
-                borderWidth: '2px',
-                borderType: 'dashed',
-                borderColor: '#a72230',
-            }">
-            <nue-button>按钮</nue-button>
-            <nue-button>按钮</nue-button>
-            <nue-button>按钮</nue-button>
-        </nue-div>
-    </nue-div>
-</template>
-```
+::: preview
+demo-preview=../demos/div/divider.vue
+:::

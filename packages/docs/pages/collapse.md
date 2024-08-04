@@ -1,10 +1,3 @@
-<script setup>
-    import { ref } from 'vue'
-
-    const activeNames = ref("")
-    const activeNames2 = ref(["c1"])
-</script>
-
 # Collapse 折叠面板
 
 实现内容区域的折叠和展开，用于收纳长内容。
@@ -13,27 +6,9 @@
 
 通过 `NueCollapse` 和 `NueCollapseItem` 组件，实现内容区域的折叠和展开。
 
-<nue-collapse>
-    <nue-collapse-item title="折叠面板标题">
-        <nue-text>
-            折叠面板内容：lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.
-        </nue-text>
-    </nue-collapse-item>
-</nue-collapse>
-
-```vue
-<template>
-    <nue-collapse>
-        <nue-collapse-item title="折叠面板标题">
-            <nue-text>
-                折叠面板内容：lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.
-            </nue-text>
-        </nue-collapse-item>
-    </nue-collapse>
-</template>
-```
+::: preview
+demo-preview=../demos/collapse/basic.vue
+:::
 
 ## 记录面板状态
 
@@ -45,41 +20,9 @@
 `v-model` 值为 `string` 类型仅支持在手风琴模式下使用，在非手风琴模式下传入 `string` 类型则会被修改为 `string[]` 类型。
 :::
 
-<nue-collapse v-model="activeNames">
-    <nue-collapse-item title="折叠面板c1" name="c1">
-        <nue-text>
-            Sed nonne merninisti licere mihi ista probare,
-        </nue-text>
-    </nue-collapse-item>
-    <nue-collapse-item title="折叠面板c2" name="c2">
-        <nue-text>
-            quae sunt a te dicta? Refert tamen, quo modo aaaa.
-        </nue-text>
-    </nue-collapse-item>
-</nue-collapse>
-
--   绑定值 activeNames: {{activeNames || []}}
-
-```vue
-<template>
-    <nue-collapse v-model="activeNames">
-        <nue-collapse-item title="折叠面板1" name="c1">
-            <nue-text>
-                Sed nonne merninisti licere mihi ista probare,
-            </nue-text>
-        </nue-collapse-item>
-        <nue-collapse-item title="折叠面板2" name="c2">
-            <nue-text>
-                quae sunt a te dicta? Refert tamen, quo modo aaaa.
-            </nue-text>
-        </nue-collapse-item>
-    </nue-collapse>
-</template>
-<script>
-import { ref } from "vue";
-const activeNames = ref([]);
-</script>
-```
+::: preview
+demo-preview=../demos/collapse/model-value.vue
+:::
 
 ## 手风琴模式
 
@@ -89,41 +32,9 @@ const activeNames = ref([]);
 手风琴模式下仅有一个面板能够内展开，因此 `v-model` 的值只会是 `string` 类型，若传入 `string[]` 类型，最终也会被修改为 `string` 类型。
 :::
 
-<nue-collapse v-model="activeNames2" accordion>
-    <nue-collapse-item title="折叠面板c1" name="c1">
-        <nue-text>
-            Sed nonne merninisti licere mihi ista probare,
-        </nue-text>
-    </nue-collapse-item>
-    <nue-collapse-item title="折叠面板c2" name="c2">
-        <nue-text>
-            quae sunt a te dicta? Refert tamen, quo modo aaaa.
-        </nue-text>
-    </nue-collapse-item>
-</nue-collapse>
-
--   绑定值 activeNames2: {{activeNames2}}
-
-```vue
-<template>
-    <nue-collapse v-model="activeNames2" accordion>
-        <nue-collapse-item title="折叠面板c1" name="c1">
-            <nue-text>
-                Sed nonne merninisti licere mihi ista probare,
-            </nue-text>
-        </nue-collapse-item>
-        <nue-collapse-item title="折叠面板c2" name="c2">
-            <nue-text>
-                quae sunt a te dicta? Refert tamen, quo modo aaaa.
-            </nue-text>
-        </nue-collapse-item>
-    </nue-collapse>
-</template>
-<script>
-import { ref } from "vue";
-const activeNames2 = ref(["c1"]);
-</script>
-```
+::: preview
+demo-preview=../demos/collapse/accordion.vue
+:::
 
 ## 自定义标题以及头部
 
@@ -131,64 +42,8 @@ const activeNames2 = ref(["c1"]);
 
 通过 `title` 属性自定义面板的标题。
 
-<nue-collapse>
-    <nue-collapse-item title="自定义标题">
-        <nue-text>
-            折叠面板内容：lorem ipsum dolor sit amet, consectetur adipiscing
-            elit.
-        </nue-text>
-    </nue-collapse-item>
-</nue-collapse>
+也可以通过 `header` 这个作用域插槽自定义面板的头部。解构出来的 `collpase` 函数操作该面板的展开和收起；`state` 获取面板展开状态。
 
-```vue
-<template>
-    <nue-collapse>
-        <nue-collapse-item title="自定义标题">
-            <nue-text>
-                折叠面板内容：lorem ipsum dolor sit amet, consectetur adipiscing
-                elit.
-            </nue-text>
-        </nue-collapse-item>
-    </nue-collapse>
-</template>
-```
-
-### 自定义头部
-
-通过 `header` 这个作用域插槽自定义面板的头部。
-
-通过解构出来的 `collpase` 函数操作该面板的展开和收起；`state` 获取面板展开状态。
-
-<nue-collapse>
-    <nue-collapse-item>
-        <template #header="{ collapse, state }">
-            <nue-div align="center" @click.stop="collapse">
-                <nue-text>自定义头部</nue-text>
-                <nue-text>{{ state ? "收起" : "展开" }}</nue-text>
-            </nue-div>
-        </template>
-        <nue-text>
-            Illo nesciunt aut voluptatem praesentium libero blanditiis
-            beatae, quia corporis.
-        </nue-text>
-    </nue-collapse-item>
-</nue-collapse>
-
-```vue
-<template>
-    <nue-collapse>
-        <nue-collapse-item>
-            <template #header="{ collapse, state }">
-                <nue-div align="center" @click.stop="collapse">
-                    <nue-text>自定义头部</nue-text>
-                    <nue-text>{{ state ? "收起" : "展开" }}</nue-text>
-                </nue-div>
-            </template>
-            <nue-text>
-                Illo nesciunt aut voluptatem praesentium libero blanditiis
-                beatae, quia corporis.
-            </nue-text>
-        </nue-collapse-item>
-    </nue-collapse>
-</template>
-```
+::: preview
+demo-preview=../demos/collapse/header.vue
+:::
