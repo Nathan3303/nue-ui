@@ -17,6 +17,9 @@ dist/*
 /cyperss/videos/
 /cypress/srceenshots/
 
+.vitepress/
+!.vitepress/config.js
+!.vitepress/theme/*
 .vitepress/dist
 .vitepress/cache
 .vitepress/cache/*
