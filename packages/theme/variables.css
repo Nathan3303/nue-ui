@@ -30,7 +30,7 @@
     --primary-gap: 16px;
     --secondary-gap: 8px;
     --primary-radius: 6px;
-    --primary-font-weight: 600;
+    --primary-font-weight: normal;
     --primary-font-family: "Poppins", "Noto Sans", sans-serif;
     --primary-line-height: 1;
     --text-xxs: 0.5rem;
