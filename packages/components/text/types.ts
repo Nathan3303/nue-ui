@@ -10,6 +10,5 @@ export type TextProps = {
     decoration?: string;
     weight?: string | number;
     align?: string;
-    flex?: string | boolean;
     clamped?: number;
 };
