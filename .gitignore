@@ -17,8 +17,6 @@ dist/*
 /cyperss/videos/
 /cypress/srceenshots/
 
-
-.vitepress
 .vitepress/dist
 .vitepress/cache
 .vitepress/cache/*
