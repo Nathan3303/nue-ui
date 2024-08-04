@@ -1,7 +1,7 @@
 /* Variables */
 .nue-button {
     --width: auto;
-    --height: auto;
+    --height: 36px;
     --flex: 0 1 auto;
     --justify-content: start;
     --color: var(--primary-text-color);
@@ -33,7 +33,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    min-height: 36px;
+    /* min-height: 36px; */
     padding: 8px 16px;
     cursor: pointer;
     -webkit-user-select: none;
@@ -80,13 +80,13 @@
 /* Build-in styles */
 
 .nue-button--small {
-    min-height: 28px;
+    --height: 28px !important;
     padding: 4px 8px;
     font-size: var(--text-xs);
 }
 
 .nue-button--large {
-    min-height: 42px;
+    --height: 42px !important;
     padding: 12px 24px;
     font-size: var(--text-lg);
     --icon-size: var(--text-lg);
@@ -116,7 +116,7 @@
 .nue-button--pure {
     box-shadow: none;
     padding: 0px;
-    min-height: max-content;
+    --height: max-content;
     --hover-background-color: transparent;
     --active-background-color: transparent;
     --hover-color: var(--secondary-text-color);
