@@ -1,5 +1,5 @@
 <template>
-    <nue-div align="center">
+    <nue-div align="center" class="vp-raw">
         <nue-text size="12px">
             Vue 是一个渐进式的 JavaScript
             框架，用于构建用户界面。与其他大型框架不同的是，Vue
