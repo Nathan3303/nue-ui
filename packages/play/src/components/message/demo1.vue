@@ -1,11 +1,13 @@
 <template>
     <nue-div wrap>
-        <nue-button @click="createMessage"> Basic </nue-button>
-        <nue-button @click="createMessageWithIcon"> With icon </nue-button>
-        <nue-button @click="createMessageWithDuration">
+        <nue-button theme="small" @click="createMessage"> Basic </nue-button>
+        <nue-button theme="small" @click="createMessageWithIcon">
+            With icon
+        </nue-button>
+        <nue-button theme="small" @click="createMessageWithDuration">
             With 5 seconds duration
         </nue-button>
-        <nue-button @click="createCloseManualMessage">
+        <nue-button theme="small" @click="createCloseManualMessage">
             With close button (close manually)
         </nue-button>
     </nue-div>

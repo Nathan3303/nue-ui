@@ -13,5 +13,8 @@ export type HeaderPropsType = {
 
 export type MainPropsType = {
     asideWidth?: string;
+    asideMinWidth?: string;
+    asideMaxWidth?: string;
     contentPadding?: string;
+    allowResizeAside?: boolean;
 };

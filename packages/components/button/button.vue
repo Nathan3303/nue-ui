@@ -7,6 +7,7 @@
         :class="classes"
         @click="handleClick">
         <nue-icon v-if="iconName" :name="iconName" :spin="loading" />
+        <slot name="prepend"></slot>
         <div v-if="$slots.default" class="nue-button__text">
             <slot></slot>
         </div>

@@ -1,4 +1,8 @@
 import { defineConfig } from "vitepress";
+import {
+    containerPreview,
+    componentPreview,
+} from "@vitepress-demo-preview/plugin";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -89,4 +93,10 @@ export default defineConfig({
         },
     },
     head: [["link", { rel: "icon", href: "/nue-ui/favicon.ico" }]],
+    markdown: {
+        config(md) {
+            md.use(containerPreview);
+            md.use(componentPreview);
+        },
+    },
 });

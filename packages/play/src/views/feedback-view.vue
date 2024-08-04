@@ -15,6 +15,7 @@
             <nue-text size="large">Message</nue-text>
             <message-demo1></message-demo1>
             <message-demo2></message-demo2>
+            <message-demo3></message-demo3>
         </nue-div>
         <nue-div vertical theme="card">
             <nue-text size="large">Confirm</nue-text>
@@ -33,6 +34,7 @@ import DialogDemo2 from "../components/dialog/demo2.vue";
 import DrawerDemo1 from "../components/drawer/demo1.vue";
 import MessageDemo1 from "../components/message/demo1.vue";
 import MessageDemo2 from "../components/message/demo2.vue";
+import MessageDemo3 from "../components/message/demo3.vue";
 import ConfirmDemo1 from "../components/confirm/demo1.vue";
 import PromptDemo1 from "../components/prompt/demo1.vue";
 </script>

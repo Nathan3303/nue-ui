@@ -15,7 +15,7 @@
     padding: 0px var(--padding-x);
     border: none;
     box-shadow: none;
-    border-bottom: 1px solid var(--border-color);
+    /* border-bottom: 1px solid var(--border-color); */
     box-sizing: border-box;
     height: var(--height);
     width: 100%;

@@ -1,10 +1,20 @@
 <template>
     <nue-div wrap>
-        <nue-button @click="createSuccessMessage"> Success </nue-button>
-        <nue-button @click="createErrorMessage"> Error </nue-button>
-        <nue-button @click="createWarningMessage"> Warning </nue-button>
-        <nue-button @click="createInfoMessage"> Info </nue-button>
-        <nue-button @click="createLogMessage"> log </nue-button>
+        <nue-button theme="small" @click="createSuccessMessage">
+            Success type
+        </nue-button>
+        <nue-button theme="small" @click="createErrorMessage">
+            Error type
+        </nue-button>
+        <nue-button theme="small" @click="createWarningMessage">
+            Warning type
+        </nue-button>
+        <nue-button theme="small" @click="createInfoMessage">
+            Info type
+        </nue-button>
+        <nue-button theme="small" @click="createLogMessage">
+            Log type
+        </nue-button>
     </nue-div>
 </template>
 

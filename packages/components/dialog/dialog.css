@@ -3,20 +3,20 @@
 .nue-dialog-wrapper {
     --dialog-width: 36%;
     --dialog-min-width: 360px;
+    --dialog-max-width: 480px;
 }
 
 /* Original styles */
 
 .nue-dialog-wrapper {
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
     height: 100%;
-    padding-top: 120px;
     background-color: rgba(0, 0, 0, 0.48);
     overflow: hidden;
     box-sizing: border-box;
@@ -28,14 +28,15 @@
         flex-direction: column;
         width: var(--dialog-width);
         min-width: var(--dialog-min-width);
-        max-width: var(--dialog-width);
+        max-width: var(--dialog-max-width);
         padding: 16px;
         border-radius: 5px;
         background-color: white;
         gap: 16px;
-        transition: all 0.3s ease;
+        transition: all 0.16s ease;
         opacity: 0;
-        transform: translateY(-20px);
+        transform: scale(0.92);
+        transform-origin: center;
 
         .nue-dialog__header {
             width: 100%;
@@ -82,7 +83,7 @@
     opacity: 1;
 
     .nue-dialog {
-        transform: translateY(0px);
+        transform: scale(1);
         opacity: 1;
     }
 }

@@ -3,7 +3,7 @@
         <nue-header height="72px">
             <template #logo>NueUI PlayGround</template>
         </nue-header>
-        <nue-main aside-width="160px">
+        <nue-main aside-width="160px" allow-resize-aside>
             <template #aside>
                 <!-- <nue-text>Category</nue-text> -->
                 <nue-link theme="btnlike" route="/basic">Basic</nue-link>

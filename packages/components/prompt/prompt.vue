@@ -20,10 +20,8 @@
                     v-model="inputValue"
                     :type="inputType"
                     :placeholder="placeholder" />
-                <nue-text
-                    v-if="inputValueError"
-                    class="nue-prompt__value-error">
-                    Invalid value.
+                <nue-text v-if="isInvalid" class="nue-prompt__value-error">
+                    {{ invalidMessage }}
                 </nue-text>
             </slot>
         </div>
@@ -62,18 +60,19 @@ const props = withDefaults(defineProps<PromptPropsType>(), {
 const promptRef = ref<HTMLDivElement>();
 const promptInputRef = ref();
 const inputValue = ref(props.inputValue);
-const inputValueError = ref(false);
+const isInvalid = ref(false);
+const invalidMessage = ref("Invalid value.");
 
-function handleClose(isConfirmed: boolean) {
+async function handleClose(isConfirmed: boolean) {
     const { close, validator, beforeConfirm } = props;
     if (isConfirmed) {
         if (validator) {
             const validateResult = validator(inputValue.value);
-            inputValueError.value = !validateResult;
+            isInvalid.value = !validateResult;
             if (!validateResult) return;
         }
         if (beforeConfirm) {
-            const beforeConfirmResult = beforeConfirm(inputValue.value);
+            const beforeConfirmResult = await beforeConfirm(inputValue.value);
             if (beforeConfirmResult instanceof Promise) {
                 beforeConfirmResult
                     .then((value) => {
@@ -100,6 +99,6 @@ onMounted(() => {
 
 watch(
     () => inputValue.value,
-    () => (inputValueError.value = false)
+    () => (isInvalid.value = false)
 );
 </script>

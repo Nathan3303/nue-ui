@@ -3,7 +3,6 @@
         <div
             v-if="modelValue"
             class="nue-dialog-wrapper"
-            @click.stop="handleCancel"
             ref="dialogWrapperRef"
             :style="styles">
             <div class="nue-dialog" @click.stop>
@@ -68,7 +67,7 @@ function handleCloseAnimation(): Promise<boolean> {
     return new Promise((resolve) => {
         if (!dialogWrapperRef.value) return;
         dialogWrapperRef.value.classList.remove("nue-dialog-wrapper--open");
-        setTimeout(() => resolve(true), 300);
+        setTimeout(() => resolve(true), 160);
     });
 }
 
