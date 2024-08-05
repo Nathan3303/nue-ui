@@ -43,6 +43,7 @@ export default defineConfig({
                         link: "/pages/infinite-scroll.md",
                     },
                     { text: "Marquee 跑马灯", link: "/pages/marquee.md" },
+                    { text: "Progress 进度", link: "/pages/progress.md" },
                 ],
             },
             {
