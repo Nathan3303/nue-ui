@@ -106,6 +106,10 @@
     font-family: var(--font-family);
     line-height: normal;
 
+    .nue-link__content {
+        flex: auto;
+    }
+
     .nue-link__append {
         display: flex;
         align-items: center;

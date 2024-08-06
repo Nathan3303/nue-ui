@@ -9,7 +9,7 @@
         v-bind="$attrs"
         :style="styles">
         <nue-icon v-if="icon" :name="icon"></nue-icon>
-        <span>
+        <span class="nue-link__content">
             <slot>{{ href }}</slot>
         </span>
         <!-- <div v-if="$slots.append" class="nue-link__append">
