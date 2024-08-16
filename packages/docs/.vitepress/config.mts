@@ -30,6 +30,7 @@ export default defineConfig({
                     { text: "(Flex)Div 弹性盒", link: "/pages/div.md" },
                     { text: "Link 链接", link: "/pages/link.md" },
                     { text: "Text 文本", link: "/pages/text.md" },
+                    { text: "Icon 图标", link: "/pages/icon.md" },
                 ],
             },
             {
@@ -43,6 +44,7 @@ export default defineConfig({
                         link: "/pages/infinite-scroll.md",
                     },
                     { text: "Marquee 跑马灯", link: "/pages/marquee.md" },
+                    { text: "Progress 进度", link: "/pages/progress.md" },
                 ],
             },
             {

@@ -17,11 +17,6 @@ dist/*
 /cyperss/videos/
 /cypress/srceenshots/
 
-!.vitepress/config.js
-!.vitepress/theme/*
-.vitepress/dist
-.vitepress/cache
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -35,3 +30,8 @@ dist/*
 
 # Custom ignore files
 /packages/core/package.json
+
+# vitepress
+
+.vitepress/dist
+.vitepress/cache

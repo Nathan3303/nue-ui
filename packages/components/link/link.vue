@@ -9,22 +9,21 @@
         v-bind="$attrs"
         :style="styles">
         <nue-icon v-if="icon" :name="icon"></nue-icon>
-        <span>
+        <span class="nue-link__content">
             <slot>{{ href }}</slot>
         </span>
-        <div v-if="$slots.append" class="nue-link__append">
-            <slot name="append"></slot>
-        </div>
+        <!-- <div v-if="$slots.append" class="nue-link__append">
+        </div> -->
+        <slot name="append"></slot>
     </component>
 </template>
-
-<style src="./link.css"></style>
 
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
 import { parseFlex, parseTheme } from "@nue-ui/utils";
 import { NueIcon } from "../icon";
 import type { LinkProps, RoutePropType } from "./types";
+import "./link.css";
 
 defineOptions({ name: "NueLink" });
 

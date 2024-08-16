@@ -57,19 +57,13 @@
         box-shadow: var(--focus-shadow);
     }
 
-    .nue-icon {
-        --icon-color: var(--dark-primary-color);
-        --icon-size: var(--text-sm);
-        --icon-weight: 600;
+    .nue-input__icon-button {
+        transition: all 0.16s ease;
+        cursor: pointer;
+        --icon-color: var(--primary-color-500);
 
-        &.icon-button {
-            transition: all 0.16s ease;
-            cursor: pointer;
-            --icon-color: var(--primary-color-500);
-
-            &:hover {
-                --icon-color: var(--primary-color-900);
-            }
+        &:hover {
+            --icon-color: var(--primary-color-900);
         }
     }
 

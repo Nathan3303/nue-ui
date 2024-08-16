@@ -1,7 +1,7 @@
 <template>
-    <nue-div align="center">
-        <nue-link theme="btnlike" icon="theme">按钮式链接</nue-link>
-        <nue-link theme="custom" icon="theme">自定义主题</nue-link>
+    <nue-div align="center" class="vp-raw">
+        <nue-link theme="btnlike">按钮式链接</nue-link>
+        <nue-link theme="custom">自定义主题</nue-link>
     </nue-div>
 </template>
 

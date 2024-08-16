@@ -1,7 +1,6 @@
 /* Variables */
-
 .nue-link {
-    --font-size: var(--primary-font-size);
+    --font-size: inherit;
     --font-weight: 500;
 
     --text-decoration: none;
@@ -54,7 +53,6 @@
 }
 
 /* Original styles */
-
 .nue-link {
     color: var(--color);
     font-size: var(--font-size);
@@ -62,6 +60,7 @@
     cursor: pointer;
     text-decoration: var(--text-decoration);
     transition: all 0.16s ease-out;
+    line-height: normal;
 
     &:hover {
         color: var(--hover-color);
@@ -75,8 +74,9 @@
         cursor: not-allowed;
     }
 
-    & .nue-icon.iconfont::before {
+    .nue-icon.iconfont::before {
         display: inline !important;
+        --icon-size: var(--font-size);
     }
 }
 
@@ -105,6 +105,10 @@
     font-weight: var(--font-weight);
     font-family: var(--font-family);
     line-height: normal;
+
+    .nue-link__content {
+        flex: auto;
+    }
 
     .nue-link__append {
         display: flex;

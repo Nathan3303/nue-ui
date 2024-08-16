@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { parseFlex, parseTheme } from "@nue-ui/utils";
+import { parseTheme } from "@nue-ui/utils";
 import type { TextProps } from "./types";
 import { TEXT_SIZE_VALUES } from "./constants";
 import "./text.css";
@@ -21,7 +21,7 @@ const size = computed(() => {
     const { size } = props;
     if (!size) return null;
     const isPresetValue = TEXT_SIZE_VALUES[size];
-    return isPresetValue ? isPresetValue : size;
+    return isPresetValue || size;
 });
 
 const style = computed(() => {
