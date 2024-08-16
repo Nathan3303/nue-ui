@@ -9,6 +9,7 @@ export interface ProgressProps extends GlobalProps {
     strokeWidth?: number;
     formatter?: Function;
     showInnerText?: boolean;
+    hideText?: boolean;
     scale?: number;
 }
 

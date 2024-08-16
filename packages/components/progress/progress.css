@@ -20,7 +20,7 @@
     position: relative;
 
     .nue-progress__text {
-        width: 36px;
+        width: 42px;
         text-align: right;
 
         color: inherit;
@@ -39,19 +39,17 @@
 
             .nue-progress__inner-bar {
                 transition: width 0.24s linear;
-
+                display: flex;
+                align-items: center;
+                justify-content: end;
                 height: var(--stroke-width);
-                line-height: var(--stroke-width);
-                text-align: right;
-
+                padding: 0px 6px;
                 background: var(--inner-bar-background-color);
                 border-radius: var(--stroke-width);
 
                 & span {
                     color: var(--percentage-text-color);
-                    font-size: calc((var(--stroke-width) - 3px));
-                    margin-right: 6px;
-                    margin-left: 6px;
+                    font-size: calc(0.6 * var(--stroke-width));
                 }
             }
         }
