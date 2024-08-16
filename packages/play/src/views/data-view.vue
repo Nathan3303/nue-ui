@@ -21,6 +21,10 @@
             <nue-text size="24px">Collapse</nue-text>
             <collapse-demo1></collapse-demo1>
         </nue-div>
+        <nue-div vertical theme="card">
+            <nue-text size="24px">Progress</nue-text>
+            <progress-demo1></progress-demo1>
+        </nue-div>
     </div>
 </template>
 
@@ -31,4 +35,5 @@ import BadgeDemo2 from "../components/badge/demo2.vue";
 import InfiniteScrollDemo1 from "../components/infinite-scroll/demo1.vue";
 import MarqueeDemo1 from "../components/marquee/demo1.vue";
 import CollapseDemo1 from "../components/collapse/demo1.vue";
+import ProgressDemo1 from "../components/progress/demo1.vue";
 </script>

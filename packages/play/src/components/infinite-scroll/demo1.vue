@@ -13,7 +13,7 @@
     </nue-infinite-scroll>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
 
 const itemsCount = ref(15);
