@@ -30,6 +30,7 @@ export default defineConfig({
                     { text: "(Flex)Div 弹性盒", link: "/pages/div.md" },
                     { text: "Link 链接", link: "/pages/link.md" },
                     { text: "Text 文本", link: "/pages/text.md" },
+                    { text: "Icon 图标", link: "/pages/icon.md" },
                 ],
             },
             {
