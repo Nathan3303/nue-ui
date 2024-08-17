@@ -1,0 +1,56 @@
+.nue-switch {
+    --height: 24px;
+    --width: calc(var(--height) * 2);
+    --padding: 2px;
+    --animation-time: 0.16s;
+    --background-color: var(--primary-color-300);
+    --background-active-color: var(--primary-color-800);
+    --circle-size: calc(var(--height) - var(--padding) * 2);
+    --circle-color: var(--primary-color-50);
+    --circle-active-color: var(--primary-color-50);
+}
+
+.nue-switch {
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--height);
+    background-color: var(--background-color);
+    padding: var(--padding);
+    box-sizing: border-box;
+    transition: all var(--animation-time) ease-in-out;
+    cursor: pointer;
+    box-shadow: var(--secondary-shadow);
+    overflow: hidden;
+
+    .nue-switch__circle {
+        width: var(--circle-size);
+        height: var(--circle-size);
+        border-radius: 50%;
+        flex: none;
+        background-color: var(--circle-color);
+        transition: all var(--animation-time) ease-in-out;
+
+        &:hover {
+            box-shadow: var(--secondary-shadow);
+        }
+    }
+}
+
+.nue-switch {
+    &.nue-switch--small {
+        --height: 18px;
+    }
+
+    &.nue-switch--large {
+        --height: 30px;
+    }
+}
+
+.nue-switch--actived {
+    background-color: var(--background-active-color);
+
+    .nue-switch__circle {
+        transform: translateX(calc(var(--height) - 1px));
+        background-color: var(--circle-active-color);
+    }
+}
