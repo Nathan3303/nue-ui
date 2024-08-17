@@ -2,29 +2,24 @@
     <nue-div align="center" style="overflow: hidden">
         <nue-button>Search</nue-button>
         <nue-button icon="search">Search</nue-button>
-        <nue-button icon="search">搜索</nue-button>
-    </nue-div>
-    <nue-div align="center">
-        <nue-button disabled>Search</nue-button>
+        <nue-button icon="search" disabled>Search</nue-button>
         <nue-button icon="search" :loading="isSearching" @click="handleSearch">
-            Loading Button
+            Search
         </nue-button>
-        <nue-button use-throttle :throttle-duration="360" @click="count++">
-            Throttle Button ({{ count }})
+        <nue-button
+            icon="search"
+            use-throttle
+            :throttle-duration="360"
+            @click="count++">
+            Search ({{ count }})
         </nue-button>
-    </nue-div>
-    <nue-div align="center">
         <nue-button theme="round" icon="search">Search</nue-button>
         <nue-button theme="icon-only" icon="search" />
         <nue-button theme="round,primary" icon="search">Search</nue-button>
         <nue-button theme="pure" icon="search">Search</nue-button>
-    </nue-div>
-    <nue-div align="center">
         <nue-button size="small" icon="search">Search</nue-button>
         <nue-button icon="search">Search</nue-button>
         <nue-button size="large" icon="search">Search</nue-button>
-    </nue-div>
-    <nue-div>
         <nue-button>
             <template #prepend>
                 <nue-icon name="scan"></nue-icon>

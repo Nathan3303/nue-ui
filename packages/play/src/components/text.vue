@@ -1,5 +1,5 @@
 <template>
-    <nue-div vertical>
+    <nue-div vertical gap="4px">
         <nue-text size="normal" flex>
             Lorem ipsum dolor,
             <nue-text decoration="underline">sit amet consectetur</nue-text>
@@ -10,6 +10,8 @@
             Voluptate ea ipsum cumque.
         </nue-text>
         <nue-text tag="h1"> This is a text with h1 tag </nue-text>
+        <nue-text tag="h2"> This is a text with h2 tag </nue-text>
+        <nue-text tag="h3"> This is a text with h3 tag </nue-text>
         <nue-text :clamped="2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae vero
             ratione, eius, nostrum ad quos temporibus quod cum in minima, iste

@@ -15,7 +15,7 @@ function openConfirm() {
         cancelButtonText: "No",
     }).then(
         () => NueMessage.success("Confirmed!"),
-        () => {}
+        () => NueMessage.info("Canceled!")
     );
 }
 </script>

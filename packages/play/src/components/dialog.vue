@@ -1,11 +1,10 @@
 <template>
-    <nue-button @click.stop="dialogData.visible = true">
-        Open Dialog 2
-    </nue-button>
+    <nue-button @click="dialogData.visible = true">Open Dialog</nue-button>
     <nue-dialog
         ref="dialogRef"
         v-model="dialogData.visible"
-        title="Create new project">
+        :before-confirm="handleBeforeConfirm"
+        title="Dialog Title">
         <nue-div vertical align="stretch">
             <nue-input
                 v-model="dialogData.projectName"
@@ -32,7 +31,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from "vue";
-import type { NueDialog } from "nue-ui";
+import { NueConfirm } from "nue-ui";
 
 const dialogRef = ref<InstanceType<typeof NueDialog> | null>(null);
 const dialogData = reactive({
@@ -41,6 +40,13 @@ const dialogData = reactive({
     projectName: "",
     projectDescription: "",
 });
+
+function handleBeforeConfirm(done: () => void) {
+    NueConfirm({
+        title: "Confirm",
+        content: "Are you sure to close the dialog?",
+    }).then(done, () => {});
+}
 
 async function handleAddProject() {
     dialogData.loading = true;
@@ -57,5 +63,3 @@ async function handleAddProject() {
     console.log(response);
 }
 </script>
-
-<style scoped></style>

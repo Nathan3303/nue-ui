@@ -1,5 +1,42 @@
 <template>
     <nue-div align="center">
+        <nue-dropdown trigger="hover" text="Hover">
+            <template #dropdown>
+                <li>trigger="hover"</li>
+                <li>text="Hover"</li>
+            </template>
+        </nue-dropdown>
+        <nue-dropdown trigger="click" text="Click">
+            <template #dropdown>
+                <li>trigger="click"</li>
+                <li>text="Click"</li>
+            </template>
+        </nue-dropdown>
+    </nue-div>
+    <nue-div align="center">
+        <nue-dropdown text="Lefty" align="left">
+            <template #dropdown>
+                <li>trigger="click"</li>
+                <li>text="Lefty"</li>
+                <li>align="left"</li>
+            </template>
+        </nue-dropdown>
+        <nue-dropdown text="Centered" align="center">
+            <template #dropdown>
+                <li>trigger="click"</li>
+                <li>text="Centered"</li>
+                <li>align="center"</li>
+            </template>
+        </nue-dropdown>
+        <nue-dropdown text="Righty" align="right">
+            <template #dropdown>
+                <li>trigger="click"</li>
+                <li>text="Righty"</li>
+                <li>align="right"</li>
+            </template>
+        </nue-dropdown>
+    </nue-div>
+    <nue-div align="center">
         <nue-dropdown trigger="hover" @execute="handleExecute" hide-on-click>
             <template #default>
                 <nue-div align="center" gap="8px">
@@ -28,8 +65,6 @@
 </template>
 
 <script setup lang="ts">
-import { NueMessage } from "nue-ui";
-
 function handleExecute(id: string) {
     switch (id) {
         case "profile":
