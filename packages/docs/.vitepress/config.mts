@@ -62,6 +62,7 @@ export default defineConfig({
                         link: "/pages/textarea.md",
                     },
                     { text: "Select 选择器", link: "/pages/select.md" },
+                    { text: "Switch 开关", link: "/pages/switch.md" },
                 ],
             },
             {
