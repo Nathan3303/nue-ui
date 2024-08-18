@@ -1,12 +1,14 @@
 <template>
-    <div class="nue-progress" :style="progressStyle">
+    <div :class="classes" :style="progressStyle">
         <template v-if="type === 'line'">
             <div class="nue-progress--line">
                 <div class="nue-progress__outer-bar">
                     <div
                         class="nue-progress__inner-bar"
                         :style="{ width: percentage }">
-                        <span v-if="showInnerText">{{ percentage }}</span>
+                        <nue-text v-if="showInnerText && !hideText">
+                            {{ percentage }}
+                        </nue-text>
                     </div>
                 </div>
             </div>
@@ -28,15 +30,16 @@
                     cy="50"></circle>
             </svg>
         </template>
-        <slot v-if="!showInnerText">
-            <span class="nue-progress__text">{{ formatter(percentage) }}</span>
-        </slot>
+        <nue-text class="nue-progress__text" v-if="!showInnerText && !hideText">
+            {{ formatter(percentage) }}
+        </nue-text>
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { isArray } from "@nue-ui/utils";
+import { isArray, parseTheme } from "@nue-ui/utils";
+import { NueText } from "../text";
 import type { ProgressEmits, ProgressProps } from "./types";
 import "./progress.css";
 
@@ -47,8 +50,9 @@ const props = withDefaults(defineProps<ProgressProps>(), {
     strokeWidth: 6,
     formatter: (p) => p,
     showInnerText: false,
+    hideText: false,
     scale: 1,
-    color: "#7777ff",
+    color: "var(--primary-color-600)",
 });
 const emit = defineEmits<ProgressEmits>();
 
@@ -64,15 +68,24 @@ const strokeWidth = computed(() => {
     return props.strokeWidth * props.scale + "px";
 });
 
+const classes = computed(() => {
+    const { theme } = props;
+    const prefix = "nue-progress";
+    const list: string[] = [];
+    list.push(prefix);
+    if (theme) list.concat(parseTheme(theme, prefix));
+    return list;
+});
+
 const color = computed<string | undefined>(() => {
     const { type, color } = props;
     switch (type) {
         case "line":
             return isArray(color)
                 ? `linear-gradient(to right, ${(color as string[]).join(", ")})`
-                : color as string;
+                : (color as string);
         case "circle":
-            return isArray(color) ? color[0] : color as string;
+            return isArray(color) ? color[0] : (color as string);
         default:
             return void 0;
     }

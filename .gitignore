@@ -30,8 +30,5 @@ dist/*
 
 # Custom ignore files
 /packages/core/package.json
-
-# vitepress
-
-.vitepress/dist
-.vitepress/cache
+/packages/docs/.vitepress/dist
+/packages/docs/.vitepress/cache

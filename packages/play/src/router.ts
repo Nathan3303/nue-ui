@@ -9,32 +9,32 @@ const routers = [
     {
         path: "/basic",
         name: "basic",
-        component: () => import("./views/basic-view.vue"),
+        component: () => import("./views/basic.vue"),
     },
     {
         path: "/data",
         name: "data",
-        component: () => import("./views/data-view.vue"),
+        component: () => import("./views/data.vue"),
     },
     {
         path: "/feedback",
         name: "feedback",
-        component: () => import("./views/feedback-view.vue"),
+        component: () => import("./views/feedback.vue"),
     },
     {
         path: "/others",
         name: "others",
-        component: () => import("./views/others-view.vue"),
+        component: () => import("./views/others.vue"),
     },
     {
         path: "/form",
         name: "form",
-        component: () => import("./views/form-view.vue"),
+        component: () => import("./views/form.vue"),
     },
     {
         path: "/navigation",
         name: "navigation",
-        component: () => import("./views/navigation-view.vue"),
+        component: () => import("./views/navigation.vue"),
     },
 ];
 

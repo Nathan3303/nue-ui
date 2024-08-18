@@ -55,3 +55,11 @@ demo-preview=../demos/progress/scale.vue
 ::: preview
 demo-preview=../demos/progress/show-inner-text.vue
 :::
+
+## 隐藏百分比文字
+
+通过属性 `hideText` 设置百分比文字的隐藏和显示，接受 `boolean` 类型的值，默认值为 false 。
+
+::: preview
+demo-preview=../demos/progress/hide-text.vue
+:::

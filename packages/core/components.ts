@@ -24,6 +24,7 @@ import {
     NueProgress,
     NueSelect,
     NueSelectOption,
+    NueSwitch,
     NueText,
     NueTextarea,
 } from "@nue-ui/components";
@@ -56,6 +57,7 @@ export default [
     NueProgress,
     NueSelect,
     NueSelectOption,
+    NueSwitch,
     NueText,
     NueTextarea,
 ] as Plugin[];
