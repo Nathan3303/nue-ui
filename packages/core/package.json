@@ -1,6 +1,6 @@
 {
   "name": "nue-ui",
-  "version": "0.5.69",
+  "version": "0.5.83",
   "description": "Components library by Vue3 + TS",
   "type": "module",
   "files": [
