@@ -2,6 +2,7 @@ export * from "./avatar";
 export * from "./badge";
 export * from "./button";
 export * from "./button-group";
+export * from "./checkbox";
 export * from "./collapse";
 export * from "./confirm";
 export * from "./container";

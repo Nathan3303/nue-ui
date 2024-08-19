@@ -1,0 +1,70 @@
+.nue-checkbox {
+    --padding: 0px;
+    --border-color: transparent;
+    --border-radius: var(--primary-radius);
+    --box-shadow: none;
+    --check-icon-size: var(--text-md);
+    --check-label-size: var(--text-sm);
+    --check-icon-color: var(--primary-color-400);
+    --check-label-color: var(--primary-color-700);
+    --animation-time: 0.16s;
+}
+
+.nue-checkbox {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    cursor: pointer;
+    padding: var(--padding);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all var(--animation-time) ease;
+
+    .nue-checkbox__icon {
+        --icon-color: var(--check-icon-color);
+        --icon-size: var(--check-icon-size);
+        transition: all var(--animation-time) ease;
+    }
+
+    .nue-checkbox__label {
+        color: var(--check-label-color);
+        font-size: var(--check-label-size);
+        line-height: var(--check-label-size);
+        -webkit-user-select: none;
+        user-select: none;
+        transition: all var(--animation-time) ease;
+    }
+}
+
+.nue-checkbox {
+    &.nue-checkbox--small {
+        gap: 4px;
+        --check-icon-size: var(--text-sm);
+        --check-label-size: var(--text-xs);
+    }
+
+    &.nue-checkbox--large {
+        gap: 8px;
+        --check-icon-size: var(--text-lg);
+        --check-label-size: var(--text-md);
+    }
+
+    &.nue-checkbox--checked {
+        --check-icon-color: var(--primary-color-900);
+        --check-label-color: var(--primary-color-900);
+    }
+
+    &.nue-checkbox--disabled,
+    &.nue-checkbox--loading {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &.nue-checkbox--bordered {
+        --padding: 8px;
+        --border-color: var(--divider-color);
+        --border-radius: var(--primary-radius);
+        --box-shadow: var(--secondary-shadow);
+    }
+}
