@@ -1,32 +1,37 @@
 <template>
-    <nue-div align="center">
-        <nue-checkbox v-model="state" label="Coding" size="small" />
-        <nue-checkbox v-model="state" label="Swimming" />
-        <nue-checkbox v-model="state" label="Music" size="large" />
-        <nue-checkbox v-model="state" label="Movie" disabled />
-        <nue-checkbox theme="bordered" v-model="state" label="Singing" />
-        <nue-checkbox
-            theme="custom"
-            v-model="state"
-            label="Draw"
-            @change="handleChange" />
-        <nue-checkbox
-            v-model="state2"
-            label="Draw"
-            :before-check="handleBeforeCheck"
-            :loading="loading"
-            @checked="handleChecked"
-            @unchecked="handleUnchecked" />
-    </nue-div>
+    <nue-checkbox-group
+        v-model="activeNames"
+        use-controller
+        controller-label="Hobbies"
+        :min="1"
+        :max="3">
+        <nue-div align="center">
+            <nue-checkbox
+                v-for="cbName in checkboxes"
+                :key="cbName"
+                :label="uppercaseFirst(cbName)"
+                :name="cbName"></nue-checkbox>
+            <nue-checkbox
+                theme="custom"
+                name="network"
+                :before-check="handleBeforeCheck"
+                :loading="loading">
+                {{ loading ? "Checking..." : "Network" }}
+            </nue-checkbox>
+        </nue-div>
+    </nue-checkbox-group>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { NueMessage } from "nue-ui";
 
-const state = ref(false);
-const state2 = ref(false);
+const checkboxes = ["game", "music", "movie", "sport", "travel"];
+const activeNames = ref<string[]>(["game", "music"]);
 const loading = ref(false);
+
+const uppercaseFirst = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};
 
 const handleBeforeCheck = () => {
     loading.value = true;
@@ -37,21 +42,15 @@ const handleBeforeCheck = () => {
         }, 1000);
     });
 };
-
-const handleChange = (state: boolean) => {
-    NueMessage.info(`Changed (${state})`);
-};
-
-const handleChecked = () => {
-    NueMessage.success("Checked");
-};
-
-const handleUnchecked = () => {
-    NueMessage.success("Unchecked");
-};
 </script>
 
 <style scoped>
+.nue-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .nue-checkbox--custom.nue-checkbox--checked {
     --check-icon-color: var(--primary-color-a200);
     --check-label-color: var(--primary-color-a200);
