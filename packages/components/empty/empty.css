@@ -1,0 +1,26 @@
+.nue-empty {
+    --image-size: 96px;
+}
+
+.nue-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+    flex: auto;
+
+    .nue-empty__image {
+        aspect-ratio: 1;
+        width: var(--image-size);
+        height: var(--image-size);
+        object-fit: contain;
+        margin-bottom: 16px;
+        border-radius: var(--primary-radius);
+    }
+
+    .nue-empty__description {
+        font-size: var(--text-sm);
+        color: var(--secondary-text-color);
+    }
+}
