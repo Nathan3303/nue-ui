@@ -18,6 +18,9 @@
         <demo-card title="Progress">
             <progress-demo></progress-demo>
         </demo-card>
+        <demo-card title="Empty">
+            <empty-demo></empty-demo>
+        </demo-card>
     </div>
 </template>
 
@@ -29,4 +32,5 @@ import InfiniteScrollDemo from "../components/infinite-scroll.vue";
 import MarqueeDemo from "../components/marquee.vue";
 import CollapseDemo from "../components/collapse.vue";
 import ProgressDemo from "../components/progress.vue";
+import EmptyDemo from "../components/empty.vue";
 </script>
