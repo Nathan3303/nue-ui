@@ -63,6 +63,7 @@ export default defineConfig({
                     },
                     { text: "Select 选择器", link: "/pages/select.md" },
                     { text: "Switch 开关", link: "/pages/switch.md" },
+                    { text: "Checkbox 复选框", link: "/pages/checkbox.md" },
                 ],
             },
             {
