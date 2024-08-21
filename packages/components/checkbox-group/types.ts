@@ -23,6 +23,7 @@ export type NueCheckboxGroupContext = {
     activeNames: Ref<CheckboxName[]>;
     size?: NueCheckboxProps["size"];
     disabled?: NueCheckboxProps["disabled"];
+    theme?: NueCheckboxProps["theme"];
     maximized: Ref<boolean>;
     minimized: Ref<boolean>;
     pushName: (name: CheckboxName) => void;

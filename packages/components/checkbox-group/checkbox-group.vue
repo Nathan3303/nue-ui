@@ -24,6 +24,7 @@ import type {
     NueCheckboxGroupProps,
     NueCheckboxGroupEmits,
     CheckboxName,
+    NueCheckboxGroupContext,
 } from "./types";
 import "./checkbox-group.css";
 
@@ -104,8 +105,9 @@ const handlePopName = (name: CheckboxName) => {
     return true;
 };
 
-provide(CHECKBOX_GROUP_CTX_KEY, {
+provide<NueCheckboxGroupContext>(CHECKBOX_GROUP_CTX_KEY, {
     activeNames: activeNames,
+    theme: props.theme,
     size: props.size,
     disabled: props.disabled,
     maximized,
