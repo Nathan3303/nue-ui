@@ -59,6 +59,10 @@ const classes = computed(() => {
     let list: string[] = [];
     const prefix = "nue-checkbox";
     let { theme, size, loading, indeterminate } = props;
+    if (checkboxGroupCtx) {
+        theme = checkboxGroupCtx.theme ?? theme;
+        size = checkboxGroupCtx.size ?? size;
+    }
     list.push(prefix);
     if (theme) list = list.concat(parseTheme(theme, prefix));
     if (size) list.push(`${prefix}--${size}`);
