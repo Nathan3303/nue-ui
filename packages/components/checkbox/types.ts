@@ -3,13 +3,13 @@ import type { GlobalProps } from "@nue-ui/utils";
 export interface NueCheckboxProps extends GlobalProps {
     modelValue?: boolean;
     label?: string;
-    value?: string | number;
     name?: string;
     size?: "small" | "large";
     disabled?: boolean;
     loading?: boolean;
     indeterminate?: boolean;
-    checked?: boolean;
+    // value?: string | number;
+    // checked?: boolean;
     beforeCheck?: (state: boolean) => boolean | Promise<boolean>;
 }
 
