@@ -3,8 +3,8 @@ import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
 import { compression } from "vite-plugin-compression2";
-import { readFileSync } from "fs";
-import { delay } from "lodash-es";
+import { readFile, readFileSync } from "fs";
+import { defer, delay } from "lodash-es";
 import shell from "shelljs";
 import hooksPlugin from "./hooks-plugin";
 import terser from "@rollup/plugin-terser";
@@ -14,12 +14,10 @@ const isDev = process.env.NODE_ENV === "development";
 const isTest = process.env.NODE_ENV === "test";
 
 const moveStyles = () => {
-    try {
-        readFileSync(resolve(__dirname, "./dist/umd/index.css"));
-        shell.cp("./dist/umd/index.css", "./dist/index.css");
-    } catch (_) {
-        delay(moveStyles, 800);
-    }
+    readFile("./dist/umd/index.css.gz", (err) => {
+        if (err) return delay(moveStyles, 800);
+        defer(() => shell.cp("./dist/umd/index.css", "./dist/index.css"));
+    });
 };
 
 export default defineConfig({

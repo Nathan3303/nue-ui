@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
-import { readdirSync } from "fs";
+import { readdir, readdirSync } from "fs";
 import { delay } from "lodash-es";
 import shell from "shelljs";
 import hooksPlugin from "./hooks-plugin";
@@ -12,20 +12,18 @@ const isProd = process.env.NODE_ENV === "production";
 const isDev = process.env.NODE_ENV === "development";
 const isTest = process.env.NODE_ENV === "test";
 
-const moveStyles = () => {
-    try {
-        readdirSync("./dist/es/theme");
-        shell.mv("./dist/es/theme", "./dist");
-    } catch (_) {
-        delay(moveStyles, 800);
-    }
-};
-
-function getComponentDirNames() {
+const getComponentDirNames = () => {
     const entries = readdirSync("../components", { withFileTypes: true });
     const dirName = entries.filter((entry) => entry.isDirectory());
     return dirName.map((item) => item.name);
-}
+};
+
+const moveStyles = () => {
+    readdir("./dist/es/theme", (err) => {
+        if (err) return delay(moveStyles, 800);
+        shell.rm("-rf", "./dist/es/theme");
+    });
+};
 
 export default defineConfig({
     plugins: [
