@@ -1,0 +1,244 @@
+/* Tooltip wrapper */
+
+.nue-tooltip-wrapper {
+}
+
+.nue-tooltip-wrapper {
+    position: relative;
+}
+
+/* Tooltip */
+
+.nue-tooltip {
+    --tooltip-width: -100px;
+    --tooltip-height: -100px;
+    --tooltip-wrapper-x: -100px;
+    --tooltip-wrapper-y: -100px;
+    --tooltip-wrapper-width: -100px;
+    --tooltip-wrapper-height: -100px;
+    --animation-time: 0.16s;
+    --gap-from-wrapper: 8px;
+}
+
+.nue-tooltip {
+    position: absolute;
+    background-color: var(--primary-color-900);
+    border-radius: var(--primary-radius);
+    text-align: center;
+    padding: 6px 12px;
+
+    .nue-tooltip__text {
+        color: var(--primary-color-50);
+        font-size: var(--text-sm);
+        line-height: 1;
+    }
+}
+
+.nue-tooltip {
+    &.nue-tooltip--small {
+        padding: 4px 8px;
+
+        .nue-tooltip__text {
+            font-size: var(--text-xs);
+        }
+    }
+
+    &.nue-tooltip--large {
+        padding: 8px 16px;
+
+        .nue-tooltip__text {
+            font-size: var(--text-md);
+        }
+    }
+}
+
+.nue-tooltip {
+    &.nue-tooltip--top-start {
+        animation: slide-fade-top var(--animation-time) ease;
+        top: calc(
+            var(--tooltip-wrapper-y) - var(--tooltip-height) -
+                var(--gap-from-wrapper)
+        );
+        left: var(--tooltip-wrapper-x);
+    }
+
+    &.nue-tooltip--top-center {
+        animation: slide-fade-top var(--animation-time) ease;
+        --left-offset: calc(
+            (var(--tooltip-width) - var(--tooltip-wrapper-width)) / 2
+        );
+        top: calc(
+            var(--tooltip-wrapper-y) - var(--tooltip-height) -
+                var(--gap-from-wrapper)
+        );
+        left: calc(var(--tooltip-wrapper-x) - var(--left-offset));
+    }
+
+    &.nue-tooltip--top-end {
+        animation: slide-fade-top var(--animation-time) ease;
+        top: calc(
+            var(--tooltip-wrapper-y) - var(--tooltip-height) -
+                var(--gap-from-wrapper)
+        );
+        left: calc(
+            var(--tooltip-wrapper-x) - var(--tooltip-width) +
+                var(--tooltip-wrapper-width)
+        );
+    }
+
+    &.nue-tooltip--bottom-start {
+        animation: slide-fade-bottom var(--animation-time) ease;
+        top: calc(
+            var(--tooltip-wrapper-y) + var(--tooltip-wrapper-height) +
+                var(--gap-from-wrapper)
+        );
+        left: var(--tooltip-wrapper-x);
+    }
+
+    &.nue-tooltip--bottom-center {
+        animation: slide-fade-bottom var(--animation-time) ease;
+        --left-offset: calc(
+            (var(--tooltip-width) - var(--tooltip-wrapper-width)) / 2
+        );
+        top: calc(
+            var(--tooltip-wrapper-y) + var(--tooltip-wrapper-height) +
+                var(--gap-from-wrapper)
+        );
+        left: calc(var(--tooltip-wrapper-x) - var(--left-offset));
+    }
+
+    &.nue-tooltip--bottom-end {
+        animation: slide-fade-bottom var(--animation-time) ease;
+        top: calc(
+            var(--tooltip-wrapper-y) + var(--tooltip-wrapper-height) +
+                var(--gap-from-wrapper)
+        );
+        left: calc(
+            var(--tooltip-wrapper-x) - var(--tooltip-width) +
+                var(--tooltip-wrapper-width)
+        );
+    }
+
+    &.nue-tooltip--left-start {
+        animation: slide-fade-left var(--animation-time) ease;
+        --top-offset: calc(
+            (var(--tooltip-height) - var(--tooltip-wrapper-height)) / 2
+        );
+        top: calc(var(--tooltip-wrapper-y) - var(--top-offset));
+        left: calc(
+            var(--tooltip-wrapper-x) - var(--tooltip-width) -
+                var(--gap-from-wrapper)
+        );
+    }
+
+    &.nue-tooltip--left-center {
+        animation: slide-fade-left var(--animation-time) ease;
+        --top-offset: calc(
+            (var(--tooltip-height) - var(--tooltip-wrapper-height)) / 2
+        );
+        top: calc(var(--tooltip-wrapper-y) - var(--top-offset));
+        left: calc(
+            var(--tooltip-wrapper-x) - var(--tooltip-width) -
+                var(--gap-from-wrapper)
+        );
+    }
+
+    &.nue-tooltip--left-end {
+        animation: slide-fade-left var(--animation-time) ease;
+        top: calc(
+            var(--tooltip-wrapper-y) - var(--tooltip-height) +
+                var(--tooltip-wrapper-height)
+        );
+        left: calc(
+            var(--tooltip-wrapper-x) - var(--tooltip-width) -
+                var(--gap-from-wrapper)
+        );
+    }
+
+    &.nue-tooltip--right-start {
+        animation: slide-fade-right var(--animation-time) ease;
+        --top-offset: calc(
+            (var(--tooltip-height) - var(--tooltip-wrapper-height)) / 2
+        );
+        top: calc(var(--tooltip-wrapper-y) - var(--top-offset));
+        left: calc(
+            var(--tooltip-wrapper-x) + var(--tooltip-wrapper-width) +
+                var(--gap-from-wrapper)
+        );
+    }
+
+    &.nue-tooltip--right-center {
+        animation: slide-fade-right var(--animation-time) ease;
+        --top-offset: calc(
+            (var(--tooltip-height) - var(--tooltip-wrapper-height)) / 2
+        );
+        top: calc(var(--tooltip-wrapper-y) - var(--top-offset));
+        left: calc(
+            var(--tooltip-wrapper-x) + var(--tooltip-wrapper-width) +
+                var(--gap-from-wrapper)
+        );
+    }
+
+    &.nue-tooltip--right-end {
+        animation: slide-fade-right var(--animation-time) ease;
+        top: calc(
+            var(--tooltip-wrapper-y) - var(--tooltip-height) +
+                var(--tooltip-wrapper-height)
+        );
+        left: calc(
+            var(--tooltip-wrapper-x) + var(--tooltip-wrapper-width) +
+                var(--gap-from-wrapper)
+        );
+    }
+}
+
+@keyframes slide-fade-out {
+    to {
+        transform: scale(0.86);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-fade-top {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-fade-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-fade-left {
+    0% {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-fade-right {
+    0% {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
