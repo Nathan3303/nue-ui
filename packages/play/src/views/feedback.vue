@@ -15,6 +15,9 @@
         <demo-card title="Prompt">
             <prompt-demo></prompt-demo>
         </demo-card>
+        <demo-card title="Tooltip">
+            <tooltip-demo></tooltip-demo>
+        </demo-card>
     </div>
 </template>
 
@@ -25,4 +28,5 @@ import DrawerDemo from "../components/drawer.vue";
 import MessageDemo from "../components/message.vue";
 import ConfirmDemo from "../components/confirm.vue";
 import PromptDemo from "../components/prompt.vue";
+import TooltipDemo from '../components/tooltip.vue';
 </script>
