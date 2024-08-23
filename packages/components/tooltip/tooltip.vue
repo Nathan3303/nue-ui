@@ -4,20 +4,22 @@
         @mouseenter="handleShow"
         @mouseleave="handleHide"
         ref="tooltipWrapperRef">
+        <div
+            v-if="visible"
+            class="nue-tooltip__buffer"
+            :data-direction="placementInfo.direction"></div>
         <slot></slot>
         <teleport to="#NueTooltipPool">
             <div
                 v-if="visible"
                 :class="tooltipClasses"
-                :style="tooltipStyles"
+                :data-direction="placementInfo.direction"
                 @mouseenter="handleShow"
                 @mouseleave="handleHide"
                 ref="tooltipRef">
-                <div class="nue-tooltip__inner">
-                    <slot name="content">
-                        <span class="nue-tooltip__text">{{ content }}</span>
-                    </slot>
-                </div>
+                <slot name="content">
+                    <span class="nue-tooltip__text">{{ content }}</span>
+                </slot>
             </div>
         </teleport>
     </div>
@@ -55,25 +57,19 @@ const hideTimer = ref<number | null>();
 
 const tooltipClasses = computed(() => {
     const { theme, size } = props;
-    const placement = placementBuffer.value;
     const prefix = "nue-tooltip";
     let list: string[] = [prefix];
     if (theme) list = list.concat(parseTheme(theme, prefix));
     if (size) list.push(`${prefix}--${size}`);
-    if (placement) list.push(`${prefix}--${placement}`);
     return list;
 });
 
-const tooltipStyles = computed(() => {
-    const { width, height, wrapperX, wrapperY, wrapperWidth, wrapperHeight } =
-        rectInfo;
+const placementInfo = computed(() => {
+    const placement = placementBuffer.value;
+    const splited = placement.split("-");
     return {
-        "--tooltip-width": `${width}px`,
-        "--tooltip-height": `${height}px`,
-        "--tooltip-wrapper-x": `${wrapperX}px`,
-        "--tooltip-wrapper-y": `${wrapperY}px`,
-        "--tooltip-wrapper-width": `${wrapperWidth}px`,
-        "--tooltip-wrapper-height": `${wrapperHeight}px`,
+        direction: splited[0] || "top",
+        alignment: splited[1] || "center",
     };
 });
 
@@ -133,9 +129,11 @@ const checkOverflow = () => {
 };
 
 const calculatePosition = () => {
-    const tooltipEl = tooltipRef.value;
-    if (!tooltipEl) return;
-    if (checkOverflow()) return calculatePosition();
+    const tooltipEl = tooltipRef.value!;
+    if (checkOverflow()) {
+        calculatePosition();
+        return;
+    }
     const { width, height, wrapperX, wrapperY, wrapperWidth, wrapperHeight } =
         rectInfo;
     const placement = placementBuffer.value;
@@ -144,60 +142,60 @@ const calculatePosition = () => {
             tooltipEl.style.left = `${
                 wrapperX + wrapperWidth / 2 - width / 2
             }px`;
-            tooltipEl.style.top = `${wrapperY - height}px`;
+            tooltipEl.style.top = `${wrapperY - height - 8}px`;
             break;
         case "top-start":
             tooltipEl.style.left = `${wrapperX}px`;
-            tooltipEl.style.top = `${wrapperY - height}px`;
+            tooltipEl.style.top = `${wrapperY - height - 8}px`;
             break;
         case "top-end":
             tooltipEl.style.left = `${wrapperX + wrapperWidth - width}px`;
-            tooltipEl.style.top = `${wrapperY - height}px`;
+            tooltipEl.style.top = `${wrapperY - height - 8}px`;
             break;
         case "bottom-center":
             tooltipEl.style.left = `${
                 wrapperX + wrapperWidth / 2 - width / 2
             }px`;
-            tooltipEl.style.top = `${wrapperY + wrapperHeight}px`;
+            tooltipEl.style.top = `${wrapperY + wrapperHeight + 8}px`;
             break;
         case "bottom-start":
             tooltipEl.style.left = `${wrapperX}px`;
-            tooltipEl.style.top = `${wrapperY + wrapperHeight}px`;
+            tooltipEl.style.top = `${wrapperY + wrapperHeight + 8}px`;
             break;
         case "bottom-end":
             tooltipEl.style.left = `${wrapperX + wrapperWidth - width}px`;
-            tooltipEl.style.top = `${wrapperY + wrapperHeight}px`;
+            tooltipEl.style.top = `${wrapperY + wrapperHeight + 8}px`;
             break;
         case "left-center":
-            tooltipEl.style.left = `${wrapperX - width}px`;
+            tooltipEl.style.left = `${wrapperX - width - 8}px`;
             tooltipEl.style.top = `${
                 wrapperY + wrapperHeight / 2 - height / 2
             }px`;
             break;
         case "left-start":
-            tooltipEl.style.left = `${wrapperX - width}px`;
+            tooltipEl.style.left = `${wrapperX - width - 8}px`;
             tooltipEl.style.top = `${
                 wrapperY + wrapperHeight / 2 - height / 2
             }px`;
             break;
         case "left-end":
-            tooltipEl.style.left = `${wrapperX - width}px`;
+            tooltipEl.style.left = `${wrapperX - width - 8}px`;
             tooltipEl.style.top = `${wrapperY + wrapperHeight - height}px`;
             break;
         case "right-center":
-            tooltipEl.style.left = `${wrapperX + wrapperWidth}px`;
+            tooltipEl.style.left = `${wrapperX + wrapperWidth + 8}px`;
             tooltipEl.style.top = `${
                 wrapperY + wrapperHeight / 2 - height / 2
             }px`;
             break;
         case "right-start":
-            tooltipEl.style.left = `${wrapperX + wrapperWidth}px`;
+            tooltipEl.style.left = `${wrapperX + wrapperWidth + 8}px`;
             tooltipEl.style.top = `${
                 wrapperY + wrapperHeight / 2 - height / 2
             }px`;
             break;
         case "right-end":
-            tooltipEl.style.left = `${wrapperX + wrapperWidth}px`;
+            tooltipEl.style.left = `${wrapperX + wrapperWidth + 8}px`;
             tooltipEl.style.top = `${wrapperY + wrapperHeight - height}px`;
             break;
         default:
