@@ -22,6 +22,12 @@
         <nue-tooltip content="NiHao" placement="left-center">
             <nue-button>Button</nue-button>
         </nue-tooltip>
+        <nue-tooltip
+            content="https://www.baidu.com"
+            size="small"
+            theme="custom">
+            <nue-link href="https://www.baidu.com">Go to baidu</nue-link>
+        </nue-tooltip>
         <nue-tooltip content="NiHao" placement="right-center">
             <nue-button>Button</nue-button>
         </nue-tooltip>
@@ -47,12 +53,6 @@
     </nue-div>
     <!--  -->
     <nue-div>
-        <nue-tooltip
-            content="https://www.baidu.com"
-            size="small"
-            theme="custom">
-            <nue-link href="https://www.baidu.com">Go to baidu</nue-link>
-        </nue-tooltip>
         <nue-tooltip
             content="Lorem ipsum, dolor sit amet consectetu"
             size="large"
