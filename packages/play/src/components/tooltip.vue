@@ -45,6 +45,36 @@
             <nue-button>Button</nue-button>
         </nue-tooltip>
     </nue-div>
+    <!--  -->
+    <nue-div>
+        <nue-tooltip
+            content="https://www.baidu.com"
+            size="small"
+            theme="custom">
+            <nue-link href="https://www.baidu.com">Go to baidu</nue-link>
+        </nue-tooltip>
+        <nue-tooltip
+            content="Lorem ipsum, dolor sit amet consectetu"
+            size="large"
+            theme="custom2">
+            <nue-text>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit
+                deleniti et dolor accusantium. Rerum velit dolores voluptatibus
+                ullam id, modi, optio numquam accusamus animi temporibus soluta
+                fugiat. Aspernatur, officiis natus.
+            </nue-text>
+        </nue-tooltip>
+    </nue-div>
 </template>
 
 <script setup lang="ts"></script>
+
+<style>
+.nue-tooltip--custom {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+}
+
+.nue-tooltip--custom2 {
+    background: linear-gradient(to left, #ff2d55, #ff743c);
+}
+</style>
