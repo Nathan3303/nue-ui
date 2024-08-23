@@ -4,6 +4,7 @@
     --height: 24px;
     --font-size: var(--text-sm);
     --animation-time: 0.16s;
+    --triangle-display: none;
 }
 
 /* Original */
@@ -42,6 +43,95 @@
     &.nue-tooltip--large {
         padding: 8px 16px;
         --font-size: var(--text-md);
+    }
+}
+
+/* Little triangle */
+
+.nue-tooltip {
+    &::after {
+        content: "";
+        display: var(--triangle-display);
+        position: absolute;
+        aspect-ratio: 1;
+        width: 8px;
+        height: 8px;
+        background: inherit;
+        transform-origin: center;
+        transform: rotate(45deg);
+        border-radius: 1px;
+    }
+    &.nue-tooltip--top-start {
+        &::after {
+            top: calc(100% - 4px);
+            left: calc(16px - 4px);
+        }
+    }
+    &.nue-tooltip--top-center {
+        &::after {
+            top: calc(100% - 4px);
+            left: calc(50% - 4px);
+        }
+    }
+    &.nue-tooltip--top-end {
+        &::after {
+            top: calc(100% - 4px);
+            right: calc(16px - 4px);
+        }
+    }
+    &.nue-tooltip--bottom-start {
+        &::after {
+            top: calc(0px - 4px);
+            left: calc(16px - 4px);
+        }
+    }
+    &.nue-tooltip--bottom-center {
+        &::after {
+            top: calc(0px - 4px);
+            left: calc(50% - 4px);
+        }
+    }
+    &.nue-tooltip--bottom-end {
+        &::after {
+            top: calc(0px - 4px);
+            right: calc(16px - 4px);
+        }
+    }
+    &.nue-tooltip--left-start {
+        &::after {
+            top: calc(16px - 4px);
+            right: calc(0px - 4px);
+        }
+    }
+    &.nue-tooltip--left-center {
+        &::after {
+            top: calc(50% - 4px);
+            right: calc(0px - 4px);
+        }
+    }
+    &.nue-tooltip--left-end {
+        &::after {
+            bottom: calc(16px - 4px);
+            right: calc(0px - 4px);
+        }
+    }
+    &.nue-tooltip--right-start {
+        &::after {
+            top: calc(16px - 4px);
+            right: calc(100% + 4px);
+        }
+    }
+    &.nue-tooltip--right-center {
+        &::after {
+            top: calc(50% - 4px);
+            right: calc(100% + 4px);
+        }
+    }
+    &.nue-tooltip--right-end {
+        &::after {
+            bottom: calc(16px - 4px);
+            right: calc(100% + 4px);
+        }
     }
 }
 
@@ -84,6 +174,8 @@
         animation: slide-fade-right var(--animation-time) ease forwards;
     }
 }
+
+/* Animations */
 
 @keyframes slide-fade-out {
     to {

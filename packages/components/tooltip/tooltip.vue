@@ -13,6 +13,7 @@
             <div
                 v-if="visible"
                 :class="tooltipClasses"
+                :style="tooltipStyles"
                 :data-direction="placementInfo.direction"
                 @mouseenter="handleShow"
                 @mouseleave="handleHide"
@@ -57,11 +58,20 @@ const hideTimer = ref<number | null>();
 
 const tooltipClasses = computed(() => {
     const { theme, size } = props;
+    const placement = placementBuffer.value;
     const prefix = "nue-tooltip";
     let list: string[] = [prefix];
     if (theme) list = list.concat(parseTheme(theme, prefix));
     if (size) list.push(`${prefix}--${size}`);
+    if (placement) list.push(`${prefix}--${placement}`);
     return list;
+});
+
+const tooltipStyles = computed(() => {
+    const { showTriangle } = props;
+    return {
+        "--triangle-display": showTriangle ? "block" : void 0,
+    };
 });
 
 const placementInfo = computed(() => {
@@ -204,6 +214,7 @@ const calculatePosition = () => {
 };
 
 const handleShow = () => {
+    placementBuffer.value = props.placement;
     if (hideTimer.value) {
         clearTimeout(hideTimer.value);
         hideTimer.value = null;
@@ -222,7 +233,6 @@ const handleHide = () => {
         tooltipRef.value.style.animationName = "slide-fade-out";
         setTimeout(() => {
             visible.value = false;
-            placementBuffer.value = props.placement;
             deactiveTooltipPool();
         }, 160);
         hideTimer.value = null;

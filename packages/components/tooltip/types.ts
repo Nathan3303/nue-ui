@@ -16,6 +16,7 @@ export interface NueTooltipProps extends GlobalProps {
         | "right-center"
         | "right-end";
     size?: "small" | "large";
+    showTriangle?: boolean;
 }
 
 export type NueTooltipEmits = {};
