@@ -20,7 +20,11 @@
 
 .nue-tooltip {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: max-content;
+    min-width: 24px;
+    max-width: 36vw;
     padding: 6px 12px;
     position: absolute;
     background-color: var(--primary-color-900);

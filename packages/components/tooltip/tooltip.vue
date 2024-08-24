@@ -184,9 +184,7 @@ const calculatePosition = () => {
             break;
         case "left-start":
             tooltipEl.style.left = `${wrapperX - width - 8}px`;
-            tooltipEl.style.top = `${
-                wrapperY + wrapperHeight / 2 - height / 2
-            }px`;
+            tooltipEl.style.top = `${wrapperY}px`;
             break;
         case "left-end":
             tooltipEl.style.left = `${wrapperX - width - 8}px`;
@@ -200,9 +198,7 @@ const calculatePosition = () => {
             break;
         case "right-start":
             tooltipEl.style.left = `${wrapperX + wrapperWidth + 8}px`;
-            tooltipEl.style.top = `${
-                wrapperY + wrapperHeight / 2 - height / 2
-            }px`;
+            tooltipEl.style.top = `${wrapperY}px`;
             break;
         case "right-end":
             tooltipEl.style.left = `${wrapperX + wrapperWidth + 8}px`;
