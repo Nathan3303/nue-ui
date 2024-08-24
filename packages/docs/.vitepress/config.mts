@@ -46,6 +46,7 @@ export default defineConfig({
                     },
                     { text: "Marquee 跑马灯", link: "/pages/marquee.md" },
                     { text: "Progress 进度", link: "/pages/progress.md" },
+                    { text: "Empty 空状态", link: "/pages/empty.md" },
                 ],
             },
             {
@@ -74,6 +75,7 @@ export default defineConfig({
                     { text: "Drawer 抽屉", link: "/pages/drawer.md" },
                     { text: "Message 消息提示", link: "/pages/message.md" },
                     { text: "Prompt 提示框", link: "/pages/prompt.md" },
+                    { text: "Tooltip 提示", link: "/pages/tooltip.md" },
                 ],
             },
             {
