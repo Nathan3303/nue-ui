@@ -1,21 +1,26 @@
 <template>
     <nue-container>
         <nue-header height="72px">
-            <template #logo>NueUI PlayGround</template>
+            <template #logo>NueUI 组件库 PlayGround</template>
         </nue-header>
         <nue-main aside-width="160px" allow-resize-aside>
             <template #aside>
-                <!-- <nue-text>Category</nue-text> -->
-                <nue-link theme="btnlike" route="/basic">Basic</nue-link>
-                <nue-link theme="btnlike" route="/form">Form</nue-link>
-                <nue-link theme="btnlike" route="/data">Data</nue-link>
+                <nue-link theme="btnlike" route="/basic">
+                    Basic 基础组件
+                </nue-link>
+                <nue-link theme="btnlike" route="/form">Form 表单组件</nue-link>
+                <nue-link theme="btnlike" route="/data">
+                    Data 数据展示组件
+                </nue-link>
                 <nue-link theme="btnlike" route="/navigation">
-                    Navigation
+                    Navigation 导航组件
                 </nue-link>
                 <nue-link theme="btnlike" route="/feedback">
-                    Feedback
+                    Feedback 反馈组件
                 </nue-link>
-                <nue-link theme="btnlike" route="/others">Others</nue-link>
+                <nue-link theme="btnlike" route="/others">
+                    Others 其他组件
+                </nue-link>
             </template>
             <template #content>
                 <router-view></router-view>
