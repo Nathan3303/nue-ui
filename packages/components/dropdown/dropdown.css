@@ -1,91 +1,101 @@
 /* Variables */
 
 .nue-dropdown-wrapper {
-    --dropdown-gap: 8px;
+    --animation-time: 0.16s;
+}
+
+.nue-dropdown {
+    --animation-time: 0.16s;
+    --font-size: var(--text-sm);
+    --inner-padding: 6px 12px;
 }
 
 /* Original styles */
 
 .nue-dropdown-wrapper {
-    display: block;
-    width: -moz-fit-content;
-    width: fit-content;
     position: relative;
 
     .state-icon {
         transform: rotate(0deg);
-        transition: all 0.3s ease-in-out;
+        transition: all var(--animation-time) ease-in-out;
+    }
+}
+
+.nue-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    position: absolute;
+    width: max-content;
+    min-width: 24px;
+    max-width: 36vw;
+    margin: 0;
+    padding: 4px;
+    background-color: white;
+    border: 1px solid var(--divider-color);
+    border-radius: var(--primary-radius);
+    box-sizing: border-box;
+    box-shadow: var(--secondary-shadow);
+    list-style: none;
+
+    .nue-dropdown__empty-text {
+        font-size: var(--text-xs);
+        color: var(--primary-color-600);
+        text-align: center;
+        padding: var(--inner-padding);
     }
 
-    .nue-dropdown {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: var(--secondary-gap);
-        position: absolute;
-        min-width: 100%;
-        width: max-content;
-        margin: 0;
-        padding: var(--secondary-padding);
-        background-color: white;
-        border: 1px solid var(--divider-color);
+    & li,
+    & .nue-dropdown-item {
+        padding: var(--inner-padding);
+        font-size: var(--font-size);
+        background-color: transparent;
         border-radius: var(--primary-radius);
-        box-shadow: var(--secondary-shadow);
-        list-style: none;
+        cursor: default;
         box-sizing: border-box;
-        z-index: 3;
-        transition: all 0.16s linear;
 
-        & > * {
-            /* color: var(--primary-text-color); */
-            font-size: var(--text-sm);
-            font-weight: 500;
-            font-family: inherit;
-            padding: 4px 7px;
-
-            &[data-executeid]:hover {
-                border-radius: var(--primary-radius);
-                cursor: pointer;
-                background-color: var(--light-primary-color);
-            }
-        }
-
-        &[data-align="left"] {
-            left: 0;
-            transform-origin: 0 0;
-        }
-
-        &[data-align="center"] {
-            left: 50%;
-            transform: translateX(-50%);
-            transform-origin: 50% 0;
-        }
-
-        &[data-align="right"] {
-            right: 0;
-            transform-origin: 100% 0;
-        }
-
-        &[data-direction="bottom"] {
-            top: calc(100% + var(--dropdown-gap));
-        }
-
-        &[data-direction="top"] {
-            bottom: calc(100% + var(--dropdown-gap));
+        &:hover {
+            background-color: var(--primary-color-200);
         }
     }
 }
 
-/* Animation */
+/* Visible */
 
-.fade-enter-active {
-    animation: fade-in 0.16s linear;
+.nue-dropdown-wrapper[data-visible="true"] {
+    .state-icon {
+        transform: rotate(180deg);
+    }
 }
 
-.fade-leave-active {
-    animation: fade-out 0.16s linear;
+/* Size */
+
+.nue-dropdown {
+    &.nue-dropdown--small {
+        --font-size: var(--text-xs);
+        --inner-padding: 4px 8px;
+    }
+
+    &.nue-dropdown--large {
+        --font-size: var(--text-md);
+        --inner-padding: 8px 16px;
+    }
 }
 
-.nue-dropdown--droped .state-icon {
-    transform: rotate(180deg);
+/* Direction */
+
+.nue-dropdown {
+    &[data-direction="top"] {
+        animation: slide-fade-top var(--animation-time) ease forwards;
+    }
+    &[data-direction="bottom"] {
+        animation: slide-fade-bottom var(--animation-time) ease forwards;
+    }
+    &[data-direction="left"] {
+        animation: slide-fade-left var(--animation-time) ease forwards;
+    }
+    &[data-direction="right"] {
+        animation: slide-fade-right var(--animation-time) ease forwards;
+    }
 }
