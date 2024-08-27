@@ -1,37 +1,25 @@
 <template>
     <nue-div gap="36px">
         <nue-badge value="New">
-            <nue-button>Button</nue-button>
+            <nue-button>文字徽标</nue-button>
         </nue-badge>
         <nue-badge :value="100" :max="99">
-            <nue-button icon="mail">Mail</nue-button>
+            <nue-button>数字徽标且有最大值显示限制</nue-button>
         </nue-badge>
         <nue-badge dot>
-            <nue-button icon="mail">Mail</nue-button>
+            <nue-button>小红点</nue-button>
         </nue-badge>
     </nue-div>
     <nue-div>
-        <nue-button icon="mail">
-            Mail
+        <nue-button>
+            NueButton 组件内联徽标
             <template #append>
                 <nue-badge :value="100" :max="99" />
             </template>
         </nue-button>
-        <nue-button icon="mail">
-            Mail
-            <template #append>
-                <nue-badge value="123"></nue-badge>
-            </template>
-        </nue-button>
-        <nue-button icon="mail">
-            Mail
-            <template #append>
-                <nue-badge dot />
-            </template>
-        </nue-button>
-        <nue-link :theme="['actived', 'btnlike']" icon="ring">
+        <nue-link theme="btnlike,actived">
             <nue-div align="center">
-                Message
+                NueLink 组件内联徽标（小红点）
                 <nue-badge dot />
             </nue-div>
         </nue-link>

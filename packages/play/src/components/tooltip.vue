@@ -1,68 +1,54 @@
 <template>
     <nue-div align="center" justify="center">
-        <nue-tooltip content="NiHao" placement="top-start">
-            <nue-button>Button</nue-button>
+        <nue-tooltip content="Hello, world!" placement="top-start">
+            <nue-button>上-左</nue-button>
         </nue-tooltip>
-        <nue-tooltip content="NiHao" placement="top-center">
-            <nue-button>Button</nue-button>
+        <nue-tooltip content="Hello, world!" placement="top-center">
+            <nue-button>上-中</nue-button>
         </nue-tooltip>
-        <nue-tooltip content="NiHao" placement="top-end">
-            <nue-button>Button</nue-button>
-        </nue-tooltip>
-    </nue-div>
-    <nue-div align="center" justify="space-between">
-        <nue-tooltip content="NiHao" placement="left-start">
-            <nue-button>Button</nue-button>
-        </nue-tooltip>
-        <nue-tooltip content="NiHao" placement="right-start">
-            <nue-button>Button</nue-button>
+        <nue-tooltip content="Hello, world!" placement="top-end">
+            <nue-button>上-右</nue-button>
         </nue-tooltip>
     </nue-div>
     <nue-div align="center" justify="space-between">
-        <nue-tooltip content="NiHao" placement="left-center">
-            <nue-button>Button</nue-button>
+        <nue-tooltip content="Hello, world!" placement="left-start">
+            <nue-button>左-上</nue-button>
         </nue-tooltip>
-        <nue-tooltip
-            content="https://www.baidu.com"
-            size="small"
-            theme="custom">
-            <nue-link href="https://www.baidu.com">Go to baidu</nue-link>
-        </nue-tooltip>
-        <nue-tooltip content="NiHao" placement="right-center">
-            <nue-button>Button</nue-button>
+        <nue-tooltip content="Hello, world!" placement="right-start">
+            <nue-button>右-上</nue-button>
         </nue-tooltip>
     </nue-div>
     <nue-div align="center" justify="space-between">
-        <nue-tooltip content="NiHao" placement="left-end">
-            <nue-button>Button</nue-button>
+        <nue-tooltip content="Hello, world!" placement="left-center">
+            <nue-button>左-中</nue-button>
         </nue-tooltip>
-        <nue-tooltip content="NiHao" placement="right-end">
-            <nue-button>Button</nue-button>
+        <nue-tooltip content="small" size="small" theme="custom">
+            <nue-button>小型文字提示</nue-button>
+        </nue-tooltip>
+        <nue-tooltip content="large" size="large" theme="custom2">
+            <nue-button>大型文字提示</nue-button>
+        </nue-tooltip>
+        <nue-tooltip content="Hello, world!" placement="right-center">
+            <nue-button>右-中</nue-button>
+        </nue-tooltip>
+    </nue-div>
+    <nue-div align="center" justify="space-between">
+        <nue-tooltip content="Hello, world!" placement="left-end">
+            <nue-button>左-下</nue-button>
+        </nue-tooltip>
+        <nue-tooltip content="Hello, world!" placement="right-end">
+            <nue-button>右-下</nue-button>
         </nue-tooltip>
     </nue-div>
     <nue-div align="center" justify="center">
-        <nue-tooltip content="NiHao" placement="bottom-start">
-            <nue-button>Button</nue-button>
+        <nue-tooltip content="Hello, world!" placement="bottom-start">
+            <nue-button>下-左</nue-button>
         </nue-tooltip>
-        <nue-tooltip content="NiHao" placement="bottom-center">
-            <nue-button>Button</nue-button>
+        <nue-tooltip content="Hello, world!" placement="bottom-center">
+            <nue-button>下-中</nue-button>
         </nue-tooltip>
-        <nue-tooltip content="NiHao" placement="bottom-end">
-            <nue-button>Button</nue-button>
-        </nue-tooltip>
-    </nue-div>
-    <!--  -->
-    <nue-div>
-        <nue-tooltip
-            content="Lorem ipsum, dolor sit amet consectetu"
-            size="large"
-            theme="custom2">
-            <nue-text>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit
-                deleniti et dolor accusantium. Rerum velit dolores voluptatibus
-                ullam id, modi, optio numquam accusamus animi temporibus soluta
-                fugiat. Aspernatur, officiis natus.
-            </nue-text>
+        <nue-tooltip content="Hello, world!" placement="bottom-end">
+            <nue-button>下-右</nue-button>
         </nue-tooltip>
     </nue-div>
 </template>

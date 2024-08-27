@@ -1,29 +1,28 @@
 <template>
-    <nue-button @click="dialogData.visible = true">Open Dialog</nue-button>
+    <nue-button @click="dialogData.visible = true">点击打开对话框</nue-button>
     <nue-dialog
         ref="dialogRef"
         v-model="dialogData.visible"
         :before-confirm="handleBeforeConfirm"
-        title="Dialog Title">
+        title="创建项目对话框">
         <nue-div vertical align="stretch">
             <nue-input
                 v-model="dialogData.projectName"
-                title="Project name"
-                placeholder="Project name (required)"></nue-input>
+                title="项目名称"
+                placeholder="项目名称"></nue-input>
             <nue-textarea
                 v-model="dialogData.projectDescription"
-                title="Project description"
-                placeholder="Project description"
-                :rows="4"
-                autosize></nue-textarea>
+                title="项目备注"
+                placeholder="项目备注"
+                :rows="4"></nue-textarea>
         </nue-div>
         <template #footer="{ cancel }">
-            <nue-button @click.stop="cancel">Cancel</nue-button>
+            <nue-button @click.stop="cancel">取消</nue-button>
             <nue-button
                 theme="primary"
                 @click.stop="handleAddProject"
                 :loading="dialogData.loading">
-                Create
+                创建
             </nue-button>
         </template>
     </nue-dialog>
@@ -31,7 +30,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from "vue";
-import { NueConfirm } from "nue-ui";
+import { NueConfirm, NueDialog } from "nue-ui";
 
 const dialogRef = ref<InstanceType<typeof NueDialog> | null>(null);
 const dialogData = reactive({
@@ -43,8 +42,10 @@ const dialogData = reactive({
 
 function handleBeforeConfirm(done: () => void) {
     NueConfirm({
-        title: "Confirm",
-        content: "Are you sure to close the dialog?",
+        title: "确认创建",
+        content: "确认创建项目吗？",
+        confirmButtonText: "确认",
+        cancelButtonText: "取消",
     }).then(done, () => {});
 }
 

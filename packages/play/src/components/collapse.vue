@@ -1,10 +1,11 @@
 <template>
-    <nue-collapse v-model="activeNames">
-        <nue-collapse-item name="c1" title="Collapse Item 1">
+    <nue-collapse v-model="activeNames" accordion>
+        <nue-collapse-item name="c1" title="面板 A">
             <nue-text>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Asperiores natus aspernatur facere dolores eos itaque cupiditate
-                eveniet perspiciatis dolorem?
+                Similique numquam quos, veniam, inventore ipsa nulla id libero
+                blanditiis illum eligendi, totam quod exercitationem omnis iure
+                corrupti. Iste quae veritatis dignissimos?
             </nue-text>
         </nue-collapse-item>
         <nue-collapse-item name="c2">
@@ -13,15 +14,18 @@
                     theme="pure"
                     @click="collapse"
                     :icon="`arrow-${state ? 'right' : 'down'}`">
-                    Collapse Item 2
+                    面板 B（自定义头部）
                 </nue-button>
             </template>
             <nue-text>
-                Illo neque, numquam amet rem veniam dolorum iste aperiam
-                laudantium fugiat.
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex,
+                facere voluptatum! Tempore molestiae dolorum dolorem magnam,
+                recusandae autem magni repellendus sequi reprehenderit.
+                Obcaecati tempora rem recusandae perferendis ullam porro
+                dolorum!
             </nue-text>
         </nue-collapse-item>
-        <nue-collapse-item name="c3" title="Collapse Item 3">
+        <nue-collapse-item name="c3" title="面板 C（空面板）">
         </nue-collapse-item>
     </nue-collapse>
 </template>

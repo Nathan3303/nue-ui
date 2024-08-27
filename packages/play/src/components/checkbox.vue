@@ -10,7 +10,7 @@
                 v-for="cbName in checkboxes"
                 :key="cbName"
                 :label="uppercaseFirst(cbName)"
-                :name="cbName"></nue-checkbox>
+                :name="cbName" />
             <nue-checkbox
                 theme="custom"
                 name="network"
