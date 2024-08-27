@@ -22,6 +22,8 @@
     /* Colors */
     --divider-color: var(--primary-color-300);
     --disabled-color: var(--primary-color-500);
+    --dark-primary-color: var(--primary-color-700);
+    --light-primary-color: var(--primary-color-100);
     --accent-color: #607d8b;
     --error-color: #f44336;
     --success-color: #4caf50;
