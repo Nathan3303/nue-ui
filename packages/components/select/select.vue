@@ -2,10 +2,10 @@
     <nue-dropdown :class="classes" @execute="handleExecute">
         <template #default="{ clickTrigger }">
             <nue-button
-                :theme="size"
-                @click="() => clickTrigger()"
+                :size="size"
+                :disabled="disabled"
                 style="gap: 16px"
-                :disabled="disabled">
+                @click.stop="clickTrigger">
                 <template #default>
                     <template v-if="label">{{ label }}</template>
                     <nue-text
@@ -20,13 +20,7 @@
                 </template>
             </nue-button>
         </template>
-        <template #dropdown>
-            <slot>
-                <nue-text color="gray" size="12px" align="center">
-                    No options
-                </nue-text>
-            </slot>
-        </template>
+        <template #dropdown> <slot></slot> </template>
     </nue-dropdown>
 </template>
 
