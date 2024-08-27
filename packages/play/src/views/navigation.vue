@@ -1,6 +1,6 @@
 <template>
     <div class="view-container">
-        <demo-card title="Dropdown">
+        <demo-card title="Dropdown 下拉框">
             <dropdown-demo></dropdown-demo>
         </demo-card>
     </div>

@@ -1,21 +1,21 @@
 <template>
     <div class="view-container">
-        <demo-card title="Dialog">
+        <demo-card title="Dialog 对话框">
             <dialog-demo></dialog-demo>
         </demo-card>
-        <demo-card title="Drawer">
+        <demo-card title="Drawer 抽屉">
             <drawer-demo></drawer-demo>
         </demo-card>
-        <demo-card title="Message">
+        <demo-card title="Message 消息提示">
             <message-demo></message-demo>
         </demo-card>
-        <demo-card title="Confirm">
+        <demo-card title="Confirm 确认框">
             <confirm-demo></confirm-demo>
         </demo-card>
-        <demo-card title="Prompt">
+        <demo-card title="Prompt 输入框">
             <prompt-demo></prompt-demo>
         </demo-card>
-        <demo-card title="Tooltip">
+        <demo-card title="Tooltip 文字提示">
             <tooltip-demo></tooltip-demo>
         </demo-card>
     </div>
