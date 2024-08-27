@@ -210,11 +210,12 @@ const calculatePosition = () => {
 };
 
 const handleShow = () => {
-    placementBuffer.value = props.placement;
     if (hideTimer.value) {
         clearTimeout(hideTimer.value);
         hideTimer.value = null;
+        return;
     }
+    placementBuffer.value = props.placement;
     visible.value = true;
     nextTick(() => {
         getRectInfo();
