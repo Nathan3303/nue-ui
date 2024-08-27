@@ -9,15 +9,6 @@
 
 /* Original */
 
-.nue-tooltip-wrapper {
-    position: relative;
-
-    .nue-tooltip__buffer {
-        position: absolute;
-        background: transparent;
-    }
-}
-
 .nue-tooltip {
     display: flex;
     align-items: center;
@@ -29,6 +20,10 @@
     position: absolute;
     background-color: var(--primary-color-900);
     border-radius: var(--primary-radius);
+
+    .nue-tooltip__padding {
+        position: absolute;
+    }
 
     .nue-tooltip__text {
         color: var(--primary-color-50);
@@ -47,6 +42,43 @@
     &.nue-tooltip--large {
         padding: 8px 16px;
         --font-size: var(--text-md);
+    }
+}
+
+/* Placement */
+
+.nue-tooltip {
+    &[data-direction="top"] {
+        animation: slide-fade-top var(--animation-time) ease forwards;
+        .nue-tooltip__padding {
+            width: 100%;
+            height: 8px;
+            top: 100%;
+        }
+    }
+    &[data-direction="bottom"] {
+        animation: slide-fade-bottom var(--animation-time) ease forwards;
+        .nue-tooltip__padding {
+            width: 100%;
+            height: 8px;
+            bottom: 100%;
+        }
+    }
+    &[data-direction="left"] {
+        animation: slide-fade-left var(--animation-time) ease forwards;
+        .nue-tooltip__padding {
+            width: 8px;
+            height: 100%;
+            left: 100%;
+        }
+    }
+    &[data-direction="right"] {
+        animation: slide-fade-right var(--animation-time) ease forwards;
+        .nue-tooltip__padding {
+            width: 8px;
+            height: 100%;
+            right: 100%;
+        }
     }
 }
 
@@ -136,98 +168,5 @@
             bottom: calc(16px - 4px);
             right: calc(100% + 4px);
         }
-    }
-}
-
-/* Placement */
-
-.nue-tooltip-wrapper {
-    .nue-tooltip__buffer[data-direction="top"] {
-        width: 100%;
-        height: 16px;
-        bottom: 100%;
-    }
-    .nue-tooltip__buffer[data-direction="bottom"] {
-        width: 100%;
-        height: 16px;
-        top: 100%;
-    }
-    .nue-tooltip__buffer[data-direction="left"] {
-        width: 16px;
-        height: 100%;
-        right: 100%;
-    }
-    .nue-tooltip__buffer[data-direction="right"] {
-        width: 16px;
-        height: 100%;
-        left: 100%;
-    }
-}
-
-.nue-tooltip {
-    &[data-direction="top"] {
-        animation: slide-fade-top var(--animation-time) ease forwards;
-    }
-    &[data-direction="bottom"] {
-        animation: slide-fade-bottom var(--animation-time) ease forwards;
-    }
-    &[data-direction="left"] {
-        animation: slide-fade-left var(--animation-time) ease forwards;
-    }
-    &[data-direction="right"] {
-        animation: slide-fade-right var(--animation-time) ease forwards;
-    }
-}
-
-/* Animations */
-
-@keyframes slide-fade-out {
-    to {
-        transform: scale(0.86);
-        opacity: 0;
-    }
-}
-
-@keyframes slide-fade-top {
-    0% {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slide-fade-bottom {
-    0% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slide-fade-left {
-    0% {
-        opacity: 0;
-        transform: translateX(10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slide-fade-right {
-    0% {
-        opacity: 0;
-        transform: translateX(-10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
     }
 }
