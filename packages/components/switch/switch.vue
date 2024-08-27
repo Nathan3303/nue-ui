@@ -62,6 +62,7 @@ const handleClick = async () => {
 
 const handleSwitch = () => {
     state.value = !state.value;
+    handleSetStateWidth();
     emit("update:modelValue", state.value);
     emit("change", state.value);
 };
