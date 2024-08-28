@@ -1,5 +1,5 @@
 <template>
-    <nue-div align="center" :divider="{}">
+    <nue-div align="center" gap="24px">
         <nue-text weight="100"> 100 </nue-text>
         <nue-text weight="300"> 300 </nue-text>
         <nue-text weight="500"> 500 </nue-text>
