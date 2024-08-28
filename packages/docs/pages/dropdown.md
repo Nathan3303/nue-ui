@@ -12,20 +12,12 @@
 demo-preview=../demos/dropdown/basic.vue
 :::
 
-## 设置触发方式
-
-通过 `trigger` 属性设置下拉菜单的触发方式，可选值为 `hover` 和 `click`。
-
-::: preview
-demo-preview=../demos/dropdown/trigger.vue
-:::
-
 ## 设置菜单的对齐方式
 
-通过 `align` 属性设置下拉菜单的对齐方式，可选值为 `left`、`center`、`right`。
+通过 `placement` 属性设置下拉菜单的对齐方式，可选值为 `top-start`、`top-center`、`top-end`、`bottom-start`、`bottom-center` 以及 `bottom-end`。
 
 ::: preview
-demo-preview=../demos/dropdown/align.vue
+demo-preview=../demos/dropdown/placement.vue
 :::
 
 ## 菜单选项事件处理

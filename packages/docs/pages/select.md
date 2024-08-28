@@ -35,3 +35,11 @@ demo-preview=../demos/select/placeholder.vue
 ::: preview
 demo-preview=../demos/select/size.vue
 :::
+
+## 可清除的选择器
+
+通过 `clearable` 属性，启用选择器的清除按钮。
+
+::: preview
+demo-preview=../demos/select/clearable.vue
+:::
