@@ -83,6 +83,7 @@ const handleShow = () => {
     show(void 0, () => {
         calculatePosition(props.placement);
         activeTooltipPool();
+        window.addEventListener("wheel", handleHide);
     });
 };
 
@@ -95,6 +96,7 @@ const handleHide = () => {
         },
         () => {
             deactiveTooltipPool();
+            window.removeEventListener("wheel", handleHide);
         }
     );
 };

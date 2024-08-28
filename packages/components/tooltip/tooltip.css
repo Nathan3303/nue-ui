@@ -28,6 +28,8 @@
     .nue-tooltip__text {
         color: var(--primary-color-50);
         font-size: var(--font-size);
+        font-family: var(--primary-font-family);
+        font-weight: var(--primary-font-weight);
     }
 }
 
