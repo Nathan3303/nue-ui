@@ -41,7 +41,6 @@ import "./dropdown.css";
 defineOptions({ name: "NueDropdown" });
 const props = withDefaults(defineProps<NueDropdownProps>(), {
     disabled: false,
-    triggerText: "Dropdown",
     placement: "bottom-start",
     dropType: "click",
     hideOnClick: false,
