@@ -29,16 +29,18 @@ export const usePopper = (
     };
 
     const updatePlacement = (
-        direction: "top" | "bottom" | "left" | "right"
+        direction?: "top" | "bottom" | "left" | "right",
+        alignment?: "start" | "center" | "end"
     ) => {
-        const splited = placement.value.split("-");
-        splited[0] = direction;
-        const newPlacement = splited.join("-") || "top-center";
+        const [_direction, _alignment] = placement.value.split("-");
+        const newDirection = direction ?? _direction;
+        const newAlignment = alignment ?? _alignment;
+        const newPlacement = newDirection + "-" + newAlignment;
         placement.value = (newPlacement as UsePopperOptions["placement"])!;
     };
 
     const checkOverflow = () => {
-        const [direction] = placement.value.split("-");
+        const [direction, alignment] = placement.value.split("-");
         const {
             popperWidth,
             popperHeight,
@@ -75,6 +77,31 @@ export const usePopper = (
                     window.innerWidth - 8
                 ) {
                     updatePlacement("left");
+                    return true;
+                }
+                break;
+        }
+        switch (alignment) {
+            case "start":
+                if (wrapperX + popperWidth > window.innerWidth - 8) {
+                    updatePlacement(void 0, "center");
+                    return true;
+                }
+
+                break;
+            case "end":
+                if (wrapperX < 8) {
+                    updatePlacement(void 0, "center");
+                    return true;
+                }
+                break;
+            case "center":
+                if (wrapperX + popperWidth > window.innerWidth - 8) {
+                    updatePlacement(void 0, "end");
+                    return true;
+                }
+                if (wrapperX < 8) {
+                    updatePlacement(void 0, "start");
                     return true;
                 }
                 break;
