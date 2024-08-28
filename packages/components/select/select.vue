@@ -1,5 +1,9 @@
 <template>
-    <nue-dropdown :class="classes" @execute="handleExecute">
+    <nue-dropdown
+        :class="classes"
+        :size="size"
+        :hide-on-clicked="hideOnSelect"
+        @execute="handleExecute">
         <template #default="{ clickTrigger }">
             <nue-button
                 :size="size"
@@ -11,16 +15,22 @@
                     <nue-text
                         v-else
                         color="gray"
-                        style="font-size: inherit !important"
-                        >{{ placeholder }}</nue-text
-                    >
+                        style="font-size: inherit !important">
+                        {{ placeholder }}
+                    </nue-text>
                 </template>
                 <template #append>
-                    <nue-icon name="select"></nue-icon>
+                    <nue-icon name="select" />
+                    <nue-icon
+                        v-if="clearable && selectedOption"
+                        name="clear"
+                        @click.stop="handleClear" />
                 </template>
             </nue-button>
         </template>
-        <template #dropdown> <slot></slot> </template>
+        <template #dropdown>
+            <slot />
+        </template>
     </nue-dropdown>
 </template>
 
@@ -39,7 +49,9 @@ defineOptions({ name: "NueSelect" });
 
 const emit = defineEmits<SelectEmits>();
 const props = withDefaults(defineProps<SelectProps>(), {
+    hideOnSelect: true,
     placeholder: "Select",
+    clearable: false,
 });
 
 const options = ref<SelectOption[]>([]);
@@ -47,9 +59,8 @@ const selectedOption = ref<SelectOption>();
 
 const classes = computed(() => {
     const { theme } = props;
-    let list: string[] = [];
     const prefix = "nue-select";
-    list.push(prefix);
+    let list: string[] = [prefix];
     if (theme) list = list.concat(parseTheme(theme, prefix));
     return list;
 });
@@ -98,17 +109,16 @@ function handleSelect(payload: unknown, isParseMV = false) {
     selectedOption.value = _option || void 0;
 }
 
+function handleClear() {
+    selectedOption.value = void 0;
+    emit("update:modelValue", void 0);
+    emit("change", void 0);
+}
+
 watch(
     () => props.modelValue,
     (newValue) => handleSelect(newValue, true)
 );
-
-// watch(
-//     () => selectedOption.value,
-//     (newValue) => {
-//         const _nv = newValue ? newValue.value : null;
-//     }
-// );
 
 onMounted(() => {
     handleSelect(props.modelValue, true);
