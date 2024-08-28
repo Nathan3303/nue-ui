@@ -1,6 +1,9 @@
 <template>
     <nue-div style="height: 160px">
-        <nue-dropdown text="Click to open dropdown" @execute="handleExecute">
+        <nue-dropdown
+            text="Click to open dropdown"
+            @execute="handleExecute"
+            hide-on-click>
             <template #dropdown>
                 <li data-executeid="Coding">Coding</li>
                 <li data-executeid="Testing">Testing</li>

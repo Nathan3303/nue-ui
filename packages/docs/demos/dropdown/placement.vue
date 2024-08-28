@@ -1,18 +1,18 @@
 <template>
-    <nue-div style="height: 160px" justify="space-between">
-        <nue-dropdown text="Left aligned" align="left">
+    <nue-div style="margin-bottom: 96px" justify="space-between">
+        <nue-dropdown text="下-左" placement="bottom-start" hide-on-click>
             <template #dropdown>
                 <li>Dropdown item 1</li>
                 <li>Dropdown item 2</li>
             </template>
         </nue-dropdown>
-        <nue-dropdown text="Center aligned" align="center">
+        <nue-dropdown text="下-中" placement="bottom-center" hide-on-click>
             <template #dropdown>
                 <li>Dropdown item 1</li>
                 <li>Dropdown item 2</li>
             </template>
         </nue-dropdown>
-        <nue-dropdown text="Right aligned" align="right">
+        <nue-dropdown text="下-右" placement="bottom-end" hide-on-click>
             <template #dropdown>
                 <li>Dropdown item 1</li>
                 <li>Dropdown item 2</li>
