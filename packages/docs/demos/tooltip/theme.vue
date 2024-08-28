@@ -1,6 +1,9 @@
 <template>
     <nue-div class="vp-raw">
-        <nue-tooltip content="https://www.baidu.com" theme="custom">
+        <nue-tooltip
+            content="https://www.baidu.com"
+            theme="custom"
+            placement="right-center">
             <nue-link href="https://www.baidu.com">Baidu</nue-link>
         </nue-tooltip>
     </nue-div>
