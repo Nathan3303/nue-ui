@@ -19,6 +19,7 @@ export interface NueDropdownProps extends GlobalProps {
         | "bottom-center"
         | "bottom-end";
     size?: "small" | "large";
+    keepAlive?: boolean;
     hideOnClicked?: boolean;
     beforeExecute?: () => void;
     afterExecute?: () => void;

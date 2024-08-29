@@ -15,17 +15,21 @@
             </nue-button>
         </slot>
         <teleport to="#NueDropdownPool">
-            <div
-                v-if="visible"
-                :class="dropdownClasses"
-                :data-direction="placementInfo.direction"
-                :style="dropdownStyles"
-                ref="dropdownRef"
-                @click.stop="handleExecute">
-                <slot name="dropdown">
-                    <span class="nue-dropdown__empty-text"> No options. </span>
-                </slot>
-            </div>
+            <template v-if="keepAlive || visible">
+                <ul
+                    v-show="visible"
+                    :class="dropdownClasses"
+                    :data-direction="placementInfo.direction"
+                    :style="dropdownStyles"
+                    ref="dropdownRef"
+                    @click.stop="handleExecute">
+                    <slot name="dropdown">
+                        <span class="nue-dropdown__empty-text">
+                            No options.
+                        </span>
+                    </slot>
+                </ul>
+            </template>
         </teleport>
     </div>
 </template>
@@ -45,6 +49,7 @@ const props = withDefaults(defineProps<NueDropdownProps>(), {
     dropType: "click",
     hideOnClick: false,
     hideOnClicked: false,
+    keepAlive: false,
 });
 const emit = defineEmits<NueDropdownEmits>();
 
@@ -104,14 +109,18 @@ const handleShow = () => {
 };
 
 const handleHide = () => {
+    const { keepAlive } = props;
     hide(
         160,
         () => {
             if (!dropdownRef.value) return;
-            dropdownRef.value.style.animationName = "slide-fade-out";
+            dropdownRef.value.classList.add("nue-dropdown--hiding");
         },
         () => {
             deactivePool();
+            if (keepAlive && dropdownRef.value) {
+                dropdownRef.value.classList.remove("nue-dropdown--hiding");
+            }
             window.removeEventListener("click", handleHide);
             window.removeEventListener("wheel", handleHide);
         }

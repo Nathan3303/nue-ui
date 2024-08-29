@@ -39,6 +39,15 @@
     box-shadow: var(--secondary-shadow);
     list-style: none;
 
+    &.nue-dropdown--hiding {
+        animation: slide-fade-out var(--animation-time) ease forwards !important;
+    }
+
+    &.nue-dropdown--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
     .nue-dropdown__empty-text {
         font-size: var(--text-xs);
         color: var(--primary-color-600);
