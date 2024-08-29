@@ -3,16 +3,28 @@ import type { GlobalProps } from "@nue-ui/utils";
 export type DropdownDirection = "top" | "bottom";
 export type DropdownAlign = "left" | "center" | "right";
 
-export interface DropdownPropsType extends GlobalProps {
-    maxHeight?: string;
-    disabled?: boolean;
-    trigger?: "click" | "hover";
+export interface NueDropdownProps extends GlobalProps {
+    // Old
     text?: string;
-    actionDelay?: number;
     hideOnClick?: boolean;
-    align?: DropdownAlign;
+    // New
+    disabled?: boolean;
+    dropType?: "click" | "hover";
+    triggerText?: string;
+    placement?:
+        | "top-start"
+        | "top-center"
+        | "top-end"
+        | "bottom-start"
+        | "bottom-center"
+        | "bottom-end";
+    size?: "small" | "large";
+    keepAlive?: boolean;
+    hideOnClicked?: boolean;
+    beforeExecute?: () => void;
+    afterExecute?: () => void;
 }
 
-export type DropdownEmitsType = {
+export type NueDropdownEmits = {
     (e: "execute", value: string): void;
 };

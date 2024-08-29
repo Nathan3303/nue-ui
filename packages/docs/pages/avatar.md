@@ -43,3 +43,41 @@ demo-preview=../demos/avatar/icon.vue
 ::: preview
 demo-preview=../demos/avatar/fit.vue
 :::
+
+## API
+
+### 属性 `(props)`
+
+| 属性名 | 类型 | 默认值 | 说明 |
+| ------ | ------ | ------ | ------ |
+| src | string | - | 图片的 URL |
+| icon | string | - | 头像的图标 |
+| size | string | - | 头像大小，该值会被直接作为 CSS 的 `width` 和 `height` 值 |
+| title | string | - | - |
+| fit | fill、cover、contain、none、scale-down | cover | - |
+| rounded | boolean | false | 圆形头像 |
+| alt | string | - | - |
+
+```typescript
+export interface AvatarProps extends GlobalProps {
+    src?: string;
+    icon?: IconNameType;
+    size?: string;
+    title?: string;
+    fit?: "fill" | "cover" | "contain" | "none" | "scale-down";
+    rounded?: boolean;
+    alt?: string;
+}
+```
+
+### 事件 `(events)`
+
+| 事件名 | 说明 | 回调参数 |
+| ------ | ------ | ------ |
+| error | 图片加载失败时触发 | Event 事件对象 |
+
+```typescript
+export type AvatarEmits = {
+    (e: "error", val: Event): void;
+};
+```

@@ -52,7 +52,7 @@
 
     .badge-content {
         aspect-ratio: 1;
-        width: var(--font-size, 14px);
+        width: 14px;
         padding: 0px;
         border-radius: 99px;
         border: 2px solid white;

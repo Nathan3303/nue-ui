@@ -67,7 +67,7 @@ const handleSwitch = () => {
 };
 
 const handleSetStateWidth = () => {
-    requestIdleCallback(() => {
+    setTimeout(() => {
         const cw = switchRef.value?.clientWidth;
         switchRef.value?.style.setProperty("--state-width", `${cw}px`);
     });

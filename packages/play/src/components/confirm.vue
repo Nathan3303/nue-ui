@@ -1,6 +1,6 @@
 <template>
     <nue-div>
-        <nue-button @click="openConfirm">Open Confirm</nue-button>
+        <nue-button @click="openConfirm">点击打开确认对话框</nue-button>
     </nue-div>
 </template>
 
@@ -9,13 +9,13 @@ import { NueConfirm, NueMessage } from "nue-ui";
 
 function openConfirm() {
     NueConfirm({
-        title: "Confirm",
-        content: "Are you sure to delete this item?",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        title: "确认对话框",
+        content: "你确定要删除吗？",
+        confirmButtonText: "确认",
+        cancelButtonText: "取消",
     }).then(
-        () => NueMessage.success("Confirmed!"),
-        () => NueMessage.info("Canceled!")
+        () => NueMessage.success("删除确认!"),
+        () => NueMessage.info("操作取消!")
     );
 }
 </script>

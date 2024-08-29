@@ -8,4 +8,5 @@ printLogo();
 const installer = makeInstaller(components);
 
 export * from "@nue-ui/components";
+export * from "@nue-ui/utils";
 export default installer;

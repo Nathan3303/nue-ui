@@ -13,6 +13,7 @@ import {
     NueDivider,
     NueDrawer,
     NueDropdown,
+    NueEmpty,
     NueFooter,
     NueHeader,
     NueIcon,
@@ -29,6 +30,7 @@ import {
     NueSwitch,
     NueText,
     NueTextarea,
+    NueTooltip,
 } from "@nue-ui/components";
 
 import type { Plugin } from "vue";
@@ -48,6 +50,7 @@ export default [
     NueDivider,
     NueDrawer,
     NueDropdown,
+    NueEmpty,
     NueFooter,
     NueHeader,
     NueIcon,
@@ -64,4 +67,5 @@ export default [
     NueSwitch,
     NueText,
     NueTextarea,
+    NueTooltip,
 ] as Plugin[];

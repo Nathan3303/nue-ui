@@ -1,6 +1,10 @@
 import { withInstall } from "@nue-ui/utils";
 import Dropdown from "./dropdown.vue";
-import type { DropdownPropsType, DropdownEmitsType } from "./types";
+import type { NueDropdownProps, NueDropdownEmits } from "./types";
 
 export const NueDropdown = withInstall(Dropdown);
-export type { DropdownPropsType, DropdownEmitsType };
+export type { NueDropdownProps, NueDropdownEmits };
+export type {
+    NueDropdownProps as DropdownPropsType,
+    NueDropdownEmits as DropdownEmitsType,
+};

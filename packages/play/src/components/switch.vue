@@ -1,18 +1,24 @@
 <template>
     <nue-div align="center">
-        <nue-switch size="small"></nue-switch>
-        <nue-switch></nue-switch>
-        <nue-switch size="large"></nue-switch>
-        <nue-switch show-text></nue-switch>
-        <nue-switch show-text active-text="开" inactive-text="关"></nue-switch>
+        <nue-switch size="small" />
+        <nue-switch />
+        <nue-switch size="large" />
+    </nue-div>
+    <nue-div>
+        <nue-switch show-text />
+        <nue-switch show-text active-text="开" inactive-text="关" />
+        <nue-switch
+            show-text
+            active-text="这是打开时的描述"
+            inactive-text="这是开关组件关闭时的描述" />
         <nue-switch
             show-text
             active-text="开"
             inactive-text="关"
             v-model="isActive"
             :loading="isLoading"
-            :before-switch="handleBeforeSwitch"></nue-switch>
-        <nue-switch theme="custom"></nue-switch>
+            :before-switch="handleBeforeSwitch" />
+        <nue-switch theme="custom" />
     </nue-div>
 </template>
 

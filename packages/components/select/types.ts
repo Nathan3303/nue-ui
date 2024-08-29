@@ -19,7 +19,8 @@ export interface SelectProps extends GlobalProps {
     placeholder?: string;
     size?: ButtonSize;
     disabled?: boolean;
-    
+    hideOnSelect?: boolean;
+    clearable?: boolean;
 }
 
 export type SelectEmits = {

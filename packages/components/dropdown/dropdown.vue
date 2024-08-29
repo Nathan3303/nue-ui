@@ -1,153 +1,149 @@
 <template>
     <div
-        ref="dropdownRef"
         class="nue-dropdown-wrapper"
-        :class="{ 'nue-dropdown--droped': visible }"
-        @mouseenter="handleHoverTrigger"
-        @mouseleave="handleHoverTrigger">
-        <!-- Default slot -->
-        <slot
-            :switchVisible="switchVisible"
-            :clickTrigger="handleClickTrigger"
-            :hoverTrigger="handleHoverTrigger"
-            :visible="visible">
-            <nue-button @click="handleClickTrigger">
-                {{ text }}
+        :data-visible="visible"
+        ref="dropdownWrapperRef">
+        <slot :clickTrigger="handleClickWrapper">
+            <nue-button
+                :size="size"
+                :disabled="disabled"
+                @click.stop="handleClickWrapper">
+                {{ triggerText || text }}
                 <template #append>
-                    <nue-icon
-                        class="state-icon"
-                        name="arrow-down"
-                        size="12px" />
+                    <nue-icon class="state-icon" name="arrow-down" />
                 </template>
             </nue-button>
         </slot>
-        <!-- Dropdown -->
-        <transition name="fade">
-            <ul
-                ref="dropdownListRef"
-                v-show="visible"
-                :class="classes"
-                :data-direction="direction"
-                :data-align="align"
-                @click="handleExecute"
-                @mouseenter="handleEnterMenu"
-                @mouseleave="handleHoverTrigger">
-                <slot name="dropdown"> Empty </slot>
-            </ul>
-        </transition>
+        <teleport to="#NueDropdownPool">
+            <template v-if="keepAlive || visible">
+                <ul
+                    v-show="visible"
+                    :class="dropdownClasses"
+                    :data-direction="placementInfo.direction"
+                    :style="dropdownStyles"
+                    ref="dropdownRef"
+                    @click.stop="handleExecute">
+                    <slot name="dropdown">
+                        <span class="nue-dropdown__empty-text">
+                            No options.
+                        </span>
+                    </slot>
+                </ul>
+            </template>
+        </teleport>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick } from "vue";
-import { NueButton } from "../button";
-import type {
-    DropdownPropsType,
-    DropdownEmitsType,
-    DropdownDirection,
-} from "./types";
-import "./dropdown.css";
+import { computed, ref, nextTick } from "vue";
+import { useDropdownPool } from "./use-dropdown-pool";
+import { usePopper, usePopperController } from "@nue-ui/hooks";
 import { parseTheme } from "@nue-ui/utils";
+import type { NueDropdownProps, NueDropdownEmits } from "./types";
+import "./dropdown.css";
 
 defineOptions({ name: "NueDropdown" });
-
-const emit = defineEmits<DropdownEmitsType>();
-const props = withDefaults(defineProps<DropdownPropsType>(), {
-    trigger: "click",
-    type: "button",
-    actionDelay: 172,
-    text: "Open dropdown",
-    hideOnClick: true,
-    shape: "square",
-    align: "left",
+const props = withDefaults(defineProps<NueDropdownProps>(), {
+    disabled: false,
+    placement: "bottom-start",
+    dropType: "click",
+    hideOnClick: false,
+    hideOnClicked: false,
+    keepAlive: false,
 });
+const emit = defineEmits<NueDropdownEmits>();
 
-const dropdownRef = ref<HTMLDivElement>();
-const dropdownListRef = ref<HTMLUListElement>();
 const visible = ref(false);
-const direction = ref<DropdownDirection>("bottom");
-let timer: number = 0;
+const dropdownWrapperRef = ref<HTMLDivElement>();
+const dropdownRef = ref<HTMLDivElement>();
 
-const classes = computed(() => {
-    const { theme, align } = props;
-    let list: string[] = [];
+const { activePool, deactivePool } = useDropdownPool();
+const { placement, rectInfo, calculatePosition } = usePopper(
+    dropdownWrapperRef,
+    dropdownRef,
+    {
+        placement: props.placement,
+    }
+);
+const { show, hide } = usePopperController(visible);
+
+const dropdownClasses = computed(() => {
+    const { theme, size } = props;
     const prefix = "nue-dropdown";
-    list.push(prefix);
+    let list: string[] = [prefix];
     if (theme) list = list.concat(parseTheme(theme, prefix));
-    if (align) list.push(`nue-dropdown--align-${align}`);
+    if (size) list.push(`${prefix}--${size}`);
+    if (placement.value) list.push(`${prefix}--${placement.value}`);
     return list;
 });
 
-function checkVisible() {
-    if (!dropdownRef.value) return;
-    const { clientHeight: viewportHeight } =
-        document.getElementsByTagName("body")[0];
-    const { y: dropdownY, height: dropdownHeight } =
-        dropdownRef.value.getBoundingClientRect();
-    const dropdownBottom = dropdownY + dropdownHeight;
-    nextTick(() => {
-        if (!dropdownListRef.value) return;
-        const { clientHeight: listHeight } = dropdownListRef.value;
-        direction.value =
-            dropdownBottom + listHeight > viewportHeight ? "top" : "bottom";
-    });
-}
+const dropdownStyles = computed(() => {
+    const { wrapperWidth } = rectInfo;
+    return {
+        "--dropdown-wrapper-width": `${wrapperWidth}px`,
+    };
+});
 
-function switchVisible(delay: number = 0) {
-    return new Promise((resolve) => {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(() => {
-            visible.value = !visible.value;
-            timer = 0;
-            checkVisible();
-            resolve(visible.value);
-        }, delay) as unknown as number;
-    });
-}
+const placementInfo = computed(() => {
+    const splited = placement.value.split("-");
+    return {
+        direction: splited[0] || "top",
+        alignment: splited[1] || "center",
+    };
+});
 
-async function handleClickTrigger() {
-    const { trigger } = props;
-    if (trigger !== "click") return;
-    const newValue = await switchVisible(0);
-    if (newValue) {
-        window.addEventListener("click", handleClickTrigger, false);
-    } else {
-        window.removeEventListener("click", handleClickTrigger, false);
-    }
-}
-
-function handleHoverTrigger(event: MouseEvent) {
-    const { trigger, actionDelay } = props;
-    const { type } = event;
-    if (trigger !== "hover") return;
-    if (type === "mouseenter") switchVisible(actionDelay);
-    else if (type === "mouseleave") {
-        if (visible.value) {
-            switchVisible(actionDelay);
-        } else {
-            clearTimeout(timer as number);
-            timer = 0;
+const handleShow = () => {
+    show(
+        () => {
+            if (!visible.value) {
+                document.body.click();
+            }
+        },
+        () => {
+            calculatePosition(props.placement);
+            activePool();
+            window.addEventListener("click", handleHide);
+            window.addEventListener("wheel", handleHide);
         }
-    }
-}
+    );
+};
 
-function handleEnterMenu() {
-    clearTimeout(timer as number);
-    timer = 0;
-}
+const handleHide = () => {
+    const { keepAlive } = props;
+    hide(
+        160,
+        () => {
+            if (!dropdownRef.value) return;
+            dropdownRef.value.classList.add("nue-dropdown--hiding");
+        },
+        () => {
+            deactivePool();
+            if (keepAlive && dropdownRef.value) {
+                dropdownRef.value.classList.remove("nue-dropdown--hiding");
+            }
+            window.removeEventListener("click", handleHide);
+            window.removeEventListener("wheel", handleHide);
+        }
+    );
+};
 
-function handleExecute(event: MouseEvent) {
+const handleClickWrapper = (e: MouseEvent) => {
+    e.stopPropagation();
+    visible.value ? handleHide() : handleShow();
+};
+
+const handleExecute = (event: MouseEvent) => {
     event.stopPropagation();
     const clicked = event.target as HTMLElement;
     const executeId = clicked.dataset.executeid;
-    if (!executeId && executeId !== "") return;
     // console.log(executeId);
-    emit("execute", executeId);
-    if (props.hideOnClick) {
-        window.removeEventListener("click", handleClickTrigger, false);
-        visible.value = false;
+    if (executeId) emit("execute", executeId);
+    if (props.hideOnClicked || props.hideOnClick) {
+        handleHide();
+    } else {
+        nextTick(() => {
+            handleShow();
+        });
     }
-}
-
-defineExpose({ visible, switchVisible });
+};
 </script>
