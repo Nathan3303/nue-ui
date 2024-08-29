@@ -62,14 +62,15 @@ const handleClick = async () => {
 
 const handleSwitch = () => {
     state.value = !state.value;
-    handleSetStateWidth();
     emit("update:modelValue", state.value);
     emit("change", state.value);
 };
 
 const handleSetStateWidth = () => {
-    const cw = switchRef.value?.clientWidth;
-    switchRef.value?.style.setProperty("--state-width", `${cw}px`);
+    setTimeout(() => {
+        const cw = switchRef.value?.clientWidth;
+        switchRef.value?.style.setProperty("--state-width", `${cw}px`);
+    });
 };
 
 watch(
