@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject, computed, onMounted } from "vue";
+import { ref, inject, computed } from "vue";
 import type { SelectOptionProps, SelectContext } from "./types";
 import { generateId } from "@nue-ui/utils";
 import { NueIcon } from "../index";
@@ -36,10 +36,9 @@ function handleClick(e: MouseEvent) {
     }
 }
 
-onMounted(() => {
-    selectContext.optionRegister({
-        executeId: executeId.value,
-        ...props,
-    });
+selectContext.optionRegister({
+    executeId: executeId.value,
+    ...props,
 });
+
 </script>

@@ -3,6 +3,7 @@
         :class="classes"
         :size="size"
         :hide-on-clicked="hideOnSelect"
+        :keep-alive="!!$slots.default"
         @execute="handleExecute">
         <template #default="{ clickTrigger }">
             <nue-button
@@ -82,6 +83,7 @@ function handleSelect(payload: unknown, isParseMV = false) {
     let _option: SelectOption | undefined = void 0;
     if (isParseMV) {
         if (selectedOption.value && payload === selectedOption.value.value) {
+            // console.log(payload, selectedOption.value.value);
             return;
         }
         for (const option of options.value) {
@@ -117,7 +119,9 @@ function handleClear() {
 
 watch(
     () => props.modelValue,
-    (newValue) => handleSelect(newValue, true)
+    (newValue) => {
+        handleSelect(newValue, true);
+    }
 );
 
 onMounted(() => {
