@@ -3,7 +3,8 @@
     <nue-dialog
         ref="dialogRef"
         v-model="dialogData.visible"
-        title="创建项目对话框">
+        title="创建项目对话框"
+        theme="project-creator">
         <nue-div vertical align="stretch">
             <nue-div vertical align="stretch" gap="4px">
                 <nue-input
@@ -103,4 +104,8 @@ watch(
 );
 </script>
 
-<style scoped></style>
+<style>
+.nue-dialog--project-creator {
+    background-color: #e2e2e2;
+}
+</style>
