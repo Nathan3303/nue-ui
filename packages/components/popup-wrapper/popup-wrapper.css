@@ -1,8 +1,8 @@
 .nue-popup-wrapper {
     display: flex;
 
-    width: 100%;
-    height: 100%;
+    width: 0px;
+    height: 0px;
     position: fixed;
     top: 0;
     left: 0;
