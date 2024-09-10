@@ -21,7 +21,7 @@ const getComponentDirNames = () => {
 const moveStyles = () => {
     readdir("./dist/es/theme", (err) => {
         if (err) return delay(moveStyles, 800);
-        shell.rm("-rf", "./dist/es/theme");
+        shell.mv("./dist/es/theme", "./dist/theme");
     });
 };
 
