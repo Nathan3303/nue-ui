@@ -6,6 +6,7 @@ export type DialogPropsType = {
     width?: string;
     minWidth?: string;
     theme?: string;
+    closable?: boolean;
     beforeConfirm?: DialogBeforeConfirmType;
 };
 

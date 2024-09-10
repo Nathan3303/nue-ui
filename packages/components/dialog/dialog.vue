@@ -12,6 +12,7 @@
                         <nue-button
                             icon="clear"
                             theme="pure"
+                            :disabled="!closable"
                             @click="handleCancel" />
                     </slot>
                 </div>
@@ -80,6 +81,8 @@ function handleCloseAnimation(): Promise<boolean> {
 }
 
 async function handleCancel() {
+    const { closable } = props;
+    if (!closable) return;
     await handleCloseAnimation();
     emit("update:modelValue", false);
     return true;
