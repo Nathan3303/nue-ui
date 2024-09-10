@@ -123,4 +123,8 @@
     --hover-color: var(--secondary-text-color);
     --active-color: var(--secondary-text-color);
     --border-color: transparet;
+
+    &.nue-button--disabled {
+        background-color: transparent;
+    }
 }
