@@ -13,7 +13,7 @@ export default (payload: PromptPayloadType) => {
         popupWrapper.appendChild(promptWrapper);
 
         const close: PromptClose = (isConfirmed, payload) => {
-            promptWrapper.dataset.leaving = "true";
+            promptWrapper.dataset.closing = "true";
             isConfirmed ? resolve(payload) : reject(payload);
             setTimeout(() => {
                 popupWrapper.removeChild(promptWrapper);

@@ -1,80 +1,76 @@
-/* Variables */
-
-/* .nue-prompt {} */
-
-/* Original styles */
+.nue-prompt-wrapper {
+    --wrapper-animation-name: fade-in;
+    --animation-name: slide-in-from-top;
+    --animation-rest-property: 0.24s ease-out forwards;
+}
 
 .nue-prompt-wrapper {
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     position: absolute;
-    width: 100%;
-    height: 100%;
-    padding-top: 8%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.48);
     overflow: hidden;
     box-sizing: border-box;
-    animation: fade-in 0.24s linear;
+    animation: var(--wrapper-animation-name) var(--animation-rest-property);
+}
 
-    .nue-prompt {
+.nue-prompt {
+    display: flex;
+    flex-direction: column;
+    width: 32%;
+    min-width: 360px;
+    max-width: 480px;
+    padding: 16px;
+    border-radius: 5px;
+    background-color: #fff;
+    gap: 16px;
+    transition: all 0.3s ease;
+    animation: var(--animation-name) var(--animation-rest-property);
+    box-sizing: border-box;
+
+    .nue-prompt__header {
+        width: 100%;
         display: flex;
-        flex-direction: column;
-        width: 32%;
-        min-width: 360px;
-        max-width: 480px;
-        padding: 16px;
-        border-radius: 5px;
-        background-color: #fff;
-        gap: 16px;
-        transition: all 0.3s ease;
-        animation: slide-in-from-top 0.24s linear;
-        box-sizing: border-box;
+        align-items: center;
+        justify-content: space-between;
 
-        .nue-prompt__header {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            .nue-button--icon-only {
-                --icon-size: 14px;
-            }
-        }
-
-        .nue-prompt__content {
-            width: 100%;
-            flex: 1 1 auto;
-
-            .nue-prompt__label {
-                margin: 0;
-                margin-bottom: 8px;
-            }
-
-            .nue-prompt__value-error {
-                color: #f44336;
-                font-size: 14px;
-
-                &::before {
-                    content: "*";
-                }
-            }
-        }
-
-        .nue-prompt__footer {
-            width: 100%;
-            display: flex;
-            align-self: center;
-            justify-content: end;
-            gap: 8px;
+        .nue-button--icon-only {
+            --icon-size: 14px;
         }
     }
 
-    &[data-leaving="true"] {
-        animation: fade-out 0.24s linear;
+    .nue-prompt__content {
+        width: 100%;
+        flex: 1 1 auto;
 
-        .nue-confirm {
-            animation: slide-out-to-top 0.24s linear;
+        .nue-prompt__label {
+            margin: 0;
+            margin-bottom: 8px;
+        }
+
+        .nue-prompt__value-error {
+            color: #f44336;
+            font-size: 14px;
+
+            &::before {
+                content: "*";
+            }
         }
     }
+
+    .nue-prompt__footer {
+        width: 100%;
+        display: flex;
+        align-self: center;
+        justify-content: end;
+        gap: 8px;
+    }
+}
+
+.nue-prompt-wrapper[data-closing="true"] {
+    --wrapper-animation-name: fade-out;
+    --animation-name: slide-out-to-top;
 }

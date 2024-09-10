@@ -13,7 +13,7 @@ export default function (payload: ConfirmPayloadType) {
         popupWrapper.appendChild(confirmWrapper);
 
         const close: ConfirmClose = (isConfirmed) => {
-            confirmWrapper.dataset.leaving = "true";
+            confirmWrapper.dataset.closing = "true";
             isConfirmed ? resolve(true) : reject(false);
             setTimeout(() => {
                 popupWrapper.removeChild(confirmWrapper);

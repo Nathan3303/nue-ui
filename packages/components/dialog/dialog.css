@@ -4,6 +4,9 @@
     --dialog-width: 36%;
     --dialog-min-width: 360px;
     --dialog-max-width: 480px;
+    --wrapper-animation-name: fade-in;
+    --dialog-animation-name: slide-in-from-top;
+    --dialog-animation-rest-property: 0.24s ease-out forwards;
 }
 
 /* Original styles */
@@ -21,7 +24,8 @@
     overflow: hidden;
     box-sizing: border-box;
     opacity: 0;
-    transition: all 0.3s ease;
+    animation: var(--wrapper-animation-name)
+        var(--dialog-animation-rest-property);
 }
 
 .nue-dialog {
@@ -34,10 +38,8 @@
     border-radius: 5px;
     background-color: white;
     gap: 16px;
-    transition: all 0.16s ease;
-    opacity: 0;
-    transform: scale(0.92);
-    transform-origin: center;
+    animation: var(--dialog-animation-name)
+        var(--dialog-animation-rest-property);
 
     .nue-dialog__header {
         width: 100%;
@@ -77,13 +79,7 @@
     }
 }
 
-/* Animation */
-
-.nue-dialog-wrapper--open {
-    opacity: 1;
-
-    .nue-dialog {
-        transform: scale(1);
-        opacity: 1;
-    }
+.nue-dialog-wrapper[data-open="false"] {
+    --wrapper-animation-name: fade-out;
+    --dialog-animation-name: slide-out-to-top;
 }

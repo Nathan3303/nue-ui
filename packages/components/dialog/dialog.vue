@@ -64,19 +64,17 @@ const styles = computed(() => {
 });
 
 function handleOpenAnimataion() {
-    // console.log("open animation", dialogWrapperRef.value);
     requestAnimationFrame(() => {
         if (!dialogWrapperRef.value) return;
-        dialogWrapperRef.value.classList.add("nue-dialog-wrapper--open");
+        dialogWrapperRef.value.dataset.open = "true";
     });
 }
 
 function handleCloseAnimation(): Promise<boolean> {
-    // console.log("close animation", dialogWrapperRef.value);
     return new Promise((resolve) => {
         if (!dialogWrapperRef.value) return;
-        dialogWrapperRef.value.classList.remove("nue-dialog-wrapper--open");
-        setTimeout(() => resolve(true), 160);
+        dialogWrapperRef.value.dataset.open = "false";
+        setTimeout(() => resolve(true), 240);
     });
 }
 

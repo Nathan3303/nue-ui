@@ -1,63 +1,59 @@
-/* Variables */
-
-/* .nue-confirm-inner {} */
-
-/* Original styles */
+.nue-confirm-wrapper {
+    --wrapper-animation-name: fade-in;
+    --animation-name: slide-in-from-top;
+    --animation-rest-property: 0.24s ease-out forwards;
+}
 
 .nue-confirm-wrapper {
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     position: absolute;
-    width: 100%;
-    height: 100%;
-    padding-top: 8%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.48);
     overflow: hidden;
     box-sizing: border-box;
-    animation: fade-in 0.24s linear;
+    animation: var(--wrapper-animation-name) var(--animation-rest-property);
+}
 
-    .nue-confirm {
+.nue-confirm {
+    display: flex;
+    flex-direction: column;
+    width: 24%;
+    min-width: 280px;
+    padding: 16px;
+    border-radius: 5px;
+    background-color: #fff;
+    gap: 16px;
+    animation: var(--animation-name) var(--animation-rest-property);
+
+    .nue-confirm__header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nue-confirm__content {
         display: flex;
         flex-direction: column;
-        width: 24%;
-        min-width: 280px;
-        padding: 16px;
-        border-radius: 5px;
-        background-color: #fff;
-        gap: 16px;
-        animation: slide-in-from-top 0.24s linear;
-
-        .nue-confirm__header {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nue-confirm__content {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            width: 100%;
-            flex: auto;
-            margin-bottom: 12px;
-        }
-
-        .nue-confirm__footer {
-            width: 100%;
-            display: flex;
-            align-self: center;
-            justify-content: end;
-            gap: 8px;
-        }
+        gap: 8px;
+        width: 100%;
+        flex: auto;
+        margin-bottom: 12px;
     }
 
-    &[data-leaving="true"] {
-        animation: fade-out 0.24s linear;
-
-        .nue-confirm {
-            animation: slide-out-to-top 0.24s linear;
-        }
+    .nue-confirm__footer {
+        width: 100%;
+        display: flex;
+        align-self: center;
+        justify-content: end;
+        gap: 8px;
     }
+}
+
+.nue-confirm-wrapper[data-closing="true"] {
+    --wrapper-animation-name: fade-out;
+    --animation-name: slide-out-to-top;
 }
