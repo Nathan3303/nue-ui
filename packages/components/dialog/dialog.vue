@@ -42,6 +42,7 @@ defineOptions({ name: "NueDialog" });
 
 const props = withDefaults(defineProps<DialogPropsType>(), {
     title: "Dialog Title",
+    closable: true,
 });
 const emit = defineEmits<DialogEmitsType>();
 
