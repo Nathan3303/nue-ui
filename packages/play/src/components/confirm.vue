@@ -1,11 +1,11 @@
 <template>
     <nue-div>
-        <nue-button @click="openConfirm">点击打开确认对话框</nue-button>
+        <nue-button @click="openConfirm">打开确认对话框</nue-button>
         <nue-button @click="openConfirmWithTheme">
-            点击打开确认对话框（带自定义主题）
+            打开确认对话框（带自定义主题）
         </nue-button>
         <nue-button @click="openConfirmWithOnConfirm">
-            点击打开确认对话框（带自定义确认回调）
+            打开确认对话框（带自定义确认回调）
         </nue-button>
     </nue-div>
 </template>
@@ -48,12 +48,14 @@ function openConfirmWithOnConfirm() {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     const randomNumber = Math.random();
-                    randomNumber > 0.2 ? resolve("ok") : reject("error");
+                    randomNumber > 0.5
+                        ? resolve("删除成功")
+                        : reject("删除失败，请重试");
                 }, 1024);
             });
         },
     }).then(
-        () => NueMessage.success("删除确认!"),
+        (res) => NueMessage.success(res),
         (err) => {
             if (err instanceof Error) {
                 NueMessage.error(err.message);
