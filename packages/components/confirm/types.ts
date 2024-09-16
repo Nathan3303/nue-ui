@@ -1,13 +1,15 @@
 import type { VNode } from "vue";
 import type { GlobalProps, Optional } from "@nue-ui/utils";
 
-export type ConfirmClose = (isConfirmed: boolean) => void;
+export type ConfirmClose = (confirmResult: any) => void;
 
 export interface ConfirmPropsType extends GlobalProps {
     title?: string;
     content?: string | VNode;
     confirmButtonText?: string;
     cancelButtonText?: string;
+    loading?: boolean;
+    onConfirm?: () => Promise<string | boolean | undefined> | boolean;
     close: ConfirmClose;
 }
 

@@ -1,8 +1,11 @@
 <template>
     <nue-div>
         <nue-button @click="openConfirm">点击打开确认对话框</nue-button>
-        <nue-button @click="openConfirmWidthTheme">
+        <nue-button @click="openConfirmWithTheme">
             点击打开确认对话框（带自定义主题）
+        </nue-button>
+        <nue-button @click="openConfirmWithOnConfirm">
+            点击打开确认对话框（带自定义确认回调）
         </nue-button>
     </nue-div>
 </template>
@@ -22,7 +25,7 @@ function openConfirm() {
     );
 }
 
-function openConfirmWidthTheme() {
+function openConfirmWithTheme() {
     NueConfirm({
         title: "确认对话框",
         content: "你确定要删除吗？",
@@ -32,6 +35,32 @@ function openConfirmWidthTheme() {
     }).then(
         () => NueMessage.success("删除确认!"),
         () => NueMessage.info("操作取消!")
+    );
+}
+
+function openConfirmWithOnConfirm() {
+    NueConfirm({
+        title: "确认对话框",
+        content: "你确定要删除吗？",
+        confirmButtonText: "确认",
+        cancelButtonText: "取消",
+        onConfirm: () => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const randomNumber = Math.random();
+                    randomNumber > 0.2 ? resolve("ok") : reject("error");
+                }, 1024);
+            });
+        },
+    }).then(
+        () => NueMessage.success("删除确认!"),
+        (err) => {
+            if (err instanceof Error) {
+                NueMessage.error(err.message);
+            } else {
+                NueMessage.info("操作取消!");
+            }
+        }
     );
 }
 </script>
