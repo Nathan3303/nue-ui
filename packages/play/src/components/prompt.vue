@@ -1,10 +1,17 @@
 <template>
     <nue-div>
-        <nue-button @click="showPromptWithBeforeConfirm">
-            Open Prompt
-        </nue-button>
+        <nue-button @click="showPrompt"> 打开输入提示框 </nue-button>
         <nue-button @click="showPromptWithInitialValue">
-            Open Prompt (with initial value)
+            打开输入提示框 (带初始值)
+        </nue-button>
+        <nue-button @click="showPromptWithValidator">
+            打开输入提示框（带验证器）
+        </nue-button>
+        <nue-button @click="showPromptWithAsyncValidator">
+            打开输入提示框（带异步验证器）
+        </nue-button>
+        <nue-button @click="showPromptWithOnConfirm">
+            打开输入提示框（带异步验证器以及回调函数）
         </nue-button>
     </nue-div>
 </template>
@@ -14,37 +21,98 @@ import { NueMessage, NueConfirm, NuePrompt } from "nue-ui";
 
 defineOptions({ name: "PromptDemo1" });
 
-function showPromptWithBeforeConfirm() {
+const showPrompt = () => {
     NuePrompt({
-        title: "Prompt",
-        placeholder: "Input your phone number here...",
+        title: "手机号码填写",
+        placeholder: "请输入您的手机号 ...",
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+    }).then(
+        (value: unknown) => NueMessage.success(`${value as string}`),
+        () => NueMessage.info("操作取消")
+    );
+};
+
+const showPromptWithInitialValue = () => {
+    NuePrompt({
+        title: "手机号码填写",
+        placeholder: "请输入您的手机号 ...",
+        inputValue: "13800138000",
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+    }).then(
+        (value: unknown) => NueMessage.success(`${value as string}`),
+        () => NueMessage.info("操作取消")
+    );
+};
+
+const showPromptWithValidator = () => {
+    NuePrompt({
+        title: "手机号码填写",
+        placeholder: "请输入您的手机号 ...",
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
         validator: (value: string) => {
             const regExp = new RegExp(/^(?:(?:\+|00)86)?1[3456789]\d{9}$/);
             return regExp.test(value);
         },
-        beforeConfirm: async (value: unknown) => {
-            await NueConfirm({ content: "Are you sure to submit?" });
-            return (value as string).toUpperCase();
-        },
-    }).then(
-        (value: unknown) =>
-            NueMessage.success(`Your phone number is: ${value as string}`),
-        () => NueMessage.warn("Cancelled!")
-    );
-}
+    }).then((value: unknown) => NueMessage.success(`${value as string}`));
+};
 
-function showPromptWithInitialValue() {
+const showPromptWithAsyncValidator = () => {
     NuePrompt({
-        title: "Prompt",
-        placeholder: "Input your name here...",
-        inputValue: "John",
+        title: "手机号码填写",
+        placeholder: "请输入您的手机号 ...",
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
         validator: (value: string) => {
-            return value.length > 0;
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const regExp = new RegExp(
+                        /^(?:(?:\+|00)86)?1[3456789]\d{9}$/
+                    );
+                    resolve(regExp.test(value));
+                }, 1000);
+            });
         },
     }).then(
-        (value: unknown) =>
-            NueMessage.success(`Your name is: ${value as string}`),
-        () => NueMessage.warn("Cancelled!")
+        (value: unknown) => NueMessage.success(`${value as string}`),
+        () => NueMessage.info("操作取消")
     );
-}
+};
+
+const showPromptWithOnConfirm = () => {
+    NuePrompt({
+        title: "手机号码填写",
+        placeholder: "请输入您的手机号 ...",
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        validator: (value: string) => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const regExp = new RegExp(
+                        /^(?:(?:\+|00)86)?1[3456789]\d{9}$/
+                    );
+                    resolve(regExp.test(value));
+                }, 1000);
+            });
+        },
+        onConfirm: (value: string) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const randomNumber = Math.random();
+                    value && randomNumber > 0.5
+                        ? resolve(1)
+                        : reject("更新失败");
+                }, 1000);
+            });
+        },
+    }).then(
+        (value: unknown) => NueMessage.success(`${value as string}`),
+        (err) => {
+            if (!err) NueMessage.info("操作取消");
+            NueMessage.error(err.message);
+        }
+    );
+};
 </script>
