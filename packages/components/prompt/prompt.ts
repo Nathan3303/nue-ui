@@ -12,12 +12,16 @@ export default (payload: PromptPayloadType) => {
         promptWrapper.classList.add("nue-prompt-wrapper");
         popupWrapper.appendChild(promptWrapper);
 
-        const close: PromptClose = (isConfirmed, payload) => {
+        const removeChild = () => {
             promptWrapper.dataset.closing = "true";
-            isConfirmed ? resolve(payload) : reject(payload);
             setTimeout(() => {
                 popupWrapper.removeChild(promptWrapper);
             }, 240);
+        };
+
+        const close: PromptClose = (isConfirmed, payload) => {
+            isConfirmed ? resolve(payload) : reject(payload);
+            removeChild();
         };
 
         render(createVNode(PromptNode, { ...payload, close }), promptWrapper);
