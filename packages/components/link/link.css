@@ -108,6 +108,9 @@
 
     .nue-link__content {
         flex: auto;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .nue-link__append {
