@@ -1,6 +1,17 @@
 <template>
-    <main :class="classes" :style="style">
-        <aside v-if="$slots.aside" ref="asideRef" class="nue-main__aside">
+    <main ref="mainRef" :class="classes" :style="style">
+        <aside
+            v-if="$slots.aside"
+            ref="asideRef"
+            class="nue-main__aside"
+            :data-visible="asideData.visible"
+            :data-float="asideData.float">
+            <nue-button
+                v-if="useVisibleButton"
+                class="nue-main__aside__visible-button"
+                theme="pure"
+                :icon="`arrow-${asideData.visible ? 'left' : 'right'}`"
+                @click.stop="asideData.visible = !asideData.visible" />
             <slot name="aside"></slot>
             <i
                 v-show="allowResizeAside"
@@ -12,24 +23,54 @@
         <div v-if="$slots.content" class="nue-main__content">
             <slot name="content"></slot>
         </div>
+        <div
+            v-if="$slots.outline"
+            class="nue-main__outline"
+            :data-visible="outlineData.visible"
+            :data-float="outlineData.float">
+            <nue-button
+                v-if="useVisibleButton"
+                class="nue-main__outline__visible-button"
+                theme="pure"
+                :icon="`arrow-${outlineData.visible ? 'right' : 'left'}`"
+                @click.stop="outlineData.visible = !outlineData.visible" />
+            <slot name="outline"></slot>
+        </div>
         <slot></slot>
     </main>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import type { MainPropsType } from "./types";
-import "./main.css";
+import { computed, reactive, ref } from "vue";
+import { NueButton } from "../button";
+import { useWindowResize } from "@nue-ui/hooks";
+import type { NueMainProps } from "./types";
 
 defineOptions({ name: "NueMain" });
+const props = withDefaults(defineProps<NueMainProps>(), {
+    responsive: false,
+    useVisibleButton: false,
+});
 
-const props = withDefaults(defineProps<MainPropsType>(), {});
+const { addCallback } = useWindowResize();
 
+const mainRef = ref<HTMLElement>();
 const asideRef = ref<HTMLElement>();
 const resizerRef = ref<HTMLElement>();
 const isResizing = ref(false);
+const asideData = reactive({ visible: true, float: false });
+const outlineData = reactive({ visible: true, float: false });
 let originalX = 0;
 let originalWidth = 0;
+
+const classes = computed(() => {
+    const { responsive } = props;
+    const prefix = "nue-main";
+    const list: string[] = [prefix];
+    if (isResizing.value) list.push(`${prefix}--resizing`);
+    if (responsive) list.push(`${prefix}--responsive`);
+    return list;
+});
 
 const style = computed(() => {
     const {
@@ -40,19 +81,21 @@ const style = computed(() => {
         contentPadding,
     } = props;
     return {
-        "--aside-width": allowResizeAside ? void 0 : asideWidth,
-        "--aside-min-width": asideMinWidth,
-        "--aside-max-width": asideMaxWidth,
-        "--content-padding": contentPadding,
+        "--nue-main-aside-width": allowResizeAside ? void 0 : asideWidth,
+        "--nue-main-aside-min-width": asideMinWidth,
+        "--nue-main-aside-max-width": asideMaxWidth,
+        "--nue-main-content-padding": contentPadding,
     };
 });
 
-const classes = computed(() => {
-    const list = [];
-    list.push("nue-main");
-    if (isResizing.value) list.push("nue-main--resizing");
-    return list;
-});
+const handleResize = () => {
+    if (!props.responsive) return;
+    if (!mainRef.value) return;
+    const _rect = mainRef.value?.getBoundingClientRect();
+    console.info(_rect);
+    outlineData.float = _rect.width <= 1024;
+    asideData.float = _rect.width <= 800;
+};
 
 const handleMouseMove = (event: MouseEvent) => {
     const { clientX: boundX } = event;
@@ -79,4 +122,6 @@ const handleMouseDown = (event: MouseEvent) => {
 const handleDoubleClick = () => {
     asideRef.value!.style.width = "200px";
 };
+
+addCallback(handleResize);
 </script>

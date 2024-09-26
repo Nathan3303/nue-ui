@@ -1,23 +1,12 @@
 <template>
-    <footer class="nue-footer" :style="style">
+    <footer class="nue-footer">
         <slot></slot>
     </footer>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import "./footer.css";
+import type {NueFooterProps} from './types'
 
-defineOptions({ name: "NueFooter" });
-
-const props = defineProps({
-    height: {
-        type: String,
-        default: "60px",
-    },
-});
-
-const style = computed(() => {
-    return { height: props.height };
-});
+defineOptions({name: "NueFooter"});
+defineProps<NueFooterProps>();
 </script>

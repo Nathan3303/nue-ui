@@ -1,20 +1,25 @@
-export type ContainerPropsType = {
-    theme?: string;
+import type { GlobalProps } from "@nue-ui/utils";
+
+export interface NueContainerProps extends GlobalProps {
     id?: string;
     height?: string;
     width?: string;
-    paddingX?: string;
-};
+}
 
-export type HeaderPropsType = {
+export type NueHeaderProps = {
     height?: string;
-    paddingX?: string;
 };
 
-export type MainPropsType = {
+export type NueMainProps = {
     asideWidth?: string;
     asideMinWidth?: string;
     asideMaxWidth?: string;
     contentPadding?: string;
     allowResizeAside?: boolean;
+    responsive?: boolean;
+    useVisibleButton?: boolean;
 };
+
+export type NueFooterProps = {
+    height?: string;
+}

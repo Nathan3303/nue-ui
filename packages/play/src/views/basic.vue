@@ -15,6 +15,9 @@
         <demo-card title="Icon 图标">
             <icon-demo></icon-demo>
         </demo-card>
+        <demo-card title="Container 布局容器">
+            <container-demo></container-demo>
+        </demo-card>
     </div>
 </template>
 
@@ -25,4 +28,5 @@ import ButtonGroupDemo from "../components/button-group.vue";
 import LinkDemo from "../components/link.vue";
 import TextDemo from "../components/text.vue";
 import IconDemo from "../components/icon.vue";
+import ContainerDemo from "../components/container.vue";
 </script>

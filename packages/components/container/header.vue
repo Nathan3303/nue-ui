@@ -1,21 +1,18 @@
 <template>
     <header class="nue-header" :style="styles">
-        <!-- Logo -->
-        <div class="item item-logo" v-if="$slots.logo">
+        <div v-if="$slots.logo" class="nue-header__logo">
             <slot name="logo"></slot>
         </div>
-        <!-- Navigation -->
-        <div class="item item-navigators" v-if="$slots.nav">
+        <div v-if="$slots.nav" class="nue-header__navigators">
             <slot name="nav"></slot>
         </div>
-        <!-- Default slot -->
-        <slot></slot>
-        <!-- Operation -->
-        <div class="item item-operations" v-if="$slots.ops">
+        <div v-if="$slots.default" class="nue-header__default">
+            <slot></slot>
+        </div>
+        <div v-if="$slots.ops" class="nue-header__operations">
             <slot name="ops"></slot>
         </div>
-        <!-- User -->
-        <div class="item item-user" v-if="$slots.user">
+        <div v-if="$slots.user" class="nue-header__user">
             <slot name="user"></slot>
         </div>
     </header>
@@ -23,18 +20,15 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { HeaderPropsType } from "./types";
-import "./header.css";
+import type { NueHeaderProps } from "./types";
 
 defineOptions({ name: "NueHeader" });
-
-const props = withDefaults(defineProps<HeaderPropsType>(), {});
+const props = defineProps<NueHeaderProps>();
 
 const styles = computed(() => {
-    const { height, paddingX } = props;
+    const { height } = props;
     return {
-        "--height": height,
-        "--padding-x": paddingX,
+        "--nue-header-height": height,
     };
 });
 </script>
