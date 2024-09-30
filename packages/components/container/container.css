@@ -87,6 +87,7 @@
         grid-template-columns: 1fr 1px;
         grid-template-rows: 1fr;
         width: var(--nue-main-aside-width);
+        min-width: var(--nue-main-aside-min-width);
         max-width: var(--nue-main-aside-max-width);
         z-index: 1;
 
@@ -118,6 +119,7 @@
 
         &[data-visible="false"] {
             width: 1px !important;
+            min-width: 1px;
             transition: all 0.16s ease;
             box-shadow: 1px 0px 3px 1px rgba(200, 200, 200, 0.2);
 
@@ -130,6 +132,7 @@
 
         &[data-collapse="true"] {
             width: 70px !important;
+            min-width: 70px;
             justify-content: center;
             transition: all 0.16s ease;
 
@@ -168,6 +171,7 @@
         grid-template-columns: 1px 1fr;
         grid-template-rows: 1fr;
         width: var(--nue-main-outline-width);
+        min-width: var(--nue-main-outline-min-width);
         max-width: var(--nue-main-outline-max-width);
         z-index: 1;
 
@@ -184,6 +188,7 @@
 
         &[data-visible="false"] {
             width: 1px !important;
+            min-width: 1px;
             transition: all 0.16s ease;
             box-shadow: -1px 0px 3px 1px rgba(200, 200, 200, 0.2);
 
@@ -196,6 +201,7 @@
 
         &[data-collapse="true"] {
             width: var(--nue-main-outline-min-width) !important;
+            min-width: var(--nue-main-outline-min-width);
             justify-content: center;
             transition: all 0.16s ease;
         }
@@ -302,6 +308,7 @@
         grid-template-areas: "logo" "navigators" "defaults" "actions" "user";
         grid-template-columns: 1fr;
         grid-template-rows: auto auto 1fr auto auto;
+        align-items: start;
 
         .nue-header__slot {
             padding: 16px 0px;
