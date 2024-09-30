@@ -19,6 +19,17 @@
             <tooltip-demo></tooltip-demo>
         </demo-card>
     </div>
+    <teleport to="#outline">
+        <ul class="outline-list">
+            <h3>大纲</h3>
+            <li><a href="#Dialog 对话框">Dialog 对话框</a></li>
+            <li><a href="#Drawer 抽屉">Drawer 抽屉</a></li>
+            <li><a href="#Message 消息提示">Message 消息提示</a></li>
+            <li><a href="#Confirm 确认框">Confirm 确认框</a></li>
+            <li><a href="#Prompt 输入框">Prompt 输入框</a></li>
+            <li><a href="#Tooltip 文字提示">Tooltip 文字提示</a></li>
+        </ul>
+    </teleport>
 </template>
 
 <script setup lang="ts">

@@ -4,6 +4,12 @@
             <divider-demo></divider-demo>
         </demo-card>
     </div>
+    <teleport to="#outline">
+        <ul class="outline-list">
+            <h3>大纲</h3>
+            <li><a href="#Divider 分隔符">Divider 分隔符</a></li>
+        </ul>
+    </teleport>
 </template>
 
 <script setup lang="ts">

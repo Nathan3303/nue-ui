@@ -1,5 +1,5 @@
 <template>
-    <nue-div vertical theme="card" :divider="{}">
+    <nue-div theme="card" vertical :divider="{}" :id="title">
         <nue-text size="24px">{{ title }}</nue-text>
         <slot></slot>
     </nue-div>

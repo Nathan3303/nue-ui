@@ -1,21 +1,24 @@
 <template>
-    <header class="nue-header" :style="styles">
-        <!-- Logo -->
-        <div class="item item-logo" v-if="$slots.logo">
+    <header :class="classes" :style="styles">
+        <div v-if="$slots.logo" class="nue-header__slot nue-header__logo">
             <slot name="logo"></slot>
         </div>
-        <!-- Navigation -->
-        <div class="item item-navigators" v-if="$slots.nav">
+        <nav
+            v-if="$slots.nav || $slots.navigators"
+            class="nue-header__slot nue-header__navigators">
             <slot name="nav"></slot>
+            <!-- Featuring patch -->
+            <slot name="navigators"></slot>
+        </nav>
+        <div v-if="$slots.default" class="nue-header__default">
+            <slot></slot>
         </div>
-        <!-- Default slot -->
-        <slot></slot>
-        <!-- Operation -->
-        <div class="item item-operations" v-if="$slots.ops">
+        <div v-if="$slots.ops || $slots.actions" class="nue-header__slot nue-header__actions">
             <slot name="ops"></slot>
+            <!-- Featuring patch -->
+            <slot name="actions"></slot>
         </div>
-        <!-- User -->
-        <div class="item item-user" v-if="$slots.user">
+        <div v-if="$slots.user" class="nue-header__slot nue-header__user">
             <slot name="user"></slot>
         </div>
     </header>
@@ -23,18 +26,25 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { HeaderPropsType } from "./types";
-import "./header.css";
+import { parseTheme } from "@nue-ui/utils";
+import type { NueHeaderProps } from "./types";
 
 defineOptions({ name: "NueHeader" });
+const props = defineProps<NueHeaderProps>();
 
-const props = withDefaults(defineProps<HeaderPropsType>(), {});
+const classes = computed(() => {
+    const { theme } = props;
+    const prefix = "nue-header";
+    let list: string[] = [prefix];
+    if (theme) list = list.concat(parseTheme(theme, prefix));
+    return list;
+});
 
 const styles = computed(() => {
-    const { height, paddingX } = props;
+    const { width, height } = props;
     return {
-        "--height": height,
-        "--padding-x": paddingX,
+        "--nue-header-width": width,
+        "--nue-header-height": height,
     };
 });
 </script>
