@@ -3,7 +3,10 @@
         <nue-header height="72px">
             <template #logo>NueUI 组件库 PlayGround</template>
         </nue-header>
-        <nue-main aside-width="160px" allow-resize-aside>
+        <nue-main
+            aside-width="200px"
+            :allow-resize-aside="false"
+            outline-width="200px">
             <template #aside>
                 <nue-link theme="btnlike" route="/basic">
                     Basic 基础组件
@@ -25,6 +28,9 @@
             <template #content>
                 <router-view></router-view>
             </template>
+            <template #outline>
+                <div id="outline"></div>
+            </template>
         </nue-main>
     </nue-container>
 </template>
@@ -33,13 +39,33 @@
 .nue-main {
     --aside-gap: 8px;
 
-    .view-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-        gap: 16px;
+    &:deep(.view-container) {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+    }
+}
+</style>
 
-        &:deep(.nue-div--card) {
-            height: 100%;
+<style>
+.outline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    h3 {
+        margin: 16px 0px;
+    }
+
+    a {
+        padding: 4px 0;
+        font-size: 12px;
+        color: gray;
+
+        &:hover {
+            text-decoration: underline;
+            color: black;
+            cursor: pointer;
         }
     }
 }
