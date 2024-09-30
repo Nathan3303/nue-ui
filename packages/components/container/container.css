@@ -3,174 +3,156 @@
 .nue-container {
     --nue-container-height: 100%;
     --nue-container-width: 100%;
-    --nue-container-padding: 0px;
 }
 
 .nue-header {
     --nue-header-width: 100%;
     --nue-header-height: 60px;
-    --nue-header-padding: 16px;
 }
 
 .nue-main {
-    --nue-main-height: 100%;
     --nue-main-padding: 16px;
     --nue-main-border-color: var(--divider-color);
-
-    --nue-main-aside-width: 200px;
-    --nue-main-aside-min-width: 200px;
-    --nue-main-aside-max-width: 20%;
-
-    --nue-main-outline-width: 200px;
-    --nue-main-outline-min-width: 200px;
-    --nue-main-outline-max-width: 20%;
 }
 
 .nue-footer {
     --nue-footer-width: 100%;
     --nue-footer-height: 60px;
-    --nue-footer-padding: 16px;
 }
 
 /* Original styles */
 
 .nue-container {
+    display: grid;
     width: var(--nue-container-width);
-    min-width: 800px;
     height: var(--nue-container-height);
-    min-height: 600px;
-    padding: var(--nue-container-padding);
-    display: flex;
-    margin: 0;
     overflow: hidden;
     position: relative;
 }
 
 .nue-header {
-    display: flex;
-    flex: none;
+    grid-area: header;
+    display: grid;
+    align-items: center;
     width: var(--nue-header-width);
     height: var(--nue-header-height);
-    align-items: center;
-    box-sizing: border-box;
-    padding: var(--nue-header-padding);
-    position: relative;
+    flex: none;
 
-    .nue-header__logo {
+    grid-template-areas: "logo navigators defaults actions user";
+    grid-template-columns: auto auto 1fr auto auto;
+    grid-template-rows: 1fr;
+
+    .nue-header__slot {
+        height: 100%;
         display: flex;
         align-items: center;
-        font-size: 24px;
-        font-weight: var(--primary-font-weight);
-        font-family: var(--primary-font-family);
-        flex: none;
+        gap: 16px;
+        overflow: hidden;
+    }
+
+    .nue-header__logo {
+        grid-area: logo;
     }
 
     .nue-header__navigators {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-right: auto;
+        grid-area: navigators;
     }
 
     .nue-header__default {
-        display: flex;
-        align-items: center;
-        flex: 1 1 auto;
-        gap: 16px;
+        grid-area: defaults;
     }
 
-    .nue-header__operations {
-        display: flex;
-        align-items: center;
-        margin-left: auto;
+    .nue-header__actions {
+        grid-area: actions;
     }
 
     .nue-header__user {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        grid-area: user;
     }
 }
 
 .nue-main {
-    display: flex;
-    align-items: stretch;
-    flex-wrap: nowrap;
+    grid-area: main;
+    display: grid;
+    grid-template-areas: "aside content outline";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
     overflow: hidden;
-    box-sizing: border-box;
     position: relative;
-    width: 100%;
-    height: 100%;
 
-    .nue-main__aside {
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        overflow-y: auto;
-        box-sizing: border-box;
-        position: relative;
-        flex: none;
-        gap: 16px;
+    .nue-main__aside-wrapper {
+        grid-area: aside;
+        display: grid;
+        grid-template-areas: "aside resizer";
+        grid-template-columns: 1fr 1px;
+        grid-template-rows: 1fr;
         width: var(--nue-main-aside-width);
-        min-width: var(--nue-main-aside-min-width);
         max-width: var(--nue-main-aside-max-width);
-        padding: var(--nue-main-padding);
-        border-right: 1px solid var(--nue-main-border-color);
-        background-color: white;
-        transition: all 0.16s ease;
+        z-index: 1;
 
-        & > .nue-main__aside__visible-button {
-            position: absolute;
-            right: 0px;
-            top: 2px;
-            transform: translateX(100%);
-            width: 16px;
-        }
+        .nue-main__aside {
+            grid-area: aside;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            padding: var(--nue-main-padding);
+            overflow-x: hidden;
+            box-sizing: border-box;
 
-        &[data-visible="false"] {
-            width: 0px;
-            min-width: 0px;
-            padding: var(--nue-main-padding) 0px;
-        }
+            .nue-link--btnlike {
+                .nue-icon {
+                    line-height: 1;
+                    display: flex;
+                    align-items: center;
+                    --font-size: 16px;
+                }
 
-        &[data-float="true"] {
-            width: auto;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            transform: translateX(0%);
-            box-shadow: 1px 0px 3px 1px rgba(200, 200, 200, 0.2);
-
-            &[data-visible="false"] {
-                transform: translateX(-100%);
-                box-shadow: none;
+                .nue-link__content {
+                    width: 100%;
+                    text-align: left;
+                    font-size: var(--text-xs);
+                }
             }
         }
 
-        .nue-main__aside__resizer {
-            content: "";
-            display: block;
-            width: 3px;
-            height: 16px;
-            position: absolute;
-            right: 3px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: var(--primary-color-500);
-            border-radius: var(--primary-radius);
-            cursor: col-resize;
-            opacity: 0;
-            transition: all 0.16s;
+        &[data-visible="false"] {
+            width: 1px !important;
+            transition: all 0.16s ease;
+            box-shadow: 1px 0px 3px 1px rgba(200, 200, 200, 0.2);
+
+            .nue-main__aside {
+                overflow: hidden;
+                padding: 16px 0px;
+                opacity: 0;
+            }
         }
 
-        &:hover {
-            .nue-main__aside__resizer {
-                opacity: 1;
+        &[data-collapse="true"] {
+            width: 70px !important;
+            justify-content: center;
+            transition: all 0.16s ease;
+
+            .nue-main__aside .nue-link--btnlike {
+                padding: 8px;
+                justify-content: center;
+                aspect-ratio: 1;
+
+                .nue-icon {
+                    font-size: var(--text-md);
+                }
+
+                &:has(.nue-icon) {
+                    .nue-link__content {
+                        display: none;
+                    }
+                }
             }
         }
     }
 
     .nue-main__content {
+        grid-area: content;
         overflow: auto;
         box-sizing: border-box;
         position: relative;
@@ -179,47 +161,43 @@
         padding: var(--nue-main-padding);
     }
 
-    .nue-main__outline {
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        position: relative;
-        flex: none;
-        gap: 16px;
+    .nue-main__outline-wrapper {
+        grid-area: outline;
+        display: grid;
+        grid-template-areas: "resizer outline";
+        grid-template-columns: 1px 1fr;
+        grid-template-rows: 1fr;
         width: var(--nue-main-outline-width);
-        min-width: var(--nue-main-outline-min-width);
         max-width: var(--nue-main-outline-max-width);
-        padding: var(--nue-main-padding);
-        border-left: 1px solid var(--nue-main-border-color);
-        background-color: white;
-        transition: all 0.16s ease;
+        z-index: 1;
 
-        & > .nue-main__outline__visible-button {
-            position: absolute;
-            left: 0px;
-            top: 2px;
-            transform: translateX(-100%);
-            width: 16px;
+        .nue-main__outline {
+            grid-area: outline;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            padding: var(--nue-main-padding);
+            overflow-x: hidden;
+            box-sizing: border-box;
         }
 
         &[data-visible="false"] {
-            width: 0px;
-            min-width: 0px;
-            padding: var(--nue-main-padding) 0px;
-        }
-
-        &[data-float="true"] {
-            width: auto;
-            height: 100%;
-            position: absolute;
-            right: 0;
-            transform: translateX(0%);
+            width: 1px !important;
+            transition: all 0.16s ease;
             box-shadow: -1px 0px 3px 1px rgba(200, 200, 200, 0.2);
 
-            &[data-visible="false"] {
-                transform: translateX(100%);
-                box-shadow: none;
+            .nue-main__outline {
+                overflow: hidden;
+                padding: 16px 0px;
+                opacity: 0;
             }
+        }
+
+        &[data-collapse="true"] {
+            width: var(--nue-main-outline-min-width) !important;
+            justify-content: center;
+            transition: all 0.16s ease;
         }
     }
 
@@ -236,24 +214,69 @@
 }
 
 .nue-footer {
+    grid-area: footer;
     display: flex;
     align-items: center;
     width: var(--nue-footer-width);
     height: var(--nue-footer-height);
-    padding: var(--nue-footer-padding);
+    padding: 16px;
     box-sizing: border-box;
+}
+
+.nue-main__resizer {
+    grid-area: resizer;
+    background-color: var(--nue-main-border-color);
+    position: relative;
+
+    .nue-main__resizer__line {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 100%;
+        transform: translateX(-50%);
+
+        &[data-actived="true"] {
+            &::after {
+                content: "";
+                display: block;
+                width: 8px;
+                height: 24px;
+                border-radius: 8px;
+                background-color: var(--primary-color-100);
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border: 1px solid var(--nue-main-border-color);
+                box-sizing: border-box;
+                transition: all 0.16s ease;
+            }
+
+            &:hover {
+                cursor: ew-resize;
+            }
+        }
+    }
 }
 
 /* Preset styles */
 
 .nue-container--vertical {
-    flex-direction: column;
+    grid-template-areas: "header" "main" "footer";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
 
     & > .nue-header {
-        --nue-header-width: 100%;
-        --nue-header-height: 70px;
-        flex-direction: row;
-        gap: 24px;
+        width: var(--nue-header-width);
+        height: var(--nue-header-height);
+
+        .nue-header__slot {
+            padding: 0px 16px;
+        }
+
+        .nue-header__logo {
+            font-size: var(--text-xxl);
+        }
     }
 
     & > .nue-main {
@@ -262,28 +285,44 @@
     }
 
     & > .nue-footer {
-        --nue-footer-width: 100%;
-        --nue-footer-height: 70px;
+        width: var(--nue-header-width);
+        height: var(--nue-header-height);
         gap: 24px;
     }
 }
 
 .nue-container--horizontal {
-    flex-direction: row;
+    grid-template-areas: "header main footer";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
 
     & > .nue-header {
         --nue-header-width: 70px;
         --nue-header-height: 100%;
-        flex-direction: column;
-        gap: 16px;
+        grid-template-areas: "logo" "navigators" "defaults" "actions" "user";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto auto;
 
-        .nue-header__navigators {
+        .nue-header__slot {
+            padding: 16px 0px;
             flex-direction: column;
-            flex-wrap: nowrap;
-            margin: 0 0 auto;
+            align-items: center;
+            height: auto;
 
-            .nue-link--btnlike .nue-link__content {
-                display: none;
+            .nue-link--btnlike {
+                padding: 8px;
+                justify-content: center;
+                aspect-ratio: 1;
+
+                .nue-icon {
+                    font-size: var(--text-md);
+                }
+
+                &:has(.nue-icon) {
+                    .nue-link__content {
+                        display: none;
+                    }
+                }
             }
         }
     }

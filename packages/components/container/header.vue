@@ -1,18 +1,24 @@
 <template>
-    <header class="nue-header" :style="styles">
-        <div v-if="$slots.logo" class="nue-header__logo">
+    <header :class="classes" :style="styles">
+        <div v-if="$slots.logo" class="nue-header__slot nue-header__logo">
             <slot name="logo"></slot>
         </div>
-        <div v-if="$slots.nav" class="nue-header__navigators">
+        <nav
+            v-if="$slots.nav || $slots.navigators"
+            class="nue-header__slot nue-header__navigators">
             <slot name="nav"></slot>
-        </div>
+            <!-- Featuring patch -->
+            <slot name="navigators"></slot>
+        </nav>
         <div v-if="$slots.default" class="nue-header__default">
             <slot></slot>
         </div>
-        <div v-if="$slots.ops" class="nue-header__operations">
+        <div v-if="$slots.ops || $slots.actions" class="nue-header__slot nue-header__actions">
             <slot name="ops"></slot>
+            <!-- Featuring patch -->
+            <slot name="actions"></slot>
         </div>
-        <div v-if="$slots.user" class="nue-header__user">
+        <div v-if="$slots.user" class="nue-header__slot nue-header__user">
             <slot name="user"></slot>
         </div>
     </header>
@@ -20,14 +26,24 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { parseTheme } from "@nue-ui/utils";
 import type { NueHeaderProps } from "./types";
 
 defineOptions({ name: "NueHeader" });
 const props = defineProps<NueHeaderProps>();
 
+const classes = computed(() => {
+    const { theme } = props;
+    const prefix = "nue-header";
+    let list: string[] = [prefix];
+    if (theme) list = list.concat(parseTheme(theme, prefix));
+    return list;
+});
+
 const styles = computed(() => {
-    const { height } = props;
+    const { width, height } = props;
     return {
+        "--nue-header-width": width,
         "--nue-header-height": height,
     };
 });

@@ -5,9 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, provide } from "vue";
 import { generateId, parseTheme } from "@nue-ui/utils";
-import type { NueContainerProps } from "./types";
+import { nueContainerContext } from "./contants";
+import type { NueContainerProps, NueContainerContext } from "./types";
 import "./container.css";
 
 defineOptions({ name: "NueContainer" });
@@ -30,5 +31,9 @@ const styles = computed(() => {
         "--nue-container-width": width,
         "--nue-container-height": height,
     };
+});
+
+provide<NueContainerContext>(nueContainerContext, {
+    containerId: computed(() => props.id),
 });
 </script>
