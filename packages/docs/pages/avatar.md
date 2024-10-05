@@ -44,7 +44,7 @@ demo-preview=../demos/avatar/icon.vue
 demo-preview=../demos/avatar/fit.vue
 :::
 
-## API
+<!-- ## API
 
 ### 属性 `(props)`
 
@@ -80,4 +80,4 @@ export interface AvatarProps extends GlobalProps {
 export type AvatarEmits = {
     (e: "error", val: Event): void;
 };
-```
+``` -->

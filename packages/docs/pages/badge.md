@@ -48,9 +48,9 @@ demo-preview=../demos/badge/dot.vue
 demo-preview=../demos/badge/hidden.vue
 :::
 
-## 无内容
+## 在组件内部使用
 
-当 `NueBadge` 组件没有内容时，徽标部分将不会定位到右上角，而是水平展示，这使得组件可以在 `NueButton`、`NueLink` 等组件的内部使用。
+当 `NueBadge` 组件没有内容时，徽标部分将不会定位到右上角，而是水平展示。因此可以在 `NueButton` 以及 `NueLink` 等组件的内部插槽中直接使用。
 
 ::: preview
 demo-preview=../demos/badge/inner.vue

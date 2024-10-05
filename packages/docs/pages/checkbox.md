@@ -106,7 +106,7 @@ demo-preview=../demos/checkbox-group/min-max.vue
 demo-preview=../demos/checkbox/theme.vue
 :::
 
-样式变量以及结构代码如下：
+<!-- 样式变量以及结构代码如下：
 
 ```css
 .nue-checkbox {
@@ -126,4 +126,4 @@ demo-preview=../demos/checkbox/theme.vue
     .nue-checkbox__icon { /* ... */ }
     .nue-checkbox__label { /* ... */ }
 }
-```
+``` -->

@@ -1,11 +1,11 @@
 <template>
     <nue-div>
-        <nue-checkbox v-model="state1" label="Unchecked" />
+        <nue-checkbox v-model="state1" label="未选中" />
         <nue-checkbox
             v-model="state2"
             :indeterminate="isIndeterminate"
-            label="Indeterminate" />
-        <nue-checkbox v-model="state3" label="Checked" />
+            label="中间状态" />
+        <nue-checkbox v-model="state3" label="已选中" />
     </nue-div>
 </template>
 

@@ -16,9 +16,9 @@ const loading = ref(false);
 
 const label = computed(() => {
     if (loading.value) {
-        return "Wating for network...";
+        return "加载中...";
     }
-    return state.value ? "Uncheck" : "Check";
+    return state.value ? "已选中" : "未选中";
 });
 
 const handleBeforeCheck = () => {

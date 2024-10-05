@@ -1,5 +1,7 @@
 <template>
-    <nue-button @click="showConfirm">Option confirm with title</nue-button>
+    <nue-button @click="showConfirm">
+        打开带有自定义标题的确认框
+    </nue-button>
 </template>
 
 <script setup>
@@ -7,12 +9,12 @@ import { NueConfirm, NueMessage } from "nue-ui";
 
 const showConfirm = () => {
     const confirmOptions = {
-        content: "Would you like to delete this item?",
-        title: "Delete confirmation",
+        content: "你确定要继续吗",
+        title: "提示",
     };
     NueConfirm(confirmOptions).then(
-        () => NueMessage.success("Confirmed"),
-        () => NueMessage.info("Canceled")
+        () => NueMessage.success("选择已确认"),
+        () => NueMessage.info("选择已取消")
     );
 }
 </script>

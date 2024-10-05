@@ -1,7 +1,7 @@
 <template>
     <nue-empty theme="custom">
         <template #description>当前页面暂无数据</template>
-        <nue-button theme="primary" size="small">Go back</nue-button>
+        <nue-button theme="primary" size="small">返回上一级</nue-button>
     </nue-empty>
 </template>
 

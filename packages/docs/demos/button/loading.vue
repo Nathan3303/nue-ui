@@ -1,17 +1,14 @@
 <template>
     <nue-div>
-        <nue-button
-            icon="search"
-            @click="changeLoadingState"
-            :loading="loadingState">
+        <nue-button icon="search" :loading="loading1" @click="changeLoading1">
             搜索
         </nue-button>
         <nue-button
-            icon="search"
-            @click="changeLoadingState"
-            :loading="loadingState"
-            loading-icon="scan">
-            搜索
+            icon="refresh"
+            loading-icon="refresh"
+            :loading="loading2"
+            @click="changeLoading2">
+            刷新
         </nue-button>
     </nue-div>
 </template>
@@ -19,10 +16,16 @@
 <script setup>
 import { ref } from "vue";
 
-const loadingState = ref(false);
+const loading1 = ref(false);
+const loading2 = ref(false);
 
-const changeLoadingState = () => {
-    loadingState.value = true;
-    setTimeout(() => (loadingState.value = false), 3000);
+const changeLoading1 = () => {
+    loading1.value = true;
+    setTimeout(() => (loading1.value = false), 3000);
+};
+
+const changeLoading2 = () => {
+    loading2.value = true;
+    setTimeout(() => (loading2.value = false), 3000);
 };
 </script>

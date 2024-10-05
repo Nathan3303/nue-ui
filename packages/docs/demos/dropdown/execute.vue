@@ -1,13 +1,14 @@
 <template>
     <nue-div style="height: 160px">
         <nue-dropdown
-            text="Click to open dropdown"
-            @execute="handleExecute"
-            hide-on-click>
+            text="请选择动作"
+            hide-on-click
+            placement="bottom-end"
+            @execute="handleExecute">
             <template #dropdown>
-                <li data-executeid="Coding">Coding</li>
-                <li data-executeid="Testing">Testing</li>
-                <li data-executeid="Maintaining">Maintaining</li>
+                <li data-executeid="Coding">编写一段代码</li>
+                <li data-executeid="Testing">测试一个功能</li>
+                <li data-executeid="Maintaining">维护一个项目</li>
             </template>
         </nue-dropdown>
     </nue-div>

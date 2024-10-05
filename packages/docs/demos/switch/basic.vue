@@ -11,6 +11,6 @@ import { ref, computed } from "vue";
 const state = ref(false);
 
 const stateText = computed(() => {
-    return state.value ? "ON" : "OFF";
+    return state.value ? "开" : "关";
 });
 </script>

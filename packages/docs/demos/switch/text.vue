@@ -1,21 +1,23 @@
 <template>
     <nue-div align="center">
-        <nue-switch v-model="state" show-text></nue-switch>
+        <nue-switch v-model="state1" show-text></nue-switch>
         <nue-switch
-            v-model="state"
+            v-model="state2"
             show-text
-            active-text="On"
-            inactive-text="Off"></nue-switch>
+            active-text="开"
+            inactive-text="关"></nue-switch>
         <nue-switch
-            v-model="state"
+            v-model="state3"
             show-text
-            active-text="Text for state ACTIVE"
-            inactive-text="Text for state INACTIVE"></nue-switch>
+            active-text="当前状态为开"
+            inactive-text="状态：关"></nue-switch>
     </nue-div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 
-const state = ref(false);
+const state1 = ref(false);
+const state2 = ref(false);
+const state3 = ref(false);
 </script>

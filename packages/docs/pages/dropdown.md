@@ -39,3 +39,11 @@ demo-preview=../demos/dropdown/execute.vue
 ::: preview
 demo-preview=../demos/dropdown/click-trigger.vue
 :::
+
+## 自定义主题
+
+通过属性 `theme` 实现对某一个下拉菜单主题的定制。
+
+::: preview
+demo-preview=../demos/dropdown/theme.vue
+:::
