@@ -87,7 +87,7 @@
 }
 
 .nue-button--large {
-    --height: 42px !important;
+    --height: 44px !important;
     padding: 12px 24px;
     font-size: var(--text-lg);
     --icon-size: var(--text-lg);
