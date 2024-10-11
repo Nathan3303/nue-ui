@@ -7,15 +7,13 @@
             v-if="$slots.nav || $slots.navigators"
             class="nue-header__slot nue-header__navigators">
             <slot name="nav"></slot>
-            <!-- Featuring patch -->
             <slot name="navigators"></slot>
         </nav>
-        <div v-if="$slots.default" class="nue-header__default">
-            <slot></slot>
-        </div>
-        <div v-if="$slots.ops || $slots.actions" class="nue-header__slot nue-header__actions">
+        <slot></slot>
+        <div
+            v-if="$slots.ops || $slots.actions"
+            class="nue-header__slot nue-header__actions">
             <slot name="ops"></slot>
-            <!-- Featuring patch -->
             <slot name="actions"></slot>
         </div>
         <div v-if="$slots.user" class="nue-header__slot nue-header__user">

@@ -16,7 +16,8 @@
                     :data-actived="allowResizeAside"></div>
             </div>
         </div>
-        <div v-if="$slots.content" class="nue-main__content">
+        <div v-if="$slots.default || $slots.content" class="nue-main__content">
+            <slot></slot>
             <slot name="content"></slot>
         </div>
         <div
@@ -35,7 +36,7 @@
                 <slot name="outline"></slot>
             </aside>
         </div>
-        <slot></slot>
+        <slot name="columns"></slot>
     </main>
 </template>
 
@@ -112,50 +113,6 @@ const handleMouseDown = (event: MouseEvent) => {
     document.documentElement.addEventListener("mouseup", handleMouseUp);
 };
 
-const handleResizeAside = (event: MouseEvent) => {
-    const { clientX: boundX } = event;
-    const { asideMinWidth, asideMaxWidth, allowCollapseAside, allowHideAside } =
-        props;
-    document.body.style.cursor = "ew-resize";
-    const newWidth = originalWidth + (boundX - originalX);
-    if (newWidth >= parseInt(asideMaxWidth)) return;
-    asideRef.value!.style.width = newWidth + "px";
-    if (allowHideAside) {
-        const isHidden = newWidth <= 24;
-        asideData.visible = !isHidden;
-        if (isHidden) return (asideData.collapse = false);
-    }
-    if (allowCollapseAside) {
-        const isCollapsed = newWidth <= parseInt(asideMinWidth);
-        asideData.collapse = isCollapsed;
-        if (isCollapsed) return;
-    }
-};
-
-const handleResizeOutline = (event: MouseEvent) => {
-    const { clientX: boundX } = event;
-    const {
-        outlineMinWidth,
-        outlineMaxWidth,
-        allowCollapseOutline,
-        allowHideOutline,
-    } = props;
-    document.body.style.cursor = "ew-resize";
-    const newWidth = originalWidth + (originalX - boundX);
-    if (newWidth >= parseInt(outlineMaxWidth)) return;
-    outlineRef.value!.style.width = newWidth + "px";
-    if (allowHideOutline) {
-        const isHidden = newWidth <= 24;
-        outlineData.visible = !isHidden && allowHideOutline;
-        if (isHidden) return (outlineData.collapse = false);
-    }
-    if (allowCollapseOutline) {
-        const isCollapsed = newWidth <= parseInt(outlineMinWidth);
-        outlineData.collapse = isCollapsed && allowCollapseOutline;
-        if (isCollapsed) return;
-    }
-};
-
 const handleMouseUp = () => {
     const targetFn =
         target === "aside" ? handleResizeAside : handleResizeOutline;
@@ -163,5 +120,69 @@ const handleMouseUp = () => {
     document.documentElement.removeEventListener("mouseup", handleMouseUp);
     isResizing.value = false;
     document.body.style.cursor = "default";
+};
+
+const convertPercentageWidth = (width: string) => {
+    width = width.trim();
+    if (!mainRef.value || !width.endsWith("%")) return parseInt(width);
+    const percent = parseFloat(width) / 100;
+    const mainWidth = mainRef.value.clientWidth;
+    return (mainWidth * percent) as number;
+};
+
+const handleResizeAside = (event: MouseEvent) => {
+    const { clientX: boundX } = event;
+    document.body.style.cursor = "ew-resize";
+    const newWidth = originalWidth + (boundX - originalX);
+    setAsideWidth(newWidth);
+};
+
+const setAsideWidth = (newWidth: number) => {
+    const { asideMinWidth, asideMaxWidth, allowCollapseAside, allowHideAside } =
+        props;
+    const minWidth = convertPercentageWidth(asideMinWidth);
+    const maxWidth = convertPercentageWidth(asideMaxWidth);
+    if (newWidth >= maxWidth) return;
+    asideRef.value!.style.width = newWidth + "px";
+    if (allowHideAside) {
+        const isHidden = newWidth <= 24;
+        asideData.visible = !isHidden;
+        if (isHidden) return (asideData.collapse = false);
+    }
+    if (allowCollapseAside) {
+        const isCollapsed = newWidth <= minWidth;
+        asideData.collapse = isCollapsed;
+        if (isCollapsed) return;
+    }
+};
+
+const handleResizeOutline = (event: MouseEvent) => {
+    const { clientX: boundX } = event;
+    document.body.style.cursor = "ew-resize";
+    const newWidth = originalWidth + (originalX - boundX);
+    setOutlineWidth(newWidth);
+};
+
+const setOutlineWidth = (newWidth: number) => {
+    const {
+        outlineMinWidth,
+        outlineMaxWidth,
+        allowCollapseOutline,
+        allowHideOutline,
+    } = props;
+    const minWidth = convertPercentageWidth(outlineMinWidth);
+    const maxWidth = convertPercentageWidth(outlineMaxWidth);
+    if (newWidth >= maxWidth) return;
+    outlineRef.value!.style.width = newWidth + "px";
+    if (allowHideOutline) {
+        const isHidden = newWidth <= 24;
+        outlineData.visible = !isHidden && allowHideOutline;
+        if (isHidden) return (outlineData.collapse = false);
+    }
+    if (allowCollapseOutline) {
+        const isCollapsed = newWidth <= minWidth;
+        outlineData.collapse = isCollapsed && allowCollapseOutline;
+        if (isCollapsed) return;
+    }
 };
 </script>
