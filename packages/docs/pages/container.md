@@ -79,3 +79,15 @@ demo-preview=../demos/container/main-collapse.vue
 ::: preview
 demo-preview=../demos/container/footer.vue
 :::
+
+## 容器嵌套
+
+`NueContainer` 组件支持嵌套，即在一个容器中再嵌套一个容器，形成嵌套布局。通常情况下，嵌套的容器会是用在 `NueMain` 组件的 `content` 插槽中。
+
+::: tip
+关于嵌套容器，需要对其指定 `theme` 属性。`inner` 主题作为嵌套容器的修补主题，因此通常嵌套容器的 `theme` 属性值是 `theme="vertical,inner"` 或者 `theme="horizontal,inner"`。
+:::
+
+::: preview
+demo-preview=../demos/container/nested.vue
+:::
