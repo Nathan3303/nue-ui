@@ -11,6 +11,6 @@ export type DialogPropsType = {
 };
 
 export type DialogEmitsType = {
-    (e: "update:modelValue", value: boolean): void;
-    (e: "confirm"): void;
+    (e: 'update:modelValue', value: boolean): void;
+    (e: 'confirm'): void;
 };

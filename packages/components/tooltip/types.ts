@@ -1,22 +1,20 @@
-import type { GlobalProps } from "@nue-ui/utils";
+import type { GlobalProps } from '@nue-ui/utils';
 
 export interface NueTooltipProps extends GlobalProps {
     content: string;
     placement?:
-        | "top-start"
-        | "top-center"
-        | "top-end"
-        | "bottom-start"
-        | "bottom-center"
-        | "bottom-end"
-        | "left-start"
-        | "left-center"
-        | "left-end"
-        | "right-start"
-        | "right-center"
-        | "right-end";
-    size?: "small" | "large";
+        | 'top-start'
+        | 'top-center'
+        | 'top-end'
+        | 'bottom-start'
+        | 'bottom-center'
+        | 'bottom-end'
+        | 'left-start'
+        | 'left-center'
+        | 'left-end'
+        | 'right-start'
+        | 'right-center'
+        | 'right-end';
+    size?: 'small' | 'large';
     showTriangle?: boolean;
 }
-
-export type NueTooltipEmits = {};

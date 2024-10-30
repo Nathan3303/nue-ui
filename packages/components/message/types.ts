@@ -1,7 +1,7 @@
-import type { IconNameType } from "../icon";
+import type { IconNameType } from '../icon';
 
-export type MessageType = "success" | "error" | "warning" | "info" | "log";
-export type MessageSize = "small" | "large";
+export type MessageType = 'success' | 'error' | 'warning' | 'info' | 'log';
+export type MessageSize = 'small' | 'large';
 
 export type MessageNodeProps = {
     wrapper: HTMLElement;
@@ -34,4 +34,4 @@ export type NueMessageType = {
     warn: NueMessageSubFnType;
     info: NueMessageSubFnType;
     log: NueMessageSubFnType;
-} & Function;
+} & (() => void);

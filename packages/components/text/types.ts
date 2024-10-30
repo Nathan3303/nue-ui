@@ -1,4 +1,4 @@
-import { TEXT_SIZE_VALUES } from "./constants";
+import { TEXT_SIZE_VALUES } from './constants';
 
 export type TextSizeType = keyof typeof TEXT_SIZE_VALUES | string;
 

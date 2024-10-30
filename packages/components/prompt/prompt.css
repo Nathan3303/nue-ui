@@ -60,7 +60,7 @@
             gap: 8px;
 
             &::before {
-                content: "*";
+                content: '*';
             }
         }
     }
@@ -74,7 +74,7 @@
     }
 }
 
-.nue-prompt-wrapper[data-closing="true"] {
+.nue-prompt-wrapper[data-closing='true'] {
     --wrapper-animation-name: fade-out;
     --animation-name: slide-out-to-top;
 }

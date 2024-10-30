@@ -1,7 +1,7 @@
-import type { VNode } from "vue";
-import type { GlobalProps, Optional } from "@nue-ui/utils";
+import type { VNode } from 'vue';
+import type { GlobalProps, Optional } from '@nue-ui/utils';
 
-export type ConfirmClose = (confirmResult: any) => void;
+export type ConfirmClose = (confirmResult: unknown) => void;
 
 export interface ConfirmPropsType extends GlobalProps {
     title?: string;

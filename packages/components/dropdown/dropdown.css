@@ -72,7 +72,7 @@
 
 /* Visible */
 
-.nue-dropdown-wrapper[data-visible="true"] {
+.nue-dropdown-wrapper[data-visible='true'] {
     .state-icon {
         transform: rotate(180deg);
     }
@@ -95,16 +95,16 @@
 /* Direction */
 
 .nue-dropdown {
-    &[data-direction="top"] {
+    &[data-direction='top'] {
         animation: slide-fade-top var(--animation-time) ease forwards;
     }
-    &[data-direction="bottom"] {
+    &[data-direction='bottom'] {
         animation: slide-fade-bottom var(--animation-time) ease forwards;
     }
-    &[data-direction="left"] {
+    &[data-direction='left'] {
         animation: slide-fade-left var(--animation-time) ease forwards;
     }
-    &[data-direction="right"] {
+    &[data-direction='right'] {
         animation: slide-fade-right var(--animation-time) ease forwards;
     }
 }

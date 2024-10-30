@@ -32,3 +32,4 @@ dist/*
 /packages/core/package.json
 /packages/docs/.vitepress/dist
 /packages/docs/.vitepress/cache
+.backup

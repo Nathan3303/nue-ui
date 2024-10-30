@@ -53,7 +53,7 @@
     }
 }
 
-.nue-confirm-wrapper[data-closing="true"] {
+.nue-confirm-wrapper[data-closing='true'] {
     --wrapper-animation-name: fade-out;
     --animation-name: slide-out-to-top;
 }

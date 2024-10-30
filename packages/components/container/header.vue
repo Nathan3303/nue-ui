@@ -5,14 +5,16 @@
         </div>
         <nav
             v-if="$slots.nav || $slots.navigators"
-            class="nue-header__slot nue-header__navigators">
+            class="nue-header__slot nue-header__navigators"
+        >
             <slot name="nav"></slot>
             <slot name="navigators"></slot>
         </nav>
         <slot></slot>
         <div
             v-if="$slots.ops || $slots.actions"
-            class="nue-header__slot nue-header__actions">
+            class="nue-header__slot nue-header__actions"
+        >
             <slot name="ops"></slot>
             <slot name="actions"></slot>
         </div>
@@ -23,26 +25,26 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { parseTheme } from "@nue-ui/utils";
-import type { NueHeaderProps } from "./types";
+    import { computed } from 'vue';
+    import { parseTheme } from '@nue-ui/utils';
+    import type { NueHeaderProps } from './types';
 
-defineOptions({ name: "NueHeader" });
-const props = defineProps<NueHeaderProps>();
+    defineOptions({ name: 'NueHeader' });
+    const props = defineProps<NueHeaderProps>();
 
-const classes = computed(() => {
-    const { theme } = props;
-    const prefix = "nue-header";
-    let list: string[] = [prefix];
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    return list;
-});
+    const classes = computed(() => {
+        const { theme } = props;
+        const prefix = 'nue-header';
+        let list: string[] = [prefix];
+        if (theme) list = list.concat(parseTheme(theme, prefix));
+        return list;
+    });
 
-const styles = computed(() => {
-    const { width, height } = props;
-    return {
-        "--nue-header-width": width,
-        "--nue-header-height": height,
-    };
-});
+    const styles = computed(() => {
+        const { width, height } = props;
+        return {
+            '--nue-header-width': width,
+            '--nue-header-height': height
+        };
+    });
 </script>

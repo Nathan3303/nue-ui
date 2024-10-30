@@ -71,7 +71,7 @@
 }
 
 .nue-collapse-item--collapsed,
-.nue-collapse-item[data-collapse="true"] {
+.nue-collapse-item[data-collapse='true'] {
     .nue-collapse-item__header {
         border-color: #eee;
     }

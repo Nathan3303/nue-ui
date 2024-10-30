@@ -1,3 +1,3 @@
-import Prompt from "./prompt";
+import Prompt from './prompt';
 
 export const NuePrompt = Prompt;

@@ -1,9 +1,9 @@
 export type DividerPropsType = {
-    direction?: "horizontal" | "vertical";
+    direction?: 'horizontal' | 'vertical';
     text?: string;
-    align?: "start" | "center" | "end";
+    align?: 'start' | 'center' | 'end';
     borderWidth?: string;
-    borderType?: "solid" | "dashed" | "dotted";
+    borderType?: 'solid' | 'dashed' | 'dotted';
     borderColor?: string;
     vertical?: boolean;
 };

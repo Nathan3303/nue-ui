@@ -1,10 +1,10 @@
-import type { GlobalProps } from "@nue-ui/utils";
+import type { GlobalProps } from '@nue-ui/utils';
 
 export interface NueCheckboxProps extends GlobalProps {
     modelValue?: boolean;
     label?: string;
     name?: string;
-    size?: "small" | "large";
+    size?: 'small' | 'large';
     disabled?: boolean;
     loading?: boolean;
     indeterminate?: boolean;
@@ -14,8 +14,8 @@ export interface NueCheckboxProps extends GlobalProps {
 }
 
 export type NueCheckboxEmits = {
-    (event: "update:modelValue", value: boolean): void;
-    (event: "change", value: boolean): void;
-    (event: "checked"): void;
-    (event: "unchecked"): void;
+    (event: 'update:modelValue', value: boolean): void;
+    (event: 'change', value: boolean): void;
+    (event: 'checked'): void;
+    (event: 'unchecked'): void;
 };

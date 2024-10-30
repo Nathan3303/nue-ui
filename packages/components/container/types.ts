@@ -1,5 +1,5 @@
-import type { GlobalProps } from "@nue-ui/utils";
-import type { ComputedRef } from "vue";
+import type { GlobalProps } from '@nue-ui/utils';
+import type { ComputedRef } from 'vue';
 
 export interface NueContainerProps extends GlobalProps {
     id?: string;
@@ -9,14 +9,14 @@ export interface NueContainerProps extends GlobalProps {
 
 export type NueContainerContext = {
     containerId: ComputedRef<string>;
-}
+};
 
 export interface NueHeaderProps extends GlobalProps {
     width?: string;
     height?: string;
-};
+}
 
-export interface NueMainProps extends GlobalProps{
+export interface NueMainProps extends GlobalProps {
     responsive?: boolean;
     // aside slot
     asideWidth?: string;
@@ -32,9 +32,9 @@ export interface NueMainProps extends GlobalProps{
     allowResizeOutline?: boolean;
     allowCollapseOutline?: boolean;
     allowHideOutline?: boolean;
-};
+}
 
 export interface NueFooterProps extends GlobalProps {
     width?: string;
     height?: string;
-};
+}

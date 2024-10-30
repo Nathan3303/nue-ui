@@ -4,7 +4,8 @@
             v-if="modelValue"
             class="nue-dialog-wrapper"
             ref="dialogWrapperRef"
-            :style="styles">
+            :style="styles"
+        >
             <div :class="classes">
                 <div class="nue-dialog__header">
                     <slot name="header" :close="handleCancel">
@@ -13,7 +14,8 @@
                             icon="clear"
                             theme="pure"
                             :disabled="!closable"
-                            @click="handleCancel" />
+                            @click="handleCancel"
+                        />
                     </slot>
                 </div>
                 <div class="nue-dialog__content">
@@ -23,7 +25,8 @@
                     <slot
                         name="footer"
                         :cancel="handleCancel"
-                        :confirm="handleConfirm"></slot>
+                        :confirm="handleConfirm"
+                    ></slot>
                 </div>
             </div>
         </div>
@@ -31,86 +34,86 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref, watch, computed } from "vue";
-import NueButton from "../button/button.vue";
-import NueText from "../text/text.vue";
-import { isFunction, parseTheme } from "@nue-ui/utils";
-import type { DialogPropsType, DialogEmitsType } from "./types";
-import "./dialog.css";
+    import { nextTick, ref, watch, computed } from 'vue';
+    import NueButton from '../button/button.vue';
+    import NueText from '../text/text.vue';
+    import { isFunction, parseTheme } from '@nue-ui/utils';
+    import type { DialogPropsType, DialogEmitsType } from './types';
+    import './dialog.css';
 
-defineOptions({ name: "NueDialog" });
+    defineOptions({ name: 'NueDialog' });
 
-const props = withDefaults(defineProps<DialogPropsType>(), {
-    title: "Dialog Title",
-    closable: true,
-});
-const emit = defineEmits<DialogEmitsType>();
-
-const dialogWrapperRef = ref<HTMLDivElement>();
-
-const classes = computed(() => {
-    const { theme } = props;
-    const prefix = "nue-dialog";
-    let list: string[] = [prefix];
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    return list;
-});
-
-const styles = computed(() => {
-    const { width, minWidth } = props;
-    return {
-        "--aside-width": width,
-        "--aside-min-width": minWidth,
-    };
-});
-
-function handleOpenAnimataion() {
-    requestAnimationFrame(() => {
-        if (!dialogWrapperRef.value) return;
-        dialogWrapperRef.value.dataset.open = "true";
+    const props = withDefaults(defineProps<DialogPropsType>(), {
+        title: 'Dialog Title',
+        closable: true
     });
-}
+    const emit = defineEmits<DialogEmitsType>();
 
-function handleCloseAnimation(): Promise<boolean> {
-    return new Promise((resolve) => {
-        if (!dialogWrapperRef.value) return;
-        dialogWrapperRef.value.dataset.open = "false";
-        setTimeout(() => resolve(true), 240);
+    const dialogWrapperRef = ref<HTMLDivElement>();
+
+    const classes = computed(() => {
+        const { theme } = props;
+        const prefix = 'nue-dialog';
+        let list: string[] = [prefix];
+        if (theme) list = list.concat(parseTheme(theme, prefix));
+        return list;
     });
-}
 
-async function handleCancel() {
-    const { closable } = props;
-    if (!closable) return;
-    await handleCloseAnimation();
-    emit("update:modelValue", false);
-    return true;
-}
+    const styles = computed(() => {
+        const { width, minWidth } = props;
+        return {
+            '--aside-width': width,
+            '--aside-min-width': minWidth
+        };
+    });
 
-async function handleConfirm() {
-    if (isFunction(props.beforeConfirm)) {
-        try {
-            await new Promise((resolve) =>
-                props.beforeConfirm?.call(null, () => resolve(null))
-            );
-        } catch (e) {
-            throw new Error(e as string);
-        }
+    function handleOpenAnimataion() {
+        requestAnimationFrame(() => {
+            if (!dialogWrapperRef.value) return;
+            dialogWrapperRef.value.dataset.open = 'true';
+        });
     }
-    emit("confirm");
-    handleCancel();
-}
 
-watch(
-    () => props.modelValue,
-    (newValue) => {
-        if (newValue) {
-            nextTick(() => {
-                handleOpenAnimataion();
-            });
-        }
+    function handleCloseAnimation(): Promise<boolean> {
+        return new Promise(resolve => {
+            if (!dialogWrapperRef.value) return;
+            dialogWrapperRef.value.dataset.open = 'false';
+            setTimeout(() => resolve(true), 240);
+        });
     }
-);
 
-defineExpose({ close: handleCancel });
+    async function handleCancel() {
+        const { closable } = props;
+        if (!closable) return;
+        await handleCloseAnimation();
+        emit('update:modelValue', false);
+        return true;
+    }
+
+    async function handleConfirm() {
+        if (isFunction(props.beforeConfirm)) {
+            try {
+                await new Promise(resolve =>
+                    props.beforeConfirm?.call(null, () => resolve(null))
+                );
+            } catch (e) {
+                throw new Error(e as string);
+            }
+        }
+        emit('confirm');
+        handleCancel();
+    }
+
+    watch(
+        () => props.modelValue,
+        newValue => {
+            if (newValue) {
+                nextTick(() => {
+                    handleOpenAnimataion();
+                });
+            }
+        }
+    );
+
+    defineExpose({ close: handleCancel });
 </script>

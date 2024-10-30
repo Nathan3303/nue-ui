@@ -1,9 +1,14 @@
-import type { GlobalProps } from "@nue-ui/utils";
-import type { IconNameType } from "../icon";
+import type { GlobalProps } from '@nue-ui/utils';
+import type { IconNameType } from '../icon';
 
 export type RoutePropType =
     | string
-    | { name: string; params?: any; query?: any; meta?: any }
+    | {
+          name: string;
+          params?: Record<string, unknown>;
+          query?: Record<string, unknown>;
+          meta?: Record<string, unknown>;
+      }
     | undefined;
 
 export interface LinkProps extends GlobalProps {

@@ -1,30 +1,28 @@
-import { ref } from "vue";
+import { ref } from 'vue';
 
-type InitialValue = boolean | (() => boolean) | undefined;
+type InitialValue = boolean | (() => boolean);
 
 export const useLoadingState = (initialValue: InitialValue = false) => {
     const isLoading = ref(initialValue);
 
-    function done() {
-        isLoading.value = false;
-    }
+    const done = () => (isLoading.value = false);
 
-    function load(callback: Function | undefined): void {
+    const load = (callback: (done: () => void) => void | undefined) => {
         isLoading.value = true;
-        if (callback) {
-            callback.call(null, done);
-        }
-    }
+        if (callback) callback(done);
+    };
 
-    function loadSync(action: Function): Promise<any> {
+    const loadSync = (
+        action: (fn: (message: unknown) => void) => void | undefined
+    ) => {
         isLoading.value = true;
-        return new Promise((resolve) => {
-            action((message?: any) => {
+        return new Promise(resolve => {
+            action((message: unknown) => {
                 isLoading.value = false;
                 resolve(message);
             });
         });
-    }
+    };
 
     return { isLoading, load, loadSync };
 };

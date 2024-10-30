@@ -9,7 +9,7 @@
 
     z-index: -1;
 
-    &[data-actived="true"] {
+    &[data-actived='true'] {
         z-index: 99;
     }
 }

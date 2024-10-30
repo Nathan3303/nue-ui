@@ -1,7 +1,7 @@
-import { ref, createVNode, render } from "vue";
-import MessageNodeInner from "./message-inner.vue";
-import { generateId } from "@nue-ui/utils";
-import type { MessagePayloadType, NueMessageType } from "./types";
+import { ref, createVNode, render } from 'vue';
+import MessageNodeInner from './message-inner.vue';
+import { generateId } from '@nue-ui/utils';
+import type { MessagePayloadType, NueMessageType } from './types';
 
 const wrapperRef = ref<HTMLElement | null>(null);
 const externalWrapperRef = ref<HTMLElement | null>(null);
@@ -14,11 +14,11 @@ function createMessageWrapper(e: HTMLElement) {
     if (externalWrapperRef.value) {
         wrapper = externalWrapperRef.value;
     } else {
-        wrapper = document.createElement("div");
+        wrapper = document.createElement('div');
         const id = generateId();
         wrapper.id = `nue-message-wrapper--${id}`;
-        wrapper.dataset.type = "external";
-        wrapper.classList.add("nue-message");
+        wrapper.dataset.type = 'external';
+        wrapper.classList.add('nue-message');
         e.appendChild(wrapper);
         externalWrapperRef.value = wrapper;
     }
@@ -43,36 +43,38 @@ export function handlePop(node: HTMLElement, wrapper: HTMLElement) {
             wrapper.removeChild(node);
             if (wrapper.children.length === 0) {
                 const dom = document.getElementById(wrapper.id);
-                if (!dom && wrapper.dataset.type === "external") {
+                if (!dom && wrapper.dataset.type === 'external') {
                     externalWrapperRef.value = null;
                     wrapperRef.value = null;
                 }
             }
-        } catch (e) {}
+        } catch (e) {
+            return e;
+        }
     }, time) as unknown as number;
 }
 
 function NueMessage(payload: MessagePayloadType) {
     if (!wrapperRef.value) {
         if (!externalWrapperRef.value) {
-            let target = document.getElementById("app");
+            let target = document.getElementById('app');
             if (!target) {
-                target = document.getElementsByTagName("body")[0];
+                target = document.getElementsByTagName('body')[0];
             }
-            target.style.position = "relative";
+            target.style.position = 'relative';
             wrapperRef.value = createMessageWrapper(target);
         } else {
             wrapperRef.value = externalWrapperRef.value;
         }
     }
 
-    const div = document.createElement("div");
-    div.classList.add("nue-message-node");
+    const div = document.createElement('div');
+    div.classList.add('nue-message-node');
     wrapperRef.value.appendChild(div);
     const vnode = createVNode(MessageNodeInner, {
         ...payload,
         node: div,
-        wrapper: wrapperRef.value,
+        wrapper: wrapperRef.value
     });
     render(vnode, div);
 }
@@ -80,45 +82,45 @@ function NueMessage(payload: MessagePayloadType) {
 NueMessage.success = (message: string, duration: number, icon: string) => {
     NueMessage({
         message,
-        type: "success",
+        type: 'success',
         duration,
-        icon,
+        icon
     } as MessagePayloadType);
 };
 
 NueMessage.error = (message: string, duration: number, icon: string) => {
     NueMessage({
         message,
-        type: "error",
+        type: 'error',
         duration,
-        icon,
+        icon
     } as MessagePayloadType);
 };
 
 NueMessage.warn = (message: string, duration: number, icon: string) => {
     NueMessage({
         message,
-        type: "warning",
+        type: 'warning',
         duration,
-        icon,
+        icon
     } as MessagePayloadType);
 };
 
 NueMessage.info = (message: string, duration: number, icon: string) => {
     NueMessage({
         message,
-        type: "info",
+        type: 'info',
         duration,
-        icon,
+        icon
     } as MessagePayloadType);
 };
 
 NueMessage.log = (message: string, duration: number, icon: string) => {
     NueMessage({
         message,
-        type: "log",
+        type: 'log',
         duration,
-        icon,
+        icon
     } as MessagePayloadType);
 };
 

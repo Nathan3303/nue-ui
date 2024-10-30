@@ -1,21 +1,21 @@
-import { onMounted, onUnmounted } from "vue";
-import { generateId, debounce } from "@nue-ui/utils";
+import { onMounted, onUnmounted } from 'vue';
+import { generateId, debounce } from '@nue-ui/utils';
 
 type Callback = (e: Event) => void;
 
 const cbPool = new Map<string, Set<Callback>>();
 
-const debouncedCaller = debounce((e: Event) => {
-    cbPool.forEach((cbSet) => {
+const debouncedCaller = debounce(e => {
+    cbPool.forEach(cbSet => {
         cbSet.forEach((cb: Callback) => {
-            requestIdleCallback(() => cb(e));
+            requestIdleCallback(() => cb(e as Event));
         });
     });
 }, 100);
 
-const resizeHandler = (e: Event) => debouncedCaller(e);
+const resizeHandler = (e: unknown) => debouncedCaller(e as Event);
 
-window.addEventListener("resize", resizeHandler, false);
+window.addEventListener('resize', resizeHandler, false);
 
 export const useWindowResize = () => {
     const cbSet: Set<Callback> | null = new Set();
@@ -39,11 +39,11 @@ export const useWindowResize = () => {
             cbPool.delete(poolId);
         }
         if (cbPool.size !== 0) return;
-        window.removeEventListener("resize", resizeHandler, false);
+        window.removeEventListener('resize', resizeHandler, false);
     });
 
     return {
         addCallback,
-        removeCallback,
+        removeCallback
     };
 };

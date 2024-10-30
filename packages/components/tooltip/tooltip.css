@@ -50,7 +50,7 @@
 /* Placement */
 
 .nue-tooltip {
-    &[data-direction="top"] {
+    &[data-direction='top'] {
         animation: slide-fade-top var(--animation-time) ease forwards;
         .nue-tooltip__padding {
             width: 100%;
@@ -58,7 +58,7 @@
             top: 100%;
         }
     }
-    &[data-direction="bottom"] {
+    &[data-direction='bottom'] {
         animation: slide-fade-bottom var(--animation-time) ease forwards;
         .nue-tooltip__padding {
             width: 100%;
@@ -66,7 +66,7 @@
             bottom: 100%;
         }
     }
-    &[data-direction="left"] {
+    &[data-direction='left'] {
         animation: slide-fade-left var(--animation-time) ease forwards;
         .nue-tooltip__padding {
             width: 8px;
@@ -74,7 +74,7 @@
             left: 100%;
         }
     }
-    &[data-direction="right"] {
+    &[data-direction='right'] {
         animation: slide-fade-right var(--animation-time) ease forwards;
         .nue-tooltip__padding {
             width: 8px;
@@ -88,7 +88,7 @@
 
 .nue-tooltip {
     &::after {
-        content: "";
+        content: '';
         display: var(--triangle-display);
         position: absolute;
         aspect-ratio: 1;

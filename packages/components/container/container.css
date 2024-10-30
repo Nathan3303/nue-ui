@@ -89,7 +89,7 @@
         /* grid-area: aside; */
         flex: none;
         display: grid;
-        grid-template-areas: "aside resizer";
+        grid-template-areas: 'aside resizer';
         grid-template-columns: 1fr 1px;
         grid-template-rows: 1fr;
         width: var(--nue-main-aside-width);
@@ -123,7 +123,7 @@
             }
         }
 
-        &[data-visible="false"] {
+        &[data-visible='false'] {
             width: 1px !important;
             min-width: 1px;
             transition: all 0.16s ease;
@@ -136,7 +136,7 @@
             }
         }
 
-        &[data-collapse="true"] {
+        &[data-collapse='true'] {
             width: 70px !important;
             min-width: 70px;
             justify-content: center;
@@ -181,7 +181,7 @@
         /* grid-area: outline; */
         flex: none;
         display: grid;
-        grid-template-areas: "resizer outline";
+        grid-template-areas: 'resizer outline';
         grid-template-columns: 1px 1fr;
         grid-template-rows: 1fr;
         width: var(--nue-main-outline-width);
@@ -200,7 +200,7 @@
             box-sizing: border-box;
         }
 
-        &[data-visible="false"] {
+        &[data-visible='false'] {
             width: 1px !important;
             min-width: 1px;
             transition: all 0.16s ease;
@@ -213,7 +213,7 @@
             }
         }
 
-        &[data-collapse="true"] {
+        &[data-collapse='true'] {
             width: var(--nue-main-outline-min-width) !important;
             min-width: var(--nue-main-outline-min-width);
             justify-content: center;
@@ -248,15 +248,15 @@
     position: relative;
 
     .nue-main__resizer__line {
-        content: "";
+        content: '';
         display: block;
         width: 8px;
         height: 100%;
         transform: translateX(-50%);
 
-        &[data-actived="true"] {
+        &[data-actived='true'] {
             &::after {
-                content: "";
+                content: '';
                 display: block;
                 width: 8px;
                 height: 24px;
@@ -281,7 +281,7 @@
 /* Preset styles */
 
 .nue-container--vertical {
-    grid-template-areas: "header" "main" "footer";
+    grid-template-areas: 'header' 'main' 'footer';
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 1fr;
 
@@ -315,7 +315,7 @@
 }
 
 .nue-container--horizontal {
-    grid-template-areas: "header main footer";
+    grid-template-areas: 'header main footer';
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
 

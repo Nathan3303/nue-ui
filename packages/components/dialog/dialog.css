@@ -79,7 +79,7 @@
     }
 }
 
-.nue-dialog-wrapper[data-open="false"] {
+.nue-dialog-wrapper[data-open='false'] {
     --wrapper-animation-name: fade-out;
     --dialog-animation-name: slide-out-to-top;
 }

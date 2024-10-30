@@ -1,1 +1,1 @@
-export const nueContainerContext = Symbol('nueContainerContext')
+export const nueContainerContext = Symbol('nueContainerContext');

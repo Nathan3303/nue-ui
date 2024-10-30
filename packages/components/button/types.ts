@@ -1,7 +1,7 @@
-import type { GlobalProps } from "@nue-ui/utils";
-import type { IconNameType } from "../icon";
+import type { GlobalProps } from '@nue-ui/utils';
+import type { IconNameType } from '../icon';
 
-export type ButtonSize = "small" | "large";
+export type ButtonSize = 'small' | 'large';
 
 export interface ButtonPropsType extends GlobalProps {
     icon?: IconNameType;
@@ -15,7 +15,7 @@ export interface ButtonPropsType extends GlobalProps {
     useThrottle?: boolean;
     throttleDuration?: number;
     flat?: boolean;
-    type?: "submit" | "reset" | "button";
+    type?: 'submit' | 'reset' | 'button';
 }
 
 export type ButtonEmitsType = {
