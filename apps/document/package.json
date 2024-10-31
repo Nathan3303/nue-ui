@@ -1,0 +1,18 @@
+{
+    "name": "@nue-ui/document",
+    "version": "0.1.0",
+    "description": "Documentation for Nue UI",
+    "author": "Nathan Lee",
+    "license": "MIT",
+    "scripts": {
+        "dev": "vitepress dev",
+        "build": "vitepress build",
+        "preview": "vitepress preview"
+    },
+    "devDependencies": {
+        "@vitepress-demo-preview/component": "^2.3.2",
+        "@vitepress-demo-preview/plugin": "^1.2.3",
+        "postcss": "^8.4.38",
+        "vitepress": "^1.4.2"
+    }
+}

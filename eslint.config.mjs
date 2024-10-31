@@ -22,6 +22,8 @@ export default [
             'node_modules/',
             'dist/',
             'packages/core/dist/*',
+            'apps/document/.vitepress/cache/*',
+            'apps/**/dist/*',
             '*.test.js',
             'src/legacy/**/*.js'
         ]

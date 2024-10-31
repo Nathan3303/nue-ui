@@ -1,7 +1,7 @@
 {
     "name": "@nue-ui/playground",
     "version": "0.1.0",
-    "description": "NueUI Playground",
+    "description": "Playground for Nue UI",
     "private": true,
     "main": "index.ts",
     "scripts": {
