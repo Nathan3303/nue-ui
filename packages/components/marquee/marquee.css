@@ -2,9 +2,9 @@
 
 .nue-marquee {
     --marquee-gap: 36px;
-    --marquee-width: 0;
-    --marquee-track-width: 0;
-    --marquee-transform-offset: 0;
+    --marquee-width: unset;
+    --marquee-track-width: unset;
+    --marquee-transform-offset: unset;
 }
 
 /* original */
@@ -23,6 +23,8 @@
     animation-name: marquee-slide;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    animation-delay: 0.16s;
+    opacity: 0;
 }
 
 .nue-marquee__track.nue-marquee__track--infinite {
@@ -43,9 +45,11 @@
 
 @keyframes marquee-infinite-slide {
     from {
+        opacity: 1;
         transform: translateX(0);
     }
     to {
+        opacity: 1;
         transform: translateX(
             calc(0px - (var(--marquee-track-width) + var(--marquee-gap)) / 2)
         );
@@ -54,9 +58,11 @@
 
 @keyframes marquee-slide {
     from {
+        opacity: 1;
         transform: translateX(var(--marquee-width));
     }
     to {
+        opacity: 1;
         transform: translateX(calc(0px - var(--marquee-track-width)));
     }
 }

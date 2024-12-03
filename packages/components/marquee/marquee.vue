@@ -37,15 +37,15 @@ const trackClasses = computed(() => {
 });
 
 onMounted(() => {
-    const marqueeWidth = marqueeRef.value!.offsetWidth;
-    const marqueeTrackWidth = marqueeTrackRef.value!.offsetWidth;
-    const animationDuration =
-        marqueeTrackRef.value!.children.length * props.speedRatio;
-    marqueeRef.value!.style.setProperty('--marquee-width', `${marqueeWidth}px`);
-    marqueeRef.value!.style.setProperty(
-        '--marquee-track-width',
-        `${marqueeTrackWidth}px`
+    if (!marqueeRef.value || !marqueeTrackRef.value) return;
+    marqueeRef.value.style.setProperty(
+        '--marquee-width',
+        `${marqueeRef.value.offsetWidth}px`
     );
-    marqueeTrackRef.value!.style.animationDuration = `${animationDuration}s`;
+    marqueeRef.value.style.setProperty(
+        '--marquee-track-width',
+        `${marqueeTrackRef.value.offsetWidth}px`
+    );
+    marqueeTrackRef.value.style.animationDuration = `${marqueeTrackRef.value.children.length * props.speedRatio}s`;
 });
 </script>
