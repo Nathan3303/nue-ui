@@ -1,11 +1,11 @@
-import { generateId } from "@nue-ui/utils";
-import type { popupWrapperFunctions, TopPopupWrapper } from "./types";
+import { generateId } from '@nue-ui/utils';
+import type { popupWrapperFunctions, TopPopupWrapper } from './types';
 
 const topPopupWrapper: TopPopupWrapper = {
     isExist: function () {
         const element = document.getElementById(this.id as string);
         return !!element;
-    },
+    }
 };
 const popupWrappers = new Map<string, HTMLDivElement>();
 
@@ -13,8 +13,8 @@ export function createPopupWrapper() {
     if (topPopupWrapper.element) {
         return topPopupWrapper.element;
     }
-    const newWrapper = document.createElement("div");
-    newWrapper.classList.add("nue-popup-wrapper");
+    const newWrapper = document.createElement('div');
+    newWrapper.classList.add('nue-popup-wrapper');
     newWrapper.id = generateId();
     topPopupWrapper.element = newWrapper;
     document.body.appendChild(newWrapper);
@@ -51,7 +51,7 @@ export function usePopupWrapper(id?: string) {
 
     const setZIndex = () => {
         const hasChildren = element?.childNodes.length;
-        element.dataset.actived = hasChildren ? "true" : "false";
+        element.dataset.actived = hasChildren ? 'true' : 'false';
     };
 
     const appendChild = (child: HTMLElement) => {

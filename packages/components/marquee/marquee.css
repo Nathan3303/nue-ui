@@ -1,10 +1,55 @@
-/* Animation */
+/* variables */
+
+.nue-marquee {
+    --marquee-gap: 36px;
+    --marquee-width: unset;
+    --marquee-track-width: unset;
+    --marquee-transform-offset: unset;
+}
+
+/* original */
+
+.nue-marquee {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+}
+
+.nue-marquee__track {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    background: transparent;
+    animation-name: marquee-slide;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-delay: 0.16s;
+    opacity: 0;
+}
+
+.nue-marquee__track.nue-marquee__track--infinite {
+    animation-name: marquee-infinite-slide !important;
+}
+
+.nue-marquee .nue-marquee-item {
+    width: 128px;
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #efefef;
+    border-radius: 12px;
+}
+
+/* animations */
 
 @keyframes marquee-infinite-slide {
     from {
+        opacity: 1;
         transform: translateX(0);
     }
     to {
+        opacity: 1;
         transform: translateX(
             calc(0px - (var(--marquee-track-width) + var(--marquee-gap)) / 2)
         );
@@ -13,50 +58,11 @@
 
 @keyframes marquee-slide {
     from {
+        opacity: 1;
         transform: translateX(var(--marquee-width));
     }
     to {
+        opacity: 1;
         transform: translateX(calc(0px - var(--marquee-track-width)));
-    }
-}
-
-/* Variables */
-
-.nue-marquee {
-    --marquee-gap: 36px;
-    --marquee-width: 0;
-    --marquee-track-width: 0;
-    --marquee-transform-offset: 0;
-}
-
-/* Original styles */
-
-.nue-marquee {
-    display: flex;
-    width: 100%;
-    overflow: hidden;
-
-    .nue-marquee__track {
-        display: flex;
-        align-items: center;
-        gap: 36px;
-        background: transparent;
-        animation-name: marquee-slide;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-
-        &.nue-marquee__track--infinite {
-            animation-name: marquee-infinite-slide !important;
-        }
-    }
-
-    .nue-marquee-item {
-        width: 128px;
-        aspect-ratio: 3 / 4;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #efefef;
-        border-radius: 12px;
     }
 }

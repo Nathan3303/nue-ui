@@ -1,13 +1,13 @@
-import { ref, provide, watchEffect } from "vue";
+import { ref, provide, watchEffect } from 'vue';
 import type {
     CollapsePropsType,
     CollapseEmitType,
     ActivedCollpaseItems,
     CollapseItemName,
-    CollapseContextType,
-} from "./types";
-import { COLLAPSE_CONTEXT_KEY } from "./constants";
-import "./collapse.css";
+    CollapseContextType
+} from './types';
+import { COLLAPSE_CONTEXT_KEY } from './constants';
+import './collapse.css';
 
 export function useCollapse(props: CollapsePropsType, emit: CollapseEmitType) {
     const activedItems = ref<ActivedCollpaseItems>([]);
@@ -17,12 +17,12 @@ export function useCollapse(props: CollapsePropsType, emit: CollapseEmitType) {
         const newValue = props.accordion
             ? activedItems.value[0]
             : activedItems.value;
-        emit("update:modelValue", newValue);
+        emit('update:modelValue', newValue);
     }
 
     function pushActivedItem(item: CollapseItemName) {
         if (props.accordion) {
-            setActivedItems([activedItems.value[0] === item ? "" : item]);
+            setActivedItems([activedItems.value[0] === item ? '' : item]);
             return;
         }
         const items = [...activedItems.value];
@@ -48,7 +48,7 @@ export function useCollapse(props: CollapsePropsType, emit: CollapseEmitType) {
 
     provide<CollapseContextType>(COLLAPSE_CONTEXT_KEY, {
         activedItems,
-        pushActivedItem,
+        pushActivedItem
     });
 
     return { activedItems, pushActivedItem };

@@ -2,28 +2,29 @@
     <div ref="marqueeRef" class="nue-marquee">
         <div
             ref="marqueeTrackRef"
-            class="nue-marquee__track"
             :class="trackClasses"
             :style="{
-                animationPlayState: $slots.default ? 'running' : 'paused',
-            }">
-            <slot></slot>
-            <slot v-if="infinite"></slot>
+                animationPlayState: $slots.default ? 'running' : 'paused'
+            }"
+            class="nue-marquee__track"
+        >
+            <slot />
+            <slot v-if="infinite" />
         </div>
     </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
-import type { MarqueePropsType } from "./types";
-import "./marquee.css";
+<script lang="ts" setup>
+import { ref, onMounted, computed } from 'vue';
+import type { MarqueePropsType } from './types';
+import './marquee.css';
 
-defineOptions({ name: "NueMarquee" });
+defineOptions({ name: 'NueMarquee' });
 
 const props = withDefaults(defineProps<MarqueePropsType>(), {
-    direction: "left",
+    direction: 'left',
     speedRatio: 1,
-    infinite: false,
+    infinite: false
 });
 
 const marqueeRef = ref<HTMLDivElement>();
@@ -31,20 +32,20 @@ const marqueeTrackRef = ref<HTMLDivElement>();
 
 const trackClasses = computed(() => {
     return {
-        "nue-marquee__track--infinite": props.infinite,
+        'nue-marquee__track--infinite': props.infinite
     };
 });
 
 onMounted(() => {
-    const marqueeWidth = marqueeRef.value!.offsetWidth;
-    const marqueeTrackWidth = marqueeTrackRef.value!.offsetWidth;
-    const animationDuration =
-        marqueeTrackRef.value!.children.length * props.speedRatio;
-    marqueeRef.value!.style.setProperty("--marquee-width", `${marqueeWidth}px`);
-    marqueeRef.value!.style.setProperty(
-        "--marquee-track-width",
-        `${marqueeTrackWidth}px`
+    if (!marqueeRef.value || !marqueeTrackRef.value) return;
+    marqueeRef.value.style.setProperty(
+        '--marquee-width',
+        `${marqueeRef.value.offsetWidth}px`
     );
-    marqueeTrackRef.value!.style.animationDuration = `${animationDuration}s`;
+    marqueeRef.value.style.setProperty(
+        '--marquee-track-width',
+        `${marqueeTrackRef.value.offsetWidth}px`
+    );
+    marqueeTrackRef.value.style.animationDuration = `${marqueeTrackRef.value.children.length * props.speedRatio}s`;
 });
 </script>

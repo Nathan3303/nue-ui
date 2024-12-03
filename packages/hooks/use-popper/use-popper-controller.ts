@@ -1,5 +1,5 @@
-import { nextTick } from "vue";
-import type { Ref } from "vue";
+import { nextTick } from 'vue';
+import type { Ref } from 'vue';
 
 export const usePopperController = (visible: Ref<boolean>) => {
     let hideTimer: number | null = null;
@@ -37,6 +37,6 @@ export const usePopperController = (visible: Ref<boolean>) => {
 
     return {
         show,
-        hide,
+        hide
     };
 };

@@ -1,17 +1,18 @@
-import { type Ref, ref } from "vue";
+import { ref } from 'vue';
+import type { Ref } from 'vue';
 
-export type useBoolState_t = [Ref<boolean>, Function, Function];
-
-export const useBoolState = (initialValue: boolean): useBoolState_t => {
+export const useBoolState = (
+    initialValue: boolean
+): [Ref<boolean>, () => void, (newState: boolean) => void] => {
     const state = ref(initialValue);
 
-    function switchState() {
+    const switchState = () => {
         state.value = !state.value;
-    }
+    };
 
-    function setState(newState: boolean) {
+    const setState = (newState: boolean) => {
         state.value = newState;
-    }
+    };
 
     return [state, switchState, setState];
 };

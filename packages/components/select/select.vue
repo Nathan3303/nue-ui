@@ -1,22 +1,25 @@
 <template>
     <nue-dropdown
         :class="classes"
-        :size="size"
         :hide-on-clicked="hideOnSelect"
         :keep-alive="!!$slots.default"
-        @execute="handleExecute">
+        :size="size"
+        @execute="handleExecute"
+    >
         <template #default="{ clickTrigger }">
             <nue-button
-                :size="size"
                 :disabled="disabled"
+                :size="size"
                 style="gap: 16px"
-                @click.stop="clickTrigger">
+                @click.stop="clickTrigger"
+            >
                 <template #default>
                     <template v-if="label">{{ label }}</template>
                     <nue-text
                         v-else
                         color="gray"
-                        style="font-size: inherit !important">
+                        style="font-size: inherit !important"
+                    >
                         {{ placeholder }}
                     </nue-text>
                 </template>
@@ -25,7 +28,8 @@
                     <nue-icon
                         v-if="clearable && selectedOption"
                         name="clear"
-                        @click.stop="handleClear" />
+                        @click.stop="handleClear"
+                    />
                 </template>
             </nue-button>
         </template>
@@ -35,24 +39,24 @@
     </nue-dropdown>
 </template>
 
-<script setup lang="ts">
-import { ref, computed, watch, provide, onMounted } from "vue";
-import { NueDropdown, NueButton, NueIcon, NueText } from "../index";
-import { parseTheme } from "@nue-ui/utils";
+<script lang="ts" setup>
+import { ref, computed, watch, provide, onMounted } from 'vue';
+import { NueDropdown, NueButton, NueIcon, NueText } from '../index';
+import { parseTheme } from '@nue-ui/utils';
 import type {
     SelectProps,
     SelectEmits,
     SelectOption,
-    SelectContext,
-} from "./types";
+    SelectContext
+} from './types';
 
-defineOptions({ name: "NueSelect" });
+defineOptions({ name: 'NueSelect' });
 
 const emit = defineEmits<SelectEmits>();
 const props = withDefaults(defineProps<SelectProps>(), {
     hideOnSelect: true,
-    placeholder: "Select",
-    clearable: false,
+    placeholder: 'Select',
+    clearable: false
 });
 
 const options = ref<SelectOption[]>([]);
@@ -60,14 +64,14 @@ const selectedOption = ref<SelectOption>();
 
 const classes = computed(() => {
     const { theme } = props;
-    const prefix = "nue-select";
+    const prefix = 'nue-select';
     let list: string[] = [prefix];
     if (theme) list = list.concat(parseTheme(theme, prefix));
     return list;
 });
 
 const label = computed(() => {
-    return selectedOption && selectedOption.value?.label;
+    return selectedOption.value && selectedOption.value?.label;
 });
 
 function optionRegister(option: SelectOption) {
@@ -105,21 +109,21 @@ function handleSelect(payload: unknown, isParseMV = false) {
                 break;
             }
         }
-        emit("update:modelValue", _option?.value);
-        emit("change", _option?.value);
+        emit('update:modelValue', _option?.value);
+        emit('change', _option?.value);
     }
     selectedOption.value = _option || void 0;
 }
 
 function handleClear() {
     selectedOption.value = void 0;
-    emit("update:modelValue", void 0);
-    emit("change", void 0);
+    emit('update:modelValue', void 0);
+    emit('change', void 0);
 }
 
 watch(
     () => props.modelValue,
-    (newValue) => {
+    newValue => {
         handleSelect(newValue, true);
     }
 );
@@ -128,8 +132,8 @@ onMounted(() => {
     handleSelect(props.modelValue, true);
 });
 
-provide<SelectContext>("SelectContext", {
+provide<SelectContext>('SelectContext', {
     optionRegister,
-    selectedOption,
+    selectedOption
 });
 </script>

@@ -1,4 +1,5 @@
 /* Variables */
+
 .nue-button {
     --width: auto;
     --height: 36px;
@@ -19,6 +20,7 @@
 }
 
 /* Original styles */
+
 .nue-button {
     justify-content: var(--justify-content);
     width: var(--width);
@@ -33,7 +35,6 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    /* min-height: 36px; */
     padding: 8px 16px;
     cursor: pointer;
     -webkit-user-select: none;
@@ -45,40 +46,40 @@
     color: var(--color);
     font-size: var(--text-sm);
     font-weight: var(--primary-font-weight);
-    font-family: var(--primary-font-family);
+    /*font-family: var(--primary-font-family);*/
 
     --icon-size: var(--text-sm);
     --icon-weight: var(--primary-font-weight);
-
-    &:hover {
-        color: var(--hover-color);
-        background-color: var(--hover-background-color);
-        border-color: var(--hover-border-color);
-    }
-
-    &:active {
-        color: var(--active-color);
-        background-color: var(--active-background-color);
-        border-color: var(--active-border-color);
-    }
-
-    &.nue-button--disabled {
-        color: var(--disable-color);
-        background-color: var(--disable-background-color);
-        cursor: not-allowed;
-    }
-
-    .nue-button__text {
-        flex: 1 1 auto;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        word-break: break-all;
-        text-align: left;
-    }
 }
 
-/* Build-in styles */
+.nue-button:hover {
+    color: var(--hover-color);
+    background-color: var(--hover-background-color);
+    border-color: var(--hover-border-color);
+}
+
+.nue-button:active {
+    color: var(--active-color);
+    background-color: var(--active-background-color);
+    border-color: var(--active-border-color);
+}
+
+.nue-button.nue-button--disabled {
+    color: var(--disable-color);
+    background-color: var(--disable-background-color);
+    cursor: not-allowed;
+}
+
+.nue-button__text {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    text-align: left;
+}
+
+/* small */
 
 .nue-button--small {
     --height: 28px !important;
@@ -86,25 +87,32 @@
     font-size: var(--text-xs);
 }
 
+/* large */
+
 .nue-button--large {
-    --height: 42px !important;
+    --height: 44px !important;
+    --icon-size: var(--text-lg);
     padding: 12px 24px;
     font-size: var(--text-lg);
-    --icon-size: var(--text-lg);
 }
+
+/* round */
 
 .nue-button--round {
     border-radius: 999px;
 }
 
+/* icon-only */
+
 .nue-button--icon-only {
-    aspect-ratio: 1;
     --justify-content: center;
     --border-color: transparent;
-    /* --icon-size: var(--text-lg); */
     --height: 36px;
+    aspect-ratio: 1;
     box-shadow: none;
 }
+
+/* primary */
 
 .nue-button--primary {
     --color: white;
@@ -114,13 +122,19 @@
     --active-background-color: var(--primary-color-800);
 }
 
+/* pure */
+
 .nue-button--pure {
-    box-shadow: none;
-    padding: 0px;
     --height: max-content;
     --hover-background-color: transparent;
     --active-background-color: transparent;
     --hover-color: var(--secondary-text-color);
     --active-color: var(--secondary-text-color);
     --border-color: transparet;
+    box-shadow: none;
+    padding: 0;
+}
+
+.nue-button--pure.nue-button--disabled {
+    background-color: transparent;
 }

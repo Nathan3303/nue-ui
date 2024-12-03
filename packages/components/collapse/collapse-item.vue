@@ -1,10 +1,11 @@
 <template>
     <div
         v-show="!isHidden"
+        :data-collapse="isCollapsed"
         class="nue-collapse-item"
-        :data-collapse="isCollapsed">
+    >
         <div class="nue-collapse-item__header">
-            <slot name="header" :collapse="handleCollapse" :state="isCollapsed">
+            <slot :collapse="handleCollapse" :state="isCollapsed" name="header">
                 <div class="nue-collapse-item__title">
                     <slot name="title">
                         <span>{{ title }}</span>
@@ -14,7 +15,8 @@
                     class="nue-collapse-item__toggle-button"
                     icon="arrow-down"
                     theme="pure"
-                    @click="handleCollapse" />
+                    @click="handleCollapse"
+                />
             </slot>
         </div>
         <div ref="contentRef" class="nue-collapse-item__content">
@@ -23,8 +25,9 @@
                     <nue-text
                         v-if="!hideWhenEmpty"
                         class="nue-collapse-item__empty"
+                        color="gray"
                         size="12px"
-                        color="gray">
+                    >
                         Empty
                     </nue-text>
                 </slot>
@@ -33,22 +36,22 @@
     </div>
 </template>
 
-<script setup lang="ts">
-import { ref, watch, onMounted, onUpdated, inject, computed } from "vue";
-import { COLLAPSE_CONTEXT_KEY } from "./constants";
-import NueButton from "../button/button.vue";
-import { generateId } from "@nue-ui/utils";
+<script lang="ts" setup>
+import { ref, watch, onMounted, onUpdated, inject, computed } from 'vue';
+import { COLLAPSE_CONTEXT_KEY } from './constants';
+import NueButton from '../button/button.vue';
+import { generateId } from '@nue-ui/utils';
 import type {
     CollapseContextType,
     CollapseItemPropsType,
-    CollapseItemName,
-} from "./types";
+    CollapseItemName
+} from './types';
 
-defineOptions({ name: "NueCollapseItem" });
+defineOptions({ name: 'NueCollapseItem' });
 
 const props = withDefaults(defineProps<CollapseItemPropsType>(), {
-    title: "",
-    hideWhenEmpty: false,
+    title: '',
+    hideWhenEmpty: false
 });
 
 const { activedItems, pushActivedItem } = inject(
@@ -74,14 +77,14 @@ function handleCollapse() {
 
 function handleCollapseAnimation() {
     if (contentRef.value) {
-        contentRef.value.style.height = contentRef.value.scrollHeight + "px";
+        contentRef.value.style.height = contentRef.value.scrollHeight + 'px';
         contentRef.value.scrollHeight;
         if (isCollapsed.value) {
             if (timer.value) clearTimeout(timer.value);
-            contentRef.value.style.height = "0px";
+            contentRef.value.style.height = '0px';
         } else {
             timer.value = setTimeout(
-                () => (contentRef.value!.style.height = "max-content"),
+                () => (contentRef.value!.style.height = 'auto'),
                 300
             ) as unknown as number;
         }
@@ -115,6 +118,6 @@ onUpdated(() => {
 defineExpose({
     name: itemName,
     isCollapsed,
-    handleCollapse,
+    handleCollapse
 });
 </script>

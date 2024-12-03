@@ -10,32 +10,32 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import type { DividerPropsType } from "./types";
-import "./divider.css";
+    import { computed } from 'vue';
+    import type { DividerPropsType } from './types';
+    import './divider.css';
 
-defineOptions({ name: "NueDivider" });
+    defineOptions({ name: 'NueDivider' });
 
-const props = withDefaults(defineProps<DividerPropsType>(), {
-    direction: "horizontal",
-    vertical: false,
-});
+    const props = withDefaults(defineProps<DividerPropsType>(), {
+        direction: 'horizontal',
+        vertical: false
+    });
 
-const classes = computed(() => {
-    const prefix = "nue-divider";
-    const { direction } = props;
-    let list: string[] = [prefix];
-    list.push(`${prefix}--${direction}`);
-    return list;
-});
+    const classes = computed(() => {
+        const prefix = 'nue-divider';
+        const { direction } = props;
+        let list: string[] = [prefix];
+        list.push(`${prefix}--${direction}`);
+        return list;
+    });
 
-const styles = computed(() => {
-    const { borderType, borderWidth, borderColor, align } = props;
-    return {
-        "--border-width": borderWidth,
-        "--border-type": borderType,
-        "--border-color": borderColor,
-        "--justify-content": align,
-    };
-});
+    const styles = computed(() => {
+        const { borderType, borderWidth, borderColor, align } = props;
+        return {
+            '--border-width': borderWidth,
+            '--border-type': borderType,
+            '--border-color': borderColor,
+            '--justify-content': align
+        };
+    });
 </script>

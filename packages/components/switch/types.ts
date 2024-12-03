@@ -1,8 +1,8 @@
-import type { GlobalProps } from "@nue-ui/utils";
+import type { GlobalProps } from '@nue-ui/utils';
 
 export interface NueSwitchProps extends GlobalProps {
     modelValue?: boolean;
-    size?: "small" | "large";
+    size?: 'small' | 'large';
     disabled?: boolean;
     loading?: boolean;
     showText?: boolean;
@@ -12,6 +12,6 @@ export interface NueSwitchProps extends GlobalProps {
 }
 
 export type NueSwitchEmits = {
-    (event: "update:modelValue", value: boolean): void;
-    (event: "change", value: boolean): void;
+    (event: 'update:modelValue', value: boolean): void;
+    (event: 'change', value: boolean): void;
 };

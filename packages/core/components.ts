@@ -30,10 +30,10 @@ import {
     NueSwitch,
     NueText,
     NueTextarea,
-    NueTooltip,
-} from "@nue-ui/components";
+    NueTooltip
+} from '@nue-ui/components';
 
-import type { Plugin } from "vue";
+import type { Plugin } from 'vue';
 
 export default [
     NueAvatar,
@@ -67,5 +67,5 @@ export default [
     NueSwitch,
     NueText,
     NueTextarea,
-    NueTooltip,
+    NueTooltip
 ] as Plugin[];

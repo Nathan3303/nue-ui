@@ -6,5 +6,5 @@ export type DrawerPropsType = {
     minSpan?: string;
     beforeClose?: DrawerBeforeCloseType;
     closeByButtonOnly?: boolean;
-    openFrom?: "left" | "right" | "top" | "bottom";
+    openFrom?: 'left' | 'right' | 'top' | 'bottom';
 };

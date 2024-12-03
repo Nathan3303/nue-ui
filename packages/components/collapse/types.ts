@@ -1,5 +1,5 @@
-import type { GlobalProps } from "@nue-ui/utils";
-import type { Ref } from "vue";
+import type { GlobalProps } from '@nue-ui/utils';
+import type { Ref } from 'vue';
 
 export type CollapseItemName = string;
 export type ActivedCollpaseItems = CollapseItemName | CollapseItemName[];
@@ -16,7 +16,7 @@ export type CollapseItemPropsType = {
 };
 
 export type CollapseEmitType = {
-    (e: "update:modelValue", value: ActivedCollpaseItems): void;
+    (e: 'update:modelValue', value: ActivedCollpaseItems): void;
 };
 
 export type CollapseContextType = {

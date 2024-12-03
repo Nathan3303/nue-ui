@@ -1,33 +1,34 @@
 <template>
-    <div :class="classes" @click.stop="handleClick" ref="switchRef">
+    <div ref="switchRef" :class="classes" @click.stop="handleClick">
         <div class="nue-switch__circle">
             <nue-icon
-                class="nue-switch__loading-icon"
                 v-if="loading"
+                class="nue-switch__loading-icon"
                 name="loading"
-                spin></nue-icon>
+                spin
+            />
         </div>
-        <div class="nue-switch__text" v-if="showText">
+        <div v-if="showText" class="nue-switch__text">
             <slot>{{ state ? activeText : inactiveText }}</slot>
         </div>
     </div>
 </template>
 
-<script setup lang="ts">
-import { ref, computed, watch } from "vue";
-import { parseTheme } from "@nue-ui/utils";
-import { isFunction } from "lodash-es";
-import { NueIcon } from "../icon";
-import type { NueSwitchProps, NueSwitchEmits } from "./types";
-import "./switch.css";
+<script lang="ts" setup>
+import { ref, computed, watch } from 'vue';
+import { parseTheme } from '@nue-ui/utils';
+import { isFunction } from 'lodash-es';
+import { NueIcon } from '../icon';
+import type { NueSwitchProps, NueSwitchEmits } from './types';
+import './switch.css';
 
-defineOptions({ name: "NueSwitch" });
+defineOptions({ name: 'NueSwitch' });
 const props = withDefaults(defineProps<NueSwitchProps>(), {
     disabled: false,
     showText: false,
     loading: false,
-    activeText: "I",
-    inactiveText: "O",
+    activeText: 'I',
+    inactiveText: 'O'
 });
 const emit = defineEmits<NueSwitchEmits>();
 
@@ -37,7 +38,7 @@ const switchRef = ref<HTMLDivElement>();
 const classes = computed(() => {
     const { size, theme, disabled } = props;
     let list: string[] = [];
-    const prefix = "nue-switch";
+    const prefix = 'nue-switch';
     list.push(prefix);
     if (theme) list = list.concat(parseTheme(theme, prefix));
     if (state.value) list.push(`${prefix}--actived`);
@@ -54,7 +55,7 @@ const handleClick = async () => {
             const result = await beforeSwitch(state.value);
             if (!result) return;
         } catch (error) {
-            return;
+            return error;
         }
     }
     handleSwitch();
@@ -62,23 +63,28 @@ const handleClick = async () => {
 
 const handleSwitch = () => {
     state.value = !state.value;
-    emit("update:modelValue", state.value);
-    emit("change", state.value);
+    emit('update:modelValue', state.value);
+    emit('change', state.value);
 };
 
 const handleSetStateWidth = () => {
     setTimeout(() => {
-        const cw = switchRef.value?.clientWidth;
-        switchRef.value?.style.setProperty("--state-width", `${cw}px`);
+        if (!switchRef.value) return;
+        switchRef.value.style.setProperty(
+            '--state-width',
+            `${switchRef.value.clientWidth}px`
+        );
     });
 };
 
 watch(
     () => props.modelValue,
-    (newValue) => {
-        state.value = newValue;
-        handleSetStateWidth();
-    },
+    newValue => (state.value = newValue),
     { immediate: true }
+);
+
+watch(
+    () => state.value,
+    () => handleSetStateWidth()
 );
 </script>

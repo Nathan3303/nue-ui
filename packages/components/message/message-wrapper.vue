@@ -2,13 +2,13 @@
     <div ref="messageRef" class="nue-message"></div>
 </template>
 
-<script setup lang="ts">
-import { onMounted, ref, onBeforeUnmount } from "vue";
-import { useMessageWrapper } from "./message";
-import "./message-wrapper.css";
+<script lang="ts" setup>
+import { onMounted, ref, onBeforeUnmount } from 'vue';
+import { useMessageWrapper } from './message';
+import './message-wrapper.css';
 
 defineOptions({
-    name: "NueMessageWrapper",
+    name: 'NueMessageWrapper'
 });
 
 const messageRef = ref<HTMLDivElement>();

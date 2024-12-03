@@ -1,20 +1,20 @@
-import { ref, reactive } from "vue";
-import type { Ref } from "vue";
-import type { UsePopperOptions } from "./types";
+import { ref, reactive } from 'vue';
+import type { Ref } from 'vue';
+import type { UsePopperOptions } from './types';
 
 export const usePopper = (
     wrapperRef: Ref<HTMLElement | undefined>,
     popperRef: Ref<HTMLElement | undefined>,
     options: UsePopperOptions
 ) => {
-    const placement = ref(options.placement || "top-center");
+    const placement = ref(options.placement || 'top-center');
     const rectInfo = reactive({
         popperWidth: 0,
         popperHeight: 0,
         wrapperX: 0,
         wrapperY: 0,
         wrapperWidth: 0,
-        wrapperHeight: 0,
+        wrapperHeight: 0
     });
 
     const getRectInfo = () => {
@@ -29,79 +29,79 @@ export const usePopper = (
     };
 
     const updatePlacement = (
-        direction?: "top" | "bottom" | "left" | "right",
-        alignment?: "start" | "center" | "end"
+        direction?: 'top' | 'bottom' | 'left' | 'right',
+        alignment?: 'start' | 'center' | 'end'
     ) => {
-        const [_direction, _alignment] = placement.value.split("-");
+        const [_direction, _alignment] = placement.value.split('-');
         const newDirection = direction ?? _direction;
         const newAlignment = alignment ?? _alignment;
-        const newPlacement = newDirection + "-" + newAlignment;
-        placement.value = (newPlacement as UsePopperOptions["placement"])!;
+        const newPlacement = newDirection + '-' + newAlignment;
+        placement.value = (newPlacement as UsePopperOptions['placement'])!;
     };
 
     const checkOverflow = () => {
-        const [direction, alignment] = placement.value.split("-");
+        const [direction, alignment] = placement.value.split('-');
         const {
             popperWidth,
             popperHeight,
             wrapperX,
             wrapperY,
             wrapperWidth,
-            wrapperHeight,
+            wrapperHeight
         } = rectInfo;
         switch (direction) {
-            case "top":
+            case 'top':
                 if (wrapperY - popperHeight < 8) {
-                    updatePlacement("bottom");
+                    updatePlacement('bottom');
                     return true;
                 }
                 break;
-            case "bottom":
+            case 'bottom':
                 if (
                     wrapperY + wrapperHeight + popperHeight >
                     window.innerHeight - 8
                 ) {
-                    updatePlacement("top");
+                    updatePlacement('top');
                     return true;
                 }
                 break;
-            case "left":
+            case 'left':
                 if (wrapperX - popperWidth < 8) {
-                    updatePlacement("right");
+                    updatePlacement('right');
                     return true;
                 }
                 break;
-            case "right":
+            case 'right':
                 if (
                     wrapperX + wrapperWidth + popperWidth >
                     window.innerWidth - 8
                 ) {
-                    updatePlacement("left");
+                    updatePlacement('left');
                     return true;
                 }
                 break;
         }
         switch (alignment) {
-            case "start":
+            case 'start':
                 if (wrapperX + popperWidth > window.innerWidth - 8) {
-                    updatePlacement(void 0, "center");
+                    updatePlacement(void 0, 'center');
                     return true;
                 }
 
                 break;
-            case "end":
+            case 'end':
                 if (wrapperX < 8) {
-                    updatePlacement(void 0, "center");
+                    updatePlacement(void 0, 'center');
                     return true;
                 }
                 break;
-            case "center":
+            case 'center':
                 if (wrapperX + popperWidth > window.innerWidth - 8) {
-                    updatePlacement(void 0, "end");
+                    updatePlacement(void 0, 'end');
                     return true;
                 }
                 if (wrapperX < 8) {
-                    updatePlacement(void 0, "start");
+                    updatePlacement(void 0, 'start');
                     return true;
                 }
                 break;
@@ -110,7 +110,7 @@ export const usePopper = (
     };
 
     const calculatePosition = (
-        initialPlacement?: UsePopperOptions["placement"]
+        initialPlacement?: UsePopperOptions['placement']
     ) => {
         const popper = popperRef.value;
         if (!popper) return;
@@ -126,68 +126,68 @@ export const usePopper = (
             wrapperX,
             wrapperY,
             wrapperWidth,
-            wrapperHeight,
+            wrapperHeight
         } = rectInfo;
         switch (placement.value) {
-            case "top-center":
+            case 'top-center':
                 popper.style.left = `${
                     wrapperX + wrapperWidth / 2 - popperWidth / 2
                 }px`;
                 popper.style.top = `${wrapperY - popperHeight - 8}px`;
                 break;
-            case "top-start":
+            case 'top-start':
                 popper.style.left = `${wrapperX}px`;
                 popper.style.top = `${wrapperY - popperHeight - 8}px`;
                 break;
-            case "top-end":
+            case 'top-end':
                 popper.style.left = `${
                     wrapperX + wrapperWidth - popperWidth
                 }px`;
                 popper.style.top = `${wrapperY - popperHeight - 8}px`;
                 break;
-            case "bottom-center":
+            case 'bottom-center':
                 popper.style.left = `${
                     wrapperX + wrapperWidth / 2 - popperWidth / 2
                 }px`;
                 popper.style.top = `${wrapperY + wrapperHeight + 8}px`;
                 break;
-            case "bottom-start":
+            case 'bottom-start':
                 popper.style.left = `${wrapperX}px`;
                 popper.style.top = `${wrapperY + wrapperHeight + 8}px`;
                 break;
-            case "bottom-end":
+            case 'bottom-end':
                 popper.style.left = `${
                     wrapperX + wrapperWidth - popperWidth
                 }px`;
                 popper.style.top = `${wrapperY + wrapperHeight + 8}px`;
                 break;
-            case "left-center":
+            case 'left-center':
                 popper.style.left = `${wrapperX - popperWidth - 8}px`;
                 popper.style.top = `${
                     wrapperY + wrapperHeight / 2 - popperHeight / 2
                 }px`;
                 break;
-            case "left-start":
+            case 'left-start':
                 popper.style.left = `${wrapperX - popperWidth - 8}px`;
                 popper.style.top = `${wrapperY}px`;
                 break;
-            case "left-end":
+            case 'left-end':
                 popper.style.left = `${wrapperX - popperWidth - 8}px`;
                 popper.style.top = `${
                     wrapperY + wrapperHeight - popperHeight
                 }px`;
                 break;
-            case "right-center":
+            case 'right-center':
                 popper.style.left = `${wrapperX + wrapperWidth + 8}px`;
                 popper.style.top = `${
                     wrapperY + wrapperHeight / 2 - popperHeight / 2
                 }px`;
                 break;
-            case "right-start":
+            case 'right-start':
                 popper.style.left = `${wrapperX + wrapperWidth + 8}px`;
                 popper.style.top = `${wrapperY}px`;
                 break;
-            case "right-end":
+            case 'right-end':
                 popper.style.left = `${wrapperX + wrapperWidth + 8}px`;
                 popper.style.top = `${
                     wrapperY + wrapperHeight - popperHeight
@@ -202,6 +202,6 @@ export const usePopper = (
         rectInfo,
         placement,
         getRectInfo,
-        calculatePosition,
+        calculatePosition
     };
 };

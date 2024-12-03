@@ -1,0 +1,37 @@
+{
+    "name": "@vitepress-demo-preview/plugin",
+    "version": "1.2.3",
+    "description": "preview component of code and component in vitepress",
+    "packageManager": "pnpm@7.9.5",
+    "main": "./bundle/index.cjs",
+    "module": "./bundle/index.mjs",
+    "types": "./bundle/index.d.ts",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./bundle/index.mjs",
+            "require": "./bundle/index.cjs"
+        }
+    },
+    "files": [
+        "bundle",
+        "package.json"
+    ],
+    "scripts": {
+        "dev": "rollup --config rollup.config.ts --watch",
+        "build": "rollup --config rollup.config.ts"
+    },
+    "homepage": "https://github.com/flingyp/vitepress-demo-preview#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/flingyp/vitepress-demo-preview.git"
+    },
+    "bugs": "https://github.com/flingyp/vitepress-demo-preview/issues",
+    "keywords": [
+        "vitepress",
+        "plugins",
+        "component"
+    ],
+    "author": "FlyPeng",
+    "license": "MIT"
+}

@@ -1,82 +1,206 @@
 <template>
-    <main :class="classes" :style="style">
-        <aside v-if="$slots.aside" ref="asideRef" class="nue-main__aside">
-            <slot name="aside"></slot>
-            <i
-                v-show="allowResizeAside"
-                ref="resizerRef"
-                class="nue-main__aside__resizer"
-                @mousedown="handleMouseDown"
-                @dblclick="handleDoubleClick"></i>
-        </aside>
-        <div v-if="$slots.content" class="nue-main__content">
+    <main ref="mainRef" :class="classes" :style="style">
+        <div
+            v-if="$slots.aside"
+            ref="asideRef"
+            class="nue-main__aside-wrapper"
+            :data-visible="asideData.visible"
+            :data-collapse="asideData.collapse"
+        >
+            <aside class="nue-main__aside">
+                <slot name="aside"></slot>
+            </aside>
+            <div class="nue-main__resizer" @mousedown.capture="handleMouseDown">
+                <div
+                    class="nue-main__resizer__line"
+                    data-target="aside"
+                    :data-actived="allowResizeAside"
+                ></div>
+            </div>
+        </div>
+        <div v-if="$slots.default || $slots.content" class="nue-main__content">
+            <slot></slot>
             <slot name="content"></slot>
         </div>
-        <slot></slot>
+        <div
+            v-if="$slots.outline"
+            ref="outlineRef"
+            class="nue-main__outline-wrapper"
+            :data-visible="outlineData.visible"
+            :data-collapse="outlineData.collapse"
+        >
+            <div class="nue-main__resizer" @mousedown.capture="handleMouseDown">
+                <div
+                    class="nue-main__resizer__line"
+                    data-target="outline"
+                    :data-actived="allowResizeOutline"
+                ></div>
+            </div>
+            <aside class="nue-main__outline">
+                <slot name="outline"></slot>
+            </aside>
+        </div>
+        <slot name="columns"></slot>
     </main>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import type { MainPropsType } from "./types";
-import "./main.css";
+    import { computed, reactive, ref } from 'vue';
+    import { parseTheme } from '@nue-ui/utils';
+    import type { NueMainProps } from './types';
 
-defineOptions({ name: "NueMain" });
+    defineOptions({ name: 'NueMain' });
+    const props = withDefaults(defineProps<NueMainProps>(), {
+        asideWidth: '256px',
+        asideMinWidth: '128px',
+        asideMaxWidth: '512px',
+        allowResizeAside: true,
+        allowCollapseAside: true,
+        allowHideAside: true,
+        outlineWidth: '256px',
+        outlineMinWidth: '128px',
+        outlineMaxWidth: '512px',
+        allowResizeOutline: true,
+        allowCollapseOutline: true,
+        allowHideOutline: true
+    });
 
-const props = withDefaults(defineProps<MainPropsType>(), {});
+    const mainRef = ref<HTMLElement>();
+    const asideRef = ref<HTMLElement>();
+    const outlineRef = ref<HTMLElement>();
+    const isResizing = ref(false);
+    const asideData = reactive({
+        visible: true,
+        float: false,
+        collapse: false
+    });
+    const outlineData = reactive({
+        visible: true,
+        float: false,
+        collapse: false
+    });
+    let target = 'aside';
+    let originalX = 0;
+    let originalWidth = 0;
 
-const asideRef = ref<HTMLElement>();
-const resizerRef = ref<HTMLElement>();
-const isResizing = ref(false);
-let originalX = 0;
-let originalWidth = 0;
+    const classes = computed(() => {
+        const { theme } = props;
+        const prefix = 'nue-main';
+        let list: string[] = [prefix];
+        if (theme) list = list.concat(parseTheme(theme, prefix));
+        if (isResizing.value) list.push(`${prefix}--resizing`);
+        return list;
+    });
 
-const style = computed(() => {
-    const {
-        allowResizeAside,
-        asideWidth,
-        asideMinWidth,
-        asideMaxWidth,
-        contentPadding,
-    } = props;
-    return {
-        "--aside-width": allowResizeAside ? void 0 : asideWidth,
-        "--aside-min-width": asideMinWidth,
-        "--aside-max-width": asideMaxWidth,
-        "--content-padding": contentPadding,
+    const style = computed(() => {
+        const {
+            asideWidth,
+            asideMinWidth,
+            asideMaxWidth,
+            outlineWidth,
+            outlineMinWidth,
+            outlineMaxWidth
+        } = props;
+        return {
+            '--nue-main-aside-width': asideWidth,
+            '--nue-main-aside-min-width': asideMinWidth,
+            '--nue-main-aside-max-width': asideMaxWidth,
+            '--nue-main-outline-width': outlineWidth,
+            '--nue-main-outline-min-width': outlineMinWidth,
+            '--nue-main-outline-max-width': outlineMaxWidth
+        };
+    });
+
+    const handleMouseDown = (event: MouseEvent) => {
+        target = (event.target as HTMLDivElement).dataset.target || 'aside';
+        if (target === 'outline' && !props.allowResizeOutline) return;
+        if (target === 'aside' && !props.allowResizeAside) return;
+        isResizing.value = true;
+        originalX = event.clientX;
+        const targetRef = target === 'outline' ? outlineRef : asideRef;
+        originalWidth = parseInt(
+            window.getComputedStyle(targetRef.value!).width
+        );
+        const targetFn =
+            target === 'aside' ? handleResizeAside : handleResizeOutline;
+        document.documentElement.addEventListener('mousemove', targetFn);
+        document.documentElement.addEventListener('mouseup', handleMouseUp);
     };
-});
 
-const classes = computed(() => {
-    const list = [];
-    list.push("nue-main");
-    if (isResizing.value) list.push("nue-main--resizing");
-    return list;
-});
+    const handleMouseUp = () => {
+        const targetFn =
+            target === 'aside' ? handleResizeAside : handleResizeOutline;
+        document.documentElement.removeEventListener('mousemove', targetFn);
+        document.documentElement.removeEventListener('mouseup', handleMouseUp);
+        isResizing.value = false;
+        document.body.style.cursor = 'default';
+    };
 
-const handleMouseMove = (event: MouseEvent) => {
-    const { clientX: boundX } = event;
-    document.body.style.cursor = "col-resize";
-    const newWidth = boundX - originalX + originalWidth;
-    asideRef.value!.style.width = newWidth + "px";
-};
+    const convertPercentageWidth = (width: string) => {
+        width = width.trim();
+        if (!mainRef.value || !width.endsWith('%')) return parseInt(width);
+        const percent = parseFloat(width) / 100;
+        const mainWidth = mainRef.value.clientWidth;
+        return (mainWidth * percent) as number;
+    };
 
-const handleMouseUp = () => {
-    document.documentElement.removeEventListener("mousemove", handleMouseMove);
-    document.documentElement.removeEventListener("mouseup", handleMouseUp);
-    isResizing.value = false;
-    document.body.style.cursor = "default";
-};
+    const handleResizeAside = (event: MouseEvent) => {
+        const { clientX: boundX } = event;
+        document.body.style.cursor = 'ew-resize';
+        const newWidth = originalWidth + (boundX - originalX);
+        setAsideWidth(newWidth);
+    };
 
-const handleMouseDown = (event: MouseEvent) => {
-    isResizing.value = true;
-    originalX = event.clientX;
-    originalWidth = parseInt(window.getComputedStyle(asideRef.value!).width);
-    document.documentElement.addEventListener("mousemove", handleMouseMove);
-    document.documentElement.addEventListener("mouseup", handleMouseUp);
-};
+    const setAsideWidth = (newWidth: number) => {
+        const {
+            asideMinWidth,
+            asideMaxWidth,
+            allowCollapseAside,
+            allowHideAside
+        } = props;
+        const minWidth = convertPercentageWidth(asideMinWidth);
+        const maxWidth = convertPercentageWidth(asideMaxWidth);
+        if (newWidth >= maxWidth) return;
+        asideRef.value!.style.width = newWidth + 'px';
+        if (allowHideAside) {
+            const isHidden = newWidth <= 24;
+            asideData.visible = !isHidden;
+            if (isHidden) return (asideData.collapse = false);
+        }
+        if (allowCollapseAside) {
+            const isCollapsed = newWidth <= minWidth;
+            asideData.collapse = isCollapsed;
+            if (isCollapsed) return;
+        }
+    };
 
-const handleDoubleClick = () => {
-    asideRef.value!.style.width = "200px";
-};
+    const handleResizeOutline = (event: MouseEvent) => {
+        const { clientX: boundX } = event;
+        document.body.style.cursor = 'ew-resize';
+        const newWidth = originalWidth + (originalX - boundX);
+        setOutlineWidth(newWidth);
+    };
+
+    const setOutlineWidth = (newWidth: number) => {
+        const {
+            outlineMinWidth,
+            outlineMaxWidth,
+            allowCollapseOutline,
+            allowHideOutline
+        } = props;
+        const minWidth = convertPercentageWidth(outlineMinWidth);
+        const maxWidth = convertPercentageWidth(outlineMaxWidth);
+        if (newWidth >= maxWidth) return;
+        outlineRef.value!.style.width = newWidth + 'px';
+        if (allowHideOutline) {
+            const isHidden = newWidth <= 24;
+            outlineData.visible = !isHidden && allowHideOutline;
+            if (isHidden) return (outlineData.collapse = false);
+        }
+        if (allowCollapseOutline) {
+            const isCollapsed = newWidth <= minWidth;
+            outlineData.collapse = isCollapsed && allowCollapseOutline;
+            if (isCollapsed) return;
+        }
+    };
 </script>

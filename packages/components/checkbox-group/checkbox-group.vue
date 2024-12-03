@@ -1,39 +1,42 @@
 <template>
     <div class="nue-checkbox-group">
         <slot
-            name="controller"
             v-if="useController"
             :controllerState="controllerState"
-            :isIndeterminate="isIndeterminate">
+            :isIndeterminate="isIndeterminate"
+            name="controller"
+        >
             <nue-checkbox
                 v-model="controllerState"
                 :indeterminate="isIndeterminate"
-                name="NueCheckboxGroupController">
-                {{ controllerLabel ?? "" }}
+                class="nue-checkbox-group__controller"
+                name="NueCheckboxGroupController"
+            >
+                {{ controllerLabel ?? '' }}
             </nue-checkbox>
         </slot>
-        <slot></slot>
+        <slot />
     </div>
 </template>
 
-<script setup lang="ts">
-import { provide, ref, watch, computed } from "vue";
-import { CHECKBOX_GROUP_CTX_KEY } from "./constants";
-import NueCheckbox from "../checkbox/checkbox.vue";
+<script lang="ts" setup>
+import { provide, ref, watch, computed } from 'vue';
+import { CHECKBOX_GROUP_CTX_KEY } from './constants';
+import NueCheckbox from '../checkbox/checkbox.vue';
 import type {
     NueCheckboxGroupProps,
     NueCheckboxGroupEmits,
     CheckboxName,
-    NueCheckboxGroupContext,
-} from "./types";
-import "./checkbox-group.css";
+    NueCheckboxGroupContext
+} from './types';
+import './checkbox-group.css';
 
-defineOptions({ name: "NueCheckboxGroup" });
+defineOptions({ name: 'NueCheckboxGroup' });
 const props = withDefaults(defineProps<NueCheckboxGroupProps>(), {
     disabled: false,
     min: 0,
     max: Infinity,
-    useController: false,
+    useController: false
 });
 const emit = defineEmits<NueCheckboxGroupEmits>();
 
@@ -68,8 +71,8 @@ const controllerState = computed({
                 checkMinMax();
             }
         }
-        emit("update:modelValue", activeNames.value);
-    },
+        emit('update:modelValue', activeNames.value);
+    }
 });
 
 const handleRegisterName = (name: CheckboxName) => {
@@ -79,7 +82,7 @@ const handleRegisterName = (name: CheckboxName) => {
 
 const handleUnregisterName = (name: CheckboxName) => {
     if (!names.value.includes(name)) return;
-    names.value = names.value.filter((n) => n !== name);
+    names.value = names.value.filter(n => n !== name);
 };
 
 const checkMinMax = () => {
@@ -91,7 +94,7 @@ const handlePushName = (name: CheckboxName) => {
     if (maximized.value) return false;
     if (activeNames.value.includes(name)) return false;
     activeNames.value.push(name);
-    emit("update:modelValue", activeNames.value);
+    emit('update:modelValue', activeNames.value);
     checkMinMax();
     return true;
 };
@@ -99,8 +102,8 @@ const handlePushName = (name: CheckboxName) => {
 const handlePopName = (name: CheckboxName) => {
     if (minimized.value) return false;
     if (!activeNames.value.includes(name)) return false;
-    activeNames.value = activeNames.value.filter((n) => n !== name);
-    emit("update:modelValue", activeNames.value);
+    activeNames.value = activeNames.value.filter(n => n !== name);
+    emit('update:modelValue', activeNames.value);
     checkMinMax();
     return true;
 };
@@ -115,12 +118,12 @@ provide<NueCheckboxGroupContext>(CHECKBOX_GROUP_CTX_KEY, {
     pushName: handlePushName,
     popName: handlePopName,
     register: handleRegisterName,
-    unregister: handleUnregisterName,
+    unregister: handleUnregisterName
 });
 
 watch(
     () => props.modelValue,
-    (newValue) => (activeNames.value = newValue as CheckboxName[]),
+    newValue => (activeNames.value = newValue as CheckboxName[]),
     { immediate: true }
 );
 </script>

@@ -1,4 +1,4 @@
-import type { GlobalProps } from "@nue-ui/utils";
+import type { GlobalProps } from '@nue-ui/utils';
 
 export interface NueEmptyProps extends GlobalProps {
     imageSrc?: string;

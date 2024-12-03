@@ -1,4 +1,4 @@
-/* Variables */
+/* variables */
 
 .infinite-scroll-wrapper {
     --font-color: var(--primary-text-color);
@@ -8,47 +8,46 @@
     --trigger-bar-height: 50px;
 }
 
-/* Original Styles */
+/* original */
 
 .infinite-scroll-wrapper {
     width: 100%;
     height: var(--height);
     overflow: auto;
+}
 
-    .infinite-scroll {
-        position: relative;
-        width: 100%;
+.infinite-scroll__trigger-bar {
+    position: absolute;
+    width: 100%;
+    height: var(--trigger-bar-height);
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    z-index: -1;
+}
 
-        .infinite-scroll__trigger-bar {
-            position: absolute;
-            width: 100%;
-            height: var(--trigger-bar-height);
-            bottom: 0;
-            left: 0;
-            opacity: 0;
-            z-index: -1;
-        }
+.infinite-scroll__loading,
+.infinite-scroll__disabled {
+    color: var(--font-color);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
 
-        .infinite-scroll__loading,
-        .infinite-scroll__disabled {
-            color: var(--font-color);
-            font-size: var(--font-size);
-            font-weight: var(--font-weight);
-            font-family: var(--font-family);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: calc(var(--font-size) * 3);
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            height: calc(var(--font-size) * 3);
+    border-radius: 12px;
+    margin-top: 16px;
+}
 
-            border-radius: 12px;
-            margin-top: 16px;
-        }
+.infinite-scroll {
+    position: relative;
+    width: 100%;
+}
 
-        .infinite-scroll__disabled {
-            color: var(--disabled-color);
-            background-color: var(--primary-color-200);
-        }
-    }
+.infinite-scroll .infinite-scroll__disabled {
+    color: var(--disabled-color);
+    background-color: var(--primary-color-200);
 }

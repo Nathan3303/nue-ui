@@ -1,25 +1,26 @@
 <template>
     <li
-        class="nue-select__option"
-        :data-executeid="executeId"
         :data-disabled="disabled"
+        :data-executeid="executeId"
         :data-selected="selected"
-        @click="handleClick">
+        class="nue-select__option"
+        @click="handleClick"
+    >
         {{ label }}
-        <nue-icon v-if="selected" name="completed"></nue-icon>
+        <nue-icon v-if="selected" name="completed" />
     </li>
 </template>
 
-<script setup lang="ts">
-import { ref, inject, computed } from "vue";
-import type { SelectOptionProps, SelectContext } from "./types";
-import { generateId } from "@nue-ui/utils";
-import { NueIcon } from "../index";
-import "./option.css";
+<script lang="ts" setup>
+import { ref, inject, computed } from 'vue';
+import type { SelectOptionProps, SelectContext } from './types';
+import { generateId } from '@nue-ui/utils';
+import { NueIcon } from '../index';
+import './option.css';
 
-const selectContext: SelectContext = inject("SelectContext")!;
+const selectContext: SelectContext = inject('SelectContext')!;
 
-defineOptions({ name: "NueSelectOption" });
+defineOptions({ name: 'NueSelectOption' });
 const props = defineProps<SelectOptionProps>();
 
 const executeId = ref<string>(generateId(4));
@@ -38,7 +39,6 @@ function handleClick(e: MouseEvent) {
 
 selectContext.optionRegister({
     executeId: executeId.value,
-    ...props,
+    ...props
 });
-
 </script>

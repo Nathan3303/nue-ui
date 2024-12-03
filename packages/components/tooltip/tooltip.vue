@@ -1,22 +1,25 @@
 <template>
     <div
+        ref="tooltipWrapperRef"
         class="nue-tooltip-wrapper"
         @mouseenter="handleShow"
         @mouseleave="handleHide"
-        ref="tooltipWrapperRef">
-        <slot></slot>
+    >
+        <slot />
         <teleport to="#NueTooltipPool">
             <div
                 v-if="visible"
+                ref="tooltipRef"
                 :class="tooltipClasses"
-                :style="tooltipStyles"
                 :data-direction="placementInfo.direction"
+                :style="tooltipStyles"
                 @mouseenter="handleShow"
                 @mouseleave="handleHide"
-                ref="tooltipRef">
+            >
                 <div
+                    :data-direction="placementInfo.direction"
                     class="nue-tooltip__padding"
-                    :data-direction="placementInfo.direction"></div>
+                ></div>
                 <slot name="content">
                     <span class="nue-tooltip__text">{{ content }}</span>
                 </slot>
@@ -25,20 +28,19 @@
     </div>
 </template>
 
-<script setup lang="ts">
-import { computed, ref } from "vue";
-import { useTooltipPool } from "./use-tooltip-pool";
-import { usePopper, usePopperController } from "@nue-ui/hooks";
-import { parseTheme } from "@nue-ui/utils";
-import type { NueTooltipProps, NueTooltipEmits } from "./types";
-import "./tooltip.css";
+<script lang="ts" setup>
+import { computed, ref } from 'vue';
+import { useTooltipPool } from './use-tooltip-pool';
+import { usePopper, usePopperController } from '@nue-ui/hooks';
+import { parseTheme } from '@nue-ui/utils';
+import type { NueTooltipProps } from './types';
+import './tooltip.css';
 
-defineOptions({ name: "NueTooltip" });
+defineOptions({ name: 'NueTooltip' });
 const props = withDefaults(defineProps<NueTooltipProps>(), {
-    content: "No content.",
-    placement: "top-center",
+    content: 'No content.',
+    placement: 'top-center'
 });
-const emit = defineEmits<NueTooltipEmits>();
 
 const visible = ref(false);
 const tooltipWrapperRef = ref<HTMLDivElement>();
@@ -49,14 +51,14 @@ const { placement, calculatePosition } = usePopper(
     tooltipWrapperRef,
     tooltipRef,
     {
-        placement: props.placement,
+        placement: props.placement
     }
 );
 const { show, hide } = usePopperController(visible);
 
 const tooltipClasses = computed(() => {
     const { theme, size } = props;
-    const prefix = "nue-tooltip";
+    const prefix = 'nue-tooltip';
     let list: string[] = [prefix];
     if (theme) list = list.concat(parseTheme(theme, prefix));
     if (size) list.push(`${prefix}--${size}`);
@@ -67,15 +69,15 @@ const tooltipClasses = computed(() => {
 const tooltipStyles = computed(() => {
     const { showTriangle } = props;
     return {
-        "--triangle-display": showTriangle ? "block" : void 0,
+        '--triangle-display': showTriangle ? 'block' : void 0
     };
 });
 
 const placementInfo = computed(() => {
-    const splited = placement.value.split("-");
+    const splited = placement.value.split('-');
     return {
-        direction: splited[0] || "top",
-        alignment: splited[1] || "center",
+        direction: splited[0] || 'top',
+        alignment: splited[1] || 'center'
     };
 });
 
@@ -83,7 +85,7 @@ const handleShow = () => {
     show(void 0, () => {
         calculatePosition(props.placement);
         activeTooltipPool();
-        window.addEventListener("wheel", handleHide);
+        window.addEventListener('wheel', handleHide);
     });
 };
 
@@ -92,11 +94,11 @@ const handleHide = () => {
         160,
         () => {
             if (!tooltipRef.value) return;
-            tooltipRef.value.style.animationName = "slide-fade-out";
+            tooltipRef.value.style.animationName = 'slide-fade-out';
         },
         () => {
             deactiveTooltipPool();
-            window.removeEventListener("wheel", handleHide);
+            window.removeEventListener('wheel', handleHide);
         }
     );
 };

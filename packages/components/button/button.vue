@@ -1,37 +1,43 @@
 <template>
     <button
-        :type="type"
-        :title="title"
+        :class="classes"
         :disabled="disabled"
         :style="styles"
-        :class="classes"
-        @click="handleClick">
-        <nue-icon v-if="iconName" :name="iconName" :spin="loading" />
-        <slot name="prepend"></slot>
+        :title="title"
+        :type="type"
+        @click="handleClick"
+    >
+        <nue-icon
+            v-if="iconName"
+            :name="iconName"
+            :spin="loading"
+            class="nue-button__icon"
+        />
+        <slot name="prepend" />
         <div v-if="$slots.default" class="nue-button__text">
-            <slot></slot>
+            <slot />
         </div>
-        <slot name="append"></slot>
+        <slot name="append" />
     </button>
 </template>
 
-<script setup lang="ts">
-import { computed, inject } from "vue";
-import type { ButtonPropsType, ButtonEmitsType } from "./types";
-import type { ButtonGroupCtxType } from "../button-group/types";
-import { parseTheme, parseFlex, throttle } from "@nue-ui/utils";
-import { BUTTON_GROUP_CTX_KEY } from "../button-group/constants";
-import { NueIcon } from "../icon";
-import "./button.css";
+<script lang="ts" setup>
+import { computed, inject } from 'vue';
+import type { ButtonPropsType, ButtonEmitsType } from './types';
+import type { ButtonGroupCtxType } from '../button-group';
+import { parseTheme, parseFlex, throttle } from '@nue-ui/utils';
+import { BUTTON_GROUP_CTX_KEY } from '../button-group/constants';
+import { NueIcon } from '../icon';
+import './button.css';
 
-defineOptions({ name: "NueButton" });
+defineOptions({ name: 'NueButton' });
 
 const ButtonGroupCtx = inject(BUTTON_GROUP_CTX_KEY, {} as ButtonGroupCtxType);
 const emit = defineEmits<ButtonEmitsType>();
 const props = withDefaults(defineProps<ButtonPropsType>(), {
-    type: "button",
-    loadingIcon: "loading",
-    throttleDuration: 200,
+    type: 'button',
+    loadingIcon: 'loading',
+    throttleDuration: 200
 });
 
 const iconName = computed(() => {
@@ -47,15 +53,15 @@ const disabled = computed(() => {
 const styles = computed(() => {
     const { flex, align } = props;
     return {
-        "--align-y": align,
-        "--flex": flex && parseFlex(flex),
+        '--align-y': align,
+        '--flex': flex && parseFlex(flex)
     };
 });
 
 const classes = computed(() => {
     const { theme, flat, size } = props;
     let list: string[] = [];
-    const prefix = "nue-button";
+    const prefix = 'nue-button';
     list.push(prefix);
     if (theme) list = list.concat(parseTheme(theme, prefix));
     if (size || ButtonGroupCtx.size) {
@@ -67,15 +73,15 @@ const classes = computed(() => {
     return list;
 });
 
-const throttledClick = throttle((e: MouseEvent) => {
-    emit("click", e);
+const throttledClick = throttle(e => {
+    emit('click', e as MouseEvent);
 }, props.throttleDuration);
 
 function handleClick(e: MouseEvent) {
     if (props.useThrottle) {
         throttledClick(e);
     } else {
-        emit("click", e);
+        emit('click', e);
     }
 }
 </script>

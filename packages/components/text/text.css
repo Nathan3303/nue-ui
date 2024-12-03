@@ -1,4 +1,5 @@
-/* Variabled */
+/* variables */
+
 .nue-text {
     --color: var(--primary-text-color);
     --font-size: var(--text-md);
@@ -12,12 +13,13 @@
     --background-color: transparent;
     --clamped-lines: 3;
     --line-height: 1.5;
+    --text-align: unset;
 }
 
-/* Original styles */
+/* original */
+
 .nue-text {
     color: var(--color, inherit);
-    font-family: var(--font-family, inherit);
     text-decoration: var(--text-decoration, inherit);
     text-align: var(--text-align, inherit);
     word-wrap: var(--word-wrap);
@@ -52,7 +54,7 @@ h4.nue-text {
     font-weight: 500;
 }
 
-/* Buit-in styles */
+/* Built-in styles */
 .nue-text.nue-text--h3 {
     --font-size: var(--text-xl);
 }

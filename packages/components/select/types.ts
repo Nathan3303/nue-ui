@@ -1,6 +1,6 @@
-import type { Ref } from "vue";
-import type { GlobalProps } from "@nue-ui/utils";
-import type { ButtonSize } from "../button";
+import type { Ref } from 'vue';
+import type { GlobalProps } from '@nue-ui/utils';
+import type { ButtonSize } from '../button';
 
 export type SelectOptionProps = {
     label: string;
@@ -24,8 +24,8 @@ export interface SelectProps extends GlobalProps {
 }
 
 export type SelectEmits = {
-    (e: "update:modelValue", value: unknown): void;
-    (e: "change", value: unknown): void;
+    (e: 'update:modelValue', value: unknown): void;
+    (e: 'change', value: unknown): void;
 };
 
 export type SelectOptionRegister = (option: SelectOption) => void;

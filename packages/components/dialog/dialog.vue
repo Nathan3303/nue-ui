@@ -2,101 +2,114 @@
     <teleport to="body">
         <div
             v-if="modelValue"
-            class="nue-dialog-wrapper"
             ref="dialogWrapperRef"
-            :style="styles">
-            <div class="nue-dialog" @click.stop>
+            :style="styles"
+            class="nue-dialog-wrapper"
+        >
+            <div :class="classes">
                 <div class="nue-dialog__header">
-                    <slot name="header" :close="handleCancel">
+                    <slot :close="handleCancel" name="header">
                         <nue-text>{{ title }}</nue-text>
                         <nue-button
+                            :disabled="!closable"
                             icon="clear"
                             theme="pure"
-                            @click="handleCancel" />
+                            @click="handleCancel"
+                        />
                     </slot>
                 </div>
                 <div class="nue-dialog__content">
-                    <slot></slot>
+                    <slot />
                 </div>
                 <div class="nue-dialog__footer">
                     <slot
-                        name="footer"
                         :cancel="handleCancel"
-                        :confirm="handleConfirm"></slot>
+                        :confirm="handleConfirm"
+                        name="footer"
+                    />
                 </div>
             </div>
         </div>
     </teleport>
 </template>
 
-<script setup lang="ts">
-import { nextTick, ref, watch, computed } from "vue";
-import NueButton from "../button/button.vue";
-import NueText from "../text/text.vue";
-import { isFunction } from "@nue-ui/utils";
-import type { DialogPropsType, DialogEmitsType } from "./types";
-import "./dialog.css";
+<script lang="ts" setup>
+import { nextTick, ref, watch, computed } from 'vue';
+import NueButton from '../button/button.vue';
+import NueText from '../text/text.vue';
+import { isFunction, parseTheme } from '@nue-ui/utils';
+import type { DialogPropsType, DialogEmitsType } from './types';
+import './dialog.css';
 
-defineOptions({ name: "NueDialog" });
+defineOptions({ name: 'NueDialog' });
 
 const props = withDefaults(defineProps<DialogPropsType>(), {
-    title: "Dialog Title",
+    title: 'Dialog Title',
+    closable: true
 });
 const emit = defineEmits<DialogEmitsType>();
 
 const dialogWrapperRef = ref<HTMLDivElement>();
 
+const classes = computed(() => {
+    const { theme } = props;
+    const prefix = 'nue-dialog';
+    let list: string[] = [prefix];
+    if (theme) list = list.concat(parseTheme(theme, prefix));
+    return list;
+});
+
 const styles = computed(() => {
     const { width, minWidth } = props;
     return {
-        "--aside-width": width,
-        "--aside-min-width": minWidth,
+        '--aside-width': width,
+        '--aside-min-width': minWidth
     };
 });
 
-function handleOpenAnimataion() {
-    // console.log("open animation", dialogWrapperRef.value);
+function handleOpenAnimation() {
     requestAnimationFrame(() => {
         if (!dialogWrapperRef.value) return;
-        dialogWrapperRef.value.classList.add("nue-dialog-wrapper--open");
+        dialogWrapperRef.value.dataset.open = 'true';
     });
 }
 
 function handleCloseAnimation(): Promise<boolean> {
-    // console.log("close animation", dialogWrapperRef.value);
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
         if (!dialogWrapperRef.value) return;
-        dialogWrapperRef.value.classList.remove("nue-dialog-wrapper--open");
-        setTimeout(() => resolve(true), 160);
+        dialogWrapperRef.value.dataset.open = 'false';
+        setTimeout(() => resolve(true), 240);
     });
 }
 
 async function handleCancel() {
+    const { closable } = props;
+    if (!closable) return;
     await handleCloseAnimation();
-    emit("update:modelValue", false);
+    emit('update:modelValue', false);
     return true;
 }
 
 async function handleConfirm() {
     if (isFunction(props.beforeConfirm)) {
         try {
-            await new Promise((resolve) =>
+            await new Promise(resolve =>
                 props.beforeConfirm?.call(null, () => resolve(null))
             );
         } catch (e) {
             throw new Error(e as string);
         }
     }
-    emit("confirm");
-    handleCancel();
+    emit('confirm');
+    await handleCancel();
 }
 
 watch(
     () => props.modelValue,
-    (newValue) => {
+    newValue => {
         if (newValue) {
             nextTick(() => {
-                handleOpenAnimataion();
+                handleOpenAnimation();
             });
         }
     }

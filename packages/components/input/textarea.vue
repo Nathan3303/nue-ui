@@ -1,53 +1,57 @@
 <template>
     <div :class="classes" :style="style">
         <textarea
-            ref="textareaRef"
             :id="id"
-            :rows="rows"
-            :value="modelValue"
-            :placeholder="placeholder"
-            :readonly="readonly"
+            ref="textareaRef"
             :disabled="disabled"
             :maxlength="maxlength"
-            @input="handleInput"
+            :placeholder="placeholder"
+            :readonly="readonly"
+            :rows="rows"
+            :value="modelValue"
+            class="nue-textarea__textarea"
             @blur="emit('blur', $event)"
             @change="emit('change', $event)"
+            @compositionend="handleCompositionEnd"
             @compositionstart="handleCompositionStart"
-            @compositionend="handleCompositionEnd"></textarea>
+            @input="handleInput"
+        ></textarea>
         <textarea
             v-if="autosize && !props.disabled && !props.readonly"
-            class="backend-textarea"
             ref="backendTextareaRef"
+            class="nue-textarea__textarea nue-textarea__backend-textarea"
             readonly
-            tabindex="-1"></textarea>
+            tabindex="-1"
+        ></textarea>
         <word-counter
             v-if="counter !== 'off'"
-            :mode="counter"
             :length="textLength"
-            :maxlength="parseInt(maxlength || '0')" />
+            :maxlength="parseInt(maxlength || '0')"
+            :mode="counter"
+        />
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {
     ref,
     computed,
     nextTick,
     watch,
     onBeforeUnmount,
-    onMounted,
-} from "vue";
-import type { TextareaPropsType, TextareaEmitsType } from "./types";
-import { parseTheme, debounce } from "@nue-ui/utils";
-import wordCounter from "./word-counter.vue";
-import "./textarea.css";
+    onMounted
+} from 'vue';
+import type { TextareaPropsType, TextareaEmitsType } from './types';
+import { parseTheme, debounce } from '@nue-ui/utils';
+import wordCounter from './word-counter.vue';
+import './textarea.css';
 
-defineOptions({ name: "NueTextarea" });
+defineOptions({ name: 'NueTextarea' });
 
 const emit = defineEmits<TextareaEmitsType>();
 const props = withDefaults(defineProps<TextareaPropsType>(), {
-    counter: "off",
-    debounceTime: 0,
+    counter: 'off',
+    debounceTime: 0
 });
 
 const textareaRef = ref();
@@ -56,7 +60,7 @@ const textLength = ref((props.modelValue as string).length);
 const isComposing = ref(false);
 
 const classes = computed(() => {
-    const prefix = "nue-textarea";
+    const prefix = 'nue-textarea';
     const { size, theme, shape, disabled, readonly } = props;
     let list: string[] = [];
     list.push(prefix);
@@ -72,16 +76,16 @@ const style = computed(() => {
     const { autosize, width, rows, resize, flex, disabled } = props;
     const rowsValue = resize ? 999 : rows === 0 ? 999 : rows;
     return {
-        "--rows": rowsValue,
-        "--width": width,
-        "--resize": resize && !disabled ? "vertical" : undefined,
-        "--flex": flex,
-        "--overflow": autosize ? "hidden" : "auto",
+        '--rows': rowsValue,
+        '--width': width,
+        '--resize': resize && !disabled ? 'vertical' : undefined,
+        '--flex': flex,
+        '--overflow': autosize ? 'hidden' : 'auto'
     };
 });
 
 const updateModelValue = debounce(
-    (value: string) => emit("update:modelValue", value),
+    value => emit('update:modelValue', value as string),
     props.debounceTime
 );
 
@@ -90,7 +94,7 @@ function handleAutosize(textareaValue: string) {
     backendTextareaRef.value.value = textareaValue;
     nextTick(() => {
         textareaRef.value.style.height =
-            backendTextareaRef.value.scrollHeight + "px";
+            backendTextareaRef.value.scrollHeight + 'px';
     });
 }
 
@@ -116,7 +120,7 @@ function handleCompositionEnd(): void {
 
 const unWatch = watch(
     () => props.modelValue,
-    (newValue) => {
+    newValue => {
         textLength.value = (newValue as string).length;
         handleAutosize(newValue as string);
     }

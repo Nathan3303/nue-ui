@@ -6,10 +6,11 @@ export type DialogPropsType = {
     width?: string;
     minWidth?: string;
     theme?: string;
+    closable?: boolean;
     beforeConfirm?: DialogBeforeConfirmType;
 };
 
 export type DialogEmitsType = {
-    (e: "update:modelValue", value: boolean): void;
-    (e: "confirm"): void;
+    (e: 'update:modelValue', value: boolean): void;
+    (e: 'confirm'): void;
 };

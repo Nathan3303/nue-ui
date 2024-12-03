@@ -1,23 +1,23 @@
-import { each, isFunction } from "lodash-es";
-import shell from "shelljs";
+import { each, isFunction } from 'lodash-es';
+import shell from 'shelljs';
 
 export default ({
     fileNames = [],
     beforeBuild,
-    afterBuild,
+    afterBuild
 }: {
     fileNames?: string[];
-    beforeBuild?: Function;
-    afterBuild?: Function;
+    beforeBuild?: () => void;
+    afterBuild?: () => void;
 }) => {
     return {
-        name: "hooks-plugin",
+        name: 'hooks-plugin',
         buildStart() {
-            each(fileNames, (fileName) => shell.rm("-rf", fileName));
-            isFunction(beforeBuild) && beforeBuild();
+            each(fileNames, fileName => shell.rm('-rf', fileName));
+            if (isFunction(beforeBuild)) beforeBuild();
         },
         buildEnd(err?: Error) {
-            !err && isFunction(afterBuild) && afterBuild();
-        },
+            if (!err && isFunction(afterBuild)) afterBuild();
+        }
     };
 };

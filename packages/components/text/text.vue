@@ -1,20 +1,20 @@
 <template>
     <component :is="tag" :class="classes" :style="style">
-        <slot></slot>
+        <slot />
     </component>
 </template>
 
-<script setup lang="ts">
-import { computed } from "vue";
-import { parseTheme } from "@nue-ui/utils";
-import type { TextProps } from "./types";
-import { TEXT_SIZE_VALUES } from "./constants";
-import "./text.css";
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { parseTheme } from '@nue-ui/utils';
+import type { TextProps } from './types';
+import { TEXT_SIZE_VALUES } from './constants';
+import './text.css';
 
-defineOptions({ name: "NueText" });
+defineOptions({ name: 'NueText' });
 
 const props = withDefaults(defineProps<TextProps>(), {
-    tag: "span",
+    tag: 'span'
 });
 
 const size = computed(() => {
@@ -27,18 +27,18 @@ const size = computed(() => {
 const style = computed(() => {
     const { color, decoration, weight, align, clamped } = props;
     return {
-        "--color": color,
-        "--font-size": size.value,
-        "--font-weight": weight,
-        "--text-decoration": decoration,
-        "--text-align": align,
-        "--clamped-lines": clamped,
+        '--color': color,
+        '--font-size': size.value,
+        '--font-weight': weight,
+        '--text-decoration': decoration,
+        '--text-align': align,
+        '--clamped-lines': clamped
     };
 });
 
 const classes = computed(() => {
     const { theme, clamped } = props;
-    const prefix = "nue-text";
+    const prefix = 'nue-text';
     let list: string[] = [];
     list.push(prefix);
     if (theme) list = list.concat(parseTheme(theme, prefix));

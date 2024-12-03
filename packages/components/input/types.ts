@@ -1,11 +1,11 @@
-import { type ShapeProp } from "@nue-ui/utils/types";
-import type { IconNameType } from "../icon";
+import type { ShapeProp } from '@nue-ui/utils';
+import type { IconNameType } from '../icon';
 
-export type InputType = "text" | "password" | "number" | "email" | "textarea";
+export type InputType = 'text' | 'password' | 'number' | 'email' | 'textarea';
 
-export type InputCounterType = "off" | "word-limit" | "word-left" | "both";
+export type InputCounterType = 'off' | 'word-limit' | 'word-left' | 'both';
 
-export type InputShapeType = "rounded" | "noshape";
+export type InputShapeType = 'rounded' | 'noshape';
 
 export type InputPropsType = {
     type?: InputType;
@@ -22,17 +22,17 @@ export type InputPropsType = {
     allowShowPassword?: boolean;
     counter?: InputCounterType;
     width?: string;
-    size?: "small" | "large";
+    size?: 'small' | 'large';
     debounceTime?: number;
     flex?: string;
     name?: string;
 };
 
 export type InputEmitsType = {
-    (e: "update:modelValue", value: HTMLInputElement["value"]): void;
-    (e: "input", value: Event): void;
-    (e: "blur", value: Event): void;
-    (e: "change", value: Event): void;
+    (e: 'update:modelValue', value: HTMLInputElement['value']): void;
+    (e: 'input', value: Event): void;
+    (e: 'blur', value: Event): void;
+    (e: 'change', value: Event): void;
 };
 
 export type TextareaPropsType = {
@@ -49,16 +49,16 @@ export type TextareaPropsType = {
     maxlength?: string;
     counter?: InputCounterType;
     width?: string;
-    size?: "small" | "large";
+    size?: 'small' | 'large';
     debounceTime?: number;
     flex?: string;
 };
 
 export type TextareaEmitsType = {
-    (e: "update:modelValue", value: HTMLTextAreaElement["value"]): void;
-    (e: "input", value: Event): void;
-    (e: "blur", value: Event): void;
-    (e: "change", value: Event): void;
+    (e: 'update:modelValue', value: HTMLTextAreaElement['value']): void;
+    (e: 'input', value: Event): void;
+    (e: 'blur', value: Event): void;
+    (e: 'change', value: Event): void;
 };
 
 export type WordCounterProps = {
