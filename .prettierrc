@@ -8,5 +8,5 @@
     "arrowParens": "avoid",
     "bracketSpacing": true,
     "jsxBracketSameLine": false,
-    "vueIndentScriptAndStyle": true
+    "vueIndentScriptAndStyle": false
 }
