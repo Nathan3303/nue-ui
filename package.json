@@ -6,17 +6,15 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "build": "cross-env NODE_ENV=production pnpm --filter nue-ui build",
-        "build:dev": "cross-env NODE_ENV=development pnpm --filter nue-ui build-watch",
-        "play:dev": "pnpm --filter @nue-ui/playground dev",
-        "docs:dev": "pnpm --filter @nue-ui/document dev",
-        "docs:build": "pnpm --filter @nue-ui/document build",
         "test": "echo \"todo\"",
         "lint": "npx eslint -c eslint.config.mjs",
         "lint-on-debug": "npx eslint -c eslint.config.mjs --debug",
         "lint:lint-staged": "lint-staged",
         "format": "prettier --write --config .prettierrc .",
-        "prepare": "husky"
+        "prepare": "husky",
+        "core": "pnpm --filter nue-ui",
+        "docs": "pnpm --filter @nue-ui/document",
+        "play": "pnpm --filter @nue-ui/playground"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx,json,css,scss,md}": [
