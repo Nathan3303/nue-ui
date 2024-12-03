@@ -23,3 +23,5 @@ export interface GlobalProps {
 export type Optional<T> = {
     [P in keyof T as T[P] extends Required<T>[P] ? never : P]: T[P];
 };
+
+export type ObjectLikeThemes = Record<string, boolean>;

@@ -23,26 +23,26 @@
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    box-shadow: 0px 0px 3px 1px var(--shadow-color);
+    box-shadow: 0 0 3px 1px var(--shadow-color);
     box-sizing: border-box;
 
     transition: all 0.5s ease-in;
     margin-top: -48px;
     margin-bottom: 8px;
     opacity: 0;
+}
 
-    span {
-        color: inherit;
-        font-size: var(--font-size);
-        font-weight: var(--primary-font-weight);
-        font-family: inherit;
-    }
+.nue-message-node-inner span {
+    color: inherit;
+    font-size: var(--font-size);
+    font-weight: var(--primary-font-weight);
+    font-family: inherit;
+}
 
-    .nue-icon {
-        --icon-color: inherit;
-        --icon-size: var(--font-size);
-        --icon-weight: var(--primary-font-weight);
-    }
+.nue-message-node-inner .nue-icon {
+    --icon-color: inherit;
+    --icon-size: var(--font-size);
+    --icon-weight: var(--primary-font-weight);
 }
 
 .nue-message-node-inner--push {

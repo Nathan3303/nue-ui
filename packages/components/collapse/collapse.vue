@@ -1,32 +1,32 @@
 <template>
     <div :class="classes">
-        <slot></slot>
+        <slot />
     </div>
 </template>
 
-<script setup lang="ts">
-    import { computed } from 'vue';
-    import type { CollapseEmitType, CollapsePropsType } from './types';
-    import { useCollapse } from './collapse';
-    import { parseTheme } from '@nue-ui/utils';
+<script lang="ts" setup>
+import { computed } from 'vue';
+import type { CollapseEmitType, CollapsePropsType } from './types';
+import { useCollapse } from './collapse';
+import { parseTheme } from '@nue-ui/utils';
 
-    defineOptions({ name: 'NueCollapse' });
+defineOptions({ name: 'NueCollapse' });
 
-    const emit = defineEmits<CollapseEmitType>();
-    const props = withDefaults(defineProps<CollapsePropsType>(), {
-        accordion: false
-    });
+const emit = defineEmits<CollapseEmitType>();
+const props = withDefaults(defineProps<CollapsePropsType>(), {
+    accordion: false
+});
 
-    const { activedItems, pushActivedItem } = useCollapse(props, emit);
+const { activedItems, pushActivedItem } = useCollapse(props, emit);
 
-    const classes = computed(() => {
-        const { theme } = props;
-        let list: string[] = [];
-        const prefix = 'nue-collapse';
-        list.push(prefix);
-        if (theme) list = list.concat(parseTheme(theme, prefix));
-        return list;
-    });
+const classes = computed(() => {
+    const { theme } = props;
+    let list: string[] = [];
+    const prefix = 'nue-collapse';
+    list.push(prefix);
+    if (theme) list = list.concat(parseTheme(theme, prefix));
+    return list;
+});
 
-    defineExpose({ activedItems, pushActivedItem });
+defineExpose({ activedItems, pushActivedItem });
 </script>

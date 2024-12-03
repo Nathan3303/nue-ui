@@ -1,15 +1,13 @@
 .nue-popup-wrapper {
     display: flex;
-
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
     position: fixed;
     top: 0;
     left: 0;
-
     z-index: -1;
+}
 
-    &[data-actived='true'] {
-        z-index: 99;
-    }
+.nue-popup-wrapper[data-actived='true'] {
+    z-index: 99;
 }

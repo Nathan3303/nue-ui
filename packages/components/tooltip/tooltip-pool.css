@@ -3,12 +3,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
 }
 
 .nue-tooltip-pool--actived {
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
     z-index: 30;
 }

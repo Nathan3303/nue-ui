@@ -1,5 +1,4 @@
 import { nextTick } from 'vue';
-import './dropdown-pool.css';
 
 let dropdownPool: HTMLDivElement | null = null;
 

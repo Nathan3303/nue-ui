@@ -15,6 +15,7 @@
     overflow: hidden;
     box-sizing: border-box;
     animation: var(--wrapper-animation-name) var(--animation-rest-property);
+    z-index: 5;
 }
 
 .nue-prompt {
@@ -30,48 +31,47 @@
     transition: all 0.3s ease;
     animation: var(--animation-name) var(--animation-rest-property);
     box-sizing: border-box;
+}
 
-    .nue-prompt__header {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+.nue-prompt__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-        .nue-button--icon-only {
-            --icon-size: 14px;
-        }
+.nue-prompt__header .nue-button--icon-only {
+    --icon-size: 14px;
+}
+
+.nue-prompt__content {
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+.nue-prompt__content .nue-prompt__label {
+    margin: 0 0 8px;
+}
+
+.nue-prompt__content .nue-prompt__value-error {
+    margin-top: 8px;
+    color: #f44336;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &::before {
+        content: '*';
     }
+}
 
-    .nue-prompt__content {
-        width: 100%;
-        flex: 1 1 auto;
-
-        .nue-prompt__label {
-            margin: 0;
-            margin-bottom: 8px;
-        }
-
-        .nue-prompt__value-error {
-            margin-top: 8px;
-            color: #f44336;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            &::before {
-                content: '*';
-            }
-        }
-    }
-
-    .nue-prompt__footer {
-        width: 100%;
-        display: flex;
-        align-self: center;
-        justify-content: end;
-        gap: 8px;
-    }
+.nue-prompt__footer {
+    width: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: end;
+    gap: 8px;
 }
 
 .nue-prompt-wrapper[data-closing='true'] {

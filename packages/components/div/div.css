@@ -1,4 +1,4 @@
-/* Variables */
+/* variables */
 
 .nue-div {
     --flex-direction: row;
@@ -11,7 +11,7 @@
     --height: auto;
 }
 
-/* Original styles */
+/* original styles */
 
 .nue-div {
     display: flex;
@@ -26,7 +26,7 @@
     box-sizing: border-box;
 }
 
-/* Built-in styles */
+/* built-in styles */
 
 .nue-div--card {
     border: 1px solid var(--divider-color);

@@ -1,10 +1,10 @@
 <template>
     <div :class="classes">
-        <slot></slot>
+        <slot />
         <component
             :is="$slots.default ? 'sup' : 'span'"
             v-if="!hidden && (content || dot)"
-            class="badge-content"
+            class="nue-badge__content"
         >
             {{ content }}
         </component>

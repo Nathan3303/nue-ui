@@ -1,4 +1,5 @@
-/* Variables */
+/* variables */
+
 .nue-input {
     --width: auto;
     --height: auto;
@@ -20,7 +21,8 @@
     --button-hover-color: var(--hover-border-color);
 }
 
-/* Original styles */
+/* original */
+
 .nue-input {
     display: flex;
     align-items: center;
@@ -29,7 +31,7 @@
     min-width: var(--min-width);
     height: var(--height);
     min-height: 36px;
-    padding: 0px var(--padding-x);
+    padding: 0 var(--padding-x);
     border: 1px solid var(--border-color);
     border-radius: var(--primary-radius);
     background-color: var(--background-color);
@@ -43,89 +45,96 @@
     user-select: none;
     color: var(--primary-text-color);
     font-size: var(--text-sm);
-    font-family: var(--primary-font-family);
     font-weight: var(--primary-font-weight);
-
-    &:hover {
-        border-color: var(--hover-border-color);
-        background-color: var(--hover-background-color);
-    }
-
-    &:focus-within {
-        border-color: var(--focus-border-color);
-        background-color: var(--focus-background-color);
-        box-shadow: var(--focus-shadow);
-    }
-
-    .nue-input__icon-button {
-        transition: all 0.16s ease;
-        cursor: pointer;
-        --icon-color: var(--primary-color-500);
-
-        &:hover {
-            --icon-color: var(--primary-color-900);
-        }
-    }
-
-    input {
-        width: 100%;
-        min-width: calc(var(--font-size) * 5);
-        line-height: 1;
-        outline: none;
-        border: none;
-        background-color: transparent;
-        color: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        font-family: inherit;
-        padding: 0px;
-
-        &::-ms-reveal {
-            display: none;
-        }
-
-        &::-ms-clear {
-            display: none;
-        }
-
-        &::placeholder {
-            color: inherit;
-            opacity: 0.36;
-        }
-    }
-
-    .word-counter {
-        flex: none;
-        color: var(--primary-color-500);
-        font-size: var(--text-xs);
-        font-weight: var(--primary-font-weight);
-        font-family: inherit;
-    }
-
-    &.nue-input--disabled {
-        --hover-border-color: var(--disabled-border-color);
-        --hover-background-color: var(--disabled-background-color);
-        color: var(--disabled-color) !important;
-        border-color: var(--disabled-border-color);
-        background-color: var(--disabled-background-color);
-        cursor: not-allowed;
-        -webkit-user-select: none;
-        user-select: none;
-        & * {
-            cursor: not-allowed;
-        }
-    }
 }
 
-/* Built-in styles */
+.nue-input:hover {
+    border-color: var(--hover-border-color);
+    background-color: var(--hover-background-color);
+}
+
+.nue-input:focus-within {
+    border-color: var(--focus-border-color);
+    background-color: var(--focus-background-color);
+    box-shadow: var(--focus-shadow);
+}
+
+/* - original - input */
+
+.nue-input__input {
+    width: 100%;
+    min-width: calc(var(--font-size) * 5);
+    line-height: 1;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    padding: 0;
+}
+
+.nue-input__input::-ms-reveal,
+.nue-input__input::-ms-clear {
+    display: none;
+}
+
+.nue-input__input::placeholder {
+    color: inherit;
+    opacity: 0.36;
+}
+
+/* - original - icon-button */
+
+.nue-input__icon-button {
+    transition: all 0.16s ease;
+    cursor: pointer;
+    --icon-color: var(--primary-color-500);
+}
+
+.nue-input__icon-button:hover {
+    --icon-color: var(--primary-color-900);
+}
+
+/* - original - word-counter */
+
+.nue-input .word-counter {
+    flex: none;
+    color: var(--primary-color-500);
+    font-size: var(--text-xs);
+    font-weight: var(--primary-font-weight);
+    font-family: inherit;
+}
+
+/* - original - disabled */
+
+.nue-input.nue-input--disabled {
+    --hover-border-color: var(--disabled-border-color);
+    --hover-background-color: var(--disabled-background-color);
+    color: var(--disabled-color) !important;
+    border-color: var(--disabled-border-color);
+    background-color: var(--disabled-background-color);
+    cursor: not-allowed;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.nue-input.nue-input--disabled * {
+    cursor: not-allowed;
+}
+
+/* rounded */
 .nue-input--rounded {
     padding-left: calc(var(--padding-x) + 2px);
     padding-right: calc(var(--padding-x) + 2px);
     border-radius: 999px;
 }
 
+/* noshape */
+
 .nue-input--noshape {
-    padding: 0px;
+    padding: 0;
     box-shadow: none;
     --border-color: transparent;
     --background-color: transparent;
@@ -135,36 +144,42 @@
     --disabled-border-color: transparent;
 }
 
+/* small */
+
 .nue-input--small {
     min-height: 28px;
     --height: 28px;
-    padding: 0px 6px;
+    padding: 0 6px;
     gap: 6px;
     font-size: var(--text-xs);
 }
 
+/* large */
+
 .nue-input--large {
     min-height: 42px;
     --height: 42px;
-    padding: 0px 12px;
+    padding: 0 12px;
     font-size: var(--text-md);
 }
+
+/* linear */
 
 .nue-input--linear {
     transition: all 0.3s;
     border: none;
     border-bottom: 2px solid #cccccc;
-    border-radius: 0px;
+    border-radius: 0;
 
-    --border-width: 0px;
+    --border-width: 0;
     --padding-y: 4px;
     --hover-border-color: #8ac7ab;
     --focus-border-color: #42b983;
     --focus-shadow-color: transparent;
     --focus-background-color: transparent;
+}
 
-    &:focus-within {
-        border: none;
-        border-bottom: 2px solid #42b983;
-    }
+.nue-input--linear:focus-within {
+    border: none;
+    border-bottom: 2px solid #42b983;
 }

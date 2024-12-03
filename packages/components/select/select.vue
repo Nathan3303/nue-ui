@@ -1,15 +1,15 @@
 <template>
     <nue-dropdown
         :class="classes"
-        :size="size"
         :hide-on-clicked="hideOnSelect"
         :keep-alive="!!$slots.default"
+        :size="size"
         @execute="handleExecute"
     >
         <template #default="{ clickTrigger }">
             <nue-button
-                :size="size"
                 :disabled="disabled"
+                :size="size"
                 style="gap: 16px"
                 @click.stop="clickTrigger"
             >
@@ -39,104 +39,101 @@
     </nue-dropdown>
 </template>
 
-<script setup lang="ts">
-    import { ref, computed, watch, provide, onMounted } from 'vue';
-    import { NueDropdown, NueButton, NueIcon, NueText } from '../index';
-    import { parseTheme } from '@nue-ui/utils';
-    import type {
-        SelectProps,
-        SelectEmits,
-        SelectOption,
-        SelectContext
-    } from './types';
+<script lang="ts" setup>
+import { ref, computed, watch, provide, onMounted } from 'vue';
+import { NueDropdown, NueButton, NueIcon, NueText } from '../index';
+import { parseTheme } from '@nue-ui/utils';
+import type {
+    SelectProps,
+    SelectEmits,
+    SelectOption,
+    SelectContext
+} from './types';
 
-    defineOptions({ name: 'NueSelect' });
+defineOptions({ name: 'NueSelect' });
 
-    const emit = defineEmits<SelectEmits>();
-    const props = withDefaults(defineProps<SelectProps>(), {
-        hideOnSelect: true,
-        placeholder: 'Select',
-        clearable: false
-    });
+const emit = defineEmits<SelectEmits>();
+const props = withDefaults(defineProps<SelectProps>(), {
+    hideOnSelect: true,
+    placeholder: 'Select',
+    clearable: false
+});
 
-    const options = ref<SelectOption[]>([]);
-    const selectedOption = ref<SelectOption>();
+const options = ref<SelectOption[]>([]);
+const selectedOption = ref<SelectOption>();
 
-    const classes = computed(() => {
-        const { theme } = props;
-        const prefix = 'nue-select';
-        let list: string[] = [prefix];
-        if (theme) list = list.concat(parseTheme(theme, prefix));
-        return list;
-    });
+const classes = computed(() => {
+    const { theme } = props;
+    const prefix = 'nue-select';
+    let list: string[] = [prefix];
+    if (theme) list = list.concat(parseTheme(theme, prefix));
+    return list;
+});
 
-    const label = computed(() => {
-        return selectedOption.value && selectedOption.value?.label;
-    });
+const label = computed(() => {
+    return selectedOption.value && selectedOption.value?.label;
+});
 
-    function optionRegister(option: SelectOption) {
-        options.value.push(option);
-    }
+function optionRegister(option: SelectOption) {
+    options.value.push(option);
+}
 
-    function handleExecute(executeId: string) {
-        // console.log(executeId);
-        handleSelect(executeId);
-    }
+function handleExecute(executeId: string) {
+    // console.log(executeId);
+    handleSelect(executeId);
+}
 
-    function handleSelect(payload: unknown, isParseMV = false) {
-        let _option: SelectOption | undefined = void 0;
-        if (isParseMV) {
-            if (
-                selectedOption.value &&
-                payload === selectedOption.value.value
-            ) {
-                // console.log(payload, selectedOption.value.value);
-                return;
-            }
-            for (const option of options.value) {
-                if (payload === option.value) {
-                    _option = option;
-                    break;
-                }
-            }
-        } else {
-            if (
-                selectedOption.value &&
-                payload === selectedOption.value.executeId
-            ) {
-                return;
-            }
-            for (const option of options.value) {
-                if ((payload as string) === option.executeId) {
-                    _option = option;
-                    break;
-                }
-            }
-            emit('update:modelValue', _option?.value);
-            emit('change', _option?.value);
+function handleSelect(payload: unknown, isParseMV = false) {
+    let _option: SelectOption | undefined = void 0;
+    if (isParseMV) {
+        if (selectedOption.value && payload === selectedOption.value.value) {
+            // console.log(payload, selectedOption.value.value);
+            return;
         }
-        selectedOption.value = _option || void 0;
-    }
-
-    function handleClear() {
-        selectedOption.value = void 0;
-        emit('update:modelValue', void 0);
-        emit('change', void 0);
-    }
-
-    watch(
-        () => props.modelValue,
-        newValue => {
-            handleSelect(newValue, true);
+        for (const option of options.value) {
+            if (payload === option.value) {
+                _option = option;
+                break;
+            }
         }
-    );
+    } else {
+        if (
+            selectedOption.value &&
+            payload === selectedOption.value.executeId
+        ) {
+            return;
+        }
+        for (const option of options.value) {
+            if ((payload as string) === option.executeId) {
+                _option = option;
+                break;
+            }
+        }
+        emit('update:modelValue', _option?.value);
+        emit('change', _option?.value);
+    }
+    selectedOption.value = _option || void 0;
+}
 
-    onMounted(() => {
-        handleSelect(props.modelValue, true);
-    });
+function handleClear() {
+    selectedOption.value = void 0;
+    emit('update:modelValue', void 0);
+    emit('change', void 0);
+}
 
-    provide<SelectContext>('SelectContext', {
-        optionRegister,
-        selectedOption
-    });
+watch(
+    () => props.modelValue,
+    newValue => {
+        handleSelect(newValue, true);
+    }
+);
+
+onMounted(() => {
+    handleSelect(props.modelValue, true);
+});
+
+provide<SelectContext>('SelectContext', {
+    optionRegister,
+    selectedOption
+});
 </script>

@@ -1,11 +1,11 @@
 <template>
     <div
         v-show="!isHidden"
-        class="nue-collapse-item"
         :data-collapse="isCollapsed"
+        class="nue-collapse-item"
     >
         <div class="nue-collapse-item__header">
-            <slot name="header" :collapse="handleCollapse" :state="isCollapsed">
+            <slot :collapse="handleCollapse" :state="isCollapsed" name="header">
                 <div class="nue-collapse-item__title">
                     <slot name="title">
                         <span>{{ title }}</span>
@@ -25,8 +25,8 @@
                     <nue-text
                         v-if="!hideWhenEmpty"
                         class="nue-collapse-item__empty"
-                        size="12px"
                         color="gray"
+                        size="12px"
                     >
                         Empty
                     </nue-text>
@@ -36,89 +36,88 @@
     </div>
 </template>
 
-<script setup lang="ts">
-    import { ref, watch, onMounted, onUpdated, inject, computed } from 'vue';
-    import { COLLAPSE_CONTEXT_KEY } from './constants';
-    import NueButton from '../button/button.vue';
-    import { generateId } from '@nue-ui/utils';
-    import type {
-        CollapseContextType,
-        CollapseItemPropsType,
-        CollapseItemName
-    } from './types';
+<script lang="ts" setup>
+import { ref, watch, onMounted, onUpdated, inject, computed } from 'vue';
+import { COLLAPSE_CONTEXT_KEY } from './constants';
+import NueButton from '../button/button.vue';
+import { generateId } from '@nue-ui/utils';
+import type {
+    CollapseContextType,
+    CollapseItemPropsType,
+    CollapseItemName
+} from './types';
 
-    defineOptions({ name: 'NueCollapseItem' });
+defineOptions({ name: 'NueCollapseItem' });
 
-    const props = withDefaults(defineProps<CollapseItemPropsType>(), {
-        title: '',
-        hideWhenEmpty: false
-    });
+const props = withDefaults(defineProps<CollapseItemPropsType>(), {
+    title: '',
+    hideWhenEmpty: false
+});
 
-    const { activedItems, pushActivedItem } = inject(
-        COLLAPSE_CONTEXT_KEY,
-        {} as CollapseContextType
-    );
-    const contentRef = ref<HTMLDivElement>();
-    const contentInnerRef = ref<HTMLDivElement>();
-    const isHidden = ref(false);
-    const timer = ref<number>();
+const { activedItems, pushActivedItem } = inject(
+    COLLAPSE_CONTEXT_KEY,
+    {} as CollapseContextType
+);
+const contentRef = ref<HTMLDivElement>();
+const contentInnerRef = ref<HTMLDivElement>();
+const isHidden = ref(false);
+const timer = ref<number>();
 
-    const itemName = computed(() => {
-        const name = props.name || generateId();
-        return name as CollapseItemName;
-    });
-    const isCollapsed = computed(() => {
-        return !activedItems.value.includes(itemName.value);
-    });
+const itemName = computed(() => {
+    const name = props.name || generateId();
+    return name as CollapseItemName;
+});
+const isCollapsed = computed(() => {
+    return !activedItems.value.includes(itemName.value);
+});
 
-    function handleCollapse() {
-        pushActivedItem(itemName.value);
-    }
+function handleCollapse() {
+    pushActivedItem(itemName.value);
+}
 
-    function handleCollapseAnimation() {
-        if (contentRef.value) {
-            contentRef.value.style.height =
-                contentRef.value.scrollHeight + 'px';
-            // contentRef.value.scrollHeight;
-            if (isCollapsed.value) {
-                if (timer.value) clearTimeout(timer.value);
-                contentRef.value.style.height = '0px';
-            } else {
-                timer.value = setTimeout(
-                    () => (contentRef.value!.style.height = 'max-content'),
-                    300
-                ) as unknown as number;
-            }
+function handleCollapseAnimation() {
+    if (contentRef.value) {
+        contentRef.value.style.height = contentRef.value.scrollHeight + 'px';
+        contentRef.value.scrollHeight;
+        if (isCollapsed.value) {
+            if (timer.value) clearTimeout(timer.value);
+            contentRef.value.style.height = '0px';
+        } else {
+            timer.value = setTimeout(
+                () => (contentRef.value!.style.height = 'auto'),
+                300
+            ) as unknown as number;
         }
     }
+}
 
-    function handleHideWhenEmpty() {
-        if (props.hideWhenEmpty) {
-            if (contentInnerRef.value) {
-                isHidden.value = contentInnerRef.value.children.length === 0;
-                return;
-            }
+function handleHideWhenEmpty() {
+    if (props.hideWhenEmpty) {
+        if (contentInnerRef.value) {
+            isHidden.value = contentInnerRef.value.children.length === 0;
+            return;
         }
-        isHidden.value = false;
     }
+    isHidden.value = false;
+}
 
-    watch(
-        () => isCollapsed.value,
-        () => handleCollapseAnimation()
-    );
+watch(
+    () => isCollapsed.value,
+    () => handleCollapseAnimation()
+);
 
-    onMounted(() => {
-        handleCollapseAnimation();
-        handleHideWhenEmpty();
-    });
+onMounted(() => {
+    handleCollapseAnimation();
+    handleHideWhenEmpty();
+});
 
-    onUpdated(() => {
-        handleHideWhenEmpty();
-    });
+onUpdated(() => {
+    handleHideWhenEmpty();
+});
 
-    defineExpose({
-        name: itemName,
-        isCollapsed,
-        handleCollapse
-    });
+defineExpose({
+    name: itemName,
+    isCollapsed,
+    handleCollapse
+});
 </script>
