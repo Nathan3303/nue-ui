@@ -21,7 +21,7 @@ import {
     withCtx
 } from './chunk-GJVE5CKW.js';
 
-// ../../node_modules/.pnpm/@vitepress-demo-preview+component@file+apps+document+vitepress-demo-preview+component_vitepre_66g2qlzg5xrnvc5icliat4qcoi/node_modules/@vitepress-demo-preview/component/dist/preview-component.js
+// ../../node_modules/.pnpm/@vitepress-demo-preview+component@file+apps+document+vitepress-demo-preview+component/node_modules/@vitepress-demo-preview/component/bundle/preview-component.js
 var x = (o, t) => {
     const e = o.__vccOpts || o;
     for (const [c, l] of t) e[c] = l;
