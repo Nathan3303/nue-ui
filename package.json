@@ -13,8 +13,8 @@
         "format": "prettier --write --config .prettierrc .",
         "prepare": "husky",
         "core": "pnpm --filter nue-ui",
-        "docs": "pnpm --filter @nue-ui/document",
-        "play": "pnpm --filter @nue-ui/playground"
+        "document": "pnpm --filter @nue-ui/document",
+        "playground": "pnpm --filter @nue-ui/playground"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx,json,css,scss,md}": [
