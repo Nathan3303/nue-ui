@@ -1,13 +1,13 @@
 <template>
-    <nue-div theme="card" vertical :divider="{}" :id="title">
-        <nue-text size="24px">{{ title }}</nue-text>
+    <nue-div :id="title" vertical>
+        <nue-text size="20px" weight="500">{{ title }}</nue-text>
         <slot></slot>
     </nue-div>
 </template>
 
-<script setup lang="ts">
-    import type { DemoCardProps } from './types';
+<script lang="ts" setup>
+import type { DemoCardProps } from './types';
 
-    defineOptions({ name: 'DemoCard ' });
-    defineProps<DemoCardProps>();
+defineOptions({ name: 'DemoCard ' });
+defineProps<DemoCardProps>();
 </script>

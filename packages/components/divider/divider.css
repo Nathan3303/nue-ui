@@ -15,25 +15,25 @@
     align-items: center;
     justify-content: var(--justify-content);
     position: relative;
-}
 
-.nue-divider__line {
-    box-sizing: border-box;
-    border: none;
-    position: absolute;
-}
+    .nue-divider__line {
+        box-sizing: border-box;
+        border: none;
+        position: absolute;
+    }
 
-.nue-divider__text {
-    z-index: 2;
-    margin: 0 16px;
-    background-color: white;
-    color: var(--primary-text-color);
-    font-size: var(--text-sm);
-    font-weight: var(--primary-font-weight);
-}
+    .nue-divider__text {
+        z-index: 2;
+        margin: 0 16px;
+        background-color: white;
+        color: var(--primary-text-color);
+        font-size: var(--text-sm);
+        font-weight: var(--primary-font-weight);
 
-.nue-divider__text .nue-divider__text__inner {
-    padding: 0 16px;
+        .nue-divider__text__inner {
+            padding: 0 16px;
+        }
+    }
 }
 
 /* horizontal */
@@ -41,13 +41,13 @@
 .nue-divider--horizontal {
     width: 100%;
     min-height: var(--border-width);
-}
 
-.nue-divider--horizontal .nue-divider__line {
-    width: 100%;
-    max-height: var(--border-width);
-    top: calc(50% - var(--border-width) / 2);
-    border-bottom: var(--border-style);
+    .nue-divider__line {
+        width: 100%;
+        max-height: var(--border-width);
+        top: calc(50% - var(--border-width) / 2);
+        border-bottom: var(--border-style);
+    }
 }
 
 /* vertical */
@@ -55,10 +55,10 @@
 .nue-divider--vertical {
     min-width: var(--border-width);
     height: 24px;
-}
 
-.nue-divider--vertical .nue-divider__line {
-    width: var(--border-width);
-    height: 100%;
-    border-left: var(--border-style);
+    .nue-divider__line {
+        width: var(--border-width);
+        height: 100%;
+        border-left: var(--border-style);
+    }
 }

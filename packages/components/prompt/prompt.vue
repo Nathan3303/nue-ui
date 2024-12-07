@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import NueButton from '../button/button.vue';
 import NueInput from '../input/input.vue';
 import NueTextarea from '../input/textarea.vue';

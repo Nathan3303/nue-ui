@@ -6,15 +6,17 @@
 
 /* original */
 
-.nue-icon.iconfont::before {
-    display: block;
-    color: var(--icon-color, inherit);
-    font-size: var(--icon-size, inherit);
-    font-weight: var(--icon-weight, 500);
-    aspect-ratio: 1 / 1;
-    line-height: normal;
-}
+.nue-icon {
+    .iconfont::before {
+        display: block;
+        color: var(--icon-color, inherit);
+        font-size: var(--icon-size, inherit);
+        font-weight: var(--icon-weight, 500);
+        aspect-ratio: 1 / 1;
+        line-height: normal;
+    }
 
-.nue-icon.nue-icon--spin {
-    animation: spin var(--spin-speed) infinite linear;
+    &.nue-icon--spin {
+        animation: spin var(--spin-speed) infinite linear;
+    }
 }

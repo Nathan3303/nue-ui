@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-import { provide, reactive, computed } from 'vue';
-import type { ButtonGroupProps, ButtonGroupCtxType } from './types';
+import { computed, provide, reactive } from 'vue';
+import type { ButtonGroupCtxType, ButtonGroupProps } from './types';
 import { BUTTON_GROUP_CTX_KEY } from './constants';
 import './button-group.css';
 import { parseTheme } from '@nue-ui/utils';

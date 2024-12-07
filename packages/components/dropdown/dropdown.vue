@@ -38,11 +38,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, nextTick } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import { useDropdownPool } from './use-dropdown-pool';
 import { usePopper, usePopperController } from '@nue-ui/hooks';
 import { parseTheme } from '@nue-ui/utils';
-import type { NueDropdownProps, NueDropdownEmits } from './types';
+import { NueButton, NueIcon } from '..';
+import type { NueDropdownEmits, NueDropdownProps } from './types';
 import './dropdown.css';
 
 defineOptions({ name: 'NueDropdown' });

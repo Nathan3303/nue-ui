@@ -4,7 +4,7 @@
             v-if="$slots.aside"
             ref="menuAsideRef"
             :allow-collapse="allowCollapseAside"
-            :allow-hide="allowHideAside"
+            :allow-hide="false"
             :allow-resize="allowResizeAside"
             :float="menuAsideFloat"
             :max-width="asideMaxWidth"
@@ -22,6 +22,7 @@
                 class="nue-main__aside-visible-controller-bar"
             >
                 <nue-button
+                    v-if="menuAsideFloat"
                     icon="menu"
                     theme="pure"
                     @click.stop="menuAsideRef?.toggleVisible()"
@@ -29,6 +30,7 @@
                     Menu
                 </nue-button>
                 <nue-button
+                    v-if="outlineAsideFloat"
                     icon="more2"
                     theme="pure"
                     @click.stop="outlineAsideRef?.toggleVisible()"
@@ -59,8 +61,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue';
-import { parseTheme } from '@nue-ui/utils';
+import { computed, onMounted, ref, useSlots } from 'vue';
+import { debounce, parseTheme } from '@nue-ui/utils';
 import NueAside from './aside.vue';
 import { NueButton, NueDiv } from '..';
 import { useWindowResize } from '@nue-ui/hooks';
@@ -69,13 +71,12 @@ import './main.css';
 
 defineOptions({ name: 'NueMain' });
 const props = withDefaults(defineProps<NueMainProps>(), {
-    responsive: true,
     asideWidth: '256px',
     asideMinWidth: '128px',
     asideMaxWidth: '512px',
     allowResizeAside: true,
     allowCollapseAside: true,
-    allowHideAside: true,
+    allowHideAside: false,
     outlineWidth: '256px',
     outlineMinWidth: '128px',
     outlineMaxWidth: '512px',
@@ -83,6 +84,9 @@ const props = withDefaults(defineProps<NueMainProps>(), {
     allowCollapseOutline: true,
     allowHideOutline: true
 });
+
+const slots = useSlots();
+const { addCallback } = useWindowResize();
 
 const mainRef = ref<HTMLElement>();
 const menuAsideRef = ref<InstanceType<typeof NueAside>>();
@@ -98,31 +102,31 @@ const classes = computed(() => {
     return list;
 });
 
-const style = computed(() => {
-    const {
-        asideWidth,
-        asideMinWidth,
-        asideMaxWidth,
-        outlineWidth,
-        outlineMinWidth,
-        outlineMaxWidth
-    } = props;
-    return {
-        '--nue-main-aside-width': asideWidth,
-        '--nue-main-aside-min-width': asideMinWidth,
-        '--nue-main-aside-max-width': asideMaxWidth,
-        '--nue-main-outline-width': outlineWidth,
-        '--nue-main-outline-min-width': outlineMinWidth,
-        '--nue-main-outline-max-width': outlineMaxWidth
-    };
-});
+const style = computed(() => ({
+    '--nue-main-aside-width': props.asideWidth,
+    '--nue-main-aside-min-width': props.asideMinWidth,
+    '--nue-main-aside-max-width': props.asideMaxWidth,
+    '--nue-main-outline-width': props.outlineWidth,
+    '--nue-main-outline-min-width': props.outlineMinWidth,
+    '--nue-main-outline-max-width': props.outlineMaxWidth
+}));
+
+const debounceFloatListener = debounce(() => {
+    if (!mainRef.value) return;
+    const parentElement = mainRef.value.parentElement;
+    if (!parentElement) return;
+    const clientWidth = parentElement.clientWidth;
+    outlineAsideFloat.value = clientWidth <= 1024;
+    menuAsideFloat.value = clientWidth <= 768;
+}, 64);
+
+if (props.responsive && (slots.aside || slots.outline)) {
+    addCallback(debounceFloatListener);
+}
 
 onMounted(() => {
-    if (props.responsive) {
-        const { addCallback } = useWindowResize();
-        addCallback((e: Event) => {
-            console.log(e);
-        });
+    if (props.responsive && (slots.aside || slots.outline)) {
+        debounceFloatListener();
     }
 });
 </script>

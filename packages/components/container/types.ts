@@ -1,15 +1,10 @@
 import type { GlobalProps } from '@nue-ui/utils';
-import type { ComputedRef } from 'vue';
 
 export interface NueContainerProps extends GlobalProps {
     id?: string;
     height?: string;
     width?: string;
 }
-
-export type NueContainerContext = {
-    containerId: ComputedRef<string>;
-};
 
 export interface NueHeaderProps extends GlobalProps {
     width?: string;

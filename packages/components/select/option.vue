@@ -12,10 +12,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, inject, computed } from 'vue';
-import type { SelectOptionProps, SelectContext } from './types';
+import { computed, inject, ref } from 'vue';
 import { generateId } from '@nue-ui/utils';
-import { NueIcon } from '../index';
+import { NueIcon } from '..';
+import type { SelectContext, SelectOptionProps } from './types';
 import './option.css';
 
 const selectContext: SelectContext = inject('SelectContext')!;

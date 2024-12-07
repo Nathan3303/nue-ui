@@ -1,18 +1,17 @@
 <template>
-    <div class="view-container">
-        <demo-card title="Dropdown 下拉框">
+    <nue-div class="view-container">
+        <demo-card title="Dropdown 下拉列表">
             <dropdown-demo></dropdown-demo>
         </demo-card>
-    </div>
+    </nue-div>
     <teleport to="#outline">
         <ul class="outline-list">
-            <h3>大纲</h3>
-            <li><a href="#Dropdown 下拉框">Dropdown 下拉框</a></li>
+            <li><a href="#Dropdown 下拉列表">Dropdown 下拉列表</a></li>
         </ul>
     </teleport>
 </template>
 
-<script setup lang="ts">
-    import DemoCard from '../layers/demo-card';
-    import DropdownDemo from '../components/dropdown.vue';
+<script lang="ts" setup>
+import DemoCard from '../layers/demo-card';
+import DropdownDemo from '../components/dropdown.vue';
 </script>

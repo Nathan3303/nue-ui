@@ -1,5 +1,5 @@
 <template>
-    <div class="view-container">
+    <nue-div class="view-container">
         <demo-card title="Avatar 头像">
             <avatar-demo></avatar-demo>
         </demo-card>
@@ -21,10 +21,9 @@
         <demo-card title="Empty 空状态">
             <empty-demo></empty-demo>
         </demo-card>
-    </div>
+    </nue-div>
     <teleport to="#outline">
         <ul class="outline-list">
-            <h3>大纲</h3>
             <li><a href="#Avatar 头像">Avatar 头像</a></li>
             <li><a href="#Badge 徽标">Badge 徽标</a></li>
             <li><a href="#Marquee 跑马灯">Marquee 跑马灯</a></li>
@@ -38,13 +37,13 @@
     </teleport>
 </template>
 
-<script setup lang="ts">
-    import DemoCard from '../layers/demo-card';
-    import AvatarDemo from '../components/avatar.vue';
-    import BadgeDemo from '../components/badge.vue';
-    import InfiniteScrollDemo from '../components/infinite-scroll.vue';
-    import MarqueeDemo from '../components/marquee.vue';
-    import CollapseDemo from '../components/collapse.vue';
-    import ProgressDemo from '../components/progress.vue';
-    import EmptyDemo from '../components/empty.vue';
+<script lang="ts" setup>
+import DemoCard from '../layers/demo-card';
+import AvatarDemo from '../components/avatar.vue';
+import BadgeDemo from '../components/badge.vue';
+import InfiniteScrollDemo from '../components/infinite-scroll.vue';
+import MarqueeDemo from '../components/marquee.vue';
+import CollapseDemo from '../components/collapse.vue';
+import ProgressDemo from '../components/progress.vue';
+import EmptyDemo from '../components/empty.vue';
 </script>

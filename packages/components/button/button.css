@@ -30,7 +30,6 @@
     border-radius: var(--primary-radius);
     background-color: var(--background-color);
     box-shadow: var(--secondary-shadow);
-
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -42,41 +41,38 @@
     transition: all 0.16s ease-out;
     position: relative;
     overflow: hidden;
-
     color: var(--color);
     font-size: var(--text-sm);
     font-weight: var(--primary-font-weight);
-    /*font-family: var(--primary-font-family);*/
-
     --icon-size: var(--text-sm);
     --icon-weight: var(--primary-font-weight);
-}
 
-.nue-button:hover {
-    color: var(--hover-color);
-    background-color: var(--hover-background-color);
-    border-color: var(--hover-border-color);
-}
+    &:hover {
+        color: var(--hover-color);
+        background-color: var(--hover-background-color);
+        border-color: var(--hover-border-color);
+    }
 
-.nue-button:active {
-    color: var(--active-color);
-    background-color: var(--active-background-color);
-    border-color: var(--active-border-color);
-}
+    &:active {
+        color: var(--active-color);
+        background-color: var(--active-background-color);
+        border-color: var(--active-border-color);
+    }
 
-.nue-button.nue-button--disabled {
-    color: var(--disable-color);
-    background-color: var(--disable-background-color);
-    cursor: not-allowed;
-}
+    &.nue-button--disabled {
+        color: var(--disable-color);
+        background-color: var(--disable-background-color);
+        cursor: not-allowed;
+    }
 
-.nue-button__text {
-    flex: 1 1 auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-break: break-all;
-    text-align: left;
+    .nue-button__text {
+        flex: 1 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        text-align: left;
+    }
 }
 
 /* small */
@@ -133,8 +129,8 @@
     --border-color: transparet;
     box-shadow: none;
     padding: 0;
-}
 
-.nue-button--pure.nue-button--disabled {
-    background-color: transparent;
+    &.nue-button--disabled {
+        background-color: transparent;
+    }
 }

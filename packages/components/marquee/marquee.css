@@ -13,32 +13,32 @@
     display: flex;
     width: 100%;
     overflow: hidden;
-}
 
-.nue-marquee__track {
-    display: flex;
-    align-items: center;
-    gap: 36px;
-    background: transparent;
-    animation-name: marquee-slide;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-delay: 0.16s;
-    opacity: 0;
-}
+    .nue-marquee__track {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        background: transparent;
+        animation-name: marquee-slide;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-delay: 0.16s;
+        opacity: 0;
 
-.nue-marquee__track.nue-marquee__track--infinite {
-    animation-name: marquee-infinite-slide !important;
-}
+        &.nue-marquee__track--infinite {
+            animation-name: marquee-infinite-slide !important;
+        }
 
-.nue-marquee .nue-marquee-item {
-    width: 128px;
-    aspect-ratio: 3 / 4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #efefef;
-    border-radius: 12px;
+        .nue-marquee-item {
+            width: 128px;
+            aspect-ratio: 3 / 4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #efefef;
+            border-radius: 12px;
+        }
+    }
 }
 
 /* animations */

@@ -23,9 +23,9 @@
 
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-import type { ButtonPropsType, ButtonEmitsType } from './types';
+import type { ButtonEmitsType, ButtonPropsType } from './types';
 import type { ButtonGroupCtxType } from '../button-group';
-import { parseTheme, parseFlex, throttle } from '@nue-ui/utils';
+import { parseFlex, parseTheme, throttle } from '@nue-ui/utils';
 import { BUTTON_GROUP_CTX_KEY } from '../button-group/constants';
 import { NueIcon } from '../icon';
 import './button.css';

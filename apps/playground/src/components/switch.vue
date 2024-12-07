@@ -1,10 +1,6 @@
 <template>
-    <nue-div align="center">
-        <nue-switch size="small" />
-        <nue-switch />
-        <nue-switch size="large" />
-    </nue-div>
     <nue-div>
+        <nue-switch />
         <nue-switch show-text />
         <nue-switch active-text="开" inactive-text="关" show-text />
         <nue-switch

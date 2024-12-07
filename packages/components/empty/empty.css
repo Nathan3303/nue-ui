@@ -13,18 +13,18 @@
     justify-content: center;
     font-weight: normal;
     flex: auto;
-}
 
-.nue-empty__image {
-    aspect-ratio: 1;
-    width: var(--image-size);
-    height: var(--image-size);
-    object-fit: contain;
-    margin-bottom: 16px;
-    border-radius: var(--primary-radius);
-}
+    .nue-empty__image {
+        aspect-ratio: 1;
+        width: var(--image-size);
+        height: var(--image-size);
+        object-fit: contain;
+        margin-bottom: 16px;
+        border-radius: var(--primary-radius);
+    }
 
-.nue-empty__description {
-    font-size: var(--text-sm);
-    color: var(--secondary-text-color);
+    .nue-empty__description {
+        font-size: var(--text-sm);
+        color: var(--secondary-text-color);
+    }
 }

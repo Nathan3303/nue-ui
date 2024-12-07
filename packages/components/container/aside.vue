@@ -30,8 +30,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
-import { NueDiv, NueText, NueButton } from '..';
+import { computed, ref, watch } from 'vue';
+import { NueButton, NueDiv, NueText } from '..';
 import type { NueAsideProps } from './types';
 import './aside.css';
 
@@ -51,7 +51,6 @@ const props = withDefaults(defineProps<NueAsideProps>(), {
 const asideRef = ref<HTMLDivElement>();
 const isResizing = ref(false);
 const visible = ref(!props.float);
-const float = ref(props.float);
 const collapse = ref(false);
 let originalX = 0;
 let originalWidth = 0;
@@ -127,6 +126,11 @@ const toggleVisible = () => {
     if (!props.float) return;
     visible.value = !visible.value;
 };
+
+watch(
+    () => props.float,
+    nv => (visible.value = !nv)
+);
 
 defineExpose({
     toggleVisible

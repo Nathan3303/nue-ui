@@ -28,35 +28,40 @@
     padding: var(--padding-y) var(--padding-x);
     background-color: var(--background-color);
     line-height: var(--line-height);
-}
 
-span.nue-text {
-    font-size: var(--font-size, inherit);
-    font-weight: var(--font-weight, inherit);
-}
+    &:is(span) {
+        font-size: var(--font-size, inherit);
+        font-weight: var(--font-weight, inherit);
+    }
 
-h1.nue-text {
-    font-size: var(--text-xxxl);
-    font-weight: 700;
-}
+    &:is(h1) {
+        font-size: var(--text-xxxl);
+        font-weight: 700;
+    }
 
-h2.nue-text {
-    font-size: var(--text-xxl);
-    font-weight: 600;
-}
+    &:is(h2) {
+        font-size: var(--text-xxl);
+        font-weight: 600;
+    }
 
-h3.nue-text {
-    font-size: var(--text-xl);
-    font-weight: 500;
-}
+    &:is(h3),
+    &.nue-text--h3 {
+        font-size: var(--text-xl);
+        font-weight: 500;
+    }
 
-h4.nue-text {
-    font-weight: 500;
+    &:is(h4) {
+        font-weight: 500;
+    }
 }
 
 /* Built-in styles */
-.nue-text.nue-text--h3 {
-    --font-size: var(--text-xl);
+
+.nue-text--clamped {
+    display: block;
+    max-height: calc(3 * var(--line-height));
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @supports (-webkit-line-clamp: var(--clamped-lines)) {
@@ -67,11 +72,4 @@ h4.nue-text {
         -webkit-line-clamp: var(--clamped-lines);
         -webkit-box-orient: vertical;
     }
-}
-
-.nue-text--clamped {
-    display: block;
-    max-height: calc(3 * var(--line-height));
-    overflow: hidden;
-    text-overflow: ellipsis;
 }

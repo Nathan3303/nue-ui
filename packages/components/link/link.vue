@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { parseFlex, parseTheme } from '@nue-ui/utils';
 import { NueIcon } from '../icon';
 import type { LinkProps, RoutePropType } from './types';

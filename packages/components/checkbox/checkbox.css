@@ -24,21 +24,21 @@
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     transition: all var(--animation-time) ease;
-}
 
-.nue-checkbox .nue-checkbox__icon {
-    --icon-color: var(--check-icon-color);
-    --icon-size: var(--check-icon-size);
-    transition: all var(--animation-time) ease;
-}
+    .nue-checkbox__icon {
+        --icon-color: var(--check-icon-color);
+        --icon-size: var(--check-icon-size);
+        transition: all var(--animation-time) ease;
+    }
 
-.nue-checkbox .nue-checkbox__label {
-    color: var(--check-label-color);
-    font-size: var(--check-label-size);
-    line-height: var(--check-label-size);
-    -webkit-user-select: none;
-    user-select: none;
-    transition: all var(--animation-time) ease;
+    .nue-checkbox__label {
+        color: var(--check-label-color);
+        font-size: var(--check-label-size);
+        line-height: var(--check-label-size);
+        -webkit-user-select: none;
+        user-select: none;
+        transition: all var(--animation-time) ease;
+    }
 }
 
 /* small */

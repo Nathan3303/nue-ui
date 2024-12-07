@@ -1,5 +1,5 @@
-import { computed, createVNode, defineComponent } from 'vue';
 import type { VNode } from 'vue';
+import { computed, createVNode, defineComponent } from 'vue';
 import { NueDivider } from '../divider';
 import { parseFlex, parseFlexWrap, parseTheme } from '@nue-ui/utils';
 import './div.css';

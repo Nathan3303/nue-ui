@@ -36,7 +36,7 @@
 
 <script lang="ts" setup>
 import { nextTick, ref, watchEffect } from 'vue';
-import { NueContainer, NueHeader, NueMain, NueFooter } from '../container';
+import { NueContainer, NueFooter, NueHeader, NueMain } from '../container';
 import NueButton from '../button/button.vue';
 import NueText from '../text/text.vue';
 import type { DrawerPropsType } from './types';

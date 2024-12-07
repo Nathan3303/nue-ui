@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import type { MarqueePropsType } from './types';
 import './marquee.css';
 

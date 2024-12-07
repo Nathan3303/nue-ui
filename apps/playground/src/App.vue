@@ -1,34 +1,19 @@
 <template>
     <nue-container>
-        <nue-header height="72px">
+        <nue-header>
             <template #logo>NueUI 组件库 PlayGround</template>
         </nue-header>
-        <nue-main
-            aside-width="200px"
-            :allow-resize-aside="false"
-            outline-width="200px"
-            responsive
-        >
+        <nue-main responsive>
             <template #aside>
-                <nue-link theme="btnlike" route="/basic">
-                    Basic 基础组件
-                </nue-link>
-                <nue-link theme="btnlike" route="/form">Form 表单组件</nue-link>
-                <nue-link theme="btnlike" route="/data">
-                    Data 数据展示组件
-                </nue-link>
-                <nue-link theme="btnlike" route="/navigation">
-                    Navigation 导航组件
-                </nue-link>
-                <nue-link theme="btnlike" route="/feedback">
-                    Feedback 反馈组件
-                </nue-link>
-                <nue-link theme="btnlike" route="/others">
-                    Others 其他组件
-                </nue-link>
+                <nue-link route="/basic">基础组件</nue-link>
+                <nue-link route="/form">表单组件</nue-link>
+                <nue-link route="/data">数据展示组件</nue-link>
+                <nue-link route="/navigation">导航组件</nue-link>
+                <nue-link route="/feedback">反馈组件</nue-link>
+                <nue-link route="/others">其他组件</nue-link>
             </template>
             <template #content>
-                <router-view></router-view>
+                <router-view />
             </template>
             <template #outline>
                 <div id="outline"></div>
@@ -42,9 +27,13 @@
     --aside-gap: 8px;
 
     &:deep(.view-container) {
-        display: flex;
-        flex-direction: column;
-        gap: 48px;
+        box-sizing: border-box;
+        padding: 16px;
+    }
+
+    .nue-link {
+        font-size: var(--text-sm);
+        color: var(--primary-color-800);
     }
 }
 </style>
@@ -56,7 +45,7 @@
     margin: 0;
 
     h3 {
-        margin: 16px 0px;
+        margin: 16px 0;
     }
 
     a {
