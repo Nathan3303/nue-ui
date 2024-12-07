@@ -25,6 +25,7 @@ export interface NueMainProps extends GlobalProps {
     allowResizeAside?: boolean;
     allowCollapseAside?: boolean;
     allowHideAside?: boolean;
+    asideOptions?: NueAsideProps;
     // outline slot
     outlineWidth?: string;
     outlineMinWidth?: string;
@@ -32,6 +33,19 @@ export interface NueMainProps extends GlobalProps {
     allowResizeOutline?: boolean;
     allowCollapseOutline?: boolean;
     allowHideOutline?: boolean;
+    outlineOptions?: NueAsideProps;
+}
+
+export interface NueAsideProps extends GlobalProps {
+    width?: string;
+    minWidth?: string;
+    maxWidth?: string;
+    allowResize?: boolean;
+    allowCollapse?: boolean;
+    allowHide?: boolean;
+    resizerPlacement?: 'left' | 'right';
+    float?: boolean;
+    title?: string;
 }
 
 export interface NueFooterProps extends GlobalProps {

@@ -7,6 +7,7 @@
             aside-width="200px"
             :allow-resize-aside="false"
             outline-width="200px"
+            responsive
         >
             <template #aside>
                 <nue-link theme="btnlike" route="/basic">
@@ -37,37 +38,37 @@
 </template>
 
 <style scoped>
-    .nue-main {
-        --aside-gap: 8px;
+.nue-main {
+    --aside-gap: 8px;
 
-        &:deep(.view-container) {
-            display: flex;
-            flex-direction: column;
-            gap: 48px;
-        }
+    &:deep(.view-container) {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
     }
+}
 </style>
 
 <style>
-    .outline-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+.outline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
-        h3 {
-            margin: 16px 0px;
-        }
+    h3 {
+        margin: 16px 0px;
+    }
 
-        a {
-            padding: 4px 0;
-            font-size: 12px;
-            color: gray;
+    a {
+        padding: 4px 0;
+        font-size: 12px;
+        color: gray;
 
-            &:hover {
-                text-decoration: underline;
-                color: black;
-                cursor: pointer;
-            }
+        &:hover {
+            text-decoration: underline;
+            color: black;
+            cursor: pointer;
         }
     }
+}
 </style>
