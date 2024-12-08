@@ -1,31 +1,40 @@
 <template>
-    <nue-container theme="horizontal">
+    <nue-container class="container-view" theme="vertical">
         <nue-header>
-            <template #logo>
-                <nue-icon name="logo" />
-            </template>
-            <template #navigators>
-                <nue-link icon="board" theme="btnlike,actived" />
-                <nue-link icon="projects" theme="btnlike" />
-                <nue-link icon="drive" theme="btnlike" />
-            </template>
-            <template #actions>
-                <nue-link icon="setting" theme="btnlike" />
-            </template>
-            <template #user>
-                <nue-avatar icon="theme" rounded />
-            </template>
+            <template #logo>Container 布局容器</template>
         </nue-header>
         <nue-main>
-            <template #aside>Aside</template>
-            <template #content>
-                <nue-text>
-                    {{ generateRandomString(64) }}
-                </nue-text>
-            </template>
-            <template #outline>Outline</template>
+            <nue-div align="center" style="padding: 16px">
+                <nue-container theme="horizontal">
+                    <nue-header>
+                        <template #logo>
+                            <nue-icon name="logo" />
+                        </template>
+                        <template #navigators>
+                            <nue-link icon="board" theme="btnlike,actived" />
+                            <nue-link icon="projects" theme="btnlike" />
+                            <nue-link icon="drive" theme="btnlike" />
+                        </template>
+                        <template #actions>
+                            <nue-link icon="setting" theme="btnlike" />
+                        </template>
+                        <template #user>
+                            <nue-avatar icon="theme" rounded />
+                        </template>
+                    </nue-header>
+                    <nue-main>
+                        <template #aside>Aside</template>
+                        <template #content>
+                            <nue-text>
+                                {{ generateRandomString(64) }}
+                            </nue-text>
+                        </template>
+                        <template #outline>Outline</template>
+                    </nue-main>
+                    <nue-footer>Footer</nue-footer>
+                </nue-container>
+            </nue-div>
         </nue-main>
-        <nue-footer>Footer</nue-footer>
     </nue-container>
 </template>
 
@@ -44,28 +53,7 @@ function generateRandomString(length: number): string {
 </script>
 
 <style scoped>
-.nue-container {
+.nue-container--horizontal {
     height: 512px;
-    border: 1px solid var(--divider-color);
-    border-radius: var(--primary-radius);
-    background-color: #fefefe;
-}
-
-.outline-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    & > li {
-        padding: 4px 0;
-        font-size: 12px;
-        color: gray;
-
-        &:hover {
-            text-decoration: underline;
-            color: black;
-            cursor: pointer;
-        }
-    }
 }
 </style>

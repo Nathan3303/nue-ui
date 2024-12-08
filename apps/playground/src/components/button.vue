@@ -1,12 +1,23 @@
 <template>
-    <nue-div align="center">
-        <nue-button :loading="isSearching" @click="handleSearch">
-            加载
-        </nue-button>
-        <nue-button :throttle-duration="360" use-throttle @click="count++">
-            节流 ({{ count }})
-        </nue-button>
-    </nue-div>
+    <nue-container class="button-view" theme="vertical">
+        <nue-header>
+            <template #logo>Button 按钮</template>
+        </nue-header>
+        <nue-main>
+            <nue-div align="center" style="padding: 16px">
+                <nue-button :loading="isSearching" @click="handleSearch">
+                    加载
+                </nue-button>
+                <nue-button
+                    :throttle-duration="360"
+                    use-throttle
+                    @click="count++"
+                >
+                    节流 ({{ count }})
+                </nue-button>
+            </nue-div>
+        </nue-main>
+    </nue-container>
 </template>
 
 <script lang="ts" setup>
