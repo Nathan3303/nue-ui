@@ -2,7 +2,7 @@
 
 .nue-button-group {
     --flex: none;
-    --border-radius: var(--primary-radius);
+    --border-radius: var(--nue-ui-primary-radius);
 }
 
 /* Original styles */
@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    box-shadow: var(--secondary-shadow);
+    box-shadow: var(--nue-ui-secondary-shadow);
     flex: var(--flex);
     width: fit-content;
     border-radius: var(--border-radius);

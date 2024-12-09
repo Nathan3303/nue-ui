@@ -15,13 +15,13 @@ export const collapseItemsData = [
         name: 'data',
         title: 'Data 数据展示础组件',
         links: [
-            { route: '/avatar', text: 'Avatar 按钮' },
-            { route: '/badge', text: 'Badge 按钮' },
-            { route: '/collapse', text: 'Collapse 按钮' },
-            { route: '/infinite-scroll', text: 'Infinite Scroll 按钮' },
-            { route: '/marquee', text: 'Marquee 按钮' },
-            { route: '/progress', text: 'Progress 按钮' },
-            { route: '/empty', text: 'Empty 按钮' }
+            { route: '/avatar', text: 'Avatar 头像' },
+            { route: '/badge', text: 'Badge 徽标' },
+            { route: '/collapse', text: 'Collapse 折叠面板' },
+            { route: '/infinite-scroll', text: 'Infinite Scroll 无限滚动' },
+            { route: '/marquee', text: 'Marquee 跑马灯' },
+            { route: '/progress', text: 'Progress 进度' },
+            { route: '/empty', text: 'Empty 空状态' }
         ]
     },
     {

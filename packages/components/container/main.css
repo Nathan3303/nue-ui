@@ -1,8 +1,8 @@
 /* variables */
 
 .nue-main {
-    --nue-main-padding: 16px;
-    --nue-main-border-color: var(--divider-color);
+    --nue-main-padding: var(--nue-ui-primary-padding);
+    --nue-main-border-color: var(--nue-ui-border-color);
     --nue-main-content-width: unset;
 }
 
@@ -28,7 +28,7 @@
             left: 0;
             width: 100%;
             padding: var(--nue-main-padding);
-            border-bottom: 1px solid var(--divider-color);
+            border-bottom: 1px solid var(--nue-ui-border-color);
             box-sizing: border-box;
             align-items: center;
             justify-content: space-between;

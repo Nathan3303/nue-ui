@@ -41,6 +41,16 @@
                 flex-direction: column;
                 align-items: stretch;
                 gap: 4px;
+
+                .nue-link {
+                    font-size: var(--nue-ui-text-sm);
+                    color: var(--nue-ui-primary-color-600);
+
+                    &.nue-link--actived {
+                        color: var(--nue-ui-primary-color-900);
+                        font-weight: 500;
+                    }
+                }
             }
         }
     }

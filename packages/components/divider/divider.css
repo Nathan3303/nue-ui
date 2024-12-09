@@ -26,9 +26,9 @@
         z-index: 2;
         margin: 0 16px;
         background-color: white;
-        color: var(--primary-text-color);
-        font-size: var(--text-sm);
-        font-weight: var(--primary-font-weight);
+        color: var(--nue-ui-primary-text-color);
+        font-size: var(--nue-ui-text-sm);
+        font-weight: var(--nue-ui-primary-font-weight);
 
         .nue-divider__text__inner {
             padding: 0 16px;

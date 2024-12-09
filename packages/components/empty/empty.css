@@ -20,11 +20,11 @@
         height: var(--image-size);
         object-fit: contain;
         margin-bottom: 16px;
-        border-radius: var(--primary-radius);
+        border-radius: var(--nue-ui-primary-radius);
     }
 
     .nue-empty__description {
-        font-size: var(--text-sm);
-        color: var(--secondary-text-color);
+        font-size: var(--nue-ui-text-sm);
+        color: var(--nue-ui-secondary-text-color);
     }
 }

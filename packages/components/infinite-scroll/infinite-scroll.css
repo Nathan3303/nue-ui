@@ -1,9 +1,9 @@
 /* variables */
 
 .infinite-scroll-wrapper {
-    --font-color: var(--primary-text-color);
-    --font-size: var(--primary-font-size);
-    --font-weight: var(--primary-font-weight);
+    --font-color: var(--nue-ui-primary-text-color);
+    --font-size: var(--nue-ui-primary-font-size);
+    --font-weight: var(--nue-ui-primary-font-weight);
     --height: 100%;
     --trigger-bar-height: 50px;
 }
@@ -46,8 +46,8 @@
         }
 
         .infinite-scroll__disabled {
-            color: var(--disabled-color);
-            background-color: var(--primary-color-200);
+            color: var(--nue-ui-disabled-color);
+            background-color: var(--nue-ui-primary-color-200);
         }
     }
 }

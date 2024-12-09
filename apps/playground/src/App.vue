@@ -1,13 +1,18 @@
 <template>
     <nue-container class="app-view">
         <nue-header>
-            <template #logo>NueUI 组件库 PlayGround</template>
+            <template #logo>
+                <nue-text size="var(--nue-ui-text-lg)">
+                    NueUI 组件库 PlayGround
+                </nue-text>
+            </template>
         </nue-header>
-        <nue-main aside-width="200px" outline-width="200px" responsive>
+        <nue-main outline-width="200px" responsive>
             <template #aside>
                 <nue-collapse
                     v-model="collapseValue"
                     class="app-view__aside-collapse-menu"
+                    theme="menu"
                 >
                     <nue-collapse-item
                         v-for="(item, idx) in collapseItemsData"
@@ -22,7 +27,6 @@
                                 v-for="(link, idx) in item.links"
                                 :key="idx"
                                 :route="link.route"
-                                theme="btnlike"
                             >
                                 {{ link.text }}
                             </nue-link>

@@ -1,10 +1,10 @@
 /* variables */
 
 .nue-text {
-    --color: var(--primary-text-color);
-    --font-size: var(--text-md);
-    --font-weight: var(--primary-font-weight);
-    --font-family: var(--primary-font-family);
+    --color: var(--nue-ui-primary-text-color);
+    --font-size: var(--nue-ui-text-md);
+    --font-weight: var(--nue-ui-primary-font-weight);
+    --font-family: var(--nue-ui-primary-font-family);
     --padding-x: 0px;
     --padding-y: 0px;
     --word-wrap: break-word;
@@ -35,18 +35,18 @@
     }
 
     &:is(h1) {
-        font-size: var(--text-xxxl);
+        font-size: var(--nue-ui-text-xxxl);
         font-weight: 700;
     }
 
     &:is(h2) {
-        font-size: var(--text-xxl);
+        font-size: var(--nue-ui-text-xxl);
         font-weight: 600;
     }
 
     &:is(h3),
     &.nue-text--h3 {
-        font-size: var(--text-xl);
+        font-size: var(--nue-ui-text-xl);
         font-weight: 500;
     }
 

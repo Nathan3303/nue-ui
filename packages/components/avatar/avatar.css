@@ -3,7 +3,7 @@
 .nue-avatar {
     --size: 36px;
     --object-fit: cover;
-    --background-color: var(--primary-color-400);
+    --background-color: var(--nue-ui-primary-color-400);
 }
 
 /* original */
@@ -20,7 +20,7 @@
     border: none;
     border-radius: var(--border-radius, 4px);
     background-color: var(--background-color);
-    color: var(--primary-color-50);
+    color: var(--nue-ui-primary-color-100);
 
     .nue-avatar__image {
         width: 100%;

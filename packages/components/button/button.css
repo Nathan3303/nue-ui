@@ -1,51 +1,50 @@
 /* Variables */
 
 .nue-button {
-    --width: auto;
-    --height: 36px;
+    --vgap: 12px;
     --flex: 0 1 auto;
-    --justify-content: start;
-    --color: var(--primary-text-color);
-    --border-color: var(--divider-color);
+    --color: var(--nue-ui-primary-text-color);
+    --border-color: var(--nue-ui-border-color);
     --background-color: transparent;
     --hover-color: var(--color);
     --hover-border-color: var(--border-color);
-    --hover-background-color: var(--primary-color-100);
+    --hover-background-color: var(--nue-ui-primary-color-100);
     --active-color: var(--color);
     --active-border-color: var(--border-color);
-    --active-background-color: var(--primary-color-200);
-    --disable-color: var(--disabled-color);
+    --active-background-color: var(--nue-ui-primary-color-200);
+    --disable-color: var(--nue-ui-disabled-color);
     --disable-border-color: var(--border-color);
-    --disable-background-color: var(--primary-color-200);
+    --disable-background-color: var(--nue-ui-primary-color-200);
 }
 
 /* Original styles */
 
 .nue-button {
-    justify-content: var(--justify-content);
-    width: var(--width);
-    height: var(--height);
-    flex: var(--flex);
-    border: 1px solid var(--border-color);
-    border-radius: var(--primary-radius);
-    background-color: var(--background-color);
-    box-shadow: var(--secondary-shadow);
-    box-sizing: border-box;
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-    transition: all 0.16s ease-out;
+    justify-content: var(--justify-content);
+    gap: calc(var(--vgap) * 0.5);
+    flex: var(--flex);
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    padding: calc(var(--vgap) * 0.5) var(--vgap);
+    border: 1px solid var(--border-color);
+    border-radius: var(--nue-ui-primary-radius);
+    background-color: var(--background-color);
+    box-shadow: var(--nue-ui-secondary-shadow);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: all 0.16s ease-out;
     color: var(--color);
-    font-size: var(--text-sm);
-    font-weight: var(--primary-font-weight);
-    --icon-size: var(--text-sm);
-    --icon-weight: var(--primary-font-weight);
+    font-size: var(--nue-ui-text-default);
+    font-weight: var(--nue-ui-primary-font-weight);
+    font-family: var(--nue-ui-primary-font-family), sans-serif;
+    --icon-size: var(--nue-ui-text-default);
+    --icon-weight: var(--nue-ui-primary-font-weight);
 
     &:hover {
         color: var(--hover-color);
@@ -59,63 +58,69 @@
         border-color: var(--active-border-color);
     }
 
+    .nue-button__text {
+        flex: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+    }
+
     &.nue-button--disabled {
         color: var(--disable-color);
         background-color: var(--disable-background-color);
         cursor: not-allowed;
     }
-
-    .nue-button__text {
-        flex: 1 1 auto;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        word-break: break-all;
-        text-align: left;
-    }
 }
 
 /* small */
 
-.nue-button--small {
-    --height: 28px !important;
-    padding: 4px 8px;
-    font-size: var(--text-xs);
+.nue-button--small,
+.nue-button--sm {
+    --vgap: 8px;
+    font-size: var(--nue-ui-text-sm);
+    --icon-size: var(--nue-ui-text-sm);
 }
 
 /* large */
 
-.nue-button--large {
-    --height: 44px !important;
-    --icon-size: var(--text-lg);
-    padding: 12px 24px;
-    font-size: var(--text-lg);
+.nue-button--large,
+.nue-button--lg {
+    --vgap: 16px;
+    font-size: var(--nue-ui-text-md);
+    --icon-size: var(--nue-ui-text-md);
 }
 
 /* round */
 
-.nue-button--round {
+.nue-button--round,
+.nue-button--rou {
     border-radius: 999px;
 }
 
 /* icon-only */
 
-.nue-button--icon-only {
+.nue-button--icon-only,
+.nue-button--io {
     --justify-content: center;
     --border-color: transparent;
-    --height: 36px;
     aspect-ratio: 1;
     box-shadow: none;
+
+    .nue-button__text {
+        display: none;
+    }
 }
 
 /* primary */
 
-.nue-button--primary {
+.nue-button--primary,
+.nue-button--pri {
     --color: white;
     --border-color: transparent;
-    --background-color: var(--primary-text-color);
-    --hover-background-color: var(--primary-color-800);
-    --active-background-color: var(--primary-color-800);
+    --background-color: var(--nue-ui-primary-text-color);
+    --hover-background-color: var(--nue-ui-primary-color-800);
+    --active-background-color: var(--nue-ui-primary-color-800);
 }
 
 /* pure */
@@ -124,8 +129,8 @@
     --height: max-content;
     --hover-background-color: transparent;
     --active-background-color: transparent;
-    --hover-color: var(--secondary-text-color);
-    --active-color: var(--secondary-text-color);
+    --hover-color: var(--nue-ui-secondary-text-color);
+    --active-color: var(--nue-ui-secondary-text-color);
     --border-color: transparet;
     box-shadow: none;
     padding: 0;

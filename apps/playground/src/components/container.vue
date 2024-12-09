@@ -1,11 +1,18 @@
 <template>
     <nue-container class="container-view" theme="vertical">
         <nue-header>
-            <template #logo>Container 布局容器</template>
+            <template #logo>
+                <nue-text size="var(--nue-ui-text-default)">
+                    Container 布局容器
+                </nue-text>
+            </template>
         </nue-header>
         <nue-main>
-            <nue-div align="center" style="padding: 16px">
-                <nue-container theme="horizontal">
+            <nue-div align="center">
+                <nue-container
+                    style="min-height: auto; height: auto"
+                    theme="horizontal"
+                >
                     <nue-header>
                         <template #logo>
                             <nue-icon name="logo" />
@@ -22,12 +29,14 @@
                             <nue-avatar icon="theme" rounded />
                         </template>
                     </nue-header>
-                    <nue-main>
+                    <nue-main aside-width="128px" outline-width="128px">
                         <template #aside>Aside</template>
                         <template #content>
-                            <nue-text>
-                                {{ generateRandomString(64) }}
-                            </nue-text>
+                            <nue-div style="padding: 16px">
+                                <nue-text>
+                                    {{ generateRandomString(64) }}
+                                </nue-text>
+                            </nue-div>
                         </template>
                         <template #outline>Outline</template>
                     </nue-main>
@@ -51,9 +60,3 @@ function generateRandomString(length: number): string {
     return result;
 }
 </script>
-
-<style scoped>
-.nue-container--horizontal {
-    height: 512px;
-}
-</style>

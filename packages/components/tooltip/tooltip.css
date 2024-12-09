@@ -2,7 +2,7 @@
 
 .nue-tooltip {
     --height: 24px;
-    --font-size: var(--text-sm);
+    --font-size: var(--nue-ui-text-sm);
     --animation-time: 0.16s;
     --triangle-display: none;
 }
@@ -18,27 +18,27 @@
     max-width: 36vw;
     padding: 6px 12px;
     position: absolute;
-    background-color: var(--primary-color-900);
-    border-radius: var(--primary-radius);
+    background-color: var(--nue-ui-primary-color-900);
+    border-radius: var(--nue-ui-primary-radius);
 
     .nue-tooltip__padding {
         position: absolute;
     }
 
     .nue-tooltip__text {
-        color: var(--primary-color-50);
+        color: var(--nue-ui-primary-color-100);
         font-size: var(--font-size);
-        font-weight: var(--primary-font-weight);
+        font-weight: var(--nue-ui-primary-font-weight);
     }
 
     &.nue-tooltip--small {
         padding: 4px 8px;
-        --font-size: var(--text-xs);
+        --font-size: var(--nue-ui-text-xs);
     }
 
     &.nue-tooltip--large {
         padding: 8px 16px;
-        --font-size: var(--text-md);
+        --font-size: var(--nue-ui-text-md);
     }
 
     &[data-direction='top'] {

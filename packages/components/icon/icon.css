@@ -2,18 +2,22 @@
 
 .nue-icon {
     --spin-speed: 2s;
+    --icon-color: inherit;
+    --icon-size: inherit;
+    --icon-weight: inherit;
 }
 
 /* original */
 
 .nue-icon {
-    .iconfont::before {
-        display: block;
-        color: var(--icon-color, inherit);
-        font-size: var(--icon-size, inherit);
-        font-weight: var(--icon-weight, 500);
+    display: inline;
+
+    .iconfont {
+        /*display: block;*/
+        color: var(--icon-color);
+        font-size: var(--icon-size) !important;
+        font-weight: var(--icon-weight);
         aspect-ratio: 1 / 1;
-        line-height: normal;
     }
 
     &.nue-icon--spin {

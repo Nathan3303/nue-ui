@@ -8,7 +8,7 @@
     *[data-selected='true'] {
         transition: all 0.2s ease-in-out;
         background-color: var(--light-primary-color);
-        border-radius: var(--primary-radius);
+        border-radius: var(--nue-ui-primary-radius);
     }
 
     *[data-disabled='true'] {

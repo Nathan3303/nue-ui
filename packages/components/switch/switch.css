@@ -6,11 +6,11 @@
     --min-width: calc(var(--height) * 2);
     --state-width: auto;
     --animation-time: 0.16s;
-    --background-color: var(--primary-color-300);
-    --background-active-color: var(--primary-color-800);
+    --background-color: var(--nue-ui-primary-color-300);
+    --background-active-color: var(--nue-ui-primary-color-800);
     --circle-size: calc(var(--height) - 4px);
-    --circle-color: var(--primary-color-50);
-    --circle-active-color: var(--primary-color-50);
+    --circle-color: var(--nue-ui-primary-color-100);
+    --circle-active-color: var(--nue-ui-primary-color-100);
 }
 
 /* original */
@@ -25,7 +25,7 @@
     padding: 2px;
     transition: all var(--animation-time) ease;
     cursor: pointer;
-    box-shadow: var(--secondary-shadow);
+    box-shadow: var(--nue-ui-secondary-shadow);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -42,7 +42,7 @@
         flex: none;
         background-color: var(--circle-color);
         transition: all var(--animation-time) ease;
-        box-shadow: var(--secondary-shadow);
+        box-shadow: var(--nue-ui-secondary-shadow);
 
         .nue-switch__loading-icon {
             font-size: calc(var(--circle-size) * 0.7);
@@ -70,12 +70,12 @@
 
     &.nue-switch--small {
         --height: 18px;
-        font-size: var(--text-xxs);
+        font-size: var(--nue-ui-text-xxs);
     }
 
     &.nue-switch--large {
         --height: 30px;
-        font-size: var(--text-sm);
+        font-size: var(--nue-ui-text-sm);
     }
 
     &.nue-switch--actived {

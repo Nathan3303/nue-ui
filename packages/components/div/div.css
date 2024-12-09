@@ -29,8 +29,8 @@
 /* built-in styles */
 
 .nue-div--card {
-    border: 1px solid var(--divider-color);
-    border-radius: var(--primary-radius);
-    box-shadow: var(--secondary-shadow);
-    padding: var(--primary-padding);
+    border: 1px solid var(--nue-ui-divider-color);
+    border-radius: var(--nue-ui-primary-radius);
+    box-shadow: var(--nue-ui-secondary-shadow);
+    padding: var(--nue-ui-primary-padding);
 }

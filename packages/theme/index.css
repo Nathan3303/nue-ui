@@ -1,59 +1,63 @@
+/* @import */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('./iconfont/iconfont.css');
 @import url('./animations.css');
 
+/* variables */
+
 :root {
-    /* Primary colors */
-    --primary-color-50: #fafafa;
-    --primary-color-100: #f5f5f5;
-    --primary-color-200: #eeeeee;
-    --primary-color-300: #e0e0e0;
-    --primary-color-400: #bdbdbd;
-    --primary-color-500: #9e9e9e;
-    --primary-color-600: #757575;
-    --primary-color-700: #616161;
-    --primary-color-800: #424242;
-    --primary-color-900: #212121;
-    --primary-color-a100: #82b1ff;
-    --primary-color-a200: #448aff;
-    --primary-color-a400: #2979ff;
-    --primary-color-a700: #2962ff;
-    --primary-color: var(--primary-color-500);
-    /* Colors */
-    --divider-color: var(--primary-color-300);
-    --disabled-color: var(--primary-color-500);
-    --dark-primary-color: var(--primary-color-700);
-    --light-primary-color: var(--primary-color-100);
-    --accent-color: #607d8b;
-    --error-color: #f44336;
-    --success-color: #4caf50;
-    --warning-color: #ffc107;
-    /* Text */
-    --primary-font-size-base: 16px;
-    --primary-font-size: 16px;
-    --primary-font-weight: 400;
-    --primary-font-family: unset;
-    --primary-line-height: 1;
-    --primary-text-color: var(--primary-color-900);
-    --secondary-text-color: var(--primary-color-600);
-    /* Text sizes */
-    --text-xxs: 0.5rem;
-    --text-xs: 0.75rem;
-    --text-sm: 0.875rem;
-    --text-md: 1rem;
-    --text-lg: 1.125rem;
-    --text-xl: 1.25rem;
-    --text-xxl: 1.5rem;
-    --text-xxxl: 2rem;
-    /* Others */
-    --primary-padding: 16px;
-    --secondary-padding: 8px;
-    --primary-gap: 16px;
-    --secondary-gap: 8px;
-    --primary-radius: 6px;
-    --primary-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14),
-        0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    --secondary-shadow: 1px 1px 3px rgba(200, 200, 200, 0.2);
+    --nue-ui-primary-color-100: #f5f5f5;
+    --nue-ui-primary-color-200: #eeeeee;
+    --nue-ui-primary-color-300: #e0e0e0;
+    --nue-ui-primary-color-400: #bdbdbd;
+    --nue-ui-primary-color-500: #9e9e9e;
+    --nue-ui-primary-color-600: #757575;
+    --nue-ui-primary-color-700: #616161;
+    --nue-ui-primary-color-800: #424242;
+    --nue-ui-primary-color-900: #212121;
+    --nue-ui-error-color: #ee3221;
+    --nue-ui-success-color: #3b9d3f;
+    --nue-ui-warning-color: #ea9515;
+    --nue-ui-border-color: var(--nue-ui-primary-color-300);
+    --nue-ui-divider-color: var(--nue-ui-primary-color-300);
+    --nue-ui-disabled-color: var(--nue-ui-primary-color-500);
+    --nue-ui-primary-text-color: var(--nue-ui-primary-color-900);
+    --nue-ui-secondary-text-color: var(--nue-ui-primary-color-600);
 }
+
+:root {
+    --nue-ui-primary-font-size-base: 15px;
+    --nue-ui-primary-font-family: 'Poppins', 'Noto Sans SC';
+    --nue-ui-primary-font-size: var(--nue-ui-text-default);
+    --nue-ui-primary-font-weight: normal;
+    --nue-ui-primary-line-height: 1;
+}
+
+:root {
+    --nue-ui-text-xxxs: 0.2rem;
+    --nue-ui-text-xxs: 0.4rem;
+    --nue-ui-text-xs: 0.6rem;
+    --nue-ui-text-sm: 0.8rem;
+    --nue-ui-text-default: 1rem;
+    --nue-ui-text-md: 1.2rem;
+    --nue-ui-text-lg: 1.4rem;
+    --nue-ui-text-xl: 1.6rem;
+    --nue-ui-text-xxl: 1.8rem;
+    --nue-ui-text-xxxl: 2rem;
+}
+
+:root {
+    --nue-ui-primary-padding: 16px;
+    --nue-ui-secondary-padding: 8px;
+    --nue-ui-primary-gap: 16px;
+    --nue-ui-secondary-gap: 8px;
+    --nue-ui-primary-radius: 6px;
+    --nue-ui-primary-shadow: 1px 1px 3px rgba(100, 100, 100, 0.6);
+    --nue-ui-secondary-shadow: 1px 1px 3px rgba(200, 200, 200, 0.2);
+}
+
+/* html original */
 
 .nue-reset-html,
 .nue-html {
@@ -61,9 +65,10 @@
     height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: var(--primary-font-family) sans-serif;
-    font-size: var(--primary-font-size-base);
-    font-weight: var(--primary-font-weight);
+    font-optical-sizing: auto;
+    font-family: var(--nue-ui-primary-font-family), sans-serif;
+    font-size: var(--nue-ui-primary-font-size);
+    font-weight: var(--nue-ui-primary-font-weight);
     min-width: 720px;
     min-height: 540px;
     aspect-ratio: 4 / 3;

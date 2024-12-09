@@ -31,7 +31,7 @@
         }
 
         .nue-header__logo {
-            font-size: var(--text-xxl);
+            font-size: var(--nue-ui-text-xxl);
         }
     }
 
@@ -43,11 +43,11 @@
     }
 
     &:has(> .nue-header) > .nue-main {
-        border-top: 1px solid var(--nue-main-border-color);
+        border-top: 1px solid var(--nue-ui-border-color);
     }
 
     &:has(> .nue-footer) > .nue-main {
-        border-bottom: 1px solid var(--nue-main-border-color);
+        border-bottom: 1px solid var(--nue-ui-border-color);
     }
 }
 
@@ -74,10 +74,6 @@
                 justify-content: center;
                 aspect-ratio: 1;
 
-                .nue-icon {
-                    font-size: var(--text-md);
-                }
-
                 &:has(.nue-icon) .nue-link__content {
                     display: none;
                 }
@@ -94,11 +90,11 @@
     }
 
     &:has(> .nue-header) > .nue-main {
-        border-left: 1px solid var(--nue-main-border-color);
+        border-left: 1px solid var(--nue-ui-border-color);
     }
 
     &:has(> .nue-footer) > .nue-main {
-        border-right: 1px solid var(--nue-main-border-color);
+        border-right: 1px solid var(--nue-ui-border-color);
     }
 }
 
