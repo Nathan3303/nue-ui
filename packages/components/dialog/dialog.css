@@ -27,6 +27,11 @@
     animation: var(--wrapper-animation-name)
         var(--dialog-animation-rest-property);
     z-index: 5;
+
+    &[data-open='false'] {
+        --wrapper-animation-name: fade-out;
+        --dialog-animation-name: slide-out-to-top;
+    }
 }
 
 .nue-dialog {
@@ -41,46 +46,41 @@
     gap: 16px;
     animation: var(--dialog-animation-name)
         var(--dialog-animation-rest-property);
-}
 
-.nue-dialog__header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    .nue-dialog__header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-.nue-dialog__content {
-    width: 100%;
-    margin-bottom: 12px;
-}
+    .nue-dialog__content {
+        width: 100%;
+        margin-bottom: 12px;
+    }
 
-.nue-dialog__footer {
-    width: 100%;
-    display: flex;
-    align-self: center;
-    justify-content: end;
-    gap: 8px;
-}
+    .nue-dialog__footer {
+        width: 100%;
+        display: flex;
+        align-self: center;
+        justify-content: end;
+        gap: 8px;
 
-.nue-dialog__footer .cancel-button {
-    --color: #333;
-    --border-color: #ccc;
-    --background-color: #fff;
-    --hover-color: #333;
-    --hover-border-color: #ccc;
-    --hover-background-color: #f5f5f5;
-}
+        .cancel-button {
+            --color: #333;
+            --border-color: #ccc;
+            --background-color: #fff;
+            --hover-color: #333;
+            --hover-border-color: #ccc;
+            --hover-background-color: #f5f5f5;
+        }
 
-.nue-dialog__footer .confirm-button {
-    --color: #fff;
-    --border-color: transparent;
-    --background-color: #90909099;
-    --hover-background-color: #909090cc;
-    --active-background-color: #909090;
-}
-
-.nue-dialog-wrapper[data-open='false'] {
-    --wrapper-animation-name: fade-out;
-    --dialog-animation-name: slide-out-to-top;
+        .confirm-button {
+            --color: #fff;
+            --border-color: transparent;
+            --background-color: #90909099;
+            --hover-background-color: #909090cc;
+            --active-background-color: #909090;
+        }
+    }
 }

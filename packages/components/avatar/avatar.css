@@ -1,11 +1,13 @@
-/* Variables */
+/* variables */
+
 .nue-avatar {
     --size: 36px;
     --object-fit: cover;
-    --background-color: var(--primary-color-400);
+    --background-color: var(--nue-ui-primary-color-400);
 }
 
-/* Original Styles */
+/* original */
+
 .nue-avatar {
     flex: none;
     width: var(--size);
@@ -18,20 +20,22 @@
     border: none;
     border-radius: var(--border-radius, 4px);
     background-color: var(--background-color);
-    color: var(--primary-color-50);
+    color: var(--nue-ui-primary-color-100);
+
+    .nue-avatar__image {
+        width: 100%;
+        height: 100%;
+        line-height: 100%;
+        text-align: center;
+        object-fit: var(--object-fit);
+    }
+
+    .nue-avatar__icon.iconfont::before {
+        display: initial;
+    }
 }
 
-.nue-avatar__image {
-    width: 100%;
-    height: 100%;
-    object-fit: var(--object-fit);
-}
-
-.nue-avatar__icon.iconfont::before {
-    display: initial;
-}
-
-/* Built-in styles */
+/* rounded */
 
 .nue-avatar--rounded {
     border-radius: 50%;

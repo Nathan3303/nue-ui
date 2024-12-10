@@ -16,12 +16,12 @@ export type SizeProp =
     | 'xlarge'
     | number;
 
+export type ObjectLikeThemes = Record<string, boolean>;
+
 export interface GlobalProps {
-    theme?: string | string[];
+    theme?: string | string[] | ObjectLikeThemes;
 }
 
 export type Optional<T> = {
     [P in keyof T as T[P] extends Required<T>[P] ? never : P]: T[P];
 };
-
-export type ObjectLikeThemes = Record<string, boolean>;

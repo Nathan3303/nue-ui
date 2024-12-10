@@ -20,14 +20,14 @@
 </template>
 
 <script lang="ts" setup>
-import { provide, ref, watch, computed } from 'vue';
+import { computed, provide, ref, watch } from 'vue';
 import { CHECKBOX_GROUP_CTX_KEY } from './constants';
 import NueCheckbox from '../checkbox/checkbox.vue';
 import type {
-    NueCheckboxGroupProps,
-    NueCheckboxGroupEmits,
     CheckboxName,
-    NueCheckboxGroupContext
+    NueCheckboxGroupContext,
+    NueCheckboxGroupEmits,
+    NueCheckboxGroupProps
 } from './types';
 import './checkbox-group.css';
 

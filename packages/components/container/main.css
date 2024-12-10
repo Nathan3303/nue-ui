@@ -1,0 +1,43 @@
+/* variables */
+
+.nue-main {
+    --nue-main-padding: var(--nue-ui-primary-padding);
+    --nue-main-border-color: var(--nue-ui-border-color);
+    --nue-main-content-width: unset;
+}
+
+/* original */
+
+.nue-main {
+    grid-area: main;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+
+    .nue-main__content {
+        flex: 1 1 auto;
+        overflow: auto;
+        box-sizing: border-box;
+        position: relative;
+        width: var(--nue-main-content-width);
+        height: 100%;
+
+        .nue-main__aside-visible-controller-bar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: var(--nue-main-padding);
+            border-bottom: 1px solid var(--nue-ui-border-color);
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            z-index: 1;
+        }
+
+        &:has(> .nue-container--inner) {
+            padding: 0;
+        }
+    }
+}

@@ -20,11 +20,11 @@
     box-sizing: border-box;
     animation: var(--wrapper-animation-name) var(--animation-rest-property);
     z-index: 5;
-}
 
-.nue-confirm-wrapper[data-closing='true'] {
-    --wrapper-animation-name: fade-out;
-    --animation-name: slide-out-to-top;
+    &[data-closing='true'] {
+        --wrapper-animation-name: fade-out;
+        --animation-name: slide-out-to-top;
+    }
 }
 
 .nue-confirm {
@@ -37,28 +37,28 @@
     background-color: #fff;
     gap: 16px;
     animation: var(--animation-name) var(--animation-rest-property);
-}
 
-.nue-confirm__header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    .nue-confirm__header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-.nue-confirm__content {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    flex: auto;
-    margin-bottom: 12px;
-}
+    .nue-confirm__content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        flex: auto;
+        margin-bottom: 12px;
+    }
 
-.nue-confirm__footer {
-    width: 100%;
-    display: flex;
-    align-self: center;
-    justify-content: end;
-    gap: 8px;
+    .nue-confirm__footer {
+        width: 100%;
+        display: flex;
+        align-self: center;
+        justify-content: end;
+        gap: 8px;
+    }
 }

@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted } from 'vue';
-import type { InfiniteScrollPropsType, InfiniteScrollEmitsType } from './types';
+import { computed, onMounted, ref } from 'vue';
+import type { InfiniteScrollEmitsType, InfiniteScrollPropsType } from './types';
 import './infinite-scroll.css';
 
 defineOptions({ name: 'NueInfiniteScroll' });

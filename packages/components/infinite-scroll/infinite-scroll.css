@@ -1,9 +1,9 @@
 /* variables */
 
 .infinite-scroll-wrapper {
-    --font-color: var(--primary-text-color);
-    --font-size: var(--primary-font-size);
-    --font-weight: var(--primary-font-weight);
+    --font-color: var(--nue-ui-primary-text-color);
+    --font-size: var(--nue-ui-primary-font-size);
+    --font-weight: var(--nue-ui-primary-font-weight);
     --height: 100%;
     --trigger-bar-height: 50px;
 }
@@ -14,40 +14,40 @@
     width: 100%;
     height: var(--height);
     overflow: auto;
-}
 
-.infinite-scroll__trigger-bar {
-    position: absolute;
-    width: 100%;
-    height: var(--trigger-bar-height);
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-}
+    .infinite-scroll {
+        position: relative;
+        width: 100%;
 
-.infinite-scroll__loading,
-.infinite-scroll__disabled {
-    color: var(--font-color);
-    font-size: var(--font-size);
-    font-weight: var(--font-weight);
+        .infinite-scroll__trigger-bar {
+            position: absolute;
+            width: 100%;
+            height: var(--trigger-bar-height);
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            z-index: -1;
+        }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    height: calc(var(--font-size) * 3);
+        .infinite-scroll__loading,
+        .infinite-scroll__disabled {
+            color: var(--font-color);
+            font-size: var(--font-size);
+            font-weight: var(--font-weight);
 
-    border-radius: 12px;
-    margin-top: 16px;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            height: calc(var(--font-size) * 3);
 
-.infinite-scroll {
-    position: relative;
-    width: 100%;
-}
+            border-radius: 12px;
+            margin-top: 16px;
+        }
 
-.infinite-scroll .infinite-scroll__disabled {
-    color: var(--disabled-color);
-    background-color: var(--primary-color-200);
+        .infinite-scroll__disabled {
+            color: var(--nue-ui-disabled-color);
+            background-color: var(--nue-ui-primary-color-200);
+        }
+    }
 }

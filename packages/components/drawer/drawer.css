@@ -8,20 +8,20 @@
     overflow: hidden;
 }
 
-.nue-drawer-wrapper .nue-drawer {
+.nue-drawer {
     position: absolute;
     background-color: #fff;
     transition: all 0.3s ease;
-}
 
-.nue-drawer__title {
-    flex: 1 1 auto;
-}
+    .nue-drawer__header {
+        height: auto;
+        padding: 16px;
+        box-sizing: border-box;
 
-.nue-drawer__header {
-    height: auto;
-    padding: 16px;
-    box-sizing: border-box;
+        .nue-drawer__title {
+            flex: 1 1 auto;
+        }
+    }
 }
 
 .nue-drawer-fade-enter-active,

@@ -7,8 +7,8 @@
 </template>
 
 <style scoped>
-    .nue-container {
-        border: 1px solid var(--divider-color);
-        border-radius: var(--primary-radius);
-    }
+.nue-container {
+    border: 1px solid var(--nue-ui-divider-color);
+    border-radius: var(--nue-ui-primary-radius);
+}
 </style>

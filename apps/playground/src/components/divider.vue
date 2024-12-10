@@ -1,22 +1,22 @@
 <template>
     <nue-div vertical>
         <nue-div align="center">
-            <nue-button theme="icon-only" icon="arrow-left" />
+            <nue-button icon="arrow-left" theme="icon-only" />
             <nue-divider direction="vertical" />
             <nue-avatar
+                size="36px"
                 src="https://placehold.co/64x64?text=C"
                 theme="rounded"
-                size="36px"
             />
             <nue-text style="margin-right: auto">Custom Title</nue-text>
             <nue-divider direction="vertical" />
-            <nue-button theme="icon-only" icon="search" />
+            <nue-button icon="search" theme="icon-only" />
         </nue-div>
         <nue-div vertical>
             <nue-divider
-                text="Lorem"
-                border-width="2px"
                 border-color="#34a853"
+                border-width="2px"
+                text="Lorem"
             />
             <nue-text size="small">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -25,9 +25,9 @@
                 perspiciatis. Nostrum veniam iure accusamus repellat!
             </nue-text>
             <nue-divider
-                text="随机文字"
-                border-width="2px"
                 border-type="dashed"
+                border-width="2px"
+                text="随机文字"
             />
             <nue-text size="small">
                 你上辈子一定是碳酸饮料吧，为什么我一看到你就能开心的冒泡？
@@ -36,6 +36,6 @@
     </nue-div>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup></script>
 
 <style scoped></style>

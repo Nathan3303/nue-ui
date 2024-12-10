@@ -28,23 +28,18 @@
 import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import type { NueHeaderProps } from './types';
+import './header.css';
 
 defineOptions({ name: 'NueHeader' });
 const props = defineProps<NueHeaderProps>();
 
-const classes = computed(() => {
-    const { theme } = props;
-    const prefix = 'nue-header';
-    let list: string[] = [prefix];
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    return list;
-});
+const classes = computed(() => [
+    'nue-header',
+    ...parseTheme(props.theme, 'nue-header')
+]);
 
-const styles = computed(() => {
-    const { width, height } = props;
-    return {
-        '--nue-header-width': width,
-        '--nue-header-height': height
-    };
-});
+const styles = computed(() => ({
+    '--nue-header-width': props.width,
+    '--nue-header-height': props.height
+}));
 </script>

@@ -8,12 +8,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, onMounted, onBeforeUnmount } from 'vue';
+import { computed, inject, onBeforeUnmount, onMounted } from 'vue';
 import NueIcon from '../icon/icon.vue';
 import { generateId, parseTheme } from '@nue-ui/utils';
 import { isFunction } from 'lodash-es';
 import { CHECKBOX_GROUP_CTX_KEY } from '../checkbox-group/constants';
-import type { NueCheckboxProps, NueCheckboxEmits } from './types';
+import type { NueCheckboxEmits, NueCheckboxProps } from './types';
 import type { NueCheckboxGroupContext } from '../checkbox-group/types';
 import './checkbox.css';
 

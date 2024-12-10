@@ -1,0 +1,30 @@
+/* variables */
+
+.nue-header {
+    --nue-header-width: 100%;
+    --nue-header-height: 60px;
+}
+
+/* original */
+
+.nue-header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    width: var(--nue-header-width);
+    height: var(--nue-header-height);
+    flex: none;
+
+    .nue-header__slot {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        overflow: hidden;
+        flex: none;
+    }
+
+    .nue-header__navigators {
+        flex: auto;
+    }
+}

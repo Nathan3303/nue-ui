@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onBeforeUnmount, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { registerPopupWrapper, unregisterPopupWrapper } from './popup-wrapper';
 import './popup-wrapper.css';
 

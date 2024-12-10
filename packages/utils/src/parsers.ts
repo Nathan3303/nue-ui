@@ -2,20 +2,19 @@ import { isString } from 'lodash-es';
 import type { ObjectLikeThemes } from './types';
 
 export function parseTheme(
-    value: string | string[] | ObjectLikeThemes,
+    value: string | string[] | ObjectLikeThemes | undefined,
     prefix: string
 ): string[] {
-    const parseResult: string[] = [];
-    let values: string[] = [];
+    if (!value) return [];
+    let themeNames: string[];
     if (isString(value)) {
-        values = (value as string).trim().split(',');
+        themeNames = value.trim().split(',');
     } else if (Array.isArray(value)) {
-        values = value as string[];
+        themeNames = value;
     } else {
-        values = Object.keys(value).filter(key => value[key]);
+        themeNames = Object.keys(value).filter(key => value[key]);
     }
-    values = values.map(item => `${prefix}--${item.trim()}`);
-    return parseResult.concat(values);
+    return themeNames.map(item => `${prefix}--${item.trim()}`);
 }
 
 export function parseFlex(value: string): string {

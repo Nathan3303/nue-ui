@@ -3,7 +3,7 @@
         <img
             v-if="src && !loadError"
             :src="src"
-            alt="NueAvatar"
+            alt="N"
             class="nue-avatar__image"
             @error="handleError($event)"
         />
@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { computed, ref } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-import type { AvatarProps, AvatarEmits } from './types';
+import type { AvatarEmits, AvatarProps } from './types';
 import { NueIcon } from '../icon';
 import './avatar.css';
 
@@ -26,14 +26,11 @@ const props = withDefaults(defineProps<AvatarProps>(), {});
 
 const loadError = ref(false);
 
-const styles = computed(() => {
-    const { size, fit, rounded } = props;
-    return {
-        '--size': size,
-        '--object-fit': fit,
-        '--border-radius': rounded ? '50%' : void 0
-    };
-});
+const styles = computed(() => ({
+    '--size': props.size,
+    '--object-fit': props.fit,
+    '--border-radius': props.rounded ? '50%' : void 0
+}));
 
 const classes = computed(() => {
     const { theme } = props;

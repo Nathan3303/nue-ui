@@ -34,15 +34,15 @@
 
 <script lang="ts" setup>
 import {
-    ref,
     computed,
     nextTick,
-    watch,
     onBeforeUnmount,
-    onMounted
+    onMounted,
+    ref,
+    watch
 } from 'vue';
-import type { TextareaPropsType, TextareaEmitsType } from './types';
-import { parseTheme, debounce } from '@nue-ui/utils';
+import type { TextareaEmitsType, TextareaPropsType } from './types';
+import { debounce, parseTheme } from '@nue-ui/utils';
 import wordCounter from './word-counter.vue';
 import './textarea.css';
 

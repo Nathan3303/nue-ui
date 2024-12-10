@@ -1,20 +1,18 @@
 <template>
-    <nue-div>
-        <nue-checkbox theme="custom" v-model="state" label="带主题的复选框" />
-    </nue-div>
+    <nue-checkbox v-model="state" label="带主题的复选框" theme="custom" />
 </template>
 
-<script setup lang="ts">
-    import { ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-    const state = ref(false);
+const state = ref(false);
 </script>
 
 <style scoped>
-    .nue-checkbox--custom {
-        &.nue-checkbox--checked {
-            --check-icon-color: var(--primary-color-a200);
-            --check-label-color: var(--primary-color-a200);
-        }
+.nue-checkbox--custom {
+    &.nue-checkbox--checked {
+        --check-icon-color: #448aff;
+        --check-label-color: #448aff;
     }
+}
 </style>

@@ -3,9 +3,6 @@
 .nue-badge {
     --color: white;
     --font-size: 12px;
-    --font-weight: var(--mainly-font-weight);
-    --font-family: var(--mainly-font-family);
-
     --background-color: #e96b36;
     --border-color: #e35011;
 }
@@ -16,55 +13,50 @@
     -webkit-user-select: none;
     user-select: none;
     transition: all 0.16s ease-in;
-
     display: flex;
     align-items: center;
     position: relative;
-}
 
-.nue-badge > sup {
-    position: absolute;
-    right: calc(0px - 12px);
-    bottom: calc(100% - 8px);
-}
+    & > sup {
+        position: absolute;
+        right: calc(0px - 12px);
+        bottom: calc(100% - 8px);
+    }
 
-.nue-badge__content {
-    color: var(--color);
-    font-size: var(--font-size);
-    font-weight: var(--font-weight);
-    font-family: var(--font-family);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: var(--font-size);
-    padding: 4px 6px;
-    border: 1px solid var(--border-color);
-    background-color: var(--background-color);
-    border-radius: var(--primary-radius);
-
-    z-index: 1;
-    transform: scale(0.88);
+    .nue-badge__content {
+        color: var(--color);
+        font-size: var(--font-size);
+        font-weight: var(--font-weight);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: var(--font-size);
+        padding: 4px 6px;
+        border: 1px solid var(--border-color);
+        background-color: var(--background-color);
+        border-radius: var(--nue-ui-primary-radius);
+        transform: scale(0.88);
+    }
 }
 
 /* dot */
 
 .nue-badge--dot {
-    padding: 0px;
-}
+    padding: 0;
 
-.nue-badge--dot > sup {
-    left: calc(100% - 9px);
-    bottom: calc(100% - 9px);
-}
+    & > sup {
+        left: calc(100% - 9px);
+        bottom: calc(100% - 9px);
+    }
 
-.nue-badge--dot .nue-badge__content {
-    aspect-ratio: 1;
-    width: 14px;
-    padding: 0px;
-    border-radius: 99px;
-    border: 2px solid white;
-    transform: scale(0.8);
+    .nue-badge__content {
+        aspect-ratio: 1;
+        width: 14px;
+        padding: 0;
+        border-radius: 99px;
+        border: 2px solid white;
+        transform: scale(0.8);
+    }
 }
 
 /* inner */
