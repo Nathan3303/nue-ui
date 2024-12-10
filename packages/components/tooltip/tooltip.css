@@ -2,7 +2,7 @@
 
 .nue-tooltip {
     --height: 24px;
-    --font-size: var(--text-sm);
+    --font-size: var(--nue-ui-text-default);
     --animation-time: 0.16s;
     --triangle-display: none;
 }
@@ -18,145 +18,139 @@
     max-width: 36vw;
     padding: 6px 12px;
     position: absolute;
-    background-color: var(--primary-color-900);
-    border-radius: var(--primary-radius);
-}
+    background-color: var(--nue-ui-primary-color-900);
+    border-radius: var(--nue-ui-primary-radius);
 
-.nue-tooltip__padding {
-    position: absolute;
-}
+    .nue-tooltip__padding {
+        position: absolute;
+    }
 
-.nue-tooltip__text {
-    color: var(--primary-color-50);
-    font-size: var(--font-size);
-    font-weight: var(--primary-font-weight);
-}
+    .nue-tooltip__text {
+        color: var(--nue-ui-primary-color-100);
+        font-size: var(--font-size);
+        font-weight: var(--nue-ui-primary-font-weight);
+    }
 
-/* Size */
+    &.nue-tooltip--small {
+        padding: 4px 8px;
+        --font-size: var(--nue-ui-text-sm);
+    }
 
-.nue-tooltip.nue-tooltip--small {
-    padding: 4px 8px;
-    --font-size: var(--text-xs);
-}
+    &.nue-tooltip--large {
+        padding: 8px 16px;
+        --font-size: var(--nue-ui-text-md);
+    }
 
-.nue-tooltip.nue-tooltip--large {
-    padding: 8px 16px;
-    --font-size: var(--text-md);
-}
+    &[data-direction='top'] {
+        animation: slide-fade-top var(--animation-time) ease forwards;
 
-/* placement */
+        .nue-tooltip__padding {
+            width: 100%;
+            height: 8px;
+            top: 100%;
+        }
+    }
 
-.nue-tooltip[data-direction='top'] {
-    animation: slide-fade-top var(--animation-time) ease forwards;
-}
+    &[data-direction='bottom'] {
+        animation: slide-fade-bottom var(--animation-time) ease forwards;
 
-.nue-tooltip[data-direction='top'] .nue-tooltip__padding {
-    width: 100%;
-    height: 8px;
-    top: 100%;
-}
+        .nue-tooltip__padding {
+            width: 100%;
+            height: 8px;
+            bottom: 100%;
+        }
+    }
 
-.nue-tooltip[data-direction='bottom'] {
-    animation: slide-fade-bottom var(--animation-time) ease forwards;
-}
+    &[data-direction='left'] {
+        animation: slide-fade-left var(--animation-time) ease forwards;
 
-.nue-tooltip[data-direction='bottom'] .nue-tooltip__padding {
-    width: 100%;
-    height: 8px;
-    bottom: 100%;
-}
+        .nue-tooltip__padding {
+            width: 8px;
+            height: 100%;
+            left: 100%;
+        }
+    }
 
-.nue-tooltip[data-direction='left'] {
-    animation: slide-fade-left var(--animation-time) ease forwards;
-}
+    &[data-direction='right'] {
+        animation: slide-fade-right var(--animation-time) ease forwards;
 
-.nue-tooltip[data-direction='left'] .nue-tooltip__padding {
-    width: 8px;
-    height: 100%;
-    left: 100%;
-}
+        .nue-tooltip__padding {
+            width: 8px;
+            height: 100%;
+            right: 100%;
+        }
+    }
 
-.nue-tooltip[data-direction='right'] {
-    animation: slide-fade-right var(--animation-time) ease forwards;
-}
+    &::after {
+        content: '';
+        display: var(--triangle-display);
+        position: absolute;
+        aspect-ratio: 1;
+        width: 8px;
+        height: 8px;
+        background: inherit;
+        transform-origin: center;
+        transform: rotate(45deg);
+        border-radius: 1px;
+    }
 
-.nue-tooltip[data-direction='right'] .nue-tooltip__padding {
-    width: 8px;
-    height: 100%;
-    right: 100%;
-}
+    &.nue-tooltip--top-start::after {
+        top: calc(100% - 4px);
+        left: calc(16px - 4px);
+    }
 
-/* Little triangle */
+    &.nue-tooltip--top-center::after {
+        top: calc(100% - 4px);
+        left: calc(50% - 4px);
+    }
 
-.nue-tooltip::after {
-    content: '';
-    display: var(--triangle-display);
-    position: absolute;
-    aspect-ratio: 1;
-    width: 8px;
-    height: 8px;
-    background: inherit;
-    transform-origin: center;
-    transform: rotate(45deg);
-    border-radius: 1px;
-}
+    &.nue-tooltip--top-end::after {
+        top: calc(100% - 4px);
+        right: calc(16px - 4px);
+    }
 
-.nue-tooltip.nue-tooltip--top-start::after {
-    top: calc(100% - 4px);
-    left: calc(16px - 4px);
-}
+    &.nue-tooltip--bottom-start::after {
+        top: calc(0px - 4px);
+        left: calc(16px - 4px);
+    }
 
-.nue-tooltip.nue-tooltip--top-center::after {
-    top: calc(100% - 4px);
-    left: calc(50% - 4px);
-}
+    &.nue-tooltip--bottom-center::after {
+        top: calc(0px - 4px);
+        left: calc(50% - 4px);
+    }
 
-.nue-tooltip.nue-tooltip--top-end::after {
-    top: calc(100% - 4px);
-    right: calc(16px - 4px);
-}
+    &.nue-tooltip--bottom-end::after {
+        top: calc(0px - 4px);
+        right: calc(16px - 4px);
+    }
 
-.nue-tooltip.nue-tooltip--bottom-start::after {
-    top: calc(0px - 4px);
-    left: calc(16px - 4px);
-}
+    &.nue-tooltip--left-start::after {
+        top: calc(16px - 4px);
+        right: calc(0px - 4px);
+    }
 
-.nue-tooltip.nue-tooltip--bottom-center::after {
-    top: calc(0px - 4px);
-    left: calc(50% - 4px);
-}
+    &.nue-tooltip--left-center::after {
+        top: calc(50% - 4px);
+        right: calc(0px - 4px);
+    }
 
-.nue-tooltip.nue-tooltip--bottom-end::after {
-    top: calc(0px - 4px);
-    right: calc(16px - 4px);
-}
+    &.nue-tooltip--left-end::after {
+        bottom: calc(16px - 4px);
+        right: calc(0px - 4px);
+    }
 
-.nue-tooltip.nue-tooltip--left-start::after {
-    top: calc(16px - 4px);
-    right: calc(0px - 4px);
-}
+    &.nue-tooltip--right-start::after {
+        top: calc(16px - 4px);
+        right: calc(100% + 4px);
+    }
 
-.nue-tooltip.nue-tooltip--left-center::after {
-    top: calc(50% - 4px);
-    right: calc(0px - 4px);
-}
+    &.nue-tooltip--right-center::after {
+        top: calc(50% - 4px);
+        right: calc(100% + 4px);
+    }
 
-.nue-tooltip.nue-tooltip--left-end::after {
-    bottom: calc(16px - 4px);
-    right: calc(0px - 4px);
-}
-
-.nue-tooltip.nue-tooltip--right-start::after {
-    top: calc(16px - 4px);
-    right: calc(100% + 4px);
-}
-
-.nue-tooltip.nue-tooltip--right-center::after {
-    top: calc(50% - 4px);
-    right: calc(100% + 4px);
-}
-
-.nue-tooltip.nue-tooltip--right-end::after {
-    bottom: calc(16px - 4px);
-    right: calc(100% + 4px);
+    &.nue-tooltip--right-end::after {
+        bottom: calc(16px - 4px);
+        right: calc(100% + 4px);
+    }
 }

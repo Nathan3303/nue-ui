@@ -1,4 +1,5 @@
 import {
+    NueAside,
     NueAvatar,
     NueBadge,
     NueButton,
@@ -36,6 +37,7 @@ import {
 import type { Plugin } from 'vue';
 
 export default [
+    NueAside,
     NueAvatar,
     NueBadge,
     NueButton,

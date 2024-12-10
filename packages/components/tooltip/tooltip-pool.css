@@ -5,10 +5,10 @@
     left: 0;
     width: 0;
     height: 0;
-}
 
-.nue-tooltip-pool--actived {
-    width: 0;
-    height: 0;
-    z-index: 30;
+    &.nue-tooltip-pool--actived {
+        width: 0;
+        height: 0;
+        z-index: 30;
+    }
 }

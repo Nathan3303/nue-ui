@@ -37,14 +37,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, onMounted, onUpdated, inject, computed } from 'vue';
+import { computed, inject, onMounted, onUpdated, ref, watch } from 'vue';
 import { COLLAPSE_CONTEXT_KEY } from './constants';
-import NueButton from '../button/button.vue';
+import { NueButton, NueText } from '..';
 import { generateId } from '@nue-ui/utils';
 import type {
     CollapseContextType,
-    CollapseItemPropsType,
-    CollapseItemName
+    CollapseItemName,
+    CollapseItemPropsType
 } from './types';
 
 defineOptions({ name: 'NueCollapseItem' });

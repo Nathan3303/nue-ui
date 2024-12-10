@@ -1,73 +1,58 @@
 <template>
-    <nue-container>
-        <nue-header height="72px">
-            <template #logo>NueUI 组件库 PlayGround</template>
+    <nue-container class="app-view">
+        <nue-header>
+            <template #logo>
+                <nue-text size="var(--nue-ui-text-lg)">
+                    NueUI 组件库 PlayGround
+                </nue-text>
+            </template>
         </nue-header>
-        <nue-main
-            aside-width="200px"
-            :allow-resize-aside="false"
-            outline-width="200px"
-        >
+        <nue-main outline-width="200px" responsive>
             <template #aside>
-                <nue-link theme="btnlike" route="/basic">
-                    Basic 基础组件
-                </nue-link>
-                <nue-link theme="btnlike" route="/form">Form 表单组件</nue-link>
-                <nue-link theme="btnlike" route="/data">
-                    Data 数据展示组件
-                </nue-link>
-                <nue-link theme="btnlike" route="/navigation">
-                    Navigation 导航组件
-                </nue-link>
-                <nue-link theme="btnlike" route="/feedback">
-                    Feedback 反馈组件
-                </nue-link>
-                <nue-link theme="btnlike" route="/others">
-                    Others 其他组件
-                </nue-link>
+                <nue-collapse
+                    v-model="collapseValue"
+                    class="app-view__aside-collapse-menu"
+                    theme="menu"
+                >
+                    <nue-collapse-item
+                        v-for="(item, idx) in collapseItemsData"
+                        :key="idx"
+                        :name="item.name"
+                        :title="item.title"
+                    >
+                        <nue-div
+                            class="app-view__aside-collapse-menu__item-main"
+                        >
+                            <nue-link
+                                v-for="(link, idx) in item.links"
+                                :key="idx"
+                                :route="link.route"
+                            >
+                                {{ link.text }}
+                            </nue-link>
+                        </nue-div>
+                    </nue-collapse-item>
+                </nue-collapse>
             </template>
             <template #content>
-                <router-view></router-view>
+                <router-view />
             </template>
-            <template #outline>
-                <div id="outline"></div>
-            </template>
+            <template #outline></template>
         </nue-main>
     </nue-container>
 </template>
 
-<style scoped>
-    .nue-main {
-        --aside-gap: 8px;
+<script lang="ts" setup>
+import { shallowRef } from 'vue';
+import { collapseItemsData } from './constants.ts';
+import './main.css';
 
-        &:deep(.view-container) {
-            display: flex;
-            flex-direction: column;
-            gap: 48px;
-        }
-    }
-</style>
-
-<style>
-    .outline-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-
-        h3 {
-            margin: 16px 0px;
-        }
-
-        a {
-            padding: 4px 0;
-            font-size: 12px;
-            color: gray;
-
-            &:hover {
-                text-decoration: underline;
-                color: black;
-                cursor: pointer;
-            }
-        }
-    }
-</style>
+const collapseValue = shallowRef([
+    'basic',
+    'data',
+    'navigation',
+    'form',
+    'feedback',
+    'others'
+]);
+</script>

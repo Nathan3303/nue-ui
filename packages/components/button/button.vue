@@ -13,21 +13,22 @@
             :spin="loading"
             class="nue-button__icon"
         />
-        <slot name="prepend" />
         <div v-if="$slots.default" class="nue-button__text">
             <slot />
         </div>
-        <slot name="append" />
+        <div v-if="$slots.append" class="nue-button__append">
+            <slot name="append" />
+        </div>
     </button>
 </template>
 
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-import type { ButtonPropsType, ButtonEmitsType } from './types';
-import type { ButtonGroupCtxType } from '../button-group';
-import { parseTheme, parseFlex, throttle } from '@nue-ui/utils';
+import { parseFlex, parseTheme, throttle } from '@nue-ui/utils';
 import { BUTTON_GROUP_CTX_KEY } from '../button-group/constants';
-import { NueIcon } from '../icon';
+import { NueIcon } from '..';
+import type { ButtonEmitsType, ButtonPropsType } from './types';
+import type { ButtonGroupCtxType } from '../button-group';
 import './button.css';
 
 defineOptions({ name: 'NueButton' });
@@ -51,9 +52,9 @@ const disabled = computed(() => {
 });
 
 const styles = computed(() => {
-    const { flex, align } = props;
+    const { flex, alignment } = props;
     return {
-        '--align-y': align,
+        '--alignment': alignment,
         '--flex': flex && parseFlex(flex)
     };
 });

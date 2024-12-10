@@ -1,15 +1,19 @@
+/* variables */
+
 .nue-switch {
     --height: 24px;
     --width: auto;
     --min-width: calc(var(--height) * 2);
     --state-width: auto;
     --animation-time: 0.16s;
-    --background-color: var(--primary-color-300);
-    --background-active-color: var(--primary-color-800);
+    --background-color: var(--nue-ui-primary-color-300);
+    --background-active-color: var(--nue-ui-primary-color-800);
     --circle-size: calc(var(--height) - 4px);
-    --circle-color: var(--primary-color-50);
-    --circle-active-color: var(--primary-color-50);
+    --circle-color: var(--nue-ui-primary-color-100);
+    --circle-active-color: var(--nue-ui-primary-color-100);
 }
+
+/* original */
 
 .nue-switch {
     width: var(--width);
@@ -21,71 +25,73 @@
     padding: 2px;
     transition: all var(--animation-time) ease;
     cursor: pointer;
-    box-shadow: var(--secondary-shadow);
+    box-shadow: var(--nue-ui-secondary-shadow);
     overflow: hidden;
     display: flex;
     align-items: center;
     -webkit-user-select: none;
     user-select: none;
-}
 
-.nue-switch__text {
-    transition: all var(--animation-time) ease;
-    transform: translateX(0);
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: var(--text-xs);
-    text-align: center;
-    flex: auto;
-    color: var(--background-active-color);
-    padding: 0 8px 0 4px;
-}
+    .nue-switch__circle {
+        width: var(--circle-size);
+        height: var(--circle-size);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        flex: none;
+        background-color: var(--circle-color);
+        transition: all var(--animation-time) ease;
+        box-shadow: var(--nue-ui-secondary-shadow);
 
-.nue-switch__circle {
-    width: var(--circle-size);
-    height: var(--circle-size);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    flex: none;
-    background-color: var(--circle-color);
-    transition: all var(--animation-time) ease;
-    box-shadow: var(--secondary-shadow);
-}
+        .nue-switch__loading-icon {
+            font-size: calc(var(--circle-size) * 0.7);
+            color: var(--background-active-color);
+        }
+    }
 
-.nue-switch__circle .nue-switch__loading-icon {
-    font-size: calc(var(--circle-size) * 0.7);
-    color: var(--background-active-color);
-}
+    .nue-switch__text {
+        transition: all var(--animation-time) ease;
+        transform: translateX(0);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: var(--text-xs);
+        text-align: center;
+        flex: auto;
+        color: var(--background-active-color);
+        padding: 0 8px 0 4px;
+    }
 
-.nue-switch.nue-switch--disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-}
+    &.nue-switch--disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
 
-.nue-switch.nue-switch--small {
-    --height: 18px;
-    font-size: var(--text-xxs);
-}
+    &.nue-switch--small {
+        --height: 18px;
+        font-size: var(--nue-ui-text-xxs);
+    }
 
-.nue-switch.nue-switch--large {
-    --height: 30px;
-    font-size: var(--text-sm);
-}
+    &.nue-switch--large {
+        --height: 30px;
+        font-size: var(--nue-ui-text-sm);
+    }
 
-.nue-switch--actived {
-    background-color: var(--background-active-color);
-}
+    &.nue-switch--actived {
+        background-color: var(--background-active-color);
 
-.nue-switch--actived .nue-switch__text {
-    padding: 0 4px 0 8px;
-    transform: translateX(calc(3px - var(--height)));
-    color: white;
-}
+        .nue-switch__circle {
+            transform: translateX(
+                calc(var(--state-width) - var(--circle-size) - 4px)
+            );
+            background-color: var(--circle-active-color);
+        }
 
-.nue-switch--actived .nue-switch__circle {
-    transform: translateX(calc(var(--state-width) - var(--circle-size) - 4px));
-    background-color: var(--circle-active-color);
+        .nue-switch__text {
+            padding: 0 4px 0 8px;
+            transform: translateX(calc(3px - var(--height)));
+            color: white;
+        }
+    }
 }

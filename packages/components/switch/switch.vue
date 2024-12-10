@@ -15,11 +15,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import { isFunction } from 'lodash-es';
 import { NueIcon } from '../icon';
-import type { NueSwitchProps, NueSwitchEmits } from './types';
+import type { NueSwitchEmits, NueSwitchProps } from './types';
 import './switch.css';
 
 defineOptions({ name: 'NueSwitch' });

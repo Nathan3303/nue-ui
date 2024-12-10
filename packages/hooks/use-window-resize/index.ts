@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted } from 'vue';
-import { generateId, debounce } from '@nue-ui/utils';
+import { debounce, generateId } from '@nue-ui/utils';
 
 type Callback = (e: Event) => void;
 
@@ -14,8 +14,6 @@ const debouncedCaller = debounce(e => {
 }, 100);
 
 const resizeHandler = (e: unknown) => debouncedCaller(e as Event);
-
-window.addEventListener('resize', resizeHandler, false);
 
 export const useWindowResize = () => {
     const cbSet: Set<Callback> | null = new Set();
@@ -32,6 +30,7 @@ export const useWindowResize = () => {
     onMounted(() => {
         if (cbSet.size === 0) return;
         cbPool.set(poolId, cbSet);
+        window.addEventListener('resize', resizeHandler, false);
     });
 
     onUnmounted(() => {

@@ -21,13 +21,13 @@
                 viewBox="0 0 100 100"
             >
                 <circle
-                    class="nue-progress__outer-path"
+                    class="nue-progress--circle__circle nue-progress__outer-path"
                     cx="50"
                     cy="50"
                     r="50"
                 ></circle>
                 <circle
-                    class="nue-progress__inner-path"
+                    class="nue-progress--circle__circle nue-progress__inner-path"
                     cx="50"
                     cy="50"
                     r="50"
@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<ProgressProps>(), {
     showInnerText: false,
     hideText: false,
     scale: 1,
-    color: 'var(--primary-color-600)'
+    color: 'var(--nue-ui-primary-color-600)'
 });
 const emit = defineEmits<ProgressEmits>();
 

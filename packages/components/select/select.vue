@@ -40,14 +40,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, provide, onMounted } from 'vue';
-import { NueDropdown, NueButton, NueIcon, NueText } from '../index';
+import { computed, onMounted, provide, ref, watch } from 'vue';
+import { NueButton, NueDropdown, NueIcon, NueText } from '../index';
 import { parseTheme } from '@nue-ui/utils';
 import type {
-    SelectProps,
+    SelectContext,
     SelectEmits,
     SelectOption,
-    SelectContext
+    SelectProps
 } from './types';
 
 defineOptions({ name: 'NueSelect' });

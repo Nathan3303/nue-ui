@@ -6,44 +6,25 @@
                 <li class="nue-dropdown-item">下拉列表项 2</li>
             </template>
         </nue-dropdown>
-        <nue-dropdown trigger-text="空下拉列表"></nue-dropdown>
-        <nue-dropdown trigger-text="禁用状态" disabled></nue-dropdown>
-    </nue-div>
-    <nue-div align="center">
-        <nue-dropdown trigger-text="小型下拉框" size="small">
-            <template #dropdown>
-                <li class="nue-dropdown-item">下拉列表项 1</li>
-                <li class="nue-dropdown-item">下拉列表项 2</li>
-            </template>
-        </nue-dropdown>
-        <nue-dropdown trigger-text="大型下拉框" size="large">
-            <template #dropdown>
-                <li class="nue-dropdown-item">下拉列表项 1</li>
-                <li class="nue-dropdown-item">下拉列表项 2</li>
-            </template>
-        </nue-dropdown>
-    </nue-div>
-    <nue-div align="center">
-        <nue-dropdown trigger-text="位置：上-中" placement="top-center">
+        <nue-dropdown disabled trigger-text="禁用状态"></nue-dropdown>
+        <nue-dropdown placement="top-center" trigger-text="位置：左对齐">
             <template #dropdown>
                 <li class="nue-dropdown-item">下拉列表项 1（长文本）</li>
             </template>
         </nue-dropdown>
-        <nue-dropdown trigger-text="位置：下-中" placement="bottom-center">
+        <nue-dropdown placement="bottom-center" trigger-text="位置：居中">
             <template #dropdown>
                 <li class="nue-dropdown-item">下拉列表项 1（长文本）</li>
             </template>
         </nue-dropdown>
-        <nue-dropdown trigger-text="位置：下-右" placement="bottom-end">
+        <nue-dropdown placement="bottom-end" trigger-text="位置：右对齐">
             <template #dropdown>
                 <li class="nue-dropdown-item">下拉列表项 1（长文本）</li>
             </template>
         </nue-dropdown>
-    </nue-div>
-    <nue-div align="center">
         <nue-dropdown
-            trigger-text="点击打开（选择后关闭）"
             hide-on-clicked
+            trigger-text="点击打开（选择后关闭）"
             @execute="handleExecute"
         >
             <template #dropdown>
@@ -55,8 +36,8 @@
     </nue-div>
 </template>
 
-<script setup lang="ts">
-    const handleExecute = (id: string) => {
-        console.log(id);
-    };
+<script lang="ts" setup>
+const handleExecute = (id: string) => {
+    console.log(id);
+};
 </script>

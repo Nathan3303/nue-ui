@@ -1,0 +1,17 @@
+/* variables */
+
+.nue-footer {
+    --nue-footer-width: 100%;
+    --nue-footer-height: 60px;
+}
+
+/* original */
+
+.nue-footer {
+    grid-area: footer;
+    display: flex;
+    align-items: center;
+    width: var(--nue-footer-width);
+    height: var(--nue-footer-height);
+    box-sizing: border-box;
+}

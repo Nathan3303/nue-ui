@@ -6,8 +6,8 @@
     top: 0;
     left: 0;
     z-index: -1;
-}
 
-.nue-popup-wrapper[data-actived='true'] {
-    z-index: 99;
+    &[data-actived='true'] {
+        z-index: 99;
+    }
 }

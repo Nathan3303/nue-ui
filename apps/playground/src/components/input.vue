@@ -1,82 +1,55 @@
 <template>
-    <nue-div vertical align="stretch">
+    <nue-div align="stretch" vertical>
         <nue-input
             v-model="v1"
-            icon="edit"
-            placeholder="文本类型（可清除、带输入计数、最大输入长度为64、防抖时间256ms）"
+            :debounce-time="256"
             clearable
             counter="both"
-            :debounce-time="256"
+            icon="edit"
             maxlength="64"
+            placeholder="文本类型（可清除、带输入计数、最大输入长度为64、防抖时间256ms）"
         />
-        <nue-div>
-            <nue-input
-                v-model="password"
-                icon="lock"
-                type="password"
-                placeholder="密码类型（可清除、允许查看密码）"
-                clearable
-                allow-show-password
-                style="flex: auto"
-            />
-            <nue-input placeholder="禁用状态" disabled style="flex: auto" />
-        </nue-div>
-        <nue-div align="center">
-            <nue-input
-                theme="noshape"
-                placeholder="无边框主题"
-                v-model="v2"
-                style="flex: auto"
-            />
-            <nue-input
-                size="small"
-                placeholder="小型输入框"
-                v-model="v2"
-                icon="search"
-                style="flex: auto"
-            />
-            <nue-input
-                icon="search"
-                size="large"
-                placeholder="大型输入框"
-                v-model="v2"
-                style="flex: auto"
-            />
-        </nue-div>
+        <nue-input
+            v-model="password"
+            allow-show-password
+            clearable
+            icon="lock"
+            placeholder="密码类型（可清除、允许查看密码）"
+            style="flex: auto"
+            type="password"
+        />
+        <nue-input disabled placeholder="禁用状态" style="flex: auto" />
         <nue-textarea
             v-model="artical"
-            placeholder="富文本框（最大输入长度512、带输入计数、自动高度、最大输入行数99）"
-            maxlength="512"
-            counter="both"
-            autosize
             :rows="99"
+            autosize
+            counter="both"
+            maxlength="512"
+            placeholder="长度512、行数99、带计数、自动高度"
         />
-        <nue-div>
-            <nue-textarea
-                v-model="description"
-                placeholder="富文本框（允许手动调整高度、无最大行数限制）"
-                resize
-                :rows="0"
-                style="flex: auto"
-            />
-            <nue-textarea
-                disabled
-                v-model="description"
-                placeholder="禁用状态"
-                style="flex: auto"
-            />
-        </nue-div>
+        <nue-textarea
+            v-model="description"
+            :rows="0"
+            placeholder="允许手动调整高度、无行数限制"
+            resize
+            style="flex: auto"
+        />
+        <nue-textarea
+            v-model="description"
+            disabled
+            placeholder="禁用状态"
+            style="flex: auto"
+        />
     </nue-div>
 </template>
 
-<script setup lang="ts">
-    import { ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-    const v1 = ref('');
-    const v2 = ref('');
-    const password = ref('');
-    const description = ref('');
-    const artical = ref('');
+const v1 = ref('');
+const password = ref('');
+const description = ref('');
+const artical = ref('');
 </script>
 
 <style scoped></style>
