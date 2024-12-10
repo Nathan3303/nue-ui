@@ -2,7 +2,7 @@
 
 .nue-tooltip {
     --height: 24px;
-    --font-size: var(--nue-ui-text-sm);
+    --font-size: var(--nue-ui-text-default);
     --animation-time: 0.16s;
     --triangle-display: none;
 }
@@ -33,7 +33,7 @@
 
     &.nue-tooltip--small {
         padding: 4px 8px;
-        --font-size: var(--nue-ui-text-xs);
+        --font-size: var(--nue-ui-text-sm);
     }
 
     &.nue-tooltip--large {

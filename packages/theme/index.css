@@ -69,6 +69,7 @@
     font-family: var(--nue-ui-primary-font-family), sans-serif;
     font-size: var(--nue-ui-primary-font-size);
     font-weight: var(--nue-ui-primary-font-weight);
+    line-height: normal;
     min-width: 720px;
     min-height: 540px;
     aspect-ratio: 4 / 3;

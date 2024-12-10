@@ -5,8 +5,8 @@
     --border-color: transparent;
     --border-radius: var(--nue-ui-primary-radius);
     --box-shadow: none;
-    --check-icon-size: var(--nue-ui-text-md);
-    --check-label-size: var(--nue-ui-text-sm);
+    --check-label-size: var(--nue-ui-text-default);
+    --check-icon-size: calc(var(--check-label-size) + 4px);
     --check-icon-color: var(--nue-ui-primary-color-400);
     --check-label-color: var(--nue-ui-primary-color-700);
     --animation-time: 0.16s;
@@ -24,6 +24,7 @@
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     transition: all var(--animation-time) ease;
+    line-height: normal;
 
     .nue-checkbox__icon {
         --icon-color: var(--check-icon-color);
@@ -45,15 +46,13 @@
 
 .nue-checkbox--small {
     gap: 4px;
-    --check-icon-size: var(--nue-ui-text-sm);
-    --check-label-size: var(--nue-ui-text-xs);
+    --check-label-size: var(--nue-ui-text-sm);
 }
 
 /* large */
 
 .nue-checkbox--large {
     gap: 8px;
-    --check-icon-size: var(--nue-ui-text-lg);
     --check-label-size: var(--nue-ui-text-md);
 }
 

@@ -9,7 +9,7 @@ export interface ButtonPropsType extends GlobalProps {
     loading?: boolean;
     loadingIcon?: IconNameType;
     title?: string;
-    align?: string;
+    alignment?: 'start' | 'center' | 'end';
     flex?: string;
     size?: ButtonSize;
     useThrottle?: boolean;

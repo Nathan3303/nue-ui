@@ -24,7 +24,7 @@
     --border-color: transparent;
     --background-color: transparent;
     --hover-color: var(--nue-ui-primary-color-100);
-    --hover-border-color: transparemt;
+    --hover-border-color: transparent;
     --hover-background-color: var(--nue-ui-primary-color-700);
     --active-color: var(--hover-color);
     --active-border-color: var(--hover-border-color);
@@ -56,7 +56,8 @@
     }
 }
 
-.nue-link--disabled {
+.nue-link--disabled,
+.nue-link--disabled:hover {
     color: var(--disable-color);
     background-color: var(--hover-background-color);
     cursor: not-allowed;
@@ -89,6 +90,7 @@
     font-size: var(--nue-ui-text-default);
     font-weight: var(--nue-ui-primary-font-weight);
     font-family: var(--nue-ui-primary-font-family), sans-serif;
+    line-height: normal;
     --icon-size: var(--nue-ui-text-default);
     --icon-weight: var(--nue-ui-primary-font-weight);
 

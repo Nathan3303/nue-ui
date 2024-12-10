@@ -3,6 +3,7 @@
 .nue-button {
     --vgap: 12px;
     --flex: 0 1 auto;
+    --alignment: start;
     --color: var(--nue-ui-primary-text-color);
     --border-color: var(--nue-ui-border-color);
     --background-color: transparent;
@@ -22,7 +23,7 @@
 .nue-button {
     display: flex;
     align-items: center;
-    justify-content: var(--justify-content);
+    justify-content: var(--alignment);
     gap: calc(var(--vgap) * 0.5);
     flex: var(--flex);
     width: auto;
@@ -43,6 +44,7 @@
     font-size: var(--nue-ui-text-default);
     font-weight: var(--nue-ui-primary-font-weight);
     font-family: var(--nue-ui-primary-font-family), sans-serif;
+    line-height: normal;
     --icon-size: var(--nue-ui-text-default);
     --icon-weight: var(--nue-ui-primary-font-weight);
 
@@ -59,11 +61,20 @@
     }
 
     .nue-button__text {
-        flex: auto;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         word-break: break-all;
+    }
+
+    .nue-button__append {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: end;
+        flex: auto;
+        gap: var(--nue-ui-secondary-gap);
+        overflow: hidden;
     }
 
     &.nue-button--disabled {

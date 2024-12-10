@@ -8,7 +8,7 @@
 
 .nue-message-node-inner {
     --color: #363636;
-    --font-size: var(--nue-ui-text-sm);
+    --font-size: var(--nue-ui-text-default);
     --icon-size: var(--font-size);
     --padding-y: 8px;
     --padding-x: 16px;
@@ -51,7 +51,7 @@
     &.nue-message-node-inner--small {
         --padding-y: 6px;
         --padding-x: 12px;
-        --font-size: var(--nue-ui-text-xs);
+        --font-size: var(--nue-ui-text-sm);
     }
 
     &.nue-message-node-inner--large {

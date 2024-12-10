@@ -10,14 +10,11 @@
 /* original */
 
 .nue-icon {
-    display: inline;
-
-    .iconfont {
+    &.iconfont {
         /*display: block;*/
         color: var(--icon-color);
         font-size: var(--icon-size) !important;
         font-weight: var(--icon-weight);
-        aspect-ratio: 1 / 1;
     }
 
     &.nue-icon--spin {

@@ -13,11 +13,12 @@
             :spin="loading"
             class="nue-button__icon"
         />
-        <slot name="prepend" />
         <div v-if="$slots.default" class="nue-button__text">
             <slot />
         </div>
-        <slot name="append" />
+        <div v-if="$slots.append" class="nue-button__append">
+            <slot name="append" />
+        </div>
     </button>
 </template>
 
@@ -51,9 +52,9 @@ const disabled = computed(() => {
 });
 
 const styles = computed(() => {
-    const { flex, align } = props;
+    const { flex, alignment } = props;
     return {
-        '--align-y': align,
+        '--alignment': alignment,
         '--flex': flex && parseFlex(flex)
     };
 });

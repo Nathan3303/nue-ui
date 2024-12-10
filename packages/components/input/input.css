@@ -44,7 +44,7 @@
     -webkit-user-select: none;
     user-select: none;
     color: var(--nue-ui-primary-text-color);
-    font-size: var(--nue-ui-text-sm);
+    font-size: var(--nue-ui-text-default);
     font-weight: var(--nue-ui-primary-font-weight);
 
     &:hover {

@@ -5,7 +5,7 @@
     --min-width: 80px;
     --height: calc(var(--line-height) * var(--rows));
     --min-height: calc(var(--line-height) * 1);
-    --line-height: calc(var(--nue-ui-text-sm) + 5px);
+    --line-height: calc(var(--nue-ui-text-default) + 4px);
     --padding-y: 6px;
     --padding-x: 12px;
     --flex: none;
@@ -48,7 +48,7 @@
     -webkit-user-select: none;
     user-select: none;
     color: var(--nue-ui-primary-text-color);
-    font-size: var(--nue-ui-text-sm);
+    font-size: var(--nue-ui-text-default);
     font-weight: var(--nue-ui-primary-font-weight);
 
     &:hover {

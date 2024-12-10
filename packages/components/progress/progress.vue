@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<ProgressProps>(), {
     showInnerText: false,
     hideText: false,
     scale: 1,
-    color: 'var(--primary-color-600)'
+    color: 'var(--nue-ui-primary-color-600)'
 });
 const emit = defineEmits<ProgressEmits>();
 

@@ -26,7 +26,7 @@
             .nue-collapse-item__title {
                 display: flex;
                 align-items: center;
-                font-size: var(--nue-ui-text-sm);
+                font-size: var(--nue-ui-text-default);
                 font-weight: var(--nue-ui-primary-font-weight);
                 line-height: 1;
             }
@@ -93,27 +93,27 @@
 /* menu */
 
 .nue-collapse--menu {
-    gap: 16px;
+    gap: 24px;
 
     .nue-collapse-item {
         gap: 16px;
 
         .nue-collapse-item__header {
-            padding: 0;
+            padding: 0 12px;
             min-height: auto;
             box-shadow: none;
             border: none;
 
             .nue-collapse-item__title {
                 color: var(--nue-ui-primary-color-600);
-                font-size: var(--nue-ui-text-xs);
+                font-size: var(--nue-ui-text-sm);
             }
 
             .nue-collapse-item__toggle-button,
             .outter-toggle-button {
                 .nue-icon {
-                    color: var(--nue-ui-primary-color-600);
-                    font-size: var(--nue-ui-text-xs);
+                    --icon-color: var(--nue-ui-primary-color-600);
+                    --icon-size: var(--nue-ui-text-sm);
                 }
             }
         }
