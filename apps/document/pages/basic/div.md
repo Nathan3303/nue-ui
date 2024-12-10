@@ -46,7 +46,7 @@ demo-preview=../../demos/div/wrap.vue
 
 ::: tip
 当 `divider` 为 `object` 类型时，所插入的分隔符会渲染为 `NueDivider` 组件，其中的键值对将被作为 `NueDivider` 的 props。
-组件具体的 props 请参考 [`NueDivider`](/pages/divider.html) 文档。
+组件具体的 props 请参考 [`NueDivider`](/pages/others/divider.html) 文档。
 :::
 
 ::: preview

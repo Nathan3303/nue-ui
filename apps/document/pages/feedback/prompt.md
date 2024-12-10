@@ -21,7 +21,8 @@ demo-preview=../../demos/prompt/basic.vue
 通过 `input-type` 属性可以设置输入框的类型，接收 `string` 类型的值。
 
 ::: tip
-由于组件内部进行了复用，因此 `type` 属性的可选值为 `NueInput` 组件 `type` 属性的可选值。在 `NueInput` 组件文档中的 [基础用法](/pages/input.html#基础用法) 一节中可以查看具体的可选值。
+由于组件内部进行了复用，因此 `type` 属性的可选值为 `NueInput` 组件 `type` 属性的可选值。在 `NueInput`
+组件文档中的 [基础用法](/pages/form/input.html#基础用法) 一节中可以查看具体的可选值。
 :::
 
 ::: preview
