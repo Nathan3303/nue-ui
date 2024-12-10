@@ -88,6 +88,16 @@ demo-preview=../../demos/container/main-resize.vue
 demo-preview=../../demos/container/main-collapse.vue
 :::
 
+### 响应式
+
+`NueMain` 组件也支持响应式，即在屏幕宽度小于 `1024px` 时，侧边栏会自动折叠；在屏幕宽度小于 `768px` 时，侧边栏会自动隐藏。
+
+通过属性 `responsive` 可以开启响应式，接受 `true` 或 `false` 两个值，默认为 `true`。
+
+::: preview
+demo-preview=../../demos/container/main-responsive.vue
+:::
+
 ## 底部组件 `NueFooter`
 
 `NueFooter` 组件为容器底部组件，与头部组件相同，默认宽度为 `100%`、高度为 `70px`，通过属性 `width` 和 `height` 修改，接受 CSS
