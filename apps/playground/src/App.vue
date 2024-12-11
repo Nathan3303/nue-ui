@@ -27,6 +27,7 @@
                                 v-for="(link, idx) in item.links"
                                 :key="idx"
                                 :route="link.route"
+                                theme="rl"
                             >
                                 {{ link.text }}
                             </nue-link>
