@@ -1,25 +1,28 @@
 <template>
-    <nue-div>
-        <nue-button theme="small" @click="showPrompt">
-            打开输入提示框
-        </nue-button>
-        <nue-button theme="small" @click="showPromptWithInitialValue">
-            打开输入提示框 (带初始值)
-        </nue-button>
-        <nue-button theme="small" @click="showPromptWithValidator">
-            打开输入提示框（带验证器）
-        </nue-button>
-        <nue-button theme="small" @click="showPromptWithAsyncValidator">
-            打开输入提示框（带异步验证器）
-        </nue-button>
-        <nue-button theme="small" @click="showPromptWithOnConfirm">
-            打开输入提示框（带异步验证器以及回调函数）
-        </nue-button>
-    </nue-div>
+    <demo title="Prompt 输入提示">
+        <nue-div>
+            <nue-button theme="small" @click="showPrompt">
+                打开输入提示框
+            </nue-button>
+            <nue-button theme="small" @click="showPromptWithInitialValue">
+                打开输入提示框 (带初始值)
+            </nue-button>
+            <nue-button theme="small" @click="showPromptWithValidator">
+                打开输入提示框（带验证器）
+            </nue-button>
+            <nue-button theme="small" @click="showPromptWithAsyncValidator">
+                打开输入提示框（带异步验证器）
+            </nue-button>
+            <nue-button theme="small" @click="showPromptWithOnConfirm">
+                打开输入提示框（带异步验证器以及回调函数）
+            </nue-button>
+        </nue-div>
+    </demo>
 </template>
 
 <script lang="ts" setup>
 import { NueMessage, NuePrompt } from 'nue-ui';
+import Demo from '../layouts/demo.vue';
 
 defineOptions({ name: 'PromptDemo1' });
 

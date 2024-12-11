@@ -1,27 +1,30 @@
 <template>
-    <nue-div>
-        <nue-switch />
-        <nue-switch show-text />
-        <nue-switch active-text="开" inactive-text="关" show-text />
-        <nue-switch
-            active-text="这是打开时的描述"
-            inactive-text="这是开关组件关闭时的描述"
-            show-text
-        />
-        <nue-switch
-            v-model="isActive"
-            :before-switch="handleBeforeSwitch"
-            :loading="isLoading"
-            active-text="开"
-            inactive-text="关"
-            show-text
-        />
-        <nue-switch theme="custom" />
-    </nue-div>
+    <demo title="Switch 开关">
+        <nue-div>
+            <nue-switch />
+            <nue-switch show-text />
+            <nue-switch active-text="开" inactive-text="关" show-text />
+            <nue-switch
+                active-text="这是打开时的描述"
+                inactive-text="这是开关组件关闭时的描述"
+                show-text
+            />
+            <nue-switch
+                v-model="isActive"
+                :before-switch="handleBeforeSwitch"
+                :loading="isLoading"
+                active-text="开"
+                inactive-text="关"
+                show-text
+            />
+            <nue-switch theme="custom" />
+        </nue-div>
+    </demo>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import Demo from '../layouts/demo.vue';
 
 const isActive = ref(false);
 const isLoading = ref(false);

@@ -1,44 +1,47 @@
 <template>
-    <nue-div wrap>
-        <nue-button theme="small" @click="createMessage">Basic</nue-button>
-        <nue-button theme="small" @click="createMessageWithIcon">
-            With icon
-        </nue-button>
-        <nue-button theme="small" @click="createMessageWithDuration">
-            With 5 seconds duration
-        </nue-button>
-        <nue-button theme="small" @click="createCloseManualMessage">
-            With close button (close manually)
-        </nue-button>
-        <nue-button theme="small" @click="createSuccessMessage">
-            Success type
-        </nue-button>
-        <nue-button theme="small" @click="createErrorMessage">
-            Error type
-        </nue-button>
-        <nue-button theme="small" @click="createWarningMessage">
-            Warning type
-        </nue-button>
-        <nue-button theme="small" @click="createInfoMessage">
-            Info type
-        </nue-button>
-        <nue-button theme="small" @click="createLogMessage">
-            Log type
-        </nue-button>
-        <nue-button theme="small" @click="createSmallMessage">
-            Small size
-        </nue-button>
-        <nue-button theme="small" @click="createNormalMessage">
-            Normal size
-        </nue-button>
-        <nue-button theme="small" @click="createLargeMessage">
-            Large size
-        </nue-button>
-    </nue-div>
+    <demo title="Message 消息提示">
+        <nue-div wrap>
+            <nue-button theme="small" @click="createMessage">Basic</nue-button>
+            <nue-button theme="small" @click="createMessageWithIcon">
+                With icon
+            </nue-button>
+            <nue-button theme="small" @click="createMessageWithDuration">
+                With 5 seconds duration
+            </nue-button>
+            <nue-button theme="small" @click="createCloseManualMessage">
+                With close button (close manually)
+            </nue-button>
+            <nue-button theme="small" @click="createSuccessMessage">
+                Success type
+            </nue-button>
+            <nue-button theme="small" @click="createErrorMessage">
+                Error type
+            </nue-button>
+            <nue-button theme="small" @click="createWarningMessage">
+                Warning type
+            </nue-button>
+            <nue-button theme="small" @click="createInfoMessage">
+                Info type
+            </nue-button>
+            <nue-button theme="small" @click="createLogMessage">
+                Log type
+            </nue-button>
+            <nue-button theme="small" @click="createSmallMessage">
+                Small size
+            </nue-button>
+            <nue-button theme="small" @click="createNormalMessage">
+                Normal size
+            </nue-button>
+            <nue-button theme="small" @click="createLargeMessage">
+                Large size
+            </nue-button>
+        </nue-div>
+    </demo>
 </template>
 
 <script lang="ts" setup>
 import { NueMessage } from 'nue-ui';
+import Demo from '../layouts/demo.vue';
 
 function createMessage() {
     NueMessage({ message: 'This is a message' });

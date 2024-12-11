@@ -44,6 +44,7 @@ export const collapseItemsData = [
         title: 'Feedback 反馈组件',
         links: [
             { route: '/confirm', text: 'Confirm 确认' },
+            { route: '/dialog', text: 'Dialog 对话框' },
             { route: '/drawer', text: 'Drawer 抽屉' },
             { route: '/message', text: 'Message 消息提示' },
             { route: '/prompt', text: 'Prompt 输入提示' },

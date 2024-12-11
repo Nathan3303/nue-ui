@@ -1,61 +1,64 @@
 <template>
-    <nue-checkbox-group
-        v-model="activeNames"
-        use-controller
-        controller-label="Hobbies"
-        :min="1"
-        :max="3"
-    >
-        <nue-div align="center">
-            <nue-checkbox
-                v-for="cbName in checkboxes"
-                :key="cbName"
-                :label="uppercaseFirst(cbName)"
-                :name="cbName"
-            />
-            <nue-checkbox
-                theme="custom"
-                name="network"
-                :before-check="handleBeforeCheck"
-                :loading="loading"
-            >
-                {{ loading ? 'Checking...' : 'Network' }}
-            </nue-checkbox>
-        </nue-div>
-    </nue-checkbox-group>
+    <demo title="Checkbox 复选框">
+        <nue-checkbox-group
+            v-model="activeNames"
+            :max="3"
+            :min="1"
+            controller-label="Hobbies"
+            use-controller
+        >
+            <nue-div align="center">
+                <nue-checkbox
+                    v-for="cbName in checkboxes"
+                    :key="cbName"
+                    :label="uppercaseFirst(cbName)"
+                    :name="cbName"
+                />
+                <nue-checkbox
+                    :before-check="handleBeforeCheck"
+                    :loading="loading"
+                    name="network"
+                    theme="custom"
+                >
+                    {{ loading ? 'Checking...' : 'Network' }}
+                </nue-checkbox>
+            </nue-div>
+        </nue-checkbox-group>
+    </demo>
 </template>
 
-<script setup lang="ts">
-    import { ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
+import Demo from '../layouts/demo.vue';
 
-    const checkboxes = ['game', 'music', 'movie', 'sport', 'travel'];
-    const activeNames = ref<string[]>(['game', 'music']);
-    const loading = ref(false);
+const checkboxes = ['game', 'music', 'movie', 'sport', 'travel'];
+const activeNames = ref<string[]>(['game', 'music']);
+const loading = ref(false);
 
-    const uppercaseFirst = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    };
+const uppercaseFirst = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};
 
-    const handleBeforeCheck = () => {
-        loading.value = true;
-        return new Promise(resolve => {
-            setTimeout(() => {
-                loading.value = false;
-                resolve(true);
-            }, 1000);
-        });
-    };
+const handleBeforeCheck = () => {
+    loading.value = true;
+    return new Promise(resolve => {
+        setTimeout(() => {
+            loading.value = false;
+            resolve(true);
+        }, 1000);
+    });
+};
 </script>
 
 <style scoped>
-    .nue-checkbox-group {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
+.nue-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
-    .nue-checkbox--custom.nue-checkbox--checked {
-        --check-icon-color: var(--primary-color-a200);
-        --check-label-color: var(--primary-color-a200);
-    }
+.nue-checkbox--custom.nue-checkbox--checked {
+    --check-icon-color: #3c3ce8;
+    --check-label-color: #3c3ce8;
+}
 </style>

@@ -38,7 +38,6 @@
             <template #content>
                 <router-view />
             </template>
-            <template #outline></template>
         </nue-main>
     </nue-container>
 </template>

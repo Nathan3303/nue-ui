@@ -1,21 +1,24 @@
 <template>
-    <nue-infinite-scroll
-        :disabled="disabled"
-        :loading="loading"
-        height="360px"
-        trigger-height="1px"
-        @load-more="loadMore"
-    >
-        <ul class="list">
-            <li v-for="i in itemsCount" :key="i" class="node">
-                {{ i }}
-            </li>
-        </ul>
-    </nue-infinite-scroll>
+    <demo title="Infinite Scroll 无限滚动">
+        <nue-infinite-scroll
+            :disabled="disabled"
+            :loading="loading"
+            height="360px"
+            trigger-height="1px"
+            @load-more="loadMore"
+        >
+            <ul class="list">
+                <li v-for="i in itemsCount" :key="i" class="node">
+                    {{ i }}
+                </li>
+            </ul>
+        </nue-infinite-scroll>
+    </demo>
 </template>
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
+import Demo from '../layouts/demo.vue';
 
 const itemsCount = ref(15);
 const loading = ref(false);

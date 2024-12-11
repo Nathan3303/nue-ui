@@ -1,15 +1,21 @@
 <template>
-    <nue-marquee infinite>
-        <div v-for="(item, idx) in 12" :key="idx" class="nue-marquee-item">
-            {{ item }}
-        </div>
-    </nue-marquee>
-    <nue-marquee :speed-ratio="2">
-        <div v-for="(item, idx) in 12" :key="idx" class="nue-marquee-item">
-            {{ item }}
-        </div>
-    </nue-marquee>
+    <demo title="Marquee 跑马灯">
+        <nue-marquee infinite>
+            <div v-for="(item, idx) in 12" :key="idx" class="nue-marquee-item">
+                {{ item }}
+            </div>
+        </nue-marquee>
+        <nue-marquee :speed-ratio="2">
+            <div v-for="(item, idx) in 12" :key="idx" class="nue-marquee-item">
+                {{ item }}
+            </div>
+        </nue-marquee>
+    </demo>
 </template>
+
+<script lang="ts" setup>
+import Demo from '../layouts/demo.vue';
+</script>
 
 <style scoped>
 .nue-marquee-item {

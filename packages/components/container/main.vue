@@ -9,16 +9,19 @@
             :float="menuAsideFloat"
             :max-width="asideMaxWidth"
             :min-width="asideMinWidth"
+            :title="asideTitle"
             :width="asideWidth"
             class="nue-main__aside"
             resizer-placement="right"
-            :title="asideTitle"
         >
             <slot name="aside" />
         </nue-aside>
         <div v-if="$slots.default || $slots.content" class="nue-main__content">
             <nue-div
-                v-if="menuAsideFloat || outlineAsideFloat"
+                v-if="
+                    (menuAsideFloat && $slots.aside) ||
+                    (outlineAsideFloat && $slots.outline)
+                "
                 class="nue-main__aside-visible-controller-bar"
             >
                 <slot
@@ -29,7 +32,7 @@
                     name="polyBar"
                 >
                     <nue-button
-                        v-if="menuAsideFloat"
+                        v-if="menuAsideFloat && $slots.aside"
                         icon="menu"
                         theme="pure,sm"
                         @click.stop="menuAsideRef?.toggleVisible()"
@@ -37,7 +40,7 @@
                         菜单
                     </nue-button>
                     <nue-button
-                        v-if="outlineAsideFloat"
+                        v-if="outlineAsideFloat && $slots.outline"
                         icon="more2"
                         theme="pure,sm"
                         @click.stop="outlineAsideRef?.toggleVisible()"
@@ -58,10 +61,10 @@
             :float="outlineAsideFloat"
             :max-width="outlineMaxWidth"
             :min-width="outlineMinWidth"
+            :title="outlineTitle"
             :width="outlineWidth"
             class="nue-main__outline"
             resizer-placement="left"
-            :title="outlineTitle"
         >
             <slot name="outline" />
         </nue-aside>
