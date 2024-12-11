@@ -10,7 +10,7 @@
 .nue-header {
     display: flex;
     align-items: center;
-    gap: var(--nue-ui-primary-gap);
+    gap: calc(var(--nue-ui-primary-gap) * 2);
     box-sizing: border-box;
     width: var(--nue-header-width);
     height: var(--nue-header-height);
@@ -21,9 +21,13 @@
         height: 100%;
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: var(--nue-ui-secondary-padding);
         overflow: hidden;
         flex: none;
+    }
+
+    .nue-header__navigators {
+        gap: 4px;
     }
 
     .nue-header__logo {
