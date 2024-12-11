@@ -35,16 +35,16 @@
 }
 
 :root {
-    --nue-ui-text-xxxs: 0.2rem;
-    --nue-ui-text-xxs: 0.4rem;
-    --nue-ui-text-xs: 0.6rem;
-    --nue-ui-text-sm: 0.8rem;
+    --nue-ui-text-xxxs: calc(var(--nue-ui-primary-font-size) * 0.625);
+    --nue-ui-text-xxs: calc(var(--nue-ui-primary-font-size) * 0.5);
+    --nue-ui-text-xs: calc(var(--nue-ui-primary-font-size) * 0.75);
+    --nue-ui-text-sm: calc(var(--nue-ui-primary-font-size) * 0.875);
     --nue-ui-text-default: 1rem;
-    --nue-ui-text-md: 1.2rem;
-    --nue-ui-text-lg: 1.4rem;
-    --nue-ui-text-xl: 1.6rem;
-    --nue-ui-text-xxl: 1.8rem;
-    --nue-ui-text-xxxl: 2rem;
+    --nue-ui-text-md: calc(var(--nue-ui-primary-font-size) * 1.125);
+    --nue-ui-text-lg: calc(var(--nue-ui-primary-font-size) * 1.25);
+    --nue-ui-text-xl: calc(var(--nue-ui-primary-font-size) * 1.375);
+    --nue-ui-text-xxl: calc(var(--nue-ui-primary-font-size) * 1.5);
+    --nue-ui-text-xxxl: calc(var(--nue-ui-primary-font-size) * 1.75);
 }
 
 :root {
