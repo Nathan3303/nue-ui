@@ -12,7 +12,7 @@
             :width="asideWidth"
             class="nue-main__aside"
             resizer-placement="right"
-            title="Menu"
+            :title="asideTitle"
         >
             <slot name="aside" />
         </nue-aside>
@@ -21,22 +21,30 @@
                 v-if="menuAsideFloat || outlineAsideFloat"
                 class="nue-main__aside-visible-controller-bar"
             >
-                <nue-button
-                    v-if="menuAsideFloat"
-                    icon="menu"
-                    theme="pure"
-                    @click.stop="menuAsideRef?.toggleVisible()"
+                <slot
+                    :menu-aside-float="menuAsideFloat"
+                    :outline-aside-float="outlineAsideFloat"
+                    :toggle-menu-aside="menuAsideRef?.toggleVisible"
+                    :toggle-outline-aside="outlineAsideRef?.toggleVisible"
+                    name="polyBar"
                 >
-                    Menu
-                </nue-button>
-                <nue-button
-                    v-if="outlineAsideFloat"
-                    icon="more2"
-                    theme="pure"
-                    @click.stop="outlineAsideRef?.toggleVisible()"
-                >
-                    Outline
-                </nue-button>
+                    <nue-button
+                        v-if="menuAsideFloat"
+                        icon="menu"
+                        theme="pure,sm"
+                        @click.stop="menuAsideRef?.toggleVisible()"
+                    >
+                        菜单
+                    </nue-button>
+                    <nue-button
+                        v-if="outlineAsideFloat"
+                        icon="more2"
+                        theme="pure,sm"
+                        @click.stop="outlineAsideRef?.toggleVisible()"
+                    >
+                        大纲
+                    </nue-button>
+                </slot>
             </nue-div>
             <slot />
             <slot name="content" />
@@ -53,7 +61,7 @@
             :width="outlineWidth"
             class="nue-main__outline"
             resizer-placement="left"
-            title="Outline"
+            :title="outlineTitle"
         >
             <slot name="outline" />
         </nue-aside>
@@ -71,18 +79,8 @@ import './main.css';
 
 defineOptions({ name: 'NueMain' });
 const props = withDefaults(defineProps<NueMainProps>(), {
-    asideWidth: '256px',
-    asideMinWidth: '128px',
-    asideMaxWidth: '512px',
-    allowResizeAside: true,
-    allowCollapseAside: true,
-    allowHideAside: false,
-    outlineWidth: '256px',
-    outlineMinWidth: '128px',
-    outlineMaxWidth: '512px',
-    allowResizeOutline: true,
-    allowCollapseOutline: true,
-    allowHideOutline: true
+    asideTitle: '菜单',
+    outlineTitle: '大纲'
 });
 
 const slots = useSlots();

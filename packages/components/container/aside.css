@@ -55,7 +55,7 @@
     height: 100%;
     border-radius: 0;
     transition: all var(--nue-aside-animation-duration) linear;
-    z-index: 2;
+    z-index: 3;
 
     &[data-resizer-placement='left'] {
         left: auto;
@@ -64,6 +64,8 @@
         .nue-aside__title-bar {
             align-items: center;
             justify-content: space-between;
+            flex-wrap: nowrap;
+            flex: none;
         }
 
         &[data-visible='true'] {

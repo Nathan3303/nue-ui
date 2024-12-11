@@ -2,6 +2,7 @@ import type { GlobalProps } from '@nue-ui/utils';
 
 export interface NueContainerProps extends GlobalProps {
     id?: string;
+    type?: 'grid' | 'flex';
     height?: string;
     width?: string;
 }
@@ -20,7 +21,7 @@ export interface NueMainProps extends GlobalProps {
     allowResizeAside?: boolean;
     allowCollapseAside?: boolean;
     allowHideAside?: boolean;
-    asideOptions?: NueAsideProps;
+    asideTitle?: string;
     // outline slot
     outlineWidth?: string;
     outlineMinWidth?: string;
@@ -28,7 +29,7 @@ export interface NueMainProps extends GlobalProps {
     allowResizeOutline?: boolean;
     allowCollapseOutline?: boolean;
     allowHideOutline?: boolean;
-    outlineOptions?: NueAsideProps;
+    outlineTitle?: string;
 }
 
 export interface NueAsideProps extends GlobalProps {

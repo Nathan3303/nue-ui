@@ -16,7 +16,7 @@
             @mousedown.stop="handleMouseDown"
         ></div>
         <nue-div v-if="float" class="nue-aside__title-bar">
-            <nue-text size="16px" weight="bold">
+            <nue-text size="var(--nue-ui-text-sm)" weight="500">
                 {{ title }}
             </nue-text>
             <nue-button

@@ -9,7 +9,6 @@
 /* original */
 
 .nue-main {
-    grid-area: main;
     display: flex;
     position: relative;
     overflow: hidden;
@@ -33,7 +32,7 @@
             align-items: center;
             justify-content: space-between;
             background-color: white;
-            z-index: 1;
+            z-index: 2;
         }
 
         &:has(> .nue-container--inner) {

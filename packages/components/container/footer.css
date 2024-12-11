@@ -8,10 +8,12 @@
 /* original */
 
 .nue-footer {
-    grid-area: footer;
     display: flex;
     align-items: center;
+    gap: var(--nue-ui-primary-gap);
+    box-sizing: border-box;
     width: var(--nue-footer-width);
     height: var(--nue-footer-height);
-    box-sizing: border-box;
+    padding: var(--nue-ui-primary-padding);
+    flex: none;
 }

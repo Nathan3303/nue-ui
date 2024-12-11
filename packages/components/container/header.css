@@ -2,17 +2,19 @@
 
 .nue-header {
     --nue-header-width: 100%;
-    --nue-header-height: 60px;
+    --nue-header-height: auto;
 }
 
 /* original */
 
 .nue-header {
-    grid-area: header;
     display: flex;
     align-items: center;
+    gap: var(--nue-ui-primary-gap);
+    box-sizing: border-box;
     width: var(--nue-header-width);
     height: var(--nue-header-height);
+    padding: var(--nue-ui-primary-padding);
     flex: none;
 
     .nue-header__slot {
@@ -22,6 +24,10 @@
         gap: 16px;
         overflow: hidden;
         flex: none;
+    }
+
+    .nue-header__logo {
+        font-size: var(--nue-ui-text-md);
     }
 
     .nue-header__navigators {
