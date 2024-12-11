@@ -13,12 +13,17 @@ import './container.css';
 defineOptions({ name: 'NueContainer' });
 const props = withDefaults(defineProps<NueContainerProps>(), {
     id: generateId(),
-    theme: 'vertical'
+    theme: 'vertical',
+    type: 'grid'
 });
 
 const classes = computed(() => {
     const prefix = 'nue-container';
-    return [prefix, ...parseTheme(props.theme, prefix)];
+    return [
+        prefix,
+        `${prefix}--${props.type}`,
+        ...parseTheme(props.theme, prefix)
+    ];
 });
 
 const styles = computed(() => ({
