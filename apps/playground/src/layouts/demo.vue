@@ -2,11 +2,14 @@
     <nue-container class="demo-layout" theme="vertical,inner">
         <nue-header>
             <template #logo>
-                <nue-text size="var(--nue-ui-text-default)">
-                    <slot name="title">
-                        {{ title }}
-                    </slot>
-                </nue-text>
+                <!--                <nue-text size="var(&#45;&#45;nue-ui-text-default)">-->
+                <!--                    <slot name="title">-->
+                <!--                        {{ title }}-->
+                <!--                    </slot>-->
+                <!--                </nue-text>-->
+                <slot name="title">
+                    {{ title }}
+                </slot>
             </template>
         </nue-header>
         <nue-main>

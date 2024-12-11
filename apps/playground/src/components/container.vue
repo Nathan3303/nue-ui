@@ -24,9 +24,20 @@
                         </template>
                     </nue-header>
                     <!-- main -->
-                    <nue-main aside-width="200px" outline-width="200px">
+                    <nue-main
+                        allow-collapse-aside
+                        allow-resize-aside
+                        aside-min-width="128px"
+                        aside-width="200px"
+                        outline-width="200px"
+                    >
                         <template #aside>
-                            <nue-div align="stretch" gap="8px" vertical>
+                            <nue-div
+                                align="stretch"
+                                gap="8px"
+                                vertical
+                                wrap="nowrap"
+                            >
                                 <nue-link icon="board" theme="rl,rl-s,actived">
                                     Dashboard
                                 </nue-link>
@@ -42,6 +53,9 @@
                                     </nue-link>
                                     <nue-link icon="more2" theme="rl,rl-s">
                                         Menu item 2
+                                    </nue-link>
+                                    <nue-link icon="more2" theme="rl,rl-s">
+                                        Menu item 3
                                     </nue-link>
                                 </nue-collapse-item>
                                 <nue-collapse-item name="b" title="Advance">

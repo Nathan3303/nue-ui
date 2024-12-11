@@ -123,6 +123,24 @@
     &[data-collapse='true'] {
         width: var(--nue-aside-min-width) !important;
         transition: width var(--nue-aside-animation-duration) ease;
+
+        & > .nue-link--btnlike,
+        & > .nue-link--rl {
+            justify-content: center;
+            aspect-ratio: 1/1;
+
+            .nue-link__content {
+                display: none;
+            }
+        }
+
+        & > .nue-collapse {
+            .nue-collapse-item
+                .nue-collapse-item__header
+                .nue-collapse-item__title {
+                display: none;
+            }
+        }
     }
 
     &[data-visible='false'] {
