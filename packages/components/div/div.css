@@ -24,6 +24,9 @@
     width: var(--width);
     height: var(--height);
     box-sizing: border-box;
+    font-size: var(--nue-ui-text-default);
+    font-weight: var(--nue-ui-primary-font-weight);
+    font-family: var(--nue-ui-primary-font-family) sans-serif;
 }
 
 /* built-in styles */
