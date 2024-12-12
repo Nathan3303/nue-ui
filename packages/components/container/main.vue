@@ -3,68 +3,26 @@
         <nue-aside
             v-if="$slots.aside"
             ref="menuAsideRef"
-            :allow-collapse="allowCollapseAside"
-            :allow-hide="false"
-            :allow-resize="allowResizeAside"
-            :float="menuAsideFloat"
             :max-width="asideMaxWidth"
             :min-width="asideMinWidth"
-            :title="asideTitle"
             :width="asideWidth"
             class="nue-main__aside"
-            resizer-placement="right"
         >
             <slot name="aside" />
         </nue-aside>
+        <nue-separator v-if="$slots.aside" op-target="previous" />
         <div v-if="$slots.default || $slots.content" class="nue-main__content">
-            <nue-div
-                v-if="
-                    (menuAsideFloat && $slots.aside) ||
-                    (outlineAsideFloat && $slots.outline)
-                "
-                class="nue-main__aside-visible-controller-bar"
-            >
-                <slot
-                    :menu-aside-float="menuAsideFloat"
-                    :outline-aside-float="outlineAsideFloat"
-                    :toggle-menu-aside="menuAsideRef?.toggleVisible"
-                    :toggle-outline-aside="outlineAsideRef?.toggleVisible"
-                    name="polyBar"
-                >
-                    <nue-button
-                        v-if="menuAsideFloat && $slots.aside"
-                        icon="menu"
-                        theme="pure,sm"
-                        @click.stop="menuAsideRef?.toggleVisible()"
-                    >
-                        菜单
-                    </nue-button>
-                    <nue-button
-                        v-if="outlineAsideFloat && $slots.outline"
-                        icon="more2"
-                        theme="pure,sm"
-                        @click.stop="outlineAsideRef?.toggleVisible()"
-                    >
-                        大纲
-                    </nue-button>
-                </slot>
-            </nue-div>
             <slot />
             <slot name="content" />
         </div>
+        <nue-separator v-if="$slots.outline" op-target="next" />
         <nue-aside
             v-if="$slots.outline"
             ref="outlineAsideRef"
-            :allow-collapse="allowCollapseOutline"
-            :allow-hide="allowHideOutline"
-            :allow-resize="allowResizeOutline"
-            :float="outlineAsideFloat"
             :max-width="outlineMaxWidth"
             :min-width="outlineMinWidth"
-            :title="outlineTitle"
             :width="outlineWidth"
             class="nue-main__outline"
-            resizer-placement="left"
         >
             <slot name="outline" />
         </nue-aside>
@@ -75,7 +33,7 @@
 import { computed, onMounted, ref, useSlots } from 'vue';
 import { debounce, parseTheme } from '@nue-ui/utils';
 import NueAside from './aside.vue';
-import { NueButton, NueDiv } from '..';
+import NueSeparator from './separator.vue';
 import { useWindowResize } from '@nue-ui/hooks';
 import type { NueMainProps } from './types';
 import './main.css';
