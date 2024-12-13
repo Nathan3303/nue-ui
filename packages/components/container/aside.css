@@ -28,41 +28,28 @@
 /* collapsed */
 
 .nue-aside[data-collapsed='true'] {
-    min-width: 66px;
-    width: 66px;
+    min-width: 64px;
+    width: 64px !important;
     transition: all var(--nue-aside-animation-duration) ease-out;
 
     .nue-link--btnlike,
     .nue-link--rl {
-        .nue-icon {
-            line-height: 1;
-            display: flex;
-            align-items: center;
-            --font-size: 16px;
-
-            .nue-icon__content {
-                display: none;
-            }
-        }
-    }
-}
-
-/* nue-link--btnlike(rl) patches */
-
-.nue-aside {
-    .nue-link--btnlike,
-    .nue-link--rl {
-        .nue-icon {
-            line-height: 1;
-            display: flex;
-            align-items: center;
-            --font-size: 16px;
-        }
+        justify-content: center;
+        gap: 0;
 
         .nue-link__content {
-            width: 100%;
-            text-align: left;
-            font-size: var(--nue-ui-text-xs);
+            width: 0;
+            flex: none;
+        }
+    }
+
+    .nue-collapse--menu {
+        .nue-collapse-item__header {
+            justify-content: center;
+
+            .nue-collapse-item__title {
+                display: none;
+            }
         }
     }
 }

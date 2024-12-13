@@ -17,16 +17,14 @@ const props = defineProps<NueSeparatorProps>();
 
 const separatorRef = ref<HTMLDivElement>();
 const opElement = ref<HTMLElement>();
-let startWidth = 0;
-let opElementMinWidth = 0;
-let originalX = 0;
-let originalWidth = 0;
+const opElementAttrs = { width: 0, minWidth: 0 };
+const tempAttrs = { originalX: 0, originalWidth: 0 };
 
 const handleMouseDown = (event: MouseEvent) => {
     event.preventDefault();
     if (!opElement.value) return;
-    originalX = event.clientX;
-    originalWidth = opElement.value.offsetWidth;
+    tempAttrs.originalX = event.clientX;
+    tempAttrs.originalWidth = opElement.value.offsetWidth;
     document.documentElement.addEventListener('mousemove', resizeOpElement);
     document.documentElement.addEventListener('mouseup', handleMouseUp);
 };
@@ -40,8 +38,9 @@ const resizeOpElement = (event: MouseEvent) => {
     const { clientX: boundX } = event;
     const newWidth =
         props.opTarget === 'next'
-            ? originalWidth + (originalX - boundX)
-            : originalWidth + (boundX - originalX);
+            ? tempAttrs.originalWidth + (tempAttrs.originalX - boundX)
+            : tempAttrs.originalWidth + (boundX - tempAttrs.originalX);
+    // console.log('[Separator/handleMouseDown] tempAttr', tempAttr);
     if (newWidth) setOpElementWidth(newWidth);
 };
 
@@ -57,16 +56,16 @@ const convertPercentageWidth = (width: string) => {
 
 const setOpElementWidth = (newWidth: number) => {
     if (!opElement.value) return;
-    // const numericMinWidth = convertPercentageWidth(props.minWidth);
-    // const numericMaxWidth = convertPercentageWidth(props.maxWidth);
-    // if (newWidth >= numericMaxWidth || newWidth <= numericMinWidth) return;
+    const isMinimal = newWidth < opElementAttrs.minWidth;
+    opElement.value.dataset.collapsed = `${isMinimal}`;
+    if (isMinimal) return;
     (opElement.value as HTMLElement).style.width = newWidth + 'px';
-    opElement.value.dataset.collapsed = `${newWidth <= opElementMinWidth}`;
+    // console.log('[Separator/setOpElementWidth] newWidth', newWidth);
 };
 
 const handleResetOpElementWidth = () => {
     if (!opElement.value) return;
-    (opElement.value as HTMLElement).style.width = startWidth + 'px';
+    (opElement.value as HTMLElement).style.width = opElementAttrs.width + 'px';
 };
 
 onMounted(() => {
@@ -80,8 +79,11 @@ onMounted(() => {
         opElement.value = props.opTarget;
     }
     if (!opElement.value) return;
-    startWidth = opElement.value.offsetWidth;
-    opElementMinWidth =
-        convertPercentageWidth(opElement.value.style.minWidth) || 64;
+    opElementAttrs.width = opElement.value.offsetWidth;
+    opElementAttrs.minWidth =
+        convertPercentageWidth(
+            window.getComputedStyle(opElement.value).minWidth
+        ) || 72;
+    // console.log('[Separator/handleMouseDown] opElementAttrs', opElementAttrs);
 });
 </script>
