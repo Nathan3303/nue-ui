@@ -104,6 +104,10 @@ export default defineConfig({
                         }
                     }
                     return 'main';
+                },
+                chunkFileNames: () => {
+                    if (isProd) return '[name].[hash].js';
+                    return '[name].js';
                 }
             }
         }
