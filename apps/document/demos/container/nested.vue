@@ -1,23 +1,20 @@
 <template>
     <nue-div class="wrapper">
         <nue-container class="vp-raw">
-            <nue-header>
-                <nue-header>
-                    <nue-div style="padding: 16px">头部</nue-div>
-                </nue-header>
-            </nue-header>
+            <nue-header>头部</nue-header>
             <nue-main aside-width="140px" outline-width="140px">
-                <template #aside>左侧栏</template>
+                <template #aside>侧栏</template>
                 <template #content>
-                    <nue-container theme="vertical,inner">
+                    <nue-container
+                        style="height: 100% !important"
+                        theme="inner,vertical"
+                    >
                         <nue-header>嵌套头部</nue-header>
-                        <nue-main>
-                            <nue-div style="padding: 16px">内容区域</nue-div>
-                        </nue-main>
+                        <nue-main>嵌套内容</nue-main>
                         <nue-footer>嵌套底部</nue-footer>
                     </nue-container>
                 </template>
-                <template #outline>右侧栏</template>
+                <template #outline>侧栏</template>
             </nue-main>
             <nue-footer>底部</nue-footer>
         </nue-container>

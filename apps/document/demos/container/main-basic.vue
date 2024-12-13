@@ -1,12 +1,17 @@
 <template>
     <nue-div class="wrapper">
         <nue-container>
-            <nue-main aside-width="200px" outline-width="200px">
-                <template #aside>侧边栏区域</template>
-                <template #content>
-                    <nue-div style="padding: 16px">内容区域</nue-div>
-                </template>
-                <template #outline>右侧（大纲）区域</template>
+            <nue-main
+                aside-max-width="160px"
+                aside-min-width="80px"
+                aside-width="120px"
+                outline-max-width="30%"
+                outline-min-width="10%"
+                outline-width="20%"
+            >
+                <template #aside>侧栏</template>
+                <template #content>内容</template>
+                <template #outline>侧栏</template>
             </nue-main>
         </nue-container>
     </nue-div>

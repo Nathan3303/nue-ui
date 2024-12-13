@@ -18,10 +18,6 @@ demo-preview=../../demos/container/basic.vue
 demo-preview=../../demos/container/basic2.vue
 :::
 
-::: preview
-demo-preview=../../demos/container/basic3.vue
-:::
-
 ## 头部组件 `NueHeader`
 
 `NueHeader` 组件为容器头部，默认宽度为 `100%`、高度为 `70px`，通过属性 `width` 和 `height` 修改，接受 CSS 宽高值。
@@ -44,58 +40,34 @@ demo-preview=../../demos/container/header2.vue
 
 `NueMain` 组件为容器主体，默认的宽高为撑满容器中的剩余宽度和高度。
 
-`NueMain` 组件拥有三个具名插槽，分别是 `aside`、`content` 以及 `outline`，分别对应常见站点主体的 “侧边栏区域”、“内容区域” 以及
-“右侧（大纲）区域”。
+`NueMain` 组件拥有三个具名插槽，分别是 `aside`、`content` 以及 `outline`，分别对应常见站点主体的 “左侧栏”、“内容” 以及
+“右侧栏” 三个区域。
 
-通过属性 `asideWidth` 和 `outlineWidth` 可以设置侧边栏和右侧区域的起始宽度，接受 CSS 宽度值类型。
+通过属性 `asideWidth` 和 `outlineWidth` 可以设置对应侧栏起始宽度；`asideMinWidth` 和 `outlineMinWidth` 设置最小宽度；
+`asideMaxWidth` 和 `outlineMaxWidth` 设置最大宽度，这些属性都接受 CSS 宽高值。
 
 ::: preview
 demo-preview=../../demos/container/main-basic.vue
 :::
 
-### 关于可变区域
+### 拖拽侧栏边线改变宽度
 
-可以看到上方的示例中，`aside` 和 `outline` 区域都提供了滑块以便用户能够手动改变这两个区域的大小，因此这两个区域属于可变区域。
-
-宽度可变是默认开启的功能，通过将属性 `allowResizeAside` 和 `allowResizeOutline` 置为 `false` 以关闭此功能。
-
-::: tip
-在后续的版本中，属性 `allowResizeAside` 和 `allowResizeOutline` 的默认值可能设置为 `false`，以此更符合属性名称语义。
-:::
+上方的示例中，`aside` 和 `outline` 区域都提供了拖拽边线以手动改变这区域大小。宽度可变是默认开启的功能，若想要禁用，则可以通过属性
+`disableAsideResize` 或 `disableOutlineResize` 禁用对应区域的功能。
 
 ::: preview
 demo-preview=../../demos/container/main-resize.vue
 :::
 
-### 关于可变区域的三个状态
+### 折叠状态
 
-在按下并滑动宽度变化滑块时，区域在默认情况下会出现三种状态，分别是 “正常”、“折叠” 以及 “隐藏” 状态。“正常”
-态是指在区域最大宽度和最小宽度之间变化的状态、“折叠” 态是指区域在最小宽度以及 `70px` 之间的状态、而当区域宽度小于 `32px`
-时会变为 “隐藏” 态。
+侧栏拥有 “折叠状态”。当拖拽边线改变宽度小于所指定的 “最小宽度” 时，侧栏会被加上属性 `data-collapsed=true`，并且宽度为
+66px（若设置了值则已设置的值为准。通过 `asideCollapsedWidth` 或 `outlineCollapsedWidth` 属性进行设置），此时边栏会应用部分改变内部元素的样式，如
+`NueLink` 链接组件和 `NueCollapse` 组件等，当然也可以通过 `theme` 属性来应用定制的折叠状态时的样式。
 
-::: tip
-当区域（侧边栏区域）处于 “折叠” 态时，其中的 `NueLink` 链接组件会被设置为仅图标的样式，若没有设置图标，则显示文字部分的前一两个字，因此推荐为侧边栏中的链接组件设置图标属性。
-:::
-
-通过属性 `asideMinWidth` 和 `asideMaxWidth` 可以设置 `aside` 区域的最大宽度和最小宽度，`outline` 区域也有着同样的属性：
-`outlineMinWidth` 和 `outlineMaxWidth` 。
-
-通过属性 `allowCollapseAside` 和 `allowHideAside` 能够控制 “折叠” 和 “隐藏” 状态是否允许，`outline` 区域类似。
-
-通过下方的示例能够了解这些属性的具体应用。
 
 ::: preview
 demo-preview=../../demos/container/main-collapse.vue
-:::
-
-### 响应式
-
-`NueMain` 组件也支持响应式，即在屏幕宽度小于 `1024px` 时，侧边栏会自动折叠；在屏幕宽度小于 `768px` 时，侧边栏会自动隐藏。
-
-通过属性 `responsive` 可以开启响应式，接受 `true` 或 `false` 两个值，默认为 `true`。
-
-::: preview
-demo-preview=../../demos/container/main-responsive.vue
 :::
 
 ## 底部组件 `NueFooter`
@@ -119,6 +91,22 @@ demo-preview=../../demos/container/footer.vue
 `theme="vertical,inner"` 或者 `theme="horizontal,inner"`。
 :::
 
+通过嵌套容器，可以快速地搭建出各种复杂的页面布局。
+
 ::: preview
 demo-preview=../../demos/container/nested.vue
+:::
+
+::: preview
+demo-preview=../../demos/container/nested2.vue
+:::
+
+## 容器类型
+
+`NueContainer` 组件提供了两种类型，分别对应两个实现方式，即 `flex` 和 `grid`。
+
+通过属性 `type` 设置容器的类型，默认值为 `grid` 。
+
+::: tip
+对于 `grid` 类型，其布局通过属性 `grid-template-areas` 来实现，area 名称分别为 `header`、`main` 以及 `footer`。
 :::

@@ -2,16 +2,15 @@
     <nue-div class="wrapper">
         <nue-container theme="horizontal">
             <nue-main aside-width="140px" outline-width="140px">
-                <template #aside>左侧栏</template>
-                <nue-container>
-                    <nue-header>
-                        <nue-div style="padding: 16px">头部</nue-div>
-                    </nue-header>
+                <template #aside>侧栏</template>
+                <nue-container
+                    style="height: 100% !important"
+                    theme="inner,vertical"
+                >
+                    <nue-header>头部</nue-header>
                     <nue-main>
-                        <template #content>
-                            <nue-div style="padding: 16px">主内容</nue-div>
-                        </template>
-                        <template #outline>右侧栏</template>
+                        <template #content>内容</template>
+                        <template #outline>侧栏</template>
                     </nue-main>
                     <nue-footer>底部</nue-footer>
                 </nue-container>
@@ -46,3 +45,4 @@
     }
 }
 </style>
+<script lang="ts" setup></script>

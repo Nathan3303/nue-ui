@@ -10,12 +10,20 @@
         >
             <slot name="aside" />
         </nue-aside>
-        <nue-separator v-if="$slots.aside" op-target="previous" />
+        <nue-separator
+            v-if="$slots.aside"
+            :disabled="disableAsideResize"
+            op-target="previous"
+        />
         <div v-if="$slots.default || $slots.content" class="nue-main__content">
             <slot />
             <slot name="content" />
         </div>
-        <nue-separator v-if="$slots.outline" op-target="next" />
+        <nue-separator
+            v-if="$slots.outline"
+            :disabled="disableOutlineResize"
+            op-target="next"
+        />
         <nue-aside
             v-if="$slots.outline"
             ref="outlineAsideRef"
@@ -39,10 +47,7 @@ import type { NueMainProps } from './types';
 import './main.css';
 
 defineOptions({ name: 'NueMain' });
-const props = withDefaults(defineProps<NueMainProps>(), {
-    asideTitle: '菜单',
-    outlineTitle: '大纲'
-});
+const props = defineProps<NueMainProps>();
 
 const slots = useSlots();
 const { addCallback } = useWindowResize();

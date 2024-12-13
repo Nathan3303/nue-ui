@@ -2,16 +2,14 @@
     <nue-div class="wrapper">
         <nue-container>
             <nue-main
-                :allow-resize-aside="false"
-                :allow-resize-outline="false"
+                disable-aside-resize
+                disable-outline-resize
                 aside-width="200px"
                 outline-width="200px"
             >
-                <template #aside>侧边栏区域</template>
-                <template #content>
-                    <nue-div style="padding: 16px">内容区域</nue-div>
-                </template>
-                <template #outline>右侧（大纲）区域</template>
+                <template #aside>侧栏</template>
+                <template #content>内容</template>
+                <template #outline>侧栏</template>
             </nue-main>
         </nue-container>
     </nue-div>
@@ -25,4 +23,3 @@
     overflow: hidden;
 }
 </style>
-<script lang="ts" setup></script>
