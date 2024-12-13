@@ -27,6 +27,7 @@
     font-size: var(--nue-ui-text-default);
     font-weight: var(--nue-ui-primary-font-weight);
     font-family: var(--nue-ui-primary-font-family) sans-serif;
+    unicode-bidi: isolate;
 }
 
 /* built-in styles */

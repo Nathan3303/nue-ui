@@ -54,7 +54,7 @@
     --nue-ui-secondary-padding: 8px;
     --nue-ui-primary-gap: 16px;
     --nue-ui-secondary-gap: 8px;
-    --nue-ui-primary-radius: 6px;
+    --nue-ui-primary-radius: 5px;
     --nue-ui-primary-shadow: 1px 1px 3px rgba(100, 100, 100, 0.6);
     --nue-ui-secondary-shadow: 1px 1px 3px rgba(200, 200, 200, 0.2);
 }
@@ -118,6 +118,14 @@
     }
 
     &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-corner {
         background: transparent;
     }
 }
