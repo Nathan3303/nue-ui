@@ -28,7 +28,7 @@
                 align-items: center;
                 font-size: var(--nue-ui-text-default);
                 font-weight: var(--nue-ui-primary-font-weight);
-                line-height: 1;
+                line-height: normal;
             }
 
             .nue-collapse-item__toggle-button,
@@ -102,11 +102,19 @@
             padding: 0 12px;
             min-height: auto;
             box-shadow: none;
-            border: none;
+            /*border: none;*/
 
             .nue-collapse-item__title {
                 color: var(--nue-ui-primary-color-600);
                 font-size: var(--nue-ui-text-sm);
+                overflow: hidden;
+
+                & span {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    word-break: break-all;
+                }
             }
 
             .nue-collapse-item__toggle-button,

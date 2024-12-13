@@ -36,12 +36,11 @@ export interface NueAsideProps extends GlobalProps {
     width?: string;
     minWidth?: string;
     maxWidth?: string;
-    allowResize?: boolean;
-    allowCollapse?: boolean;
-    allowHide?: boolean;
-    resizerPlacement?: 'left' | 'right';
-    float?: boolean;
-    title?: string;
+    collapsedWidth?: string;
+}
+
+export interface NueSeparatorProps extends GlobalProps {
+    opTarget?: 'previous' | 'next' | HTMLElement;
 }
 
 export interface NueFooterProps extends GlobalProps {
