@@ -45,6 +45,7 @@
 
     .nue-collapse--menu {
         .nue-collapse-item__header {
+            padding: 0;
             justify-content: center;
 
             .nue-collapse-item__title {
