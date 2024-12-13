@@ -2,6 +2,7 @@
     <div
         ref="separatorRef"
         class="nue-separator"
+        :class="{ 'nue-separator--disabled': disabled }"
         @mousedown.stop="handleMouseDown"
         @dblclick.stop="handleResetOpElementWidth"
     ></div>
@@ -22,7 +23,7 @@ const tempAttrs = { originalX: 0, originalWidth: 0 };
 
 const handleMouseDown = (event: MouseEvent) => {
     event.preventDefault();
-    if (!opElement.value) return;
+    if (!opElement.value || props.disabled) return;
     tempAttrs.originalX = event.clientX;
     tempAttrs.originalWidth = opElement.value.offsetWidth;
     document.documentElement.addEventListener('mousemove', resizeOpElement);

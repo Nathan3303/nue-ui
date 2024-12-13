@@ -18,18 +18,12 @@ export interface NueMainProps extends GlobalProps {
     asideWidth?: string;
     asideMinWidth?: string;
     asideMaxWidth?: string;
-    allowResizeAside?: boolean;
-    allowCollapseAside?: boolean;
-    allowHideAside?: boolean;
-    asideTitle?: string;
+    disableAsideResize?: boolean;
     // outline slot
     outlineWidth?: string;
     outlineMinWidth?: string;
     outlineMaxWidth?: string;
-    allowResizeOutline?: boolean;
-    allowCollapseOutline?: boolean;
-    allowHideOutline?: boolean;
-    outlineTitle?: string;
+    disableOutlineResize?: boolean;
 }
 
 export interface NueAsideProps extends GlobalProps {
@@ -41,6 +35,7 @@ export interface NueAsideProps extends GlobalProps {
 
 export interface NueSeparatorProps extends GlobalProps {
     opTarget?: 'previous' | 'next' | HTMLElement;
+    disabled?: boolean;
 }
 
 export interface NueFooterProps extends GlobalProps {

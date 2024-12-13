@@ -25,28 +25,13 @@
         padding: 0 4px;
     }
 
-    /*&::after {*/
-    /*    content: '';*/
-    /*    display: block;*/
-    /*    position: absolute;*/
-    /*    top: 50%;*/
-    /*    left: -4px;*/
-    /*    width: 9px;*/
-    /*    height: 27px;*/
-    /*    background-color: var(--nue-ui-primary-color-100);*/
-    /*    border-radius: var(--nue-ui-primary-radius);*/
-    /*    border: 1px solid var(--nue-ui-divider-color);*/
-    /*    box-sizing: border-box;*/
-    /*    !*opacity: 0;*!*/
-    /*    transition: all 0.16s ease-out;*/
-    /*    transform: translateY(-50%);*/
-    /*}*/
-
     &:hover {
         cursor: e-resize;
+    }
+}
 
-        /*&::after {*/
-        /*    opacity: 1;*/
-        /*}*/
+.nue-separator--disabled {
+    &:hover {
+        cursor: default;
     }
 }
