@@ -78,7 +78,7 @@
                                 </nue-main>
                             </nue-container>
                         </template>
-                        <!--                        <template #outline>右侧栏</template>-->
+                        <template #outline>右侧栏</template>
                     </nue-main>
                     <!-- footer -->
                     <nue-footer>
