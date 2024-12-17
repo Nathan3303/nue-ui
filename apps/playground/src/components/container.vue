@@ -48,15 +48,17 @@
                             <nue-divider />
                             <nue-collapse v-model="activeNames" theme="menu">
                                 <nue-collapse-item name="a" title="Menu">
-                                    <nue-link icon="more2" theme="rl,rl-s">
-                                        Menu item 1
-                                    </nue-link>
-                                    <nue-link icon="more2" theme="rl,rl-s">
-                                        Menu item 2
-                                    </nue-link>
-                                    <nue-link icon="more2" theme="rl,rl-s">
-                                        Menu item 3
-                                    </nue-link>
+                                    <nue-div align="stretch" gap="8px" vertical>
+                                        <nue-link icon="more2" theme="rl,rl-s">
+                                            Menu item 1
+                                        </nue-link>
+                                        <nue-link icon="more2" theme="rl,rl-s">
+                                            Menu item 2
+                                        </nue-link>
+                                        <nue-link icon="more2" theme="rl,rl-s">
+                                            Menu item 3
+                                        </nue-link>
+                                    </nue-div>
                                 </nue-collapse-item>
                                 <nue-collapse-item name="b" title="Advance">
                                     <nue-link icon="setting" theme="rl,rl-s">

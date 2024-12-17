@@ -1,13 +1,11 @@
 <template>
     <demo title="Confirm 确认对话框">
-        <nue-div>
-            <nue-button theme="small" @click="openConfirm">
-                打开确认对话框
-            </nue-button>
-            <nue-button theme="small" @click="openConfirmWithTheme">
+        <nue-div vertical>
+            <nue-button @click="openConfirm"> 打开确认对话框</nue-button>
+            <nue-button @click="openConfirmWithTheme">
                 打开确认对话框（带自定义主题）
             </nue-button>
-            <nue-button theme="small" @click="openConfirmWithOnConfirm">
+            <nue-button @click="openConfirmWithOnConfirm">
                 打开确认对话框（带自定义确认回调）
             </nue-button>
         </nue-div>

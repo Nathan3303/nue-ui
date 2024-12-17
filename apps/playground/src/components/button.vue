@@ -1,6 +1,5 @@
 <template>
-    <demo>
-        <template #title>Button 按钮</template>
+    <demo title="Button 按钮">
         <nue-div vertical>
             <nue-div align="center">
                 <nue-button>Button 按钮</nue-button>
@@ -53,7 +52,6 @@
             </nue-button>
         </nue-div>
     </demo>
-    <nue-divider />
     <demo title="ButtonGroup 按钮组">
         <nue-div>
             <nue-div>

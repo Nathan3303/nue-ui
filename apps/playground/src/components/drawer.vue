@@ -1,29 +1,25 @@
 <template>
     <demo title="Drawer 抽屉">
         <nue-div>
-            <nue-button @click="drawer1Visible = true">
-                Open drawer1
-            </nue-button>
-            <nue-button @click="drawer2Visible = true">
-                Open drawer2
-            </nue-button>
+            <nue-button @click="drawer1Visible = true">打开抽屉 1</nue-button>
+            <nue-button @click="drawer2Visible = true">打开抽屉 2</nue-button>
         </nue-div>
         <nue-drawer
             v-model:visible="drawer1Visible"
             min-span="360px"
             span="42%"
-            title="Drawer1"
+            title="抽屉 1 标题"
         >
-            <nue-button @click="drawer2Visible = true">Open drawer2</nue-button>
+            <nue-button @click="drawer2Visible = true">打开抽屉 2</nue-button>
         </nue-drawer>
         <nue-drawer
             v-model:visible="drawer2Visible"
             min-span="240px"
             open-from="left"
             span="36%"
-            title="Drawer2"
+            title="抽屉 2 标题"
         >
-            drawer2 content
+            抽屉 2 内容
         </nue-drawer>
     </demo>
 </template>
