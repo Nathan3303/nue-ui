@@ -2,7 +2,7 @@
 
 .nue-badge {
     --nue-badge-vgap: 4px;
-    --nue-badge-font-size: var(--nue-ui-text-sm);
+    --nue-badge-font-size: var(--nue-ui-text-xs);
     --nue-badge-background-color: #e96b36;
 }
 
@@ -18,17 +18,18 @@
         align-items: center;
         justify-content: center;
         color: white;
-        font-size: var(--font-size);
-        line-height: var(--font-size);
-        padding: var(--nue-badge-vgap) calc(var(--nue-badge-vgap) * 1.5);
+        line-height: 1.2;
+        font-size: var(--nue-badge-font-size);
+        padding: calc(var(--nue-badge-vgap) * 0.5) var(--nue-badge-vgap);
         border: 1px solid var(--nue-badge-background-color);
         background-color: var(--nue-badge-background-color);
         border-radius: var(--nue-ui-primary-radius);
 
         &:is(sup) {
+            font-size: var(--nue-badge-font-size);
             position: absolute;
-            right: calc(0px - 12px);
-            bottom: calc(100% - 8px);
+            right: -12px;
+            top: -12px;
         }
     }
 }
@@ -36,14 +37,15 @@
 /* dot */
 
 .nue-badge--dot .nue-badge__content {
-    width: 13px;
+    width: calc(var(--nue-badge-vgap) * 2);
     padding: 0;
     aspect-ratio: 1;
-    border-radius: 50%;
+    flex: none;
+    border-radius: 999px;
 
     &:is(sup) {
-        left: calc(100% - 8px);
-        bottom: calc(100% - 8px);
+        right: -4px;
+        top: -4px;
     }
 }
 
