@@ -13,6 +13,7 @@
     background-color: var(--nue-ui-divider-color);
     z-index: 2;
     position: relative;
+    flex: none;
 
     &::before {
         content: '';
