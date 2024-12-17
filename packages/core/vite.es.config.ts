@@ -34,7 +34,10 @@ export default defineConfig({
         }),
         hooksPlugin({
             fileNames: ['./dist/es', './dist/theme', './dist/types'],
-            afterBuild: moveStyles
+            afterBuild: () => {
+                moveStyles();
+                shell.cp('./global.d.ts', './dist');
+            }
         }),
         terser({
             compress: {
