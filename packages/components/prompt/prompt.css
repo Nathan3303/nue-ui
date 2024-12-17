@@ -1,31 +1,6 @@
 /* variables */
 
-.nue-prompt-wrapper {
-    --wrapper-animation-name: fade-in;
-    --animation-name: slide-in-from-top;
-    --animation-rest-property: 0.24s ease-out forwards;
-}
-
 /* original */
-
-.nue-prompt-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.48);
-    overflow: hidden;
-    box-sizing: border-box;
-    animation: var(--wrapper-animation-name) var(--animation-rest-property);
-    z-index: 5;
-
-    &[data-closing='true'] {
-        --wrapper-animation-name: fade-out;
-        --animation-name: slide-out-to-top;
-    }
-}
 
 .nue-prompt {
     display: flex;
@@ -53,11 +28,14 @@
     }
 
     .nue-prompt__content {
-        width: 100%;
+        display: flex;
+        flex-direction: column;
         flex: 1 1 auto;
+        gap: var(--nue-ui-secondary-gap);
 
-        .nue-prompt__label {
-            margin: 0 0 8px;
+        .nue-prompt__description {
+            font-size: var(--nue-ui-text-default);
+            color: var(--nue-ui-primary-color-700);
         }
 
         .nue-prompt__value-error {

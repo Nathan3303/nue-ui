@@ -9,9 +9,9 @@
 
 <script lang="ts" setup>
 import { computed, inject, onBeforeUnmount, onMounted } from 'vue';
-import NueIcon from '../icon/icon.vue';
-import { generateId, parseTheme } from '@nue-ui/utils';
 import { isFunction } from 'lodash-es';
+import { generateId, parseTheme } from '@nue-ui/utils';
+import { NueIcon } from '../icon';
 import { CHECKBOX_GROUP_CTX_KEY } from '../checkbox-group/constants';
 import type { NueCheckboxEmits, NueCheckboxProps } from './types';
 import type { NueCheckboxGroupContext } from '../checkbox-group/types';
@@ -56,25 +56,24 @@ const disabled = computed(() => {
 });
 
 const classes = computed(() => {
-    let list: string[] = [];
     const prefix = 'nue-checkbox';
-    let { theme, size, loading, indeterminate } = props;
+    let { theme, size } = props;
     if (checkboxGroupCtx) {
-        theme = checkboxGroupCtx.theme ?? theme;
-        size = checkboxGroupCtx.size ?? size;
+        theme = checkboxGroupCtx.theme;
+        size = checkboxGroupCtx.size;
     }
-    list.push(prefix);
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    if (size) list.push(`${prefix}--${size}`);
-    if (loading) list.push(`${prefix}--loading`);
-    if (disabled.value) list.push(`${prefix}--disabled`);
-    if (checked.value || indeterminate) list.push(`${prefix}--checked`);
-    return list;
+    return [
+        prefix,
+        ...parseTheme(theme, prefix),
+        size && `${prefix}--${size}`,
+        props.loading && `${prefix}--loading`,
+        disabled.value && `${prefix}--disabled`,
+        (checked.value || props.indeterminate) && `${prefix}--checked`
+    ];
 });
 
 const label = computed(() => {
-    const { label, name } = props;
-    return label ?? name;
+    return props.label || props.name;
 });
 
 const iconName = computed(() => {

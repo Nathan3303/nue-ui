@@ -26,7 +26,7 @@
 import { computed, inject } from 'vue';
 import { parseFlex, parseTheme, throttle } from '@nue-ui/utils';
 import { BUTTON_GROUP_CTX_KEY } from '../button-group/constants';
-import { NueIcon } from '..';
+import { NueIcon } from '../icon';
 import type { ButtonEmitsType, ButtonPropsType } from './types';
 import type { ButtonGroupCtxType } from '../button-group';
 import './button.css';
@@ -42,36 +42,30 @@ const props = withDefaults(defineProps<ButtonPropsType>(), {
 });
 
 const iconName = computed(() => {
-    const { loading, loadingIcon, icon } = props;
-    return loading ? loadingIcon : icon;
+    return props.loading ? props.loadingIcon : props.icon;
 });
 
 const disabled = computed(() => {
-    const { disabled, loading } = props;
-    return ButtonGroupCtx?.disabled || disabled || loading;
+    return ButtonGroupCtx?.disabled || props.disabled || props.loading;
 });
 
 const styles = computed(() => {
-    const { flex, alignment } = props;
     return {
-        '--alignment': alignment,
-        '--flex': flex && parseFlex(flex)
+        '--alignment': props.alignment,
+        '--flex': props.flex && parseFlex(props.flex)
     };
 });
 
 const classes = computed(() => {
-    const { theme, flat, size } = props;
-    let list: string[] = [];
     const prefix = 'nue-button';
-    list.push(prefix);
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    if (size || ButtonGroupCtx.size) {
-        let _size = size || ButtonGroupCtx.size;
-        list.push(`${prefix}--${_size}`);
-    }
-    if (disabled.value) list.push(`${prefix}--disabled`);
-    if (flat) list.push(`${prefix}--flat`);
-    return list;
+    const _size = props.size || ButtonGroupCtx.size;
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        _size && `${prefix}--${_size}`,
+        disabled.value && `${prefix}--disabled`,
+        props.flat && `${prefix}--flat`
+    ];
 });
 
 const throttledClick = throttle(e => {

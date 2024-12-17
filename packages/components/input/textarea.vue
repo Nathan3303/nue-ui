@@ -61,26 +61,21 @@ const isComposing = ref(false);
 
 const classes = computed(() => {
     const prefix = 'nue-textarea';
-    const { size, theme, shape, disabled, readonly } = props;
-    let list: string[] = [];
-    list.push(prefix);
-    if (size) list.push(`${prefix}--${size}`);
-    if (shape) list.push(`${prefix}--${shape}`);
-    if (theme) list.push(...parseTheme(theme, prefix));
-    if (disabled) list.push(`${prefix}--disabled`);
-    if (readonly) list.push(`${prefix}--readonly`);
-    return list;
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        props.size && `${prefix}--${props.size}`,
+        props.shape && `${prefix}--${props.shape}`,
+        props.disabled && `${prefix}--disabled`,
+        props.readonly && `${prefix}--readonly`
+    ];
 });
 
 const style = computed(() => {
-    const { autosize, width, rows, resize, flex, disabled } = props;
-    const rowsValue = resize ? 999 : rows === 0 ? 999 : rows;
     return {
-        '--rows': rowsValue,
-        '--width': width,
-        '--resize': resize && !disabled ? 'vertical' : undefined,
-        '--flex': flex,
-        '--overflow': autosize ? 'hidden' : 'auto'
+        '--rows': props.resize ? 999 : props.rows === 0 ? 999 : props.rows,
+        '--resize': props.resize && !props.disabled ? 'vertical' : void 0,
+        '--nue-textarea-overflow': props.autosize ? 'hidden' : 'auto'
     };
 });
 

@@ -63,7 +63,8 @@
 
 <script lang="ts" setup>
 import { reactive, ref, watch } from 'vue';
-import { NueConfirm, NueDialog, NueMessage } from 'nue-ui';
+import { NueConfirm, NueMessage } from '@nue-ui/components';
+import NueDialog from '@nue-ui/components/dialog/dialog.vue';
 import Demo from '../layouts/demo.vue';
 
 const isAddDescription = ref(false);

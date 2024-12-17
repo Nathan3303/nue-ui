@@ -20,20 +20,16 @@ import './badge.css';
 defineOptions({ name: 'NueBadge' });
 
 const slots = useSlots();
-const props = withDefaults(defineProps<BadgePropsType>(), {
-    hidden: false,
-    dot: false
-});
+const props = withDefaults(defineProps<BadgePropsType>(), {});
 
 const classes = computed(() => {
     const prefix = 'nue-badge';
-    const { theme, dot } = props;
-    let list: string[] = [];
-    list.push(prefix);
-    if (theme) list.push(...parseTheme(theme, prefix));
-    if (dot) list.push(`${prefix}--dot`);
-    if (!slots.default && !dot) list.push(`${prefix}--inner`);
-    return list;
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        props.dot && `${prefix}--dot`,
+        !slots.default && !props.dot && `${prefix}--inner`
+    ];
 });
 
 const content = computed(() => {

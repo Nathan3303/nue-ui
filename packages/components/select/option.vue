@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 import { computed, inject, ref } from 'vue';
 import { generateId } from '@nue-ui/utils';
-import { NueIcon } from '..';
+import NueIcon from '../icon/icon.vue';
 import type { SelectContext, SelectOptionProps } from './types';
 import './option.css';
 

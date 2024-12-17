@@ -1,109 +1,106 @@
 <template>
     <demo title="Message 消息提示">
-        <nue-div wrap>
-            <nue-button theme="small" @click="createMessage">Basic</nue-button>
-            <nue-button theme="small" @click="createMessageWithIcon">
-                With icon
-            </nue-button>
-            <nue-button theme="small" @click="createMessageWithDuration">
-                With 5 seconds duration
-            </nue-button>
-            <nue-button theme="small" @click="createCloseManualMessage">
-                With close button (close manually)
-            </nue-button>
-            <nue-button theme="small" @click="createSuccessMessage">
-                Success type
-            </nue-button>
-            <nue-button theme="small" @click="createErrorMessage">
-                Error type
-            </nue-button>
-            <nue-button theme="small" @click="createWarningMessage">
-                Warning type
-            </nue-button>
-            <nue-button theme="small" @click="createInfoMessage">
-                Info type
-            </nue-button>
-            <nue-button theme="small" @click="createLogMessage">
-                Log type
-            </nue-button>
-            <nue-button theme="small" @click="createSmallMessage">
-                Small size
-            </nue-button>
-            <nue-button theme="small" @click="createNormalMessage">
-                Normal size
-            </nue-button>
-            <nue-button theme="small" @click="createLargeMessage">
-                Large size
-            </nue-button>
+        <nue-div vertical>
+            <nue-div>
+                <nue-button @click="createMessage">基础消息提示</nue-button>
+                <nue-button @click="createMessageWithIcon">
+                    带图标的消息提示
+                </nue-button>
+                <nue-button @click="createMessageWithDuration">
+                    消息提示：5 秒的自动关闭时间
+                </nue-button>
+                <nue-button @click="createCloseManualMessage">
+                    消息提示：手动关闭
+                </nue-button>
+            </nue-div>
+            <nue-div>
+                <nue-button @click="createSuccessMessage">
+                    消息提示：成功类型
+                </nue-button>
+                <nue-button @click="createErrorMessage">
+                    消息提示：失败类型
+                </nue-button>
+                <nue-button @click="createWarningMessage">
+                    消息提示：警告类型
+                </nue-button>
+                <nue-button @click="createInfoMessage">
+                    消息提示：基础类型
+                </nue-button>
+                <nue-button @click="createLogMessage">
+                    消息提示：日志类型
+                </nue-button>
+            </nue-div>
+            <nue-div>
+                <nue-button @click="createSmallMessage">
+                    小型消息提示
+                </nue-button>
+                <nue-button @click="createLargeMessage">
+                    大型消息提示
+                </nue-button>
+            </nue-div>
         </nue-div>
     </demo>
 </template>
 
 <script lang="ts" setup>
-import { NueMessage } from 'nue-ui';
+import NueMessage from '@nue-ui/components/message/message';
 import Demo from '../layouts/demo.vue';
 
 function createMessage() {
-    NueMessage({ message: 'This is a message' });
+    NueMessage({ message: '基础消息提示' });
 }
 
 function createMessageWithIcon() {
     NueMessage({
-        message: 'This is a message with icon',
+        message: '带图标的消息提示',
         icon: 'success'
     });
 }
 
 function createMessageWithDuration() {
     NueMessage({
-        message: 'This is a message with 5 seconds duration',
+        message: '消息提示：5 秒的自动关闭时间',
         duration: 5000
     });
 }
 
 function createCloseManualMessage() {
     NueMessage({
-        message: 'This is a message with close button (close manually)',
+        message: '消息提示：手动关闭',
         duration: 0
     });
 }
 
 function createSuccessMessage() {
-    NueMessage.success('This is a success message.');
+    NueMessage.success('消息提示：成功类型');
 }
 
 function createErrorMessage() {
-    NueMessage.error('This is an error message.');
+    NueMessage.error('消息提示：错误类型');
 }
 
 function createWarningMessage() {
-    NueMessage.warn('This is a warning message.');
+    NueMessage.warn('消息提示：警告类型');
 }
 
 function createInfoMessage() {
-    NueMessage.info('This is an info message.');
+    NueMessage.info('消息提示：基础类型');
 }
 
 function createLogMessage() {
-    NueMessage.log('This is a log message.');
+    NueMessage.log('消息提示：日志类型');
 }
 
 function createSmallMessage() {
     NueMessage({
-        message: 'This is a small message.',
+        message: '小型消息提示',
         size: 'small'
-    });
-}
-
-function createNormalMessage() {
-    NueMessage({
-        message: 'This is a large message.'
     });
 }
 
 function createLargeMessage() {
     NueMessage({
-        message: 'This is a large message.',
+        message: '大型消息提示',
         size: 'large'
     });
 }

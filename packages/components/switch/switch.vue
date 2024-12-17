@@ -36,15 +36,14 @@ const state = ref(false);
 const switchRef = ref<HTMLDivElement>();
 
 const classes = computed(() => {
-    const { size, theme, disabled } = props;
-    let list: string[] = [];
     const prefix = 'nue-switch';
-    list.push(prefix);
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    if (state.value) list.push(`${prefix}--actived`);
-    if (size) list.push(`${prefix}--${size}`);
-    if (disabled) list.push(`${prefix}--disabled`);
-    return list;
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        state.value && `${prefix}--actived`,
+        props.size && `${prefix}--${props.size}`,
+        props.disabled && `${prefix}--disabled`
+    ];
 });
 
 const handleClick = async () => {

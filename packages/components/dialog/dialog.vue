@@ -9,11 +9,13 @@
             <div :class="classes">
                 <div class="nue-dialog__header">
                     <slot :close="handleCancel" name="header">
-                        <nue-text>{{ title }}</nue-text>
+                        <nue-text size="var(--nue-ui-text-md)">
+                            {{ title }}
+                        </nue-text>
                         <nue-button
                             :disabled="!closable"
                             icon="clear"
-                            theme="pure"
+                            theme="ico"
                             @click="handleCancel"
                         />
                     </slot>
@@ -51,18 +53,14 @@ const emit = defineEmits<DialogEmitsType>();
 const dialogWrapperRef = ref<HTMLDivElement>();
 
 const classes = computed(() => {
-    const { theme } = props;
     const prefix = 'nue-dialog';
-    let list: string[] = [prefix];
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    return list;
+    return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
 const styles = computed(() => {
-    const { width, minWidth } = props;
     return {
-        '--aside-width': width,
-        '--aside-min-width': minWidth
+        '--aside-width': props.width,
+        '--aside-min-width': props.minWidth
     };
 });
 

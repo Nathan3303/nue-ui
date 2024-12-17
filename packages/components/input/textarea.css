@@ -1,16 +1,7 @@
 /* variables */
 
 .nue-textarea {
-    --width: auto;
-    --min-width: 80px;
-    --height: calc(var(--line-height) * var(--rows));
-    --min-height: calc(var(--line-height) * 1);
-    --line-height: calc(var(--nue-ui-text-default) + 4px);
-    --padding-y: 6px;
-    --padding-x: 12px;
-    --flex: none;
     --rows: 3;
-    --overflow: auto;
     --resize: none;
     --border-color: var(--nue-ui-divider-color);
     --background-color: transparent;
@@ -22,6 +13,16 @@
     --disabled-color: #9e9e9e;
     --disabled-border-color: var(--nue-ui-divider-color);
     --disabled-background-color: var(--nue-ui-primary-color-100);
+    /* after v0.7.0 */
+    --nue-textarea-vgap: 12px;
+    --nue-textarea-width: auto;
+    --nue-textarea-height: calc(var(--nue-textarea-line-height) * var(--rows));
+    --nue-textarea-line-height: 22px;
+    --nue-textarea-font-size: var(--nue-ui-text-default);
+    --nue-textarea-font-color: var(--nue-ui-primary-text-color);
+    --nue-textarea-icon-size: var(--nue-textarea-font-size);
+    --nue-textarea-icon-color: var(--nue-textarea-font-color);
+    --nue-textarea-overflow: auto;
 }
 
 /* original */
@@ -30,26 +31,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex: var(--flex);
-    width: var(--width);
-    height: auto;
-    min-height: 36px;
-    box-sizing: border-box;
-    padding: var(--padding-y) var(--padding-x);
+    padding: calc(var(--nue-textarea-vgap) * 0.5) var(--nue-textarea-vgap);
     border: 1px solid var(--border-color);
     border-radius: var(--nue-ui-primary-radius);
     background-color: var(--background-color);
     box-shadow: var(--nue-ui-secondary-shadow);
+    flex: auto;
     overflow: auto;
     overflow-x: hidden;
     position: relative;
     transition: all 0.16s ease;
     -webkit-user-select: none;
     user-select: none;
-    color: var(--nue-ui-primary-text-color);
-    font-size: var(--nue-ui-text-default);
-    font-weight: var(--nue-ui-primary-font-weight);
 
     &:hover {
         border-color: var(--hover-border-color);
@@ -64,20 +57,18 @@
 
     .nue-textarea__textarea {
         width: 100%;
-        margin: 0;
+        min-height: var(--nue-textarea-line-height);
         padding: 0;
         border: none;
         outline: none;
+        overflow: var(--nue-textarea-overflow);
         resize: var(--resize);
-        overflow: var(--overflow);
         background-color: transparent;
-        color: inherit;
-        font-size: inherit;
-        font-weight: inherit;
+        flex: auto;
+        color: var(--nue-textarea-font-color);
+        font-size: var(--nue-textarea-font-size);
+        line-height: var(--nue-textarea-line-height);
         font-family: inherit;
-        line-height: var(--line-height);
-        min-height: calc(var(--line-height));
-        max-height: calc(var(--line-height) * var(--rows));
 
         &::-ms-reveal,
         &::-ms-clear {
@@ -91,13 +82,12 @@
     }
 
     .nue-textarea__backend-textarea {
-        height: 0;
-        position: absolute;
-        top: var(--padding-y);
-        left: var(--padding-y);
-        z-index: -1;
-        opacity: 0;
-        width: calc(100% - var(--padding-x) * 2);
+        width: 100% !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        opacity: 0 !important;
+        resize: none !important;
+        overflow: hidden !important;
     }
 
     .word-counter {
@@ -106,71 +96,44 @@
         right: 8px;
         background: white;
         color: var(--nue-ui-primary-color-500);
-        font-size: var(--nue-ui-text-xs);
+        font-size: var(--nue-ui-text-sm);
     }
 
     &.nue-textarea--disabled {
         --hover-border-color: var(--disabled-border-color);
         --hover-background-color: var(--disabled-background-color);
-
         border-color: var(--disabled-border-color);
         background-color: var(--disabled-background-color);
         cursor: not-allowed;
         -webkit-user-select: none;
         user-select: none;
-    }
 
-    &.nue-textarea--disabled * {
-        cursor: not-allowed;
-    }
-
-    &.nue-textarea--rounded {
-        border-radius: 18px;
-        --padding-y: 8px;
-    }
-
-    &.nue-textarea--noshape {
-        padding: 0;
-        box-shadow: none;
-        --width: auto;
-        --border-color: transparent;
-        --hover-border-color: transparent;
-        --focus-border-color: transparent;
-        --focus-shadow-color: transparent;
-        --focus-shadow: none;
-        --disabled-border-color: transparent;
-    }
-
-    &.nue-textarea--small {
-        min-height: 28px;
-        padding: 4px 6px 5px 6px;
-        font-size: var(--nue-ui-text-xs);
-    }
-
-    &.nue-textarea--large {
-        min-height: 48px;
-        padding: 8px 12px 9px 12px;
-        font-size: var(--nue-ui-text-md);
+        & * {
+            cursor: not-allowed;
+        }
     }
 }
 
-/* Built-in styles */
-
-.nue-textarea--linear {
-    transition: all 0.3s;
-    border: none;
-    border-bottom: 2px solid #cccccc;
-    border-radius: 0;
-
-    --border-width: 0px;
-    --padding-y: 4px;
-    --hover-border-color: #8ac7ab;
-    --focus-border-color: #42b983;
+.nue-textarea--noshape {
+    padding: 0;
+    box-shadow: none;
+    --width: auto;
+    --border-color: transparent;
+    --hover-border-color: transparent;
+    --focus-border-color: transparent;
     --focus-shadow-color: transparent;
-    --focus-background-color: transparent;
+    --focus-shadow: none;
+    --disabled-border-color: transparent;
+}
 
-    &:focus-within {
-        border: none;
-        border-bottom: 2px solid #42b983;
-    }
+.nue-textarea--small {
+    --nue-textarea-vgap: 8px;
+    --nue-textarea-font-size: var(--nue-ui-text-xs);
+    --nue-textarea-line-height: 19px;
+}
+
+.nue-textarea--large {
+    --nue-textarea-vgap: 16px;
+    --nue-textarea-font-size: var(--nue-ui-text-lg);
+    --nue-textarea-line-height: 27px;
 }

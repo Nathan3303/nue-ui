@@ -1,10 +1,10 @@
 <template>
     <demo title="Drawer 抽屉">
         <nue-div>
-            <nue-button theme="small" @click="drawer1Visible = true">
+            <nue-button @click="drawer1Visible = true">
                 Open drawer1
             </nue-button>
-            <nue-button theme="small" @click="drawer2Visible = true">
+            <nue-button @click="drawer2Visible = true">
                 Open drawer2
             </nue-button>
         </nue-div>
@@ -14,7 +14,6 @@
             span="42%"
             title="Drawer1"
         >
-            <nue-text tag="p">drawer1 content</nue-text>
             <nue-button @click="drawer2Visible = true">Open drawer2</nue-button>
         </nue-drawer>
         <nue-drawer
@@ -31,6 +30,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import NueDrawer from '@nue-ui/components/drawer/drawer.vue';
 import Demo from '../layouts/demo.vue';
 
 const drawer1Visible = ref(false);

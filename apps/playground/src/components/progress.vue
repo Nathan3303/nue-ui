@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts" setup>
+import NueProgress from '@nue-ui/components/progress/progress.vue';
 import Demo from '../layouts/demo.vue';
 </script>
-
-<style scoped></style>

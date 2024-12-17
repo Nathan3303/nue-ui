@@ -11,6 +11,8 @@
     --circle-size: calc(var(--height) - 4px);
     --circle-color: var(--nue-ui-primary-color-100);
     --circle-active-color: var(--nue-ui-primary-color-100);
+    /* after v0.7.0 */
+    --switch-font-size: var(--nue-ui-text-default);
 }
 
 /* original */
@@ -56,8 +58,7 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-        font-size: var(--text-xs);
-        text-align: center;
+        font-size: var(--switch-font-size);
         flex: auto;
         color: var(--background-active-color);
         padding: 0 8px 0 4px;
@@ -69,13 +70,13 @@
     }
 
     &.nue-switch--small {
-        --height: 18px;
-        font-size: var(--nue-ui-text-xxs);
+        --height: 21px;
+        --switch-font-size: var(--nue-ui-text-xs);
     }
 
     &.nue-switch--large {
-        --height: 30px;
-        font-size: var(--nue-ui-text-sm);
+        --height: 27px;
+        --switch-font-size: var(--nue-ui-text-md);
     }
 
     &.nue-switch--actived {

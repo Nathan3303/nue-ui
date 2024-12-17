@@ -7,7 +7,7 @@
                 </nue-text>
             </template>
         </nue-header>
-        <nue-main outline-width="200px" responsive>
+        <nue-main aside-width="256px" responsive>
             <template #aside>
                 <nue-collapse
                     v-model="collapseValue"

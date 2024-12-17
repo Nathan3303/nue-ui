@@ -1,18 +1,17 @@
-import { ref, provide, watchEffect } from 'vue';
+import { provide, ref, watchEffect } from 'vue';
 import type {
-    CollapsePropsType,
+    ActivedCollapseItems,
+    CollapseContextType,
     CollapseEmitType,
-    ActivedCollpaseItems,
     CollapseItemName,
-    CollapseContextType
+    CollapsePropsType
 } from './types';
 import { COLLAPSE_CONTEXT_KEY } from './constants';
-import './collapse.css';
 
 export function useCollapse(props: CollapsePropsType, emit: CollapseEmitType) {
-    const activedItems = ref<ActivedCollpaseItems>([]);
+    const activedItems = ref<ActivedCollapseItems>([]);
 
-    function setActivedItems(items: ActivedCollpaseItems) {
+    function setActivedItems(items: ActivedCollapseItems) {
         activedItems.value = items;
         const newValue = props.accordion
             ? activedItems.value[0]

@@ -1,45 +1,24 @@
 /* variables */
 
-.nue-confirm-wrapper {
-    --wrapper-animation-name: fade-in;
+.nue-confirm {
     --animation-name: slide-in-from-top;
     --animation-rest-property: 0.24s ease-out forwards;
 }
 
 /* original */
 
-.nue-confirm-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.48);
-    overflow: hidden;
-    box-sizing: border-box;
-    animation: var(--wrapper-animation-name) var(--animation-rest-property);
-    z-index: 5;
-
-    &[data-closing='true'] {
-        --wrapper-animation-name: fade-out;
-        --animation-name: slide-out-to-top;
-    }
-}
-
 .nue-confirm {
     display: flex;
     flex-direction: column;
     width: 24%;
     min-width: 280px;
-    padding: 16px;
-    border-radius: 5px;
-    background-color: #fff;
-    gap: 16px;
+    padding: var(--nue-ui-primary-padding);
+    border-radius: var(--nue-ui-primary-radius);
+    background-color: var(--nue-ui-primary-color-100);
+    gap: var(--nue-ui-primary-gap);
     animation: var(--animation-name) var(--animation-rest-property);
 
     .nue-confirm__header {
-        width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;

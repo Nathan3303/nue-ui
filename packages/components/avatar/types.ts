@@ -14,5 +14,5 @@ export interface AvatarProps extends GlobalProps {
 }
 
 export type AvatarEmits = {
-    (e: 'error', val: Event): void;
+    (e: 'error', payload: Event): void;
 };

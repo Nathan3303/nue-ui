@@ -1,16 +1,14 @@
 <template>
     <div
         v-show="!isHidden"
-        :data-collapse="isCollapsed"
+        :data-collapsed="isCollapsed"
         class="nue-collapse-item"
     >
         <div class="nue-collapse-item__header">
             <slot :collapse="handleCollapse" :state="isCollapsed" name="header">
-                <div class="nue-collapse-item__title">
-                    <slot name="title">
-                        <span>{{ title }}</span>
-                    </slot>
-                </div>
+                <nue-text :clamped="1" class="nue-collapse-item__title">
+                    <slot name="title">{{ title }}</slot>
+                </nue-text>
                 <nue-button
                     class="nue-collapse-item__toggle-button"
                     icon="arrow-down"
@@ -25,10 +23,8 @@
                     <nue-text
                         v-if="!hideWhenEmpty"
                         class="nue-collapse-item__empty"
-                        color="gray"
-                        size="12px"
                     >
-                        Empty
+                        暂无内容
                     </nue-text>
                 </slot>
             </div>
@@ -39,7 +35,8 @@
 <script lang="ts" setup>
 import { computed, inject, onMounted, onUpdated, ref, watch } from 'vue';
 import { COLLAPSE_CONTEXT_KEY } from './constants';
-import { NueButton, NueText } from '..';
+import NueButton from '../button/button.vue';
+import NueText from '../text/text.vue';
 import { generateId } from '@nue-ui/utils';
 import type {
     CollapseContextType,
@@ -49,15 +46,13 @@ import type {
 
 defineOptions({ name: 'NueCollapseItem' });
 
-const props = withDefaults(defineProps<CollapseItemPropsType>(), {
-    title: '',
-    hideWhenEmpty: false
-});
+const props = withDefaults(defineProps<CollapseItemPropsType>(), {});
 
 const { activedItems, pushActivedItem } = inject(
     COLLAPSE_CONTEXT_KEY,
     {} as CollapseContextType
 );
+
 const contentRef = ref<HTMLDivElement>();
 const contentInnerRef = ref<HTMLDivElement>();
 const isHidden = ref(false);

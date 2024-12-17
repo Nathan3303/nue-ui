@@ -27,5 +27,6 @@
 </template>
 
 <script lang="ts" setup>
+import NueBadge from '@nue-ui/components/badge/badge.vue';
 import Demo from '../layouts/demo.vue';
 </script>

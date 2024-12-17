@@ -8,8 +8,6 @@ export interface NueCheckboxProps extends GlobalProps {
     disabled?: boolean;
     loading?: boolean;
     indeterminate?: boolean;
-    // value?: string | number;
-    // checked?: boolean;
     beforeCheck?: (state: boolean) => boolean | Promise<boolean>;
 }
 

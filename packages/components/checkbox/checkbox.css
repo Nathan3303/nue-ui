@@ -5,10 +5,10 @@
     --border-color: transparent;
     --border-radius: var(--nue-ui-primary-radius);
     --box-shadow: none;
-    --check-label-size: var(--nue-ui-text-default);
-    --check-icon-size: calc(var(--check-label-size) + 4px);
-    --check-icon-color: var(--nue-ui-primary-color-400);
-    --check-label-color: var(--nue-ui-primary-color-700);
+    --nue-check-label-size: var(--nue-ui-text-default);
+    --nue-check-label-color: var(--nue-ui-primary-color-900);
+    --nue-check-icon-size: calc(var(--nue-check-label-size) + 2px);
+    --nue-check-icon-color: var(--nue-ui-primary-color-600);
     --animation-time: 0.16s;
 }
 
@@ -24,21 +24,18 @@
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     transition: all var(--animation-time) ease;
-    line-height: normal;
 
     .nue-checkbox__icon {
-        --icon-color: var(--check-icon-color);
-        --icon-size: var(--check-icon-size);
-        transition: all var(--animation-time) ease;
+        color: var(--nue-check-icon-color);
+        --icon-size: var(--nue-check-icon-size);
     }
 
     .nue-checkbox__label {
-        color: var(--check-label-color);
-        font-size: var(--check-label-size);
-        line-height: var(--check-label-size);
-        -webkit-user-select: none;
+        font-size: var(--nue-check-label-size);
+        color: var(--nue-check-label-color);
+        line-height: normal;
         user-select: none;
-        transition: all var(--animation-time) ease;
+        -webkit-user-select: none;
     }
 }
 
@@ -46,21 +43,21 @@
 
 .nue-checkbox--small {
     gap: 4px;
-    --check-label-size: var(--nue-ui-text-sm);
+    --nue-check-label-size: var(--nue-ui-text-xs);
 }
 
 /* large */
 
 .nue-checkbox--large {
     gap: 8px;
-    --check-label-size: var(--nue-ui-text-md);
+    --nue-check-label-size: var(--nue-ui-text-lg);
 }
 
 /* checked */
 
 .nue-checkbox--checked {
-    --check-icon-color: var(--nue-ui-primary-color-900);
-    --check-label-color: var(--nue-ui-primary-color-900);
+    --nue-check-icon-color: var(--nue-ui-primary-color-900);
+    --nue-check-label-color: var(--nue-ui-primary-color-900);
 }
 
 /* disabled & loading */
@@ -73,9 +70,12 @@
 
 /* bordered */
 
-.nue-checkbox--bordered {
-    --padding: 8px;
+.nue-checkbox--bordered,
+.nue-checkbox--bd {
+    --nue-checkbox-vgap: var(--nue-ui-secondary-gap);
     --border-color: var(--nue-ui-border-color);
     --border-radius: var(--nue-ui-primary-radius);
     --box-shadow: var(--nue-ui-secondary-shadow);
+    gap: var(--nue-checkbox-vgap);
+    padding: calc(var(--nue-checkbox-vgap) * 0.5) var(--nue-checkbox-vgap);
 }

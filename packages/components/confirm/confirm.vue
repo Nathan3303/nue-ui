@@ -1,11 +1,11 @@
 <template>
     <div ref="confirmRef" :class="classes">
         <div class="nue-confirm__header">
-            <nue-text>{{ title }}</nue-text>
+            <nue-text size="var(--nue-ui-text-md)">{{ title }}</nue-text>
             <nue-button
                 :disabled="loading"
                 icon="clear"
-                theme="pure"
+                theme="ico"
                 @click.stop="handleConfirm(false)"
             />
         </div>
@@ -33,6 +33,7 @@ import NueButton from '../button/button.vue';
 import NueText from '../text/text.vue';
 import type { ConfirmPropsType } from './types';
 import { parseTheme } from '@nue-ui/utils';
+import './confirm.css';
 
 defineOptions({ name: 'NueConfirmNodeInner' });
 const props = withDefaults(defineProps<ConfirmPropsType>(), {
@@ -44,11 +45,8 @@ const props = withDefaults(defineProps<ConfirmPropsType>(), {
 const loading = ref(false);
 
 const classes = computed(() => {
-    const { theme } = props;
     const prefix = 'nue-confirm';
-    let list: string[] = [prefix];
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    return list;
+    return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
 const handleConfirm = async (isConfirmed: boolean) => {

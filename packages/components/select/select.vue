@@ -7,19 +7,10 @@
         @execute="handleExecute"
     >
         <template #default="{ clickTrigger }">
-            <nue-button
-                :disabled="disabled"
-                :size="size"
-                style="gap: 16px"
-                @click.stop="clickTrigger"
-            >
+            <nue-button :disabled="disabled" :size="size" @click="clickTrigger">
                 <template #default>
                     <template v-if="label">{{ label }}</template>
-                    <nue-text
-                        v-else
-                        color="gray"
-                        style="font-size: inherit !important"
-                    >
+                    <nue-text v-else color="gray">
                         {{ placeholder }}
                     </nue-text>
                 </template>
@@ -41,8 +32,11 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, provide, ref, watch } from 'vue';
-import { NueButton, NueDropdown, NueIcon, NueText } from '../index';
 import { parseTheme } from '@nue-ui/utils';
+import NueButton from '../button/button.vue';
+import NueDropdown from '../dropdown/dropdown.vue';
+import NueIcon from '../icon/icon.vue';
+import NueText from '../text/text.vue';
 import type {
     SelectContext,
     SelectEmits,
@@ -55,7 +49,7 @@ defineOptions({ name: 'NueSelect' });
 const emit = defineEmits<SelectEmits>();
 const props = withDefaults(defineProps<SelectProps>(), {
     hideOnSelect: true,
-    placeholder: 'Select',
+    placeholder: '请选择',
     clearable: false
 });
 
@@ -63,11 +57,8 @@ const options = ref<SelectOption[]>([]);
 const selectedOption = ref<SelectOption>();
 
 const classes = computed(() => {
-    const { theme } = props;
     const prefix = 'nue-select';
-    let list: string[] = [prefix];
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    return list;
+    return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
 const label = computed(() => {
@@ -79,7 +70,6 @@ function optionRegister(option: SelectOption) {
 }
 
 function handleExecute(executeId: string) {
-    // console.log(executeId);
     handleSelect(executeId);
 }
 
@@ -87,7 +77,6 @@ function handleSelect(payload: unknown, isParseMV = false) {
     let _option: SelectOption | undefined = void 0;
     if (isParseMV) {
         if (selectedOption.value && payload === selectedOption.value.value) {
-            // console.log(payload, selectedOption.value.value);
             return;
         }
         for (const option of options.value) {

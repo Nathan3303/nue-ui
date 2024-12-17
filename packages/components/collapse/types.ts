@@ -2,10 +2,10 @@ import type { GlobalProps } from '@nue-ui/utils';
 import type { Ref } from 'vue';
 
 export type CollapseItemName = string;
-export type ActivedCollpaseItems = CollapseItemName | CollapseItemName[];
+export type ActivedCollapseItems = CollapseItemName | CollapseItemName[];
 
 export interface CollapsePropsType extends GlobalProps {
-    modelValue?: ActivedCollpaseItems;
+    modelValue?: ActivedCollapseItems;
     accordion?: boolean;
 }
 
@@ -16,10 +16,10 @@ export type CollapseItemPropsType = {
 };
 
 export type CollapseEmitType = {
-    (e: 'update:modelValue', value: ActivedCollpaseItems): void;
+    (e: 'update:modelValue', value: ActivedCollapseItems): void;
 };
 
 export type CollapseContextType = {
-    activedItems: Ref<ActivedCollpaseItems>;
+    activedItems: Ref<ActivedCollapseItems>;
     pushActivedItem: (item: CollapseItemName) => void;
 };

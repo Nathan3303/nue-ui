@@ -15,7 +15,8 @@
 </template>
 
 <script lang="ts" setup>
-import { NueConfirm, NueMessage } from 'nue-ui';
+import { NueConfirm } from '@nue-ui/components/confirm';
+import { NueMessage } from '@nue-ui/components/message';
 import Demo from '../layouts/demo.vue';
 
 function openConfirm() {
@@ -62,7 +63,7 @@ function openConfirmWithOnConfirm() {
             });
         }
     }).then(
-        res => NueMessage.success(res),
+        res => NueMessage.success(res as string),
         err => {
             if (err instanceof Error) {
                 NueMessage.error(err.message);
@@ -93,7 +94,7 @@ function openConfirmWithOnConfirm() {
         }
 
         .nue-button--primary {
-            background-color: var(--primary-color-a200);
+            background-color: var(--nue-ui-primary-color-200);
         }
     }
 }

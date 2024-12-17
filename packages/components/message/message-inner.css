@@ -1,3 +1,23 @@
+/* variables */
+
+.nue-message-node {
+}
+
+.nue-message-node-inner {
+    --border-color: var(--nue-ui-primary-color-600);
+    --background-color: var(--nue-ui-primary-color-300);
+    --shadow-color: unset;
+    /* after v0.7.0 */
+    --inner-vgap: 12px;
+    --inner-font-size: var(--nue-ui-text-default);
+    --inner-font-color: var(--nue-ui-primary-text-color);
+    --inner-icon-size: var(--inner-font-size);
+    --inner-icon-color: var(--inner-font-color);
+    --inner-line-height: 22px;
+}
+
+/* original */
+
 .nue-message-node {
     display: flex;
     align-items: center;
@@ -7,18 +27,10 @@
 }
 
 .nue-message-node-inner {
-    --color: #363636;
-    --font-size: var(--nue-ui-text-default);
-    --icon-size: var(--font-size);
-    --padding-y: 8px;
-    --padding-x: 16px;
-    --border-color: #5e5e5e;
-    --background-color: #e5e5e5;
     display: flex;
     align-items: center;
-    gap: var(--padding-y);
-    padding: var(--padding-y) var(--padding-x);
-    color: var(--color);
+    gap: var(--inner-vgap);
+    padding: calc(var(--inner-vgap) * 0.5) var(--inner-vgap);
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
     border-radius: 5px;
@@ -30,16 +42,15 @@
     opacity: 0;
 
     .nue-message-node-inner__text {
-        color: inherit;
-        font-size: var(--font-size);
-        font-weight: var(--nue-ui-primary-font-weight);
+        color: var(--inner-font-color);
+        font-size: var(--inner-font-size);
         font-family: inherit;
+        line-height: var(--inner-line-height);
     }
 
     .nue-icon {
-        --icon-color: inherit;
-        --icon-size: var(--font-size);
-        --icon-weight: var(--nue-ui-primary-font-weight);
+        --icon-color: var(--inner-icon-color);
+        --icon-size: var(--inner-icon-size);
     }
 
     &.nue-message-node-inner--push {
@@ -49,47 +60,47 @@
     }
 
     &.nue-message-node-inner--small {
-        --padding-y: 6px;
-        --padding-x: 12px;
-        --font-size: var(--nue-ui-text-sm);
+        --inner-vgap: 10px;
+        --inner-font-size: var(--nue-ui-text-xs);
+        --inner-line-height: 19px;
     }
 
     &.nue-message-node-inner--large {
-        --padding-y: 10px;
-        --padding-x: 20px;
-        --font-size: var(--nue-ui-text-md);
+        --inner-vgap: 16px;
+        --inner-font-size: var(--nue-ui-text-lg);
+        --inner-line-height: 27px;
     }
 
     &.type--success {
-        color: #28a745;
+        --inner-font-color: #28a745;
         --background-color: #d4edda;
         --border-color: #28a745;
         --shadow-color: rgba(40, 167, 69, 0.3);
     }
 
     &.type--warning {
-        color: #ffc107;
+        --inner-font-color: #ffc107;
         --background-color: #fff3cd;
         --border-color: #ffc107;
         --shadow-color: rgba(255, 193, 7, 0.3);
     }
 
     &.type--error {
-        color: #dc3545;
+        --inner-font-color: #dc3545;
         --background-color: #f8d7da;
         --border-color: #dc3545;
         --shadow-color: rgba(220, 53, 69, 0.3);
     }
 
     &.type--info {
-        color: #17a2b8;
+        --inner-font-color: #17a2b8;
         --background-color: #d1ecf1;
         --border-color: #17a2b8;
         --shadow-color: rgba(23, 162, 184, 0.3);
     }
 
     &.type--log {
-        color: #131313;
+        --inner-font-color: #131313;
         --background-color: #ededed;
         --border-color: #363636;
         --shadow-color: rgba(0, 0, 0, 0.2);
