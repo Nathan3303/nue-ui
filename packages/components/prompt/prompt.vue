@@ -23,11 +23,11 @@
                 :placeholder="placeholder"
                 :type="inputType"
             />
+        </div>
+        <div class="nue-prompt__footer">
             <nue-text v-if="isInvalid" class="nue-prompt__value-error">
                 {{ invalidMessage }}
             </nue-text>
-        </div>
-        <div class="nue-prompt__footer">
             <nue-button :disabled="loading" @click.stop="handleClose(false)">
                 {{ cancelButtonText }}
             </nue-button>
@@ -79,6 +79,9 @@ const handleValidate = async () => {
         validateResult = await validator(inputValue.value);
     } catch (error) {
         console.warn('[NuePrompt/validator] Await error:', error);
+        validateResult = false;
+    }
+    if (!validateResult) {
         validateResult = new Error('无效的输入值');
     }
     if (validateResult instanceof Error) {

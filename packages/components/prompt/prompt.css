@@ -37,26 +37,19 @@
             font-size: var(--nue-ui-text-default);
             color: var(--nue-ui-primary-color-700);
         }
-
-        .nue-prompt__value-error {
-            margin-top: 8px;
-            color: #f44336;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            &::before {
-                content: '*';
-            }
-        }
     }
 
     .nue-prompt__footer {
         width: 100%;
         display: flex;
-        align-self: center;
+        align-items: center;
         justify-content: end;
         gap: 8px;
+        flex-wrap: nowrap;
+    }
+
+    .nue-prompt__value-error {
+        color: #f44336;
+        font-size: var(--nue-ui-text-sm);
     }
 }
