@@ -37,9 +37,9 @@ import './confirm.css';
 
 defineOptions({ name: 'NueConfirmNodeInner' });
 const props = withDefaults(defineProps<ConfirmPropsType>(), {
-    title: 'Confirm',
-    confirmButtonText: 'Yes',
-    cancelButtonText: 'No'
+    title: '确认提示',
+    confirmButtonText: '确认',
+    cancelButtonText: '取消'
 });
 
 const loading = ref(false);
