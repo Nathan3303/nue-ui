@@ -62,6 +62,7 @@
         flex: auto;
         color: var(--background-active-color);
         padding: 0 8px 0 4px;
+        line-height: var(--height);
     }
 
     &.nue-switch--disabled {
