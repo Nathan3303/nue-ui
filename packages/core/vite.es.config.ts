@@ -25,6 +25,13 @@ const moveStyles = () => {
     });
 };
 
+const moveGlobalDTs = () => {
+    readdir('./dist', err => {
+        if (err) return delay(moveGlobalDTs, 800);
+        shell.cp('./global.d.ts', './dist');
+    });
+};
+
 export default defineConfig({
     plugins: [
         vue(),
@@ -36,7 +43,7 @@ export default defineConfig({
             fileNames: ['./dist/es', './dist/theme', './dist/types'],
             afterBuild: () => {
                 moveStyles();
-                shell.cp('./global.d.ts', './dist');
+                moveGlobalDTs();
             }
         }),
         terser({
