@@ -23,7 +23,7 @@ app.use(NueUI);
 app.mount('#app');
 ```
 
-### Volar 支持 <Badge type="tip" text="^0.7.2" />
+### Volar 支持 <Badge type="tip" text="^0.7.33" />
 
 如果您使用 Volar，请在 tsconfig.json 中通过 compilerOptions.type 指定全局组件类型。
 
