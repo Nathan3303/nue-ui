@@ -18,7 +18,7 @@
         align-items: center;
         justify-content: center;
         color: white;
-        line-height: 1.2;
+        line-height: normal;
         font-size: var(--nue-badge-font-size);
         padding: calc(var(--nue-badge-vgap) * 0.5) var(--nue-badge-vgap);
         border: 1px solid var(--nue-badge-background-color);
@@ -28,8 +28,8 @@
         &:is(sup) {
             font-size: var(--nue-badge-font-size);
             position: absolute;
-            right: -12px;
-            top: -12px;
+            left: calc(100% - calc(var(--nue-badge-vgap) * 3));
+            bottom: calc(100% - calc(var(--nue-badge-vgap) * 3));
         }
     }
 }
@@ -37,20 +37,20 @@
 /* dot */
 
 .nue-badge--dot .nue-badge__content {
-    width: calc(var(--nue-badge-vgap) * 2);
-    padding: 0;
-    aspect-ratio: 1;
-    flex: none;
+    width: calc(var(--nue-badge-vgap) * 2.5);
+    height: calc(var(--nue-badge-vgap) * 2.5);
+    padding: calc(var(--nue-badge-vgap) * 0.5);
     border-radius: 999px;
 
     &:is(sup) {
-        right: -4px;
-        top: -4px;
+        left: calc(100% - calc(var(--nue-badge-vgap) * 1.5));
+        bottom: calc(100% - calc(var(--nue-badge-vgap) * 1.5));
     }
 }
 
 /* inner */
 
 .nue-badge--inner .nue-badge__content {
+    flex: none;
     border: none;
 }
