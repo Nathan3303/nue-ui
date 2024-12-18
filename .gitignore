@@ -32,5 +32,3 @@ dist/*
 /packages/docs/.vitepress/dist
 /packages/docs/.vitepress/cache
 .backup
-
-pnpm-lock.yaml
