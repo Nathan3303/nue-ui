@@ -32,6 +32,7 @@
             -webkit-user-select: none;
             user-select: none;
             box-shadow: 0 1px var(--nue-ui-divider-color);
+            color: var(--nue-ui-primary-text-color);
 
             .nue-collapse-item__toggle-button,
             .outter-toggle-button {
