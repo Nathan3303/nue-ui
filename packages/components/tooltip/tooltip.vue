@@ -57,19 +57,18 @@ const { placement, calculatePosition } = usePopper(
 const { show, hide } = usePopperController(visible);
 
 const tooltipClasses = computed(() => {
-    const { theme, size } = props;
     const prefix = 'nue-tooltip';
-    let list: string[] = [prefix];
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    if (size) list.push(`${prefix}--${size}`);
-    if (placement.value) list.push(`${prefix}--${placement.value}`);
-    return list;
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        props.size && `${prefix}--${props.size}`,
+        placement.value && `${prefix}--${placement.value}`
+    ];
 });
 
 const tooltipStyles = computed(() => {
-    const { showTriangle } = props;
     return {
-        '--triangle-display': showTriangle ? 'block' : void 0
+        '--triangle-display': props.showTriangle ? 'block' : void 0
     };
 });
 

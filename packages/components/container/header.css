@@ -2,26 +2,36 @@
 
 .nue-header {
     --nue-header-width: 100%;
-    --nue-header-height: 60px;
+    --nue-header-height: auto;
 }
 
 /* original */
 
 .nue-header {
-    grid-area: header;
     display: flex;
     align-items: center;
+    gap: calc(var(--nue-ui-primary-gap) * 2);
+    box-sizing: border-box;
     width: var(--nue-header-width);
     height: var(--nue-header-height);
+    padding: var(--nue-ui-primary-padding);
     flex: none;
 
     .nue-header__slot {
         height: 100%;
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: var(--nue-ui-secondary-padding);
         overflow: hidden;
         flex: none;
+    }
+
+    .nue-header__navigators {
+        gap: 4px;
+    }
+
+    .nue-header__logo {
+        font-size: var(--nue-ui-text-md);
     }
 
     .nue-header__navigators {

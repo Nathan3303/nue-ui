@@ -1,61 +1,89 @@
 <template>
-    <nue-container class="button-view" theme="vertical">
-        <nue-header>
-            <template #logo>
-                <nue-text size="var(--nue-ui-text-default)">
-                    Button 按钮
-                </nue-text>
-            </template>
-        </nue-header>
-        <nue-main>
-            <nue-div style="padding: 16px">
-                <nue-button>Button</nue-button>
-                <nue-button icon="search">带图标的按钮</nue-button>
+    <demo title="Button 按钮">
+        <nue-div vertical>
+            <nue-div align="center">
+                <nue-button>Button 按钮</nue-button>
+                <nue-button icon="theme">图标按钮</nue-button>
                 <nue-button disabled>禁用状态</nue-button>
+            </nue-div>
+            <nue-div align="center">
+                <nue-button :loading="isSearching" @click="handleSearch">
+                    加载状态
+                </nue-button>
                 <nue-button
                     :loading="isSearching"
                     loading-icon="scan"
                     @click="handleSearch"
                 >
-                    加载状态以及自定加载图标
+                    指定加载图标
                 </nue-button>
+            </nue-div>
+            <nue-div align="center">
                 <nue-button
-                    :throttle-duration="360"
+                    :throttle-duration="2000"
                     use-throttle
                     @click="count++"
                 >
-                    节流 ({{ count }})
+                    节流按钮 - 点击次数 {{ count }}
                 </nue-button>
-                <nue-button size="small">小按钮</nue-button>
-                <nue-button>正常按钮</nue-button>
-                <nue-button size="large">大按钮</nue-button>
+            </nue-div>
+            <nue-div align="center">
+                <nue-button size="large">大型按钮</nue-button>
+                <nue-button>按钮</nue-button>
+                <nue-button size="small">小型按钮</nue-button>
+            </nue-div>
+            <nue-div align="center">
                 <nue-button theme="round">圆角主题</nue-button>
                 <nue-button :theme="{ round: true, primary: true }">
-                    圆角主题+主要色主题
+                    主要+圆角主题
                 </nue-button>
                 <nue-button
                     icon="search"
                     theme="icon-only"
                     title="仅图标主题"
                 />
-                <nue-button theme="pure">纯文本主题</nue-button>
-                <nue-button>
-                    <template #prepend>
-                        <nue-icon name="scan" />
-                    </template>
-                    带有 prepend 插槽、带有 append 插槽。当 NueButton
-                    组件文本过长时，会自动隐藏过长的文字并出现省略号。
-                    <template #append>
-                        <nue-icon name="scan" />
-                    </template>
-                </nue-button>
+                <nue-button theme="pure">纯净主题</nue-button>
             </nue-div>
-        </nue-main>
-    </nue-container>
+            <nue-button>
+                使用后置插槽
+                <template #append>
+                    <nue-icon name="arrow-right-more" />
+                </template>
+            </nue-button>
+        </nue-div>
+    </demo>
+    <demo title="ButtonGroup 按钮组">
+        <nue-div>
+            <nue-div>
+                <nue-button-group>
+                    <nue-button icon="plus">添加</nue-button>
+                    <nue-button disabled icon="search">搜索</nue-button>
+                    <nue-button icon="more">更多</nue-button>
+                </nue-button-group>
+            </nue-div>
+            <nue-div>
+                <nue-button-group disabled>
+                    <nue-button icon="plus">添加</nue-button>
+                    <nue-button disabled icon="search">搜索</nue-button>
+                    <nue-button icon="more">更多</nue-button>
+                </nue-button-group>
+            </nue-div>
+            <nue-div>
+                <nue-button-group size="small">
+                    <nue-button icon="plus">添加</nue-button>
+                    <nue-button disabled icon="search">搜索</nue-button>
+                    <nue-button icon="more">更多</nue-button>
+                </nue-button-group>
+            </nue-div>
+        </nue-div>
+    </demo>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import NueButton from '@nue-ui/components/button/button.vue';
+import NueButtonGroup from '@nue-ui/components/button-group/button-group.vue';
+import Demo from '../layouts/demo.vue';
 
 const isSearching = ref(false);
 const count = ref(0);

@@ -1,7 +1,7 @@
 <template>
     <nue-div align="center">
-        <nue-avatar src="https://picsum.photos/200?3" size="36px" />
-        <nue-avatar src="https://picsum.photos/200?3" size="48px" />
-        <nue-avatar src="https://picsum.photos/200?3" size="56px" />
+        <nue-avatar size="36px" src="https://picsum.photos/200?3" />
+        <nue-avatar size="48px" src="https://picsum.photos/200?3" />
+        <nue-avatar size="56px" src="https://picsum.photos/200?3" />
     </nue-div>
 </template>

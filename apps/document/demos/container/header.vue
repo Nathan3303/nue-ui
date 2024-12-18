@@ -1,7 +1,7 @@
 <template>
     <nue-div class="vp-raw">
         <nue-container>
-            <nue-header height="72px">
+            <nue-header>
                 <template #logo>
                     <nue-text size="24px">Logo</nue-text>
                 </template>

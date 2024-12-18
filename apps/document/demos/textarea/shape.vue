@@ -1,10 +1,5 @@
 <template>
-    <nue-div vertical align="stretch">
-        <nue-textarea
-            v-model="textareaVModel"
-            placeholder="Please input something"
-            shape="rounded"
-        />
+    <nue-div align="stretch" vertical>
         <nue-textarea
             v-model="textareaVModel"
             placeholder="Please input something"
@@ -14,7 +9,7 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+import { ref } from 'vue';
 
-    const textareaVModel = ref('');
+const textareaVModel = ref('');
 </script>

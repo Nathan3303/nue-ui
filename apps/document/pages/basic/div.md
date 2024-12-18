@@ -42,12 +42,15 @@ demo-preview=../../demos/div/wrap.vue
 
 通过 `divider` 属性设置元素之间的分隔符。
 
-`divider` 属性接收 `string`、`number` 以及 `object` 类型。
+`divider` 属性接收 `string`、`number` 类型。
 
-::: tip
-当 `divider` 为 `object` 类型时，所插入的分隔符会渲染为 `NueDivider` 组件，其中的键值对将被作为 `NueDivider` 的 props。
-组件具体的 props 请参考 [`NueDivider`](/pages/others/divider.html) 文档。
-:::
+[//]: # (::: tip)
+
+[//]: # (当 `divider` 为 `object` 类型时，所插入的分隔符会渲染为 `NueDivider` 组件，其中的键值对将被作为 `NueDivider` 的 props。)
+
+[//]: # (组件具体的 props 请参考 [`NueDivider`]&#40;/pages/others/divider.html&#41; 文档。)
+
+[//]: # (:::)
 
 ::: preview
 demo-preview=../../demos/div/divider.vue

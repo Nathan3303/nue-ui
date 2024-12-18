@@ -1,25 +1,23 @@
 /* variables */
 
 .nue-avatar {
-    --size: 36px;
-    --object-fit: cover;
-    --background-color: var(--nue-ui-primary-color-400);
+    --nue-avatar-size: 36px;
+    --nue-avatar-object-fit: cover;
 }
 
 /* original */
 
 .nue-avatar {
     flex: none;
-    width: var(--size);
-    height: var(--size);
-    line-height: var(--size);
+    width: var(--nue-avatar-size);
+    height: var(--nue-avatar-size);
+    line-height: var(--nue-avatar-size);
     text-align: center;
     overflow: hidden;
     box-sizing: border-box;
-    aspect-ratio: 1;
     border: none;
-    border-radius: var(--border-radius, 4px);
-    background-color: var(--background-color);
+    border-radius: 4px;
+    background-color: var(--nue-ui-primary-color-400);
     color: var(--nue-ui-primary-color-100);
 
     .nue-avatar__image {
@@ -27,11 +25,7 @@
         height: 100%;
         line-height: 100%;
         text-align: center;
-        object-fit: var(--object-fit);
-    }
-
-    .nue-avatar__icon.iconfont::before {
-        display: initial;
+        object-fit: var(--nue-avatar-object-fit);
     }
 }
 

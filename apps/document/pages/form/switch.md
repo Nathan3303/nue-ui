@@ -42,7 +42,8 @@ demo-preview=../../demos/switch/disabled.vue
 
 通过属性 `loading` 设置开关组件的加载状态，接受 `boolean` 类型值，默认为 false 。
 
-通常属性 `loading` 与切换前的回调函数 `before-switch` 搭配使用。在 `before-switch` 回调函数中，只有返回 Resolved Promise 或是布尔类型 ture 时才会使开关组件的状态发生改变。
+通常属性 `loading` 与切换前的回调函数 `before-switch` 搭配使用。在 `before-switch` 回调函数中，只有返回 Resolved Promise
+或是布尔类型 ture 时才会使开关组件的状态发生改变。
 
 ::: preview
 demo-preview=../../demos/switch/loading.vue

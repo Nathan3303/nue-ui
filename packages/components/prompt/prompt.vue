@@ -1,50 +1,43 @@
 <template>
     <div ref="promptRef" class="nue-prompt">
         <div class="nue-prompt__header">
-            <slot name="header">
-                <nue-text>{{ title }}</nue-text>
-                <nue-button
-                    :disabled="loading"
-                    icon="clear"
-                    theme="pure"
-                    @click.stop="handleClose(false)"
-                />
-            </slot>
+            <nue-text size="var(--nue-ui-text-md)">
+                {{ title }}
+            </nue-text>
+            <nue-button
+                :disabled="loading"
+                icon="clear"
+                theme="ico"
+                @click.stop="handleClose(false)"
+            />
         </div>
         <div class="nue-prompt__content">
-            <slot>
-                <nue-text v-if="label" class="nue-prompt__label">
-                    {{ label }}
-                </nue-text>
-                <component
-                    :is="inputType === 'textarea' ? NueTextarea : NueInput"
-                    ref="promptInputRef"
-                    v-model="inputValue"
-                    :disabled="loading"
-                    :placeholder="placeholder"
-                    :type="inputType"
-                />
-                <nue-text v-if="isInvalid" class="nue-prompt__value-error">
-                    {{ invalidMessage }}
-                </nue-text>
-            </slot>
+            <nue-text v-if="description" class="nue-prompt__description">
+                {{ description }}
+            </nue-text>
+            <component
+                :is="inputType === 'textarea' ? NueTextarea : NueInput"
+                ref="promptInputRef"
+                v-model="inputValue"
+                :disabled="loading"
+                :placeholder="placeholder"
+                :type="inputType"
+            />
         </div>
         <div class="nue-prompt__footer">
-            <slot name="footer">
-                <nue-button
-                    :disabled="loading"
-                    @click.stop="handleClose(false)"
-                >
-                    {{ cancelButtonText }}
-                </nue-button>
-                <nue-button
-                    :loading="loading"
-                    theme="primary"
-                    @click.stop="handleClose(true)"
-                >
-                    {{ confirmButtonText }}
-                </nue-button>
-            </slot>
+            <nue-text v-if="isInvalid" class="nue-prompt__value-error">
+                {{ invalidMessage }}
+            </nue-text>
+            <nue-button :disabled="loading" @click.stop="handleClose(false)">
+                {{ cancelButtonText }}
+            </nue-button>
+            <nue-button
+                :loading="loading"
+                theme="primary"
+                @click.stop="handleClose(true)"
+            >
+                {{ confirmButtonText }}
+            </nue-button>
         </div>
     </div>
 </template>
@@ -60,12 +53,13 @@ import type { PromptPropsType } from './types';
 defineOptions({ name: 'NuePromptNode' });
 
 const props = withDefaults(defineProps<PromptPropsType>(), {
-    title: 'Prompt',
-    placeholder: 'Please input',
+    title: '输入提示',
+    description: '',
+    placeholder: '请输入 ...',
     inputType: 'text',
     inputValue: '',
-    confirmButtonText: 'Yes',
-    cancelButtonText: 'No'
+    confirmButtonText: '确定',
+    cancelButtonText: '取消'
 });
 
 const promptRef = ref<HTMLDivElement>();
@@ -77,54 +71,61 @@ const loading = ref(false);
 
 const handleValidate = async () => {
     const { validator } = props;
-    const value = inputValue.value;
+    let validateResult: boolean | Error = false;
     if (!validator) return true;
+    isInvalid.value = false;
+    loading.value = true;
     try {
-        loading.value = true;
-        const validateResult = await validator(value);
-        if (validateResult) {
-            isInvalid.value = false;
-            return true;
-        }
-        throw new Error('无效的输入值');
-    } catch (e) {
-        isInvalid.value = true;
-        if (typeof e === 'string') {
-            invalidMessage.value = e;
-        } else if (e instanceof Error) {
-            invalidMessage.value = e.message;
-        } else {
-            invalidMessage.value = '无效的输入值';
-        }
-        loading.value = false;
-        return false;
+        validateResult = await validator(inputValue.value);
+    } catch (error) {
+        console.warn('[NuePrompt/validator] Await error:', error);
+        validateResult = false;
     }
+    if (!validateResult) {
+        validateResult = new Error('无效的输入值');
+    }
+    if (validateResult instanceof Error) {
+        isInvalid.value = true;
+        invalidMessage.value = validateResult.message || '无效的输入值';
+        loading.value = false;
+        validateResult = false;
+    }
+    return validateResult;
 };
 
 const handleClose = async (isConfirmed: boolean) => {
+    let onConfirmResult: unknown;
     const { close, onConfirm, closeOnError } = props;
-    const value = inputValue.value;
-    if (!isConfirmed) return close(false, '');
-    isInvalid.value = false;
-    const isValid = await handleValidate();
-    if (!isValid) return;
-    if (!onConfirm) return close(true, value);
+    // 点击了取消按钮
+    if (!isConfirmed) return close(false, '操作取消');
+    // 验证器验证失败
+    if (!(await handleValidate())) return;
+    // 没有 onConfirm 回调
+    if (!onConfirm) return close(true, inputValue.value);
+    // 开启加载状态
+    loading.value = true;
     try {
-        loading.value = true;
-        await onConfirm(value);
-        close(true, value);
-    } catch (e) {
+        // 获取 onConfirm 回调的返回值
+        onConfirmResult = await onConfirm(inputValue.value);
+    } catch (error) {
+        console.warn('[NuePrompt/onConfirm] Await error:', error);
+        onConfirmResult = false;
+    }
+    // 关闭还在状态
+    loading.value = false;
+    // 判断结果
+    if (onConfirmResult instanceof Error) {
+        // 判断是否 closeOnError
         if (closeOnError) {
-            const onConfirmResult =
-                e instanceof Error ? e : new Error(e as string);
-            close(false, onConfirmResult);
+            close(false, onConfirmResult.message);
+            return;
+        } else {
+            isInvalid.value = true;
+            invalidMessage.value = onConfirmResult.message || '确认失败';
             return;
         }
-        isInvalid.value = true;
-        invalidMessage.value = typeof e === 'string' ? e : '无效的输入值';
-    } finally {
-        loading.value = false;
     }
+    close(true, onConfirmResult);
 };
 
 onMounted(() => {

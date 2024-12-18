@@ -27,9 +27,7 @@
                     @click.stop="handleExecute"
                 >
                     <slot name="dropdown">
-                        <span class="nue-dropdown__empty-text">
-                            No options.
-                        </span>
+                        <span class="nue-dropdown__empty-text">没有选项</span>
                     </slot>
                 </ul>
             </template>
@@ -42,7 +40,8 @@ import { computed, nextTick, ref } from 'vue';
 import { useDropdownPool } from './use-dropdown-pool';
 import { usePopper, usePopperController } from '@nue-ui/hooks';
 import { parseTheme } from '@nue-ui/utils';
-import { NueButton, NueIcon } from '..';
+import NueButton from '../button/button.vue';
+import NueIcon from '../icon/icon.vue';
 import type { NueDropdownEmits, NueDropdownProps } from './types';
 import './dropdown.css';
 

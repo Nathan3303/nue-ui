@@ -24,7 +24,7 @@ export type InputPropsType = {
     width?: string;
     size?: 'small' | 'large';
     debounceTime?: number;
-    flex?: string;
+    flex?: string | boolean;
     name?: string;
 };
 

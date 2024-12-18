@@ -2,21 +2,24 @@
     <div :class="classes" :style="styles" :title="title">
         <img
             v-if="src && !loadError"
+            :alt="alt || `Avatar`"
             :src="src"
-            alt="N"
             class="nue-avatar__image"
             @error="handleError($event)"
         />
         <nue-icon v-else-if="icon" :name="icon" class="nue-avatar__icon" />
-        <slot v-else />
+        <slot v-else>
+            <span v-if="alt" class="nue-avatar__text">{{ alt }}</span>
+            <nue-icon v-else class="nue-avatar__icon" name="logo" />
+        </slot>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-import type { AvatarEmits, AvatarProps } from './types';
 import { NueIcon } from '../icon';
+import type { AvatarEmits, AvatarProps } from './types';
 import './avatar.css';
 
 defineOptions({ name: 'NueAvatar' });
@@ -26,19 +29,20 @@ const props = withDefaults(defineProps<AvatarProps>(), {});
 
 const loadError = ref(false);
 
-const styles = computed(() => ({
-    '--size': props.size,
-    '--object-fit': props.fit,
-    '--border-radius': props.rounded ? '50%' : void 0
-}));
+const styles = computed(() => {
+    return {
+        '--nue-avatar-size': props.size,
+        '--nue-avatar-object-fit': props.fit
+    };
+});
 
 const classes = computed(() => {
-    const { theme } = props;
-    let list: string[] = [];
     const prefix = 'nue-avatar';
-    list.push(prefix);
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    return list;
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        props.rounded && 'nue-avatar--rounded'
+    ];
 });
 
 const handleError = (e: Event) => {

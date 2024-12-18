@@ -5,8 +5,8 @@
     </nue-div>
 </template>
 
-<script setup lang="ts">
-    import { ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-    const state = ref(false);
+const state = ref(false);
 </script>

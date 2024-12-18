@@ -11,11 +11,12 @@
             应用。如果你想了解更多信息，可以访问
             <nue-link
                 href="https://cn.vuejs.org/"
-                target="_blank"
                 icon="connection"
+                target="_blank"
             >
-                Vue 官方文档 </nue-link
-            >。
+                Vue 官方文档
+            </nue-link>
+            。
         </nue-text>
     </nue-div>
 </template>

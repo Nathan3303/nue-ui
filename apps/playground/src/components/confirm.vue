@@ -1,19 +1,21 @@
 <template>
-    <nue-div>
-        <nue-button theme="small" @click="openConfirm">
-            打开确认对话框
-        </nue-button>
-        <nue-button theme="small" @click="openConfirmWithTheme">
-            打开确认对话框（带自定义主题）
-        </nue-button>
-        <nue-button theme="small" @click="openConfirmWithOnConfirm">
-            打开确认对话框（带自定义确认回调）
-        </nue-button>
-    </nue-div>
+    <demo title="Confirm 确认对话框">
+        <nue-div vertical>
+            <nue-button @click="openConfirm"> 打开确认对话框</nue-button>
+            <nue-button @click="openConfirmWithTheme">
+                打开确认对话框（带自定义主题）
+            </nue-button>
+            <nue-button @click="openConfirmWithOnConfirm">
+                打开确认对话框（带自定义确认回调）
+            </nue-button>
+        </nue-div>
+    </demo>
 </template>
 
 <script lang="ts" setup>
-import { NueConfirm, NueMessage } from 'nue-ui';
+import { NueConfirm } from '@nue-ui/components/confirm';
+import { NueMessage } from '@nue-ui/components/message';
+import Demo from '../layouts/demo.vue';
 
 function openConfirm() {
     NueConfirm({
@@ -59,7 +61,7 @@ function openConfirmWithOnConfirm() {
             });
         }
     }).then(
-        res => NueMessage.success(res),
+        res => NueMessage.success(res as string),
         err => {
             if (err instanceof Error) {
                 NueMessage.error(err.message);
@@ -90,7 +92,7 @@ function openConfirmWithOnConfirm() {
         }
 
         .nue-button--primary {
-            background-color: var(--primary-color-a200);
+            background-color: var(--nue-ui-primary-color-200);
         }
     }
 }

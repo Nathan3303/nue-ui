@@ -2,22 +2,25 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 64px;
-    gap: 16px;
+    gap: var(--nue-ui-primary-gap);
 
-    *[data-selected='true'] {
+    &[data-selected='true'] {
         transition: all 0.2s ease-in-out;
-        background-color: var(--light-primary-color);
+        background-color: var(--nue-ui-primary-color-300);
         border-radius: var(--nue-ui-primary-radius);
-    }
-
-    *[data-disabled='true'] {
-        opacity: 0.5;
-        cursor: not-allowed;
 
         &:hover {
-            background-color: transparent !important;
-            cursor: not-allowed !important;
+            background-color: var(--nue-ui-primary-color-300);
+        }
+    }
+
+    &[data-disabled='true'] {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: var(--nue-ui-primary-color-200);
+
+        &:hover {
+            background-color: var(--nue-ui-primary-color-200);
         }
     }
 }

@@ -23,28 +23,30 @@
     --nue-ui-divider-color: var(--nue-ui-primary-color-300);
     --nue-ui-disabled-color: var(--nue-ui-primary-color-500);
     --nue-ui-primary-text-color: var(--nue-ui-primary-color-900);
-    --nue-ui-secondary-text-color: var(--nue-ui-primary-color-600);
+    --nue-ui-secondary-text-color: var(--nue-ui-primary-color-700);
 }
 
 :root {
-    --nue-ui-primary-font-size-base: 15px;
-    --nue-ui-primary-font-family: 'Poppins', 'Noto Sans SC';
+    --nue-ui-primary-font-size-base: 14px;
+    --nue-ui-primary-font-family: 'Poppins', 'Noto Sans SC', ui-sans-serif,
+        system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
     --nue-ui-primary-font-size: var(--nue-ui-text-default);
     --nue-ui-primary-font-weight: normal;
-    --nue-ui-primary-line-height: 1;
+    --nue-ui-primary-line-height: normal;
 }
 
 :root {
-    --nue-ui-text-xxxs: 0.2rem;
-    --nue-ui-text-xxs: 0.4rem;
-    --nue-ui-text-xs: 0.6rem;
-    --nue-ui-text-sm: 0.8rem;
+    --nue-ui-text-xxxs: calc(var(--nue-ui-primary-font-size) * 0.625);
+    --nue-ui-text-xxs: calc(var(--nue-ui-primary-font-size) * 0.5);
+    --nue-ui-text-xs: calc(var(--nue-ui-primary-font-size) * 0.75);
+    --nue-ui-text-sm: calc(var(--nue-ui-primary-font-size) * 0.875);
     --nue-ui-text-default: 1rem;
-    --nue-ui-text-md: 1.2rem;
-    --nue-ui-text-lg: 1.4rem;
-    --nue-ui-text-xl: 1.6rem;
-    --nue-ui-text-xxl: 1.8rem;
-    --nue-ui-text-xxxl: 2rem;
+    --nue-ui-text-md: calc(var(--nue-ui-primary-font-size) * 1.125);
+    --nue-ui-text-lg: calc(var(--nue-ui-primary-font-size) * 1.25);
+    --nue-ui-text-xl: calc(var(--nue-ui-primary-font-size) * 1.375);
+    --nue-ui-text-xxl: calc(var(--nue-ui-primary-font-size) * 1.5);
+    --nue-ui-text-xxxl: calc(var(--nue-ui-primary-font-size) * 1.75);
 }
 
 :root {
@@ -52,28 +54,38 @@
     --nue-ui-secondary-padding: 8px;
     --nue-ui-primary-gap: 16px;
     --nue-ui-secondary-gap: 8px;
-    --nue-ui-primary-radius: 6px;
+    --nue-ui-primary-radius: 5px;
     --nue-ui-primary-shadow: 1px 1px 3px rgba(100, 100, 100, 0.6);
     --nue-ui-secondary-shadow: 1px 1px 3px rgba(200, 200, 200, 0.2);
 }
 
 /* html original */
 
-.nue-reset-html,
-.nue-html {
+html.nue-reset-html,
+html.nue-html {
     width: 100vw;
     height: 100vh;
     margin: 0;
     padding: 0;
-    font-optical-sizing: auto;
     font-family: var(--nue-ui-primary-font-family), sans-serif;
-    font-size: var(--nue-ui-primary-font-size);
+    font-size: var(--nue-ui-primary-font-size-base);
     font-weight: var(--nue-ui-primary-font-weight);
     line-height: normal;
     min-width: 720px;
     min-height: 540px;
     aspect-ratio: 4 / 3;
     overflow: auto;
+
+    /* unknown attribute */
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    -webkit-font-smoothing: antialiased;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    font-optical-sizing: auto;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    -webkit-tap-highlight-color: transparent;
 
     & body {
         width: 100%;
@@ -87,5 +99,79 @@
             width: 100%;
             height: 100%;
         }
+    }
+}
+
+/* scrollbar */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--nue-ui-divider-color) transparent;
+
+    &::-webkit-scrollbar {
+        width: var(--nue-ui-primary-radius);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--nue-ui-divider-color);
+        border-radius: var(--nue-ui-primary-radius);
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+}
+
+/* wrapper style for confirm & prompt */
+
+body .nue-confirm-prompt-wrapper {
+    --wrapper-animation-name: fade-in;
+    --animation-name: slide-in-from-top;
+    --animation-rest-property: 0.24s ease-out forwards;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.48);
+    overflow: hidden;
+    box-sizing: border-box;
+    animation: var(--wrapper-animation-name) var(--animation-rest-property);
+    z-index: 5;
+
+    &[data-closing='true'] {
+        --wrapper-animation-name: fade-out;
+        --animation-name: slide-out-to-top;
+    }
+}
+
+/* linear style for input & textarea */
+
+body .nue-input--linear,
+body .nue-textarea--linear {
+    --hover-border-color: #8ac7ab;
+    --focus-border-color: #42b983;
+    --focus-shadow-color: transparent;
+    --focus-background-color: transparent;
+    transition-duration: 0.3s;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    border-radius: 0;
+    box-shadow: none;
+
+    &:focus-within {
+        border: none;
+        border-bottom: 2px solid #42b983;
+        box-shadow: none;
     }
 }

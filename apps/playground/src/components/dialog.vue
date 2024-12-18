@@ -1,7 +1,9 @@
 <template>
-    <nue-button theme="small" @click="dialogData.visible = true">
-        点击打开对话框
-    </nue-button>
+    <demo title="Dialog 对话框">
+        <nue-button @click="dialogData.visible = true">
+            点击打开对话框
+        </nue-button>
+    </demo>
     <nue-dialog
         ref="dialogRef"
         v-model="dialogData.visible"
@@ -57,7 +59,9 @@
 
 <script lang="ts" setup>
 import { reactive, ref, watch } from 'vue';
-import { NueConfirm, NueDialog, NueMessage } from 'nue-ui';
+import { NueConfirm, NueMessage } from '@nue-ui/components';
+import NueDialog from '@nue-ui/components/dialog/dialog.vue';
+import Demo from '../layouts/demo.vue';
 
 const isAddDescription = ref(false);
 const isProjectNameEmpty = ref(false);
@@ -114,6 +118,6 @@ watch(
 
 <style>
 .nue-dialog--project-creator {
-    border: 2px solid var(--primary-color-a200);
+    border: 2px solid var(--nue-ui-primary-color-500);
 }
 </style>

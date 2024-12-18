@@ -13,9 +13,9 @@
     </nue-div>
 </template>
 
-<script setup lang="ts">
-    import { ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-    const checkboxes = ['游戏', '音乐', '电影'];
-    const activeNames = ref([]);
+const checkboxes = ['游戏', '音乐', '电影'];
+const activeNames = ref([]);
 </script>

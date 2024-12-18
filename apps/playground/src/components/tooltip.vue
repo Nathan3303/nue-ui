@@ -1,59 +1,68 @@
 <template>
-    <nue-div align="center" justify="center">
-        <nue-tooltip content="Hello, world!" placement="top-start">
-            <nue-button theme="small">上-左</nue-button>
-        </nue-tooltip>
-        <nue-tooltip content="Hello, world!" placement="top-center">
-            <nue-button theme="small">上-中</nue-button>
-        </nue-tooltip>
-        <nue-tooltip content="Hello, world!" placement="top-end">
-            <nue-button theme="small">上-右</nue-button>
-        </nue-tooltip>
-    </nue-div>
-    <nue-div align="center" justify="space-between">
-        <nue-tooltip content="Hello, world!" placement="left-start">
-            <nue-button theme="small">左-上</nue-button>
-        </nue-tooltip>
-        <nue-tooltip content="Hello, world!" placement="right-start">
-            <nue-button theme="small">右-上</nue-button>
-        </nue-tooltip>
-    </nue-div>
-    <nue-div align="center" justify="space-between">
-        <nue-tooltip content="Hello, world!" placement="left-center">
-            <nue-button theme="small">左-中</nue-button>
-        </nue-tooltip>
-        <nue-tooltip content="small" size="small" theme="custom">
-            <nue-button theme="small">小型文字提示</nue-button>
-        </nue-tooltip>
-        <nue-tooltip content="large" size="large" theme="custom2">
-            <nue-button theme="small">大型文字提示</nue-button>
-        </nue-tooltip>
-        <nue-tooltip content="Hello, world!" placement="right-center">
-            <nue-button theme="small">右-中</nue-button>
-        </nue-tooltip>
-    </nue-div>
-    <nue-div align="center" justify="space-between">
-        <nue-tooltip content="Hello, world!" placement="left-end">
-            <nue-button theme="small">左-下</nue-button>
-        </nue-tooltip>
-        <nue-tooltip content="Hello, world!" placement="right-end">
-            <nue-button theme="small">右-下</nue-button>
-        </nue-tooltip>
-    </nue-div>
-    <nue-div align="center" justify="center">
-        <nue-tooltip content="Hello, world!" placement="bottom-start">
-            <nue-button theme="small">下-左</nue-button>
-        </nue-tooltip>
-        <nue-tooltip content="Hello, world!" placement="bottom-center">
-            <nue-button theme="small">下-中</nue-button>
-        </nue-tooltip>
-        <nue-tooltip content="Hello, world!" placement="bottom-end">
-            <nue-button theme="small">下-右</nue-button>
-        </nue-tooltip>
-    </nue-div>
+    <demo title="Tooltip 文字提示">
+        <nue-div vertical>
+            <nue-div align="center">
+                <nue-tooltip content="上方左对齐" placement="top-start">
+                    <nue-button theme="small">上方左对齐</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="上方居中" placement="top-center">
+                    <nue-button theme="small">上方居中</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="上方右对齐" placement="top-end">
+                    <nue-button theme="small">上方右对齐</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="左方上对齐" placement="left-start">
+                    <nue-button theme="small">左方上对齐</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="左方居中" placement="left-center">
+                    <nue-button theme="small">左方居中</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="左方下对齐" placement="left-end">
+                    <nue-button theme="small">左方下对齐</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="下方左对齐" placement="bottom-start">
+                    <nue-button theme="small">下方左对齐</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="下方居中" placement="bottom-center">
+                    <nue-button theme="small">下方居中</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="下方右对齐" placement="bottom-end">
+                    <nue-button theme="small">下方右对齐</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="右方上对齐" placement="right-start">
+                    <nue-button theme="small">右方上对齐</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="右方居中" placement="right-center">
+                    <nue-button theme="small">右方居中</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="右方下对齐" placement="right-end">
+                    <nue-button theme="small">右方下对齐</nue-button>
+                </nue-tooltip>
+            </nue-div>
+            <nue-div align="center">
+                <nue-tooltip content="小型文字提示" size="small">
+                    <nue-button theme="small">小型文字提示</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="大型文字提示" size="large">
+                    <nue-button theme="small">大型文字提示</nue-button>
+                </nue-tooltip>
+            </nue-div>
+            <nue-div align="center">
+                <nue-tooltip content="文字提示：自定主题 1" theme="custom">
+                    <nue-button theme="small">文字提示：自定主题 1</nue-button>
+                </nue-tooltip>
+                <nue-tooltip content="文字提示：自定主题 2" theme="custom2">
+                    <nue-button theme="small">文字提示：自定主题 2</nue-button>
+                </nue-tooltip>
+            </nue-div>
+        </nue-div>
+    </demo>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import NueTooltip from '@nue-ui/components/tooltip/tooltip.vue';
+import Demo from '../layouts/demo.vue';
+</script>
 
 <style>
 .nue-tooltip--custom {
@@ -61,6 +70,7 @@
 }
 
 .nue-tooltip--custom2 {
-    background: linear-gradient(to left, #ff2d55, #ff743c);
+    --nue-tooltip-font-color: #303a49;
+    background: linear-gradient(to left, #3cff97, #2dc7ff);
 }
 </style>

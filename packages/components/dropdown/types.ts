@@ -1,8 +1,5 @@
 import type { GlobalProps } from '@nue-ui/utils';
 
-export type DropdownDirection = 'top' | 'bottom';
-export type DropdownAlign = 'left' | 'center' | 'right';
-
 export interface NueDropdownProps extends GlobalProps {
     // Old
     text?: string;

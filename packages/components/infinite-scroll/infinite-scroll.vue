@@ -5,12 +5,14 @@
             <div ref="triggerBarRef" class="infinite-scroll__trigger-bar"></div>
             <div v-if="loading" class="infinite-scroll__loading">
                 <slot name="loading">
-                    <span>Loading...</span>
+                    <nue-text>数据加载中...</nue-text>
                 </slot>
             </div>
             <div v-if="disabled && !loading" class="infinite-scroll__disabled">
                 <slot name="disabled">
-                    <span>-- No more data --</span>
+                    <nue-text color="var(--nue-ui-disabled-color)">
+                        没有更多数据了
+                    </nue-text>
                 </slot>
             </div>
         </div>
@@ -19,6 +21,7 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
+import NueText from '../text/text.vue';
 import type { InfiniteScrollEmitsType, InfiniteScrollPropsType } from './types';
 import './infinite-scroll.css';
 

@@ -1,21 +1,21 @@
 <template>
     <nue-div>
-        <nue-avatar src="https://picsum.photos/200?10" size="48px" fit="fill" />
+        <nue-avatar fit="fill" size="48px" src="https://picsum.photos/200?10" />
         <nue-avatar
-            src="https://picsum.photos/200?10"
-            size="48px"
             fit="cover"
+            size="48px"
+            src="https://picsum.photos/200?10"
         />
         <nue-avatar
-            src="https://picsum.photos/200?10"
-            size="48px"
             fit="contain"
-        />
-        <nue-avatar src="https://picsum.photos/200?10" size="48px" fit="none" />
-        <nue-avatar
-            src="https://picsum.photos/200?10"
             size="48px"
+            src="https://picsum.photos/200?10"
+        />
+        <nue-avatar fit="none" size="48px" src="https://picsum.photos/200?10" />
+        <nue-avatar
             fit="scale-down"
+            size="48px"
+            src="https://picsum.photos/200?10"
         />
     </nue-div>
 </template>

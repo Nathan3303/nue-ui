@@ -7,7 +7,7 @@
                 </nue-text>
             </template>
         </nue-header>
-        <nue-main outline-width="200px" responsive>
+        <nue-main aside-width="256px" responsive>
             <template #aside>
                 <nue-collapse
                     v-model="collapseValue"
@@ -27,6 +27,7 @@
                                 v-for="(link, idx) in item.links"
                                 :key="idx"
                                 :route="link.route"
+                                theme="rl"
                             >
                                 {{ link.text }}
                             </nue-link>
@@ -37,7 +38,6 @@
             <template #content>
                 <router-view />
             </template>
-            <template #outline></template>
         </nue-main>
     </nue-container>
 </template>

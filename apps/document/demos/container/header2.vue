@@ -1,15 +1,11 @@
 <template>
     <nue-div class="vp-raw">
         <nue-container>
-            <nue-header height="72px">
-                <nue-div
-                    align="center"
-                    justify="space-between"
-                    style="padding: 16px"
-                >
-                    <nue-div gap="32px" width="fit-content">
+            <nue-header>
+                <nue-div align="center" justify="space-between">
+                    <nue-div align="center" gap="32px" width="fit-content">
                         <nue-text size="24px">Logo</nue-text>
-                        <nue-div width="fit-content">
+                        <nue-div gap="4px" width="fit-content">
                             <nue-link theme="btnlike,actived">首页</nue-link>
                             <nue-link theme="btnlike">关于我们</nue-link>
                         </nue-div>
@@ -35,4 +31,3 @@
     border-radius: var(--nue-ui-primary-radius);
 }
 </style>
-<script lang="ts" setup></script>

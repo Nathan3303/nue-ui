@@ -28,6 +28,7 @@ const routers = [
     { path: '/checkbox', component: () => import('./components/checkbox.vue') },
     { path: '/confirm', component: () => import('./components/confirm.vue') },
     { path: '/drawer', component: () => import('./components/drawer.vue') },
+    { path: '/dialog', component: () => import('./components/dialog.vue') },
     { path: '/message', component: () => import('./components/message.vue') },
     { path: '/prompt', component: () => import('./components/prompt.vue') },
     { path: '/tooltip', component: () => import('./components/tooltip.vue') },

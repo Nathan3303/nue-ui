@@ -1,0 +1,38 @@
+/* variables */
+
+.nue-separator {
+}
+
+/* original */
+
+.nue-separator {
+    display: flex;
+    flex-direction: column;
+    width: 1px;
+    height: 100%;
+    background-color: var(--nue-ui-divider-color);
+    z-index: 2;
+    position: relative;
+    flex: none;
+
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -4px;
+        width: 100%;
+        height: 100%;
+        padding: 0 4px;
+    }
+
+    &:hover {
+        cursor: e-resize;
+    }
+}
+
+.nue-separator--disabled {
+    &:hover {
+        cursor: default;
+    }
+}

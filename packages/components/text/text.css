@@ -1,10 +1,10 @@
 /* variables */
 
 .nue-text {
-    --color: var(--nue-ui-primary-text-color);
-    --font-size: var(--nue-ui-text-md);
-    --font-weight: var(--nue-ui-primary-font-weight);
-    --font-family: var(--nue-ui-primary-font-family);
+    --color: inherit;
+    --font-size: inherit;
+    --font-weight: inherit;
+    --font-family: inherit;
     --padding-x: 0px;
     --padding-y: 0px;
     --word-wrap: break-word;
@@ -19,39 +19,52 @@
 /* original */
 
 .nue-text {
-    color: var(--color, inherit);
-    text-decoration: var(--text-decoration, inherit);
-    text-align: var(--text-align, inherit);
+    color: var(--color);
+    text-decoration: var(--text-decoration);
+    text-align: var(--text-align);
     word-wrap: var(--word-wrap);
     word-break: var(--word-break);
     flex: var(--flex);
+    margin: 0;
     padding: var(--padding-y) var(--padding-x);
     background-color: var(--background-color);
     line-height: var(--line-height);
 
-    &:is(span) {
-        font-size: var(--font-size, inherit);
-        font-weight: var(--font-weight, inherit);
-    }
-
     &:is(h1) {
         font-size: var(--nue-ui-text-xxxl);
-        font-weight: 700;
+        font-weight: 800;
+        line-height: 3;
     }
 
     &:is(h2) {
         font-size: var(--nue-ui-text-xxl);
-        font-weight: 600;
+        font-weight: 700;
+        line-height: 2.75;
     }
 
     &:is(h3),
     &.nue-text--h3 {
         font-size: var(--nue-ui-text-xl);
-        font-weight: 500;
+        font-weight: 600;
+        line-height: 2.25;
     }
 
     &:is(h4) {
+        font-size: var(--nue-ui-text-md);
         font-weight: 500;
+        line-height: 1.75;
+    }
+
+    &:is(span) {
+        font-size: var(--font-size, inherit);
+        font-weight: var(--font-weight, inherit);
+        line-height: normal;
+    }
+
+    &:is(p) {
+        font-size: var(--font-size, inherit);
+        font-weight: var(--font-weight, inherit);
+        line-height: normal;
     }
 
     .nue-link:not(.nue-link--btnlike) {

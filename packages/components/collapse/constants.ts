@@ -1,1 +1,1 @@
-export const COLLAPSE_CONTEXT_KEY = 'CollpaseContextKey';
+export const COLLAPSE_CONTEXT_KEY = 'CollapseContextKey';

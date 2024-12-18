@@ -12,30 +12,24 @@ import './icon.css';
 
 defineOptions({ name: 'NueIcon' });
 
-const props = withDefaults(defineProps<IconPropsType>(), {
-    spin: false
-});
+const props = withDefaults(defineProps<IconPropsType>(), {});
 
 const classes = computed(() => {
     const prefix = 'nue-icon';
-    const { name, spin, theme } = props;
-    let themeClasses: string[] = [];
-    if (theme) themeClasses = parseTheme(theme, prefix);
     return [
         prefix,
         'iconfont',
-        `icon-${name}`,
-        { 'nue-icon--spin': spin },
-        ...themeClasses
+        `icon-${props.name}`,
+        { 'nue-icon--spin': props.spin },
+        ...parseTheme(props.theme, prefix)
     ];
 });
 
 const styles = computed(() => {
-    const { size, color, spinSpeed } = props;
     return {
-        '--icon-size': size,
-        '--icon-color': color,
-        '--spin-speed': spinSpeed
+        '--icon-size': props.size,
+        '--icon-color': props.color,
+        '--spin-speed': props.spinSpeed
     };
 });
 </script>

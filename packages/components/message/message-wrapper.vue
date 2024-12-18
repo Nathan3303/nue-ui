@@ -7,9 +7,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { useMessageWrapper } from './message';
 import './message-wrapper.css';
 
-defineOptions({
-    name: 'NueMessageWrapper'
-});
+defineOptions({ name: 'NueMessageWrapper' });
 
 const messageRef = ref<HTMLDivElement>();
 const clearFn = ref(() => {});

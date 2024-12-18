@@ -7,13 +7,13 @@
 </template>
 
 <style scoped>
-    .marquee-item {
-        width: 80px;
-        height: 80px;
-        background-color: var(--divider-color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: var(--primary-radius);
-    }
+.marquee-item {
+    width: 80px;
+    height: 80px;
+    background-color: var(--nue-ui-divider-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--nue-ui-primary-radius);
+}
 </style>

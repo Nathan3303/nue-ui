@@ -1,8 +1,8 @@
 <template>
     <nue-checkbox-group
         v-model="activeNames"
-        use-controller
         controller-label="全选"
+        use-controller
     >
         <nue-div gap="12px" style="margin-top: 12px">
             <nue-checkbox
@@ -15,9 +15,9 @@
     </nue-checkbox-group>
 </template>
 
-<script setup lang="ts">
-    import { ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-    const checkboxes = ['游戏', '音乐', '电影', '运动', '旅行'];
-    const activeNames = ref<string[]>(['游戏', '音乐']);
+const checkboxes = ['游戏', '音乐', '电影', '运动', '旅行'];
+const activeNames = ref<string[]>(['游戏', '音乐']);
 </script>

@@ -5,6 +5,9 @@
     --font-size: var(--nue-ui-text-default);
     --animation-time: 0.16s;
     --triangle-display: none;
+    /* after v0.7.0 */
+    --nue-tooltip-vgap: 12px;
+    --nue-tooltip-font-color: var(--nue-ui-primary-color-100);
 }
 
 /* original */
@@ -16,7 +19,7 @@
     width: max-content;
     min-width: 24px;
     max-width: 36vw;
-    padding: 6px 12px;
+    padding: calc(var(--nue-tooltip-vgap) * 0.5) var(--nue-tooltip-vgap);
     position: absolute;
     background-color: var(--nue-ui-primary-color-900);
     border-radius: var(--nue-ui-primary-radius);
@@ -26,18 +29,18 @@
     }
 
     .nue-tooltip__text {
-        color: var(--nue-ui-primary-color-100);
+        color: var(--nue-tooltip-font-color);
         font-size: var(--font-size);
         font-weight: var(--nue-ui-primary-font-weight);
     }
 
     &.nue-tooltip--small {
-        padding: 4px 8px;
+        --nue-tooltip-vgap: 8px;
         --font-size: var(--nue-ui-text-sm);
     }
 
     &.nue-tooltip--large {
-        padding: 8px 16px;
+        --nue-tooltip-vgap: 16px;
         --font-size: var(--nue-ui-text-md);
     }
 

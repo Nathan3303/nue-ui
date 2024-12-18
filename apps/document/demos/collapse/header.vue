@@ -1,7 +1,7 @@
 <template>
     <nue-collapse>
         <nue-collapse-item title="折叠项 自定标题">
-            <nue-text size="12px">
+            <nue-text>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Quibusdam voluptas harum velit, odit eaque aliquid optio
                 excepturi quas! Deserunt sequi quisquam vero magni itaque
@@ -21,7 +21,7 @@
                     </nue-text>
                 </nue-div>
             </template>
-            <nue-text size="12px">
+            <nue-text>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
                 ullam iusto laudantium dignissimos repellendus delectus
                 perferendis numquam quia quibusdam, et modi a. Ut cumque
@@ -30,3 +30,4 @@
         </nue-collapse-item>
     </nue-collapse>
 </template>
+<script lang="ts" setup></script>

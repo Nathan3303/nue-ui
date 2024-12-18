@@ -9,7 +9,7 @@
 通过属性 `icon` 可以指定按钮的前置图标。
 
 ::: tip
-按钮的前置图标的内部实现使用了 `NueIcon` 组件，关于图标的可选值请参考 [Icon 图标](/pages/basic/icon) 组件文档。
+前置图标的实现使用了组件库的图标组件 `NueIcon` ，关于属性 `icon` 的可选值请参考 [Icon 图标](/pages/basic/icon) 组件文档。
 :::
 
 ::: preview
@@ -18,7 +18,7 @@ demo-preview=../../demos/button/basic.vue
 
 ## 禁用状态
 
-使用属性 `disabled` 使按钮组件处于不可用状态。
+使用属性 `disabled` 使按钮组件处于不可用状态。属性接受 `boolean` 类型的值，为 `true` 时表示禁用。
 
 ::: preview
 demo-preview=../../demos/button/disabled.vue
@@ -26,7 +26,7 @@ demo-preview=../../demos/button/disabled.vue
 
 ## 设置按钮大小
 
-通过 `size` 属性设置按钮的大小。`size` 属性拥有 `small` 和 `large` 两个可选值，分别对应小和大两个尺寸。
+通过 `size` 属性设置按钮的大小。属性接受 `small` 和 `large` 两个可选值，分别对应小和大两个尺寸。
 
 ::: preview
 demo-preview=../../demos/button/size.vue
@@ -36,13 +36,13 @@ demo-preview=../../demos/button/size.vue
 
 通过 `NueButtonGroup` 组件可以将多个按钮以按钮组的形式排列。
 
-按钮组组件 `NueButtonGroup` 接收 `size` 和 `disabled` 属性控制组中按钮的属性。
+按钮组组件 `NueButtonGroup` 拥有 `size` 和 `disabled` 属性控制组中按钮的对应属性。
 
 - `size` 用于控制按钮组中的按钮大小。
 - `disabled` 用于控制按钮组中的按钮是否禁用。
 
 ::: tip
-按钮组组件中对按钮的属性控制优先级高于按钮组组件自身的属性。
+当按钮的属性和按钮组的属性同时被指定时，按钮组的属性会优先于按钮自身的属性。
 :::
 
 ::: preview
@@ -96,13 +96,19 @@ demo-preview=../../demos/button/append.vue
 
 预设主题包括 `icon-only`、 `primary` 以及 `pure`。
 
-::: tip
+[//]: # (::: tip)
 
-- 除了以 `string[]` 的方式传递多个主题名，还支持通过 `,` 分隔的字符串形式传递多个主题名。如 `theme="custom1,custom2"` 等价于
-  `:theme="['custom1', 'custom2']`。
-- 添加后的类名为 `nue-button--` 加上 `theme` 属性的值。如 `theme="custom"`，则该类名为 `nue-button--custom`。
+[//]: # ()
 
-:::
+[//]: # (- 除了以 `string[]` 的方式传递多个主题名，还支持通过 `,` 分隔的字符串形式传递多个主题名。如 `theme="custom1,custom2"` 等价于)
+
+[//]: # (  `:theme="['custom1', 'custom2']`。)
+
+[//]: # (- 添加后的类名为 `nue-button--` 加上 `theme` 属性的值。如 `theme="custom"`，则该类名为 `nue-button--custom`。)
+
+[//]: # ()
+
+[//]: # (:::)
 
 ::: preview
 demo-preview=../../demos/button/theme.vue

@@ -34,7 +34,10 @@ export default defineConfig({
         }),
         hooksPlugin({
             fileNames: ['./dist/es', './dist/theme', './dist/types'],
-            afterBuild: moveStyles
+            afterBuild: () => {
+                moveStyles();
+                shell.cp('./global.d.ts', './dist');
+            }
         }),
         terser({
             compress: {
@@ -104,6 +107,10 @@ export default defineConfig({
                         }
                     }
                     return 'main';
+                },
+                chunkFileNames: () => {
+                    if (isProd) return '[name].[hash].js';
+                    return '[name].js';
                 }
             }
         }

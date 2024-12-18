@@ -1,7 +1,7 @@
-import { ref, createVNode, render } from 'vue';
+import { createVNode, ref, render } from 'vue';
 import MessageNodeInner from './message-inner.vue';
 import { generateId } from '@nue-ui/utils';
-import type { MessagePayloadType, NueMessageType } from './types';
+import type { MessagePayloadType } from './types';
 
 const wrapperRef = ref<HTMLElement | null>(null);
 const externalWrapperRef = ref<HTMLElement | null>(null);
@@ -9,8 +9,9 @@ const wrappers = ref<HTMLElement[]>([]);
 const timer = ref<number>();
 let time = 0;
 
-function createMessageWrapper(e: HTMLElement) {
-    let wrapper: HTMLElement | null = null;
+// 创建消息容器
+const createMessageWrapper = (e: HTMLElement) => {
+    let wrapper: HTMLElement | null;
     if (externalWrapperRef.value) {
         wrapper = externalWrapperRef.value;
     } else {
@@ -23,8 +24,9 @@ function createMessageWrapper(e: HTMLElement) {
         externalWrapperRef.value = wrapper;
     }
     return wrapper;
-}
+};
 
+// 应用消息容器
 export function useMessageWrapper(e: HTMLElement) {
     wrapperRef.value = e;
     wrappers.value.push(e);
@@ -36,6 +38,7 @@ export function useMessageWrapper(e: HTMLElement) {
     };
 }
 
+// 处理弹出动作
 export function handlePop(node: HTMLElement, wrapper: HTMLElement) {
     time = timer.value ? time + 24 : 0;
     timer.value = setTimeout(() => {
@@ -54,6 +57,7 @@ export function handlePop(node: HTMLElement, wrapper: HTMLElement) {
     }, time) as unknown as number;
 }
 
+// 创建消息体并弹出
 function NueMessage(payload: MessagePayloadType) {
     if (!wrapperRef.value) {
         if (!externalWrapperRef.value) {
@@ -79,7 +83,8 @@ function NueMessage(payload: MessagePayloadType) {
     render(vnode, div);
 }
 
-NueMessage.success = (message: string, duration: number, icon: string) => {
+// 魔术方法
+NueMessage.success = (message: string, duration?: number, icon?: string) => {
     NueMessage({
         message,
         type: 'success',
@@ -87,8 +92,7 @@ NueMessage.success = (message: string, duration: number, icon: string) => {
         icon
     } as MessagePayloadType);
 };
-
-NueMessage.error = (message: string, duration: number, icon: string) => {
+NueMessage.error = (message: string, duration?: number, icon?: string) => {
     NueMessage({
         message,
         type: 'error',
@@ -96,8 +100,7 @@ NueMessage.error = (message: string, duration: number, icon: string) => {
         icon
     } as MessagePayloadType);
 };
-
-NueMessage.warn = (message: string, duration: number, icon: string) => {
+NueMessage.warn = (message: string, duration?: number, icon?: string) => {
     NueMessage({
         message,
         type: 'warning',
@@ -105,8 +108,7 @@ NueMessage.warn = (message: string, duration: number, icon: string) => {
         icon
     } as MessagePayloadType);
 };
-
-NueMessage.info = (message: string, duration: number, icon: string) => {
+NueMessage.info = (message: string, duration?: number, icon?: string) => {
     NueMessage({
         message,
         type: 'info',
@@ -114,8 +116,7 @@ NueMessage.info = (message: string, duration: number, icon: string) => {
         icon
     } as MessagePayloadType);
 };
-
-NueMessage.log = (message: string, duration: number, icon: string) => {
+NueMessage.log = (message: string, duration?: number, icon?: string) => {
     NueMessage({
         message,
         type: 'log',
@@ -124,4 +125,5 @@ NueMessage.log = (message: string, duration: number, icon: string) => {
     } as MessagePayloadType);
 };
 
-export default NueMessage as NueMessageType;
+// 暴露创建消息体函数
+export default NueMessage;

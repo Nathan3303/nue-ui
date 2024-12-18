@@ -40,12 +40,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, onBeforeUnmount, nextTick } from 'vue';
-import { parseTheme, debounce, parseFlex } from '@nue-ui/utils';
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue';
+import { debounce, parseFlex, parseTheme } from '@nue-ui/utils';
 import { useBoolState } from '@nue-ui/hooks';
-import type { InputPropsType, InputEmitsType } from './types';
-import { NueIcon } from '../index';
+import NueIcon from '../icon/icon.vue';
 import WordCounter from './word-counter.vue';
+import type { InputEmitsType, InputPropsType } from './types';
 import './input.css';
 
 defineOptions({ name: 'NueInput' });
@@ -64,22 +64,19 @@ const textLength = ref(0);
 
 const classes = computed(() => {
     const prefix = 'nue-input';
-    const { size, theme, shape, disabled } = props;
-    let list: string[] = [];
-    list.push(prefix);
-    if (size) list.push(`${prefix}--${size}`);
-    if (shape) list.push(`${prefix}--${shape}`);
-    if (theme) list.push(...parseTheme(theme, prefix));
-    if (disabled) list.push(`${prefix}--disabled`);
-    return list;
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        props.size && `${prefix}--${props.size}`,
+        props.shape && `${prefix}--${props.shape}`,
+        props.disabled && `${prefix}--disabled`
+    ];
 });
 
 const style = computed(() => {
-    const { width, size, flex } = props;
     return {
-        '--width': width,
-        '--font-size': size,
-        '--flex': flex ? parseFlex(flex) : undefined
+        '--nue-input-width': props.width,
+        '--flex': props.flex ? parseFlex(props.flex as string) : undefined
     };
 });
 
@@ -87,6 +84,7 @@ const passwordVisible = computed(() => {
     const { type, allowShowPassword, modelValue } = props;
     return type === 'password' && allowShowPassword && modelValue !== '';
 });
+
 const clearButtonVisible = computed(() => {
     const { disabled, readonly, clearable, modelValue } = props;
     return !disabled && !readonly && clearable && modelValue !== '';

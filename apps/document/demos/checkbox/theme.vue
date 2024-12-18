@@ -9,10 +9,8 @@ const state = ref(false);
 </script>
 
 <style scoped>
-.nue-checkbox--custom {
-    &.nue-checkbox--checked {
-        --check-icon-color: #448aff;
-        --check-label-color: #448aff;
-    }
+.nue-checkbox--custom.nue-checkbox--checked {
+    --nue-check-icon-color: #448aff;
+    --nue-check-label-color: #448aff;
 }
 </style>

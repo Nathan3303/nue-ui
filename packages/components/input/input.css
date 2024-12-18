@@ -1,12 +1,8 @@
 /* variables */
 
 .nue-input {
-    --width: auto;
-    --height: auto;
-    --padding-x: 12px;
     --border-color: var(--nue-ui-divider-color);
     --background-color: transparent;
-    --flex: none;
     --hover-border-color: var(--nue-ui-primary-color-600);
     --hover-background-color: transparent;
     --focus-border-color: var(--nue-ui-primary-color-600);
@@ -19,6 +15,14 @@
     --button-color: var(--border-color);
     --button-border-color: var(--border-color);
     --button-hover-color: var(--hover-border-color);
+    /* after v0.7.0 */
+    --nue-input-vgap: 12px;
+    --nue-input-width: auto;
+    --nue-input-line-height: 22px;
+    --nue-input-font-size: var(--nue-ui-text-default);
+    --nue-input-font-color: var(--nue-ui-primary-text-color);
+    --nue-input-icon-size: var(--nue-input-font-size);
+    --nue-input-icon-color: var(--nue-input-font-color);
 }
 
 /* original */
@@ -26,26 +30,22 @@
 .nue-input {
     display: flex;
     align-items: center;
-    gap: var(--nue-ui-secondary-gap);
-    width: var(--width);
-    min-width: var(--min-width);
-    height: var(--height);
-    min-height: 36px;
-    padding: 0 var(--padding-x);
+    /*gap: calc(var(--nue-input-vgap) * 0.5);*/
+    gap: var(--nue-input-vgap);
+    width: var(--nue-input-width);
+    height: auto;
+    padding: calc(var(--nue-input-vgap) * 0.5) var(--nue-input-vgap);
     border: 1px solid var(--border-color);
     border-radius: var(--nue-ui-primary-radius);
     background-color: var(--background-color);
     box-shadow: var(--nue-ui-secondary-shadow);
-    flex: var(--flex);
+    flex: auto;
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
     transition: all 0.16s ease;
     -webkit-user-select: none;
     user-select: none;
-    color: var(--nue-ui-primary-text-color);
-    font-size: var(--nue-ui-text-default);
-    font-weight: var(--nue-ui-primary-font-weight);
 
     &:hover {
         border-color: var(--hover-border-color);
@@ -58,18 +58,22 @@
         box-shadow: var(--focus-shadow);
     }
 
+    .nue-input__icon {
+        --icon-size: var(--nue-input-icon-size);
+    }
+
     .nue-input__input {
-        width: 100%;
-        min-width: calc(var(--font-size) * 5);
-        line-height: 1;
+        min-width: 36px;
+        height: auto;
         outline: none;
         border: none;
-        background-color: transparent;
-        color: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        font-family: inherit;
         padding: 0;
+        background-color: transparent;
+        flex: auto;
+        color: var(--nue-input-font-color);
+        font-size: var(--nue-input-font-size);
+        line-height: var(--nue-input-line-height);
+        font-family: inherit;
 
         &::-ms-reveal,
         &::-ms-clear {
@@ -77,17 +81,14 @@
         }
 
         &::placeholder {
-            color: inherit;
-            opacity: 0.36;
+            color: var(--nue-ui-primary-color-500);
         }
     }
 
     .word-counter {
         flex: none;
         color: var(--nue-ui-primary-color-500);
-        font-size: var(--nue-ui-text-xs);
-        font-weight: var(--nue-ui-primary-font-weight);
-        font-family: inherit;
+        font-size: var(--nue-ui-text-sm);
     }
 
     .nue-input__icon-button {
@@ -109,61 +110,36 @@
         cursor: not-allowed;
         -webkit-user-select: none;
         user-select: none;
-    }
 
-    &.nue-input--disabled * {
-        cursor: not-allowed;
-    }
-
-    &.nue-input--rounded {
-        padding-left: calc(var(--padding-x) + 2px);
-        padding-right: calc(var(--padding-x) + 2px);
-        border-radius: 999px;
-    }
-
-    &.nue-input--noshape {
-        padding: 0;
-        box-shadow: none;
-        --border-color: transparent;
-        --background-color: transparent;
-        --hover-border-color: transparent;
-        --focus-border-color: transparent;
-        --focus-shadow: none;
-        --disabled-border-color: transparent;
-    }
-
-    &.nue-input--small {
-        min-height: 28px;
-        --height: 28px;
-        padding: 0 6px;
-        gap: 6px;
-        font-size: var(--nue-ui-text-xs);
-    }
-
-    &.nue-input--large {
-        min-height: 42px;
-        --height: 42px;
-        padding: 0 12px;
-        font-size: var(--nue-ui-text-md);
+        & * {
+            cursor: not-allowed;
+        }
     }
 }
 
-/* linear */
+.nue-input--rounded {
+    border-radius: 999px;
+}
 
-.nue-input--linear {
-    --border-width: 0;
-    --padding-y: 4px;
-    --hover-border-color: #8ac7ab;
-    --focus-border-color: #42b983;
-    --focus-shadow-color: transparent;
-    --focus-background-color: transparent;
-    transition: all 0.3s;
-    border: none;
-    border-bottom: 2px solid #cccccc;
-    border-radius: 0;
+.nue-input--noshape {
+    padding: 0;
+    box-shadow: none;
+    --border-color: transparent;
+    --background-color: transparent;
+    --hover-border-color: transparent;
+    --focus-border-color: transparent;
+    --focus-shadow: none;
+    --disabled-border-color: transparent;
+}
 
-    &:focus-within {
-        border: none;
-        border-bottom: 2px solid #42b983;
-    }
+.nue-input--small {
+    --nue-input-vgap: 8px;
+    --nue-input-font-size: var(--nue-ui-text-xs);
+    --nue-input-line-height: 19px;
+}
+
+.nue-input--large {
+    --nue-input-vgap: 16px;
+    --nue-input-font-size: var(--nue-ui-text-lg);
+    --nue-input-line-height: 27px;
 }

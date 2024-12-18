@@ -3,57 +3,34 @@
         <nue-aside
             v-if="$slots.aside"
             ref="menuAsideRef"
-            :allow-collapse="allowCollapseAside"
-            :allow-hide="false"
-            :allow-resize="allowResizeAside"
-            :float="menuAsideFloat"
             :max-width="asideMaxWidth"
             :min-width="asideMinWidth"
             :width="asideWidth"
             class="nue-main__aside"
-            resizer-placement="right"
-            title="Menu"
         >
             <slot name="aside" />
         </nue-aside>
+        <nue-separator
+            v-if="$slots.aside"
+            :disabled="disableAsideResize"
+            op-target="previous"
+        />
         <div v-if="$slots.default || $slots.content" class="nue-main__content">
-            <nue-div
-                v-if="menuAsideFloat || outlineAsideFloat"
-                class="nue-main__aside-visible-controller-bar"
-            >
-                <nue-button
-                    v-if="menuAsideFloat"
-                    icon="menu"
-                    theme="pure"
-                    @click.stop="menuAsideRef?.toggleVisible()"
-                >
-                    Menu
-                </nue-button>
-                <nue-button
-                    v-if="outlineAsideFloat"
-                    icon="more2"
-                    theme="pure"
-                    @click.stop="outlineAsideRef?.toggleVisible()"
-                >
-                    Outline
-                </nue-button>
-            </nue-div>
             <slot />
             <slot name="content" />
         </div>
+        <nue-separator
+            v-if="$slots.outline"
+            :disabled="disableOutlineResize"
+            op-target="next"
+        />
         <nue-aside
             v-if="$slots.outline"
             ref="outlineAsideRef"
-            :allow-collapse="allowCollapseOutline"
-            :allow-hide="allowHideOutline"
-            :allow-resize="allowResizeOutline"
-            :float="outlineAsideFloat"
             :max-width="outlineMaxWidth"
             :min-width="outlineMinWidth"
             :width="outlineWidth"
             class="nue-main__outline"
-            resizer-placement="left"
-            title="Outline"
         >
             <slot name="outline" />
         </nue-aside>
@@ -64,26 +41,13 @@
 import { computed, onMounted, ref, useSlots } from 'vue';
 import { debounce, parseTheme } from '@nue-ui/utils';
 import NueAside from './aside.vue';
-import { NueButton, NueDiv } from '..';
+import NueSeparator from './separator.vue';
 import { useWindowResize } from '@nue-ui/hooks';
 import type { NueMainProps } from './types';
 import './main.css';
 
 defineOptions({ name: 'NueMain' });
-const props = withDefaults(defineProps<NueMainProps>(), {
-    asideWidth: '256px',
-    asideMinWidth: '128px',
-    asideMaxWidth: '512px',
-    allowResizeAside: true,
-    allowCollapseAside: true,
-    allowHideAside: false,
-    outlineWidth: '256px',
-    outlineMinWidth: '128px',
-    outlineMaxWidth: '512px',
-    allowResizeOutline: true,
-    allowCollapseOutline: true,
-    allowHideOutline: true
-});
+const props = defineProps<NueMainProps>();
 
 const slots = useSlots();
 const { addCallback } = useWindowResize();

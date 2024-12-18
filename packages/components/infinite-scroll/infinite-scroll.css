@@ -1,19 +1,16 @@
 /* variables */
 
 .infinite-scroll-wrapper {
-    --font-color: var(--nue-ui-primary-text-color);
-    --font-size: var(--nue-ui-primary-font-size);
-    --font-weight: var(--nue-ui-primary-font-weight);
-    --height: 100%;
-    --trigger-bar-height: 50px;
+    --wrapper-height: 100%;
+    --trigger-bar-height: 1px;
 }
 
 /* original */
 
 .infinite-scroll-wrapper {
     width: 100%;
-    height: var(--height);
-    overflow: auto;
+    height: var(--wrapper-height);
+    /*overflow: auto;*/
 
     .infinite-scroll {
         position: relative;
@@ -31,23 +28,15 @@
 
         .infinite-scroll__loading,
         .infinite-scroll__disabled {
-            color: var(--font-color);
-            font-size: var(--font-size);
-            font-weight: var(--font-weight);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            height: calc(var(--font-size) * 3);
-
-            border-radius: 12px;
-            margin-top: 16px;
+            padding: calc(var(--nue-ui-primary-padding) * 0.5)
+                var(--nue-ui-primary-padding);
+            border-radius: var(--nue-ui-primary-radius);
+            margin-top: var(--nue-ui-primary-padding);
+            text-align: center;
         }
 
         .infinite-scroll__disabled {
             color: var(--nue-ui-disabled-color);
-            background-color: var(--nue-ui-primary-color-200);
         }
     }
 }

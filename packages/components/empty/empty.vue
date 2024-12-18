@@ -19,11 +19,11 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import NueText from '../text/text.vue';
-import type { NueEmptyProps } from './types';
-import emptyImage from './empty.png';
-import './empty.css';
 import { parseTheme } from '@nue-ui/utils';
+import NueText from '../text/text.vue';
+import emptyImage from './empty.png';
+import type { NueEmptyProps } from './types';
+import './empty.css';
 
 defineOptions({ name: 'NueEmpty' });
 const props = withDefaults(defineProps<NueEmptyProps>(), {
@@ -33,17 +33,13 @@ const props = withDefaults(defineProps<NueEmptyProps>(), {
 });
 
 const classes = computed(() => {
-    const { theme } = props;
     const prefix = 'nue-empty';
-    let list: string[] = [prefix];
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    return list;
+    return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
 const imageStyle = computed(() => {
-    const { imageSize } = props;
     return {
-        '--image-size': imageSize
+        '--image-size': props.imageSize
     };
 });
 </script>

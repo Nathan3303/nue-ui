@@ -8,7 +8,7 @@ export interface NueSwitchProps extends GlobalProps {
     showText?: boolean;
     activeText?: string;
     inactiveText?: string;
-    beforeSwitch?: (value: boolean) => Promise<boolean | void> | boolean | void;
+    beforeSwitch?: (value: boolean) => Promise<boolean>;
 }
 
 export type NueSwitchEmits = {

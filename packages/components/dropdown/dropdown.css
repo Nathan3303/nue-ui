@@ -53,6 +53,7 @@
         color: var(--nue-ui-primary-color-600);
         text-align: center;
         padding: var(--inner-padding);
+        cursor: default;
     }
 
     & li,

@@ -5,10 +5,10 @@
 通过完整导入的方式可以在输入两到三条语句后使用 NueUI 中的所有组件。
 
 ::: warning 关于构建后的包大小
-完整导入将导入所有组件。如果对于构建后产物的大小有要求，请使用手动导入的方式。若所使用的构建工具拥有树摇功能，可以尝试在构建配置中开启，以减小构建产物的体积。
+完整导入将导入所有组件。如果对于构建后产物的大小有要求，请使用手动导入的方式。
 :::
 
-```js
+```typescript {5,7,11}
 // main.ts
 import { createApp } from 'vue';
 
@@ -23,11 +23,30 @@ app.use(NueUI);
 app.mount('#app');
 ```
 
-## Volar 支持
+### Volar 支持 <Badge type="tip" text="^0.7.33" />
 
-::: tip 提示
-目前版本的 NueUI 并未对 Volar 做出支持，该功能将在未来的版本中添加。
-:::
+如果您使用 Volar，请在 tsconfig.json 中通过 compilerOptions.type 指定全局组件类型。
+
+```json5 {5-7}
+{
+    // ...
+    "compilerOptions": {
+        // ...
+        "types": [
+            "nue-ui/dist/global"
+        ]
+    },
+    // ...
+}
+```
+
+## 手动导入
+
+通过手动导入的方式可以按需载入组件，从而减少构建后产物的体积。
+
+```typescript
+import { NueButton, NueText } from 'nue-ui';
+```
 
 ## 开始使用
 

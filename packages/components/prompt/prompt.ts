@@ -9,7 +9,7 @@ export default (payload: PromptPayloadType) => {
 
     return new Promise((resolve, reject) => {
         const promptWrapper = document.createElement('div');
-        promptWrapper.classList.add('nue-prompt-wrapper');
+        promptWrapper.classList.add('nue-confirm-prompt-wrapper');
         popupWrapper.appendChild(promptWrapper);
 
         const removeChild = () => {
