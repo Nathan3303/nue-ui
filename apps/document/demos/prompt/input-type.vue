@@ -10,21 +10,16 @@
 </template>
 
 <script setup>
-    import { NueMessage, NuePrompt } from 'nue-ui';
+import { NueMessage, NuePrompt } from 'nue-ui';
 
-    function showPromptWithInputType(type) {
-        NuePrompt({
-            title: '输入确认',
-            placeholder: '请输入内容',
-            inputType: type
-        }).then(
-            value => {
-                NueMessage({
-                    message: `Value is: ${value}`,
-                    type: 'success'
-                });
-            },
-            () => NueMessage({ message: 'Cancelled!', type: 'warning' })
-        );
-    }
+function showPromptWithInputType(type) {
+    NuePrompt({
+        title: '输入确认',
+        placeholder: '请输入内容',
+        inputType: type
+    }).then(
+        value => NueMessage.success(`内容: ${value}`),
+        () => NueMessage.warn('操作取消')
+    );
+}
 </script>

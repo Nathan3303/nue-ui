@@ -97,13 +97,19 @@ demo-preview=../../demos/textarea/debounce.vue
 demo-preview=../../demos/textarea/size.vue
 :::
 
-### 输入框外形
+[//]: # (### 输入框外形)
 
-通过 `shape` 属性设置输入框外形，接收 `rounded` 和 `noshape` 之一。
+[//]: # ()
 
-::: preview
-demo-preview=../../demos/textarea/shape.vue
-:::
+[//]: # (通过 `shape` 属性设置输入框外形，接收 `noshape`。)
+
+[//]: # ()
+
+[//]: # (::: preview)
+
+[//]: # (demo-preview=../../demos/textarea/shape.vue)
+
+[//]: # (:::)
 
 ### 自定义样式
 

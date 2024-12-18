@@ -1,5 +1,5 @@
 <template>
-    <nue-div>
+    <nue-div class="vp-raw">
         <nue-button icon="ring">
             消息
             <template #append>

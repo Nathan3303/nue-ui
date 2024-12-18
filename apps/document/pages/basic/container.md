@@ -65,7 +65,7 @@ demo-preview=../../demos/container/main-resize.vue
 66px（若设置了值则已设置的值为准。通过 `asideCollapsedWidth` 或 `outlineCollapsedWidth` 属性进行设置），此时边栏会应用部分改变内部元素的样式，如
 `NueLink` 链接组件和 `NueCollapse` 组件等，当然也可以通过 `theme` 属性来应用定制的折叠状态时的样式。
 
-
+::: raw
 ::: preview
 demo-preview=../../demos/container/main-collapse.vue
 :::

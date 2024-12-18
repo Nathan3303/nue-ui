@@ -6,12 +6,12 @@
 </template>
 
 <style scoped>
-    .nue-link--custom {
-        --color: orange;
-        --font-weight: bolder;
-        --text-decoration: none;
-        --font-size: 16px;
-        --hover-background-color: #a5a5a5;
-        --hover-font-color: blue;
-    }
+.nue-link--custom {
+    --color: orange;
+    --font-weight: bolder;
+    --text-decoration: none;
+    --font-size: 16px;
+    --hover-background-color: #a5a5a5;
+    --hover-font-color: blue;
+}
 </style>

@@ -5,24 +5,19 @@
 </template>
 
 <script setup>
-    import { NueMessage, NueConfirm, NuePrompt } from 'nue-ui';
+import { NueConfirm, NueMessage, NuePrompt } from 'nue-ui';
 
-    function showPromptWithBeforeConfirm() {
-        NuePrompt({
-            title: '输入确认',
-            placeholder: '请输入内容',
-            beforeConfirm: async value => {
-                await NueConfirm({ content: '确认提交吗？' });
-                return value.toUpperCase();
-            }
-        }).then(
-            value => {
-                NueMessage({
-                    message: `Value is: ${value}`,
-                    type: 'success'
-                });
-            },
-            () => NueMessage({ message: 'Cancelled!', type: 'warning' })
-        );
-    }
+function showPromptWithBeforeConfirm() {
+    NuePrompt({
+        title: '输入确认',
+        placeholder: '请输入内容',
+        beforeConfirm: async value => {
+            await NueConfirm({ content: '确认提交吗？' });
+            return value.toUpperCase();
+        }
+    }).then(
+        value => NueMessage.success(`内容: ${value}`),
+        () => NueMessage.warn('操作取消')
+    );
+}
 </script>

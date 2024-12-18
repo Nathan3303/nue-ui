@@ -1,12 +1,12 @@
 <template>
     <nue-div>
         <nue-checkbox v-model="state" label="正常复选框" />
-        <nue-checkbox v-model="state" label="禁用复选框" disabled />
+        <nue-checkbox v-model="state" disabled label="禁用复选框" />
     </nue-div>
 </template>
 
-<script setup lang="ts">
-    import { ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-    const state = ref(false);
+const state = ref(false);
 </script>
