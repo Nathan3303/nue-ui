@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 开始使用
-      link: /pages/usage/install
+      link: /tutorial/usage/install
 
 features:
   - icon: 🎨
