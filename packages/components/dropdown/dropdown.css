@@ -6,8 +6,9 @@
 
 .nue-dropdown {
     --animation-time: 0.16s;
-    --font-size: var(--nue-ui-text-default);
-    --inner-padding: 6px 12px;
+    --font-size: var(--nue-text-sm);
+    --item-height: 2.25rem;
+    --item-vgap: 1rem;
 }
 
 /* original */
@@ -25,18 +26,18 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 4px;
+    gap: 0.25rem;
     position: absolute;
     width: max-content;
-    min-width: 24px;
+    min-width: 1.5rem;
     max-width: 36vw;
     margin: 0;
-    padding: 4px;
+    padding: 0.25rem;
     background-color: white;
-    border: 1px solid var(--nue-ui-divider-color);
-    border-radius: var(--nue-ui-primary-radius);
+    border: 1px solid var(--nue-divider-color);
+    border-radius: var(--nue-primary-radius);
     box-sizing: border-box;
-    box-shadow: var(--nue-ui-secondary-shadow);
+    box-shadow: var(--nue-secondary-shadow);
     list-style: none;
 
     &.nue-dropdown--hiding {
@@ -49,8 +50,8 @@
     }
 
     .nue-dropdown__empty-text {
-        font-size: var(--nue-ui-text-sm);
-        color: var(--nue-ui-primary-color-600);
+        font-size: var(--nue-text-sm);
+        color: var(--nue-primary-color-600);
         text-align: center;
         padding: var(--inner-padding);
         cursor: default;
@@ -58,15 +59,19 @@
 
     & li,
     & .nue-dropdown-item {
-        padding: var(--inner-padding);
+        display: flex;
+        align-items: center;
+        height: var(--item-height);
+        gap: calc(var(--item-vgap) * 0.5);
+        padding: 0 var(--item-vgap);
         font-size: var(--font-size);
         background-color: transparent;
-        border-radius: var(--nue-ui-primary-radius);
+        border-radius: var(--nue-primary-radius);
         cursor: default;
         box-sizing: border-box;
 
         &:hover {
-            background-color: var(--nue-ui-primary-color-200);
+            background-color: var(--nue-primary-color-200);
         }
     }
 }
@@ -80,13 +85,15 @@
 /* size */
 
 .nue-dropdown.nue-dropdown--small {
-    --font-size: var(--nue-ui-text-sm);
-    --inner-padding: 4px 8px;
+    --font-size: var(--nue-text-xs);
+    --item-vgap: 0.75rem;
+    --item-height: 1.75rem;
 }
 
 .nue-dropdown.nue-dropdown--large {
-    --font-size: var(--nue-ui-text-md);
-    --inner-padding: 8px 16px;
+    --font-size: var(--nue-text-md);
+    --item-vgap: 1.25rem;
+    --item-height: 2.625rem;
 }
 
 /* direction */

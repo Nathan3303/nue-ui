@@ -1,53 +1,52 @@
 /* Variables */
 
 .nue-button {
-    --nue-button-vgap: 12px;
+    --vgap: 1rem;
     --flex: 0 1 auto;
     --alignment: start;
-    --nue-button-color: var(--nue-ui-primary-text-color);
-    --nue-button-font-size: var(--nue-ui-text-default);
-    --border-color: var(--nue-ui-border-color);
+    --height: 2.25rem;
+    --font-size: var(--nue-text-sm);
+    --icon-size: var(--font-size);
+    --color: var(--nue-primary-text-color);
+    --border-radius: var(--nue-primary-radius);
+    --border-color: var(--nue-border-color);
     --background-color: transparent;
-    --hover-color: var(--nue-button-color);
+    --hover-color: var(--color);
     --hover-border-color: var(--border-color);
-    --hover-background-color: var(--nue-ui-primary-color-100);
-    --active-color: var(--nue-button-color);
+    --hover-background-color: var(--nue-primary-color-100);
+    --active-color: var(--color);
     --active-border-color: var(--border-color);
-    --active-background-color: var(--nue-ui-primary-color-200);
-    --disable-color: var(--nue-ui-disabled-color);
+    --active-background-color: var(--nue-primary-color-200);
+    --disable-color: var(--nue-disabled-color);
     --disable-border-color: var(--border-color);
-    --disable-background-color: var(--nue-ui-primary-color-200);
-
-    /* icon patches */
-    --icon-size: var(--nue-button-font-size);
+    --disable-background-color: var(--nue-primary-color-200);
 }
 
 /* Original styles */
 
 .nue-button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: var(--alignment);
-    /*gap: calc(var(--nue-button-vgap) * 0.5);*/
-    gap: var(--nue-button-vgap);
+    gap: calc(var(--vgap) * 0.5);
     flex: var(--flex);
     width: auto;
-    height: auto;
+    height: var(--height);
+    line-height: var(--height);
     box-sizing: border-box;
-    padding: calc(var(--nue-button-vgap) * 0.5) var(--nue-button-vgap);
+    padding: 0 var(--vgap);
     border: 1px solid var(--border-color);
-    border-radius: var(--nue-ui-primary-radius);
+    border-radius: var(--border-radius);
     background-color: var(--background-color);
-    box-shadow: var(--nue-ui-secondary-shadow);
+    box-shadow: var(--nue-secondary-shadow);
     position: relative;
     overflow: hidden;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
     transition: all 0.16s ease-out;
-    color: var(--nue-button-color);
-    font-size: var(--nue-button-font-size);
-    line-height: normal;
+    color: var(--color);
+    font-size: var(--font-size);
     font-family: inherit;
 
     &:hover {
@@ -75,7 +74,7 @@
         align-items: center;
         justify-content: end;
         flex: auto;
-        gap: var(--nue-ui-secondary-gap);
+        gap: var(--nue-secondary-gap);
         overflow: hidden;
     }
 
@@ -88,34 +87,31 @@
 
 /* small */
 
-.nue-button--small,
-.nue-button--sm {
-    --nue-button-vgap: 8px;
-    --nue-button-font-size: var(--nue-ui-text-xs);
+.nue-button--small {
+    --vgap: 0.75rem;
+    --height: 1.75rem;
+    --font-size: var(--nue-text-xs);
 }
 
 /* large */
 
-.nue-button--large,
-.nue-button--lg {
-    --nue-button-vgap: 16px;
-    --nue-button-font-size: var(--nue-ui-text-lg);
+.nue-button--large {
+    --vgap: 1.25rem;
+    --height: 2.625rem;
+    --font-size: var(--nue-text-md);
 }
 
 /* round */
 
 .nue-button--round {
-    border-radius: 999px;
+    --border-radius: 9999px;
 }
 
-/* icon-only */
+/* icon */
 
-.nue-button--icon-only,
-.nue-button--ico {
-    --border-color: transparent;
-    --hover-background-color: var(--nue-ui-primary-color-300);
-    box-shadow: none;
-    padding: calc(var(--nue-button-vgap) * 0.5);
+.nue-button--icon {
+    --alignment: center;
+    aspect-ratio: 1;
 
     .nue-button__text {
         display: none;
@@ -124,26 +120,54 @@
 
 /* primary */
 
-.nue-button--primary,
-.nue-button--pri {
-    --nue-button-color: white;
-    --border-color: transparent;
-    --background-color: var(--nue-ui-primary-text-color);
-    --hover-background-color: var(--nue-ui-primary-color-800);
-    --active-background-color: var(--nue-ui-primary-color-800);
+.nue-button--primary {
+    --color: white;
+    --background-color: var(--nue-primary-color-900);
+    --hover-background-color: var(--nue-primary-color-800);
+    --active-background-color: var(--nue-primary-color-800);
+    border-width: 0;
+}
+
+/* secondary */
+
+.nue-button--secondary {
+    --background-color: var(--nue-primary-color-200);
+    --hover-background-color: var(--nue-primary-color-300);
+    --active-background-color: var(--nue-primary-color-300);
+    border-width: 0;
+}
+
+/* destructive */
+
+.nue-button--destructive {
+    --color: white;
+    --background-color: hsl(var(--nue-destructive-color));
+    --hover-background-color: hsl(var(--nue-destructive-color) / 0.86);
+    --active-background-color: var(--hover-background-color);
+    border-width: 0;
+}
+
+/* ghost */
+
+.nue-button--ghost {
+    --background-color: transparent;
+    --hover-background-color: var(--nue-primary-color-200);
+    --active-background-color: var(--nue-primary-color-300);
+    box-shadow: none;
+    border-width: 0;
 }
 
 /* pure */
 
 .nue-button--pure {
+    --vgap: 0;
     --height: max-content;
     --hover-background-color: transparent;
     --active-background-color: transparent;
-    --hover-color: var(--nue-ui-secondary-text-color);
-    --active-color: var(--nue-ui-secondary-text-color);
+    --hover-color: var(--nue-secondary-text-color);
+    --active-color: var(--nue-secondary-text-color);
     --border-color: transparet;
     box-shadow: none;
-    padding: 0;
 
     &.nue-button--disabled {
         background-color: transparent;

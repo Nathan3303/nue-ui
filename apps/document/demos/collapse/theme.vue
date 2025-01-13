@@ -35,8 +35,8 @@ const activeNames = ref(['Collapse item A', 'Collapse item B']);
 
 <style scoped>
 .wrapper {
-    border: 1px solid var(--nue-ui-divider-color);
-    border-radius: var(--nue-ui-primary-radius);
+    border: 1px solid var(--nue-divider-color);
+    border-radius: var(--nue-primary-radius);
     height: 360px;
     overflow: hidden;
 }

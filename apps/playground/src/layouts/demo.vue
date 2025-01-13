@@ -21,15 +21,14 @@
 </template>
 
 <script lang="ts" setup>
+import { NueContainer, NueHeader, NueMain } from '@nue-ui/components';
 defineProps<{ title?: string }>();
 </script>
 
 <style scoped>
-.demo-layout {
-    &:deep(.wrapper) {
-        border: 1px solid var(--nue-ui-divider-color);
-        border-radius: var(--nue-ui-primary-radius);
-        overflow: hidden;
-    }
+.demo-layout:deep(.wrapper) {
+    border: 1px solid var(--nue-divider-color);
+    border-radius: var(--nue-primary-radius);
+    overflow: hidden;
 }
 </style>

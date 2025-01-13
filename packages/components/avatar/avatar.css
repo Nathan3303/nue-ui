@@ -17,8 +17,8 @@
     box-sizing: border-box;
     border: none;
     border-radius: 4px;
-    background-color: var(--nue-ui-primary-color-400);
-    color: var(--nue-ui-primary-color-100);
+    background-color: var(--nue-primary-color-400);
+    color: var(--nue-primary-color-100);
 
     .nue-avatar__image {
         width: 100%;

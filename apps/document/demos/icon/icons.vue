@@ -99,10 +99,10 @@ const filteredIcons = computed(() => {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 1px;
     align-content: center;
-    border-radius: var(--nue-ui-primary-radius);
-    border: 1px solid var(--nue-ui-divider-color);
+    border-radius: var(--nue-primary-radius);
+    border: 1px solid var(--nue-divider-color);
     box-sizing: border-box;
-    background-color: var(--nue-ui-divider-color);
+    background-color: var(--nue-divider-color);
     overflow: hidden;
 
     .icon {
@@ -115,11 +115,11 @@ const filteredIcons = computed(() => {
         background-color: white;
 
         .nue-icon {
-            --icon-size: var(--nue-ui-text-lg);
+            --icon-size: var(--nue-text-lg);
         }
 
         .nue-text {
-            font-size: var(--nue-ui-text-xs);
+            font-size: var(--nue-text-xs);
         }
     }
 }

@@ -1,9 +1,11 @@
 /* Variables */
 
 .nue-badge {
-    --nue-badge-vgap: 4px;
-    --nue-badge-font-size: var(--nue-ui-text-xs);
-    --nue-badge-background-color: #e96b36;
+    --vgap: 0.5rem;
+    --width: max-content;
+    --height: 1.25rem;
+    --font-size: var(--nue-text-xs);
+    --background-color: #e96b36;
 }
 
 /* Original styles */
@@ -14,22 +16,32 @@
     position: relative;
 
     .nue-badge__content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        line-height: normal;
-        font-size: var(--nue-badge-font-size);
-        padding: calc(var(--nue-badge-vgap) * 0.5) var(--nue-badge-vgap);
-        border: 1px solid var(--nue-badge-background-color);
-        background-color: var(--nue-badge-background-color);
-        border-radius: var(--nue-ui-primary-radius);
+        display: block;
+        width: var(--width);
+        max-width: 100%;
+        height: var(--height);
+        line-height: var(--height);
+        padding: 0 var(--vgap);
+        background-color: var(--background-color);
+        border-radius: var(--nue-primary-radius);
+        box-sizing: border-box;
 
         &:is(sup) {
-            font-size: var(--nue-badge-font-size);
             position: absolute;
-            left: calc(100% - calc(var(--nue-badge-vgap) * 3));
-            bottom: calc(100% - calc(var(--nue-badge-vgap) * 3));
+            --offset: calc(var(--height) / 2);
+            top: calc(-1 * var(--offset));
+            left: calc(100% - var(--offset) * 2);
+            color: white;
+            font-size: var(--font-size);
+
+            .nue-text {
+                line-height: var(--height);
+            }
+        }
+
+        &:is(span) .nue-text {
+            line-height: var(--height);
+            color: white;
         }
     }
 }
@@ -37,20 +49,12 @@
 /* dot */
 
 .nue-badge--dot .nue-badge__content {
-    width: calc(var(--nue-badge-vgap) * 2.5);
-    height: calc(var(--nue-badge-vgap) * 2.5);
-    padding: calc(var(--nue-badge-vgap) * 0.5);
-    border-radius: 999px;
+    --height: 0.75rem;
+    aspect-ratio: 1;
+    padding: 0;
+    border-radius: 9999px;
 
     &:is(sup) {
-        left: calc(100% - calc(var(--nue-badge-vgap) * 1.5));
-        bottom: calc(100% - calc(var(--nue-badge-vgap) * 1.5));
+        left: calc(100% - var(--offset) - 1px);
     }
-}
-
-/* inner */
-
-.nue-badge--inner .nue-badge__content {
-    flex: none;
-    border: none;
 }

@@ -31,26 +31,26 @@
     line-height: var(--line-height);
 
     &:is(h1) {
-        font-size: var(--nue-ui-text-xxxl);
+        font-size: var(--nue-text-xxxl);
         font-weight: 800;
         line-height: 3;
     }
 
     &:is(h2) {
-        font-size: var(--nue-ui-text-xxl);
+        font-size: var(--nue-text-xxl);
         font-weight: 700;
         line-height: 2.75;
     }
 
     &:is(h3),
     &.nue-text--h3 {
-        font-size: var(--nue-ui-text-xl);
+        font-size: var(--nue-text-xl);
         font-weight: 600;
         line-height: 2.25;
     }
 
     &:is(h4) {
-        font-size: var(--nue-ui-text-md);
+        font-size: var(--nue-text-md);
         font-weight: 500;
         line-height: 1.75;
     }

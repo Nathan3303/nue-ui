@@ -26,7 +26,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import NueDrawer from '@nue-ui/components/drawer/drawer.vue';
+import { NueDiv, NueButton, NueDrawer } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
 const drawer1Visible = ref(false);

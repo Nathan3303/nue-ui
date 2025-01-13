@@ -25,7 +25,7 @@
 
 <style scoped>
 .nue-container {
-    border: 1px solid var(--nue-ui-divider-color);
-    border-radius: var(--nue-ui-primary-radius);
+    border: 1px solid var(--nue-divider-color);
+    border-radius: var(--nue-primary-radius);
 }
 </style>

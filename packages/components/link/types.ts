@@ -19,4 +19,5 @@ export interface LinkProps extends GlobalProps {
     flex?: string;
     align?: string;
     size?: string;
+    title?: string;
 }

@@ -3,13 +3,13 @@
         :is="disabled ? 'a' : tag"
         :active-class="activeClass"
         :class="classes"
-        :href="disabled || !href ? undefined : href"
+        :href="disabled || !href ? void 0 : href"
         :style="styles"
-        :title="href || undefined"
+        :title="href || title || void 0"
         :to="to"
         v-bind="$attrs"
     >
-        <nue-icon v-if="icon" :name="icon" />
+        <nue-icon v-if="icon" :name="icon" class="nue-link__icon" />
         <span class="nue-link__content">
             <slot>{{ href }}</slot>
         </span>

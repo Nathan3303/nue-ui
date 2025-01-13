@@ -6,12 +6,12 @@
     display: flex;
     flex-direction: column;
     width: 32%;
-    min-width: 360px;
-    max-width: 480px;
-    padding: 16px;
-    border-radius: 5px;
-    background-color: #fff;
-    gap: 16px;
+    min-width: 24rem;
+    max-width: 32rem;
+    padding: 1rem;
+    border-radius: var(--nue-primary-radius);
+    background-color: white;
+    gap: 1rem;
     transition: all 0.3s ease;
     animation: var(--animation-name) var(--animation-rest-property);
     box-sizing: border-box;
@@ -21,21 +21,18 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-
-        .nue-button--icon-only {
-            --icon-size: 14px;
-        }
+        font-size: var(--nue-text-md);
     }
 
     .nue-prompt__content {
         display: flex;
         flex-direction: column;
         flex: 1 1 auto;
-        gap: var(--nue-ui-secondary-gap);
+        gap: var(--nue-secondary-gap);
 
         .nue-prompt__description {
-            font-size: var(--nue-ui-text-default);
-            color: var(--nue-ui-primary-color-700);
+            font-size: var(--nue-text-sm);
+            color: var(--nue-primary-color-600);
         }
     }
 
@@ -44,12 +41,12 @@
         display: flex;
         align-items: center;
         justify-content: end;
-        gap: 8px;
+        gap: var(--nue-secondary-gap);
         flex-wrap: nowrap;
     }
 
     .nue-prompt__value-error {
         color: #f44336;
-        font-size: var(--nue-ui-text-sm);
+        font-size: var(--nue-text-sm);
     }
 }

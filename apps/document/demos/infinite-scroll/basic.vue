@@ -1,5 +1,5 @@
 <template>
-    <nue-div style="height: 420px" theme="card">
+    <nue-div style="height: 420px; overflow: auto">
         <nue-infinite-scroll
             :disabled="disabled"
             height="512px"

@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import NueEmpty from '@nue-ui/components/empty/empty.vue';
+import { NueDiv, NueEmpty, NueButton } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 </script>
 
@@ -26,8 +26,8 @@ import Demo from '../layouts/demo.vue';
 .nue-empty--custom {
     width: 100%;
     height: 256px;
-    background-color: var(--nue-ui-primary-color-100);
-    border-radius: var(--nue-ui-primary-radius);
+    background-color: var(--nue-primary-color-100);
+    border-radius: var(--nue-primary-radius);
     gap: 4px;
 
     &:deep().nue-empty__image {

@@ -3,26 +3,26 @@
 .nue-textarea {
     --rows: 3;
     --resize: none;
-    --border-color: var(--nue-ui-divider-color);
+    --vgap: 0.75rem;
+    --width: auto;
+    --height: calc(var(--line-height) * var(--rows));
+    --min-height: 2.25rem;
+    --line-height: 1.375rem;
+    --font-size: var(--nue-text-sm);
+    --font-color: var(--nue-primary-text-color);
+    --icon-size: var(--font-size);
+    --icon-color: var(--font-color);
+    --overflow: auto;
+    --border-color: var(--nue-divider-color);
     --background-color: transparent;
-    --hover-border-color: var(--nue-ui-primary-color-600);
+    --hover-border-color: var(--nue-primary-color-600);
     --hover-background-color: transparent;
-    --focus-border-color: var(--nue-ui-primary-color-600);
+    --focus-border-color: var(--nue-primary-color-600);
     --focus-background-color: transparent;
-    --focus-shadow: var(--nue-ui-primary-shadow);
+    --focus-shadow: var(--nue-primary-shadow);
     --disabled-color: #9e9e9e;
-    --disabled-border-color: var(--nue-ui-divider-color);
-    --disabled-background-color: var(--nue-ui-primary-color-100);
-    /* after v0.7.0 */
-    --nue-textarea-vgap: 12px;
-    --nue-textarea-width: auto;
-    --nue-textarea-height: calc(var(--nue-textarea-line-height) * var(--rows));
-    --nue-textarea-line-height: 22px;
-    --nue-textarea-font-size: var(--nue-ui-text-default);
-    --nue-textarea-font-color: var(--nue-ui-primary-text-color);
-    --nue-textarea-icon-size: var(--nue-textarea-font-size);
-    --nue-textarea-icon-color: var(--nue-textarea-font-color);
-    --nue-textarea-overflow: auto;
+    --disabled-border-color: var(--nue-divider-color);
+    --disabled-background-color: var(--nue-primary-color-100);
 }
 
 /* original */
@@ -30,15 +30,19 @@
 .nue-textarea {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: calc(var(--nue-textarea-vgap) * 0.5) var(--nue-textarea-vgap);
+    align-items: stretch;
+    height: fit-content;
+    min-height: var(--min-height);
+    padding: calc(calc(var(--min-height) - var(--line-height) - 2px) * 0.5)
+        var(--vgap);
     border: 1px solid var(--border-color);
-    border-radius: var(--nue-ui-primary-radius);
+    border-radius: var(--nue-primary-radius);
     background-color: var(--background-color);
-    box-shadow: var(--nue-ui-secondary-shadow);
+    box-shadow: var(--nue-secondary-shadow);
+    box-sizing: border-box;
     flex: auto;
-    overflow: auto;
-    overflow-x: hidden;
+    overflow: hidden;
+    overflow-y: auto;
     position: relative;
     transition: all 0.16s ease;
     -webkit-user-select: none;
@@ -56,18 +60,16 @@
     }
 
     .nue-textarea__textarea {
-        width: 100%;
-        min-height: var(--nue-textarea-line-height);
+        min-height: var(--line-height);
         padding: 0;
         border: none;
         outline: none;
-        overflow: var(--nue-textarea-overflow);
+        overflow: var(--overflow);
         resize: var(--resize);
         background-color: transparent;
-        flex: auto;
-        color: var(--nue-textarea-font-color);
-        font-size: var(--nue-textarea-font-size);
-        line-height: var(--nue-textarea-line-height);
+        color: var(--font-color);
+        font-size: var(--font-size);
+        line-height: var(--line-height);
         font-family: inherit;
 
         &::-ms-reveal,
@@ -88,15 +90,18 @@
         opacity: 0 !important;
         resize: none !important;
         overflow: hidden !important;
+        padding: 0 !important;
     }
 
     .word-counter {
         position: absolute;
-        bottom: 4px;
-        right: 8px;
-        background: white;
-        color: var(--nue-ui-primary-color-500);
-        font-size: var(--nue-ui-text-sm);
+        bottom: 0.25rem;
+        right: 0.25rem;
+        padding: 0 0.25rem;
+        border-radius: var(--nue-primary-radius);
+        background-color: rgba(200, 200, 200, 0.2);
+        color: var(--nue-primary-color-500);
+        font-size: var(--nue-text-sm);
     }
 
     &.nue-textarea--disabled {
@@ -127,13 +132,15 @@
 }
 
 .nue-textarea--small {
-    --nue-textarea-vgap: 8px;
-    --nue-textarea-font-size: var(--nue-ui-text-xs);
-    --nue-textarea-line-height: 19px;
+    --vgap: 8px;
+    --font-size: var(--nue-text-xs);
+    --line-height: 1.1875rem;
+    --min-height: 1.75rem;
 }
 
 .nue-textarea--large {
-    --nue-textarea-vgap: 16px;
-    --nue-textarea-font-size: var(--nue-ui-text-lg);
-    --nue-textarea-line-height: 27px;
+    --vgap: 16px;
+    --font-size: var(--nue-text-md);
+    --line-height: 1.6875rem;
+    --min-height: 2.625rem;
 }

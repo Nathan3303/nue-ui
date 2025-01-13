@@ -2,7 +2,7 @@
     <nue-container class="app-view">
         <nue-header>
             <template #logo>
-                <nue-text size="var(--nue-ui-text-lg)">
+                <nue-text size="var(--nue-text-lg)">
                     NueUI 组件库 PlayGround
                 </nue-text>
             </template>
@@ -44,6 +44,16 @@
 
 <script lang="ts" setup>
 import { shallowRef } from 'vue';
+import {
+    NueContainer,
+    NueHeader,
+    NueMain,
+    NueLink,
+    NueCollapse,
+    NueCollapseItem,
+    NueText,
+    NueDiv
+} from '@nue-ui/components';
 import { collapseItemsData } from './constants.ts';
 import './main.css';
 

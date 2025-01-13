@@ -43,7 +43,7 @@
                 gap: 4px;
 
                 .nue-link {
-                    font-size: var(--nue-ui-text-sm);
+                    font-size: var(--nue-text-sm);
                 }
             }
         }

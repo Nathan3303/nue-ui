@@ -17,12 +17,13 @@ export default defineComponent({
         width: String,
         height: String,
         divider: { type: [String, Number, Boolean, Object], default: null },
-        theme: [String, Array]
+        theme: [String, Array],
+        inline: Boolean
     },
     setup(props, { slots }) {
         function getDirection() {
             const { direction, vertical } = props;
-            return direction ? direction : vertical ? 'column' : 'row';
+            return direction ? direction : vertical ? 'column' : void 0;
         }
 
         const style = computed(() => {
@@ -35,7 +36,8 @@ export default defineComponent({
                 '--flex-wrap': parseFlexWrap(wrap as string),
                 '--gap': gap,
                 '--width': width,
-                '--height': height
+                '--height': height,
+                display: props.inline ? 'inline-flex' : void 0
             };
         });
 

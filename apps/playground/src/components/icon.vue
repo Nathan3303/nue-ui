@@ -9,20 +9,24 @@
     </demo>
     <demo title="所有图标">
         <nue-div align="center">
-            <nue-icon
+            <nue-div
                 v-for="(name, idx) in IconNames"
                 :key="idx"
-                :name="name"
-                class="icon-item"
+                align="center"
+                gap="0.5rem"
+                theme="card"
+                vertical
+                width="10rem"
             >
-                {{ name }}
-            </nue-icon>
+                <nue-icon :name="name" size="1.75rem" />
+                <nue-text size="var(--nue-text-sm)">{{ name }}</nue-text>
+            </nue-div>
         </nue-div>
     </demo>
 </template>
 
 <script lang="ts" setup>
-import NueIcon from '@nue-ui/components/icon/icon.vue';
+import { NueDiv, NueText, NueIcon } from '@nue-ui/components';
 import { IconNames } from '@nue-ui/components/icon/constants.ts';
 import Demo from '../layouts/demo.vue';
 </script>
@@ -33,8 +37,8 @@ import Demo from '../layouts/demo.vue';
     align-items: center;
     gap: 4px;
     padding: 4px 8px;
-    border: 1px solid var(--nue-ui-border-color);
-    border-radius: var(--nue-ui-primary-radius);
+    border: 1px solid var(--nue-border-color);
+    border-radius: var(--nue-primary-radius);
     line-height: 1;
 }
 </style>

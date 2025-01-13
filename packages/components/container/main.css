@@ -18,15 +18,15 @@
         box-sizing: border-box;
         position: relative;
         height: 100%;
-        padding: var(--nue-ui-primary-padding);
+        padding: var(--nue-primary-padding);
 
         .nue-main__aside-visible-controller-bar {
             position: sticky;
             top: 0;
             left: 0;
             width: 100%;
-            padding: var(--nue-ui-primary-padding);
-            border-bottom: 1px solid var(--nue-ui-border-color);
+            padding: var(--nue-primary-padding);
+            border-bottom: 1px solid var(--nue-border-color);
             box-sizing: border-box;
             align-items: center;
             justify-content: space-between;

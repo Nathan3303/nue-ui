@@ -9,15 +9,7 @@
             <div :class="classes">
                 <div class="nue-dialog__header">
                     <slot :close="handleCancel" name="header">
-                        <nue-text size="var(--nue-ui-text-md)">
-                            {{ title }}
-                        </nue-text>
-                        <nue-button
-                            :disabled="!closable"
-                            icon="clear"
-                            theme="ico"
-                            @click="handleCancel"
-                        />
+                        <nue-text>{{ title }}</nue-text>
                     </slot>
                 </div>
                 <div class="nue-dialog__content">
@@ -37,7 +29,7 @@
 
 <script lang="ts" setup>
 import { computed, nextTick, ref, watch } from 'vue';
-import { NueButton, NueText } from '..';
+import { NueText } from '..';
 import { isFunction, parseTheme } from '@nue-ui/utils';
 import type { DialogEmitsType, DialogPropsType } from './types';
 import './dialog.css';

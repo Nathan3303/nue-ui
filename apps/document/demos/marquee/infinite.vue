@@ -10,10 +10,10 @@
 .marquee-item {
     width: 80px;
     height: 80px;
-    background-color: var(--nue-ui-divider-color);
+    background-color: var(--nue-divider-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--nue-ui-primary-radius);
+    border-radius: var(--nue-primary-radius);
 }
 </style>

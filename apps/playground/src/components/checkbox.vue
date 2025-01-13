@@ -69,8 +69,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import NueCheckbox from '@nue-ui/components/checkbox/checkbox.vue';
-import NueCheckboxGroup from '@nue-ui/components/checkbox-group/checkbox-group.vue';
+import { NueDiv, NueCheckbox, NueCheckboxGroup } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
 const checkbox1 = ref(false);

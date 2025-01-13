@@ -2,25 +2,25 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--nue-ui-primary-gap);
+    gap: var(--nue-primary-gap);
 
     &[data-selected='true'] {
         transition: all 0.2s ease-in-out;
-        background-color: var(--nue-ui-primary-color-300);
-        border-radius: var(--nue-ui-primary-radius);
+        background-color: var(--nue-primary-color-300);
+        border-radius: var(--nue-primary-radius);
 
         &:hover {
-            background-color: var(--nue-ui-primary-color-300);
+            background-color: var(--nue-primary-color-300);
         }
     }
 
     &[data-disabled='true'] {
         opacity: 0.5;
         cursor: not-allowed;
-        background-color: var(--nue-ui-primary-color-200);
+        background-color: var(--nue-primary-color-200);
 
         &:hover {
-            background-color: var(--nue-ui-primary-color-200);
+            background-color: var(--nue-primary-color-200);
         }
     }
 }

@@ -15,11 +15,17 @@
 
     .nue-drawer__header {
         height: auto;
-        padding: 16px;
+        padding: var(--nue-primary-padding);
         box-sizing: border-box;
 
         .nue-drawer__title {
-            flex: 1 1 auto;
+            flex: auto;
+            font-size: var(--nue-text-md);
+        }
+
+        .nue-button {
+            --vgap: 0.5rem;
+            --height: 1.25rem;
         }
     }
 }

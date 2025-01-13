@@ -13,8 +13,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: 16px;
-    gap: 16px;
+    padding: var(--nue-primary-padding);
+    gap: var(--nue-primary-gap);
     flex: none;
     width: var(--nue-aside-width);
     min-width: var(--nue-aside-min-width);
@@ -28,18 +28,19 @@
 /* collapsed */
 
 .nue-aside[data-collapsed='true'] {
-    min-width: 64px;
-    width: 64px !important;
+    min-width: 4.5rem;
+    width: 4.5rem !important;
     transition: all var(--nue-aside-animation-duration) ease-out;
 
     .nue-link--btnlike,
     .nue-link--rl {
-        justify-content: center;
-        gap: 0;
+        --vgap: 0;
+        --alignment: center;
 
         .nue-link__content {
             width: 0;
             flex: none;
+            display: none;
         }
     }
 

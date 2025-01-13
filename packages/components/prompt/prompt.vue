@@ -1,16 +1,6 @@
 <template>
     <div ref="promptRef" class="nue-prompt">
-        <div class="nue-prompt__header">
-            <nue-text size="var(--nue-ui-text-md)">
-                {{ title }}
-            </nue-text>
-            <nue-button
-                :disabled="loading"
-                icon="clear"
-                theme="ico"
-                @click.stop="handleClose(false)"
-            />
-        </div>
+        <div v-if="title" class="nue-prompt__header">{{ title }}</div>
         <div class="nue-prompt__content">
             <nue-text v-if="description" class="nue-prompt__description">
                 {{ description }}
@@ -22,6 +12,7 @@
                 :disabled="loading"
                 :placeholder="placeholder"
                 :type="inputType"
+                style="flex: none"
             />
         </div>
         <div class="nue-prompt__footer">

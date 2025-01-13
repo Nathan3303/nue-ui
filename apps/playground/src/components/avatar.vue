@@ -12,6 +12,6 @@
 </template>
 
 <script lang="ts" setup>
-import NueAvatar from '@nue-ui/components/avatar/avatar.vue';
+import { NueDiv, NueAvatar } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 </script>

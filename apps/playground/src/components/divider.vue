@@ -36,6 +36,6 @@
 </template>
 
 <script lang="ts" setup>
-import NueDivider from '@nue-ui/components/divider/divider.vue';
+import { NueDiv, NueButton, NueDivider } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 </script>

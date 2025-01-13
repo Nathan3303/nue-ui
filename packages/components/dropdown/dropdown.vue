@@ -4,7 +4,7 @@
         :data-visible="visible"
         class="nue-dropdown-wrapper"
     >
-        <slot :clickTrigger="handleClickWrapper">
+        <slot :clickTrigger="handleClickWrapper" :visible="visible">
             <nue-button
                 :disabled="disabled"
                 :size="size"
@@ -48,7 +48,7 @@ import './dropdown.css';
 defineOptions({ name: 'NueDropdown' });
 const props = withDefaults(defineProps<NueDropdownProps>(), {
     disabled: false,
-    placement: 'bottom-start',
+    placement: 'bottom-end',
     dropType: 'click',
     hideOnClick: false,
     hideOnClicked: false,
