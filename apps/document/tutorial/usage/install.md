@@ -1,9 +1,8 @@
 # 安装
 
-## 兼容性
-
-- NueUI 在编写时使用了较新的语法和特性，因此仅对于最近两个版本的浏览器有较好的支持。
-- NueUI 基于 Vue 3，因此不支持 IE 浏览器。
+::: war ning 兼容性提示
+NueUI 在编写时使用了较新的语法和特性，因此仅对于最近两个版本的浏览器有较好的支持。并且 NueUI 基于 Vue 3，因此不支持 IE 浏览器。
+:::
 
 ## 通过包管理器下载 NueUI
 
@@ -30,9 +29,9 @@ pnpm install nue-ui --registry=https://registry.npmmirror.com/
 ## 通过浏览器标签直接引入 NueUI
 
 ::: tip 提示
-目前 NueUI 还没有发布到 CDN，因此无法通过浏览器直接引入。
+目前 NueUI 还没有发布到 CDN，因此无法通过 CDN 链接引入 NueUI。
 :::
 
-::: tip 如何使用 NueUI
-通过阅读下一篇幅，了解如何在使用包管理器下载软件包后，快速上手 NueUI。
-:::
+---
+
+阅读下一篇幅，了解如何在使用包管理器下载软件包后，快速上手 NueUI。
