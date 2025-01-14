@@ -71,7 +71,9 @@ const handleIS1LoadMore = () => (is1ItemsCount.value += 10);
 
 const is2ItemsCount = ref(20);
 const is2Loading = ref(false);
-const is2Disabled = computed(() => is2Loading && is2ItemsCount.value >= 100);
+const is2Disabled = computed(
+    () => is2Loading.value && is2ItemsCount.value >= 100
+);
 const handleIS2LoadMore = () => {
     is2Loading.value = true;
     setTimeout(() => {
