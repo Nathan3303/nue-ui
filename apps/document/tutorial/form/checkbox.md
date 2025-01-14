@@ -11,7 +11,7 @@
 通过 `label` 属性或 **默认插槽** 设置复选框的标识文本。
 
 ::: preview
-demo-preview=../../demos/checkbox/basic.vue
+demo-preview=../demos/checkbox/basic.vue
 :::
 
 ## 禁用状态
@@ -19,7 +19,7 @@ demo-preview=../../demos/checkbox/basic.vue
 通过 `disabled` 属性来禁用复选框，接受 Boolean 类型，默认为 `false`。
 
 ::: preview
-demo-preview=../../demos/checkbox/disabled.vue
+demo-preview=../demos/checkbox/disabled.vue
 :::
 
 ## 大小
@@ -27,7 +27,7 @@ demo-preview=../../demos/checkbox/disabled.vue
 通过 `size` 属性来设置复选框的大小，可选值为 `small` 和 `large`，不设置则为正常大小。
 
 ::: preview
-demo-preview=../../demos/checkbox/size.vue
+demo-preview=../demos/checkbox/size.vue
 :::
 
 ## 中间状态
@@ -39,7 +39,7 @@ demo-preview=../../demos/checkbox/size.vue
 :::
 
 ::: preview
-demo-preview=../../demos/checkbox/indeterminate.vue
+demo-preview=../demos/checkbox/indeterminate.vue
 :::
 
 ## 加载状态和状态变更前的回调函数
@@ -47,7 +47,7 @@ demo-preview=../../demos/checkbox/indeterminate.vue
 通过属性 `loading` 设置复选框的加载状态，通常搭配状态变更前的回调函数属性 `before-check` 使用。在 `before-switch` 回调函数中，只有返回 Resolved Promise 或是布尔类型 ture 时才会使开关组件的状态发生改变。
 
 ::: preview
-demo-preview=../../demos/checkbox/loading.vue
+demo-preview=../demos/checkbox/loading.vue
 :::
 
 ## 复选框组
@@ -61,7 +61,7 @@ demo-preview=../../demos/checkbox/loading.vue
 :::
 
 ::: preview
-demo-preview=../../demos/checkbox-group/basic.vue
+demo-preview=../demos/checkbox-group/basic.vue
 :::
 
 ## 复选框组 - 禁用状态
@@ -69,7 +69,7 @@ demo-preview=../../demos/checkbox-group/basic.vue
 通过使用复选框组的 `disabled` 属性控制组内的复选框的禁用状态，接受 Boolean 类型，默认为 `false`。
 
 ::: preview
-demo-preview=../../demos/checkbox-group/disabled.vue
+demo-preview=../demos/checkbox-group/disabled.vue
 :::
 
 ## 复选框组 - 大小
@@ -77,7 +77,7 @@ demo-preview=../../demos/checkbox-group/disabled.vue
 通过使用复选框组的 `size` 属性控制组内复选框的大小，可选值为 `small` 和 `large`，不设置则为正常大小。
 
 ::: preview
-demo-preview=../../demos/checkbox-group/size.vue
+demo-preview=../demos/checkbox-group/size.vue
 :::
 
 ## 复选框组 - 控制器
@@ -87,7 +87,7 @@ demo-preview=../../demos/checkbox-group/size.vue
 通过 `controllerLabel` 属性设置控制器标识文本。
 
 ::: preview
-demo-preview=../../demos/checkbox-group/controller.vue
+demo-preview=../demos/checkbox-group/controller.vue
 :::
 
 ## 复选框组 - 最小和最大选中数
@@ -95,7 +95,7 @@ demo-preview=../../demos/checkbox-group/controller.vue
 通过使用复选框的 `min` 和 `max` 属性指定复选框组内复选框的最小和最大选中数，接受 Number 类型，默认值分别为 `0` 和 `Infinity`。
 
 ::: preview
-demo-preview=../../demos/checkbox-group/min-max.vue
+demo-preview=../demos/checkbox-group/min-max.vue
 :::
 
 ## 自定义主题
@@ -103,5 +103,5 @@ demo-preview=../../demos/checkbox-group/min-max.vue
 通过属性 `theme` 设置复选框的主题样式。
 
 ::: preview
-demo-preview=../../demos/checkbox/theme.vue
+demo-preview=../demos/checkbox/theme.vue
 :::

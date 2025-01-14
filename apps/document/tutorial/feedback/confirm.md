@@ -9,7 +9,7 @@
 `NueConfirm` 方法接收一个 `options` 对象作为参数，其中的 `content` 用于指定确认框的内容。
 
 ::: preview
-demo-preview=../../demos/confirm/basic.vue
+demo-preview=../demos/confirm/basic.vue
 :::
 
 ## 自定义标题文字
@@ -17,7 +17,7 @@ demo-preview=../../demos/confirm/basic.vue
 通过 `title` 属性来自定义确认框的标题文字。
 
 ::: preview
-demo-preview=../../demos/confirm/title.vue
+demo-preview=../demos/confirm/title.vue
 :::
 
 ## 自定义按钮文字
@@ -25,5 +25,5 @@ demo-preview=../../demos/confirm/title.vue
 通过 `confirmButtonText` 和 `cancelButtonText` 属性来自定义确认框的按钮文字。
 
 ::: preview
-demo-preview=../../demos/confirm/button-text.vue
+demo-preview=../demos/confirm/button-text.vue
 :::

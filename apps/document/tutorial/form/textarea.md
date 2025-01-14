@@ -11,7 +11,7 @@
 通过 `placeholder` 属性设置占位字符，接收 `string` 类型。
 
 ::: preview
-demo-preview=../../demos/textarea/basic.vue
+demo-preview=../demos/textarea/basic.vue
 :::
 
 ## 禁用状态
@@ -19,7 +19,7 @@ demo-preview=../../demos/textarea/basic.vue
 通过 `disabled` 属性设置禁用状态，接收 `boolean` 类型。
 
 ::: preview
-demo-preview=../../demos/textarea/disabled.vue
+demo-preview=../demos/textarea/disabled.vue
 :::
 
 ## 设置最大行数
@@ -27,7 +27,7 @@ demo-preview=../../demos/textarea/disabled.vue
 通过 `rows` 属性设置图标，接收 `number` 类型，默认值为 `3`。
 
 ::: preview
-demo-preview=../../demos/textarea/rows.vue
+demo-preview=../demos/textarea/rows.vue
 :::
 
 ## 内容高度自适应以及最大高度限制
@@ -37,7 +37,7 @@ demo-preview=../../demos/textarea/rows.vue
 通过 `autosize` 属性设置是否自适应内容高度，接收 `boolean` 类型，默认值为 `false`。
 
 ::: preview
-demo-preview=../../demos/textarea/autosize.vue
+demo-preview=../demos/textarea/autosize.vue
 :::
 
 ### 最大高度限制
@@ -50,7 +50,7 @@ demo-preview=../../demos/textarea/autosize.vue
 :::
 
 ::: preview
-demo-preview=../../demos/textarea/rows-autosize.vue
+demo-preview=../demos/textarea/rows-autosize.vue
 :::
 
 ## 字数限制与计数
@@ -73,7 +73,7 @@ demo-preview=../../demos/textarea/rows-autosize.vue
 :::
 
 ::: preview
-demo-preview=../../demos/textarea/max-count.vue
+demo-preview=../demos/textarea/max-count.vue
 :::
 
 ## 防抖
@@ -83,7 +83,7 @@ demo-preview=../../demos/textarea/max-count.vue
 通过 `debounceTime` 属性设置防抖时间，单位为 `ms`，接收 `number` 类型，默认值为 `0`。
 
 ::: preview
-demo-preview=../../demos/textarea/debounce.vue
+demo-preview=../demos/textarea/debounce.vue
 :::
 
 ## 样式设置
@@ -94,22 +94,8 @@ demo-preview=../../demos/textarea/debounce.vue
 则表示正常尺寸。
 
 ::: preview
-demo-preview=../../demos/textarea/size.vue
+demo-preview=../demos/textarea/size.vue
 :::
-
-[//]: # (### 输入框外形)
-
-[//]: # ()
-
-[//]: # (通过 `shape` 属性设置输入框外形，接收 `noshape`。)
-
-[//]: # ()
-
-[//]: # (::: preview)
-
-[//]: # (demo-preview=../../demos/textarea/shape.vue)
-
-[//]: # (:::)
 
 ### 自定义样式
 
@@ -122,5 +108,5 @@ demo-preview=../../demos/textarea/size.vue
 :::
 
 ::: preview
-demo-preview=../../demos/textarea/theme.vue
+demo-preview=../demos/textarea/theme.vue
 :::

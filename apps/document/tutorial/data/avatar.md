@@ -11,7 +11,7 @@
 通过 `rounded` 属性设置组件形状，接收 `boolean` 类型的值。
 
 ::: preview
-demo-preview=../../demos/avatar/basic.vue
+demo-preview=../demos/avatar/basic.vue
 :::
 
 ## 设置大小
@@ -19,7 +19,7 @@ demo-preview=../../demos/avatar/basic.vue
 通过 `size` 属性设置大小，属性接收一个 `string` 类型的值，该值会被直接作为 CSS 的 `width` 和 `height` 值。
 
 ::: preview
-demo-preview=../../demos/avatar/size.vue
+demo-preview=../demos/avatar/size.vue
 :::
 
 ## 设置图标
@@ -31,7 +31,7 @@ demo-preview=../../demos/avatar/size.vue
 :::
 
 ::: preview
-demo-preview=../../demos/avatar/icon.vue
+demo-preview=../demos/avatar/icon.vue
 :::
 
 ## 设置图片填充方式
@@ -41,5 +41,5 @@ demo-preview=../../demos/avatar/icon.vue
 `fit` 属性接受 `fill`、`contain`、`cover*`、`none` 以及 `scale-down` 五个可选值，分别对应填充、包含、覆盖、不填充、缩小填充五种方式。
 
 ::: preview
-demo-preview=../../demos/avatar/fit.vue
+demo-preview=../demos/avatar/fit.vue
 :::

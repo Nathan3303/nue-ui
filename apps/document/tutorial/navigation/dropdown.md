@@ -9,7 +9,7 @@
 通过 `text` 属性设置下拉菜单触发按钮中的文字。
 
 ::: preview
-demo-preview=../../demos/dropdown/basic.vue
+demo-preview=../demos/dropdown/basic.vue
 :::
 
 ## 设置菜单的对齐方式
@@ -17,7 +17,7 @@ demo-preview=../../demos/dropdown/basic.vue
 通过 `placement` 属性设置下拉菜单的对齐方式，可选值为 `top-start`、`top-center`、`top-end`、`bottom-start`、`bottom-center` 以及 `bottom-end`。
 
 ::: preview
-demo-preview=../../demos/dropdown/placement.vue
+demo-preview=../demos/dropdown/placement.vue
 :::
 
 ## 菜单选项事件处理
@@ -27,7 +27,7 @@ demo-preview=../../demos/dropdown/placement.vue
 在 `dropdown` 插槽内，通过给对应的元素添加 `data-executeid` 属性来指定可执行选项的动作标识，并在 `execute` 事件所传递的 `id` 参数中获取该标识，根据标识执行对应的动作。
 
 ::: preview
-demo-preview=../../demos/dropdown/execute.vue
+demo-preview=../demos/dropdown/execute.vue
 :::
 
 ## 自定义下拉菜单的触发元素
@@ -37,7 +37,7 @@ demo-preview=../../demos/dropdown/execute.vue
 通过插槽传递出来的 `clickTrigger` 方法来控制下拉菜单的显示。
 
 ::: preview
-demo-preview=../../demos/dropdown/click-trigger.vue
+demo-preview=../demos/dropdown/click-trigger.vue
 :::
 
 ## 自定义主题
@@ -45,5 +45,5 @@ demo-preview=../../demos/dropdown/click-trigger.vue
 通过属性 `theme` 实现对某一个下拉菜单主题的定制。
 
 ::: preview
-demo-preview=../../demos/dropdown/theme.vue
+demo-preview=../demos/dropdown/theme.vue
 :::

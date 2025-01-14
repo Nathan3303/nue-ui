@@ -7,7 +7,7 @@
 通过 `NueCollapse` 和 `NueCollapseItem` 组件，实现内容区域的折叠和展开。
 
 ::: preview
-demo-preview=../../demos/collapse/basic.vue
+demo-preview=../demos/collapse/basic.vue
 :::
 
 ## 记录面板状态
@@ -22,7 +22,7 @@ demo-preview=../../demos/collapse/basic.vue
 :::
 
 ::: preview
-demo-preview=../../demos/collapse/model-value.vue
+demo-preview=../demos/collapse/model-value.vue
 :::
 
 ## 手风琴模式
@@ -35,7 +35,7 @@ demo-preview=../../demos/collapse/model-value.vue
 :::
 
 ::: preview
-demo-preview=../../demos/collapse/accordion.vue
+demo-preview=../demos/collapse/accordion.vue
 :::
 
 ## 自定义标题
@@ -45,7 +45,7 @@ demo-preview=../../demos/collapse/accordion.vue
 也可以通过 `header` 这个作用域插槽自定义面板的头部。解构出来的 `collpase` 函数操作该面板的展开和收起；`state` 获取面板展开状态。
 
 ::: preview
-demo-preview=../../demos/collapse/header.vue
+demo-preview=../demos/collapse/header.vue
 :::
 
 ## 使用预设或自定义主题
@@ -53,5 +53,5 @@ demo-preview=../../demos/collapse/header.vue
 通过 `theme` 属性设置主题。
 
 ::: preview
-demo-preview=../../demos/collapse/theme.vue
+demo-preview=../demos/collapse/theme.vue
 :::

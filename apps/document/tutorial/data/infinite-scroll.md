@@ -13,7 +13,7 @@
 通过 `height` 属性设置可视区域的高度，默认为 `100%` 。
 
 ::: preview
-demo-preview=../../demos/infinite-scroll/basic.vue
+demo-preview=../demos/infinite-scroll/basic.vue
 :::
 
 ## 加载状态和禁用状态
@@ -23,5 +23,5 @@ demo-preview=../../demos/infinite-scroll/basic.vue
 通过 `disabled` 属性设置禁用状态，当 `disabled` 为 `true` 时，组件不会触发加载事件。
 
 ::: preview
-demo-preview=../../demos/infinite-scroll/loading-disabled.vue
+demo-preview=../demos/infinite-scroll/loading-disabled.vue
 :::

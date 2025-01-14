@@ -15,7 +15,7 @@
 :::
 
 ::: preview
-demo-preview=../../demos/divider/basic.vue
+demo-preview=../demos/divider/basic.vue
 :::
 
 ## 设置分隔符文本及其对齐方式
@@ -25,7 +25,7 @@ demo-preview=../../demos/divider/basic.vue
 通过 `text` 属性设置分隔符的文本内容。
 
 ::: preview
-demo-preview=../../demos/divider/text.vue
+demo-preview=../demos/divider/text.vue
 :::
 
 ### 设置分隔符对齐方式
@@ -33,7 +33,7 @@ demo-preview=../../demos/divider/text.vue
 通过 `align` 属性设置分隔符的对齐方式，可选值为 `left*`、`center`、`right`。
 
 ::: preview
-demo-preview=../../demos/divider/align.vue
+demo-preview=../demos/divider/align.vue
 :::
 
 ## 设置分割线样式
@@ -45,5 +45,5 @@ demo-preview=../../demos/divider/align.vue
 通过 `border-type` 属性设置分割线的类型，可选值为 `solid*`、`dashed` 以及 `dotted`。
 
 ::: preview
-demo-preview=../../demos/divider/style.vue
+demo-preview=../demos/divider/style.vue
 :::

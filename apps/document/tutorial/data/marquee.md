@@ -9,7 +9,7 @@
 通过 `speed-ratio` 属性设置速度倍率系数，值越大，速度越慢。属性接受数字类型。
 
 ::: preview
-demo-preview=../../demos/marquee/basic.vue
+demo-preview=../demos/marquee/basic.vue
 :::
 
 ## 无限循环
@@ -17,5 +17,5 @@ demo-preview=../../demos/marquee/basic.vue
 通过 `infinite` 属性设置是否无限循环，属性接受布尔类型。
 
 ::: preview
-demo-preview=../../demos/marquee/infinite.vue
+demo-preview=../demos/marquee/infinite.vue
 :::

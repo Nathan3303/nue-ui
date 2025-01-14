@@ -11,7 +11,7 @@
 通过属性 `type` 设置进度展示的类型，可选值为 `line*` 和 `circle`。
 
 ::: preview
-demo-preview=../../demos/progress/basic.vue
+demo-preview=../demos/progress/basic.vue
 :::
 
 ## 自定义颜色
@@ -25,7 +25,7 @@ demo-preview=../../demos/progress/basic.vue
 :::
 
 ::: preview
-demo-preview=../../demos/progress/color.vue
+demo-preview=../demos/progress/color.vue
 :::
 
 ## 设置进度条粗细
@@ -33,7 +33,7 @@ demo-preview=../../demos/progress/color.vue
 通过属性 `stroke-width` 设置进度条的粗细，接受 `number` 类型的值，默认值为 6 。
 
 ::: preview
-demo-preview=../../demos/progress/stroke-width.vue
+demo-preview=../demos/progress/stroke-width.vue
 :::
 
 ## 设置缩放比例
@@ -41,7 +41,7 @@ demo-preview=../../demos/progress/stroke-width.vue
 通过属性 `scale` 设置进度条缩放比例，接受 `number` 类型的值，默认值为 1 。
 
 ::: preview
-demo-preview=../../demos/progress/scale.vue
+demo-preview=../demos/progress/scale.vue
 :::
 
 ## 将进度文字显示到内部
@@ -53,7 +53,7 @@ demo-preview=../../demos/progress/scale.vue
 :::
 
 ::: preview
-demo-preview=../../demos/progress/show-inner-text.vue
+demo-preview=../demos/progress/show-inner-text.vue
 :::
 
 ## 隐藏百分比文字
@@ -61,5 +61,5 @@ demo-preview=../../demos/progress/show-inner-text.vue
 通过属性 `hideText` 设置百分比文字的隐藏和显示，接受 `boolean` 类型的值，默认值为 false 。
 
 ::: preview
-demo-preview=../../demos/progress/hide-text.vue
+demo-preview=../demos/progress/hide-text.vue
 :::

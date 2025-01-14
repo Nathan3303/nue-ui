@@ -9,7 +9,7 @@
 通过 `v-model` 绑定开关状态。
 
 ::: preview
-demo-preview=../../demos/switch/basic.vue
+demo-preview=../demos/switch/basic.vue
 :::
 
 ## 大小
@@ -17,7 +17,7 @@ demo-preview=../../demos/switch/basic.vue
 通过属性 `size` 设置开关组件的大小，可选值为 `small` 和 `large`，不指定则为默认大小。
 
 ::: preview
-demo-preview=../../demos/switch/size.vue
+demo-preview=../demos/switch/size.vue
 :::
 
 ## 文字描述
@@ -27,7 +27,7 @@ demo-preview=../../demos/switch/size.vue
 通过属性 `active-text` 和 `inactive-text` 设置开关的描述文字，接受 `string` 类型值，默认值分别为 I 和 O。
 
 ::: preview
-demo-preview=../../demos/switch/text.vue
+demo-preview=../demos/switch/text.vue
 :::
 
 ## 设置禁用状态
@@ -35,7 +35,7 @@ demo-preview=../../demos/switch/text.vue
 通过属性 `disabled` 设置开关组件的禁用状态，接受 `boolean` 类型值，默认为 false 。
 
 ::: preview
-demo-preview=../../demos/switch/disabled.vue
+demo-preview=../demos/switch/disabled.vue
 :::
 
 ## 加载状态以及切换前的回调函数
@@ -46,5 +46,5 @@ demo-preview=../../demos/switch/disabled.vue
 或是布尔类型 ture 时才会使开关组件的状态发生改变。
 
 ::: preview
-demo-preview=../../demos/switch/loading.vue
+demo-preview=../demos/switch/loading.vue
 :::

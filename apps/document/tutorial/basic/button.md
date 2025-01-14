@@ -9,11 +9,11 @@
 通过属性 `icon` 可以指定按钮的前置图标。
 
 ::: tip
-前置图标的实现使用了组件库的图标组件 `NueIcon` ，关于属性 `icon` 的可选值请参考 [Icon 图标](/pages/basic/icon) 组件文档。
+前置图标的实现使用了组件库的图标组件 `NueIcon` ，关于属性 `icon` 的可选值请参考 [Icon 图标](/tutorial/basic/icon) 组件文档。
 :::
 
 ::: preview
-demo-preview=../../demos/button/basic.vue
+demo-preview=../demos/button/basic.vue
 :::
 
 ## 禁用状态
@@ -21,7 +21,7 @@ demo-preview=../../demos/button/basic.vue
 使用属性 `disabled` 使按钮组件处于不可用状态。属性接受 `boolean` 类型的值，为 `true` 时表示禁用。
 
 ::: preview
-demo-preview=../../demos/button/disabled.vue
+demo-preview=../demos/button/disabled.vue
 :::
 
 ## 设置按钮大小
@@ -29,7 +29,7 @@ demo-preview=../../demos/button/disabled.vue
 通过 `size` 属性设置按钮的大小。属性接受 `small` 和 `large` 两个可选值，分别对应小和大两个尺寸。
 
 ::: preview
-demo-preview=../../demos/button/size.vue
+demo-preview=../demos/button/size.vue
 :::
 
 ## 按钮组及统一属性控制
@@ -46,7 +46,7 @@ demo-preview=../../demos/button/size.vue
 :::
 
 ::: preview
-demo-preview=../../demos/button-group/basic.vue
+demo-preview=../demos/button-group/basic.vue
 :::
 
 ## 加载状态以及加载图标
@@ -61,7 +61,7 @@ demo-preview=../../demos/button-group/basic.vue
 :::
 
 ::: preview
-demo-preview=../../demos/button/loading.vue
+demo-preview=../demos/button/loading.vue
 :::
 
 ## 节流
@@ -69,7 +69,7 @@ demo-preview=../../demos/button/loading.vue
 通过 `use-throttle` 属性启用节流模式；`throttle-duration` 属性设置节流间隔，单位为 `ms`，默认值为 `200` 。
 
 ::: preview
-demo-preview=../../demos/button/throttle.vue
+demo-preview=../demos/button/throttle.vue
 :::
 
 ## 对齐方式
@@ -77,7 +77,7 @@ demo-preview=../../demos/button/throttle.vue
 通过属性 `alignment` 设置按钮组件内元素的对齐方式。属性值为 `left`、`center` 以及 `right` 。
 
 ::: preview
-demo-preview=../../demos/button/alignment.vue
+demo-preview=../demos/button/alignment.vue
 :::
 
 ## 扩展插槽
@@ -85,7 +85,7 @@ demo-preview=../../demos/button/alignment.vue
 通过插槽 `append` 可以在按钮文字的后方插入自定义的元素。
 
 ::: preview
-demo-preview=../../demos/button/append.vue
+demo-preview=../demos/button/append.vue
 :::
 
 ## 添加自定义类名以及使用预设主题
@@ -96,20 +96,6 @@ demo-preview=../../demos/button/append.vue
 
 预设主题包括 `icon-only`、 `primary` 以及 `pure`。
 
-[//]: # (::: tip)
-
-[//]: # ()
-
-[//]: # (- 除了以 `string[]` 的方式传递多个主题名，还支持通过 `,` 分隔的字符串形式传递多个主题名。如 `theme="custom1,custom2"` 等价于)
-
-[//]: # (  `:theme="['custom1', 'custom2']`。)
-
-[//]: # (- 添加后的类名为 `nue-button--` 加上 `theme` 属性的值。如 `theme="custom"`，则该类名为 `nue-button--custom`。)
-
-[//]: # ()
-
-[//]: # (:::)
-
 ::: preview
-demo-preview=../../demos/button/theme.vue
+demo-preview=../demos/button/theme.vue
 :::

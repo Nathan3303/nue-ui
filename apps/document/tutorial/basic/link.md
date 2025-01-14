@@ -9,7 +9,7 @@
 通过 `href` 属性设置链接的目标地址。
 
 ::: preview
-demo-preview=../../demos/link/basic.vue
+demo-preview=../demos/link/basic.vue
 :::
 
 ## 禁用状态
@@ -17,7 +17,7 @@ demo-preview=../../demos/link/basic.vue
 通过 `disabled` 属性可以禁用链接。
 
 ::: preview
-demo-preview=../../demos/link/disabled.vue
+demo-preview=../demos/link/disabled.vue
 :::
 
 ## 链接图标
@@ -25,7 +25,7 @@ demo-preview=../../demos/link/disabled.vue
 通过 `icon` 属性可以给链接添加图标，接受 `string` 类型的值，表示图标的类名。
 
 ::: preview
-demo-preview=../../demos/link/icon.vue
+demo-preview=../demos/link/icon.vue
 :::
 
 ## 添加自定义类名以及使用预设主题
@@ -35,7 +35,7 @@ demo-preview=../../demos/link/icon.vue
 预设主题的使用依然是通过 `theme` 属性设置。预设主题包括 `btnlike`。
 
 ::: preview
-demo-preview=../../demos/link/theme.vue
+demo-preview=../demos/link/theme.vue
 :::
 
 ## 使用路由连接
@@ -55,5 +55,5 @@ demo-preview=../../demos/link/theme.vue
 :::
 
 ::: preview
-demo-preview=../../demos/link/route.vue
+demo-preview=../demos/link/route.vue
 :::

@@ -9,7 +9,7 @@
 `NueMessage` 方法接收一个 `options` 对象作为参数，其中的 `message` 属性表示提示信息。
 
 ::: preview
-demo-preview=../../demos/message/basic.vue
+demo-preview=../demos/message/basic.vue
 :::
 
 ## 指定消息类型
@@ -17,7 +17,7 @@ demo-preview=../../demos/message/basic.vue
 通过 `type` 属性指定消息类型，可选值为 `success`、`info`、`warning`、`error` 以及 `log`。
 
 ::: preview
-demo-preview=../../demos/message/type.vue
+demo-preview=../demos/message/type.vue
 :::
 
 ## 确定类型的快速使用
@@ -25,7 +25,7 @@ demo-preview=../../demos/message/type.vue
 通过 `NueMessage` 中的子方法 `success`、`info`、`warn`、`error`、`log` 可以快速创建不同类型的消息提示。这些子方法都拥有同样的形参，包括 `message`、`duration` 以及 `icon` 。
 
 ::: preview
-demo-preview=../../demos/message/quick-use.vue
+demo-preview=../demos/message/quick-use.vue
 :::
 
 ## 设置图标
@@ -37,7 +37,7 @@ demo-preview=../../demos/message/quick-use.vue
 :::
 
 ::: preview
-demo-preview=../../demos/message/icon.vue
+demo-preview=../demos/message/icon.vue
 :::
 
 ## 设置显示持续时间
@@ -51,5 +51,5 @@ demo-preview=../../demos/message/icon.vue
 :::
 
 ::: preview
-demo-preview=../../demos/message/duration.vue
+demo-preview=../demos/message/duration.vue
 :::

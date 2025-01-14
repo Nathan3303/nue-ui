@@ -9,7 +9,7 @@
 使用属性 `description` 属性或者插槽 `#description` 设置占位文本。
 
 ::: preview
-demo-preview=../../demos/empty/basic.vue
+demo-preview=../demos/empty/basic.vue
 :::
 
 ## 自定义图片
@@ -23,7 +23,7 @@ demo-preview=../../demos/empty/basic.vue
 :::
 
 ::: preview
-demo-preview=../../demos/empty/image.vue
+demo-preview=../demos/empty/image.vue
 :::
 
 ## 自定义主题
@@ -31,5 +31,5 @@ demo-preview=../../demos/empty/image.vue
 通过 `theme` 属性设置自定义样式。
 
 ::: preview
-demo-preview=../../demos/empty/theme.vue
+demo-preview=../demos/empty/theme.vue
 :::

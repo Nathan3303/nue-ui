@@ -13,7 +13,7 @@
 通过 `placeholder` 属性为输入框的占位符。
 
 ::: preview
-demo-preview=../../demos/prompt/basic.vue
+demo-preview=../demos/prompt/basic.vue
 :::
 
 ## 更换输入框类型
@@ -22,11 +22,11 @@ demo-preview=../../demos/prompt/basic.vue
 
 ::: tip
 由于组件内部进行了复用，因此 `type` 属性的可选值为 `NueInput` 组件 `type` 属性的可选值。在 `NueInput`
-组件文档中的 [基础用法](/pages/form/input.html#基础用法) 一节中可以查看具体的可选值。
+组件文档中的 [基础用法](/tutorial/form/input.html#基础用法) 一节中可以查看具体的可选值。
 :::
 
 ::: preview
-demo-preview=../../demos/prompt/input-type.vue
+demo-preview=../demos/prompt/input-type.vue
 :::
 
 ## 设置输入验证器
@@ -36,7 +36,7 @@ demo-preview=../../demos/prompt/input-type.vue
 验证器函数接收一个参数，即输入框的值，最终需要返回一个布尔值以表示输入的数据是否合法。
 
 ::: preview
-demo-preview=../../demos/prompt/validator.vue
+demo-preview=../demos/prompt/validator.vue
 :::
 
 ## 设置确认前的回调函数
@@ -46,5 +46,5 @@ demo-preview=../../demos/prompt/validator.vue
 回调函数接收一个参数，即输入框的值，可以对输入的数据进行处理，然后返回处理后的数据。
 
 ::: preview
-demo-preview=../../demos/prompt/before-confirm.vue
+demo-preview=../demos/prompt/before-confirm.vue
 :::

@@ -9,7 +9,7 @@
 通过 `name` 属性指定生成的图标。
 
 ::: preview
-demo-preview=../../demos/icon/basic.vue
+demo-preview=../demos/icon/basic.vue
 :::
 
 ## 大小和颜色
@@ -19,7 +19,7 @@ demo-preview=../../demos/icon/basic.vue
 通过 `color` 属性指定图标颜色，接受 CSS Color 的合法值，默认为字体颜色。
 
 ::: preview
-demo-preview=../../demos/icon/color-size.vue
+demo-preview=../demos/icon/color-size.vue
 :::
 
 ## 图标自旋转
@@ -29,7 +29,7 @@ demo-preview=../../demos/icon/color-size.vue
 通过 `spin-speed` 属性指定图标的旋转速度，接受 CSS Time 的合法值，默认为 `2s` 。
 
 ::: preview
-demo-preview=../../demos/icon/spin.vue
+demo-preview=../demos/icon/spin.vue
 :::
 
 ## 所有图标
@@ -37,5 +37,5 @@ demo-preview=../../demos/icon/spin.vue
 下方表格列出了所有可用的图标名称，通过 `name` 属性指定即可使用对应图标。
 
 ::: preview
-demo-preview=../../demos/icon/icons.vue
+demo-preview=../demos/icon/icons.vue
 :::

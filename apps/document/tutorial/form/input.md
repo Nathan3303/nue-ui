@@ -13,7 +13,7 @@
 通过 `placeholder` 属性设置占位字符，接收 `string` 类型。
 
 ::: preview
-demo-preview=../../demos/input/basic.vue
+demo-preview=../demos/input/basic.vue
 :::
 
 ## 禁用状态
@@ -21,7 +21,7 @@ demo-preview=../../demos/input/basic.vue
 通过 `disabled` 属性设置禁用状态，接收 `boolean` 类型。
 
 ::: preview
-demo-preview=../../demos/input/disabled.vue
+demo-preview=../demos/input/disabled.vue
 :::
 
 ## 设置图标
@@ -29,7 +29,7 @@ demo-preview=../../demos/input/disabled.vue
 通过 `icon` 属性设置图标，接收 `string` 类型。
 
 ::: preview
-demo-preview=../../demos/input/icon.vue
+demo-preview=../demos/input/icon.vue
 :::
 
 ## 清除控制与密码显示控制
@@ -43,7 +43,7 @@ demo-preview=../../demos/input/icon.vue
 :::
 
 ::: preview
-demo-preview=../../demos/input/clearable-show.vue
+demo-preview=../demos/input/clearable-show.vue
 :::
 
 ## 字数限制与计数
@@ -65,7 +65,7 @@ demo-preview=../../demos/input/clearable-show.vue
 :::
 
 ::: preview
-demo-preview=../../demos/input/max-count.vue
+demo-preview=../demos/input/max-count.vue
 :::
 
 ## 防抖
@@ -75,7 +75,7 @@ demo-preview=../../demos/input/max-count.vue
 通过 `debounceTime` 属性设置防抖时间，单位为 `ms`，接收 `number` 类型，默认值为 `0`。
 
 ::: preview
-demo-preview=../../demos/input/debounce.vue
+demo-preview=../demos/input/debounce.vue
 :::
 
 ## 样式设置
@@ -85,7 +85,7 @@ demo-preview=../../demos/input/debounce.vue
 输入框拥有小、正常、大三种尺寸，通过 `size` 属性设置，小和大分别对应 `size` 值中的 `small` 和 `large`，不指定 `size` 则表示正常尺寸。
 
 ::: preview
-demo-preview=../../demos/input/size.vue
+demo-preview=../demos/input/size.vue
 :::
 
 ### 输入框外形
@@ -93,7 +93,7 @@ demo-preview=../../demos/input/size.vue
 通过 `shape` 属性设置输入框外形，接收 `rounded` 或 `noshape`。
 
 ::: preview
-demo-preview=../../demos/input/shape.vue
+demo-preview=../demos/input/shape.vue
 :::
 
 ### 自定义样式
@@ -107,5 +107,5 @@ demo-preview=../../demos/input/shape.vue
 :::
 
 ::: preview
-demo-preview=../../demos/input/theme.vue
+demo-preview=../demos/input/theme.vue
 :::

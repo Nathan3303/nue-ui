@@ -13,7 +13,7 @@
 其中 `direction` 表示提示框出现的位置，`alignment` 表示提示框相对于触发元素的对齐方式。
 
 ::: preview
-demo-preview=../../demos/tooltip/basic.vue
+demo-preview=../demos/tooltip/basic.vue
 :::
 
 ## 插槽 `#content`
@@ -25,7 +25,7 @@ demo-preview=../../demos/tooltip/basic.vue
 :::
 
 ::: preview
-demo-preview=../../demos/tooltip/content.vue
+demo-preview=../demos/tooltip/content.vue
 :::
 
 ## 大小
@@ -33,7 +33,7 @@ demo-preview=../../demos/tooltip/content.vue
 通过 `size` 属性设置提示元素的大小，接受 String 类型，可选值为 `small` 和 `large`，不设置则为正常大小。
 
 ::: preview
-demo-preview=../../demos/tooltip/size.vue
+demo-preview=../demos/tooltip/size.vue
 :::
 
 ## 自定义主题
@@ -45,5 +45,5 @@ demo-preview=../../demos/tooltip/size.vue
 :::
 
 ::: preview
-demo-preview=../../demos/tooltip/theme.vue
+demo-preview=../demos/tooltip/theme.vue
 :::

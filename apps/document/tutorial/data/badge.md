@@ -9,7 +9,7 @@
 通过 `value` 属性来设置徽标显示的文字或数字，该属性接收 `string` 和 `number` 两种类型的值。
 
 ::: preview
-demo-preview=../../demos/badge/basic.vue
+demo-preview=../demos/badge/basic.vue
 :::
 
 ## 设置上限
@@ -23,7 +23,7 @@ demo-preview=../../demos/badge/basic.vue
 :::
 
 ::: preview
-demo-preview=../../demos/badge/max.vue
+demo-preview=../demos/badge/max.vue
 :::
 
 ## 小红点
@@ -37,7 +37,7 @@ demo-preview=../../demos/badge/max.vue
 :::
 
 ::: preview
-demo-preview=../../demos/badge/dot.vue
+demo-preview=../demos/badge/dot.vue
 :::
 
 ## 隐藏与显示控制
@@ -45,7 +45,7 @@ demo-preview=../../demos/badge/dot.vue
 通过 `hidden` 属性控制徽标是否隐藏。
 
 ::: preview
-demo-preview=../../demos/badge/hidden.vue
+demo-preview=../demos/badge/hidden.vue
 :::
 
 ## 在组件内部使用
@@ -53,5 +53,5 @@ demo-preview=../../demos/badge/hidden.vue
 当 `NueBadge` 组件没有内容时，徽标部分将不会定位到右上角，而是水平展示。因此可以在 `NueButton` 以及 `NueLink` 等组件的内部插槽中直接使用。
 
 ::: preview
-demo-preview=../../demos/badge/inner.vue
+demo-preview=../demos/badge/inner.vue
 :::

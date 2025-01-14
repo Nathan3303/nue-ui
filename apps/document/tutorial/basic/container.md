@@ -11,11 +11,11 @@
 :::
 
 ::: preview
-demo-preview=../../demos/container/basic.vue
+demo-preview=../demos/container/basic.vue
 :::
 
 ::: preview
-demo-preview=../../demos/container/basic2.vue
+demo-preview=../demos/container/basic2.vue
 :::
 
 ## 头部组件 `NueHeader`
@@ -29,11 +29,11 @@ demo-preview=../../demos/container/basic2.vue
 下方是完全一致的两个示例，第一个示例通过具名插槽定制了头部，第二个示例通过默认插槽定制了头部。
 
 ::: preview
-demo-preview=../../demos/container/header.vue
+demo-preview=../demos/container/header.vue
 :::
 
 ::: preview
-demo-preview=../../demos/container/header2.vue
+demo-preview=../demos/container/header2.vue
 :::
 
 ## 主体组件 `NueMain`
@@ -47,7 +47,7 @@ demo-preview=../../demos/container/header2.vue
 `asideMaxWidth` 和 `outlineMaxWidth` 设置最大宽度，这些属性都接受 CSS 宽高值。
 
 ::: preview
-demo-preview=../../demos/container/main-basic.vue
+demo-preview=../demos/container/main-basic.vue
 :::
 
 ### 拖拽侧栏边线改变宽度
@@ -56,7 +56,7 @@ demo-preview=../../demos/container/main-basic.vue
 `disableAsideResize` 或 `disableOutlineResize` 禁用对应区域的功能。
 
 ::: preview
-demo-preview=../../demos/container/main-resize.vue
+demo-preview=../demos/container/main-resize.vue
 :::
 
 ### 折叠状态
@@ -67,7 +67,7 @@ demo-preview=../../demos/container/main-resize.vue
 
 ::: raw
 ::: preview
-demo-preview=../../demos/container/main-collapse.vue
+demo-preview=../demos/container/main-collapse.vue
 :::
 
 ## 底部组件 `NueFooter`
@@ -78,7 +78,7 @@ demo-preview=../../demos/container/main-collapse.vue
 `NueFooter` 组件仅设有默认插槽。
 
 ::: preview
-demo-preview=../../demos/container/footer.vue
+demo-preview=../demos/container/footer.vue
 :::
 
 ## 容器嵌套
@@ -94,11 +94,11 @@ demo-preview=../../demos/container/footer.vue
 通过嵌套容器，可以快速地搭建出各种复杂的页面布局。
 
 ::: preview
-demo-preview=../../demos/container/nested.vue
+demo-preview=../demos/container/nested.vue
 :::
 
 ::: preview
-demo-preview=../../demos/container/nested2.vue
+demo-preview=../demos/container/nested2.vue
 :::
 
 ## 容器类型
