@@ -1,36 +1,19 @@
-import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
-import { readdir, readdirSync } from 'fs';
-import { delay } from 'lodash-es';
-import shell from 'shelljs';
-import hooksPlugin from './hooks-plugin';
 import terser from '@rollup/plugin-terser';
+import useRollupPlugin from './use-rollup-plugin.ts';
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import {
+    removeOldFiles,
+    moveESStyleFiles,
+    touchGlobalTypesFile,
+    getComponentNames
+} from './utils.ts';
 
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = process.env.NODE_ENV === 'development';
 const isTest = process.env.NODE_ENV === 'test';
-
-const getComponentDirNames = () => {
-    const entries = readdirSync('../components', { withFileTypes: true });
-    const dirName = entries.filter(entry => entry.isDirectory());
-    return dirName.map(item => item.name);
-};
-
-const moveStyles = () => {
-    readdir('./dist/es/theme', err => {
-        if (err) return delay(moveStyles, 800);
-        shell.mv('./dist/es/theme', './dist/theme');
-    });
-};
-
-const moveGlobalDTs = () => {
-    readdir('./dist', err => {
-        if (err) return delay(moveGlobalDTs, 800);
-        shell.cp('./global.d.ts', './dist');
-    });
-};
 
 export default defineConfig({
     plugins: [
@@ -39,11 +22,12 @@ export default defineConfig({
             outDir: 'dist/types',
             tsconfigPath: './tsconfig.build.json'
         }),
-        hooksPlugin({
-            fileNames: ['./dist/es', './dist/theme', './dist/types'],
+        useRollupPlugin({
+            name: 'es-rollup-plugin',
+            beforeBuild: () => removeOldFiles(),
             afterBuild: () => {
-                moveStyles();
-                moveGlobalDTs();
+                moveESStyleFiles();
+                touchGlobalTypesFile();
             }
         }),
         terser({
@@ -108,7 +92,7 @@ export default defineConfig({
                     ) {
                         return 'utils';
                     }
-                    for (const item of getComponentDirNames()) {
+                    for (const item of getComponentNames()) {
                         if (id.includes(`/packages/components/${item}`)) {
                             return item;
                         }
