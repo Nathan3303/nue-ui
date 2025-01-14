@@ -31,10 +31,9 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    height: fit-content;
+    height: max-content;
     min-height: var(--min-height);
-    padding: calc(calc(var(--min-height) - var(--line-height) - 2px) * 0.5)
-        var(--vgap);
+    padding: 0.25rem;
     border: 1px solid var(--border-color);
     border-radius: var(--nue-primary-radius);
     background-color: var(--background-color);
@@ -61,7 +60,6 @@
 
     .nue-textarea__textarea {
         min-height: var(--line-height);
-        padding: 0;
         border: none;
         outline: none;
         overflow: var(--overflow);
@@ -71,6 +69,12 @@
         font-size: var(--font-size);
         line-height: var(--line-height);
         font-family: inherit;
+        padding: calc(
+                calc(calc(var(--min-height) - var(--line-height) - 6px) * 0.5) -
+                    0.25rem
+            )
+            calc(var(--vgap) - 0.25rem);
+        z-index: 0;
 
         &::-ms-reveal,
         &::-ms-clear {
@@ -84,24 +88,24 @@
     }
 
     .nue-textarea__backend-textarea {
-        width: 100% !important;
         height: 0 !important;
         min-height: 0 !important;
         opacity: 0 !important;
         resize: none !important;
         overflow: hidden !important;
-        padding: 0 !important;
     }
 
     .word-counter {
-        position: absolute;
-        bottom: 0.25rem;
-        right: 0.25rem;
+        width: max-content;
         padding: 0 0.25rem;
+        margin-left: auto;
         border-radius: var(--nue-primary-radius);
         background-color: rgba(200, 200, 200, 0.2);
         color: var(--nue-primary-color-500);
         font-size: var(--nue-text-sm);
+        cursor: text;
+        z-index: 1;
+        line-height: 1.25;
     }
 
     &.nue-textarea--disabled {
