@@ -26,8 +26,7 @@
 </template>
 
 <script lang="ts" setup>
-import { NueMessage } from 'nue-ui';
-import NuePrompt from '@nue-ui/components/prompt/prompt.ts';
+import { NueDiv, NueButton, NueMessage, NuePrompt } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
 defineOptions({ name: 'PromptDemo1' });

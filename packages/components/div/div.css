@@ -24,17 +24,17 @@
     width: var(--width);
     height: var(--height);
     box-sizing: border-box;
-    font-size: var(--nue-ui-text-default);
-    font-weight: var(--nue-ui-primary-font-weight);
-    font-family: var(--nue-ui-primary-font-family) sans-serif;
+    font-size: var(--nue-text-df);
+    font-weight: var(--nue-primary-font-weight);
+    font-family: var(--nue-primary-font-family) sans-serif;
     unicode-bidi: isolate;
 }
 
 /* built-in styles */
 
 .nue-div--card {
-    border: 1px solid var(--nue-ui-divider-color);
-    border-radius: var(--nue-ui-primary-radius);
-    box-shadow: var(--nue-ui-secondary-shadow);
-    padding: var(--nue-ui-primary-padding);
+    border: 1px solid var(--nue-divider-color);
+    border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-secondary-shadow);
+    padding: var(--nue-primary-padding);
 }

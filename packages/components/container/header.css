@@ -10,31 +10,33 @@
 .nue-header {
     display: flex;
     align-items: center;
-    gap: calc(var(--nue-ui-primary-gap) * 2);
+    gap: calc(var(--nue-primary-gap) * 2);
     box-sizing: border-box;
     width: var(--nue-header-width);
     height: var(--nue-header-height);
-    padding: var(--nue-ui-primary-padding);
+    padding: var(--nue-primary-padding);
     flex: none;
 
     .nue-header__slot {
         height: 100%;
         display: flex;
         align-items: center;
-        gap: var(--nue-ui-secondary-padding);
+        gap: var(--nue-secondary-padding);
         overflow: hidden;
         flex: none;
     }
 
-    .nue-header__navigators {
-        gap: 4px;
-    }
-
     .nue-header__logo {
-        font-size: var(--nue-ui-text-md);
+        font-size: var(--nue-text-md);
     }
 
     .nue-header__navigators {
         flex: auto;
+        gap: 0.5rem;
+
+        .nue-link--btnlike,
+        .nue-link--rl {
+            --flex: none;
+        }
     }
 }

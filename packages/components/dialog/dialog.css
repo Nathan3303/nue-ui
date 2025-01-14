@@ -2,8 +2,8 @@
 
 .nue-dialog-wrapper {
     --dialog-width: 36%;
-    --dialog-min-width: 360px;
-    --dialog-max-width: 480px;
+    --dialog-min-width: 24rem;
+    --dialog-max-width: 32rem;
     --wrapper-animation-name: fade-in;
     --dialog-animation-name: slide-in-from-top;
     --dialog-animation-rest-property: 0.24s ease-out forwards;
@@ -40,10 +40,10 @@
     width: var(--dialog-width);
     min-width: var(--dialog-min-width);
     max-width: var(--dialog-max-width);
-    padding: 16px;
-    border-radius: 5px;
+    padding: 1rem;
+    border-radius: var(--nue-primary-radius);
     background-color: white;
-    gap: 16px;
+    gap: 1rem;
     animation: var(--dialog-animation-name)
         var(--dialog-animation-rest-property);
 
@@ -52,11 +52,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        font-size: var(--nue-text-md);
     }
 
     .nue-dialog__content {
         width: 100%;
-        margin-bottom: 12px;
     }
 
     .nue-dialog__footer {
@@ -64,7 +64,7 @@
         display: flex;
         align-self: center;
         justify-content: end;
-        gap: 8px;
+        gap: 0.5rem;
 
         .cancel-button {
             --color: #333;

@@ -46,7 +46,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import NueSwitch from '@nue-ui/components/switch/switch.vue';
+import { NueDiv, NueSwitch } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
 const isActive = ref(false);
@@ -62,14 +62,14 @@ const handleBeforeSwitch = async (value: boolean) => {
 
 <style scoped>
 .nue-switch--custom1 {
-    --background-active-color: var(--nue-ui-success-color);
+    --background-active-color: var(--nue-success-color);
 }
 
 .nue-switch--custom2 {
-    --background-active-color: var(--nue-ui-warning-color);
+    --background-active-color: var(--nue-warning-color);
 }
 
 .nue-switch--custom3 {
-    --background-active-color: var(--nue-ui-error-color);
+    --background-active-color: var(--nue-error-color);
 }
 </style>

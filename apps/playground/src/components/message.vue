@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import NueMessage from '@nue-ui/components/message/message';
+import { NueDiv, NueButton, NueMessage } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
 function createMessage() {

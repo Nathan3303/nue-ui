@@ -5,12 +5,12 @@
             <div ref="triggerBarRef" class="infinite-scroll__trigger-bar"></div>
             <div v-if="loading" class="infinite-scroll__loading">
                 <slot name="loading">
-                    <nue-text>数据加载中...</nue-text>
+                    <nue-text size=".875rem">数据加载中...</nue-text>
                 </slot>
             </div>
             <div v-if="disabled && !loading" class="infinite-scroll__disabled">
                 <slot name="disabled">
-                    <nue-text color="var(--nue-ui-disabled-color)">
+                    <nue-text color="var(--nue-disabled-color)" size=".875rem">
                         没有更多数据了
                     </nue-text>
                 </slot>

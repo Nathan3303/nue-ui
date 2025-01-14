@@ -10,7 +10,7 @@
     flex-direction: column;
     width: 1px;
     height: 100%;
-    background-color: var(--nue-ui-divider-color);
+    background-color: var(--nue-divider-color);
     z-index: 2;
     position: relative;
     flex: none;
@@ -20,10 +20,10 @@
         display: block;
         position: absolute;
         top: 0;
-        left: -4px;
+        left: -0.25rem;
         width: 100%;
         height: 100%;
-        padding: 0 4px;
+        padding: 0 0.25rem;
     }
 
     &:hover {

@@ -15,21 +15,21 @@
 
     &.nue-container--vertical {
         &:has(> .nue-header) > .nue-main {
-            border-top: 1px solid var(--nue-ui-border-color);
+            border-top: 1px solid var(--nue-border-color);
         }
 
         &:has(> .nue-footer) > .nue-main {
-            border-bottom: 1px solid var(--nue-ui-border-color);
+            border-bottom: 1px solid var(--nue-border-color);
         }
     }
 
     &.nue-container--horizontal {
         &:has(> .nue-header) > .nue-main {
-            border-left: 1px solid var(--nue-ui-border-color);
+            border-left: 1px solid var(--nue-border-color);
         }
 
         &:has(> .nue-footer) > .nue-main {
-            border-right: 1px solid var(--nue-ui-border-color);
+            border-right: 1px solid var(--nue-border-color);
         }
     }
 }
@@ -48,7 +48,7 @@
             height: auto;
             width: 100%;
             flex: none;
-            padding: 16px;
+            padding: var(--nue-primary-padding);
         }
 
         & > .nue-main {
@@ -62,7 +62,7 @@
 
         & > .nue-header,
         & > .nue-footer {
-            padding: 16px;
+            padding: var(--nue-primary-padding);
             height: 100%;
             width: auto;
             flex-direction: column;
@@ -110,13 +110,13 @@
             flex-direction: column;
 
             .nue-header__slot {
-                padding: 16px 0;
+                padding: var(--nue-primary-padding) 0;
                 flex-direction: column;
                 align-items: center;
                 height: auto;
 
                 .nue-link--btnlike {
-                    padding: 8px;
+                    padding: var(--nue-secondary-padding);
                     justify-content: center;
                     aspect-ratio: 1;
 

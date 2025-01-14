@@ -6,7 +6,11 @@
     >
         <div class="nue-collapse-item__header">
             <slot :collapse="handleCollapse" :state="isCollapsed" name="header">
-                <nue-text :clamped="1" class="nue-collapse-item__title">
+                <nue-text
+                    :clamped="1"
+                    class="nue-collapse-item__title"
+                    @click="handleCollapse"
+                >
                     <slot name="title">{{ title }}</slot>
                 </nue-text>
                 <nue-button

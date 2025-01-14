@@ -20,6 +20,7 @@
                     clearable
                     placeholder="请输入项目名称"
                     title="项目名称"
+                    style="flex: none"
                 />
                 <nue-text v-if="isProjectNameEmpty" color="#f56c6c" size="12px">
                     * 项目名称不能为空
@@ -59,8 +60,17 @@
 
 <script lang="ts" setup>
 import { reactive, ref, watch } from 'vue';
-import { NueConfirm, NueMessage } from '@nue-ui/components';
-import NueDialog from '@nue-ui/components/dialog/dialog.vue';
+import {
+    NueDiv,
+    NueButton,
+    NueDialog,
+    NueText,
+    NueInput,
+    NueTextarea,
+    NueConfirm,
+    NueMessage,
+    NueSwitch
+} from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
 const isAddDescription = ref(false);
@@ -81,8 +91,7 @@ async function handleAddProject() {
             return;
         }
         await NueConfirm({
-            title: '确认创建',
-            content: '确认创建项目吗？',
+            title: '确认创建项目吗？',
             confirmButtonText: '确认',
             cancelButtonText: '取消'
         });
@@ -115,9 +124,3 @@ watch(
     }
 );
 </script>
-
-<style>
-.nue-dialog--project-creator {
-    border: 2px solid var(--nue-ui-primary-color-500);
-}
-</style>

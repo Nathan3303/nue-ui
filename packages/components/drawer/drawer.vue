@@ -10,15 +10,12 @@
                 <nue-container class="vertical,inner">
                     <nue-header class="nue-drawer__header">
                         <slot :close="handleClose" name="header">
-                            <nue-text
-                                class="nue-drawer__title"
-                                size="var(--nue-ui-text-md)"
-                            >
+                            <nue-text class="nue-drawer__title">
                                 {{ title }}
                             </nue-text>
                             <nue-button
                                 icon="clear"
-                                theme="ico"
+                                theme="pure"
                                 @click.stop="handleClose"
                             />
                         </slot>

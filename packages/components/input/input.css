@@ -1,28 +1,27 @@
 /* variables */
 
 .nue-input {
-    --border-color: var(--nue-ui-divider-color);
+    --vgap: 0.75rem;
+    --width: auto;
+    --height: 2.25rem;
+    --font-size: var(--nue-text-sm);
+    --font-color: var(--nue-primary-color-900);
+    --icon-size: calc(var(--font-size));
+    --icon-color: var(--font-color);
+    --border-color: var(--nue-divider-color);
     --background-color: transparent;
-    --hover-border-color: var(--nue-ui-primary-color-600);
+    --hover-border-color: var(--nue-primary-color-600);
     --hover-background-color: transparent;
-    --focus-border-color: var(--nue-ui-primary-color-600);
+    --focus-border-color: var(--nue-primary-color-600);
     --focus-background-color: transparent;
-    --focus-shadow: var(--nue-ui-primary-shadow);
+    --focus-shadow: var(--nue-primary-shadow);
     --disabled-color: #9e9e9e;
-    --disabled-border-color: var(--nue-ui-divider-color);
-    --disabled-background-color: var(--nue-ui-primary-color-100);
+    --disabled-border-color: var(--nue-divider-color);
+    --disabled-background-color: var(--nue-primary-color-100);
     --button-size: var(--font-size);
     --button-color: var(--border-color);
     --button-border-color: var(--border-color);
     --button-hover-color: var(--hover-border-color);
-    /* after v0.7.0 */
-    --nue-input-vgap: 12px;
-    --nue-input-width: auto;
-    --nue-input-line-height: 22px;
-    --nue-input-font-size: var(--nue-ui-text-default);
-    --nue-input-font-color: var(--nue-ui-primary-text-color);
-    --nue-input-icon-size: var(--nue-input-font-size);
-    --nue-input-icon-color: var(--nue-input-font-color);
 }
 
 /* original */
@@ -30,22 +29,22 @@
 .nue-input {
     display: flex;
     align-items: center;
-    /*gap: calc(var(--nue-input-vgap) * 0.5);*/
-    gap: var(--nue-input-vgap);
-    width: var(--nue-input-width);
-    height: auto;
-    padding: calc(var(--nue-input-vgap) * 0.5) var(--nue-input-vgap);
+    gap: var(--vgap);
+    width: var(--width);
+    height: var(--height);
+    line-height: var(--height);
+    padding: 0 var(--vgap);
     border: 1px solid var(--border-color);
-    border-radius: var(--nue-ui-primary-radius);
+    border-radius: var(--nue-primary-radius);
     background-color: var(--background-color);
-    box-shadow: var(--nue-ui-secondary-shadow);
-    flex: auto;
+    box-shadow: var(--nue-secondary-shadow);
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
     transition: all 0.16s ease;
     -webkit-user-select: none;
     user-select: none;
+    flex: 1;
 
     &:hover {
         border-color: var(--hover-border-color);
@@ -58,21 +57,16 @@
         box-shadow: var(--focus-shadow);
     }
 
-    .nue-input__icon {
-        --icon-size: var(--nue-input-icon-size);
-    }
-
     .nue-input__input {
-        min-width: 36px;
+        min-width: 5rem;
         height: auto;
         outline: none;
         border: none;
         padding: 0;
         background-color: transparent;
         flex: auto;
-        color: var(--nue-input-font-color);
-        font-size: var(--nue-input-font-size);
-        line-height: var(--nue-input-line-height);
+        color: var(--font-color);
+        font-size: var(--font-size);
         font-family: inherit;
 
         &::-ms-reveal,
@@ -81,23 +75,23 @@
         }
 
         &::placeholder {
-            color: var(--nue-ui-primary-color-500);
+            color: var(--nue-primary-color-400);
         }
     }
 
     .word-counter {
         flex: none;
-        color: var(--nue-ui-primary-color-500);
-        font-size: var(--nue-ui-text-sm);
+        color: var(--nue-primary-color-500);
+        font-size: var(--nue-text-sm);
     }
 
     .nue-input__icon-button {
         transition: all 0.16s ease;
         cursor: pointer;
-        --icon-color: var(--nue-ui-primary-color-500);
+        --icon-color: var(--nue-primary-color-500);
 
         &:hover {
-            --icon-color: var(--nue-ui-primary-color-900);
+            --icon-color: var(--nue-primary-color-900);
         }
     }
 
@@ -118,7 +112,7 @@
 }
 
 .nue-input--rounded {
-    border-radius: 999px;
+    border-radius: 9999px;
 }
 
 .nue-input--noshape {
@@ -133,13 +127,13 @@
 }
 
 .nue-input--small {
-    --nue-input-vgap: 8px;
-    --nue-input-font-size: var(--nue-ui-text-xs);
-    --nue-input-line-height: 19px;
+    --vgap: 0.75rem;
+    --height: 1.75rem;
+    --font-size: var(--nue-text-xs);
 }
 
 .nue-input--large {
-    --nue-input-vgap: 16px;
-    --nue-input-font-size: var(--nue-ui-text-lg);
-    --nue-input-line-height: 27px;
+    --vgap: 1.25rem;
+    --height: 2.625rem;
+    --font-size: var(--nue-text-md);
 }

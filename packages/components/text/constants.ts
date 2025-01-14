@@ -1,14 +1,14 @@
 export const TEXT_SIZE_VALUES: Record<string, string> = {
-    xsmall: 'var(--nue-ui-text-xs)',
-    small: 'var(--nue-ui-text-sm)',
-    normal: 'var(--nue-ui-text-default)',
-    medium: 'var(--nue-ui-text-md)',
-    large: 'var(--nue-ui-text-lg)',
-    xlarge: 'var(--nue-ui-text-xl)',
-    xs: 'var(--nue-ui-text-xs)',
-    sm: 'var(--nue-ui-text-sm)',
-    df: 'var(--nue-ui-text-default)',
-    md: 'var(--nue-ui-text-md)',
-    lg: 'var(--nue-ui-text-lg)',
-    xl: 'var(--nue-ui-text-xl)'
+    xsmall: 'var(--nue-text-xs)',
+    small: 'var(--nue-text-sm)',
+    normal: 'var(--nue-text-df)',
+    medium: 'var(--nue-text-md)',
+    large: 'var(--nue-text-lg)',
+    xlarge: 'var(--nue-text-xl)',
+    xs: 'var(--nue-text-xs)',
+    sm: 'var(--nue-text-sm)',
+    df: 'var(--nue-text-df)',
+    md: 'var(--nue-text-md)',
+    lg: 'var(--nue-text-lg)',
+    xl: 'var(--nue-text-xl)'
 };

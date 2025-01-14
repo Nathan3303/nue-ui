@@ -48,8 +48,13 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import NueSelect from '@nue-ui/components/select/select.vue';
-import NueSelectOption from '@nue-ui/components/select/option.vue';
+import {
+    NueDiv,
+    NueSelect,
+    NueSelectOption,
+    NueAvatar,
+    NueText
+} from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
 const s1 = ref(24);

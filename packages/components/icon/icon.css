@@ -5,16 +5,22 @@
     --icon-color: inherit;
     --icon-size: inherit;
     --icon-weight: inherit;
+    --icon-height: unset;
 }
 
 /* original */
 
 .nue-icon {
-    &.iconfont {
-        /*display: block;*/
-        color: var(--icon-color);
-        font-size: var(--icon-size) !important;
-        font-weight: var(--icon-weight);
+    color: var(--icon-color);
+    font-size: var(--icon-size) !important;
+    font-weight: var(--icon-weight);
+    line-height: var(--icon-height, normal);
+
+    &.iconfont::before {
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
     }
 
     &.nue-icon--spin {

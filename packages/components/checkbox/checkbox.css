@@ -1,14 +1,15 @@
 /* Variables */
 
 .nue-checkbox {
-    --padding: 0px;
+    --padding: 0;
     --border-color: transparent;
-    --border-radius: var(--nue-ui-primary-radius);
+    --border-radius: var(--nue-primary-radius);
     --box-shadow: none;
-    --nue-check-label-size: var(--nue-ui-text-default);
-    --nue-check-label-color: var(--nue-ui-primary-color-900);
-    --nue-check-icon-size: calc(var(--nue-check-label-size) + 2px);
-    --nue-check-icon-color: var(--nue-ui-primary-color-600);
+    --nue-check-label-size: var(--nue-text-sm);
+    --nue-check-label-color: var(--nue-primary-color-900);
+    --nue-check-icon-size: calc(var(--nue-check-label-size) + 0.25rem);
+    --nue-check-icon-color: var(--nue-primary-color-900);
+    --nue-check-icon-shadow-color: var(--nue-primary-color-500);
     --animation-time: 0.16s;
 }
 
@@ -16,7 +17,7 @@
 
 .nue-checkbox {
     display: flex;
-    gap: 6px;
+    gap: 0.375rem;
     align-items: center;
     cursor: pointer;
     padding: var(--padding);
@@ -42,22 +43,23 @@
 /* small */
 
 .nue-checkbox--small {
-    gap: 4px;
-    --nue-check-label-size: var(--nue-ui-text-xs);
+    gap: 0.25rem;
+    --nue-check-label-size: var(--nue-text-xs);
 }
 
 /* large */
 
 .nue-checkbox--large {
-    gap: 8px;
-    --nue-check-label-size: var(--nue-ui-text-lg);
+    gap: 0.5rem;
+    --nue-check-label-size: var(--nue-text-lg);
 }
 
 /* checked */
 
 .nue-checkbox--checked {
-    --nue-check-icon-color: var(--nue-ui-primary-color-900);
-    --nue-check-label-color: var(--nue-ui-primary-color-900);
+    --nue-check-icon-color: var(--nue-primary-color-900);
+    --nue-check-label-color: var(--nue-primary-color-900);
+    --nue-check-icon-shadow-color: transparent;
 }
 
 /* disabled & loading */
@@ -72,10 +74,10 @@
 
 .nue-checkbox--bordered,
 .nue-checkbox--bd {
-    --nue-checkbox-vgap: var(--nue-ui-secondary-gap);
-    --border-color: var(--nue-ui-border-color);
-    --border-radius: var(--nue-ui-primary-radius);
-    --box-shadow: var(--nue-ui-secondary-shadow);
+    --nue-checkbox-vgap: var(--nue-secondary-gap);
+    --border-color: var(--nue-border-color);
+    --border-radius: var(--nue-primary-radius);
+    --box-shadow: var(--nue-secondary-shadow);
     gap: var(--nue-checkbox-vgap);
     padding: calc(var(--nue-checkbox-vgap) * 0.5) var(--nue-checkbox-vgap);
 }

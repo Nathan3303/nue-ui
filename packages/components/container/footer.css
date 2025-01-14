@@ -2,7 +2,7 @@
 
 .nue-footer {
     --nue-footer-width: 100%;
-    --nue-footer-height: 60px;
+    --nue-footer-height: 4rem;
 }
 
 /* original */
@@ -10,10 +10,10 @@
 .nue-footer {
     display: flex;
     align-items: center;
-    gap: var(--nue-ui-primary-gap);
+    gap: var(--nue-primary-gap);
     box-sizing: border-box;
     width: var(--nue-footer-width);
     height: var(--nue-footer-height);
-    padding: var(--nue-ui-primary-padding);
+    padding: var(--nue-primary-padding);
     flex: none;
 }

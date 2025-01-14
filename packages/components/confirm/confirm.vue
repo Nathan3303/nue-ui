@@ -1,17 +1,7 @@
 <template>
     <div ref="confirmRef" :class="classes">
-        <div class="nue-confirm__header">
-            <nue-text size="var(--nue-ui-text-md)">{{ title }}</nue-text>
-            <nue-button
-                :disabled="loading"
-                icon="clear"
-                theme="ico"
-                @click.stop="handleConfirm(false)"
-            />
-        </div>
-        <div class="nue-confirm__content">
-            <nue-text>{{ content }}</nue-text>
-        </div>
+        <div v-if="title" class="nue-confirm__header">{{ title }}</div>
+        <div v-if="content" class="nue-confirm__content">{{ content }}</div>
         <div class="nue-confirm__footer">
             <nue-button :disabled="loading" @click.stop="handleConfirm(false)">
                 {{ cancelButtonText }}
@@ -30,7 +20,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import NueButton from '../button/button.vue';
-import NueText from '../text/text.vue';
 import type { ConfirmPropsType } from './types';
 import { parseTheme } from '@nue-ui/utils';
 import './confirm.css';

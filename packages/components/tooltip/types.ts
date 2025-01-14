@@ -1,7 +1,7 @@
 import type { GlobalProps } from '@nue-ui/utils';
 
 export interface NueTooltipProps extends GlobalProps {
-    content: string;
+    content?: string;
     placement?:
         | 'top-start'
         | 'top-center'

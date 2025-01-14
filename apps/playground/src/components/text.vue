@@ -49,6 +49,6 @@
 </template>
 
 <script lang="ts" setup>
-import NueText from '@nue-ui/components/text/text.vue';
+import { NueDiv, NueText } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 </script>

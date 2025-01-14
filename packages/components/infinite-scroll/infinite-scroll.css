@@ -10,7 +10,6 @@
 .infinite-scroll-wrapper {
     width: 100%;
     height: var(--wrapper-height);
-    /*overflow: auto;*/
 
     .infinite-scroll {
         position: relative;
@@ -28,15 +27,13 @@
 
         .infinite-scroll__loading,
         .infinite-scroll__disabled {
-            padding: calc(var(--nue-ui-primary-padding) * 0.5)
-                var(--nue-ui-primary-padding);
-            border-radius: var(--nue-ui-primary-radius);
-            margin-top: var(--nue-ui-primary-padding);
+            padding: var(--nue-primary-padding);
+            border-radius: var(--nue-primary-radius);
             text-align: center;
         }
 
         .infinite-scroll__disabled {
-            color: var(--nue-ui-disabled-color);
+            color: var(--nue-disabled-color);
         }
     }
 }
