@@ -1,0 +1,27 @@
+/* Variables */
+.nue-breadcrumb {
+}
+
+/* Original */
+.nue-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.5rem 0;
+    margin: 0;
+    list-style: none;
+}
+
+.nue-breadcrumb__separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    --icon-size: var(--nue-text-xs);
+    --icon-color: var(--nue-primary-color-700);
+
+    &:last-of-type {
+        display: none;
+    }
+}

@@ -35,7 +35,11 @@ const routers = [
     { path: '/prompt', component: () => import('./components/prompt.vue') },
     { path: '/tooltip', component: () => import('./components/tooltip.vue') },
     { path: '/divider', component: () => import('./components/divider.vue') },
-    { path: '/dropdown', component: () => import('./components/dropdown.vue') }
+    { path: '/dropdown', component: () => import('./components/dropdown.vue') },
+    {
+        path: '/breadcrumb',
+        component: () => import('./components/breadcrumb.vue')
+    }
 ];
 
 const router = createRouter({

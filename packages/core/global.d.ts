@@ -5,6 +5,8 @@ declare module 'vue' {
         NueAside: (typeof import('nue-ui'))['NueAside'];
         NueAvatar: (typeof import('nue-ui'))['NueAvatar'];
         NueBadge: (typeof import('nue-ui'))['NueBadge'];
+        NueBreadcrumb: (typeof import('nue-ui'))['NueBreadcrumb'];
+        NueBreadcrumbItem: (typeof import('nue-ui'))['NueBreadcrumbItem'];
         NueButton: (typeof import('nue-ui'))['NueButton'];
         NueButtonGroup: (typeof import('nue-ui'))['NueButtonGroup'];
         NueCheckbox: (typeof import('nue-ui'))['NueCheckbox'];

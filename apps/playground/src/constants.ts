@@ -21,7 +21,8 @@ export const collapseItemsData = [
             { route: '/infinite-scroll', text: 'Infinite Scroll 无限滚动' },
             { route: '/marquee', text: 'Marquee 跑马灯' },
             { route: '/progress', text: 'Progress 进度' },
-            { route: '/empty', text: 'Empty 空状态' }
+            { route: '/empty', text: 'Empty 空状态' },
+            { route: '/breadcrumb', text: 'Breadcrumb 面包屑' }
         ]
     },
     {

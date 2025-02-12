@@ -2,14 +2,7 @@
     <nue-container class="demo-layout" theme="vertical,inner">
         <nue-header>
             <template #logo>
-                <!--                <nue-text size="var(&#45;&#45;nue-ui-text-default)">-->
-                <!--                    <slot name="title">-->
-                <!--                        {{ title }}-->
-                <!--                    </slot>-->
-                <!--                </nue-text>-->
-                <slot name="title">
-                    {{ title }}
-                </slot>
+                <slot name="title">{{ title }}</slot>
             </template>
         </nue-header>
         <nue-main>
@@ -26,6 +19,10 @@ defineProps<{ title?: string }>();
 </script>
 
 <style scoped>
+.nue-header:deep(> .nue-header__logo) {
+    font-size: var(--nue-text-df);
+}
+
 .demo-layout:deep(.wrapper) {
     border: 1px solid var(--nue-divider-color);
     border-radius: var(--nue-primary-radius);
