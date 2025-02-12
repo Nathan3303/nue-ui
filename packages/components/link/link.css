@@ -16,10 +16,9 @@
     --actived-color: #0754ff;
 }
 
-.nue-link--btnlike,
 .nue-link--rl {
     --vgap: 1rem;
-    --flex: auto;
+    --flex: none;
     --alignment: start;
     --height: 2.25rem;
     --font-size: var(--nue-text-sm);
@@ -49,6 +48,7 @@
     color: var(--color);
     font-size: var(--font-size);
     font-weight: var(--font-weight);
+    font-family: var(--nue-primary-font-family), sans-serif;
     text-decoration: var(--text-decoration);
     transition: all 0.16s ease-out;
     cursor: pointer;
@@ -81,7 +81,6 @@
 
 /* router-link / rl */
 
-.nue-link--btnlike,
 .nue-link--rl {
     display: flex;
     align-items: center;
