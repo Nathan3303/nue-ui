@@ -9,6 +9,7 @@
         </nue-header>
         <nue-main aside-width="256px" responsive>
             <template #aside>
+                <nue-link route="/custom" theme="rl">自定义演练</nue-link>
                 <nue-collapse
                     v-model="collapseValue"
                     class="app-view__aside-collapse-menu"

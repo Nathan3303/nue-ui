@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routers = [
-    { path: '/', name: 'home', redirect: '/button' },
+    { path: '/', name: 'home', redirect: '/custom' },
+    // Custom
+    { path: '/custom', component: () => import('./layouts/custom.vue') },
     // Basic components
     { path: '/button', component: () => import('./components/button.vue') },
     {
