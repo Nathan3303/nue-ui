@@ -14,7 +14,8 @@
         "prepare": "husky",
         "core": "pnpm --filter nue-ui",
         "document": "pnpm --filter @nue-ui/document",
-        "playground": "pnpm --filter @nue-ui/playground"
+        "playground": "pnpm --filter @nue-ui/playground",
+        "story": "pnpm --filter @nue-ui/story"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx,json,css,scss,md}": [
