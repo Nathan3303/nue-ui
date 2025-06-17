@@ -1,0 +1,24 @@
+{
+  "name": "@nue-ui/histoire",
+  "version": "0.0.1",
+  "description": "Histoire on NueUI, for the component testing and previewing.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "histoire dev",
+    "build": "histoire build",
+    "preview": "histoire preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nathan3303/nue-ui.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "@histoire/plugin-vue": "1.0.0-alpha.2",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "histoire": "1.0.0-alpha.2",
+    "typescript": "~5.6.2",
+    "vite": "6.3.4",
+    "vue-tsc": "^2.1.8"
+  }
+}
