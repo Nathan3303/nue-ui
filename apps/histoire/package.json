@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Histoire on NueUI, for the component testing and previewing.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "histoire dev",
     "build": "histoire build",
