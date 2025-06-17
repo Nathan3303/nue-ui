@@ -4,7 +4,7 @@ import useRollupPlugin from './use-rollup-plugin.ts';
 import terser from '@rollup/plugin-terser';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { compression } from 'vite-plugin-compression2';
+// import { compression } from 'vite-plugin-compression2';
 import { removeOldFiles, moveUMDStyleFiles } from './utils.ts';
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -18,7 +18,7 @@ export default defineConfig({
             outDir: 'dist/types',
             tsconfigPath: 'tsconfig.build.json'
         }),
-        compression({ include: /\.(cjs|css)$/i }),
+        // compression({ include: /\.(cjs|css)$/i }),
         useRollupPlugin({
             name: 'umd-rollup-plugin',
             beforeBuild: () => removeOldFiles(),

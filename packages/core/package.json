@@ -14,13 +14,13 @@
     "types": "./dist/types/core/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/es/index.js",
+            "types": "./dist/types/core/index.d.ts",
             "require": "./dist/umd/index.umd.cjs",
-            "types": "./dist/types/core/index.d.ts"
+            "import": "./dist/es/index.js"
         },
         "./dist/": {
-            "import": "./dist/",
-            "require": "./dist/"
+            "require": "./dist/",
+            "import": "./dist/"
         }
     },
     "scripts": {
