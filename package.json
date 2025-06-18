@@ -15,7 +15,8 @@
         "core": "pnpm --filter nue-ui",
         "document": "pnpm --filter @nue-ui/document",
         "playground": "pnpm --filter @nue-ui/playground",
-        "histoire": "pnpm --filter @nue-ui/histoire"
+        "histoire": "pnpm --filter @nue-ui/histoire",
+        "theme-shadlike": "pnpm --filter @nue-ui/theme-shadlike"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx,json,css,scss,md}": [

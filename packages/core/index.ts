@@ -1,6 +1,6 @@
 import { makeInstaller } from '@nue-ui/utils';
 import components from './components';
-import '@nue-ui/theme/index.css';
+import '@nue-ui/assets';
 
 const installer = makeInstaller(components);
 

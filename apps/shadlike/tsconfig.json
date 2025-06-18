@@ -1,0 +1,13 @@
+{
+  "references": [
+    {
+      "path": "../../tsconfig.base.json"
+    }
+  ],
+  "include": [
+    "env.d.ts",
+    "./*.ts",
+    "./src/*.ts",
+    "./src/*.css"
+  ]
+}

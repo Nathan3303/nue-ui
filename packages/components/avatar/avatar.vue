@@ -2,30 +2,38 @@
     <div :class="classes" :style="styles" :title="title">
         <img
             v-if="src && !loadError"
-            :alt="alt || `Avatar`"
+            :alt="alt || `NueAvatar`"
             :src="src"
             class="nue-avatar__image"
             @error="handleError($event)"
         />
-        <nue-icon v-else-if="icon" :name="icon" class="nue-avatar__icon" />
-        <slot v-else>
-            <span v-if="alt" class="nue-avatar__text">{{ alt }}</span>
+        <slot v-else-if="$slots.default">
+            <nue-text v-if="alt" class="nue-avatar__text">{{ alt }}</nue-text>
             <nue-icon v-else class="nue-avatar__icon" name="logo" />
         </slot>
+        <nue-icon v-else :name="icon" class="nue-avatar__icon" />
     </div>
 </template>
+
+<style src="./avatar.css" />
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-import { NueIcon } from '../icon';
-import type { AvatarEmits, AvatarProps } from './types';
-import './avatar.css';
+import NueIcon from '../icon/icon.vue';
+import NueText from '../text/text.vue';
+import type { NueAvatarEmits, NueAvatarProps } from './types';
 
 defineOptions({ name: 'NueAvatar' });
 
-const emit = defineEmits<AvatarEmits>();
-const props = withDefaults(defineProps<AvatarProps>(), {});
+const emit = defineEmits<NueAvatarEmits>();
+const props = withDefaults(defineProps<NueAvatarProps>(), {
+    alt: 'NueAvatar',
+    size: '36px',
+    rounded: false,
+    icon: 'logo',
+    title: 'NueAvatar'
+});
 
 const loadError = ref(false);
 
@@ -41,7 +49,7 @@ const classes = computed(() => {
     return [
         prefix,
         ...parseTheme(props.theme, prefix),
-        props.rounded && 'nue-avatar--rounded'
+        props.rounded && `${prefix}--rounded`
     ];
 });
 
