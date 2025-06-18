@@ -73,7 +73,7 @@
         "nue-ui": "workspace:*",
         "@nue-ui/components": "workspace:*",
         "@nue-ui/hooks": "workspace:*",
-        "@nue-ui/theme": "workspace:*",
+        "@nue-ui/assets": "workspace:*",
         "@nue-ui/utils": "workspace:*",
         "lodash-es": "^4.17.21"
     }
