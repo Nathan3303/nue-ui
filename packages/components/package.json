@@ -1,10 +1,8 @@
 {
     "name": "@nue-ui/components",
-    "version": "0.1.0",
-    "description": "NueUI Components",
+    "description": "NueUI components package",
     "private": true,
     "main": "index.ts",
-    "scripts": {},
     "author": "Nathan Lee",
     "license": "MIT"
 }
