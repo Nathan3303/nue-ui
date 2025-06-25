@@ -1,10 +1,8 @@
 .nue-overlay {
     --nue-overlay-animation-name: fade-in;
     --nue-overlay-animation-duration: 0.24s;
-    --nue-overlay-animation-rest-property: ease-out forwards;
     --nue-overlay-close-animation-name: fade-out;
     --nue-overlay-close-animation-duration: 0.24s;
-    --nue-overlay-close-animation-rest-property: ease-out forwards;
 
     display: flex;
     align-items: center;
@@ -15,14 +13,17 @@
     background-color: rgba(0, 0, 0, 0.64);
     overflow: hidden;
     box-sizing: border-box;
-    animation: var(--nue-overlay-animation-name) var(--nue-overlay-animation-duration)
-        var(--nue-overlay-animation-rest-property);
+    animation-name: var(--nue-overlay-animation-name);
+    animation-duration: var(--nue-overlay-animation-duration);
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
 
-    &[data-closing='true'] {
-        animation: var(--nue-overlay-close-animation-name)
-            var(--nue-overlay-close-animation-duration)
-            var(--nue-overlay-close-animation-rest-property);
-    }
+.nue-overlay[data-closing='true'] {
+    animation-name: var(--nue-overlay-close-animation-name);
+    animation-duration: var(--nue-overlay-close-animation-duration);
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
 }
 
 @keyframes fade-in {

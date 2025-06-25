@@ -1,37 +1,36 @@
-import ConfirmNode from './confirm.vue';
-import { usePopupPool } from '../popup-pool';
+import NueConfirm from './confirm.vue';
+import { usePopupPoolV2 } from '../popup-pool-v2';
 import { createVNode, render } from 'vue';
-import { isString, isNumber } from 'lodash-es';
-import type { NueConfirmPayload } from './types';
+import { NueConfirmCallerPayload, NueConfirmCallerReturned } from './types';
 
-export default function (payload: NueConfirmPayload) {
-    const popupPool = usePopupPool(payload.wrapperId);
-
+export default function NueConfirmCaller(
+    payload: NueConfirmCallerPayload
+): NueConfirmCallerReturned {
     return new Promise((resolve, reject) => {
-        const popupOverlay = document.createElement('div');
-        popupOverlay.classList.add('nue-overlay');
-        popupOverlay.classList.add('nue-confirm-overlay');
-        popupPool.appendChild(popupOverlay);
-
-        const removeChild = () => {
-            const customTimeout = isString(payload.closeAnimation)
-                ? 240
-                : payload.closeAnimation?.duration;
-            const timeout = isNumber(customTimeout) ? customTimeout : 240;
-            popupOverlay.dataset.closing = 'true';
-            popupOverlay.style.animationDuration = `${timeout}ms`;
-            setTimeout(() => {
-                popupPool.removeChild(popupOverlay);
-            }, timeout);
-        };
-
-        const close = async (confirmResult: boolean | string | Error | undefined) => {
-            removeChild();
-            confirmResult instanceof Error || !confirmResult
-                ? reject(confirmResult)
-                : resolve(confirmResult);
-        };
-
-        render(createVNode(ConfirmNode, { ...payload, close }), popupOverlay);
+        const popupPool = usePopupPoolV2(payload.wrapperId);
+        const confirmAnchor = document.createElement('div');
+        confirmAnchor.classList.add('nue-confirm-anchor');
+        if (!popupPool.element) {
+            reject('Popup pool is not exist');
+            return;
+        }
+        popupPool.element.appendChild(confirmAnchor);
+        render(
+            createVNode(NueConfirm, {
+                ...payload,
+                close: (confirmResult: NueConfirmCallerReturned) => {
+                    confirmResult instanceof Error || !confirmResult
+                        ? reject(confirmResult)
+                        : resolve(confirmResult);
+                },
+                destroy: () => {
+                    if (!popupPool.element) return;
+                    popupPool.element.removeChild(confirmAnchor);
+                    popupPool.setZIndex();
+                }
+            }),
+            confirmAnchor
+        );
+        popupPool.setZIndex();
     });
 }

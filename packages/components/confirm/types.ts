@@ -1,22 +1,28 @@
 import type { VNode } from 'vue';
-import type { GlobalProps, Optional } from '@nue-ui/utils';
+import type { GlobalProps, NueGlobalPopupItemProps, NuePopupItemAnimation } from '@nue-ui/utils';
 
-export type ConfirmClose = (confirmResult: unknown) => void;
-export type NueConfirmAnimation = string | { name: string; duration?: number };
-
-export interface NueConfirmProps extends GlobalProps {
+export interface NueConfirmCallerPayload extends GlobalProps, NueGlobalPopupItemProps {
+    wrapperId?: string;
     title?: string;
     content?: string | VNode;
     confirmButtonText?: string;
     cancelButtonText?: string;
     unuseCancelButton?: boolean;
     loading?: boolean;
-    onConfirm?: () => Promise<string | boolean | undefined> | boolean;
-    close: ConfirmClose;
-    animation?: NueConfirmAnimation;
-    closeAnimation?: NueConfirmAnimation;
+    overlayAnimation?: NuePopupItemAnimation;
+    overlayCloseAnimation?: NuePopupItemAnimation;
+    onConfirm?: () => Promise<Error | boolean | string> | boolean;
 }
 
-export type NueConfirmPayload = {
-    wrapperId?: string;
-} & Optional<NueConfirmProps>;
+export type NueConfirmCallerReturnedUnpromise = Error | boolean | string;
+
+export type NueConfirmCallerReturned = Promise<Error | boolean | string>;
+
+export interface NueConfirmProps extends NueConfirmCallerPayload {
+    close: (confirmResult: NueConfirmCallerReturnedUnpromise) => void;
+    destroy: () => void;
+}
+
+// export type NueConfirmEmits = {
+//     (e: 'close', confirmResult: Error | boolean | string): void;
+// };

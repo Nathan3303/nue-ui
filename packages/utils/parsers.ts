@@ -26,3 +26,14 @@ export function parseFlexWrap(value: string): string {
     if (value === '') return 'wrap';
     return value;
 }
+
+export function parseAnimationDurationToNumber(value: string | number): number {
+    // maybe 'xxx s' or 'xxx ms', please convert to number
+    if (typeof value === 'string') {
+        if (value.endsWith('s')) {
+            return parseFloat(value.slice(0, -1)) * 1000;
+        }
+        return parseFloat(value);
+    }
+    return value;
+}

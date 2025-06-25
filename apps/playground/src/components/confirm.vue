@@ -31,11 +31,13 @@ function openConfirm() {
 
 function openConfirm2() {
     NueConfirm({
-        content: '自定义了动画以及动画的持续时间',
+        content: '自定义了 自身 以及 背景层 的 动画 以及 动画的持续时间。',
         confirmButtonText: '知道了',
         unuseCancelButton: true,
         animation: 'slide-in-from-top',
-        closeAnimation: { name: 'slide-out-to-top', duration: 1000 }
+        closeAnimation: { name: 'slide-out-to-top', duration: 512 },
+        overlayAnimation: 'fade-in',
+        overlayCloseAnimation: { name: 'fade-out', duration: 512 }
     }).then(
         () => NueMessage.success('确认!'),
         () => NueMessage.info('取消!')
@@ -83,26 +85,33 @@ function openConfirmWithOnConfirm() {
 </script>
 
 <style>
-.nue-confirm--custom {
-    --nue-confirm-bg-color: var(--nue-primary-color-900);
-    --nue-confirm-header-color: var(--nue-primary-color-100);
-    --nue-confirm-content-color: var(--nue-primary-color-500);
-    --nue-confirm-animation-name: slide-in-from-top;
-    --nue-confirm-animation-duration: 0.36s;
-    --nue-confirm-close-animation-name: slide-out-to-top;
-    --nue-confirm-close-animation-duration: 1s;
+.nue-overlay--custom {
+    --nue-overlay-animation-name: fade-in;
+    --nue-overlay-animation-duration: 0.36s;
+    --nue-overlay-close-animation-name: fade-out;
+    --nue-overlay-close-animation-duration: 0.512s;
 
-    .nue-confirm__footer {
-        .nue-button {
-            font-size: 14px;
-            color: var(--nue-primary-color-100);
-            --nue-button-hover-bg-color: #363636;
-            --nue-button-active-bg-color: #363636;
-        }
+    .nue-confirm--custom {
+        --nue-confirm-bg-color: var(--nue-primary-color-900);
+        --nue-confirm-header-color: var(--nue-primary-color-100);
+        --nue-confirm-content-color: var(--nue-primary-color-500);
+        --nue-confirm-animation-name: slide-in-from-top;
+        --nue-confirm-animation-duration: 0.36s;
+        --nue-confirm-close-animation-name: slide-out-to-top;
+        --nue-confirm-close-animation-duration: 0.512s;
 
-        .nue-button--primary {
-            background-color: var(--nue-primary-color-200);
-            color: var(--nue-primary-color-900);
+        .nue-confirm__footer {
+            .nue-button {
+                font-size: 14px;
+                color: var(--nue-primary-color-100);
+                --nue-button-hover-bg-color: #363636;
+                --nue-button-active-bg-color: #363636;
+            }
+
+            .nue-button--primary {
+                background-color: var(--nue-primary-color-200);
+                color: var(--nue-primary-color-900);
+            }
         }
     }
 }

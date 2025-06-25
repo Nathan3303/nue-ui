@@ -1,5 +1,5 @@
 import Confirm from './confirm';
-import type { NueConfirmPayload } from './types';
+import type { NueConfirmCallerPayload } from './types';
 
 export const NueConfirm = Confirm;
-export type { NueConfirmPayload };
+export type { NueConfirmCallerPayload };
