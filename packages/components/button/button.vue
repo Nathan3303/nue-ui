@@ -7,12 +7,7 @@
         :type="type"
         @click="handleClick"
     >
-        <nue-icon
-            v-if="iconName"
-            :name="iconName"
-            :spin="loading"
-            class="nue-button__icon"
-        />
+        <nue-icon v-if="iconName" :name="iconName" :spin="loading" class="nue-button__icon" />
         <nue-text v-if="$slots.default" class="nue-button__text">
             <slot />
         </nue-text>
@@ -31,11 +26,11 @@ import { BUTTON_GROUP_CTX_KEY } from '../button-group/constants';
 import NueIcon from '../icon/icon.vue';
 import NueText from '../text/text.vue';
 import type { NueButtonProps, NueButtonEmits } from './types';
-import type { ButtonGroupCtxType } from '../button-group';
+import type { NueButtonGroupCtxType } from '../button-group';
 
 defineOptions({ name: 'NueButton' });
 
-const ButtonGroupCtx = inject(BUTTON_GROUP_CTX_KEY, {} as ButtonGroupCtxType);
+const ButtonGroupCtx = inject(BUTTON_GROUP_CTX_KEY, {} as NueButtonGroupCtxType);
 const emit = defineEmits<NueButtonEmits>();
 const props = withDefaults(defineProps<NueButtonProps>(), {
     type: 'button',

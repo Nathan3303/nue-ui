@@ -1,6 +1,6 @@
 import type { Ref } from 'vue';
 import type { GlobalProps } from '@nue-ui/utils';
-import type { ButtonSize } from '../button';
+import type { NueButtonSize } from '../button';
 
 export type SelectOptionProps = {
     label: string;
@@ -17,7 +17,7 @@ export type SelectOptions = SelectOption[];
 export interface SelectProps extends GlobalProps {
     modelValue?: unknown;
     placeholder?: string;
-    size?: ButtonSize;
+    size?: NueButtonSize;
     disabled?: boolean;
     hideOnSelect?: boolean;
     clearable?: boolean;
