@@ -1,53 +1,48 @@
 <template>
-    <demo title="Checkbox 复选框">
-        <nue-div>
-            <nue-div align="center">
-                <nue-checkbox v-model="checkbox1" label="基础复选框" />
-                <nue-checkbox v-model="checkbox1" disabled label="禁用状态" />
-            </nue-div>
-            <nue-div align="center">
-                <nue-checkbox
-                    v-model="checkbox4"
-                    label="大型复选框"
-                    size="large"
-                />
-                <nue-checkbox v-model="checkbox4" label="复选框" />
-                <nue-checkbox
-                    v-model="checkbox4"
-                    label="小型复选框"
-                    size="small"
-                />
-            </nue-div>
-            <nue-div align="center">
-                <nue-checkbox
-                    v-model="checkbox3"
-                    label="复选框（边框主题）"
-                    theme="large,bordered"
-                />
-                <nue-checkbox
-                    v-model="checkbox3"
-                    label="复选框（边框主题）"
-                    theme="bordered"
-                />
-                <nue-checkbox
-                    v-model="checkbox3"
-                    label="复选框（边框主题）"
-                    theme="small,bordered"
-                />
-            </nue-div>
-            <nue-div align="center">
-                <nue-checkbox
-                    v-model="checkbox2"
-                    :before-check="handleBeforeCheck"
-                    :loading="loading"
-                    theme="custom"
-                >
-                    {{ loading ? '正在选中...' : '复选框（带有选择前的回调）' }}
-                </nue-checkbox>
-            </nue-div>
+    <demo title="基础">
+        <nue-div align="center">
+            <nue-checkbox v-model="checkbox1" label="基础复选框" />
+            <nue-checkbox v-model="checkbox1" disabled label="禁用状态" />
         </nue-div>
     </demo>
-    <demo title="CheckboxGroup 复选框组">
+    <demo title="加载态">
+        <nue-div align="center">
+            <nue-checkbox
+                v-model="checkbox2"
+                :before-check="handleBeforeCheck"
+                :loading="loading"
+            >
+                {{ loading ? '正在选中...' : '复选框（带有选择前的回调）' }}
+            </nue-checkbox>
+        </nue-div>
+    </demo>
+    <demo title="尺寸">
+        <nue-div align="center">
+            <nue-checkbox v-model="checkbox4" label="小型复选框" size="small" />
+            <nue-checkbox v-model="checkbox4" label="正常复选框" />
+            <nue-checkbox v-model="checkbox4" label="大型复选框" size="large" />
+        </nue-div>
+    </demo>
+    <demo title="主题">
+        <nue-div align="center">
+            <nue-checkbox
+                v-model="checkbox5"
+                :before-check="handleBeforeCheck2"
+                :loading="loading2"
+                label="边框主题"
+                theme="bordered"
+            />
+            <nue-checkbox
+                v-model="checkbox5"
+                :before-check="handleBeforeCheck2"
+                :loading="loading2"
+                theme="custom"
+            >
+                自定义主题
+            </nue-checkbox>
+        </nue-div>
+    </demo>
+    <demo title="复选框组">
         <nue-checkbox-group
             v-model="activeNames"
             :controller-label="controllerLabel"
@@ -74,11 +69,12 @@ import Demo from '../layouts/demo.vue';
 
 const checkbox1 = ref(false);
 const checkbox2 = ref(false);
-const checkbox3 = ref(false);
 const checkbox4 = ref(false);
+const checkbox5 = ref(false);
 const checkboxes = ['game', 'music', 'movie', 'sport', 'travel'];
 const activeNames = ref<string[]>(['game', 'music']);
 const loading = ref(false);
+const loading2 = ref(false);
 
 const controllerLabel = computed(() => {
     const len = activeNames.value.length;
@@ -93,7 +89,14 @@ const handleBeforeCheck = async () => {
     loading.value = true;
     await new Promise(resolve => setTimeout(resolve, 1000));
     loading.value = false;
-    return Math.random() >= 0.3;
+    return true;
+};
+
+const handleBeforeCheck2 = async () => {
+    loading2.value = true;
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    loading2.value = false;
+    return true;
 };
 </script>
 
@@ -105,7 +108,7 @@ const handleBeforeCheck = async () => {
 }
 
 .nue-checkbox--custom.nue-checkbox--checked {
-    --check-icon-color: #3c3ce8;
-    --check-label-color: #3c3ce8;
+    --nue-checkbox-icon-color: #3c3ce8;
+    --nue-checkbox-label-color: #3c3ce8;
 }
 </style>

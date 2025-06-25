@@ -1,28 +1,38 @@
-/* variables */
-
 .nue-confirm {
-    --animation-name: slide-in-from-top;
-    --animation-rest-property: 0.24s ease-out forwards;
-}
+    --nue-confirm-animation-name: unset;
+    --nue-confirm-animation-duration: var(--nue-overlay-animation-duration, 0.24s);
+    --nue-confirm-animation-rest-property: var(--nue-overlay-animation-rest-property, unset);
+    --nue-confirm-close-animation-name: unset;
+    --nue-confirm-close-animation-duration: var(--nue-overlay-close-animation-duration, 0.24s);
+    --nue-confirm-close-animation-rest-property: var(
+        --nue-overlay-close-animation-rest-property,
+        unset
+    );
+    --nue-confirm-header-font-size: 1rem;
+    --nue-confirm-header-color: #212121;
+    --nue-confirm-content-font-size: 0.875rem;
+    --nue-confirm-content-color: #757575;
+    --nue-confirm-bg-color: #f5f5f5;
+    --nue-confirm-border-radius: 6px;
 
-/* original */
-
-.nue-confirm {
     display: flex;
     flex-direction: column;
     width: 32%;
     min-width: 24rem;
     padding: 1rem;
-    border-radius: var(--nue-primary-radius);
-    background-color: var(--nue-primary-color-100);
-    animation: var(--animation-name) var(--animation-rest-property);
     box-sizing: border-box;
+
+    animation: var(--nue-confirm-animation-name) var(--nue-confirm-animation-duration)
+        var(--nue-confirm-animation-rest-property);
+    background-color: var(--nue-confirm-bg-color);
+    border-radius: var(--nue-confirm-border-radius);
 
     .nue-confirm__header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: var(--nue-text-md);
+        font-size: var(--nue-confirm-header-font-size);
+        color: var(--nue-confirm-header-color);
     }
 
     .nue-confirm__content {
@@ -32,8 +42,8 @@
         width: 100%;
         flex: auto;
         margin: 0.5rem 0 1rem;
-        font-size: var(--nue-text-sm);
-        color: var(--nue-primary-color-600);
+        font-size: var(--nue-confirm-content-font-size);
+        color: var(--nue-confirm-content-color);
     }
 
     .nue-confirm__footer {
@@ -43,4 +53,9 @@
         justify-content: end;
         gap: 0.5rem;
     }
+}
+
+.nue-confirm[data-closing='true'] {
+    animation: var(--nue-confirm-close-animation-name) var(--nue-confirm-close-animation-duration)
+        var(--nue-confirm-close-animation-rest-property);
 }

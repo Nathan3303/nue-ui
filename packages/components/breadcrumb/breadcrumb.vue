@@ -4,11 +4,12 @@
     </ul>
 </template>
 
+<style src="./breadcrumb.css"></style>
+
 <script lang="ts" setup>
 import { provide } from 'vue';
 import type { NueBreadcrumbProps, NueBreadcrumbContext } from './types';
 import { NueBreadcrumbContextKey } from './constants';
-import './breadcrumb.css';
 
 defineOptions({ name: 'NueBreadcrumb' });
 const props = withDefaults(defineProps<NueBreadcrumbProps>(), {

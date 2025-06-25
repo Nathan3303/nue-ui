@@ -1,0 +1,120 @@
+.nue-button {
+    --nue-button-vgap: 1rem;
+    --nue-button-height: calc(2 * var(--nue-button-vgap));
+    --nue-button-flex: 0 1 auto;
+    --nue-button-alignment: start;
+    --nue-button-box-shadow: var(--nue-secondary-shadow);
+    --nue-button-color: var(--nue-primary-text-color);
+    --nue-button-border-radius: var(--nue-primary-radius);
+    --nue-button-border-color: var(--nue-border-color);
+    --nue-button-bg-color: transparent;
+    --nue-button-hover-color: var(--nue-button-color);
+    --nue-button-hover-bg-color: var(--nue-primary-color-100);
+    --nue-button-hover-border-color: var(--nue-button-border-color);
+    --nue-button-active-color: var(--nue-button-color);
+    --nue-button-active-bg-color: var(--nue-primary-color-200);
+    --nue-button-active-border-color: var(--nue-button-border-color);
+    --nue-button-disable-color: var(--nue-disabled-color);
+    --nue-button-disable-bg-color: var(--nue-primary-color-200);
+    --nue-button-disable-border-color: var(--nue-button-border-color);
+
+    justify-content: var(--nue-button-alignment);
+    gap: calc(var(--nue-button-vgap) * 0.5);
+    flex: var(--nue-button-flex);
+    width: auto;
+    padding: 0 var(--nue-button-vgap);
+    background-color: var(--nue-button-bg-color);
+    color: var(--nue-button-color);
+
+    &:hover {
+        color: var(--nue-button-hover-color);
+        background-color: var(--nue-button-hover-bg-color);
+        border-color: var(--nue-button-hover-border-color);
+    }
+
+    &:active {
+        color: var(--nue-button-active-color);
+        background-color: var(--nue-button-active-bg-color);
+        border-color: var(--nue-button-active-border-color);
+    }
+
+    .nue-button__text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+    }
+
+    &.nue-button--small {
+        --nue-button-vgap: 0.75rem;
+        --nue-button-height: 1.75rem;
+    }
+
+    &.nue-button--large {
+        --nue-button-vgap: 1.25rem;
+        --nue-button-height: 2.625rem;
+    }
+
+    &.nue-button--round {
+        --nue-button-border-radius: 9999px;
+    }
+
+    &.nue-button--icon {
+        --nue-button-alignment: center;
+        aspect-ratio: 1;
+
+        .nue-button__text {
+            display: none;
+        }
+    }
+}
+
+.nue-button--primary {
+    --nue-button-color: white;
+    --nue-button-bg-color: var(--nue-primary-color-900);
+    --nue-button-hover-bg-color: var(--nue-primary-color-800);
+    --nue-button-active-bg-color: var(--nue-primary-color-800);
+    border-width: 0;
+}
+
+.nue-button--secondary {
+    --nue-button-bg-color: var(--nue-primary-color-200);
+    --nue-button-hover-bg-color: var(--nue-primary-color-300);
+    --nue-button-active-bg-color: var(--nue-primary-color-300);
+    border-width: 0;
+}
+
+.nue-button--destructive {
+    --nue-button-color: white;
+    --nue-button-bg-color: hsl(var(--nue-destructive-color));
+    --nue-button-hover-bg-color: hsl(var(--nue-destructive-color) / 0.86);
+    --nue-button-active-bg-color: var(--nue-button-hover-bg-color);
+    border-width: 0;
+}
+
+.nue-button--ghost {
+    --nue-button-bg-color: transparent;
+    --nue-button-hover-bg-color: var(--nue-primary-color-200);
+    --nue-button-active-bg-color: var(--nue-primary-color-300);
+    box-shadow: none;
+    border-width: 0;
+}
+
+.nue-button--pure {
+    --nue-button-vgap: 0;
+    --nue-button-height: auto;
+    --nue-button-hover-color: var(--nue-secondary-text-color);
+    --nue-button-active-color: var(--nue-secondary-text-color);
+    --nue-button-border-color: transparet;
+    --nue-button-hover-bg-color: transparent;
+    --nue-button-active-bg-color: transparent;
+    box-shadow: none;
+
+    .nue-button__text {
+        font-size: var(--nue-button-font-size);
+    }
+
+    &.nue-button--disabled {
+        background-color: transparent;
+    }
+}

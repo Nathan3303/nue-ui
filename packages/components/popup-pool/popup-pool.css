@@ -1,0 +1,15 @@
+.nue-popup-pool {
+    --nue-popup-pool-actived-z-index: 99;
+
+    display: flex;
+    width: 0;
+    height: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.nue-popup-pool[data-actived='true'] {
+    z-index: var(--nue-popup-pool-actived-z-index);
+}

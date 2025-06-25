@@ -13,31 +13,34 @@
             :spin="loading"
             class="nue-button__icon"
         />
-        <div v-if="$slots.default" class="nue-button__text">
+        <nue-text v-if="$slots.default" class="nue-button__text">
             <slot />
-        </div>
+        </nue-text>
         <div v-if="$slots.append" class="nue-button__append">
             <slot name="append" />
         </div>
     </button>
 </template>
 
+<style src="./button.css"></style>
+
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { parseFlex, parseTheme, throttle } from '@nue-ui/utils';
 import { BUTTON_GROUP_CTX_KEY } from '../button-group/constants';
-import { NueIcon } from '../icon';
-import type { ButtonEmitsType, ButtonPropsType } from './types';
+import NueIcon from '../icon/icon.vue';
+import NueText from '../text/text.vue';
+import type { NueButtonProps, NueButtonEmits } from './types';
 import type { ButtonGroupCtxType } from '../button-group';
-import './button.css';
 
 defineOptions({ name: 'NueButton' });
 
 const ButtonGroupCtx = inject(BUTTON_GROUP_CTX_KEY, {} as ButtonGroupCtxType);
-const emit = defineEmits<ButtonEmitsType>();
-const props = withDefaults(defineProps<ButtonPropsType>(), {
+const emit = defineEmits<NueButtonEmits>();
+const props = withDefaults(defineProps<NueButtonProps>(), {
     type: 'button',
     loadingIcon: 'loading',
+    useThrottle: false,
     throttleDuration: 200
 });
 

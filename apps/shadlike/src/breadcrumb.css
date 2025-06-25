@@ -1,0 +1,21 @@
+.nue-breadcrumb {
+    --nue-breadcrumb-font-size: var(--nue-text-sm);
+    --nue-breadcrumb-color: var(--nue-primary-color-600);
+
+    .nue-breadcrumb-item {
+        color: var(--nue-primary-color-600);
+
+        .nue-link {
+            --font-size: var(--nue-text-sm);
+            --color: var(--nue-primary-color-500);
+            --hover-color: var(--nue-primary-color-900);
+
+            &.nue-link--actived {
+                --hover-text-decoration: none;
+                color: var(--nue-primary-color-900);
+                font-weight: 500;
+                cursor: default;
+            }
+        }
+    }
+}

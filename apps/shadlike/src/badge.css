@@ -1,0 +1,33 @@
+.nue-badge {
+    --nue-badge-bg-color: var(--nue-primary-color-700);
+    --nue-badge-font-size: var(--nue-text-xs);
+    --nue-badge-color: var(--nue-primary-color-100);
+
+    .nue-badge__content {
+        background-color: var(--nue-badge-bg-color);
+        border-radius: var(--nue-primary-radius);
+
+        &:is(sup),
+        &:is(span) .nue-text {
+            color: var(--nue-badge-color);
+            font-size: var(--nue-badge-font-size);
+        }
+    }
+}
+
+.nue-badge--dot {
+    .nue-badge__content {
+        --nue-badge-height: 0.75rem;
+
+        aspect-ratio: 1;
+        padding: 0;
+        border-radius: 9999px;
+
+        &:is(sup) {
+            --nue-badge-sup-offset: calc(0.5 * var(--nue-badge-height));
+
+            top: calc(-1 * var(--nue-badge-sup-offset));
+            left: calc(100% - var(--nue-badge-sup-offset));
+        }
+    }
+}

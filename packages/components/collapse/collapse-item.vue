@@ -15,7 +15,7 @@
                 </nue-text>
                 <nue-button
                     class="nue-collapse-item__toggle-button"
-                    icon="arrow-down"
+                    icon="arrow-up"
                     theme="pure"
                     @click="handleCollapse"
                 />
@@ -43,18 +43,18 @@ import NueButton from '../button/button.vue';
 import NueText from '../text/text.vue';
 import { generateId } from '@nue-ui/utils';
 import type {
-    CollapseContextType,
+    NueCollapseContext,
     CollapseItemName,
-    CollapseItemPropsType
+    NueCollapseItemProps
 } from './types';
 
 defineOptions({ name: 'NueCollapseItem' });
 
-const props = withDefaults(defineProps<CollapseItemPropsType>(), {});
+const props = withDefaults(defineProps<NueCollapseItemProps>(), {});
 
 const { activedItems, pushActivedItem } = inject(
     COLLAPSE_CONTEXT_KEY,
-    {} as CollapseContextType
+    {} as NueCollapseContext
 );
 
 const contentRef = ref<HTMLDivElement>();

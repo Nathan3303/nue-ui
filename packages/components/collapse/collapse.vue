@@ -6,15 +6,15 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import type { CollapseEmitType, CollapsePropsType } from './types';
 import { useCollapse } from './use-collapse';
 import { parseTheme } from '@nue-ui/utils';
+import type { NueCollapseEmit, NueCollapseProps } from './types';
 import './collapse.css';
 
 defineOptions({ name: 'NueCollapse' });
 
-const emit = defineEmits<CollapseEmitType>();
-const props = withDefaults(defineProps<CollapsePropsType>(), {});
+const emit = defineEmits<NueCollapseEmit>();
+const props = withDefaults(defineProps<NueCollapseProps>(), {});
 
 const { activedItems, pushActivedItem } = useCollapse(props, emit);
 

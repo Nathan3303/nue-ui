@@ -1,20 +1,30 @@
 <template>
-    <demo title="Avatar 头像">
+    <demo title="基础">
         <nue-div align="center" gap="2rem">
             <nue-avatar src="https://placehold.co/36" />
-            <nue-avatar size="48px" src="https://placehold.co/36" />
-            <nue-avatar rounded size="56px" src="https://placehold.co/48" />
-            <nue-avatar size="64px" src="123" />
-            <nue-avatar icon="location" size="72px" />
-            <nue-avatar size="80px">A</nue-avatar>
+            <nue-avatar icon="location" />
+            <nue-avatar>A</nue-avatar>
+        </nue-div>
+    </demo>
+    <demo title="尺寸">
+        <nue-div align="center" gap="2rem">
+            <nue-avatar size="36px" src="https://picsum.photos/36" />
+            <nue-avatar size="48px" src="https://picsum.photos/48" />
+            <nue-avatar size="56px" src="https://picsum.photos/56" />
+        </nue-div>
+    </demo>
+    <demo title="加载失败处理">
+        <nue-div align="center" gap="2rem">
+            <nue-avatar src="123" />
+            <nue-avatar src="123">A</nue-avatar>
+        </nue-div>
+    </demo>
+    <demo title="主题">
+        <nue-div align="center" gap="2rem">
+            <nue-avatar rounded src="https://placehold.co/48" />
             <nue-avatar
-                size="88px"
-                title="This is a component of avatar from NueUI !!"
-            />
-            <nue-avatar
-                size="96px"
-                theme="rounded,outline"
                 src="https://picsum.photos/96"
+                theme="rounded,outline"
             />
         </nue-div>
     </demo>
@@ -28,14 +38,17 @@ import Demo from '../layouts/demo.vue';
 
 <style scoped>
 .nue-avatar--outline {
-    --nue-avatar-outline-width: 3px;
+    --nue-avatar-outline-width: 2px;
     --nue-avatar-outline-gap: var(--nue-avatar-outline-width);
     --nue-avatar-outline-offset: calc(
         var(--nue-avatar-outline-gap) + var(--nue-avatar-outline-width)
     );
     --nue-avatar-outline-pos-offset: calc(
-        -1 * calc(var(--nue-avatar-outline-offset) +
-                    var(--nue-avatar-outline-width))
+        -1 *
+            calc(
+                var(--nue-avatar-outline-offset) +
+                    var(--nue-avatar-outline-width)
+            )
     );
     --nue-avatar-bg-color: #ea9d38;
 

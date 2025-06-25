@@ -18,7 +18,7 @@ export * from './icon';
 export * from './infinite-scroll';
 export * from './input';
 export * from './link';
-export * from './popup-wrapper';
+export * from './popup-pool';
 export * from './progress';
 export * from './prompt';
 export * from './select';

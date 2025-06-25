@@ -1,17 +1,18 @@
 <template>
-    <demo title="Breadcrumb 面包屑（基础）">
+    <demo title="基础">
         <nue-breadcrumb>
             <nue-breadcrumb-item>Home</nue-breadcrumb-item>
             <nue-breadcrumb-item>Components</nue-breadcrumb-item>
         </nue-breadcrumb>
     </demo>
-    <demo title="Breadcrumb 面包屑（整体替换分割符）">
+    <demo title="整体替换分割符">
         <nue-breadcrumb separator="arrow-right-more">
             <nue-breadcrumb-item>Home</nue-breadcrumb-item>
             <nue-breadcrumb-item>Components</nue-breadcrumb-item>
+            <nue-breadcrumb-item>Breadcrumb</nue-breadcrumb-item>
         </nue-breadcrumb>
     </demo>
-    <demo title="Breadcrumb 面包屑（单一替换分割符）">
+    <demo title="单一替换分割符">
         <nue-breadcrumb>
             <nue-breadcrumb-item>Home</nue-breadcrumb-item>
             <nue-breadcrumb-item separator="arrow-right-circle">
@@ -20,7 +21,7 @@
             <nue-breadcrumb-item>Breadcrumb</nue-breadcrumb-item>
         </nue-breadcrumb>
     </demo>
-    <demo title="Breadcrumb 面包屑（引入下拉列表）">
+    <demo title="引入下拉列表">
         <nue-breadcrumb separator="arrow-right-more">
             <nue-breadcrumb-item>
                 <nue-dropdown placement="bottom-start" size="small">
@@ -50,7 +51,7 @@
             <nue-breadcrumb-item>Breadcrumb</nue-breadcrumb-item>
         </nue-breadcrumb>
     </demo>
-    <demo title="Breadcrumb 面包屑（路由链接）">
+    <demo title="路由链接">
         <nue-breadcrumb>
             <nue-breadcrumb-item>
                 <nue-link route="/">Index</nue-link>

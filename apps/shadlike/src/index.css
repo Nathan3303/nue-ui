@@ -31,8 +31,7 @@
 :root {
     --nue-primary-font-size-base: 16px;
     --nue-primary-font-family:
-        'Apple Color Emoji', 'Noto Color Emoji', ui-sans-serif, system-ui,
-        sans-serif;
+        'Apple Color Emoji', 'Noto Color Emoji', ui-sans-serif, system-ui, sans-serif;
     --nue-primary-font-size: 1rem;
     --nue-primary-font-weight: normal;
     --nue-primary-line-height: normal;
@@ -136,28 +135,28 @@ html.nue-html {
 
 /* wrapper style for confirm & prompt */
 
-body .nue-confirm-prompt-wrapper {
-    --wrapper-animation-name: fade-in;
-    --animation-name: slide-in-from-top;
-    --animation-rest-property: 0.24s ease-out forwards;
+/*body .nue-confirm-prompt-wrapper {*/
+/*    --wrapper-animation-name: fade-in;*/
+/*    --animation-name: slide-in-from-top;*/
+/*    --animation-rest-property: 0.24s ease-out forwards;*/
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.64);
-    overflow: hidden;
-    box-sizing: border-box;
-    animation: var(--wrapper-animation-name) var(--animation-rest-property);
-    z-index: 5;
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    position: absolute;*/
+/*    width: 100vw;*/
+/*    height: 100vh;*/
+/*    background-color: rgba(0, 0, 0, 0.64);*/
+/*    overflow: hidden;*/
+/*    box-sizing: border-box;*/
+/*    animation: var(--wrapper-animation-name) var(--animation-rest-property);*/
+/*    z-index: 5;*/
 
-    &[data-closing='true'] {
-        --wrapper-animation-name: fade-out;
-        --animation-name: slide-out-to-top;
-    }
-}
+/*    &[data-closing='true'] {*/
+/*        --wrapper-animation-name: fade-out;*/
+/*        --animation-name: slide-out-to-top;*/
+/*    }*/
+/*}*/
 
 /* linear style for input & textarea */
 
@@ -193,24 +192,6 @@ body .nue-textarea--linear {
     }
 }
 
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
 @keyframes slide-in-from-top {
     from {
         opacity: 0;
@@ -229,7 +210,7 @@ body .nue-textarea--linear {
     }
     to {
         opacity: 0;
-        transform: translateY(-0.5rem);
+        transform: translateY(-0.75rem);
     }
 }
 

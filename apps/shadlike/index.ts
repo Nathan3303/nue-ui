@@ -1,2 +1,9 @@
 import './src/index.css';
 import './src/avatar.css';
+import './src/badge.css';
+import './src/breadcrumb.css';
+import './src/button.css';
+import './src/button-group.css';
+import './src/checkbox.css';
+import './src/collapse.css';
+// import './src/confirm.css';

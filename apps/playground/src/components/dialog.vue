@@ -9,7 +9,7 @@
         v-model="dialogData.visible"
         :closable="!dialogData.loading"
         theme="project-creator"
-        title="创建项目对话框"
+        title="对话框"
     >
         <nue-div align="stretch" vertical>
             <nue-div align="stretch" gap="4px" vertical>
@@ -18,30 +18,13 @@
                     :debounce-time="240"
                     :disabled="dialogData.loading"
                     clearable
-                    placeholder="请输入项目名称"
-                    title="项目名称"
+                    placeholder="请输入"
                     style="flex: none"
                 />
                 <nue-text v-if="isProjectNameEmpty" color="#f56c6c" size="12px">
-                    * 项目名称不能为空
+                    * 不能为空
                 </nue-text>
             </nue-div>
-            <nue-div align="center" gap="8px">
-                <nue-switch
-                    v-model="isAddDescription"
-                    :disabled="dialogData.loading"
-                    size="small"
-                />
-                <nue-text size="12px">添加项目备注</nue-text>
-            </nue-div>
-            <nue-textarea
-                v-if="isAddDescription"
-                v-model="dialogData.projectDescription"
-                :disabled="dialogData.loading"
-                :rows="4"
-                placeholder="项目备注"
-                title="项目备注"
-            />
         </nue-div>
         <template #footer="{ cancel }">
             <nue-button :disabled="dialogData.loading" @click.stop="cancel">
@@ -66,21 +49,17 @@ import {
     NueDialog,
     NueText,
     NueInput,
-    NueTextarea,
     NueConfirm,
-    NueMessage,
-    NueSwitch
+    NueMessage
 } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
-const isAddDescription = ref(false);
 const isProjectNameEmpty = ref(false);
-const dialogRef = ref<InstanceType<typeof NueDialog> | null>(null);
+const dialogRef = ref<InstanceType<typeof NueDialog>>();
 const dialogData = reactive({
     visible: false,
     loading: false,
-    projectName: '',
-    projectDescription: ''
+    projectName: ''
 });
 
 async function handleAddProject() {
@@ -91,22 +70,20 @@ async function handleAddProject() {
             return;
         }
         await NueConfirm({
-            title: '确认创建项目吗？',
+            title: '确认吗？',
             confirmButtonText: '确认',
             cancelButtonText: '取消'
         });
-        NueMessage.info('正在创建项目，请稍候...');
+        NueMessage.info('正在处理，请稍候...');
         const response = await new Promise(resolve => {
             setTimeout(async () => {
                 resolve({
-                    name: dialogData.projectName,
-                    description: dialogData.projectDescription
+                    name: dialogData.projectName
                 });
                 await dialogRef.value?.close();
-                NueMessage.success(`项目 ${dialogData.projectName} 创建成功！`);
+                NueMessage.success(`处理成功：${dialogData.projectName}`);
                 dialogData.loading = false;
                 dialogData.projectName = '';
-                dialogData.projectDescription = '';
             }, 2000);
         });
         console.log(response);

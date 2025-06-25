@@ -1,32 +1,37 @@
 import ConfirmNode from './confirm.vue';
-import { usePopupWrapper } from '../popup-wrapper';
+import { usePopupPool } from '../popup-pool';
 import { createVNode, render } from 'vue';
-import type { ConfirmPayloadType } from './types';
+import { isString, isNumber } from 'lodash-es';
+import type { NueConfirmPayload } from './types';
 
-export default function (payload: ConfirmPayloadType) {
-    const popupWrapper = usePopupWrapper(payload.wrapperId);
+export default function (payload: NueConfirmPayload) {
+    const popupPool = usePopupPool(payload.wrapperId);
 
     return new Promise((resolve, reject) => {
-        const confirmWrapper = document.createElement('div');
-        confirmWrapper.classList.add('nue-confirm-prompt-wrapper');
-        popupWrapper.appendChild(confirmWrapper);
+        const popupOverlay = document.createElement('div');
+        popupOverlay.classList.add('nue-overlay');
+        popupOverlay.classList.add('nue-confirm-overlay');
+        popupPool.appendChild(popupOverlay);
 
         const removeChild = () => {
-            confirmWrapper.dataset.closing = 'true';
+            const customTimeout = isString(payload.closeAnimation)
+                ? 240
+                : payload.closeAnimation?.duration;
+            const timeout = isNumber(customTimeout) ? customTimeout : 240;
+            popupOverlay.dataset.closing = 'true';
+            popupOverlay.style.animationDuration = `${timeout}ms`;
             setTimeout(() => {
-                popupWrapper.removeChild(confirmWrapper);
-            }, 240);
+                popupPool.removeChild(popupOverlay);
+            }, timeout);
         };
 
-        const close = async (confirmResult: unknown) => {
-            if (confirmResult instanceof Error || !confirmResult) {
-                reject(confirmResult);
-            } else {
-                resolve(confirmResult);
-            }
+        const close = async (confirmResult: boolean | string | Error | undefined) => {
             removeChild();
+            confirmResult instanceof Error || !confirmResult
+                ? reject(confirmResult)
+                : resolve(confirmResult);
         };
 
-        render(createVNode(ConfirmNode, { ...payload, close }), confirmWrapper);
+        render(createVNode(ConfirmNode, { ...payload, close }), popupOverlay);
     });
 }

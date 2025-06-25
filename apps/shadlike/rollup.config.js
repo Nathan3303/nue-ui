@@ -8,6 +8,7 @@ export default {
         typescript(),
         terser(),
         postcss({
+            extract: true,
             minimize: true
         })
     ],

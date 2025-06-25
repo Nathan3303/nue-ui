@@ -14,7 +14,6 @@ import { inject, computed } from 'vue';
 import { NueIcon } from '../icon';
 import type { NueBreadcrumbContext, NueBreadcrumbItemProps } from './types';
 import { NueBreadcrumbContextKey } from './constants';
-import './breadcrumb-item.css';
 
 defineOptions({ name: 'NueBreadcrumbItem' });
 const props = withDefaults(defineProps<NueBreadcrumbItemProps>(), {});

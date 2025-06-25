@@ -1,0 +1,44 @@
+.nue-overlay {
+    --nue-overlay-animation-name: fade-in;
+    --nue-overlay-animation-duration: 0.24s;
+    --nue-overlay-animation-rest-property: ease-out forwards;
+    --nue-overlay-close-animation-name: fade-out;
+    --nue-overlay-close-animation-duration: 0.24s;
+    --nue-overlay-close-animation-rest-property: ease-out forwards;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.64);
+    overflow: hidden;
+    box-sizing: border-box;
+    animation: var(--nue-overlay-animation-name) var(--nue-overlay-animation-duration)
+        var(--nue-overlay-animation-rest-property);
+
+    &[data-closing='true'] {
+        animation: var(--nue-overlay-close-animation-name)
+            var(--nue-overlay-close-animation-duration)
+            var(--nue-overlay-close-animation-rest-property);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

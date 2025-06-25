@@ -1,15 +1,9 @@
-/* variables */
-
 .nue-aside {
     --nue-aside-width: unset;
     --nue-aside-min-width: unset;
     --nue-aside-max-width: unset;
     --nue-aside-animation-duration: 0.32s;
-}
 
-/* original */
-
-.nue-aside {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -24,8 +18,6 @@
     background-color: transparent;
     box-sizing: border-box;
 }
-
-/* collapsed */
 
 .nue-aside[data-collapsed='true'] {
     min-width: 4.5rem;
