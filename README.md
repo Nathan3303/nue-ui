@@ -4,9 +4,9 @@ NueUI 是一个基于 Vue 3 的 UI 组件库，旨在提供一套简洁、易用
 
 ## 项目信息
 
-- **名称**: `@nue-ui/repo`
-- **版本**: `0.2.0`
-- **作者**: Nathan Lee
+- **名称**: `nue-ui`
+- **版本**: `0.8.0`
+- **作者**: Nathan3303
 - **许可证**: MIT
 - **仓库**: [GitHub](https://github.com/nathanlee323/nue-ui)
 
@@ -15,14 +15,14 @@ NueUI 是一个基于 Vue 3 的 UI 组件库，旨在提供一套简洁、易用
 ### 安装
 
 ```bash
-pnpm install nue-ui@latest
+pnpm install nue-ui
 ```
 
 ### 使用
 
 #### 全量引入
 
-在您的 Vue 应用程序中，您可以通过以下方式使用全量引入 NueUI 组件库：
+在您的 Vue 3 应用程序中，您可以通过以下方式使用 **全量** 引入 NueUI 组件库：
 
 ```ts
 // main.ts
@@ -36,7 +36,7 @@ createApp(App).use(NueUI).mount('#app');
 
 #### 按需引入
 
-在您的 Vue 应用程序中，您可以通过以下方式使用按需引入 NueUI 组件库：
+在您的 Vue 3 应用程序中，您可以通过以下方式使用 **按需** 引入 NueUI 组件库：
 
 ```ts
 // main.ts
@@ -58,14 +58,15 @@ NueUI 项目采用 Monorepo 结构，包含以下几个主要模块：
 
 - **Apps**
     - **`@nue-ui/document`**: 文档站点
-    - **`@nue-ui/playground`**: 组件演示与测试环境
-    - **`@nue-ui/story`**: Storybook
+    - **`@nue-ui/playground`**: 组件演练
+    - **`@nue-ui/histoire`**: Histoire 组件测试
+    - **`nue-ui-theme-shadlike`**: Shadlike 主题（单独包）
 - **Packages**
-    - **`@nue-ui/components`**: 组件库
-    - **`@nue-ui/core`**: 核心组件库
-    - **`@nue-ui/hooks`**: 钩子库
-    - **`@nue-ui/theme`**: 主题库
-    - **`@nue-ui/utils`**: 工具库
+    - **`@nue-ui/components`**: 组件
+    - **`@nue-ui/core`**: 构建核心
+    - **`@nue-ui/hooks`**: 功能钩子
+    - **`@nue-ui/assets`**: 组件公共资源
+    - **`@nue-ui/utils`**: 工具
 
 ### 开发
 
@@ -82,9 +83,10 @@ pnpm install
 #### 常用指令
 
 ```bash
-pnpm core build # 构建核心组件库
-pnpm playground [dev|build|preview] # Playground
-pnpm document [dev|build|preview] # 文档站点
+pnpm core build # 构建组件库
+pnpm document [dev|build|preview] # 文档
+pnpm histoire [dev|build|preview] # Histoire
+pnpm playground [dev|build|preview] # 演练
 ```
 
 ### 贡献
