@@ -1,41 +1,37 @@
 <template>
     <div :class="classes" :style="styles">
-        <div class="nue-divider__line"></div>
-        <div v-if="$slots.default || text" class="nue-divider__text">
-            <span class="nue-divider__text__inner">
-                <slot>{{ text }}</slot>
-            </span>
+        <div v-if="$slots.default || text" class="nue-divider__content">
+            <slot>{{ text }}</slot>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import type { DividerPropsType } from './types';
+import { parseTheme } from '@nue-ui/utils';
+import type { NueDividerProps } from './types';
 import './divider.css';
 
 defineOptions({ name: 'NueDivider' });
 
-const props = withDefaults(defineProps<DividerPropsType>(), {
-    direction: 'horizontal',
-    vertical: false
-});
+const props = defineProps<NueDividerProps>();
 
 const classes = computed(() => {
     const prefix = 'nue-divider';
-    const { direction } = props;
-    let list: string[] = [prefix];
-    list.push(`${prefix}--${direction}`);
-    return list;
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        props.vertical ? `${prefix}--vertical` : void 0
+    ];
 });
 
 const styles = computed(() => {
-    const { borderType, borderWidth, borderColor, align } = props;
+    const { lineStyle, lineWidth, lineColor, alignment } = props;
     return {
-        '--border-width': borderWidth,
-        '--border-type': borderType,
-        '--border-color': borderColor,
-        '--justify-content': align
+        '--nue-divider-border-width': lineWidth,
+        '--nue-divider-border-style': lineStyle,
+        '--nue-divider-border-color': lineColor,
+        '--nue-divider-alignment': alignment
     };
 });
 </script>

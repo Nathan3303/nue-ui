@@ -1,16 +1,19 @@
-export type DialogBeforeConfirmType = (done: () => void) => void;
+import { GlobalProps } from '@nue-ui/utils';
 
-export type DialogPropsType = {
+export type NueDialogHandleClose = (afterAnimation?: () => void) => Promise<void>;
+
+export type NueDialogBeforeConfirm = () => boolean | Promise<boolean>;
+
+export interface NueDialogProps extends GlobalProps {
     title?: string;
     modelValue?: boolean;
     width?: string;
     minWidth?: string;
-    theme?: string;
-    closable?: boolean;
-    beforeConfirm?: DialogBeforeConfirmType;
-};
+    beforeConfirm?: NueDialogBeforeConfirm;
+    teleportTo?: string;
+}
 
-export type DialogEmitsType = {
+export type NueDialogEmits = {
     (e: 'update:modelValue', value: boolean): void;
     (e: 'confirm'): void;
 };

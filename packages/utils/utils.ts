@@ -6,10 +6,7 @@ export function isString(value: unknown): boolean {
 }
 
 export function isNumber(value: unknown): boolean {
-    return (
-        typeof value === 'number' &&
-        Object.prototype.toString.call(value) === '[object Number]'
-    );
+    return typeof value === 'number' && Object.prototype.toString.call(value) === '[object Number]';
 }
 
 export function isArray(value: unknown): boolean {
@@ -54,4 +51,13 @@ export function generateId(length: number = 6) {
     return Math.random()
         .toString(36)
         .slice(2, 2 + length);
+}
+
+export function generateElementId(length: number = 6): string {
+    const str = Math.random()
+        .toString(36)
+        .slice(2, 2 + length)
+        .replace(/[0-9]/g, '');
+    if (str.length === length) return str;
+    return str + generateElementId(length - str.length);
 }

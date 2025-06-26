@@ -1,64 +1,62 @@
-/* variables */
-
 .nue-divider {
-    --border-width: 1px;
-    --border-type: solid;
-    --border-color: #e5e5e5;
-    --border-style: var(--border-width) var(--border-type) var(--border-color);
-    --justify-content: start;
-}
+    --nue-divider-border-width: 1px;
+    --nue-divider-border-style: solid;
+    --nue-divider-border-color: #e0e0e0;
+    --nue-divider-alignment: start;
 
-/* original */
-
-.nue-divider {
     display: flex;
     align-items: center;
-    justify-content: var(--justify-content);
+    justify-content: var(--nue-divider-alignment);
     position: relative;
-
-    .nue-divider__line {
-        box-sizing: border-box;
-        border: none;
-        position: absolute;
-    }
-
-    .nue-divider__text {
-        z-index: 2;
-        margin: 0 16px;
-        background-color: white;
-        color: var(--nue-primary-text-color);
-        font-size: var(--nue-text-df);
-        font-weight: var(--nue-primary-font-weight);
-
-        .nue-divider__text__inner {
-            padding: 0 16px;
-        }
-    }
-}
-
-/* horizontal */
-
-.nue-divider--horizontal {
     width: 100%;
-    min-height: var(--border-width);
+    height: auto;
 
-    .nue-divider__line {
+    &::before {
+        content: '';
         width: 100%;
-        max-height: var(--border-width);
-        top: calc(50% - var(--border-width) / 2);
-        border-bottom: var(--border-style);
+        height: 0;
+        position: absolute;
+        top: calc(50% + var(--nue-divider-border-width) / 2);
+        left: 0;
+        border: none;
+        border-top-width: var(--nue-divider-border-width);
+        border-top-style: var(--nue-divider-border-style);
+        border-top-color: var(--nue-divider-border-color);
+        z-index: 1;
+    }
+
+    .nue-divider__content {
+        width: fit-content;
+        height: auto;
+        margin: 0 0.5rem;
+        padding: 0 0.5rem;
+        background-color: white;
+        z-index: 2;
     }
 }
-
-/* vertical */
 
 .nue-divider--vertical {
-    min-width: var(--border-width);
-    height: 24px;
+    width: auto;
+    height: 100%;
+    min-height: 1rem;
+    flex-direction: column;
 
-    .nue-divider__line {
-        width: var(--border-width);
+    &::before {
+        width: 0;
         height: 100%;
-        border-left: var(--border-style);
+        position: absolute;
+        top: 0;
+        left: calc(50% + var(--nue-divider-border-width) / 2);
+        border: none;
+        border-left-width: var(--nue-divider-border-width);
+        border-left-style: var(--nue-divider-border-style);
+        border-left-color: var(--nue-divider-border-color);
+    }
+
+    .nue-divider__content {
+        width: auto;
+        height: fit-content;
+        margin: 0.5rem 0;
+        padding: 0.5rem 0;
     }
 }

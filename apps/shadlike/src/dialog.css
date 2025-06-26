@@ -1,78 +1,19 @@
-.nue-dialog-wrapper {
-    --nue-dialog-width: 36%;
-    --nue-dialog-min-width: 24rem;
-    --nue-dialog-max-width: 32rem;
-    --nue-dialog-wrapper-animation-name: fade-in;
-    --nue-dialog-animation-name: slide-in-from-top;
-    --nue-dialog-animation-rest-property: 0.24s ease-out forwards;
+.nue-dialog-overlay {
+    --nue-overlay-animation-duration: 0.24s;
+    --nue-overlay-close-animation-duration: 0.24s;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.48);
-    overflow: hidden;
-    box-sizing: border-box;
-    opacity: 0;
-    animation: var(--nue-dialog-wrapper-animation-name) var(--nue-dialog-animation-rest-property);
-    z-index: 5;
+    .nue-dialog {
+        --nue-dialog-animation-name: slide-in-from-top;
+        --nue-dialog-animation-duration: 0.24s;
+        --nue-dialog-close-animation-name: slide-out-to-top;
+        --nue-dialog-close-animation-duration: 0.24s;
 
-    &[data-open='false'] {
-        --wrapper-animation-name: fade-out;
-        --dialog-animation-name: slide-out-to-top;
-    }
-}
-
-.nue-dialog {
-    display: flex;
-    flex-direction: column;
-    width: var(--nue-dialog-width);
-    min-width: var(--nue-dialog-min-width);
-    max-width: var(--nue-dialog-max-width);
-    padding: 1rem;
-    border-radius: var(--nue-primary-radius);
-    background-color: white;
-    gap: 1rem;
-    animation: var(--nue-dialog-animation-name) var(--nue-dialog-animation-rest-property);
-
-    .nue-dialog__header {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: var(--nue-text-md);
-    }
-
-    .nue-dialog__content {
-        width: 100%;
-    }
-
-    .nue-dialog__footer {
-        width: 100%;
-        display: flex;
-        align-self: center;
-        justify-content: end;
-        gap: 0.5rem;
-
-        .cancel-button {
-            --nue-button-color: #333;
-            --nue-button-border-color: #ccc;
-            --nue-button-background-color: #fff;
-            --nue-button-hover-color: #333;
-            --nue-button-hover-border-color: #ccc;
-            --nue-button-hover-background-color: #f5f5f5;
+        .nue-dialog__header {
+            font-size: var(--nue-text-df);
         }
 
-        .confirm-button {
-            --nue-button-olor: #fff;
-            --nue-button-order-color: transparent;
-            --nue-button-ackground-color: #90909099;
-            --nue-button-over-background-color: #909090cc;
-            --nue-button-ctive-background-color: #909090;
+        .nue-dialog__content {
+            font-size: var(--nue-text-sm);
         }
     }
 }

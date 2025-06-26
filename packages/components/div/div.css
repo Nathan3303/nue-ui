@@ -1,40 +1,25 @@
-/* variables */
-
 .nue-div {
-    --flex-direction: row;
-    --align-items: start;
-    --justify-content: start;
-    --flex-wrap: wrap;
-    --gap: 16px;
-    --flex: none;
-    --width: 100%;
-    --height: auto;
-}
+    --nue-div-width: 100%;
+    --nue-div-height: auto;
+    --nue-div-flex-direction: row;
+    --nue-div-align-items: start;
+    --nue-div-justify-content: start;
+    --nue-div-flex-wrap: wrap;
+    --nue-div-gap: 1rem;
+    --nue-div-flex: none;
 
-/* original styles */
-
-.nue-div {
     display: flex;
-    flex-direction: var(--flex-direction);
-    align-items: var(--align-items);
-    justify-content: var(--justify-content);
-    flex-wrap: var(--flex-wrap);
-    gap: var(--gap);
-    flex: var(--flex);
-    width: var(--width);
-    height: var(--height);
+    flex-direction: var(--nue-div-flex-direction);
+    align-items: var(--nue-div-align-items);
+    justify-content: var(--nue-div-justify-content);
+    flex-wrap: var(--nue-div-flex-wrap);
+    gap: var(--nue-div-gap);
+    flex: var(--nue-div-flex);
+
     box-sizing: border-box;
-    font-size: var(--nue-text-df);
-    font-weight: var(--nue-primary-font-weight);
-    font-family: var(--nue-primary-font-family) sans-serif;
-    unicode-bidi: isolate;
-}
+    width: var(--nue-div-width);
+    height: var(--nue-div-height);
 
-/* built-in styles */
-
-.nue-div--card {
-    border: 1px solid var(--nue-divider-color);
-    border-radius: var(--nue-primary-radius);
-    box-shadow: var(--nue-secondary-shadow);
-    padding: var(--nue-primary-padding);
+    font-size: 1rem;
+    font-weight: normal;
 }

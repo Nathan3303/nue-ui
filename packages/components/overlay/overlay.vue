@@ -5,12 +5,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { NueOverlayProps } from './types';
 import './overlay.css';
 import { isString } from 'lodash-es';
 import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import type { NuePopupItemAnimation } from '@nue-ui/utils';
+import type { NueOverlayProps } from './types';
 
 defineOptions({ name: 'NueOverlay' });
 const props = defineProps<NueOverlayProps>();

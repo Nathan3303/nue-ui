@@ -6,4 +6,5 @@ import './src/button.css';
 import './src/button-group.css';
 import './src/checkbox.css';
 import './src/collapse.css';
-// import './src/confirm.css';
+import './src/confirm.css';
+import './src/dialog.css';

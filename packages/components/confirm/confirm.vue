@@ -40,7 +40,7 @@ import NueButton from '../button/button.vue';
 import NueText from '../text/text.vue';
 import NueOverlay from '../overlay/overlay.vue';
 import { NuePopupItemAnimation, parseTheme, parseAnimationDurationToNumber } from '@nue-ui/utils';
-import { isString } from 'lodash-es';
+import { isFunction, isString } from 'lodash-es';
 import { NueConfirmProps, NueConfirmCallerReturnedUnpromise } from './types';
 import './confirm.css';
 
@@ -85,16 +85,22 @@ const handleAnimationStyles = (
     return result;
 };
 
+const waitForAnimation = () => {
+    const timeout = parseAnimationDurationToNumber(
+        closeAnimationDuration.value || window.getComputedStyle(confirmRef.value!).animationDuration
+    );
+    console.log(timeout);
+    return new Promise(resolve => {
+        setTimeout(() => resolve(1), timeout);
+    });
+};
+
 const handleClose = (result: NueConfirmCallerReturnedUnpromise) => {
     closing.value = true;
     props.close(result);
-    setTimeout(
-        () => props.destroy(),
-        parseAnimationDurationToNumber(
-            closeAnimationDuration.value ||
-                window.getComputedStyle(confirmRef.value!).animationDuration
-        )
-    );
+    waitForAnimation().then(() => {
+        props.destroy();
+    });
 };
 
 const handleConfirm = async (isConfirmed: boolean) => {
