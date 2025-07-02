@@ -5,6 +5,8 @@
     --nue-icon-weight: inherit;
     --nue-icon-line-height: 1;
 
+    display: inline-block;
+
     &.iconfont::before {
         display: block;
         color: var(--nue-icon-color);
