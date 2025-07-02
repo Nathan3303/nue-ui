@@ -1,4 +1,4 @@
-import { GlobalProps } from '@nue-ui/utils';
+import type { GlobalProps } from '@nue-ui/utils';
 
 export interface NueDividerProps extends GlobalProps {
     vertical?: boolean;

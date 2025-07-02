@@ -1,19 +1,74 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { NueTextarea, NueButton, NueDiv } from '@nue-ui/components';
+import { ref, computed } from 'vue';
+import { NueDiv, NueDropdown, NueDivider, NueInput, NueMessage } from '@nue-ui/components';
 
-const text = ref('');
+const defaultDropdownItem = [
+    { id: 'Option 1', text: '下拉选项 1' },
+    { id: 'Option 2', text: '下拉选项 2' },
+    { id: 'Option 3', text: '下拉选项 3' },
+    { id: 'Option 4', text: '下拉选项 4' },
+    { id: 'Option 5', text: '下拉选项 5' }
+];
 
-const changeText = () => {
-    text.value = '修改了文本';
-};
+const inputValue = ref('');
+
+const dropdownItems = computed(() => {
+    return defaultDropdownItem.filter(item => item.text.includes(inputValue.value));
+});
+
+const handleExecute = (value: string) => NueMessage.info(value);
+const handleDropdownClose = () => (inputValue.value = '');
 </script>
 
 <template>
     <nue-div align="stretch" vertical>
-        <nue-textarea v-model="text" />
-        <nue-button @click="changeText">修改文本</nue-button>
+        <nue-div height="100vh"></nue-div>
+        <nue-dropdown
+            close-when-executed
+            theme="custom"
+            transparent
+            trigger-text="下拉选择"
+            @close="handleDropdownClose"
+            @execute="handleExecute"
+        >
+            <nue-div align="stretch" class="header" gap="0" vertical @click.stop>
+                <nue-input
+                    v-model="inputValue"
+                    icon="search"
+                    placeholder="筛选下拉选项"
+                    theme="noshape"
+                />
+            </nue-div>
+            <nue-divider />
+            <nue-div v-if="dropdownItems.length" align="stretch" class="main" gap=".25rem" vertical>
+                <li
+                    v-for="item in dropdownItems"
+                    :key="item.id"
+                    :data-executeid="item.id"
+                    class="nue-dropdown-item"
+                >
+                    {{ item.text }}
+                </li>
+            </nue-div>
+            <span v-else class="nue-dropdown__empty-text">没有选项</span>
+        </nue-dropdown>
+        <nue-div height="100vh"></nue-div>
     </nue-div>
 </template>
 
-<style scoped></style>
+<style>
+.nue-dropdown--custom {
+    width: 360px;
+    max-width: unset;
+    padding: 0;
+    gap: 0;
+
+    .header {
+        padding: 0.5rem 0.875rem;
+    }
+
+    .main {
+        padding: 0.25rem;
+    }
+}
+</style>

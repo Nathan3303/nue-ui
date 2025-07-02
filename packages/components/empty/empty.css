@@ -1,12 +1,8 @@
-/* variables */
-
 .nue-empty {
-    --image-size: 96px;
-}
+    --nue-empty-image-size: 96px;
+    --nue-empty-image-width: var(--nue-empty-image-size);
+    --nue-empty-image-height: var(--nue-empty-image-size);
 
-/* original */
-
-.nue-empty {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,15 +12,15 @@
 
     .nue-empty__image {
         aspect-ratio: 1;
-        width: var(--image-size);
-        height: var(--image-size);
+        width: var(--nue-empty-image-width);
+        height: var(--nue-empty-image-height);
         object-fit: contain;
-        margin-bottom: 16px;
-        border-radius: var(--nue-primary-radius);
+        margin-bottom: 1rem;
+        border-radius: 6px;
     }
 
     .nue-empty__description {
-        font-size: var(--nue-text-sm);
-        color: var(--nue-secondary-text-color);
+        font-size: 0.875rem;
+        color: #696969;
     }
 }

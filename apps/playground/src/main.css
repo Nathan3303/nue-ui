@@ -1,7 +1,7 @@
 * {
     font-family:
-        'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei',
-        sans-serif;
+        'Poppins', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+        'WenQuanYi Micro Hei', sans-serif;
     font-size: var(--nue-text-sm);
     line-height: 1.2;
     -webkit-font-smoothing: antialiased;

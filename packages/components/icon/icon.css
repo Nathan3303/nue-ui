@@ -1,29 +1,29 @@
-/* variables */
-
 .nue-icon {
-    --spin-speed: 2s;
-    --icon-color: inherit;
-    --icon-size: inherit;
-    --icon-weight: inherit;
-    --icon-height: unset;
-}
-
-/* original */
-
-.nue-icon {
-    color: var(--icon-color);
-    font-size: var(--icon-size) !important;
-    font-weight: var(--icon-weight);
-    line-height: var(--icon-height, normal);
+    --nue-icon-spin-speed: 2s;
+    --nue-icon-color: inherit;
+    --nue-icon-size: inherit;
+    --nue-icon-weight: inherit;
+    --nue-icon-line-height: 1;
 
     &.iconfont::before {
-        color: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        line-height: inherit;
+        display: block;
+        color: var(--nue-icon-color);
+        font-size: var(--nue-icon-size);
+        font-weight: var(--nue-icon-weight);
+        line-height: var(--nue-icon-line-height);
     }
 
     &.nue-icon--spin {
-        animation: spin var(--spin-speed) infinite linear;
+        transform-origin: center;
+        animation: spin var(--nue-icon-spin-speed) infinite linear;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }

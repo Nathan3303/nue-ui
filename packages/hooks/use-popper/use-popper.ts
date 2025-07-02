@@ -41,14 +41,8 @@ export const usePopper = (
 
     const checkOverflow = () => {
         const [direction, alignment] = placement.value.split('-');
-        const {
-            popperWidth,
-            popperHeight,
-            wrapperX,
-            wrapperY,
-            wrapperWidth,
-            wrapperHeight
-        } = rectInfo;
+        const { popperWidth, popperHeight, wrapperX, wrapperY, wrapperWidth, wrapperHeight } =
+            rectInfo;
         switch (direction) {
             case 'top':
                 if (wrapperY - popperHeight < 8) {
@@ -57,10 +51,7 @@ export const usePopper = (
                 }
                 break;
             case 'bottom':
-                if (
-                    wrapperY + wrapperHeight + popperHeight >
-                    window.innerHeight - 8
-                ) {
+                if (wrapperY + wrapperHeight + popperHeight > window.innerHeight - 8) {
                     updatePlacement('top');
                     return true;
                 }
@@ -72,10 +63,7 @@ export const usePopper = (
                 }
                 break;
             case 'right':
-                if (
-                    wrapperX + wrapperWidth + popperWidth >
-                    window.innerWidth - 8
-                ) {
+                if (wrapperX + wrapperWidth + popperWidth > window.innerWidth - 8) {
                     updatePlacement('left');
                     return true;
                 }
@@ -109,9 +97,7 @@ export const usePopper = (
         return false;
     };
 
-    const calculatePosition = (
-        initialPlacement?: UsePopperOptions['placement']
-    ) => {
+    const calculatePosition = (initialPlacement?: UsePopperOptions['placement']) => {
         const popper = popperRef.value;
         if (!popper) return;
         getRectInfo();
@@ -120,82 +106,66 @@ export const usePopper = (
             calculatePosition();
             return;
         }
-        const {
-            popperWidth,
-            popperHeight,
-            wrapperX,
-            wrapperY,
-            wrapperWidth,
-            wrapperHeight
-        } = rectInfo;
+        const { popperWidth, popperHeight, wrapperX, wrapperY, wrapperWidth, wrapperHeight } =
+            rectInfo;
+        let x = 0,
+            y = 0;
         switch (placement.value) {
-            case 'top-center':
-                popper.style.left = `${
-                    wrapperX + wrapperWidth / 2 - popperWidth / 2
-                }px`;
-                popper.style.top = `${wrapperY - popperHeight - 8}px`;
+            case 'top-center': {
+                x = wrapperX + wrapperWidth / 2 - popperWidth / 2;
+                y = wrapperY - popperHeight - 8;
                 break;
+            }
             case 'top-start':
-                popper.style.left = `${wrapperX}px`;
-                popper.style.top = `${wrapperY - popperHeight - 8}px`;
+                x = wrapperX;
+                y = wrapperY - popperHeight - 8;
                 break;
             case 'top-end':
-                popper.style.left = `${
-                    wrapperX + wrapperWidth - popperWidth
-                }px`;
-                popper.style.top = `${wrapperY - popperHeight - 8}px`;
+                x = wrapperX + wrapperWidth - popperWidth;
+                y = wrapperY - popperHeight - 8;
                 break;
             case 'bottom-center':
-                popper.style.left = `${
-                    wrapperX + wrapperWidth / 2 - popperWidth / 2
-                }px`;
-                popper.style.top = `${wrapperY + wrapperHeight + 8}px`;
+                x = wrapperX + wrapperWidth / 2 - popperWidth / 2;
+                y = wrapperY + wrapperHeight + 8;
                 break;
             case 'bottom-start':
-                popper.style.left = `${wrapperX}px`;
-                popper.style.top = `${wrapperY + wrapperHeight + 8}px`;
+                x = wrapperX;
+                y = wrapperY + wrapperHeight + 8;
                 break;
             case 'bottom-end':
-                popper.style.left = `${
-                    wrapperX + wrapperWidth - popperWidth
-                }px`;
-                popper.style.top = `${wrapperY + wrapperHeight + 8}px`;
+                x = wrapperX + wrapperWidth - popperWidth;
+                y = wrapperY + wrapperHeight + 8;
                 break;
             case 'left-center':
-                popper.style.left = `${wrapperX - popperWidth - 8}px`;
-                popper.style.top = `${
-                    wrapperY + wrapperHeight / 2 - popperHeight / 2
-                }px`;
+                x = wrapperX - popperWidth - 8;
+                y = wrapperY + wrapperHeight / 2 - popperHeight / 2;
                 break;
             case 'left-start':
-                popper.style.left = `${wrapperX - popperWidth - 8}px`;
-                popper.style.top = `${wrapperY}px`;
+                x = wrapperX - popperWidth - 8;
+                y = wrapperY;
                 break;
             case 'left-end':
-                popper.style.left = `${wrapperX - popperWidth - 8}px`;
-                popper.style.top = `${
-                    wrapperY + wrapperHeight - popperHeight
-                }px`;
+                x = wrapperX - popperWidth - 8;
+                y = wrapperY + wrapperHeight - popperHeight;
                 break;
             case 'right-center':
-                popper.style.left = `${wrapperX + wrapperWidth + 8}px`;
-                popper.style.top = `${
-                    wrapperY + wrapperHeight / 2 - popperHeight / 2
-                }px`;
+                x = wrapperX + wrapperWidth + 8;
+                y = wrapperY + wrapperHeight / 2 - popperHeight / 2;
                 break;
             case 'right-start':
-                popper.style.left = `${wrapperX + wrapperWidth + 8}px`;
-                popper.style.top = `${wrapperY}px`;
+                x = wrapperX + wrapperWidth + 8;
+                y = wrapperY;
                 break;
             case 'right-end':
-                popper.style.left = `${wrapperX + wrapperWidth + 8}px`;
-                popper.style.top = `${
-                    wrapperY + wrapperHeight - popperHeight
-                }px`;
+                x = wrapperX + wrapperWidth + 8;
+                y = wrapperY + wrapperHeight - popperHeight;
                 break;
             default:
                 break;
         }
+        // popper.style.transform = `translate(${x}px, ${y}px)`;
+        popper.style.left = `${x}px`;
+        popper.style.top = `${y}px`;
     };
 
     return {

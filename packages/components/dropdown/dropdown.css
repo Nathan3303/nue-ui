@@ -1,132 +1,94 @@
-/* variables */
-
-.nue-dropdown-wrapper {
-    --animation-time: 0.16s;
-}
-
-.nue-dropdown {
-    --animation-time: 0.16s;
-    --font-size: var(--nue-text-sm);
-    --item-height: 2.25rem;
-    --item-vgap: 1rem;
-}
-
-/* original */
-
 .nue-dropdown-wrapper {
     position: relative;
 
     .state-icon {
         transform: rotate(0deg);
-        transition: all var(--animation-time) ease-in-out;
+        transition: all 0.16s ease-in-out;
+    }
+
+    &[data-visible='true'] .state-icon {
+        transform: rotate(180deg);
+    }
+
+    &[data-closing='true'] .state-icon {
+        transform: rotate(0deg);
     }
 }
 
 .nue-dropdown {
+    --nue-dropdown-item-height: 2rem;
+    --nue-dropdown-item-vgap: 1rem;
+    --nue-dropdown-item-padding: calc(0.4 * var(--nue-dropdown-item-height));
+    --nue-dropdown-item-gap: calc(0.5 * var(--nue-dropdown-item-padding));
+    --nue-dropdown-item-font-size: calc(0.4 * var(--nue-dropdown-item-height));
+
+    width: max-content;
+    min-width: 1.5rem;
+    max-width: 36vw;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0.25rem;
-    position: absolute;
-    width: max-content;
-    min-width: 1.5rem;
-    max-width: 36vw;
+    list-style: none;
     margin: 0;
     padding: 0.25rem;
     background-color: white;
-    border: 1px solid var(--nue-divider-color);
-    border-radius: var(--nue-primary-radius);
+    border: 1px solid #e0e0e0;
+    border-radius: 0.375rem;
+    box-shadow: 1px 1px 0.25rem rgba(200, 200, 200, 0.2);
     box-sizing: border-box;
-    box-shadow: var(--nue-secondary-shadow);
-    list-style: none;
-
-    &.nue-dropdown--hiding {
-        animation: slide-fade-out var(--animation-time) ease forwards !important;
-    }
 
     &.nue-dropdown--disabled {
         opacity: 0.5;
         pointer-events: none;
     }
 
+    li,
+    .nue-dropdown-item,
     .nue-dropdown__empty-text {
-        font-size: var(--nue-text-sm);
-        color: var(--nue-primary-color-600);
-        text-align: center;
-        padding: var(--inner-padding);
-        cursor: default;
-    }
-
-    & li,
-    & .nue-dropdown-item {
         display: flex;
         align-items: center;
-        height: var(--item-height);
-        gap: calc(var(--item-vgap) * 0.5);
-        padding: 0 var(--item-vgap);
-        font-size: var(--font-size);
-        background-color: transparent;
-        border-radius: var(--nue-primary-radius);
-        cursor: default;
         box-sizing: border-box;
+        overflow: hidden;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+
+        height: var(--nue-dropdown-item-height);
+        line-height: var(--nue-dropdown-item-height);
+        gap: var(--nue-dropdown-item-vgap);
+        padding: 0 var(--nue-dropdown-item-padding);
+        font-size: var(--nue-dropdown-item-font-size);
+        background-color: transparent;
+        border-radius: 6px;
+
+        .nue-icon {
+            --icon-size: var(--nue-dropdown-item-font-size);
+        }
 
         &:hover {
-            background-color: var(--nue-primary-color-200);
+            background-color: #eeeeee;
         }
     }
-}
 
-/* visible */
+    .nue-dropdown__empty-text {
+        font-size: 0.75rem;
+        color: #969696;
+        cursor: default;
 
-.nue-dropdown-wrapper[data-visible='true'] .state-icon {
-    transform: rotate(180deg);
-}
+        &:hover {
+            background-color: transparent;
+        }
+    }
 
-/* size */
+    &.nue-dropdown--small {
+        --nue-dropdown-item-height: 1.75rem;
+    }
 
-.nue-dropdown.nue-dropdown--small {
-    --font-size: var(--nue-text-xs);
-    --item-vgap: 0.75rem;
-    --item-height: 1.75rem;
-}
-
-.nue-dropdown.nue-dropdown--large {
-    --font-size: var(--nue-text-md);
-    --item-vgap: 1.25rem;
-    --item-height: 2.625rem;
-}
-
-/* direction */
-
-.nue-dropdown[data-direction='top'] {
-    animation: slide-fade-top var(--animation-time) ease forwards;
-}
-
-.nue-dropdown[data-direction='bottom'] {
-    animation: slide-fade-bottom var(--animation-time) ease forwards;
-}
-
-.nue-dropdown[data-direction='left'] {
-    animation: slide-fade-left var(--animation-time) ease forwards;
-}
-
-.nue-dropdown[data-direction='right'] {
-    animation: slide-fade-right var(--animation-time) ease forwards;
-}
-
-/* pool */
-
-.nue-dropdown-pool {
-    z-index: -1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-
-    &.nue-dropdown-pool--actived {
-        width: 0;
-        height: 0;
-        z-index: 30;
+    &.nue-dropdown--large {
+        --nue-dropdown-item-height: 2.625rem;
     }
 }

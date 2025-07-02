@@ -1,5 +1,5 @@
 <template>
-    <div :class="classes" :data-closing="closing" :style="styles" class="nue-overlay">
+    <div :class="classes" :data-closing="closing" :style="styles">
         <slot />
     </div>
 </template>

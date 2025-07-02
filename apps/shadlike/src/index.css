@@ -60,6 +60,14 @@
     --nue-secondary-shadow: 1px 1px 0.25rem rgba(200, 200, 200, 0.2);
 }
 
+:root {
+    --nue-animation-duration-xshort: 0.06s;
+    --nue-animation-duration-short: 0.18s;
+    --nue-animation-duration: 0.36s;
+    --nue-animation-duration-long: 0.54s;
+    --nue-animation-timing-function: ease-in-out;
+}
+
 /* html original */
 
 html.nue-reset-html,
@@ -133,31 +141,6 @@ html.nue-html {
     }
 }
 
-/* wrapper style for confirm & prompt */
-
-/*body .nue-confirm-prompt-wrapper {*/
-/*    --wrapper-animation-name: fade-in;*/
-/*    --animation-name: slide-in-from-top;*/
-/*    --animation-rest-property: 0.24s ease-out forwards;*/
-
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    position: absolute;*/
-/*    width: 100vw;*/
-/*    height: 100vh;*/
-/*    background-color: rgba(0, 0, 0, 0.64);*/
-/*    overflow: hidden;*/
-/*    box-sizing: border-box;*/
-/*    animation: var(--wrapper-animation-name) var(--animation-rest-property);*/
-/*    z-index: 5;*/
-
-/*    &[data-closing='true'] {*/
-/*        --wrapper-animation-name: fade-out;*/
-/*        --animation-name: slide-out-to-top;*/
-/*    }*/
-/*}*/
-
 /* linear style for input & textarea */
 
 body .nue-input--linear,
@@ -180,17 +163,6 @@ body .nue-textarea--linear {
 }
 
 /* Animations */
-
-@keyframes spin {
-    from {
-        transform-origin: center;
-        transform: rotate(0deg);
-    }
-    to {
-        transform-origin: center;
-        transform: rotate(360deg);
-    }
-}
 
 @keyframes slide-in-from-top {
     from {

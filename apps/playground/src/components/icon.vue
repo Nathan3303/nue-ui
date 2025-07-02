@@ -1,25 +1,37 @@
 <template>
-    <demo title="Icon 图标">
-        <nue-div align="center" wrap>
-            <nue-icon color="blue" name="setting" />
-            <nue-icon name="warning" size="24px" />
+    <demo title="基础">
+        <nue-div>
+            <nue-icon name="setting" />
+            <nue-icon name="theme" />
+        </nue-div>
+    </demo>
+    <demo title="大小">
+        <nue-div align="center" style="font-size: 1.25rem">
+            <nue-icon name="theme" />
+            <nue-icon name="theme" style="--nue-icon-size: 1.5rem" />
+            <nue-icon name="theme" size="1.75rem" />
+            <nue-icon name="theme" size="2rem" />
+        </nue-div>
+    </demo>
+    <demo title="旋转 & 旋转动画时长">
+        <nue-div>
             <nue-icon name="loading" spin />
-            <nue-icon name="scan" spin spin-speed="4s" />
+            <nue-icon name="loading" spin spin-speed="5s" />
         </nue-div>
     </demo>
     <demo title="所有图标">
         <nue-div align="center">
             <nue-div
-                v-for="(name, idx) in IconNames"
-                :key="idx"
+                v-for="name in IconNames"
+                :key="name"
                 align="center"
                 gap="0.5rem"
-                theme="card"
-                vertical
-                width="10rem"
+                width="11rem"
             >
-                <nue-icon :name="name" size="1.75rem" />
-                <nue-text size="var(--nue-text-sm)">{{ name }}</nue-text>
+                <nue-icon :name="name" size="1.25rem" />
+                <nue-text color="gray" size="0.75rem" style="line-height: 1.4">
+                    {{ name }}
+                </nue-text>
             </nue-div>
         </nue-div>
     </demo>

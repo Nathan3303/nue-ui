@@ -1,12 +1,7 @@
 <template>
     <div :class="classes">
-        <slot name="picture">
-            <img
-                :src="imageSrc"
-                :style="imageStyle"
-                alt="Empty image"
-                class="nue-empty__image"
-            />
+        <slot name="image">
+            <img :src="imageSrc" :style="imageStyle" alt="Empty image" class="nue-empty__image" />
         </slot>
         <nue-text class="nue-empty__description">
             <slot name="description">

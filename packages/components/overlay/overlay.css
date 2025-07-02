@@ -26,6 +26,17 @@
     animation-fill-mode: forwards;
 }
 
+.nue-overlay--transparent {
+    width: 0;
+    height: 0;
+    overflow: initial;
+    background-color: transparent;
+}
+
+.nue-overlay--no-background {
+    background-color: transparent;
+}
+
 @keyframes fade-in {
     from {
         opacity: 0;

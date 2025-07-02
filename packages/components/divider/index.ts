@@ -1,6 +1,6 @@
 import { withInstall } from '@nue-ui/utils';
 import Divider from './divider.vue';
-import type { DividerPropsType } from './types';
+import type { NueDividerProps } from './types';
 
 export const NueDivider = withInstall(Divider);
-export type { DividerPropsType };
+export type { NueDividerProps };

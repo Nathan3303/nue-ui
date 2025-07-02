@@ -27,9 +27,9 @@ const classes = computed(() => {
 
 const styles = computed(() => {
     return {
-        '--icon-size': props.size,
-        '--icon-color': props.color,
-        '--spin-speed': props.spinSpeed
+        '--nue-icon-size': props.size,
+        '--nue-icon-color': props.color,
+        '--nue-icon-spin-speed': props.spinSpeed
     };
 });
 </script>

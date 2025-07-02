@@ -9,7 +9,7 @@
     justify-content: var(--nue-divider-alignment);
     position: relative;
     width: 100%;
-    height: auto;
+    height: var(--nue-divider-border-width);
 
     &::before {
         content: '';
@@ -36,7 +36,7 @@
 }
 
 .nue-divider--vertical {
-    width: auto;
+    width: var(--nue-divider-border-width);
     height: 100%;
     min-height: 1rem;
     flex-direction: column;

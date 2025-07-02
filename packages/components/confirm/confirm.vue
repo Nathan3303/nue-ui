@@ -39,9 +39,10 @@ import { computed, ref } from 'vue';
 import NueButton from '../button/button.vue';
 import NueText from '../text/text.vue';
 import NueOverlay from '../overlay/overlay.vue';
-import { NuePopupItemAnimation, parseTheme, parseAnimationDurationToNumber } from '@nue-ui/utils';
-import { isFunction, isString } from 'lodash-es';
-import { NueConfirmProps, NueConfirmCallerReturnedUnpromise } from './types';
+import { parseTheme, parseAnimationDurationToNumber } from '@nue-ui/utils';
+import { isString } from 'lodash-es';
+import type { NuePopupItemAnimation } from '@nue-ui/utils';
+import type { NueConfirmProps, NueConfirmCallerReturnedUnpromise } from './types';
 import './confirm.css';
 
 defineOptions({ name: 'NueConfirmNodeInner' });
@@ -89,7 +90,7 @@ const waitForAnimation = () => {
     const timeout = parseAnimationDurationToNumber(
         closeAnimationDuration.value || window.getComputedStyle(confirmRef.value!).animationDuration
     );
-    console.log(timeout);
+    // console.log(timeout);
     return new Promise(resolve => {
         setTimeout(() => resolve(1), timeout);
     });

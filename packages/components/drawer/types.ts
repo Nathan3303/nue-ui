@@ -1,4 +1,4 @@
-import { GlobalProps, NueGlobalPopupItemProps } from '@nue-ui/utils';
+import type { GlobalProps, NueGlobalPopupItemProps } from '@nue-ui/utils';
 
 export type NueDrawerOpenFrom = 'left' | 'right' | 'top' | 'bottom';
 
