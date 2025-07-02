@@ -1,7 +1,7 @@
 import NueConfirm from './confirm.vue';
 import { usePopupPoolV2 } from '../popup-pool-v2';
 import { createVNode, render } from 'vue';
-import { NueConfirmCallerPayload, NueConfirmCallerReturned } from './types';
+import type { NueConfirmCallerPayload, NueConfirmCallerReturned } from './types';
 
 export default function NueConfirmCaller(
     payload: NueConfirmCallerPayload

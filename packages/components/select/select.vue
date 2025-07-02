@@ -6,8 +6,8 @@
         :size="size"
         @execute="handleExecute"
     >
-        <template #default="{ clickTrigger }">
-            <nue-button :disabled="disabled" :size="size" @click="clickTrigger">
+        <template #trigger="{ trigger }">
+            <nue-button :disabled="disabled" :size="size" @click="trigger">
                 <template #default>
                     <template v-if="label">{{ label }}</template>
                     <nue-text v-else color="gray">
@@ -24,9 +24,7 @@
                 </template>
             </nue-button>
         </template>
-        <template #dropdown>
-            <slot />
-        </template>
+        <slot />
     </nue-dropdown>
 </template>
 
@@ -37,12 +35,7 @@ import NueButton from '../button/button.vue';
 import NueDropdown from '../dropdown/dropdown.vue';
 import NueIcon from '../icon/icon.vue';
 import NueText from '../text/text.vue';
-import type {
-    SelectContext,
-    SelectEmits,
-    SelectOption,
-    SelectProps
-} from './types';
+import type { SelectContext, SelectEmits, SelectOption, SelectProps } from './types';
 
 defineOptions({ name: 'NueSelect' });
 
@@ -86,10 +79,7 @@ function handleSelect(payload: unknown, isParseMV = false) {
             }
         }
     } else {
-        if (
-            selectedOption.value &&
-            payload === selectedOption.value.executeId
-        ) {
+        if (selectedOption.value && payload === selectedOption.value.executeId) {
             return;
         }
         for (const option of options.value) {
