@@ -46,7 +46,7 @@
     .nue-confirm__footer {
         width: 100%;
         display: flex;
-        align-self: center;
+        align-items: center;
         justify-content: end;
         gap: 0.5rem;
     }

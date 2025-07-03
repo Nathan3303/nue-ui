@@ -47,9 +47,9 @@ import './confirm.css';
 
 defineOptions({ name: 'NueConfirmNodeInner' });
 const props = withDefaults(defineProps<NueConfirmProps>(), {
-    title: '确认提示',
-    confirmButtonText: '确认',
-    cancelButtonText: '取消'
+    title: 'Confirm',
+    confirmButtonText: 'Confirm',
+    cancelButtonText: 'Cancel'
 });
 
 const confirmRef = ref<HTMLDivElement | null>(null);
@@ -90,7 +90,6 @@ const waitForAnimation = () => {
     const timeout = parseAnimationDurationToNumber(
         closeAnimationDuration.value || window.getComputedStyle(confirmRef.value!).animationDuration
     );
-    // console.log(timeout);
     return new Promise(resolve => {
         setTimeout(() => resolve(1), timeout);
     });

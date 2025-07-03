@@ -16,7 +16,7 @@ export const register = (groupId: NueDropdownGroupId, dropdownId: string, close:
     const item = { dropdownId, close };
     const group = dropdownGroups.get(groupId);
     if (!group) return;
-    console.log(groupId, group);
+    // console.log(groupId, group);
     group.push(item);
 };
 
@@ -28,7 +28,7 @@ export const unregister = (groupId: NueDropdownGroupId, dropdownId: string) => {
     const newGroup = group.filter(item => {
         return item.dropdownId !== dropdownId;
     });
-    console.log(groupId, newGroup);
+    // console.log(groupId, newGroup);
     if (newGroup.length === 0) {
         destroyGroup(groupId);
     } else {

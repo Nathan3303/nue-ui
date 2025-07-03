@@ -43,7 +43,7 @@
     </demo>
     <demo title="选择后关闭">
         <nue-dropdown close-when-executed trigger-text="下拉选择">
-            <li class="nue-dropdown-item">下拉选项 ...</li>
+            <li class="nue-dropdown-item" data-executeid="Option 1">下拉选项 1</li>
         </nue-dropdown>
     </demo>
     <demo title="处理执行事件 onExecute">

@@ -95,7 +95,7 @@ const placementInfo = computed(() => {
     };
 });
 
-const handleCalculatePosition = throttle(() => calculatePosition(props.placement), 1);
+const handleCalculatePosition = throttle(() => calculatePosition(props.placement), 4);
 
 const handleGroupRegistering = () => {
     if (!props.group) return;
@@ -131,8 +131,8 @@ const handleOpen = () => {
         }
     );
     if (!props.transparent) return;
-    window.addEventListener('scroll', handleCalculatePosition, false);
-    window.addEventListener('resize', handleCalculatePosition, false);
+    window.addEventListener('scroll', handleCalculatePosition, true);
+    window.addEventListener('resize', handleCalculatePosition, true);
     window.addEventListener('click', handleClose, false);
 };
 
@@ -149,8 +149,8 @@ const handleClose = () => {
         }
     );
     if (!props.transparent) return;
-    window.removeEventListener('scroll', handleCalculatePosition, false);
-    window.removeEventListener('resize', handleCalculatePosition, false);
+    window.removeEventListener('scroll', handleCalculatePosition, true);
+    window.removeEventListener('resize', handleCalculatePosition, true);
     window.removeEventListener('click', handleClose, false);
 };
 
