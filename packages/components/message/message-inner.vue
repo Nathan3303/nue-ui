@@ -1,28 +1,24 @@
 <template>
     <div ref="nodeInnerRef" :class="classes">
         <nue-icon v-if="icon" :name="icon" />
-        <span class="nue-message-node-inner__text">{{ message }}</span>
-        <nue-icon
-            v-if="!duration"
-            name="clear"
-            style="cursor: pointer"
-            @click="handlePopAnimation"
-        />
+        <nue-text class="nue-message-node-inner__text">{{ message }}</nue-text>
+        <nue-icon v-if="!duration" name="clear" @click="handlePopAnimation" />
     </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import NueIcon from '../icon/icon.vue';
+import NueText from '../text/text.vue';
 import { handlePop } from './message';
-import type { MessageNodeProps } from './types';
+import type { NueMessageNodeProps } from './types';
 import './message-inner.css';
 
 defineOptions({ name: 'MessageNode' });
 
-const props = withDefaults(defineProps<MessageNodeProps>(), {
+const props = withDefaults(defineProps<NueMessageNodeProps>(), {
     type: 'info',
-    message: '',
+    message: 'No content.',
     duration: 3000
 });
 
@@ -30,11 +26,12 @@ const nodeInnerRef = ref();
 const timer = ref<number | null>(null);
 
 const classes = computed(() => {
-    const { size } = props;
-    let list = ['nue-message-node-inner'];
-    list.push(`type--${props.type}`);
-    if (size) list.push(`nue-message-node-inner--${size}`);
-    return list;
+    const prefix = 'nue-message-node-inner';
+    return [
+        prefix,
+        props.type && `${prefix}--${props.type}`,
+        props.size && `${prefix}--${props.size}`
+    ];
 });
 
 function createTimer(callback: () => void, delay: number) {
@@ -62,8 +59,7 @@ watch(
 );
 
 onMounted(() => {
-    nodeInnerRef.value.style.marginTop =
-        0 - nodeInnerRef.value.clientHeight * 2 + 'px';
+    nodeInnerRef.value.style.marginTop = 0 - nodeInnerRef.value.clientHeight * 2 + 'px';
     handleAnimation();
 });
 </script>

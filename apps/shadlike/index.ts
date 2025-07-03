@@ -10,3 +10,7 @@ import './src/confirm.css';
 import './src/dialog.css';
 import './src/dropdown.css';
 import './src/empty.css';
+import './src/input.css';
+import './src/textarea.css';
+import './src/link.css';
+import './src/message.css';

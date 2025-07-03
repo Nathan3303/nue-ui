@@ -1,21 +1,20 @@
 <template>
-    <nue-container class="demo-layout" theme="vertical,inner">
+    <nue-container :height="height" class="demo-layout" theme="vertical,inner">
         <nue-header>
             <template #logo>
                 <slot name="title">{{ title }}</slot>
             </template>
         </nue-header>
         <nue-main>
-            <template #default>
-                <slot />
-            </template>
+            <slot />
         </nue-main>
     </nue-container>
 </template>
 
 <script lang="ts" setup>
 import { NueContainer, NueHeader, NueMain } from '@nue-ui/components';
-defineProps<{ title?: string }>();
+
+defineProps<{ title?: string; height?: string }>();
 </script>
 
 <style scoped>

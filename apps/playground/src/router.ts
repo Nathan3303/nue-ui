@@ -25,6 +25,7 @@ const routers = [
     { path: '/progress', component: () => import('./components/progress.vue') },
     { path: '/empty', component: () => import('./components/empty.vue') },
     { path: '/input', component: () => import('./components/input.vue') },
+    { path: '/textarea', component: () => import('./components/textarea.vue') },
     { path: '/select', component: () => import('./components/select.vue') },
     { path: '/switch', component: () => import('./components/switch.vue') },
     { path: '/checkbox', component: () => import('./components/checkbox.vue') },

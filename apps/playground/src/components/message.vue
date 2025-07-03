@@ -1,43 +1,29 @@
 <template>
-    <demo title="Message 消息提示">
-        <nue-div vertical>
-            <nue-div>
-                <nue-button @click="createMessage">基础消息提示</nue-button>
-                <nue-button @click="createMessageWithIcon">
-                    带图标的消息提示
-                </nue-button>
-                <nue-button @click="createMessageWithDuration">
-                    消息提示：5 秒的自动关闭时间
-                </nue-button>
-                <nue-button @click="createCloseManualMessage">
-                    消息提示：手动关闭
-                </nue-button>
-            </nue-div>
-            <nue-div>
-                <nue-button @click="createSuccessMessage">
-                    消息提示：成功类型
-                </nue-button>
-                <nue-button @click="createErrorMessage">
-                    消息提示：失败类型
-                </nue-button>
-                <nue-button @click="createWarningMessage">
-                    消息提示：警告类型
-                </nue-button>
-                <nue-button @click="createInfoMessage">
-                    消息提示：基础类型
-                </nue-button>
-                <nue-button @click="createLogMessage">
-                    消息提示：日志类型
-                </nue-button>
-            </nue-div>
-            <nue-div>
-                <nue-button @click="createSmallMessage">
-                    小型消息提示
-                </nue-button>
-                <nue-button @click="createLargeMessage">
-                    大型消息提示
-                </nue-button>
-            </nue-div>
+    <demo title="基础">
+        <nue-div>
+            <nue-button @click="createMessage">基础消息提示</nue-button>
+            <nue-button @click="createMessageWithIcon">带图标的消息提示</nue-button>
+        </nue-div>
+    </demo>
+    <demo title="自动关闭间隔 & 手动关闭">
+        <nue-div>
+            <nue-button @click="createMessageWithDuration">5 秒的自动关闭时间</nue-button>
+            <nue-button @click="createCloseManualMessage">手动关闭</nue-button>
+        </nue-div>
+    </demo>
+    <demo title="大小">
+        <nue-div>
+            <nue-button @click="createSmallMessage">小型消息提示</nue-button>
+            <nue-button @click="createLargeMessage">大型消息提示</nue-button>
+        </nue-div>
+    </demo>
+    <demo title="类型主题">
+        <nue-div>
+            <nue-button @click="createSuccessMessage">成功</nue-button>
+            <nue-button @click="createErrorMessage">失败</nue-button>
+            <nue-button @click="createWarningMessage">警告</nue-button>
+            <nue-button @click="createInfoMessage">基础</nue-button>
+            <nue-button @click="createLogMessage">日志</nue-button>
         </nue-div>
     </demo>
 </template>

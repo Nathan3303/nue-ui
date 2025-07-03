@@ -1,0 +1,74 @@
+.nue-link--rl {
+    --nue-link-height: 2rem;
+    --nue-link-padding: calc(0.4 * var(--nue-link-height));
+    --nue-link-gap: calc(0.5 * var(--nue-link-padding));
+    --nue-link-border-color: transparent;
+    --nue-link-border-radius: 6px;
+    --nue-link-box-shadow: 0 0 3px 1px rgba(200, 200, 200, 0.3);
+    --nue-link-font-size: calc(0.4 * var(--nue-link-height));
+    --nue-link-icon-size: var(--nue-link-font-size);
+    --nue-link-color: var(--nue-primary-text-color);
+    --nue-link-hover-color: var(--nue-primary-text-color);
+    --nue-link-hover-background-color: var(--nue-primary-color-300);
+    --nue-link-hover-text-decoration: none;
+    --nue-link-active-color: var(--nue-link-hover-color);
+    --nue-link-active-border-color: var(--nue-link-hover-border-color);
+    --nue-link-active-background-color: var(--nue-link-hover-background-color);
+    --nue-link-disable-color: gray;
+    --nue-link-disable-background-color: var(--nue-primary-color-200);
+    --nue-link-disable-border-color: gray;
+    --nue-link-actived-color: white;
+    --nue-link-actived-border-color: var(--nue-link-active-border-color);
+    --nue-link-actived-background-color: var(--nue-primary-color-900);
+
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: all 0.16s ease-out;
+    flex: none;
+
+    width: auto;
+    height: var(--nue-link-height);
+    gap: var(--nue-link-gap);
+    padding: 0 var(--nue-link-padding);
+    border: 1px solid var(--nue-link-border-color);
+    border-radius: var(--nue-link-border-radius);
+    background-color: var(--nue-link-background-color);
+    font-size: var(--nue-link-font-size);
+
+    .nue-link__icon {
+        padding: 0;
+    }
+
+    .nue-link__content {
+        flex: auto;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+    }
+
+    &:active {
+        color: var(--nue-link-active-color);
+        border-color: var(--nue-link-active-border-color);
+        background-color: var(--nue-link-active-background-color);
+    }
+
+    &.nue-link--actived {
+        color: var(--nue-link-actived-color);
+        border-color: var(--nue-link-actived-border-color);
+        background-color: var(--nue-link-actived-background-color);
+    }
+
+    &.nue-link--rl-sm {
+        --nue-link-height: 1.75rem;
+    }
+
+    &.nue-link--rl-lg {
+        --nue-link-height: 2.625rem;
+    }
+}

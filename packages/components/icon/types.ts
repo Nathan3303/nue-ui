@@ -1,9 +1,9 @@
 import { IconNames } from './constants';
 
-export type IconNameType = (typeof IconNames)[number];
+export type NueIconName = (typeof IconNames)[number];
 
-export type IconPropsType = {
-    name: IconNameType | undefined;
+export type NueIconProps = {
+    name: NueIconName | string;
     size?: string;
     color?: string;
     spin?: boolean;

@@ -1,0 +1,17 @@
+.nue-textarea {
+    --nue-textarea-font-size: var(--nue-text-sm);
+    --nue-textarea-color: var(--nue-primary-text-color);
+    --nue-textarea-border-color: var(--nue-divider-color);
+    --nue-textarea-hover-border-color: var(--nue-primary-color-600);
+    --nue-textarea-focus-border-color: var(--nue-primary-color-600);
+    --nue-textarea-focus-shadow: var(--nue-primary-shadow);
+    --nue-textarea-disabled-color: var(--nue-primary-color-500);
+    --nue-textarea-disabled-border-color: var(--nue-divider-color);
+    --nue-textarea-disabled-background-color: var(--nue-primary-color-100);
+
+    .word-counter {
+        border-radius: var(--nue-primary-radius);
+        color: var(--nue-primary-color-500);
+        font-size: var(--nue-text-sm);
+    }
+}

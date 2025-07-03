@@ -35,6 +35,7 @@ export const collapseItemsData = [
         title: 'Form 表单组件',
         links: [
             { route: '/input', text: 'Input 输入框' },
+            { route: '/textarea', text: 'Textarea 富文本输入框' },
             { route: '/select', text: 'Select 选择器' },
             { route: '/switch', text: 'Switch 开关' },
             { route: '/checkbox', text: 'Checkbox 复选框' }

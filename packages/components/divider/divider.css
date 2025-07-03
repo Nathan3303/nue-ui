@@ -9,14 +9,16 @@
     justify-content: var(--nue-divider-alignment);
     position: relative;
     width: 100%;
-    height: var(--nue-divider-border-width);
+    min-height: var(--nue-divider-border-width);
+    height: fit-content;
+    overflow: hidden;
 
     &::before {
         content: '';
         width: 100%;
         height: 0;
         position: absolute;
-        top: calc(50% + var(--nue-divider-border-width) / 2);
+        top: calc(50% - var(--nue-divider-border-width) / 2);
         left: 0;
         border: none;
         border-top-width: var(--nue-divider-border-width);

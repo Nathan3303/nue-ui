@@ -1,7 +1,7 @@
 import { createVNode, ref, render } from 'vue';
 import MessageNodeInner from './message-inner.vue';
 import { generateId } from '@nue-ui/utils';
-import type { MessagePayloadType } from './types';
+import type { NueMessageCallerPayload, NueMessageCaller } from './types';
 
 const wrapperRef = ref<HTMLElement | null>(null);
 const externalWrapperRef = ref<HTMLElement | null>(null);
@@ -58,7 +58,7 @@ export function handlePop(node: HTMLElement, wrapper: HTMLElement) {
 }
 
 // 创建消息体并弹出
-function NueMessage(payload: MessagePayloadType) {
+const NueMessage: NueMessageCaller = (payload: NueMessageCallerPayload) => {
     if (!wrapperRef.value) {
         if (!externalWrapperRef.value) {
             let target = document.getElementById('app');
@@ -71,58 +71,32 @@ function NueMessage(payload: MessagePayloadType) {
             wrapperRef.value = externalWrapperRef.value;
         }
     }
-
     const div = document.createElement('div');
     div.classList.add('nue-message-node');
     wrapperRef.value.appendChild(div);
-    const vnode = createVNode(MessageNodeInner, {
+    const VNode = createVNode(MessageNodeInner, {
         ...payload,
         node: div,
         wrapper: wrapperRef.value
     });
-    render(vnode, div);
-}
+    render(VNode, div);
+};
 
 // 魔术方法
-NueMessage.success = (message: string, duration?: number, icon?: string) => {
-    NueMessage({
-        message,
-        type: 'success',
-        duration,
-        icon
-    } as MessagePayloadType);
+NueMessage.success = (message, duration, icon) => {
+    NueMessage({ message, type: 'success', duration, icon });
 };
-NueMessage.error = (message: string, duration?: number, icon?: string) => {
-    NueMessage({
-        message,
-        type: 'error',
-        duration,
-        icon
-    } as MessagePayloadType);
+NueMessage.error = (message, duration, icon) => {
+    NueMessage({ message, type: 'error', duration, icon });
 };
-NueMessage.warn = (message: string, duration?: number, icon?: string) => {
-    NueMessage({
-        message,
-        type: 'warning',
-        duration,
-        icon
-    } as MessagePayloadType);
+NueMessage.warn = (message, duration, icon) => {
+    NueMessage({ message, type: 'warning', duration, icon });
 };
-NueMessage.info = (message: string, duration?: number, icon?: string) => {
-    NueMessage({
-        message,
-        type: 'info',
-        duration,
-        icon
-    } as MessagePayloadType);
+NueMessage.info = (message, duration, icon) => {
+    NueMessage({ message, type: 'info', duration, icon });
 };
-NueMessage.log = (message: string, duration?: number, icon?: string) => {
-    NueMessage({
-        message,
-        type: 'log',
-        duration,
-        icon
-    } as MessagePayloadType);
+NueMessage.log = (message, duration, icon) => {
+    NueMessage({ message, type: 'log', duration, icon });
 };
 
 // 暴露创建消息体函数

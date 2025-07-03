@@ -1,21 +1,20 @@
 import type { GlobalProps } from '@nue-ui/utils';
-import type { IconNameType } from '../icon';
+import type { NueIconName } from '../icon';
 
-export type RoutePropType =
-    | string
+export type NueLinkRoute =
     | {
           name: string;
           params?: Record<string, unknown>;
           query?: Record<string, unknown>;
           meta?: Record<string, unknown>;
       }
-    | undefined;
+    | string;
 
-export interface LinkProps extends GlobalProps {
+export interface NueLinkProps extends GlobalProps {
     href?: string;
     disabled?: boolean;
-    icon?: IconNameType;
-    route?: RoutePropType;
+    icon?: NueIconName;
+    route?: NueLinkRoute;
     flex?: string;
     align?: string;
     size?: string;

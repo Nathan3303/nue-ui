@@ -10,7 +10,7 @@
         v-bind="$attrs"
     >
         <nue-icon v-if="icon" :name="icon" class="nue-link__icon" />
-        <span class="nue-link__content">
+        <span v-if="$slots.default" class="nue-link__content">
             <slot>{{ href }}</slot>
         </span>
         <slot name="append" />
@@ -21,15 +21,17 @@
 import { computed, ref, watch } from 'vue';
 import { parseFlex, parseTheme } from '@nue-ui/utils';
 import { NueIcon } from '../icon';
-import type { LinkProps, RoutePropType } from './types';
+import type { NueLinkProps, NueLinkRoute } from './types';
 import './link.css';
 
 defineOptions({ name: 'NueLink' });
-
-const props = withDefaults(defineProps<LinkProps>(), {});
+const props = withDefaults(defineProps<NueLinkProps>(), {
+    href: '#',
+    title: 'NueLink'
+});
 
 const tag = ref('a');
-const to = ref<RoutePropType>();
+const to = ref<NueLinkRoute>();
 const activeClass = ref('');
 
 watch(
@@ -45,13 +47,8 @@ watch(
 );
 
 const classes = computed(() => {
-    let list: string[] = [];
-    const { theme, disabled } = props;
     const prefix = 'nue-link';
-    list.push(prefix);
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    if (disabled) list.push(`${prefix}--disabled`);
-    return list;
+    return [prefix, ...parseTheme(props.theme, prefix), props.disabled && `${prefix}--disabled`];
 });
 
 const styles = computed(() => {

@@ -1,5 +1,7 @@
-export type MarqueePropsType = {
+type NueMarqueeDirection = 'left' | 'right';
+
+export type NueMarqueeProps = {
     infinite?: boolean;
     speedRatio?: number;
-    direction?: 'left' | 'right';
+    direction?: NueMarqueeDirection;
 };

@@ -1,0 +1,26 @@
+.nue-input {
+    --nue-button-font-size: var(--nue-text-sm);
+    --nue-button-color: var(--nue-primary-color-900);
+    --nue-button-icon-size: calc(var(--font-size));
+    --nue-button-icon-color: var(--font-color);
+    --nue-button-placeholder-color: var(--nue-primary-color-400);
+    --nue-button-border-color: var(--nue-divider-color);
+    --nue-button-hover-border-color: var(--nue-primary-color-600);
+    --nue-button-focus-border-color: var(--nue-primary-color-600);
+    --nue-button-focus-shadow: var(--nue-primary-shadow);
+    --nue-button-disabled-border-color: var(--nue-divider-color);
+    --nue-button-disabled-background-color: var(--nue-primary-color-100);
+    --nue-button-opbtn-color: var(--nue-primary-color-500);
+    --nue-button-opbtn-hover-color: var(--nue-primary-color-900);
+
+    border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-secondary-shadow);
+
+    &.nue-input--small {
+        --nue-button-font-size: var(--nue-text-xs);
+    }
+
+    &.nue-input--large {
+        --nue-button-font-size: var(--nue-text-md);
+    }
+}

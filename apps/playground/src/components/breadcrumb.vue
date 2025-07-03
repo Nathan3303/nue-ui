@@ -15,37 +15,22 @@
     <demo title="单一替换分割符">
         <nue-breadcrumb>
             <nue-breadcrumb-item>Home</nue-breadcrumb-item>
-            <nue-breadcrumb-item separator="arrow-right-circle">
-                Components
-            </nue-breadcrumb-item>
+            <nue-breadcrumb-item separator="arrow-right-circle"> Components</nue-breadcrumb-item>
             <nue-breadcrumb-item>Breadcrumb</nue-breadcrumb-item>
         </nue-breadcrumb>
     </demo>
     <demo title="引入下拉列表">
         <nue-breadcrumb separator="arrow-right-more">
             <nue-breadcrumb-item>
-                <nue-dropdown placement="bottom-start" size="small">
-                    <template #default="{ clickTrigger }">
-                        <nue-button
-                            style="
-                                font-size: var(--nue-text-sm);
-                                color: var(--nue-primary-color-600);
-                                --icon-size: var(--nue-text-xs);
-                                gap: 0.25rem;
-                            "
-                            theme="pure"
-                            @click="clickTrigger"
-                        >
+                <nue-dropdown placement="bottom-center" size="small">
+                    <template #trigger="{ trigger }">
+                        <li @click="trigger">
                             Home
-                            <template #append>
-                                <nue-icon name="arrow-down" />
-                            </template>
-                        </nue-button>
+                            <nue-icon class="state-icon" name="arrow-down" />
+                        </li>
                     </template>
-                    <template #dropdown>
-                        <li>Components</li>
-                        <li>Breadcrumb</li>
-                    </template>
+                    <nue-link class="nue-dropdown-item" href="/button">Button</nue-link>
+                    <nue-link class="nue-dropdown-item" href="/link">Link</nue-link>
                 </nue-dropdown>
             </nue-breadcrumb-item>
             <nue-breadcrumb-item>Breadcrumb</nue-breadcrumb-item>
@@ -66,7 +51,6 @@
 <script lang="ts" setup>
 import {
     NueIcon,
-    NueButton,
     NueDropdown,
     NueLink,
     NueBreadcrumb,
