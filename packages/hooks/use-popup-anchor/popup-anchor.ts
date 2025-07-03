@@ -27,7 +27,9 @@ const usePopupAnchor = (popupPoolId?: string) => {
     const unmountPopupAnchor = () => {
         if (!popupPool.element) return;
         try {
-            popupPool.element.removeChild(popupAnchor);
+            const anchorElement = document.getElementById(popupAnchorId);
+            if (!anchorElement) return;
+            anchorElement.parentElement?.removeChild(anchorElement);
         } catch (err) {
             console.log('[UsePopupAnchor] Unmount anchor element error:', err);
         } finally {

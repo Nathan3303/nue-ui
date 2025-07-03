@@ -13,29 +13,29 @@
                 </template>
             </nue-button>
         </slot>
-    </div>
-    <template v-if="visible">
-        <teleport :disabled="tpState.disabled" :to="tpState.to">
-            <nue-overlay
-                :closing="closing"
-                :theme="transparent ? 'transparent' : 'no-background'"
-                @click="handleClose"
-            >
-                <ul
-                    v-show="visible"
-                    ref="dropdownRef"
-                    :class="classes"
-                    :data-direction="placementInfo.direction"
-                    :style="styles"
-                    @click.stop="handleExecute"
+        <template v-if="visible">
+            <teleport :disabled="tpState.disabled" :to="tpState.to">
+                <nue-overlay
+                    :closing="closing"
+                    :theme="transparent ? 'transparent' : 'no-background'"
+                    @click="handleClose"
                 >
-                    <slot>
-                        <span class="nue-dropdown__empty-text">No options.</span>
-                    </slot>
-                </ul>
-            </nue-overlay>
-        </teleport>
-    </template>
+                    <ul
+                        v-show="visible"
+                        ref="dropdownRef"
+                        :class="classes"
+                        :data-direction="placementInfo.direction"
+                        :style="styles"
+                        @click.stop="handleExecute"
+                    >
+                        <slot>
+                            <span class="nue-dropdown__empty-text">No options.</span>
+                        </slot>
+                    </ul>
+                </nue-overlay>
+            </teleport>
+        </template>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -99,7 +99,7 @@ const handleCalculatePosition = throttle(() => calculatePosition(props.placement
 
 const handleGroupRegistering = () => {
     if (!props.group) return;
-    register(props.group, popupAnchorId, () => handleDrop('close'));
+    register(props.group, popupAnchorId, handleClose);
 };
 
 const handleGroupUnregistering = () => {
@@ -144,8 +144,8 @@ const handleClose = () => {
             await waitForAnimation();
         },
         () => {
-            emit('close');
             handleGroupUnregistering();
+            emit('close');
         }
     );
     if (!props.transparent) return;
@@ -202,10 +202,7 @@ const handleExecute = (event: MouseEvent) => {
     }
 };
 
-onUnmounted(() => {
-    unmountPopupAnchor();
-    handleGroupUnregistering();
-});
+onUnmounted(() => unmountPopupAnchor());
 
 defineExpose({ open: handleOpen, close: handleClose });
 </script>

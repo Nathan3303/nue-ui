@@ -25,15 +25,15 @@ export const unregister = (groupId: NueDropdownGroupId, dropdownId: string) => {
     if (!isPoolExist) return;
     const group = dropdownGroups.get(groupId);
     if (!group) return;
-    if (group.length === 0) {
-        destroyGroup(groupId);
-        return;
-    }
     const newGroup = group.filter(item => {
         return item.dropdownId !== dropdownId;
     });
     console.log(groupId, newGroup);
-    dropdownGroups.set(groupId, newGroup);
+    if (newGroup.length === 0) {
+        destroyGroup(groupId);
+    } else {
+        dropdownGroups.set(groupId, newGroup);
+    }
 };
 
 export const closeDropdownsInGroup = (groupId: NueDropdownGroupId) => {
