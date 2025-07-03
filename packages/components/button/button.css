@@ -62,6 +62,9 @@
     }
 
     &.nue-button--disabled {
+        --nue-button-hover-color: var(--nue-button-disable-color);
+        --nue-button-hover-bg-color: var(--nue-button-disable-bg-color);
+
         cursor: not-allowed;
         color: var(--nue-button-disable-color);
         background-color: var(--nue-button-disable-bg-color);
