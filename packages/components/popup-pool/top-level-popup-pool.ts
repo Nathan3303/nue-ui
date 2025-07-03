@@ -1,8 +1,8 @@
 import { h, render } from 'vue';
-import NuePopupPoolV2 from './popup-pool-v2.vue';
+import NuePopupPool from './popup-pool.vue';
 
 export function createPopupPoolVNode(id: string) {
-    return h(NuePopupPoolV2, { id: id });
+    return h(NuePopupPool, { id: id });
 }
 
 export function renderPopupPool(id: string, container: HTMLElement) {

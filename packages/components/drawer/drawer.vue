@@ -1,5 +1,5 @@
 <template>
-    <teleport v-if="modelValue" :disabled="teleportDisabled" :to="teleportTo">
+    <teleport v-if="modelValue" :disabled="tpState.disabled" :to="tpState.to">
         <nue-overlay
             :closing="closing"
             :theme="theme"
@@ -31,10 +31,10 @@ import { computed, nextTick, ref, watch, onUnmounted } from 'vue';
 import { NueContainer, NueFooter, NueHeader, NueMain } from '../container';
 import NueButton from '../button/button.vue';
 import NueOverlay from '../overlay/overlay.vue';
-import { generateElementId, parseAnimationDurationToNumber, parseTheme } from '@nue-ui/utils';
-import { usePopupPoolV2 } from '../popup-pool-v2';
+import { parseAnimationDurationToNumber, parseTheme } from '@nue-ui/utils';
 import { isFunction } from 'lodash-es';
 import { playDrawerAnimation } from './animation';
+import { usePopupAnchor } from '@nue-ui/hooks';
 import type { NueDrawerProps, NueDrawerEmits, NueDrawerHandleClose } from './types';
 import './drawer.css';
 
@@ -47,16 +47,9 @@ const props = withDefaults(defineProps<NueDrawerProps>(), {
 });
 const emit = defineEmits<NueDrawerEmits>();
 
-const popupPool = usePopupPoolV2();
-
+const { tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
 const nueDrawerRef = ref<HTMLDivElement>();
-const drawerAnchor = document.createElement('div');
-drawerAnchor.classList.add('nue-drawer-anchor');
-drawerAnchor.id = generateElementId();
-
 const closing = ref(false);
-const teleportTo = ref('body');
-const teleportDisabled = ref(true);
 
 const classes = computed(() => {
     const prefix = 'nue-drawer';
@@ -90,17 +83,9 @@ const waitForAnimation = (visible: boolean) => {
 
 const handleOpen = () => {
     closing.value = false;
+    mountPopupAnchor();
+    waitForAnimation(true);
     emit('update:modelValue', true);
-    if (!popupPool.element) return;
-    popupPool.element.appendChild(drawerAnchor);
-    try {
-        teleportTo.value = props.teleportTo || '#' + drawerAnchor.id;
-        teleportDisabled.value = false;
-        popupPool.setZIndex();
-        waitForAnimation(true);
-    } catch (err) {
-        console.log('[NueDialog] Open Error:', err);
-    }
 };
 
 const handleClose: NueDrawerHandleClose = async afterAnimation => {
@@ -116,9 +101,7 @@ const handleOverlayClick = () => {
 };
 
 onUnmounted(() => {
-    const drawerAnchorElement = document.getElementById(drawerAnchor.id);
-    if (!drawerAnchorElement) return;
-    drawerAnchorElement.parentElement?.removeChild(drawerAnchorElement);
+    unmountPopupAnchor();
 });
 
 defineExpose({ open: handleOpen, close: handleClose });

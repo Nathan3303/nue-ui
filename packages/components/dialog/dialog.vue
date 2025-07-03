@@ -1,5 +1,5 @@
 <template>
-    <teleport v-if="modelValue" :disabled="teleportDisabled" :to="teleportTo">
+    <teleport v-if="modelValue" :disabled="tpState.disabled" :to="tpState.to">
         <nue-overlay :closing="closing" :theme="theme" class="nue-dialog-overlay">
             <div ref="nueDialogRef" :class="classes" :data-closing="closing">
                 <div class="nue-dialog__header">
@@ -24,9 +24,9 @@
 import { computed, nextTick, onUnmounted, ref, watch } from 'vue';
 import NueText from '../text/text.vue';
 import NueOverlay from '../overlay/overlay.vue';
-import { parseAnimationDurationToNumber, parseTheme, generateElementId } from '@nue-ui/utils';
+import { parseAnimationDurationToNumber, parseTheme } from '@nue-ui/utils';
 import { isFunction } from 'lodash-es';
-import { usePopupPoolV2 } from '../popup-pool-v2';
+import { usePopupAnchor } from '@nue-ui/hooks';
 import type { NueDialogEmits, NueDialogHandleClose, NueDialogProps } from './types';
 import './dialog.css';
 
@@ -37,16 +37,9 @@ const props = withDefaults(defineProps<NueDialogProps>(), {
 });
 const emit = defineEmits<NueDialogEmits>();
 
-const popupPool = usePopupPoolV2();
-
-const nueDialogRef = ref<HTMLElement>();
-const dialogAnchor = document.createElement('div');
-dialogAnchor.classList.add('nue-dialog-anchor');
-dialogAnchor.id = generateElementId();
-
+const { tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
+const nueDialogRef = ref<HTMLDivElement>();
 const closing = ref(false);
-const teleportTo = ref('body');
-const teleportDisabled = ref(true);
 
 const classes = computed(() => {
     const prefix = 'nue-dialog';
@@ -75,15 +68,7 @@ const waitForAnimation = async () => {
 const handleOpen = async () => {
     closing.value = false;
     emit('update:modelValue', true);
-    if (!popupPool.element) return;
-    popupPool.element.appendChild(dialogAnchor);
-    try {
-        teleportTo.value = props.teleportTo || '#' + dialogAnchor.id;
-        teleportDisabled.value = false;
-        popupPool.setZIndex();
-    } catch (err) {
-        console.log('[NueDialog] Open Error:', err);
-    }
+    mountPopupAnchor();
 };
 
 const handleClose: NueDialogHandleClose = async afterAnimation => {
@@ -107,9 +92,7 @@ const handleConfirm = async () => {
 };
 
 onUnmounted(() => {
-    const dialogAnchorElement = document.getElementById(dialogAnchor.id);
-    if (!dialogAnchorElement) return;
-    dialogAnchorElement.parentElement?.removeChild(dialogAnchorElement);
+    unmountPopupAnchor();
 });
 
 defineExpose({ open: handleOpen, close: handleClose, confirm: handleConfirm });

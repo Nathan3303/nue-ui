@@ -15,7 +15,7 @@
         </slot>
     </div>
     <template v-if="visible">
-        <teleport :disabled="teleportDisabled" :to="teleportTo">
+        <teleport :disabled="tpState.disabled" :to="tpState.to">
             <nue-overlay
                 :closing="closing"
                 :theme="transparent ? 'transparent' : 'no-background'"
@@ -43,10 +43,10 @@ import { computed, onUnmounted, ref } from 'vue';
 import NueButton from '../button/button.vue';
 import NueIcon from '../icon/icon.vue';
 import NueOverlay from '../overlay/overlay.vue';
-import { generateElementId, parseAnimationDurationToNumber, parseTheme } from '@nue-ui/utils';
-import { usePopupPoolV2 } from '../popup-pool-v2';
+import { parseAnimationDurationToNumber, parseTheme } from '@nue-ui/utils';
 import { usePopper, usePopperController } from '@nue-ui/hooks';
 import { throttle } from 'lodash-es';
+import { usePopupAnchor } from '@nue-ui/hooks';
 import type { NueDropdownProps, NueDropdownEmits } from './types';
 import './dropdown.css';
 
@@ -62,23 +62,17 @@ const props = withDefaults(defineProps<NueDropdownProps>(), {
 });
 const emit = defineEmits<NueDropdownEmits>();
 
+const { tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
 const dropdownRef = ref<HTMLDivElement>();
 const dropdownWrapperRef = ref<HTMLDivElement>();
 const closing = ref(false);
 const visible = ref(false);
-const teleportTo = ref('body');
-const teleportDisabled = ref(true);
 const closeAnimationDuration = ref(0);
-const popupPool = usePopupPoolV2();
 const { placement, rectInfo, calculatePosition } = usePopper(dropdownWrapperRef, dropdownRef, {
     placement: props.placement
 });
 const { show, hide } = usePopperController(visible);
-const dropdownAnchor = document.createElement('div');
 let dropdownTimer: number | null = 0;
-
-dropdownAnchor.classList.add('nue-dropdown-anchor');
-dropdownAnchor.id = generateElementId();
 
 const classes = computed(() => {
     const prefix = 'nue-dropdown';
@@ -122,22 +116,14 @@ const handleOpen = () => {
         },
         () => {
             handleCalculatePosition();
-            if (!popupPool.element) return;
-            popupPool.element.appendChild(dropdownAnchor);
             emit('open');
-            try {
-                teleportTo.value = props.teleportTo || '#' + dropdownAnchor.id;
-                teleportDisabled.value = false;
-                popupPool.setZIndex();
-            } catch (err) {
-                console.log('[NueDropdown] Open Error:', err);
-            }
+            mountPopupAnchor();
         }
     );
     if (!props.transparent) return;
-    window.addEventListener('scroll', handleCalculatePosition, true);
-    window.addEventListener('resize', handleCalculatePosition, true);
-    window.addEventListener('click', handleClose, true);
+    window.addEventListener('scroll', handleCalculatePosition, false);
+    window.addEventListener('resize', handleCalculatePosition, false);
+    window.addEventListener('click', handleClose, false);
 };
 
 const handleClose = () => {
@@ -147,12 +133,14 @@ const handleClose = () => {
             closing.value = true;
             await waitForAnimation();
         },
-        () => emit('close')
+        () => {
+            emit('close');
+        }
     );
     if (!props.transparent) return;
-    window.removeEventListener('scroll', handleCalculatePosition, true);
-    window.removeEventListener('resize', handleCalculatePosition, true);
-    window.removeEventListener('click', handleClose, true);
+    window.removeEventListener('scroll', handleCalculatePosition, false);
+    window.removeEventListener('resize', handleCalculatePosition, false);
+    window.removeEventListener('click', handleClose, false);
 };
 
 const handleDrop = (type: 'close' | 'open') => {
@@ -170,10 +158,11 @@ const handleDrop = (type: 'close' | 'open') => {
     }, 200) as unknown as number;
 };
 
-const handleSwitchByMouseEvent = (e: MouseEvent) => {
+const handleSwitchByMouseEvent = (event: MouseEvent) => {
+    event.stopPropagation();
     switch (props.dropType) {
         case 'hover':
-            switch (e.type) {
+            switch (event.type) {
                 case 'mouseenter':
                     handleDrop('open');
                     break;
@@ -191,8 +180,6 @@ const handleSwitchByMouseEvent = (e: MouseEvent) => {
 
 const handleExecute = (event: MouseEvent) => {
     const clickedElement = event.target as HTMLElement;
-    if (clickedElement.classList.contains('nue-dropdown')) return;
-    if (clickedElement.classList.contains('nue-dropdown-wrapper')) return;
     const executeId = clickedElement.dataset.executeid;
     if (executeId === void 0) return;
     emit('execute', executeId);
@@ -202,9 +189,7 @@ const handleExecute = (event: MouseEvent) => {
 };
 
 onUnmounted(() => {
-    const dropdownAnchorElement = document.getElementById(dropdownAnchor.id);
-    if (!dropdownAnchorElement) return;
-    dropdownAnchorElement.parentElement?.removeChild(dropdownAnchorElement);
+    unmountPopupAnchor();
 });
 
 defineExpose({ open: handleOpen, close: handleClose });

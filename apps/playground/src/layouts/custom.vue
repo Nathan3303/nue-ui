@@ -31,12 +31,13 @@ const handleDropdownClose = () => (inputValue.value = '');
             @close="handleDropdownClose"
             @execute="handleExecute"
         >
-            <nue-div align="stretch" class="header" gap="0" vertical @click.stop>
+            <nue-div align="stretch" class="header" gap="0" vertical>
                 <nue-input
                     v-model="inputValue"
-                    icon="search"
+                    clearable
                     placeholder="筛选下拉选项"
                     theme="noshape"
+                    icon="filter"
                 />
             </nue-div>
             <nue-divider />
@@ -64,7 +65,7 @@ const handleDropdownClose = () => (inputValue.value = '');
     gap: 0;
 
     .header {
-        padding: 0.5rem 0.875rem;
+        padding: 0.25rem 0.875rem;
     }
 
     .main {
