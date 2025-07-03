@@ -54,9 +54,19 @@
         </nue-dropdown>
     </demo>
     <demo title="嵌套">
-        <nue-dropdown close-when-executed trigger-text="下拉选择" @execute="handleExecute">
+        <nue-dropdown
+            close-when-executed
+            group="abc"
+            trigger-text="下拉选择"
+            @execute="handleExecute"
+        >
             <li data-executeid="Option 1">下拉选项 1</li>
-            <nue-dropdown close-when-executed placement="right-start" @execute="handleExecute">
+            <nue-dropdown
+                close-when-executed
+                group="abc"
+                placement="right-start"
+                @execute="handleExecute"
+            >
                 <template #trigger="{ trigger }">
                     <li @click.stop="trigger">
                         下拉选项 2

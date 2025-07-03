@@ -29,6 +29,7 @@ export interface NueDropdownProps extends GlobalProps, NueGlobalPopupItemProps {
     placement?: NueDropdownPlacement;
     size?: NueDropdownSize;
     closeWhenExecuted?: boolean;
+    group?: NueDropdownGroupId;
     beforeExecute?: () => void;
     afterExecute?: () => void;
 }
@@ -39,8 +40,10 @@ export type NueDropdownEmits = {
     (e: 'close'): void;
 };
 
-export type NueDropdownPoolId = string;
+export type NueDropdownGroupId = string;
 
-export type NueDropdownPoolItem = { id: string; handleDrop: () => void };
+export type NueDropdownGroupMember = { dropdownId: string; close: () => void };
 
-export type NueDropdownPool = Map<NueDropdownPoolId, NueDropdownPoolItem[]>;
+export type NueDropdownGroup = NueDropdownGroupMember[];
+
+export type NueDropdownGroups = Map<NueDropdownGroupId, NueDropdownGroup>;

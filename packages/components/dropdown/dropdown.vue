@@ -30,7 +30,7 @@
                     @click.stop="handleExecute"
                 >
                     <slot>
-                        <span class="nue-dropdown__empty-text">没有选项</span>
+                        <span class="nue-dropdown__empty-text">No options.</span>
                     </slot>
                 </ul>
             </nue-overlay>
@@ -47,6 +47,7 @@ import { parseAnimationDurationToNumber, parseTheme } from '@nue-ui/utils';
 import { usePopper, usePopperController } from '@nue-ui/hooks';
 import { throttle } from 'lodash-es';
 import { usePopupAnchor } from '@nue-ui/hooks';
+import { register, unregister, closeDropdownsInGroup } from './dropdown-group';
 import type { NueDropdownProps, NueDropdownEmits } from './types';
 import './dropdown.css';
 
@@ -62,16 +63,16 @@ const props = withDefaults(defineProps<NueDropdownProps>(), {
 });
 const emit = defineEmits<NueDropdownEmits>();
 
-const { tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
 const dropdownRef = ref<HTMLDivElement>();
 const dropdownWrapperRef = ref<HTMLDivElement>();
-const closing = ref(false);
-const visible = ref(false);
-const closeAnimationDuration = ref(0);
+const { popupAnchorId, tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
 const { placement, rectInfo, calculatePosition } = usePopper(dropdownWrapperRef, dropdownRef, {
     placement: props.placement
 });
+const visible = ref(false);
 const { show, hide } = usePopperController(visible);
+const closing = ref(false);
+const closeAnimationDuration = ref(0);
 let dropdownTimer: number | null = 0;
 
 const classes = computed(() => {
@@ -94,6 +95,18 @@ const placementInfo = computed(() => {
     };
 });
 
+const handleCalculatePosition = throttle(() => calculatePosition(props.placement), 1);
+
+const handleGroupRegistering = () => {
+    if (!props.group) return;
+    register(props.group, popupAnchorId, () => handleDrop('close'));
+};
+
+const handleGroupUnregistering = () => {
+    if (!props.group) return;
+    unregister(props.group, popupAnchorId);
+};
+
 const waitForAnimation = () => {
     const timeout = parseAnimationDurationToNumber(
         closeAnimationDuration.value ||
@@ -103,10 +116,6 @@ const waitForAnimation = () => {
         setTimeout(() => resolve(1), timeout);
     });
 };
-
-const handleCalculatePosition = throttle(() => {
-    calculatePosition(props.placement);
-}, 1);
 
 const handleOpen = () => {
     show(
@@ -118,6 +127,7 @@ const handleOpen = () => {
             handleCalculatePosition();
             emit('open');
             mountPopupAnchor();
+            handleGroupRegistering();
         }
     );
     if (!props.transparent) return;
@@ -135,6 +145,7 @@ const handleClose = () => {
         },
         () => {
             emit('close');
+            handleGroupUnregistering();
         }
     );
     if (!props.transparent) return;
@@ -184,12 +195,16 @@ const handleExecute = (event: MouseEvent) => {
     if (executeId === void 0) return;
     emit('execute', executeId);
     if (!props.closeWhenExecuted) return;
-    handleClose();
-    dropdownWrapperRef.value?.click();
+    if (props.group) {
+        closeDropdownsInGroup(props.group);
+    } else {
+        handleClose();
+    }
 };
 
 onUnmounted(() => {
     unmountPopupAnchor();
+    handleGroupUnregistering();
 });
 
 defineExpose({ open: handleOpen, close: handleClose });
