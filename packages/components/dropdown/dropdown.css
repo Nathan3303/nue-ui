@@ -1,5 +1,8 @@
 .nue-dropdown-wrapper {
     position: relative;
+    flex: none;
+    width: fit-content;
+    height: fit-content;
 
     .state-icon {
         transform: rotate(0deg);
@@ -41,11 +44,6 @@
     box-shadow: 1px 1px 0.25rem rgba(200, 200, 200, 0.2);
     box-sizing: border-box;
 
-    &.nue-dropdown--disabled {
-        opacity: 0.5;
-        pointer-events: none;
-    }
-
     li,
     .nue-dropdown-item,
     .nue-dropdown__empty-text {
@@ -65,10 +63,6 @@
         background-color: transparent;
         border-radius: 6px;
 
-        .nue-icon {
-            --icon-size: var(--nue-dropdown-item-font-size);
-        }
-
         &:hover {
             background-color: #eeeeee;
         }
@@ -78,10 +72,16 @@
         font-size: 0.75rem;
         color: #969696;
         cursor: default;
+        justify-content: center;
 
         &:hover {
             background-color: transparent;
         }
+    }
+
+    &.nue-dropdown--disabled {
+        opacity: 0.5;
+        pointer-events: none;
     }
 
     &.nue-dropdown--small {

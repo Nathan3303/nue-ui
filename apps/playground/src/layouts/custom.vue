@@ -23,36 +23,90 @@ const handleDropdownClose = () => (inputValue.value = '');
 <template>
     <nue-div align="stretch" vertical>
         <nue-div height="100vh"></nue-div>
-        <nue-dropdown
-            close-when-executed
-            theme="custom"
-            transparent
-            trigger-text="下拉选择"
-            @close="handleDropdownClose"
-            @execute="handleExecute"
-        >
-            <nue-div align="stretch" class="header" gap="0" vertical>
-                <nue-input
-                    v-model="inputValue"
-                    clearable
-                    placeholder="筛选下拉选项"
-                    theme="noshape"
-                    icon="filter"
-                />
-            </nue-div>
-            <nue-divider />
-            <nue-div v-if="dropdownItems.length" align="stretch" class="main" gap=".25rem" vertical>
-                <li
-                    v-for="item in dropdownItems"
-                    :key="item.id"
-                    :data-executeid="item.id"
-                    class="nue-dropdown-item"
-                >
-                    {{ item.text }}
-                </li>
-            </nue-div>
-            <span v-else class="nue-dropdown__empty-text">没有选项</span>
-        </nue-dropdown>
+        <nue-div wrap="nowrap" justify="space-between">
+            <nue-dropdown
+                close-when-executed
+                theme="custom"
+                transparent
+                trigger-text="下拉选择"
+                @close="handleDropdownClose"
+                @execute="handleExecute"
+            >
+                <nue-div align="stretch" class="header" gap="0" vertical>
+                    <nue-input
+                        v-model="inputValue"
+                        clearable
+                        placeholder="筛选下拉选项"
+                        theme="noshape"
+                        icon="filter"
+                    />
+                </nue-div>
+                <nue-divider />
+                <nue-div align="stretch" class="main" gap=".25rem" vertical>
+                    <template v-if="dropdownItems.length">
+                        <li v-for="item in dropdownItems" :key="item.id" :data-executeid="item.id">
+                            {{ item.text }}
+                        </li>
+                    </template>
+                    <span v-else class="nue-dropdown__empty-text">没有选项</span>
+                </nue-div>
+            </nue-dropdown>
+            <nue-dropdown
+                close-when-executed
+                theme="custom"
+                transparent
+                trigger-text="下拉选择"
+                @close="handleDropdownClose"
+                @execute="handleExecute"
+                placement="right-start"
+            >
+                <nue-div align="stretch" class="header" gap="0" vertical>
+                    <nue-input
+                        v-model="inputValue"
+                        clearable
+                        placeholder="筛选下拉选项"
+                        theme="noshape"
+                        icon="filter"
+                    />
+                </nue-div>
+                <nue-divider />
+                <nue-div align="stretch" class="main" gap=".25rem" vertical>
+                    <template v-if="dropdownItems.length">
+                        <li v-for="item in dropdownItems" :key="item.id" :data-executeid="item.id">
+                            {{ item.text }}
+                        </li>
+                    </template>
+                    <span v-else class="nue-dropdown__empty-text">没有选项</span>
+                </nue-div>
+            </nue-dropdown>
+            <nue-dropdown
+                close-when-executed
+                theme="custom"
+                transparent
+                trigger-text="下拉选择"
+                @close="handleDropdownClose"
+                @execute="handleExecute"
+            >
+                <nue-div align="stretch" class="header" gap="0" vertical>
+                    <nue-input
+                        v-model="inputValue"
+                        clearable
+                        placeholder="筛选下拉选项"
+                        theme="noshape"
+                        icon="filter"
+                    />
+                </nue-div>
+                <nue-divider />
+                <nue-div align="stretch" class="main" gap=".25rem" vertical>
+                    <template v-if="dropdownItems.length">
+                        <li v-for="item in dropdownItems" :key="item.id" :data-executeid="item.id">
+                            {{ item.text }}
+                        </li>
+                    </template>
+                    <span v-else class="nue-dropdown__empty-text">没有选项</span>
+                </nue-div>
+            </nue-dropdown>
+        </nue-div>
         <nue-div height="100vh"></nue-div>
     </nue-div>
 </template>

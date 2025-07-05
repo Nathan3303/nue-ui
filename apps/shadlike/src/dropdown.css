@@ -8,8 +8,7 @@
     animation-timing-function: var(--nue-animation-timing-function);
 
     li:hover,
-    .nue-dropdown-item:hover,
-    .nue-dropdown__empty-text:hover {
+    .nue-dropdown-item:hover {
         background-color: var(--nue-primary-color-300);
     }
 

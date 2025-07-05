@@ -24,7 +24,7 @@
                         v-show="visible"
                         ref="dropdownRef"
                         :class="classes"
-                        :data-direction="placementInfo.direction"
+                        :data-direction="relativePosition.direction"
                         :style="styles"
                         @click.stop="handleExecute"
                     >
@@ -66,9 +66,10 @@ const emit = defineEmits<NueDropdownEmits>();
 const dropdownRef = ref<HTMLDivElement>();
 const dropdownWrapperRef = ref<HTMLDivElement>();
 const { popupAnchorId, tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
-const { placement, rectInfo, calculatePosition } = usePopper(dropdownWrapperRef, dropdownRef, {
-    placement: props.placement
-});
+const { relativePosition, rectInfo, calculatePosition } = usePopper(
+    dropdownWrapperRef,
+    dropdownRef
+);
 const visible = ref(false);
 const { show, hide } = usePopperController(visible);
 const closing = ref(false);
@@ -81,17 +82,8 @@ const classes = computed(() => {
 });
 
 const styles = computed(() => {
-    const { wrapperWidth } = rectInfo;
     return {
-        '--dropdown-wrapper-width': `${wrapperWidth.toFixed(2)}px`
-    };
-});
-
-const placementInfo = computed(() => {
-    const splited = placement.value.split('-');
-    return {
-        direction: splited[0] || 'top',
-        alignment: splited[1] || 'center'
+        '--dropdown-wrapper-width': `${rectInfo.wrapperW.toFixed(2)}px`
     };
 });
 

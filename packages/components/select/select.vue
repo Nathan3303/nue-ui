@@ -1,19 +1,14 @@
 <template>
     <nue-dropdown
         :class="classes"
-        :hide-on-clicked="hideOnSelect"
-        :keep-alive="!!$slots.default"
+        :close-when-executed="hideOnSelect"
         :size="size"
         @execute="handleExecute"
     >
         <template #trigger="{ trigger }">
             <nue-button :disabled="disabled" :size="size" @click="trigger">
-                <template #default>
-                    <template v-if="label">{{ label }}</template>
-                    <nue-text v-else color="gray">
-                        {{ placeholder }}
-                    </nue-text>
-                </template>
+                <template v-if="label">{{ label }}</template>
+                <nue-text v-else color="gray">{{ placeholder }}</nue-text>
                 <template #append>
                     <nue-icon name="select" />
                     <nue-icon
@@ -42,7 +37,7 @@ defineOptions({ name: 'NueSelect' });
 const emit = defineEmits<SelectEmits>();
 const props = withDefaults(defineProps<SelectProps>(), {
     hideOnSelect: true,
-    placeholder: '请选择',
+    placeholder: 'Select here...',
     clearable: false
 });
 
