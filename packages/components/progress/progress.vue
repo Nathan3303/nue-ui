@@ -3,10 +3,7 @@
         <template v-if="type === 'line'">
             <div class="nue-progress--line">
                 <div class="nue-progress__outer-bar">
-                    <div
-                        :style="{ width: percentage }"
-                        class="nue-progress__inner-bar"
-                    >
+                    <div :style="{ width: percentage }" class="nue-progress__inner-bar">
                         <nue-text v-if="showInnerText && !hideText">
                             {{ percentage }}
                         </nue-text>
@@ -15,11 +12,7 @@
             </div>
         </template>
         <template v-else-if="type === 'circle'">
-            <svg
-                :style="circleStyles"
-                class="nue-progress--circle"
-                viewBox="0 0 100 100"
-            >
+            <svg :style="circleStyles" class="nue-progress--circle" viewBox="0 0 100 100">
                 <circle
                     class="nue-progress--circle__circle nue-progress__outer-path"
                     cx="50"
@@ -44,28 +37,25 @@
 import { computed } from 'vue';
 import { isArray, parseTheme } from '@nue-ui/utils';
 import { NueText } from '../text';
-import type { ProgressEmits, ProgressProps } from './types';
+import { NueProgressProps, NueProgressEmits } from './types';
 import './progress.css';
 
 defineOptions({ name: 'NueProgress' });
-const props = withDefaults(defineProps<ProgressProps>(), {
+const props = withDefaults(defineProps<NueProgressProps>(), {
     type: 'line',
+    scale: 1,
+    color: '#757575',
     percentage: 0,
     strokeWidth: 6,
-    formatter: (p: string) => p,
-    showInnerText: false,
-    hideText: false,
-    scale: 1,
-    color: 'var(--nue-primary-color-600)'
+    formatter: (p: string) => p
 });
-const emit = defineEmits<ProgressEmits>();
+const emit = defineEmits<NueProgressEmits>();
 
 const percentage = computed(() => {
-    const { percentage } = props;
-    if (percentage < 0) return '0%';
-    if (percentage === 100) emit('full');
-    if (percentage > 100) return '100%';
-    return percentage + '%';
+    if (props.percentage < 0) return '0%';
+    if (props.percentage === 100) emit('full');
+    if (props.percentage > 100) return '100%';
+    return props.percentage + '%';
 });
 
 const strokeWidth = computed(() => {
@@ -73,12 +63,8 @@ const strokeWidth = computed(() => {
 });
 
 const classes = computed(() => {
-    const { theme } = props;
     const prefix = 'nue-progress';
-    const list: string[] = [];
-    list.push(prefix);
-    if (theme) list.concat(parseTheme(theme, prefix));
-    return list;
+    return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
 const color = computed<string | undefined>(() => {
@@ -98,9 +84,9 @@ const color = computed<string | undefined>(() => {
 const progressStyle = computed(() => {
     const { type } = props;
     return {
-        '--stroke-width': strokeWidth.value,
-        '--flex': type === 'line' ? 'auto' : 'none',
-        '--inner-bar-background-color': color.value
+        '--nue-progress-stroke-width': strokeWidth.value,
+        '--nue-progress-flex': type === 'line' ? 'auto' : 'none',
+        '--nue-progress-innerbar-background-color': color.value
     };
 });
 
@@ -110,9 +96,9 @@ const strokeDashArray = computed(() => {
 
 const circleStyles = computed(() => {
     return {
-        '--circle-size': `${props.scale * 100}px`,
-        '--stroke-dash-array': strokeDashArray.value,
-        '--stroke-dash-offset': Math.ceil(
+        '--nue-progress-circle-size': `${props.scale * 100}px`,
+        '--nue-progress-stroke-dash-array': strokeDashArray.value,
+        '--nue-progress-stroke-dash-offset': Math.ceil(
             (1 - parseInt(percentage.value) / 100) * strokeDashArray.value
         )
     };

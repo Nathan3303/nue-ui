@@ -1,18 +1,22 @@
 import type { GlobalProps } from '@nue-ui/utils';
 
-export type ProgressType = 'line' | 'circle' | 'dashboard';
+export type NueProgressType = 'line' | 'circle' | 'dashboard';
 
-export interface ProgressProps extends GlobalProps {
-    type?: ProgressType;
-    percentage?: number;
-    color?: string | string[];
+export type NueProgressColor = string | string[];
+
+export interface NueProgressProps extends GlobalProps {
+    // properties
+    type?: NueProgressType;
+    color?: NueProgressColor;
     strokeWidth?: number;
-    formatter?: (p: string) => void | string;
+    percentage?: number;
     showInnerText?: boolean;
     hideText?: boolean;
     scale?: number;
+    // methods
+    formatter?: (p: string) => void | string;
 }
 
-export type ProgressEmits = {
+export type NueProgressEmits = {
     (event: 'full'): void;
 };
