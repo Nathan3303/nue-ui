@@ -1,143 +1,146 @@
-/* variables */
-
 .nue-container {
-    --nue-container-height: 100%;
     --nue-container-width: 100%;
-}
+    --nue-container-height: 100%;
+    --nue-container-inner-border-color: #e0e0e0;
+    --nue-container-inner-gap: 1rem;
 
-/* original */
-
-.nue-container {
+    display: flex;
+    flex-direction: column;
     width: var(--nue-container-width);
     height: var(--nue-container-height);
-    overflow: hidden;
+
+    box-sizing: border-box;
     position: relative;
+    overflow: hidden;
 
-    &.nue-container--vertical {
-        &:has(> .nue-header) > .nue-main {
-            border-top: 1px solid var(--nue-border-color);
-        }
+    &:has(> .nue-main) > .nue-header,
+    &:has(> .nue-footer) > .nue-main,
+    &:has(> .nue-footer) > .nue-header {
+        border-bottom: 1px solid var(--nue-container-inner-border-color);
+    }
 
-        &:has(> .nue-footer) > .nue-main {
-            border-bottom: 1px solid var(--nue-border-color);
+    .nue-header,
+    .nue-main,
+    .nue-aside,
+    .nue-footer {
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nue-header {
+        --nue-header-width: auto;
+        --nue-header-height: 4rem;
+        --nue-header-gap: var(--nue-container-inner-gap);
+
+        width: var(--nue-header-width);
+        height: var(--nue-header-height);
+
+        display: flex;
+        gap: var(--nue-header-gap);
+        padding: var(--nue-header-gap);
+    }
+
+    .nue-main {
+        display: flex;
+        align-items: stretch;
+        flex: auto;
+        flex-wrap: nowrap;
+        width: 100%;
+        height: 100%;
+
+        & > .nue-aside + .nue-content,
+        & > .nue-content + .nue-aside {
+            border-left: 1px solid var(--nue-container-inner-border-color);
         }
     }
 
-    &.nue-container--horizontal {
-        &:has(> .nue-header) > .nue-main {
-            border-left: 1px solid var(--nue-border-color);
-        }
+    .nue-aside {
+        --nue-aside-width: 16rem;
+        --nue-aside-min-width: 12rem;
+        --nue-aside-max-width: 18rem;
+        --nue-aside-gap: var(--nue-container-inner-gap);
+        --nue-aside-animation-duration: 0.18s;
 
-        &:has(> .nue-footer) > .nue-main {
-            border-right: 1px solid var(--nue-border-color);
-        }
-    }
-}
+        width: var(--nue-aside-width);
+        min-width: var(--nue-aside-min-width);
+        max-width: var(--nue-aside-max-width);
 
-/* flex */
-
-.nue-container--flex {
-    display: flex !important;
-
-    &.nue-container--vertical {
+        display: flex;
         flex-direction: column;
-        flex-wrap: nowrap;
+        flex: none;
+        overflow: auto;
+        overflow-x: hidden;
+        padding: var(--nue-aside-gap);
+        gap: var(--nue-aside-gap);
 
-        & > .nue-footer,
-        & > .nue-header {
-            height: auto;
+        &[data-collapsed='true'] {
+            /*min-width: 4.5rem;*/
+            /*width: 4.5rem !important;*/
+            transition: width var(--nue-aside-animation-duration) ease-out;
+        }
+    }
+
+    .nue-separator {
+        display: flex;
+        flex-direction: column;
+        width: 1px;
+        height: 100%;
+        background-color: var(--nue-container-inner-border-color);
+        z-index: 2;
+        position: relative;
+        flex: none;
+
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: -0.25rem;
             width: 100%;
-            flex: none;
-            padding: var(--nue-primary-padding);
-        }
-
-        & > .nue-main {
-            flex: auto;
-        }
-    }
-
-    &.nue-container--horizontal {
-        flex-direction: row;
-        flex-wrap: nowrap;
-
-        & > .nue-header,
-        & > .nue-footer {
-            padding: var(--nue-primary-padding);
             height: 100%;
-            width: auto;
-            flex-direction: column;
-            flex: none;
-            align-items: start;
+            padding: 0 0.25rem;
         }
 
-        & > .nue-main {
-            flex: auto;
-        }
-    }
-}
-
-/* grid */
-
-.nue-container--grid {
-    display: grid;
-
-    & > .nue-header {
-        grid-area: header;
-    }
-
-    & > .nue-footer {
-        grid-area: footer;
-    }
-
-    & > .nue-main {
-        grid-area: main;
-    }
-
-    &.nue-container--vertical {
-        grid-template-areas: 'header' 'main' 'footer';
-        grid-template-rows: auto 1fr auto;
-        grid-template-columns: 1fr;
-    }
-
-    &.nue-container--horizontal {
-        grid-template-areas: 'header main footer';
-        grid-template-columns: auto 1fr auto;
-        grid-template-rows: 1fr;
-
-        & > .nue-header {
-            --nue-header-width: auto;
-            --nue-header-height: 100%;
-            flex-direction: column;
-
-            .nue-header__slot {
-                padding: var(--nue-primary-padding) 0;
-                flex-direction: column;
-                align-items: center;
-                height: auto;
-
-                .nue-link--btnlike {
-                    padding: var(--nue-secondary-padding);
-                    justify-content: center;
-                    aspect-ratio: 1;
-
-                    &:has(.nue-icon) .nue-link__content {
-                        display: none;
-                    }
-                }
-            }
+        &:hover {
+            cursor: e-resize;
         }
 
-        & > .nue-footer {
-            --nue-footer-width: auto;
-            --nue-footer-height: 100%;
-            flex-direction: column;
+        &.nue-separator--disabled:hover {
+            cursor: default;
         }
     }
-}
 
-/* inner */
+    .nue-content {
+        --nue-content-width: auto;
+        --nue-content-min-width: unset;
+        --nue-content-max-width: unset;
+        --nue-content-gap: var(--nue-container-inner-gap);
 
-.nue-container--inner {
-    height: auto;
-    flex: auto;
+        width: var(--nue-content-width);
+        min-width: var(--nue-content-min-width);
+        max-width: var(--nue-content-max-width);
+        height: fit-content;
+        max-height: 100%;
+        flex: 1 1 auto;
+        overflow: auto;
+
+        .nue-content--fill {
+            height: 100%;
+        }
+    }
+
+    .nue-footer {
+        --nue-footer-width: auto;
+        --nue-footer-height: 3rem;
+        --nue-footer-gap: var(--nue-container-inner-gap);
+
+        width: var(--nue-footer-width);
+        height: var(--nue-footer-height);
+
+        display: flex;
+        align-items: center;
+        gap: var(--nue-footer-gap);
+        padding: var(--nue-footer-gap);
+    }
 }

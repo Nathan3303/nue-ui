@@ -2,17 +2,17 @@
     <demo>
         <template #title>Container 布局容器</template>
         <template #default>
-            <nue-div class="wrapper">
-                <nue-container type="flex">
-                    <nue-header>头部</nue-header>
-                    <nue-main>
-                        <template #aside>左侧栏</template>
-                        <template #content>主体</template>
-                        <template #outline>右侧栏</template>
-                    </nue-main>
-                    <nue-footer>底部</nue-footer>
-                </nue-container>
-            </nue-div>
+            <nue-container height="521px">
+                <nue-header>头部</nue-header>
+                <nue-main>
+                    <nue-aside max-width="32%" min-width="8%" width="16%">左侧栏</nue-aside>
+                    <nue-separator op-target="previous" />
+                    <nue-content fill>主体</nue-content>
+                    <nue-separator op-target="next" />
+                    <nue-aside max-width="32%" min-width="8%" width="16%">右侧栏</nue-aside>
+                </nue-main>
+                <nue-footer>底部</nue-footer>
+            </nue-container>
         </template>
     </demo>
 </template>
@@ -23,28 +23,24 @@ import {
     NueHeader,
     NueMain,
     NueFooter,
-    NueDiv
+    NueSeparator,
+    NueAside,
+    NueContent
 } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 </script>
 
 <style scoped>
-.wrapper {
-    height: 512px;
-}
-
 .nue-header {
     background-color: #f8f0f0;
 }
 
-.nue-main {
-    &:deep(.nue-aside) {
-        background-color: #edf8ed;
-    }
+.nue-aside {
+    background-color: #edf8ed;
+}
 
-    &:deep(.nue-main__content) {
-        background-color: #eaeaf5;
-    }
+.nue-content {
+    background-color: #eaeaf5;
 }
 
 .nue-footer {

@@ -1,33 +1,33 @@
 .nue-text {
-    &:is(h1) {
-        font-size: 1.5rem;
-        font-weight: 800;
-        line-height: 3;
-    }
-
-    &:is(h2) {
-        font-size: var(--nue-text-xxl);
-        font-weight: 700;
-        line-height: 2.75;
-    }
-
-    &:is(h3) {
-        font-size: var(--nue-text-xl);
-        font-weight: 600;
-        line-height: 2.25;
-    }
-
-    &:is(h4) {
-        font-size: var(--nue-text-md);
-        font-weight: 500;
-        line-height: 1.75;
-    }
-
     &:is(span) {
-        line-height: normal;
+        --nue-text-line-height: 1.3;
     }
 
     &:is(p) {
-        line-height: normal;
+        --nue-text-line-height: 1.5;
+    }
+
+    &:is(h1) {
+        --nue-text-font-size: 1.5rem;
+        --nue-text-font-weight: 800;
+        --nue-text-line-height: 3;
+    }
+
+    &:is(h2) {
+        --nue-text-font-size: var(--nue-text-xxl);
+        --nue-text-font-weight: 700;
+        --nue-text-line-height: 2.75;
+    }
+
+    &:is(h3) {
+        --nue-text-font-size: var(--nue-text-xl);
+        --nue-text-font-weight: 600;
+        --nue-text-line-height: 2.25;
+    }
+
+    &:is(h4) {
+        --nue-text-font-size: var(--nue-text-md);
+        --nue-text-font-weight: 500;
+        --nue-text-line-height: 1.75;
     }
 }

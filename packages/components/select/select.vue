@@ -81,12 +81,6 @@ const handleClear = () => {
 const handleExecute = (executeId: string) => {
     const _selectOptions = selectOptions.value;
     const shouldSelectedOption = _selectOptions.find(option => option.executeId === executeId);
-    console.log(
-        '[NueSelect] handle execute:',
-        executeId,
-        selectOptions.value,
-        shouldSelectedOption
-    );
     if (!shouldSelectedOption) return;
     selectedOption.value = { ...shouldSelectedOption } as NueSelectOption;
     emit('update:modelValue', shouldSelectedOption.value);

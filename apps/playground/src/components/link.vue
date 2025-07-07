@@ -30,6 +30,6 @@
 </template>
 
 <script lang="ts" setup>
-import { NueDiv, NueLink } from '@nue-ui/components';
+import { NueDiv, NueLink, NueText } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 </script>

@@ -3,12 +3,16 @@
     --nue-text-font-size: inherit;
     --nue-text-align: initial;
     --nue-text-decoration: initial;
+    --nue-text-font-weight: initial;
+    --nue-text-line-height: 1.5;
     --nue-text-clamped-lines: 3;
 
     color: var(--nue-text-color);
     font-size: var(--nue-text-font-size);
+    font-weight: var(--nue-text-font-weight);
     text-align: var(--nue-text-align);
     text-decoration: var(--nue-text-decoration);
+    line-height: var(--nue-text-line-height);
 
     &.nue-text--clamped {
         overflow: hidden;

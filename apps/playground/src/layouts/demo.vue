@@ -1,18 +1,20 @@
 <template>
     <nue-container :height="height" class="demo-layout" theme="vertical,inner">
-        <nue-header>
-            <template #logo>
+        <nue-header height="auto">
+            <nue-text size="df">
                 <slot name="title">{{ title }}</slot>
-            </template>
+            </nue-text>
         </nue-header>
         <nue-main>
-            <slot />
+            <nue-content style="padding: 1rem">
+                <slot />
+            </nue-content>
         </nue-main>
     </nue-container>
 </template>
 
 <script lang="ts" setup>
-import { NueContainer, NueHeader, NueMain } from '@nue-ui/components';
+import { NueContainer, NueHeader, NueMain, NueText, NueContent } from '@nue-ui/components';
 
 defineProps<{ title?: string; height?: string }>();
 </script>
