@@ -17,3 +17,4 @@ import './src/link.css';
 import './src/message.css';
 import './src/prompt.css';
 import './src/textarea.css';
+import './src/text.css';

@@ -2,35 +2,47 @@ import type { Ref } from 'vue';
 import type { GlobalProps } from '@nue-ui/utils';
 import type { NueButtonSize } from '../button';
 
-export type SelectOptionProps = {
+export type NueSelectValue =
+    | string
+    | number
+    | boolean
+    | Record<never, never>
+    | Array<never>
+    | null
+    | undefined;
+
+export interface NueSelectOptionRaw {
     label: string;
-    value: unknown;
-    disabled?: boolean;
-};
+    value: NueSelectValue;
+}
 
-export type SelectOption = {
+export interface NueSelectOption extends NueSelectOptionRaw {
     executeId: string;
-} & SelectOptionProps;
+}
 
-export type SelectOptions = SelectOption[];
+export type NueSelectOptions = NueSelectOption[];
 
-export interface SelectProps extends GlobalProps {
-    modelValue?: unknown;
+export interface NueSelectProps extends GlobalProps {
+    modelValue?: NueSelectValue;
     placeholder?: string;
     size?: NueButtonSize;
     disabled?: boolean;
-    hideOnSelect?: boolean;
     clearable?: boolean;
+    closeWhenSelected?: boolean;
 }
 
-export type SelectEmits = {
+export type NueSelectEmits = {
     (e: 'update:modelValue', value: unknown): void;
     (e: 'change', value: unknown): void;
+    (e: 'drop'): void;
+    (e: 'close'): void;
 };
 
-export type SelectOptionRegister = (option: SelectOption) => void;
-
-export type SelectContext = {
-    optionRegister: SelectOptionRegister;
-    selectedOption: Ref<SelectOption | undefined>;
+export type NueSelectContext = {
+    optionRegister: (option: NueSelectOption) => void;
+    selectedOption: Ref<NueSelectOption | undefined>;
 };
+
+export interface NueSelectOptionProps extends GlobalProps, NueSelectOptionRaw {
+    disabled?: boolean;
+}

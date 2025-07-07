@@ -1,58 +1,65 @@
-/* variables */
+.nue-tooltip-pool {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
 
-.nue-tooltip {
-    --vgap: 1rem;
-    --height: 2.25rem;
-    --font-size: var(--nue-text-sm);
-    --font-color: var(--nue-primary-color-100);
-    --animation-time: 0.16s;
-    --triangle-display: none;
+    &.nue-tooltip-pool--actived {
+        width: 0;
+        height: 0;
+        z-index: 30;
+    }
 }
 
-/* original */
+.nue-tooltip-wrapper {
+    width: fit-content;
+    height: fit-content;
+    flex: none;
+}
 
 .nue-tooltip {
+    --nue-tooltip-vgap: 0.875rem;
+    --nue-tooltip-font-size: var(--nue-tooltip-vgap);
+    --nue-tooltip-font-color: #f5f5f5;
+    --nue-tooltip-animation-duration: 0.18s;
+    --nue-tooltip-triangle-display: none;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: calc(var(--vgap) * 0.5);
     width: max-content;
-    min-width: 2rem;
     max-width: 36vw;
-    min-height: var(--height);
-    padding: 0 var(--vgap);
+    height: max-content;
+    padding: calc(var(--nue-tooltip-vgap) / 2) var(--nue-tooltip-vgap);
     position: absolute;
-    background-color: var(--nue-primary-color-900);
-    border-radius: var(--nue-primary-radius);
-
-    &:not(:has(.nue-tooltip__text)) {
-        padding: calc(var(--vgap) * 0.5) var(--vgap);
-    }
+    background-color: #212121;
+    border-radius: 6px;
+    animation-name: unset;
+    animation-duration: var(--nue-tooltip-animation-duration);
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
 
     .nue-tooltip__padding {
         position: absolute;
     }
 
     .nue-tooltip__text {
-        color: var(--font-color);
-        font-size: var(--font-size);
-        font-weight: var(--nue-primary-font-weight);
+        color: var(--nue-tooltip-font-color);
+        font-size: var(--nue-tooltip-font-size);
     }
 
     &.nue-tooltip--small {
-        --vgap: 0.75rem;
-        --height: 1.75rem;
-        --font-size: var(--nue-text-xs);
+        --nue-tooltip-vgap: 0.75rem;
     }
 
     &.nue-tooltip--large {
-        --vgap: 1.25rem;
-        --height: 2.625rem;
-        --font-size: var(--nue-text-md);
+        --nue-tooltip-vgap: 1.125rem;
     }
 
     &[data-direction='top'] {
-        animation: slide-fade-top var(--animation-time) ease forwards;
+        animation-name: slide-fade-top;
 
         .nue-tooltip__padding {
             width: 100%;
@@ -62,7 +69,7 @@
     }
 
     &[data-direction='bottom'] {
-        animation: slide-fade-bottom var(--animation-time) ease forwards;
+        animation-name: slide-fade-bottom;
 
         .nue-tooltip__padding {
             width: 100%;
@@ -72,7 +79,7 @@
     }
 
     &[data-direction='left'] {
-        animation: slide-fade-left var(--animation-time) ease forwards;
+        animation-name: slide-fade-left;
 
         .nue-tooltip__padding {
             width: 0.5rem;
@@ -82,7 +89,7 @@
     }
 
     &[data-direction='right'] {
-        animation: slide-fade-right var(--animation-time) ease forwards;
+        animation-name: slide-fade-right;
 
         .nue-tooltip__padding {
             width: 0.5rem;
@@ -93,7 +100,7 @@
 
     &::after {
         content: '';
-        display: var(--triangle-display);
+        display: var(--nue-tooltip-triangle-display);
         position: absolute;
         aspect-ratio: 1;
         width: 0.5rem;
@@ -162,5 +169,16 @@
     &.nue-tooltip--right-end::after {
         bottom: calc(1rem - 0.25rem);
         right: calc(100% + 0.25rem);
+    }
+}
+
+@keyframes slide-fade-top {
+    0% {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

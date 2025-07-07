@@ -1,8 +1,9 @@
 <template>
     <nue-dropdown
         :class="classes"
-        :close-when-executed="hideOnSelect"
+        :close-when-executed="closeWhenSelected"
         :size="size"
+        keepalive
         @execute="handleExecute"
     >
         <template #trigger="{ trigger }">
@@ -24,25 +25,32 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, provide, ref, watch } from 'vue';
+import { computed, provide, shallowRef, watch, onMounted } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import NueButton from '../button/button.vue';
 import NueDropdown from '../dropdown/dropdown.vue';
 import NueIcon from '../icon/icon.vue';
 import NueText from '../text/text.vue';
-import type { SelectContext, SelectEmits, SelectOption, SelectProps } from './types';
+import type {
+    NueSelectContext,
+    NueSelectEmits,
+    NueSelectOption,
+    NueSelectOptions,
+    NueSelectProps,
+    NueSelectValue
+} from './types';
+import { NueSelectContextKey } from './constants';
 
 defineOptions({ name: 'NueSelect' });
-
-const emit = defineEmits<SelectEmits>();
-const props = withDefaults(defineProps<SelectProps>(), {
-    hideOnSelect: true,
+const props = withDefaults(defineProps<NueSelectProps>(), {
+    closeWhenSelected: true,
     placeholder: 'Select here...',
     clearable: false
 });
+const emit = defineEmits<NueSelectEmits>();
 
-const options = ref<SelectOption[]>([]);
-const selectedOption = ref<SelectOption>();
+const selectOptions = shallowRef<NueSelectOptions>([]);
+const selectedOption = shallowRef<NueSelectOption | undefined>();
 
 const classes = computed(() => {
     const prefix = 'nue-select';
@@ -50,63 +58,56 @@ const classes = computed(() => {
 });
 
 const label = computed(() => {
-    return selectedOption.value && selectedOption.value?.label;
+    if (!selectedOption.value) return false;
+    return selectedOption.value.label;
 });
 
-function optionRegister(option: SelectOption) {
-    options.value.push(option);
-}
-
-function handleExecute(executeId: string) {
-    handleSelect(executeId);
-}
-
-function handleSelect(payload: unknown, isParseMV = false) {
-    let _option: SelectOption | undefined = void 0;
-    if (isParseMV) {
-        if (selectedOption.value && payload === selectedOption.value.value) {
+const optionRegister = (option: NueSelectOption) => {
+    const _selectOptions = selectOptions.value;
+    for (const _option of _selectOptions) {
+        if (option.label === _option.label && option.value === _option.value) {
             return;
         }
-        for (const option of options.value) {
-            if (payload === option.value) {
-                _option = option;
-                break;
-            }
-        }
-    } else {
-        if (selectedOption.value && payload === selectedOption.value.executeId) {
-            return;
-        }
-        for (const option of options.value) {
-            if ((payload as string) === option.executeId) {
-                _option = option;
-                break;
-            }
-        }
-        emit('update:modelValue', _option?.value);
-        emit('change', _option?.value);
     }
-    selectedOption.value = _option || void 0;
-}
+    selectOptions.value.push(option);
+};
 
-function handleClear() {
+const handleClear = () => {
     selectedOption.value = void 0;
     emit('update:modelValue', void 0);
     emit('change', void 0);
-}
+};
+
+const handleExecute = (executeId: string) => {
+    const _selectOptions = selectOptions.value;
+    const shouldSelectedOption = _selectOptions.find(option => option.executeId === executeId);
+    console.log(
+        '[NueSelect] handle execute:',
+        executeId,
+        selectOptions.value,
+        shouldSelectedOption
+    );
+    if (!shouldSelectedOption) return;
+    selectedOption.value = { ...shouldSelectedOption } as NueSelectOption;
+    emit('update:modelValue', shouldSelectedOption.value);
+    emit('change', shouldSelectedOption.value);
+};
+
+const handleSelect = (newValue: NueSelectValue) => {
+    const _selectOptions = selectOptions.value;
+    const shouldSelectedOption = _selectOptions.find(option => option.value === newValue);
+    if (!shouldSelectedOption) return;
+    selectedOption.value = { ...shouldSelectedOption } as NueSelectOption;
+};
 
 watch(
     () => props.modelValue,
-    newValue => {
-        handleSelect(newValue, true);
-    }
+    newValue => handleSelect(newValue)
 );
 
-onMounted(() => {
-    handleSelect(props.modelValue, true);
-});
+onMounted(() => handleSelect(props.modelValue));
 
-provide<SelectContext>('SelectContext', {
+provide<NueSelectContext>(NueSelectContextKey, {
     optionRegister,
     selectedOption
 });

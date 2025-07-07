@@ -1,20 +1,13 @@
 import type { GlobalProps } from '@nue-ui/utils';
+import type { PopperPlacement } from '@nue-ui/hooks';
+
+type NueTooltipPlacement = PopperPlacement;
+
+type NueTooltipSize = 'small' | 'normal' | 'large';
 
 export interface NueTooltipProps extends GlobalProps {
     content?: string;
-    placement?:
-        | 'top-start'
-        | 'top-center'
-        | 'top-end'
-        | 'bottom-start'
-        | 'bottom-center'
-        | 'bottom-end'
-        | 'left-start'
-        | 'left-center'
-        | 'left-end'
-        | 'right-start'
-        | 'right-center'
-        | 'right-end';
-    size?: 'small' | 'large';
+    placement?: NueTooltipPlacement;
+    size?: NueTooltipSize;
     showTriangle?: boolean;
 }

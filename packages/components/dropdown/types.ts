@@ -20,6 +20,7 @@ export type NueDropdownDropType = 'click' | 'hover';
 export type NueDropdownSize = NueButtonSize;
 
 export interface NueDropdownProps extends GlobalProps, NueGlobalPopupItemProps {
+    // properties
     transparent?: boolean;
     teleportTo?: string;
     text?: string;
@@ -30,6 +31,8 @@ export interface NueDropdownProps extends GlobalProps, NueGlobalPopupItemProps {
     size?: NueDropdownSize;
     closeWhenExecuted?: boolean;
     group?: NueDropdownGroupId;
+    keepalive?: boolean; // Used to solve the nue-select-option register problem
+    // methods
     beforeExecute?: () => void;
     afterExecute?: () => void;
 }

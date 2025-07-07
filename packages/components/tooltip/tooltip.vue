@@ -16,12 +16,9 @@
                 @mouseenter="handleShow"
                 @mouseleave="handleHide"
             >
-                <div
-                    :data-direction="placementInfo.direction"
-                    class="nue-tooltip__padding"
-                ></div>
+                <div :data-direction="placementInfo.direction" class="nue-tooltip__padding" />
                 <slot name="content">
-                    <span class="nue-tooltip__text">{{ content }}</span>
+                    <nue-text class="nue-tooltip__text">{{ content }}</nue-text>
                 </slot>
             </div>
         </teleport>
@@ -33,6 +30,7 @@ import { computed, ref } from 'vue';
 import { useTooltipPool } from './use-tooltip-pool';
 import { usePopper, usePopperController } from '@nue-ui/hooks';
 import { parseTheme } from '@nue-ui/utils';
+import NueText from '../text/text.vue';
 import type { NueTooltipProps } from './types';
 import './tooltip.css';
 
@@ -47,13 +45,7 @@ const tooltipWrapperRef = ref<HTMLDivElement>();
 const tooltipRef = ref<HTMLDivElement>();
 
 const { activeTooltipPool, deactiveTooltipPool } = useTooltipPool();
-const { placement, calculatePosition } = usePopper(
-    tooltipWrapperRef,
-    tooltipRef,
-    {
-        placement: props.placement
-    }
-);
+const { placement, calculatePosition } = usePopper(tooltipWrapperRef, tooltipRef);
 const { show, hide } = usePopperController(visible);
 
 const tooltipClasses = computed(() => {

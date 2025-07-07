@@ -4,7 +4,7 @@
             <nue-icon
                 v-if="loading"
                 class="nue-switch__loading-icon"
-                name="loading"
+                :name="loadingIcon || 'loading'"
                 spin
             />
         </div>
@@ -70,7 +70,7 @@ const handleSetStateWidth = () => {
     setTimeout(() => {
         if (!switchRef.value) return;
         switchRef.value.style.setProperty(
-            '--state-width',
+            '--nue-switch-state-width',
             `${switchRef.value.clientWidth}px`
         );
     });

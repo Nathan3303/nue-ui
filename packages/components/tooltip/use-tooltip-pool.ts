@@ -1,12 +1,11 @@
 import { nextTick } from 'vue';
-import './tooltip-pool.css';
 
 let tooltipPool: HTMLDivElement | null = null;
 
 const createTooltipPool = () => {
     const tp = document.createElement('div');
-    tp.classList.add('nue-tooltip-pool');
     tp.id = 'NueTooltipPool';
+    tp.classList.add('nue-tooltip-pool');
     document.body.appendChild(tp);
     tooltipPool = tp as HTMLDivElement;
     return tp;
@@ -17,8 +16,8 @@ const activeTooltipPool = () => {
     tooltipPool.classList.add('nue-tooltip-pool--actived');
 };
 
-const deactiveTooltipPool = () => {
-    nextTick(() => {
+const deactiveTooltipPool = async () => {
+    await nextTick(() => {
         if (!tooltipPool) return;
         const children = tooltipPool.children;
         if (children.length) return;

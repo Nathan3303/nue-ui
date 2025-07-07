@@ -13,11 +13,11 @@
                 </template>
             </nue-button>
         </slot>
-        <template v-if="visible">
+        <template v-if="visible || keepalive">
             <teleport :disabled="tpState.disabled" :to="tpState.to">
                 <nue-overlay
                     :closing="closing"
-                    :theme="transparent ? 'transparent' : 'no-background'"
+                    :theme="transparent || keepalive ? 'transparent' : 'no-background'"
                     @click="handleClose"
                 >
                     <ul
@@ -87,6 +87,10 @@ const styles = computed(() => {
     };
 });
 
+const transparent = computed(() => {
+    return props.transparent || props.keepalive;
+});
+
 const handleCalculatePosition = throttle(() => calculatePosition(props.placement), 4);
 
 const handleGroupRegistering = () => {
@@ -122,7 +126,7 @@ const handleOpen = () => {
             handleGroupRegistering();
         }
     );
-    if (!props.transparent) return;
+    if (!transparent.value) return;
     window.addEventListener('scroll', handleCalculatePosition, true);
     window.addEventListener('resize', handleCalculatePosition, true);
     window.addEventListener('click', handleClose, false);
@@ -140,7 +144,7 @@ const handleClose = () => {
             emit('close');
         }
     );
-    if (!props.transparent) return;
+    if (!transparent.value) return;
     window.removeEventListener('scroll', handleCalculatePosition, true);
     window.removeEventListener('resize', handleCalculatePosition, true);
     window.removeEventListener('click', handleClose, false);

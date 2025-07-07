@@ -1,75 +1,75 @@
 <template>
-    <demo title="Switch 开关">
-        <nue-div vertical>
-            <nue-div align="center">
-                <nue-switch />
-                <nue-switch show-text />
-                <nue-switch active-text="开" inactive-text="关" show-text />
-                <nue-switch
-                    active-text="这是打开时的描述"
-                    inactive-text="这是开关组件关闭时的描述"
-                    show-text
-                />
-            </nue-div>
-            <nue-div align="center">
-                <nue-switch
-                    active-text="大型开关"
-                    inactive-text="大型开关"
-                    show-text
-                    size="large"
-                />
-                <nue-switch
-                    active-text="小型开关"
-                    inactive-text="小型开关"
-                    show-text
-                    size="small"
-                />
-            </nue-div>
-            <nue-div align="center">
-                <nue-switch
-                    v-model="isActive"
-                    :before-switch="handleBeforeSwitch"
-                    :loading="isLoading"
-                    active-text="开"
-                    inactive-text="关"
-                    show-text
-                />
-            </nue-div>
-            <nue-div align="center">
-                <nue-switch theme="custom1" />
-                <nue-switch theme="custom2" />
-                <nue-switch theme="custom3" />
-            </nue-div>
+    <demo title="基础">
+        <nue-switch />
+    </demo>
+    <demo title="值">
+        <nue-div align="center">
+            <nue-switch v-model="sw1" />
+            {{ sw1 }}
+        </nue-div>
+    </demo>
+    <demo title="显示 & 自定 内嵌文本">
+        <nue-div>
+            <nue-switch show-text />
+            <nue-switch active-text="开" inactive-text="关" show-text />
+            <nue-switch active-text="打开" inactive-text="现在是关闭状态" show-text />
+        </nue-div>
+    </demo>
+    <demo title="大小">
+        <nue-div align="center">
+            <nue-switch size="small" />
+            <nue-switch size="large" />
+        </nue-div>
+    </demo>
+    <demo title="加载态 & 加载图标">
+        <nue-div align="center">
+            <nue-switch :loading="sw2.loading" />
+            <nue-switch :loading="sw2.loading" loading-icon="scan" />
+        </nue-div>
+    </demo>
+    <demo title="BeforeSwitch 方法">
+        <nue-switch
+            v-model="sw3.value"
+            :before-switch="handleBeforeSwitch"
+            :loading="sw3.loading"
+        />
+    </demo>
+    <demo title="自定义主题">
+        <nue-div>
+            <nue-switch theme="custom1" />
+            <nue-switch theme="custom2" />
+            <nue-switch theme="custom3" />
         </nue-div>
     </demo>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { NueDiv, NueSwitch } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
-const isActive = ref(false);
-const isLoading = ref(false);
+const sw1 = ref(false);
+const sw2 = reactive({ loading: true });
+const sw3 = reactive({ value: false, loading: false });
 
-const handleBeforeSwitch = async (value: boolean) => {
-    isLoading.value = true;
+const handleBeforeSwitch = async () => {
+    sw3.loading = true;
     await new Promise(resolve => setTimeout(resolve, 1000));
-    isLoading.value = false;
-    return !value;
+    sw3.loading = false;
+    return true;
 };
 </script>
 
 <style scoped>
 .nue-switch--custom1 {
-    --background-active-color: var(--nue-success-color);
+    --nue-switch-background-active-color: var(--nue-success-color);
 }
 
 .nue-switch--custom2 {
-    --background-active-color: var(--nue-warning-color);
+    --nue-switch-background-active-color: var(--nue-warning-color);
 }
 
 .nue-switch--custom3 {
-    --background-active-color: var(--nue-error-color);
+    --nue-switch-background-active-color: var(--nue-error-color);
 }
 </style>

@@ -1,44 +1,47 @@
 <template>
-    <li
-        :data-disabled="disabled"
-        :data-executeid="executeId"
-        :data-selected="selected"
-        class="nue-select__option"
-        @click="handleClick"
-    >
+    <li :class="classes" :data-executeid="executeId" @click="handleClick">
         {{ label }}
         <nue-icon v-if="selected" name="completed" />
     </li>
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, ref } from 'vue';
-import { generateId } from '@nue-ui/utils';
+import { computed, inject } from 'vue';
+import { generateId, parseTheme } from '@nue-ui/utils';
 import NueIcon from '../icon/icon.vue';
-import type { SelectContext, SelectOptionProps } from './types';
+import { NueSelectContextKey } from './constants';
+import type { NueSelectContext, NueSelectOptionProps } from './types';
 import './option.css';
 
-const selectContext: SelectContext = inject('SelectContext')!;
-
 defineOptions({ name: 'NueSelectOption' });
-const props = defineProps<SelectOptionProps>();
+const props = defineProps<NueSelectOptionProps>();
 
-const executeId = ref<string>(generateId(4));
+const selectContext = inject<NueSelectContext>(NueSelectContextKey);
+
+const executeId = generateId(8);
 
 const selected = computed(() => {
-    const selectedOption = selectContext.selectedOption.value;
+    const selectedOption = selectContext?.selectedOption.value;
     return selectedOption?.label === props.label;
 });
 
-function handleClick(e: MouseEvent) {
-    if (props.disabled) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-}
+const classes = computed(() => {
+    const prefix = 'nue-select-option';
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        props.disabled && `${prefix}--disabled`,
+        selected.value && `${prefix}--selected`
+    ];
+});
 
-selectContext.optionRegister({
-    executeId: executeId.value,
-    ...props
+const handleClick = (e: MouseEvent) => {
+    if (props.disabled) e.stopPropagation();
+};
+
+selectContext?.optionRegister({
+    label: props.label,
+    value: props.value,
+    executeId
 });
 </script>
