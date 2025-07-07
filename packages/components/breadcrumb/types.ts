@@ -1,18 +1,18 @@
 import type { GlobalProps } from '@nue-ui/utils';
-import type { IconNameType } from '../icon';
+import type { NueIconName } from '../icon';
 
 // NueBreadcrumb
 
 export interface NueBreadcrumbProps extends GlobalProps {
-    separator?: IconNameType;
+    separator?: NueIconName;
 }
 
 export type NueBreadcrumbContext = {
-    separator: IconNameType;
+    separator: NueIconName;
 };
 
 // NueBreadcrumbItem
 
 export interface NueBreadcrumbItemProps extends GlobalProps {
-    separator?: IconNameType;
+    separator?: NueIconName;
 }

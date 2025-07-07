@@ -56,7 +56,7 @@ import {
     parseTheme
 } from '@nue-ui/utils';
 import { isString } from 'lodash-es';
-import { NuePromptClose, NuePromptProps } from './types';
+import type { NuePromptClose, NuePromptProps } from './types';
 import './prompt.css';
 
 defineOptions({ name: 'NuePromptNode' });

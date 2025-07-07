@@ -37,7 +37,7 @@
 import { computed } from 'vue';
 import { isArray, parseTheme } from '@nue-ui/utils';
 import { NueText } from '../text';
-import { NueProgressProps, NueProgressEmits } from './types';
+import type { NueProgressProps, NueProgressEmits } from './types';
 import './progress.css';
 
 defineOptions({ name: 'NueProgress' });

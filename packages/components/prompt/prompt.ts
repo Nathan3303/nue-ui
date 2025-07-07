@@ -1,7 +1,7 @@
 import PromptNode from './prompt.vue';
 import { createVNode, render } from 'vue';
 import { usePopupAnchor } from '@nue-ui/hooks';
-import { NuePromptCaller, NuePromptClose } from './types';
+import type { NuePromptCaller, NuePromptClose } from './types';
 
 const nuePromptCaller: NuePromptCaller = payload => {
     return new Promise((resolve, reject) => {

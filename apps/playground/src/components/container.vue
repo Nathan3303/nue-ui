@@ -44,6 +44,6 @@ import Demo from '../layouts/demo.vue';
 }
 
 .nue-footer {
-    background-color: #dcdada;
+    background-color: #fbe5ff;
 }
 </style>

@@ -16,11 +16,11 @@ import type { NueBreadcrumbContext, NueBreadcrumbItemProps } from './types';
 import { NueBreadcrumbContextKey } from './constants';
 
 defineOptions({ name: 'NueBreadcrumbItem' });
-const props = withDefaults(defineProps<NueBreadcrumbItemProps>(), {});
+const props = withDefaults(defineProps<NueBreadcrumbItemProps>(), {
+    separator: 'arrow-right'
+});
 
 const breadcrumbContext = inject<NueBreadcrumbContext>(NueBreadcrumbContextKey);
 
-const separator = computed(
-    () => props.separator ?? breadcrumbContext?.separator
-);
+const separator = computed(() => props.separator ?? breadcrumbContext?.separator);
 </script>

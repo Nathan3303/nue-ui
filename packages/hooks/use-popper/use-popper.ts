@@ -1,5 +1,5 @@
 import { ref, reactive, computed } from 'vue';
-import {
+import type {
     PopperAlignment,
     PopperDirection,
     PopperPlacement,
