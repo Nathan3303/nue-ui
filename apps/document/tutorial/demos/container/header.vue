@@ -1,31 +1,20 @@
 <template>
-    <nue-div class="vp-raw">
-        <nue-container>
-            <nue-header>
-                <template #logo>
-                    <nue-text size="24px">Logo</nue-text>
-                </template>
-                <template #navigators>
-                    <nue-link theme="btnlike,actived">首页</nue-link>
-                    <nue-link theme="btnlike">关于我们</nue-link>
-                </template>
-                <template #actions>
-                    <nue-button icon="search" theme="icon-only" />
-                </template>
-                <template #user>
-                    <nue-avatar
-                        shape="round"
-                        src="https://picsum.photos/id/237/200/200"
-                    />
-                </template>
-            </nue-header>
-        </nue-container>
-    </nue-div>
+    <nue-container>
+        <nue-header>
+            <nue-div flex="1" gap=".25rem">
+                <nue-link href="#" theme="rl,actived">首页</nue-link>
+                <nue-link href="#" theme="rl">关于我们</nue-link>
+            </nue-div>
+            <nue-text size="md">LOGO</nue-text>
+            <nue-div flex="1" gap=".25rem" justify="end">
+                <nue-avatar icon="theme" />
+            </nue-div>
+        </nue-header>
+    </nue-container>
 </template>
 
 <style scoped>
-.nue-container {
-    border: 1px solid var(--nue-divider-color);
-    border-radius: var(--nue-primary-radius);
+.nue-header {
+    background-color: #f8f0f0;
 }
 </style>

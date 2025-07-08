@@ -23,9 +23,7 @@ function __awaiter(thisArg, _arguments, P, generator) {
             }
         }
         function step(result) {
-            result.done
-                ? resolve(result.value)
-                : adopt(result.value).then(fulfilled, rejected);
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
         }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
@@ -133,27 +131,14 @@ var recurse = (node, query, maxDistance, results, matrix, m, n, prefix) => {
                     const rpl = matrix[prevRowOffset + j] + +different;
                     const del = matrix[prevRowOffset + j + 1] + 1;
                     const ins = matrix[thisRowOffset + j] + 1;
-                    const dist = (matrix[thisRowOffset + j + 1] = Math.min(
-                        rpl,
-                        del,
-                        ins
-                    ));
+                    const dist = (matrix[thisRowOffset + j + 1] = Math.min(rpl, del, ins));
                     if (dist < minDistance) minDistance = dist;
                 }
                 if (minDistance > maxDistance) {
                     continue key;
                 }
             }
-            recurse(
-                node.get(key),
-                query,
-                maxDistance,
-                results,
-                matrix,
-                i,
-                n,
-                prefix + key
-            );
+            recurse(node.get(key), query, maxDistance, results, matrix, i, n, prefix + key);
         }
     }
 };
@@ -205,10 +190,7 @@ var SearchableMap = class _SearchableMap {
         if (!prefix.startsWith(this._prefix)) {
             throw new Error('Mismatched prefix');
         }
-        const [node, path] = trackDown(
-            this._tree,
-            prefix.slice(this._prefix.length)
-        );
+        const [node, path] = trackDown(this._tree, prefix.slice(this._prefix.length));
         if (node === void 0) {
             const [parentNode, key] = last(path);
             for (const k of parentNode.keys()) {
@@ -459,8 +441,7 @@ var createPath = (node, key) => {
             if (k !== LEAF && key[pos] === k[0]) {
                 const len = Math.min(keyLength - pos, k.length);
                 let offset = 1;
-                while (offset < len && key[pos + offset] === k[offset])
-                    ++offset;
+                while (offset < len && key[pos + offset] === k[offset]) ++offset;
                 const child2 = node.get(k);
                 if (offset === k.length) {
                     node = child2;
@@ -586,31 +567,24 @@ var MiniSearch = class _MiniSearch {
      * ```
      */
     constructor(options) {
-        if (
-            (options === null || options === void 0
-                ? void 0
-                : options.fields) == null
-        ) {
+        if ((options === null || options === void 0 ? void 0 : options.fields) == null) {
             throw new Error('MiniSearch: option "fields" must be provided');
         }
         const autoVacuum =
             options.autoVacuum == null || options.autoVacuum === true
                 ? defaultAutoVacuumOptions
                 : options.autoVacuum;
-        this._options = Object.assign(
-            Object.assign(Object.assign({}, defaultOptions), options),
-            {
-                autoVacuum,
-                searchOptions: Object.assign(
-                    Object.assign({}, defaultSearchOptions),
-                    options.searchOptions || {}
-                ),
-                autoSuggestOptions: Object.assign(
-                    Object.assign({}, defaultAutoSuggestOptions),
-                    options.autoSuggestOptions || {}
-                )
-            }
-        );
+        this._options = Object.assign(Object.assign(Object.assign({}, defaultOptions), options), {
+            autoVacuum,
+            searchOptions: Object.assign(
+                Object.assign({}, defaultSearchOptions),
+                options.searchOptions || {}
+            ),
+            autoSuggestOptions: Object.assign(
+                Object.assign({}, defaultAutoSuggestOptions),
+                options.autoSuggestOptions || {}
+            )
+        });
         this._index = new SearchableMap();
         this._documentCount = 0;
         this._documentIds = /* @__PURE__ */ new Map();
@@ -632,13 +606,10 @@ var MiniSearch = class _MiniSearch {
      * @param document  The document to be indexed
      */
     add(document) {
-        const { extractField, tokenize, processTerm, fields, idField } =
-            this._options;
+        const { extractField, tokenize, processTerm, fields, idField } = this._options;
         const id = extractField(document, idField);
         if (id == null) {
-            throw new Error(
-                `MiniSearch: document does not have ID field "${idField}"`
-            );
+            throw new Error(`MiniSearch: document does not have ID field "${idField}"`);
         }
         if (this._idToShortId.has(id)) {
             throw new Error(`MiniSearch: duplicate ID ${id}`);
@@ -651,12 +622,7 @@ var MiniSearch = class _MiniSearch {
             const tokens = tokenize(fieldValue.toString(), field);
             const fieldId = this._fieldIds[field];
             const uniqueTerms = new Set(tokens).size;
-            this.addFieldLength(
-                shortDocumentId,
-                fieldId,
-                this._documentCount - 1,
-                uniqueTerms
-            );
+            this.addFieldLength(shortDocumentId, fieldId, this._documentCount - 1, uniqueTerms);
             for (const term of tokens) {
                 const processedTerm = processTerm(term, field);
                 if (Array.isArray(processedTerm)) {
@@ -698,12 +664,7 @@ var MiniSearch = class _MiniSearch {
                     return {
                         chunk: [],
                         promise: promise2
-                            .then(
-                                () =>
-                                    new Promise(resolve =>
-                                        setTimeout(resolve, 0)
-                                    )
-                            )
+                            .then(() => new Promise(resolve => setTimeout(resolve, 0)))
                             .then(() => this.addAll(chunk2))
                     };
                 } else {
@@ -729,13 +690,10 @@ var MiniSearch = class _MiniSearch {
      * @param document  The document to be removed
      */
     remove(document) {
-        const { tokenize, processTerm, extractField, fields, idField } =
-            this._options;
+        const { tokenize, processTerm, extractField, fields, idField } = this._options;
         const id = extractField(document, idField);
         if (id == null) {
-            throw new Error(
-                `MiniSearch: document does not have ID field "${idField}"`
-            );
+            throw new Error(`MiniSearch: document does not have ID field "${idField}"`);
         }
         const shortId = this._idToShortId.get(id);
         if (shortId == null) {
@@ -749,12 +707,7 @@ var MiniSearch = class _MiniSearch {
             const tokens = tokenize(fieldValue.toString(), field);
             const fieldId = this._fieldIds[field];
             const uniqueTerms = new Set(tokens).size;
-            this.removeFieldLength(
-                shortId,
-                fieldId,
-                this._documentCount,
-                uniqueTerms
-            );
+            this.removeFieldLength(shortId, fieldId, this._documentCount, uniqueTerms);
             for (const term of tokens) {
                 const processedTerm = processTerm(term, field);
                 if (Array.isArray(processedTerm)) {
@@ -853,16 +806,9 @@ var MiniSearch = class _MiniSearch {
         this._idToShortId.delete(id);
         this._documentIds.delete(shortId);
         this._storedFields.delete(shortId);
-        (this._fieldLength.get(shortId) || []).forEach(
-            (fieldLength, fieldId) => {
-                this.removeFieldLength(
-                    shortId,
-                    fieldId,
-                    this._documentCount,
-                    fieldLength
-                );
-            }
-        );
+        (this._fieldLength.get(shortId) || []).forEach((fieldLength, fieldId) => {
+            this.removeFieldLength(shortId, fieldId, this._documentCount, fieldLength);
+        });
         this._fieldLength.delete(shortId);
         this._documentCount -= 1;
         this._dirtCount += 1;
@@ -872,12 +818,8 @@ var MiniSearch = class _MiniSearch {
         if (this._options.autoVacuum === false) {
             return;
         }
-        const { minDirtFactor, minDirtCount, batchSize, batchWait } =
-            this._options.autoVacuum;
-        this.conditionalVacuum(
-            { batchSize, batchWait },
-            { minDirtCount, minDirtFactor }
-        );
+        const { minDirtFactor, minDirtCount, batchSize, batchWait } = this._options.autoVacuum;
+        this.conditionalVacuum({ batchSize, batchWait }, { minDirtCount, minDirtFactor });
     }
     /**
      * Discards the documents with the given IDs, so they won't appear in search
@@ -968,8 +910,7 @@ var MiniSearch = class _MiniSearch {
     }
     conditionalVacuum(options, conditions) {
         if (this._currentVacuum) {
-            this._enqueuedVacuumConditions =
-                this._enqueuedVacuumConditions && conditions;
+            this._enqueuedVacuumConditions = this._enqueuedVacuumConditions && conditions;
             if (this._enqueuedVacuum != null) {
                 return this._enqueuedVacuum;
             }
@@ -990,10 +931,8 @@ var MiniSearch = class _MiniSearch {
         return __awaiter(this, void 0, void 0, function* () {
             const initialDirtCount = this._dirtCount;
             if (this.vacuumConditionsMet(conditions)) {
-                const batchSize =
-                    options.batchSize || defaultVacuumOptions.batchSize;
-                const batchWait =
-                    options.batchWait || defaultVacuumOptions.batchWait;
+                const batchSize = options.batchSize || defaultVacuumOptions.batchSize;
+                const batchWait = options.batchWait || defaultVacuumOptions.batchWait;
                 let i = 1;
                 for (const [term, fieldsData] of this._index) {
                     for (const [fieldId, fieldIndex] of fieldsData) {
@@ -1012,9 +951,7 @@ var MiniSearch = class _MiniSearch {
                         this._index.delete(term);
                     }
                     if (i % batchSize === 0) {
-                        yield new Promise(resolve =>
-                            setTimeout(resolve, batchWait)
-                        );
+                        yield new Promise(resolve => setTimeout(resolve, batchWait));
                     }
                     i += 1;
                 }
@@ -1032,9 +969,7 @@ var MiniSearch = class _MiniSearch {
         let { minDirtCount, minDirtFactor } = conditions;
         minDirtCount = minDirtCount || defaultAutoVacuumOptions.minDirtCount;
         minDirtFactor = minDirtFactor || defaultAutoVacuumOptions.minDirtFactor;
-        return (
-            this.dirtCount >= minDirtCount && this.dirtFactor >= minDirtFactor
-        );
+        return this.dirtCount >= minDirtCount && this.dirtFactor >= minDirtFactor;
     }
     /**
      * Is `true` if a vacuuming operation is ongoing, `false` otherwise
@@ -1330,10 +1265,7 @@ var MiniSearch = class _MiniSearch {
      * @return  A sorted array of suggestions sorted by relevance score.
      */
     autoSuggest(queryString, options = {}) {
-        options = Object.assign(
-            Object.assign({}, this._options.autoSuggestOptions),
-            options
-        );
+        options = Object.assign(Object.assign({}, this._options.autoSuggestOptions), options);
         const suggestions = /* @__PURE__ */ new Map();
         for (const { score, terms } of this.search(queryString, options)) {
             const phrase = terms.join(' ');
@@ -1448,13 +1380,7 @@ var MiniSearch = class _MiniSearch {
      * @ignore
      */
     static loadJS(js, options) {
-        const {
-            index,
-            documentIds,
-            fieldLength,
-            storedFields,
-            serializationVersion
-        } = js;
+        const { index, documentIds, fieldLength, storedFields, serializationVersion } = js;
         const miniSearch = this.instantiateMiniSearch(js, options);
         miniSearch._documentIds = objectToNumericMap(documentIds);
         miniSearch._fieldLength = objectToNumericMap(fieldLength);
@@ -1469,10 +1395,7 @@ var MiniSearch = class _MiniSearch {
                 if (serializationVersion === 1) {
                     indexEntry = indexEntry.ds;
                 }
-                dataMap.set(
-                    parseInt(fieldId, 10),
-                    objectToNumericMap(indexEntry)
-                );
+                dataMap.set(parseInt(fieldId, 10), objectToNumericMap(indexEntry));
             }
             miniSearch._index.set(term, dataMap);
         }
@@ -1483,20 +1406,11 @@ var MiniSearch = class _MiniSearch {
      */
     static loadJSAsync(js, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            const {
-                index,
-                documentIds,
-                fieldLength,
-                storedFields,
-                serializationVersion
-            } = js;
+            const { index, documentIds, fieldLength, storedFields, serializationVersion } = js;
             const miniSearch = this.instantiateMiniSearch(js, options);
-            miniSearch._documentIds =
-                yield objectToNumericMapAsync(documentIds);
-            miniSearch._fieldLength =
-                yield objectToNumericMapAsync(fieldLength);
-            miniSearch._storedFields =
-                yield objectToNumericMapAsync(storedFields);
+            miniSearch._documentIds = yield objectToNumericMapAsync(documentIds);
+            miniSearch._fieldLength = yield objectToNumericMapAsync(fieldLength);
+            miniSearch._storedFields = yield objectToNumericMapAsync(storedFields);
             for (const [shortId, id] of miniSearch._documentIds) {
                 miniSearch._idToShortId.set(id, shortId);
             }
@@ -1508,10 +1422,7 @@ var MiniSearch = class _MiniSearch {
                     if (serializationVersion === 1) {
                         indexEntry = indexEntry.ds;
                     }
-                    dataMap.set(
-                        parseInt(fieldId, 10),
-                        yield objectToNumericMapAsync(indexEntry)
-                    );
+                    dataMap.set(parseInt(fieldId, 10), yield objectToNumericMapAsync(indexEntry));
                 }
                 if (++count % 1e3 === 0) yield wait(0);
                 miniSearch._index.set(term, dataMap);
@@ -1554,33 +1465,23 @@ var MiniSearch = class _MiniSearch {
             return this.executeWildcardQuery(searchOptions);
         }
         if (typeof query !== 'string') {
-            const options2 = Object.assign(
-                Object.assign(Object.assign({}, searchOptions), query),
-                { queries: void 0 }
-            );
-            const results2 = query.queries.map(subquery =>
-                this.executeQuery(subquery, options2)
-            );
+            const options2 = Object.assign(Object.assign(Object.assign({}, searchOptions), query), {
+                queries: void 0
+            });
+            const results2 = query.queries.map(subquery => this.executeQuery(subquery, options2));
             return this.combineResults(results2, options2.combineWith);
         }
-        const {
-            tokenize,
-            processTerm,
-            searchOptions: globalSearchOptions
-        } = this._options;
+        const { tokenize, processTerm, searchOptions: globalSearchOptions } = this._options;
         const options = Object.assign(
             Object.assign({ tokenize, processTerm }, globalSearchOptions),
             searchOptions
         );
-        const { tokenize: searchTokenize, processTerm: searchProcessTerm } =
-            options;
+        const { tokenize: searchTokenize, processTerm: searchProcessTerm } = options;
         const terms = searchTokenize(query)
             .flatMap(term => searchProcessTerm(term))
             .filter(term => !!term);
         const queries = terms.map(termToQuerySpec(options));
-        const results = queries.map(query2 =>
-            this.executeQuerySpec(query2, options)
-        );
+        const results = queries.map(query2 => this.executeQuerySpec(query2, options));
         return this.combineResults(results, options.combineWith);
     }
     /**
@@ -1622,11 +1523,8 @@ var MiniSearch = class _MiniSearch {
         if (query.fuzzy) {
             const fuzzy = query.fuzzy === true ? 0.2 : query.fuzzy;
             const maxDistance =
-                fuzzy < 1
-                    ? Math.min(maxFuzzy, Math.round(query.term.length * fuzzy))
-                    : fuzzy;
-            if (maxDistance)
-                fuzzyMatches = this._index.fuzzyGet(query.term, maxDistance);
+                fuzzy < 1 ? Math.min(maxFuzzy, Math.round(query.term.length * fuzzy)) : fuzzy;
+            if (maxDistance) fuzzyMatches = this._index.fuzzyGet(query.term, maxDistance);
         }
         if (prefixMatches) {
             for (const [term, data2] of prefixMatches) {
@@ -1637,9 +1535,7 @@ var MiniSearch = class _MiniSearch {
                 fuzzyMatches === null || fuzzyMatches === void 0
                     ? void 0
                     : fuzzyMatches.delete(term);
-                const weight =
-                    (prefixWeight * term.length) /
-                    (term.length + 0.3 * distance);
+                const weight = (prefixWeight * term.length) / (term.length + 0.3 * distance);
                 this.termResults(
                     query.term,
                     term,
@@ -1659,8 +1555,7 @@ var MiniSearch = class _MiniSearch {
                 if (!distance) {
                     continue;
                 }
-                const weight =
-                    (fuzzyWeight * term.length) / (term.length + distance);
+                const weight = (fuzzyWeight * term.length) / (term.length + distance);
                 this.termResults(
                     query.term,
                     term,
@@ -1803,8 +1698,7 @@ var MiniSearch = class _MiniSearch {
                     avgFieldLength,
                     bm25params
                 );
-                const weightedScore =
-                    termWeight * termBoost * fieldBoost * docBoost * rawScore;
+                const weightedScore = termWeight * termBoost * fieldBoost * docBoost * rawScore;
                 const result = results.get(docId);
                 if (result) {
                     result.score += weightedScore;
@@ -1905,8 +1799,7 @@ var MiniSearch = class _MiniSearch {
      */
     addFieldLength(documentId, fieldId, count, length) {
         let fieldLengths = this._fieldLength.get(documentId);
-        if (fieldLengths == null)
-            this._fieldLength.set(documentId, (fieldLengths = []));
+        if (fieldLengths == null) this._fieldLength.set(documentId, (fieldLengths = []));
         fieldLengths[fieldId] = length;
         const averageFieldLength = this._avgFieldLength[fieldId] || 0;
         const totalFieldLength = averageFieldLength * count + length;
@@ -1932,8 +1825,7 @@ var MiniSearch = class _MiniSearch {
             return;
         }
         let documentFields = this._storedFields.get(documentId);
-        if (documentFields == null)
-            this._storedFields.set(documentId, (documentFields = {}));
+        if (documentFields == null) this._storedFields.set(documentId, (documentFields = {}));
         for (const fieldName of storeFields) {
             const fieldValue = extractField(doc, fieldName);
             if (fieldValue !== void 0) documentFields[fieldName] = fieldValue;
@@ -1942,9 +1834,7 @@ var MiniSearch = class _MiniSearch {
 };
 MiniSearch.wildcard = Symbol('*');
 var getOwnProperty = (object, property) =>
-    Object.prototype.hasOwnProperty.call(object, property)
-        ? object[property]
-        : void 0;
+    Object.prototype.hasOwnProperty.call(object, property) ? object[property] : void 0;
 var combinators = {
     [OR]: (a, b) => {
         for (const docId of b.keys()) {
@@ -1990,14 +1880,10 @@ var calcBM25Score = (
     bm25params
 ) => {
     const { k, b, d } = bm25params;
-    const invDocFreq = Math.log(
-        1 + (totalCount - matchingCount + 0.5) / (matchingCount + 0.5)
-    );
+    const invDocFreq = Math.log(1 + (totalCount - matchingCount + 0.5) / (matchingCount + 0.5));
     return (
         invDocFreq *
-        (d +
-            (termFreq * (k + 1)) /
-                (termFreq + k * (1 - b + (b * fieldLength) / avgFieldLength)))
+        (d + (termFreq * (k + 1)) / (termFreq + k * (1 - b + (b * fieldLength) / avgFieldLength)))
     );
 };
 var termToQuerySpec = options => (term, i, terms) => {
@@ -2010,9 +1896,7 @@ var termToQuerySpec = options => (term, i, terms) => {
             ? options.prefix(term, i, terms)
             : options.prefix === true;
     const termBoost =
-        typeof options.boostTerm === 'function'
-            ? options.boostTerm(term, i, terms)
-            : 1;
+        typeof options.boostTerm === 'function' ? options.boostTerm(term, i, terms) : 1;
     return { term, fuzzy, prefix, termBoost };
 };
 var defaultOptions = {
@@ -2025,9 +1909,7 @@ var defaultOptions = {
     storeFields: [],
     logger: (level, message) => {
         if (
-            typeof (console === null || console === void 0
-                ? void 0
-                : console[level]) === 'function'
+            typeof (console === null || console === void 0 ? void 0 : console[level]) === 'function'
         )
             console[level](message);
     },

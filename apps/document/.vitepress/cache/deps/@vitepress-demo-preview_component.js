@@ -19,7 +19,7 @@ import {
     unref,
     watch,
     withCtx
-} from './chunk-GJVE5CKW.js';
+} from './chunk-MVSCGQCM.js';
 
 // ../../node_modules/.pnpm/@vitepress-demo-preview+component@file+apps+document+vitepress-demo-preview+component/node_modules/@vitepress-demo-preview/component/bundle/preview-component.js
 var x = (o, t) => {
@@ -210,14 +210,9 @@ var ve = defineComponent({
                                       {
                                           key: 0,
                                           class: normalizeClass([
-                                              unref(c).bem(
-                                                  'message-notice',
-                                                  'container'
-                                              )
+                                              unref(c).bem('message-notice', 'container')
                                           ]),
-                                          style: normalizeStyle({
-                                              top: m.value + 'px'
-                                          })
+                                          style: normalizeStyle({ top: m.value + 'px' })
                                       },
                                       [
                                           createVNode(_e),
@@ -279,16 +274,10 @@ var ye = defineComponent({
             },
             g = computed(() => {
                 var r;
-                return d.value
-                    ? (r = d.value) == null
-                        ? void 0
-                        : r.clientHeight
-                    : 0;
+                return d.value ? ((r = d.value) == null ? void 0 : r.clientHeight) : 0;
             }),
             s = r => {
-                c.value
-                    ? (d.value.style.height = '0px')
-                    : (d.value.style.height = `${r}px`);
+                c.value ? (d.value.style.height = '0px') : (d.value.style.height = `${r}px`);
             };
         return (
             onMounted(() => {
@@ -304,9 +293,7 @@ var ye = defineComponent({
                 createElementBlock(
                     'div',
                     {
-                        class: normalizeClass([
-                            unref(e).e('ant-design__container')
-                        ])
+                        class: normalizeClass([unref(e).e('ant-design__container')])
                     },
                     [
                         createBaseVNode(
@@ -320,9 +307,7 @@ var ye = defineComponent({
                         createBaseVNode(
                             'section',
                             {
-                                class: normalizeClass([
-                                    unref(e).bem('description')
-                                ])
+                                class: normalizeClass([unref(e).bem('description')])
                             },
                             [
                                 t.title
@@ -332,10 +317,7 @@ var ye = defineComponent({
                                           {
                                               key: 0,
                                               class: normalizeClass([
-                                                  unref(e).bem(
-                                                      'description',
-                                                      'title'
-                                                  )
+                                                  unref(e).bem('description', 'title')
                                               ])
                                           },
                                           toDisplayString(r.title),
@@ -349,10 +331,7 @@ var ye = defineComponent({
                                           {
                                               key: 1,
                                               class: normalizeClass([
-                                                  unref(e).bem(
-                                                      'description',
-                                                      'content'
-                                                  )
+                                                  unref(e).bem('description', 'content')
                                               ]),
                                               innerHTML: r.description
                                           },
@@ -368,10 +347,7 @@ var ye = defineComponent({
                                           {
                                               key: 2,
                                               class: normalizeClass([
-                                                  unref(e).bem(
-                                                      'description',
-                                                      'split-line'
-                                                  )
+                                                  unref(e).bem('description', 'split-line')
                                               ])
                                           },
                                           null,
@@ -382,10 +358,7 @@ var ye = defineComponent({
                                     'div',
                                     {
                                         class: normalizeClass([
-                                            unref(e).bem(
-                                                'description',
-                                                'handle-btn'
-                                            )
+                                            unref(e).bem('description', 'handle-btn')
                                         ])
                                     },
                                     [
@@ -393,18 +366,12 @@ var ye = defineComponent({
                                             ? (openBlock(),
                                               createBlock(I, {
                                                   key: 1,
-                                                  onClick:
-                                                      f[1] ||
-                                                      (f[1] = V =>
-                                                          unref(l)(false))
+                                                  onClick: f[1] || (f[1] = V => unref(l)(false))
                                               }))
                                             : (openBlock(),
                                               createBlock(D, {
                                                   key: 0,
-                                                  onClick:
-                                                      f[0] ||
-                                                      (f[0] = V =>
-                                                          unref(l)(true))
+                                                  onClick: f[0] || (f[0] = V => unref(l)(true))
                                               })),
                                         createVNode(S, { onClick: L })
                                     ],
@@ -463,16 +430,10 @@ var He = defineComponent({
             },
             L = computed(() => {
                 var s;
-                return p.value
-                    ? (s = p.value) == null
-                        ? void 0
-                        : s.clientHeight
-                    : 0;
+                return p.value ? ((s = p.value) == null ? void 0 : s.clientHeight) : 0;
             }),
             g = s => {
-                c.value
-                    ? (p.value.style.height = '0px')
-                    : (p.value.style.height = `${s}px`);
+                c.value ? (p.value.style.height = '0px') : (p.value.style.height = `${s}px`);
             };
         return (
             onMounted(() => {
@@ -490,9 +451,7 @@ var He = defineComponent({
                     createElementBlock(
                         'div',
                         {
-                            class: normalizeClass([
-                                unref(e).e('element-plus__container')
-                            ])
+                            class: normalizeClass([unref(e).e('element-plus__container')])
                         },
                         [
                             createVNode(f, null, {
@@ -500,9 +459,7 @@ var He = defineComponent({
                                     createBaseVNode(
                                         'section',
                                         {
-                                            class: normalizeClass([
-                                                unref(e).bem('preview')
-                                            ])
+                                            class: normalizeClass([unref(e).bem('preview')])
                                         },
                                         [renderSlot(s.$slots, 'default')],
                                         2
@@ -513,19 +470,14 @@ var He = defineComponent({
                             createBaseVNode(
                                 'section',
                                 {
-                                    class: normalizeClass([
-                                        unref(e).bem('description')
-                                    ])
+                                    class: normalizeClass([unref(e).bem('description')])
                                 },
                                 [
                                     createBaseVNode(
                                         'div',
                                         {
                                             class: normalizeClass([
-                                                unref(e).bem(
-                                                    'description',
-                                                    'split-line'
-                                                )
+                                                unref(e).bem('description', 'split-line')
                                             ])
                                         },
                                         null,
@@ -535,10 +487,7 @@ var He = defineComponent({
                                         'div',
                                         {
                                             class: normalizeClass([
-                                                unref(e).bem(
-                                                    'description',
-                                                    'handle-btn'
-                                                )
+                                                unref(e).bem('description', 'handle-btn')
                                             ])
                                         },
                                         [
@@ -546,18 +495,12 @@ var He = defineComponent({
                                                 ? (openBlock(),
                                                   createBlock(I, {
                                                       key: 1,
-                                                      onClick:
-                                                          r[1] ||
-                                                          (r[1] = V =>
-                                                              unref(l)(false))
+                                                      onClick: r[1] || (r[1] = V => unref(l)(false))
                                                   }))
                                                 : (openBlock(),
                                                   createBlock(D, {
                                                       key: 0,
-                                                      onClick:
-                                                          r[0] ||
-                                                          (r[0] = V =>
-                                                              unref(l)(true))
+                                                      onClick: r[0] || (r[0] = V => unref(l)(true))
                                                   })),
                                             createVNode(S, { onClick: d })
                                         ],
@@ -569,9 +512,7 @@ var He = defineComponent({
                             createBaseVNode(
                                 'section',
                                 {
-                                    class: normalizeClass([
-                                        unref(e).bem('source')
-                                    ]),
+                                    class: normalizeClass([unref(e).bem('source')]),
                                     ref_key: 'sourceCodeArea',
                                     ref: p
                                 },
@@ -619,16 +560,10 @@ var Me = defineComponent({
             },
             L = computed(() => {
                 var s;
-                return p.value
-                    ? (s = p.value) == null
-                        ? void 0
-                        : s.clientHeight
-                    : 0;
+                return p.value ? ((s = p.value) == null ? void 0 : s.clientHeight) : 0;
             }),
             g = s => {
-                c.value
-                    ? (p.value.style.height = '0px')
-                    : (p.value.style.height = `${s}px`);
+                c.value ? (p.value.style.height = '0px') : (p.value.style.height = `${s}px`);
             };
         return (
             onMounted(() => {
@@ -644,17 +579,13 @@ var Me = defineComponent({
                 createElementBlock(
                     'div',
                     {
-                        class: normalizeClass([
-                            unref(e).e('naive-ui__container')
-                        ])
+                        class: normalizeClass([unref(e).e('naive-ui__container')])
                     },
                     [
                         createBaseVNode(
                             'section',
                             {
-                                class: normalizeClass([
-                                    unref(e).bem('name_handle')
-                                ])
+                                class: normalizeClass([unref(e).bem('name_handle')])
                             },
                             [
                                 t.title
@@ -664,10 +595,7 @@ var Me = defineComponent({
                                           {
                                               key: 0,
                                               class: normalizeClass([
-                                                  unref(e).bem(
-                                                      'component',
-                                                      'name'
-                                                  )
+                                                  unref(e).bem('component', 'name')
                                               ])
                                           },
                                           toDisplayString(s.title),
@@ -677,9 +605,7 @@ var Me = defineComponent({
                                 createBaseVNode(
                                     'div',
                                     {
-                                        class: normalizeClass([
-                                            unref(e).bem('description', 'btns')
-                                        ])
+                                        class: normalizeClass([unref(e).bem('description', 'btns')])
                                     },
                                     [
                                         createVNode(S, { onClick: d }),
@@ -687,18 +613,12 @@ var Me = defineComponent({
                                             ? (openBlock(),
                                               createBlock(I, {
                                                   key: 1,
-                                                  onClick:
-                                                      r[1] ||
-                                                      (r[1] = f =>
-                                                          unref(l)(false))
+                                                  onClick: r[1] || (r[1] = f => unref(l)(false))
                                               }))
                                             : (openBlock(),
                                               createBlock(D, {
                                                   key: 0,
-                                                  onClick:
-                                                      r[0] ||
-                                                      (r[0] = f =>
-                                                          unref(l)(true))
+                                                  onClick: r[0] || (r[0] = f => unref(l)(true))
                                               }))
                                     ],
                                     2
@@ -712,9 +632,7 @@ var Me = defineComponent({
                                   'section',
                                   {
                                       key: 0,
-                                      class: normalizeClass([
-                                          unref(e).bem('description')
-                                      ])
+                                      class: normalizeClass([unref(e).bem('description')])
                                   },
                                   [
                                       createBaseVNode(
@@ -763,9 +681,5 @@ var Me = defineComponent({
         );
     }
 });
-export {
-    ye as AntDesignContainer,
-    He as ElementPlusContainer,
-    Me as NaiveUIContainer
-};
+export { ye as AntDesignContainer, He as ElementPlusContainer, Me as NaiveUIContainer };
 //# sourceMappingURL=@vitepress-demo-preview_component.js.map

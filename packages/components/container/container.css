@@ -37,8 +37,10 @@
         height: var(--nue-header-height);
 
         display: flex;
+        align-items: center;
         gap: var(--nue-header-gap);
-        padding: var(--nue-header-gap);
+        padding: 0 var(--nue-header-gap);
+        flex: none;
     }
 
     .nue-main {
@@ -125,7 +127,7 @@
         flex: 1 1 auto;
         overflow: auto;
 
-        .nue-content--fill {
+        &.nue-content--fill {
             height: 100%;
         }
     }
@@ -141,6 +143,7 @@
         display: flex;
         align-items: center;
         gap: var(--nue-footer-gap);
-        padding: var(--nue-footer-gap);
+        padding: 0 var(--nue-footer-gap);
+        flex: none;
     }
 }

@@ -4,6 +4,7 @@ import 'nue-ui/dist/index.css';
 import './main.css';
 import { ElementPlusContainer as UIContainer } from '@vitepress-demo-preview/component';
 import '@vitepress-demo-preview/component/bundle/style.css';
+import 'nue-ui-theme-shadlike/dist/index.css';
 
 export default {
     extends: DefaultTheme,

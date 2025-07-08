@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     width: max-content;
-    z-index: 99;
+    z-index: 100;
 }
 
 .nue-message-node-inner {

@@ -1,8 +1,5 @@
 import { defineConfig } from 'vitepress';
-import {
-    componentPreview,
-    containerPreview
-} from '@vitepress-demo-preview/plugin';
+import { componentPreview, containerPreview } from '@vitepress-demo-preview/plugin';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -154,9 +151,7 @@ export default defineConfig({
             ],
             '/enhance/': [{}]
         },
-        socialLinks: [
-            { icon: 'github', link: 'https://github.com/Nathan3303/nue-ui' }
-        ],
+        socialLinks: [{ icon: 'github', link: 'https://github.com/Nathan3303/nue-ui' }],
         search: {
             provider: 'local',
             options: {
@@ -173,7 +168,10 @@ export default defineConfig({
             copyright: 'Copyright © 2024-present Nathan Lee'
         }
     },
-    head: [['link', { rel: 'icon', href: '/nue-ui/favicon.ico' }]],
+    head: [
+        ['link', { rel: 'icon', href: '/nue-ui/favicon.ico' }],
+        ['link', { ref: 'stylesheet', href: 'https://fonts.font.im/css?family=Poppins' }]
+    ],
     markdown: {
         config(md) {
             md.use(containerPreview);

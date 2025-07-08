@@ -14,52 +14,21 @@
 }
 
 .app-view {
-    & > .nue-main {
-        --aside-gap: 8px;
-
-        .view-container {
-            box-sizing: border-box;
-            padding: 16px;
-        }
-
-        .outline-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-
-            h3 {
-                margin: 16px 0;
-            }
-
-            a {
-                padding: 4px 0;
-                font-size: 12px;
-                color: gray;
-
-                &:hover {
-                    text-decoration: underline;
-                    color: black;
-                    cursor: pointer;
-                }
+    .app-view__aside-collapse-menu {
+        & .nue-collapse-item:first-child {
+            .nue-collapse-item__header {
+                box-shadow: none;
+                height: auto;
             }
         }
 
-        .app-view__aside-collapse-menu {
-            & .nue-collapse-item:first-child {
-                .nue-collapse-item__header {
-                    box-shadow: none;
-                    height: auto;
-                }
-            }
+        .app-view__aside-collapse-menu__item-main {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 4px;
 
-            .app-view__aside-collapse-menu__item-main {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 4px;
-
-                .nue-link {
-                    font-size: var(--nue-text-sm);
-                }
+            .nue-link {
+                font-size: var(--nue-text-sm);
             }
         }
     }

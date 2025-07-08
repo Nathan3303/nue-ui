@@ -65,9 +65,7 @@ var DOMIterator = class _DOMIterator {
         } else if (Array.isArray(this.ctx)) {
             ctx = this.ctx;
         } else if (typeof this.ctx === 'string') {
-            ctx = Array.prototype.slice.call(
-                document.querySelectorAll(this.ctx)
-            );
+            ctx = Array.prototype.slice.call(document.querySelectorAll(this.ctx));
         } else {
             ctx = [this.ctx];
         }
@@ -414,11 +412,7 @@ var DOMIterator = class _DOMIterator {
         ifr.forEach(ifrDict => {
             if (!ifrDict.handled) {
                 this.getIframeContents(ifrDict.val, con => {
-                    this.createInstanceOnIframe(con).forEachNode(
-                        whatToShow,
-                        eCb,
-                        fCb
-                    );
+                    this.createInstanceOnIframe(con).forEachNode(whatToShow, eCb, fCb);
                 });
             }
         });
@@ -448,12 +442,7 @@ var DOMIterator = class _DOMIterator {
                 this.forEachIframe(
                     ctx,
                     currIfr => {
-                        return this.checkIframeFilter(
-                            node,
-                            prevNode,
-                            currIfr,
-                            ifr
-                        );
+                        return this.checkIframeFilter(node, prevNode, currIfr, ifr);
                     },
                     con => {
                         this.createInstanceOnIframe(con).forEachNode(
@@ -661,9 +650,7 @@ var Mark = class {
         const syn = this.opt.synonyms,
             sens = this.opt.caseSensitive ? '' : 'i',
             joinerPlaceholder =
-                this.opt.ignoreJoiners || this.opt.ignorePunctuation.length
-                    ? '\0'
-                    : '';
+                this.opt.ignoreJoiners || this.opt.ignorePunctuation.length ? '\0' : '';
         for (let index in syn) {
             if (syn.hasOwnProperty(index)) {
                 const value = syn[index],
@@ -677,10 +664,7 @@ var Mark = class {
                             : this.escapeStr(value);
                 if (k1 !== '' && k2 !== '') {
                     str = str.replace(
-                        new RegExp(
-                            `(${this.escapeStr(k1)}|${this.escapeStr(k2)})`,
-                            `gm${sens}`
-                        ),
+                        new RegExp(`(${this.escapeStr(k1)}|${this.escapeStr(k2)})`, `gm${sens}`),
                         joinerPlaceholder +
                             `(${this.processSynomyms(k1)}|${this.processSynomyms(k2)})` +
                             joinerPlaceholder
@@ -764,9 +748,7 @@ var Mark = class {
         if (this.opt.ignoreJoiners) {
             joiner.push('\\u00ad\\u200b\\u200c\\u200d');
         }
-        return joiner.length
-            ? str.split(/\u0000+/).join(`[${joiner.join('')}]*`)
-            : str;
+        return joiner.length ? str.split(/\u0000+/).join(`[${joiner.join('')}]*`) : str;
     }
     /**
      * Creates a regular expression string to match diacritics
@@ -830,10 +812,7 @@ var Mark = class {
                     if (handled.indexOf(dct2) > -1) {
                         return false;
                     }
-                    str = str.replace(
-                        new RegExp(`[${dct2}]`, `gm${sens}`),
-                        `[${dct2}]`
-                    );
+                    str = str.replace(new RegExp(`[${dct2}]`, `gm${sens}`), `[${dct2}]`);
                     handled.push(dct2);
                 }
                 return true;
@@ -965,10 +944,7 @@ var Mark = class {
                 return a.start - b.start;
             })
             .forEach(item => {
-                let { start, end, valid } = this.callNoMatchOnInvalidRanges(
-                    item,
-                    last
-                );
+                let { start, end, valid } = this.callNoMatchOnInvalidRanges(item, last);
                 if (valid) {
                     item.start = start;
                     item.length = end - start;
@@ -1011,9 +987,7 @@ var Mark = class {
             ) {
                 valid = true;
             } else {
-                this.log(
-                    `Ignoring invalid or overlapping range: ${JSON.stringify(range)}`
-                );
+                this.log(`Ignoring invalid or overlapping range: ${JSON.stringify(range)}`);
                 this.opt.noMatch(range);
             }
         } else {
@@ -1055,9 +1029,7 @@ var Mark = class {
             this.opt.noMatch(range);
         } else if (string.substring(start, end).replace(/\s+/g, '') === '') {
             valid = false;
-            this.log(
-                'Skipping whitespace only range: ' + JSON.stringify(range)
-            );
+            this.log('Skipping whitespace only range: ' + JSON.stringify(range));
             this.opt.noMatch(range);
         }
         return {
@@ -1258,10 +1230,7 @@ var Mark = class {
             dict.nodes.forEach(node => {
                 node = node.node;
                 let match;
-                while (
-                    (match = regex.exec(node.textContent)) !== null &&
-                    match[matchIdx] !== ''
-                ) {
+                while ((match = regex.exec(node.textContent)) !== null && match[matchIdx] !== '') {
                     if (!filterCb(match[matchIdx], node)) {
                         continue;
                     }
@@ -1271,11 +1240,7 @@ var Mark = class {
                             pos += match[i].length;
                         }
                     }
-                    node = this.wrapRangeInTextNode(
-                        node,
-                        pos,
-                        pos + match[matchIdx].length
-                    );
+                    node = this.wrapRangeInTextNode(node, pos, pos + match[matchIdx].length);
                     eachCb(node.previousSibling);
                     regex.lastIndex = 0;
                 }
@@ -1313,10 +1278,7 @@ var Mark = class {
         const matchIdx = ignoreGroups === 0 ? 0 : ignoreGroups + 1;
         this.getTextNodes(dict => {
             let match;
-            while (
-                (match = regex.exec(dict.value)) !== null &&
-                match[matchIdx] !== ''
-            ) {
+            while ((match = regex.exec(dict.value)) !== null && match[matchIdx] !== '') {
                 let start = match.index;
                 if (matchIdx !== 0) {
                     for (let i = 1; i < matchIdx; i++) {
@@ -1383,12 +1345,7 @@ var Mark = class {
                         start,
                         end,
                         node => {
-                            return filterCb(
-                                node,
-                                range,
-                                dict.value.substring(start, end),
-                                counter
-                            );
+                            return filterCb(node, range, dict.value.substring(start, end), counter);
                         },
                         node => {
                             eachCb(node, range);
@@ -1720,10 +1677,7 @@ var Mark = class {
         let totalMatches = 0,
             ranges = this.checkRanges(rawRanges);
         if (ranges && ranges.length) {
-            this.log(
-                'Starting to mark with the following ranges: ' +
-                    JSON.stringify(ranges)
-            );
+            this.log('Starting to mark with the following ranges: ' + JSON.stringify(ranges));
             this.wrapRangeFromIndex(
                 ranges,
                 (node, range, match, counter) => {

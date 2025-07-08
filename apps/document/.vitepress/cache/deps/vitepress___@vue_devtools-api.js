@@ -12,11 +12,7 @@ var __esm = (fn, res) =>
 var __commonJS = (cb, mod) =>
     function __require() {
         return (
-            mod ||
-                (0, cb[__getOwnPropNames(cb)[0]])(
-                    (mod = { exports: {} }).exports,
-                    mod
-                ),
+            mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod),
             mod.exports
         );
     };
@@ -26,8 +22,7 @@ var __copyProps = (to, from, except, desc) => {
             if (!__hasOwnProp.call(to, key) && key !== except)
                 __defProp(to, key, {
                     get: () => from[key],
-                    enumerable:
-                        !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+                    enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
                 });
     }
     return to;
@@ -51,10 +46,7 @@ var init_esm_shims = __esm({
     }
 });
 var require_rfdc = __commonJS({
-    '../../node_modules/.pnpm/rfdc@1.4.1/node_modules/rfdc/index.js'(
-        exports,
-        module
-    ) {
+    '../../node_modules/.pnpm/rfdc@1.4.1/node_modules/rfdc/index.js'(exports, module) {
         'use strict';
         init_esm_shims();
         module.exports = rfdc2;
@@ -62,25 +54,15 @@ var require_rfdc = __commonJS({
             if (cur instanceof Buffer) {
                 return Buffer.from(cur);
             }
-            return new cur.constructor(
-                cur.buffer.slice(),
-                cur.byteOffset,
-                cur.length
-            );
+            return new cur.constructor(cur.buffer.slice(), cur.byteOffset, cur.length);
         }
         function rfdc2(opts) {
             opts = opts || {};
             if (opts.circles) return rfdcCircles(opts);
             const constructorHandlers = /* @__PURE__ */ new Map();
             constructorHandlers.set(Date, o => new Date(o));
-            constructorHandlers.set(
-                Map,
-                (o, fn) => new Map(cloneArray(Array.from(o), fn))
-            );
-            constructorHandlers.set(
-                Set,
-                (o, fn) => new Set(cloneArray(Array.from(o), fn))
-            );
+            constructorHandlers.set(Map, (o, fn) => new Map(cloneArray(Array.from(o), fn)));
+            constructorHandlers.set(Set, (o, fn) => new Set(cloneArray(Array.from(o), fn)));
             if (opts.constructorHandlers) {
                 for (const handler2 of opts.constructorHandlers) {
                     constructorHandlers.set(handler2[0], handler2[1]);
@@ -170,14 +152,8 @@ var require_rfdc = __commonJS({
             const refsNew = [];
             const constructorHandlers = /* @__PURE__ */ new Map();
             constructorHandlers.set(Date, o => new Date(o));
-            constructorHandlers.set(
-                Map,
-                (o, fn) => new Map(cloneArray(Array.from(o), fn))
-            );
-            constructorHandlers.set(
-                Set,
-                (o, fn) => new Set(cloneArray(Array.from(o), fn))
-            );
+            constructorHandlers.set(Map, (o, fn) => new Map(cloneArray(Array.from(o), fn)));
+            constructorHandlers.set(Set, (o, fn) => new Set(cloneArray(Array.from(o), fn)));
             if (opts.constructorHandlers) {
                 for (const handler2 of opts.constructorHandlers) {
                     constructorHandlers.set(handler2[0], handler2[1]);
@@ -299,15 +275,12 @@ var target =
           : typeof global !== 'undefined'
             ? global
             : {};
-var isInChromePanel =
-    typeof target.chrome !== 'undefined' && !!target.chrome.devtools;
+var isInChromePanel = typeof target.chrome !== 'undefined' && !!target.chrome.devtools;
 var isInIframe = isBrowser && target.self !== target.top;
 var _a;
 var isInElectron =
     typeof navigator !== 'undefined' &&
-    ((_a = navigator.userAgent) == null
-        ? void 0
-        : _a.toLowerCase().includes('electron'));
+    ((_a = navigator.userAgent) == null ? void 0 : _a.toLowerCase().includes('electron'));
 var isNuxtApp = typeof window !== 'undefined' && !!window.__NUXT__;
 init_esm_shims();
 var import_rfdc = __toESM(require_rfdc(), 1);
@@ -319,9 +292,7 @@ function classify(str) {
     return str && `${str}`.replace(classifyRE, toUpper);
 }
 function basename(filename, ext) {
-    let normalizedFilename = filename
-        .replace(/^[a-z]:/i, '')
-        .replace(/\\/g, '/');
+    let normalizedFilename = filename.replace(/^[a-z]:/i, '').replace(/\\/g, '/');
     if (normalizedFilename.endsWith(`index${ext}`)) {
         normalizedFilename = normalizedFilename.replace(`/index${ext}`, ext);
     }
@@ -377,9 +348,7 @@ function debounce(fn, wait = 25, options = {}) {
             clearTimeout(timeout);
             timeout = setTimeout(() => {
                 timeout = null;
-                const promise = options.leading
-                    ? leadingValue
-                    : applyFn(this, args);
+                const promise = options.leading ? leadingValue : applyFn(this, args);
                 for (const _resolve of resolveList) {
                     _resolve(promise);
                 }
@@ -413,16 +382,12 @@ function flatHooks(configHooks, hooks2 = {}, parentName) {
 }
 var defaultTask = { run: function_ => function_() };
 var _createTask = () => defaultTask;
-var createTask =
-    typeof console.createTask !== 'undefined'
-        ? console.createTask
-        : _createTask;
+var createTask = typeof console.createTask !== 'undefined' ? console.createTask : _createTask;
 function serialTaskCaller(hooks2, args) {
     const name = args.shift();
     const task = createTask(name);
     return hooks2.reduce(
-        (promise, hookFunction) =>
-            promise.then(() => task.run(() => hookFunction(...args))),
+        (promise, hookFunction) => promise.then(() => task.run(() => hookFunction(...args))),
         Promise.resolve()
     );
 }
@@ -530,9 +495,7 @@ var Hookable = class {
     }
     addHooks(configHooks) {
         const hooks2 = flatHooks(configHooks);
-        const removeFns = Object.keys(hooks2).map(key =>
-            this.hook(key, hooks2[key])
-        );
+        const removeFns = Object.keys(hooks2).map(key => this.hook(key, hooks2[key]));
         return () => {
             for (const unreg of removeFns.splice(0, removeFns.length)) {
                 unreg();
@@ -560,16 +523,11 @@ var Hookable = class {
     }
     callHookWith(caller, name, ...arguments_) {
         const event =
-            this._before || this._after
-                ? { name, args: arguments_, context: {} }
-                : void 0;
+            this._before || this._after ? { name, args: arguments_, context: {} } : void 0;
         if (this._before) {
             callEachWith(this._before, event);
         }
-        const result = caller(
-            name in this._hooks ? [...this._hooks[name]] : [],
-            arguments_
-        );
+        const result = caller(name in this._hooks ? [...this._hooks[name]] : [], arguments_);
         if (result instanceof Promise) {
             return result.finally(() => {
                 if (this._after && event) {
@@ -629,11 +587,7 @@ var __esm2 = (fn, res) =>
 var __commonJS2 = (cb, mod) =>
     function __require() {
         return (
-            mod ||
-                (0, cb[__getOwnPropNames2(cb)[0]])(
-                    (mod = { exports: {} }).exports,
-                    mod
-                ),
+            mod || (0, cb[__getOwnPropNames2(cb)[0]])((mod = { exports: {} }).exports, mod),
             mod.exports
         );
     };
@@ -643,9 +597,7 @@ var __copyProps2 = (to, from, except, desc) => {
             if (!__hasOwnProp2.call(to, key) && key !== except)
                 __defProp2(to, key, {
                     get: () => from[key],
-                    enumerable:
-                        !(desc = __getOwnPropDesc2(from, key)) ||
-                        desc.enumerable
+                    enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable
                 });
     }
     return to;
@@ -2015,29 +1967,8 @@ var require_speakingurl = __commonJS2({
                     '¤': 'tien te'
                 }
             };
-            var uricChars = [
-                ';',
-                '?',
-                ':',
-                '@',
-                '&',
-                '=',
-                '+',
-                '$',
-                ',',
-                '/'
-            ].join('');
-            var uricNoSlashChars = [
-                ';',
-                '?',
-                ':',
-                '@',
-                '&',
-                '=',
-                '+',
-                '$',
-                ','
-            ].join('');
+            var uricChars = [';', '?', ':', '@', '&', '=', '+', '$', ',', '/'].join('');
+            var uricNoSlashChars = [';', '?', ':', '@', '&', '=', '+', '$', ','].join('');
             var markChars = ['.', '!', '~', '*', "'", '(', ')'].join('');
             var getSlug = function getSlug2(input, opts) {
                 var separator = '-';
@@ -2078,10 +2009,7 @@ var require_speakingurl = __commonJS2({
                     uricFlag = opts.uric || false;
                     uricNoSlashFlag = opts.uricNoSlash || false;
                     markFlag = opts.mark || false;
-                    convertSymbols =
-                        opts.symbols === false || opts.lang === false
-                            ? false
-                            : true;
+                    convertSymbols = opts.symbols === false || opts.lang === false ? false : true;
                     separator = opts.separator || separator;
                     if (uricFlag) {
                         allowedChars += uricChars;
@@ -2128,10 +2056,7 @@ var require_speakingurl = __commonJS2({
                     Object.keys(customReplacements).forEach(function (v) {
                         var r;
                         if (v.length > 1) {
-                            r = new RegExp(
-                                '\\b' + escapeChars(v) + '\\b',
-                                'gi'
-                            );
+                            r = new RegExp('\\b' + escapeChars(v) + '\\b', 'gi');
                         } else {
                             r = new RegExp(escapeChars(v), 'gi');
                         }
@@ -2152,16 +2077,12 @@ var require_speakingurl = __commonJS2({
                         lastCharWasSymbol = false;
                     } else if (langChar[ch]) {
                         ch =
-                            lastCharWasSymbol &&
-                            langChar[ch].match(/[A-Za-z0-9]/)
+                            lastCharWasSymbol && langChar[ch].match(/[A-Za-z0-9]/)
                                 ? ' ' + langChar[ch]
                                 : langChar[ch];
                         lastCharWasSymbol = false;
                     } else if (ch in charMap) {
-                        if (
-                            i + 1 < l &&
-                            lookAheadCharArray.indexOf(input[i + 1]) >= 0
-                        ) {
+                        if (i + 1 < l && lookAheadCharArray.indexOf(input[i + 1]) >= 0) {
                             diatricString += ch;
                             ch = '';
                         } else if (lastCharWasDiatric === true) {
@@ -2169,8 +2090,7 @@ var require_speakingurl = __commonJS2({
                             diatricString = '';
                         } else {
                             ch =
-                                lastCharWasSymbol &&
-                                charMap[ch].match(/[A-Za-z0-9]/)
+                                lastCharWasSymbol && charMap[ch].match(/[A-Za-z0-9]/)
                                     ? ' ' + charMap[ch]
                                     : charMap[ch];
                         }
@@ -2187,19 +2107,14 @@ var require_speakingurl = __commonJS2({
                         // process symbol chars
                         symbol[ch] &&
                         !(uricFlag && uricChars.indexOf(ch) !== -1) &&
-                        !(
-                            uricNoSlashFlag &&
-                            uricNoSlashChars.indexOf(ch) !== -1
-                        )
+                        !(uricNoSlashFlag && uricNoSlashChars.indexOf(ch) !== -1)
                     ) {
                         ch =
-                            lastCharWasSymbol ||
-                            result.substr(-1).match(/[A-Za-z0-9]/)
+                            lastCharWasSymbol || result.substr(-1).match(/[A-Za-z0-9]/)
                                 ? separator + symbol[ch]
                                 : symbol[ch];
                         ch +=
-                            input[i + 1] !== void 0 &&
-                            input[i + 1].match(/[A-Za-z0-9]/)
+                            input[i + 1] !== void 0 && input[i + 1].match(/[A-Za-z0-9]/)
                                 ? separator
                                 : '';
                         lastCharWasSymbol = true;
@@ -2210,8 +2125,7 @@ var require_speakingurl = __commonJS2({
                             lastCharWasDiatric = false;
                         } else if (
                             lastCharWasSymbol &&
-                            (/[A-Za-z0-9]/.test(ch) ||
-                                result.substr(-1).match(/A-Za-z0-9]/))
+                            (/[A-Za-z0-9]/.test(ch) || result.substr(-1).match(/A-Za-z0-9]/))
                         ) {
                             ch = ' ' + ch;
                         }
@@ -2225,9 +2139,7 @@ var require_speakingurl = __commonJS2({
                 if (titleCase) {
                     result = result.replace(/(\w)(\S*)/g, function (_, i2, r) {
                         var j = i2.toUpperCase() + (r !== null ? r : '');
-                        return Object.keys(customReplacements).indexOf(
-                            j.toLowerCase()
-                        ) < 0
+                        return Object.keys(customReplacements).indexOf(j.toLowerCase()) < 0
                             ? j
                             : j.toLowerCase();
                     });
@@ -2235,13 +2147,7 @@ var require_speakingurl = __commonJS2({
                 result = result
                     .replace(/\s+/g, separator)
                     .replace(new RegExp('\\' + separator + '+', 'g'), separator)
-                    .replace(
-                        new RegExp(
-                            '(^\\' + separator + '+|\\' + separator + '+$)',
-                            'g'
-                        ),
-                        ''
-                    );
+                    .replace(new RegExp('(^\\' + separator + '+|\\' + separator + '+$)', 'g'), '');
                 if (truncate && result.length > truncate) {
                     lucky = result.charAt(truncate) === separator;
                     result = result.slice(0, truncate);
@@ -2370,16 +2276,13 @@ function saveComponentGussedName(instance, name) {
     return name;
 }
 function getAppRecord(instance) {
-    if (instance.__VUE_DEVTOOLS_NEXT_APP_RECORD__)
-        return instance.__VUE_DEVTOOLS_NEXT_APP_RECORD__;
-    else if (instance.root)
-        return instance.appContext.app.__VUE_DEVTOOLS_NEXT_APP_RECORD__;
+    if (instance.__VUE_DEVTOOLS_NEXT_APP_RECORD__) return instance.__VUE_DEVTOOLS_NEXT_APP_RECORD__;
+    else if (instance.root) return instance.appContext.app.__VUE_DEVTOOLS_NEXT_APP_RECORD__;
 }
 async function getComponentId(options) {
     const { app, uid, instance } = options;
     try {
-        if (instance.__VUE_DEVTOOLS_NEXT_UID__)
-            return instance.__VUE_DEVTOOLS_NEXT_UID__;
+        if (instance.__VUE_DEVTOOLS_NEXT_UID__) return instance.__VUE_DEVTOOLS_NEXT_UID__;
         const appRecord = await getAppRecord(app);
         if (!appRecord) return null;
         const isRoot = appRecord.rootInstance === instance;
@@ -2401,33 +2304,20 @@ function isFragment(instance) {
 }
 function getInstanceName(instance) {
     var _a25, _b25, _c;
-    const name = getComponentTypeName(
-        (instance == null ? void 0 : instance.type) || {}
-    );
+    const name = getComponentTypeName((instance == null ? void 0 : instance.type) || {});
     if (name) return name;
     if ((instance == null ? void 0 : instance.root) === instance) return 'Root';
-    for (const key in (_b25 =
-        (_a25 = instance.parent) == null ? void 0 : _a25.type) == null
+    for (const key in (_b25 = (_a25 = instance.parent) == null ? void 0 : _a25.type) == null
         ? void 0
         : _b25.components) {
-        if (
-            instance.parent.type.components[key] ===
-            (instance == null ? void 0 : instance.type)
-        )
+        if (instance.parent.type.components[key] === (instance == null ? void 0 : instance.type))
             return saveComponentGussedName(instance, key);
     }
-    for (const key in (_c = instance.appContext) == null
-        ? void 0
-        : _c.components) {
-        if (
-            instance.appContext.components[key] ===
-            (instance == null ? void 0 : instance.type)
-        )
+    for (const key in (_c = instance.appContext) == null ? void 0 : _c.components) {
+        if (instance.appContext.components[key] === (instance == null ? void 0 : instance.type))
             return saveComponentGussedName(instance, key);
     }
-    const fileName = getComponentFileName(
-        (instance == null ? void 0 : instance.type) || {}
-    );
+    const fileName = getComponentFileName((instance == null ? void 0 : instance.type) || {});
     if (fileName) return fileName;
     return 'Anonymous Component';
 }
@@ -2446,11 +2336,9 @@ var StateEditor = class {
         while (sections.length > 1) {
             const section = sections.shift();
             if (object instanceof Map) object = object.get(section);
-            if (object instanceof Set)
-                object = Array.from(object.values())[section];
+            if (object instanceof Set) object = Array.from(object.values())[section];
             else object = object[section];
-            if (this.refEditor.isRef(object))
-                object = this.refEditor.get(object);
+            if (this.refEditor.isRef(object)) object = this.refEditor.get(object);
         }
         const field = sections[0];
         const item = this.refEditor.get(object)[field];
@@ -2467,8 +2355,7 @@ var StateEditor = class {
         for (let i = 0; i < sections.length; i++) {
             if (object instanceof Map) object = object.get(sections[i]);
             else object = object[sections[i]];
-            if (this.refEditor.isRef(object))
-                object = this.refEditor.get(object);
+            if (this.refEditor.isRef(object)) object = this.refEditor.get(object);
             if (!object) return void 0;
         }
         return object;
@@ -2480,13 +2367,9 @@ var StateEditor = class {
         while (object && sections.length > size) {
             const section = sections.shift();
             object = object[section];
-            if (this.refEditor.isRef(object))
-                object = this.refEditor.get(object);
+            if (this.refEditor.isRef(object)) object = this.refEditor.get(object);
         }
-        return (
-            object != null &&
-            Object.prototype.hasOwnProperty.call(object, sections[0])
-        );
+        return object != null && Object.prototype.hasOwnProperty.call(object, sections[0]);
     }
     createDefaultSetCallback(state) {
         return (object, field, value) => {
@@ -2499,10 +2382,8 @@ var StateEditor = class {
             }
             if (!state.remove) {
                 const target22 = object[state.newKey || field];
-                if (this.refEditor.isRef(target22))
-                    this.refEditor.set(target22, value);
-                else if (toRaw(object) instanceof Map)
-                    object.set(state.newKey || field, value);
+                if (this.refEditor.isRef(target22)) this.refEditor.set(target22, value);
+                else if (toRaw(object) instanceof Map) object.set(state.newKey || field, value);
                 else if (toRaw(object) instanceof Set) object.add(value);
                 else object[state.newKey || field] = value;
             }
@@ -2556,11 +2437,8 @@ function getFragmentRootElements(vnode) {
     const list = [];
     vnode.children.forEach(childVnode => {
         if (childVnode.component)
-            list.push(
-                ...getRootElementsFromComponentInstance(childVnode.component)
-            );
-        else if (childVnode == null ? void 0 : childVnode.el)
-            list.push(childVnode.el);
+            list.push(...getRootElementsFromComponentInstance(childVnode.component));
+        else if (childVnode == null ? void 0 : childVnode.el) list.push(childVnode.el);
     });
     return list;
 }
@@ -2599,8 +2477,7 @@ function getFragmentRect(vnode) {
             const el = childVnode.el;
             if (el.nodeType === 1 || el.getBoundingClientRect)
                 childRect = el.getBoundingClientRect();
-            else if (el.nodeType === 3 && el.data.trim())
-                childRect = getTextRect(el);
+            else if (el.nodeType === 3 && el.data.trim()) childRect = getTextRect(el);
         }
         if (childRect) mergeRects(rect, childRect);
     }
@@ -2659,8 +2536,7 @@ var cardStyles = {
     fontWeight: 600,
     lineHeight: '24px',
     backgroundColor: '#42b883',
-    boxShadow:
-        '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)'
+    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)'
 };
 var indicatorStyles = {
     display: 'inline-block',
@@ -2692,8 +2568,7 @@ function getStyles(bounds) {
 function create(options) {
     var _a25;
     const containerEl = document.createElement('div');
-    containerEl.id =
-        (_a25 = options.elementId) != null ? _a25 : CONTAINER_ELEMENT_ID;
+    containerEl.id = (_a25 = options.elementId) != null ? _a25 : CONTAINER_ELEMENT_ID;
     Object.assign(containerEl.style, {
         ...containerStyles,
         ...getStyles(options.bounds),
@@ -2781,11 +2656,7 @@ var inspectComponentHighLighterSelectFn = null;
 function cancelInspectComponentHighLighter() {
     unhighlight();
     window.removeEventListener('mouseover', inspectFn);
-    window.removeEventListener(
-        'click',
-        inspectComponentHighLighterSelectFn,
-        true
-    );
+    window.removeEventListener('click', inspectComponentHighLighterSelectFn, true);
     inspectComponentHighLighterSelectFn = null;
 }
 function inspectComponentHighLighter() {
@@ -2836,9 +2707,7 @@ function scrollToComponent(options) {
             if (bounds.width || bounds.height) {
                 const name = getInstanceName(instance);
                 const el2 = getContainerElement();
-                el2
-                    ? update({ ...options, name, bounds })
-                    : create({ ...options, name, bounds });
+                el2 ? update({ ...options, name, bounds }) : create({ ...options, name, bounds });
                 setTimeout(() => {
                     if (el2) el2.style.display = 'none';
                 }, 1500);
@@ -2889,14 +2758,9 @@ function getComponentInspector() {
 init_esm_shims2();
 init_esm_shims2();
 init_esm_shims2();
-var TIMELINE_LAYERS_STATE_STORAGE_ID =
-    '__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS_STATE__';
+var TIMELINE_LAYERS_STATE_STORAGE_ID = '__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS_STATE__';
 function getTimelineLayersStateFromStorage() {
-    if (
-        !isBrowser ||
-        typeof localStorage === 'undefined' ||
-        localStorage === null
-    ) {
+    if (!isBrowser || typeof localStorage === 'undefined' || localStorage === null) {
         return {
             recordingState: false,
             mouseEventEnabled: false,
@@ -2926,14 +2790,11 @@ var _b2;
 (_b2 = (_a22 = target).__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS) != null
     ? _b2
     : (_a22.__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS = []);
-var devtoolsTimelineLayers = new Proxy(
-    target.__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS,
-    {
-        get(target22, prop, receiver) {
-            return Reflect.get(target22, prop, receiver);
-        }
+var devtoolsTimelineLayers = new Proxy(target.__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS, {
+    get(target22, prop, receiver) {
+        return Reflect.get(target22, prop, receiver);
     }
-);
+});
 function addTimelineLayer(options, descriptor) {
     devtoolsState.timelineLayersState[descriptor.id] = false;
     devtoolsTimelineLayers.push({
@@ -2953,10 +2814,7 @@ var devtoolsInspector = new Proxy(target.__VUE_DEVTOOLS_KIT_INSPECTOR__, {
     }
 });
 var callInspectorUpdatedHook = debounce(() => {
-    devtoolsContext.hooks.callHook(
-        'sendInspectorToClient',
-        getActiveInspectors()
-    );
+    devtoolsContext.hooks.callHook('sendInspectorToClient', getActiveInspectors());
 });
 function addInspector(inspector, descriptor) {
     devtoolsInspector.push({
@@ -2970,9 +2828,7 @@ function addInspector(inspector, descriptor) {
 }
 function getActiveInspectors() {
     return devtoolsInspector
-        .filter(
-            inspector => inspector.descriptor.app === activeAppRecord.value.app
-        )
+        .filter(inspector => inspector.descriptor.app === activeAppRecord.value.app)
         .filter(inspector => inspector.descriptor.id !== 'components')
         .map(inspector => {
             var _a25;
@@ -2991,9 +2847,7 @@ function getActiveInspectors() {
 }
 function getInspector(id, app) {
     return devtoolsInspector.find(
-        inspector =>
-            inspector.options.id === id &&
-            (app ? inspector.descriptor.app === app : true)
+        inspector => inspector.options.id === id && (app ? inspector.descriptor.app === app : true)
     );
 }
 var DevToolsV6PluginAPIHookKeys = (DevToolsV6PluginAPIHookKeys2 => {
@@ -3003,8 +2857,7 @@ var DevToolsV6PluginAPIHookKeys = (DevToolsV6PluginAPIHookKeys2 => {
     DevToolsV6PluginAPIHookKeys2['GET_INSPECTOR_TREE'] = 'getInspectorTree';
     DevToolsV6PluginAPIHookKeys2['GET_INSPECTOR_STATE'] = 'getInspectorState';
     DevToolsV6PluginAPIHookKeys2['EDIT_INSPECTOR_STATE'] = 'editInspectorState';
-    DevToolsV6PluginAPIHookKeys2['INSPECT_TIMELINE_EVENT'] =
-        'inspectTimelineEvent';
+    DevToolsV6PluginAPIHookKeys2['INSPECT_TIMELINE_EVENT'] = 'inspectTimelineEvent';
     DevToolsV6PluginAPIHookKeys2['TIMELINE_CLEARED'] = 'timelineCleared';
     DevToolsV6PluginAPIHookKeys2['SET_PLUGIN_SETTINGS'] = 'setPluginSettings';
     return DevToolsV6PluginAPIHookKeys2;
@@ -3013,12 +2866,10 @@ var DevToolsContextHookKeys = (DevToolsContextHookKeys2 => {
     DevToolsContextHookKeys2['ADD_INSPECTOR'] = 'addInspector';
     DevToolsContextHookKeys2['SEND_INSPECTOR_TREE'] = 'sendInspectorTree';
     DevToolsContextHookKeys2['SEND_INSPECTOR_STATE'] = 'sendInspectorState';
-    DevToolsContextHookKeys2['CUSTOM_INSPECTOR_SELECT_NODE'] =
-        'customInspectorSelectNode';
+    DevToolsContextHookKeys2['CUSTOM_INSPECTOR_SELECT_NODE'] = 'customInspectorSelectNode';
     DevToolsContextHookKeys2['TIMELINE_LAYER_ADDED'] = 'timelineLayerAdded';
     DevToolsContextHookKeys2['TIMELINE_EVENT_ADDED'] = 'timelineEventAdded';
-    DevToolsContextHookKeys2['GET_COMPONENT_INSTANCES'] =
-        'getComponentInstances';
+    DevToolsContextHookKeys2['GET_COMPONENT_INSTANCES'] = 'getComponentInstances';
     DevToolsContextHookKeys2['GET_COMPONENT_BOUNDS'] = 'getComponentBounds';
     DevToolsContextHookKeys2['GET_COMPONENT_NAME'] = 'getComponentName';
     DevToolsContextHookKeys2['COMPONENT_HIGHLIGHT'] = 'componentHighlight';
@@ -3026,20 +2877,14 @@ var DevToolsContextHookKeys = (DevToolsContextHookKeys2 => {
     return DevToolsContextHookKeys2;
 })(DevToolsContextHookKeys || {});
 var DevToolsMessagingHookKeys = (DevToolsMessagingHookKeys2 => {
-    DevToolsMessagingHookKeys2['SEND_INSPECTOR_TREE_TO_CLIENT'] =
-        'sendInspectorTreeToClient';
-    DevToolsMessagingHookKeys2['SEND_INSPECTOR_STATE_TO_CLIENT'] =
-        'sendInspectorStateToClient';
-    DevToolsMessagingHookKeys2['SEND_TIMELINE_EVENT_TO_CLIENT'] =
-        'sendTimelineEventToClient';
-    DevToolsMessagingHookKeys2['SEND_INSPECTOR_TO_CLIENT'] =
-        'sendInspectorToClient';
+    DevToolsMessagingHookKeys2['SEND_INSPECTOR_TREE_TO_CLIENT'] = 'sendInspectorTreeToClient';
+    DevToolsMessagingHookKeys2['SEND_INSPECTOR_STATE_TO_CLIENT'] = 'sendInspectorStateToClient';
+    DevToolsMessagingHookKeys2['SEND_TIMELINE_EVENT_TO_CLIENT'] = 'sendTimelineEventToClient';
+    DevToolsMessagingHookKeys2['SEND_INSPECTOR_TO_CLIENT'] = 'sendInspectorToClient';
     DevToolsMessagingHookKeys2['SEND_ACTIVE_APP_UNMOUNTED_TO_CLIENT'] =
         'sendActiveAppUpdatedToClient';
-    DevToolsMessagingHookKeys2['DEVTOOLS_STATE_UPDATED'] =
-        'devtoolsStateUpdated';
-    DevToolsMessagingHookKeys2['DEVTOOLS_CONNECTED_UPDATED'] =
-        'devtoolsConnectedUpdated';
+    DevToolsMessagingHookKeys2['DEVTOOLS_STATE_UPDATED'] = 'devtoolsStateUpdated';
+    DevToolsMessagingHookKeys2['DEVTOOLS_CONNECTED_UPDATED'] = 'devtoolsConnectedUpdated';
     DevToolsMessagingHookKeys2['ROUTER_INFO_UPDATED'] = 'routerInfoUpdated';
     return DevToolsMessagingHookKeys2;
 })(DevToolsMessagingHookKeys || {});
@@ -3048,128 +2893,105 @@ function createDevToolsCtxHooks() {
     hooks2.hook('addInspector', ({ inspector, plugin }) => {
         addInspector(inspector, plugin.descriptor);
     });
-    const debounceSendInspectorTree = debounce(
-        async ({ inspectorId, plugin }) => {
-            var _a25;
-            if (
-                !inspectorId ||
-                !((_a25 = plugin == null ? void 0 : plugin.descriptor) == null
-                    ? void 0
-                    : _a25.app) ||
-                devtoolsState.highPerfModeEnabled
-            )
-                return;
-            const inspector = getInspector(inspectorId, plugin.descriptor.app);
-            const _payload = {
-                app: plugin.descriptor.app,
-                inspectorId,
-                filter:
-                    (inspector == null ? void 0 : inspector.treeFilter) || '',
-                rootNodes: []
-            };
+    const debounceSendInspectorTree = debounce(async ({ inspectorId, plugin }) => {
+        var _a25;
+        if (
+            !inspectorId ||
+            !((_a25 = plugin == null ? void 0 : plugin.descriptor) == null ? void 0 : _a25.app) ||
+            devtoolsState.highPerfModeEnabled
+        )
+            return;
+        const inspector = getInspector(inspectorId, plugin.descriptor.app);
+        const _payload = {
+            app: plugin.descriptor.app,
+            inspectorId,
+            filter: (inspector == null ? void 0 : inspector.treeFilter) || '',
+            rootNodes: []
+        };
+        await new Promise(resolve => {
+            hooks2.callHookWith(
+                async callbacks => {
+                    await Promise.all(callbacks.map(cb => cb(_payload)));
+                    resolve();
+                },
+                'getInspectorTree'
+                /* GET_INSPECTOR_TREE */
+            );
+        });
+        hooks2.callHookWith(
+            async callbacks => {
+                await Promise.all(
+                    callbacks.map(cb =>
+                        cb({
+                            inspectorId,
+                            rootNodes: _payload.rootNodes
+                        })
+                    )
+                );
+            },
+            'sendInspectorTreeToClient'
+            /* SEND_INSPECTOR_TREE_TO_CLIENT */
+        );
+    }, 120);
+    hooks2.hook('sendInspectorTree', debounceSendInspectorTree);
+    const debounceSendInspectorState = debounce(async ({ inspectorId, plugin }) => {
+        var _a25;
+        if (
+            !inspectorId ||
+            !((_a25 = plugin == null ? void 0 : plugin.descriptor) == null ? void 0 : _a25.app) ||
+            devtoolsState.highPerfModeEnabled
+        )
+            return;
+        const inspector = getInspector(inspectorId, plugin.descriptor.app);
+        const _payload = {
+            app: plugin.descriptor.app,
+            inspectorId,
+            nodeId: (inspector == null ? void 0 : inspector.selectedNodeId) || '',
+            state: null
+        };
+        const ctx = {
+            currentTab: `custom-inspector:${inspectorId}`
+        };
+        if (_payload.nodeId) {
             await new Promise(resolve => {
                 hooks2.callHookWith(
                     async callbacks => {
-                        await Promise.all(callbacks.map(cb => cb(_payload)));
+                        await Promise.all(callbacks.map(cb => cb(_payload, ctx)));
                         resolve();
                     },
-                    'getInspectorTree'
-                    /* GET_INSPECTOR_TREE */
+                    'getInspectorState'
+                    /* GET_INSPECTOR_STATE */
                 );
             });
-            hooks2.callHookWith(
-                async callbacks => {
-                    await Promise.all(
-                        callbacks.map(cb =>
-                            cb({
-                                inspectorId,
-                                rootNodes: _payload.rootNodes
-                            })
-                        )
-                    );
-                },
-                'sendInspectorTreeToClient'
-                /* SEND_INSPECTOR_TREE_TO_CLIENT */
-            );
-        },
-        120
-    );
-    hooks2.hook('sendInspectorTree', debounceSendInspectorTree);
-    const debounceSendInspectorState = debounce(
-        async ({ inspectorId, plugin }) => {
-            var _a25;
-            if (
-                !inspectorId ||
-                !((_a25 = plugin == null ? void 0 : plugin.descriptor) == null
-                    ? void 0
-                    : _a25.app) ||
-                devtoolsState.highPerfModeEnabled
-            )
-                return;
-            const inspector = getInspector(inspectorId, plugin.descriptor.app);
-            const _payload = {
-                app: plugin.descriptor.app,
-                inspectorId,
-                nodeId:
-                    (inspector == null ? void 0 : inspector.selectedNodeId) ||
-                    '',
-                state: null
-            };
-            const ctx = {
-                currentTab: `custom-inspector:${inspectorId}`
-            };
-            if (_payload.nodeId) {
-                await new Promise(resolve => {
-                    hooks2.callHookWith(
-                        async callbacks => {
-                            await Promise.all(
-                                callbacks.map(cb => cb(_payload, ctx))
-                            );
-                            resolve();
-                        },
-                        'getInspectorState'
-                        /* GET_INSPECTOR_STATE */
-                    );
-                });
-            }
-            hooks2.callHookWith(
-                async callbacks => {
-                    await Promise.all(
-                        callbacks.map(cb =>
-                            cb({
-                                inspectorId,
-                                nodeId: _payload.nodeId,
-                                state: _payload.state
-                            })
-                        )
-                    );
-                },
-                'sendInspectorStateToClient'
-                /* SEND_INSPECTOR_STATE_TO_CLIENT */
-            );
-        },
-        120
-    );
-    hooks2.hook('sendInspectorState', debounceSendInspectorState);
-    hooks2.hook(
-        'customInspectorSelectNode',
-        ({ inspectorId, nodeId, plugin }) => {
-            const inspector = getInspector(inspectorId, plugin.descriptor.app);
-            if (!inspector) return;
-            inspector.selectedNodeId = nodeId;
         }
-    );
+        hooks2.callHookWith(
+            async callbacks => {
+                await Promise.all(
+                    callbacks.map(cb =>
+                        cb({
+                            inspectorId,
+                            nodeId: _payload.nodeId,
+                            state: _payload.state
+                        })
+                    )
+                );
+            },
+            'sendInspectorStateToClient'
+            /* SEND_INSPECTOR_STATE_TO_CLIENT */
+        );
+    }, 120);
+    hooks2.hook('sendInspectorState', debounceSendInspectorState);
+    hooks2.hook('customInspectorSelectNode', ({ inspectorId, nodeId, plugin }) => {
+        const inspector = getInspector(inspectorId, plugin.descriptor.app);
+        if (!inspector) return;
+        inspector.selectedNodeId = nodeId;
+    });
     hooks2.hook('timelineLayerAdded', ({ options, plugin }) => {
         addTimelineLayer(options, plugin.descriptor);
     });
     hooks2.hook('timelineEventAdded', ({ options, plugin }) => {
         var _a25;
-        const internalLayerIds = [
-            'performance',
-            'component-event',
-            'keyboard',
-            'mouse'
-        ];
+        const internalLayerIds = ['performance', 'component-event', 'keyboard', 'mouse'];
         if (
             devtoolsState.highPerfModeEnabled ||
             (!((_a25 = devtoolsState.timelineLayersState) == null
@@ -3257,17 +3079,12 @@ function initStateFactory() {
 }
 var _a9;
 var _b9;
-(_b9 = (_a9 = target)[STATE_KEY]) != null
-    ? _b9
-    : (_a9[STATE_KEY] = initStateFactory());
+(_b9 = (_a9 = target)[STATE_KEY]) != null ? _b9 : (_a9[STATE_KEY] = initStateFactory());
 var callStateUpdatedHook = debounce(state => {
     devtoolsContext.hooks.callHook('devtoolsStateUpdated', { state });
 });
 var callConnectedUpdatedHook = debounce((state, oldState) => {
-    devtoolsContext.hooks.callHook('devtoolsConnectedUpdated', {
-        state,
-        oldState
-    });
+    devtoolsContext.hooks.callHook('devtoolsConnectedUpdated', { state, oldState });
 });
 var devtoolsAppRecords = new Proxy(target.__VUE_DEVTOOLS_KIT_APP_RECORDS__, {
     get(_target, prop, receiver) {
@@ -3277,10 +3094,8 @@ var devtoolsAppRecords = new Proxy(target.__VUE_DEVTOOLS_KIT_APP_RECORDS__, {
 });
 var activeAppRecord = new Proxy(target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD__, {
     get(_target, prop, receiver) {
-        if (prop === 'value')
-            return target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD__;
-        else if (prop === 'id')
-            return target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD_ID__;
+        if (prop === 'value') return target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD__;
+        else if (prop === 'id') return target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD_ID__;
         return target.__VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD__[prop];
     }
 });
@@ -3380,36 +3195,25 @@ function removeCustomCommand(actionId) {
 }
 function openInEditor(options = {}) {
     var _a25, _b25, _c;
-    const {
-        file,
-        host,
-        baseUrl = window.location.origin,
-        line = 0,
-        column = 0
-    } = options;
+    const { file, host, baseUrl = window.location.origin, line = 0, column = 0 } = options;
     if (file) {
         if (host === 'chrome-extension') {
             const fileName = file.replace(/\\/g, '\\\\');
             const _baseUrl =
                 (_b25 =
-                    (_a25 = window.VUE_DEVTOOLS_CONFIG) == null
-                        ? void 0
-                        : _a25.openInEditorHost) != null
+                    (_a25 = window.VUE_DEVTOOLS_CONFIG) == null ? void 0 : _a25.openInEditorHost) !=
+                null
                     ? _b25
                     : '/';
-            fetch(`${_baseUrl}__open-in-editor?file=${encodeURI(file)}`).then(
-                response => {
-                    if (!response.ok) {
-                        const msg = `Opening component ${fileName} failed`;
-                        console.log(`%c${msg}`, 'color:red');
-                    }
+            fetch(`${_baseUrl}__open-in-editor?file=${encodeURI(file)}`).then(response => {
+                if (!response.ok) {
+                    const msg = `Opening component ${fileName} failed`;
+                    console.log(`%c${msg}`, 'color:red');
                 }
-            );
+            });
         } else if (devtoolsState.vitePluginDetected) {
             const _baseUrl =
-                (_c = target.__VUE_DEVTOOLS_OPEN_IN_EDITOR_BASE_URL__) != null
-                    ? _c
-                    : baseUrl;
+                (_c = target.__VUE_DEVTOOLS_OPEN_IN_EDITOR_BASE_URL__) != null ? _c : baseUrl;
             target.__VUE_INSPECTOR__.openInEditor(_baseUrl, file, line, column);
         }
     }
@@ -3424,14 +3228,11 @@ var _b10;
 (_b10 = (_a10 = target).__VUE_DEVTOOLS_KIT_PLUGIN_BUFFER__) != null
     ? _b10
     : (_a10.__VUE_DEVTOOLS_KIT_PLUGIN_BUFFER__ = []);
-var devtoolsPluginBuffer = new Proxy(
-    target.__VUE_DEVTOOLS_KIT_PLUGIN_BUFFER__,
-    {
-        get(target22, prop, receiver) {
-            return Reflect.get(target22, prop, receiver);
-        }
+var devtoolsPluginBuffer = new Proxy(target.__VUE_DEVTOOLS_KIT_PLUGIN_BUFFER__, {
+    get(target22, prop, receiver) {
+        return Reflect.get(target22, prop, receiver);
     }
-);
+});
 function _getSettings(settings) {
     const _settings = {};
     Object.keys(settings).forEach(key => {
@@ -3471,16 +3272,12 @@ function getPluginSettings(pluginId, fallbackValue) {
     if (pluginId) {
         const item =
             (_b25 =
-                (_a25 = devtoolsPluginBuffer.find(
-                    item2 => item2[0].id === pluginId
-                )) == null
+                (_a25 = devtoolsPluginBuffer.find(item2 => item2[0].id === pluginId)) == null
                     ? void 0
                     : _a25[0]) != null
                 ? _b25
                 : null;
-        return _getSettings(
-            (_c = item == null ? void 0 : item.settings) != null ? _c : {}
-        );
+        return _getSettings((_c = item == null ? void 0 : item.settings) != null ? _c : {});
     }
     return _getSettings(fallbackValue);
 }
@@ -3568,11 +3365,7 @@ var on = {
 var hook = {
     on,
     setupDevToolsPlugin(pluginDescriptor, setupFn) {
-        return devtoolsHooks.callHook(
-            'devtools-plugin:setup',
-            pluginDescriptor,
-            setupFn
-        );
+        return devtoolsHooks.callHook('devtools-plugin:setup', pluginDescriptor, setupFn);
     }
 };
 var DevToolsV6PluginAPI = class {
@@ -3644,25 +3437,16 @@ var DevToolsV6PluginAPI = class {
     }
     // custom inspector
     addInspector(options) {
-        this.hooks.callHook('addInspector', {
-            inspector: options,
-            plugin: this.plugin
-        });
+        this.hooks.callHook('addInspector', { inspector: options, plugin: this.plugin });
         if (this.plugin.descriptor.settings) {
             initPluginSettings(options.id, this.plugin.descriptor.settings);
         }
     }
     sendInspectorTree(inspectorId) {
-        this.hooks.callHook('sendInspectorTree', {
-            inspectorId,
-            plugin: this.plugin
-        });
+        this.hooks.callHook('sendInspectorTree', { inspectorId, plugin: this.plugin });
     }
     sendInspectorState(inspectorId) {
-        this.hooks.callHook('sendInspectorState', {
-            inspectorId,
-            plugin: this.plugin
-        });
+        this.hooks.callHook('sendInspectorState', { inspectorId, plugin: this.plugin });
     }
     selectInspectorNode(inspectorId, nodeId) {
         this.hooks.callHook('customInspectorSelectNode', {
@@ -3679,16 +3463,10 @@ var DevToolsV6PluginAPI = class {
         return Date.now();
     }
     addTimelineLayer(options) {
-        this.hooks.callHook('timelineLayerAdded', {
-            options,
-            plugin: this.plugin
-        });
+        this.hooks.callHook('timelineLayerAdded', { options, plugin: this.plugin });
     }
     addTimelineEvent(options) {
-        this.hooks.callHook('timelineEventAdded', {
-            options,
-            plugin: this.plugin
-        });
+        this.hooks.callHook('timelineEventAdded', { options, plugin: this.plugin });
     }
     // settings
     getSettings(pluginId) {
@@ -3748,8 +3526,7 @@ var _a12;
 var _b12;
 (_b12 = (_a12 = target).__VUE_DEVTOOLS_KIT__REGISTERED_PLUGIN_APPS__) != null
     ? _b12
-    : (_a12.__VUE_DEVTOOLS_KIT__REGISTERED_PLUGIN_APPS__ =
-          /* @__PURE__ */ new Set());
+    : (_a12.__VUE_DEVTOOLS_KIT__REGISTERED_PLUGIN_APPS__ = /* @__PURE__ */ new Set());
 function setupDevToolsPlugin(pluginDescriptor, setupFn) {
     return hook.setupDevToolsPlugin(pluginDescriptor, setupFn);
 }
@@ -3813,8 +3590,7 @@ function getRoutes(router) {
 function filterRoutes(routes) {
     return routes.map(item => {
         let { path, name, children, meta } = item;
-        if (children == null ? void 0 : children.length)
-            children = filterRoutes(children);
+        if (children == null ? void 0 : children.length) children = filterRoutes(children);
         return {
             path,
             name,
@@ -3825,8 +3601,7 @@ function filterRoutes(routes) {
 }
 function filterCurrentRoute(route) {
     if (route) {
-        const { fullPath, hash, href, path, name, matched, params, query } =
-            route;
+        const { fullPath, hash, href, path, name, matched, params, query } = route;
         return {
             fullPath,
             hash,
@@ -3844,9 +3619,7 @@ function normalizeRouterInfo(appRecord, activeAppRecord2) {
     function init() {
         var _a25;
         const router =
-            (_a25 = appRecord.app) == null
-                ? void 0
-                : _a25.config.globalProperties.$router;
+            (_a25 = appRecord.app) == null ? void 0 : _a25.config.globalProperties.$router;
         const currentRoute = filterCurrentRoute(
             router == null ? void 0 : router.currentRoute.value
         );
@@ -3864,17 +3637,11 @@ function normalizeRouterInfo(appRecord, activeAppRecord2) {
     hook.on.componentUpdated(
         debounce(() => {
             var _a25;
-            if (
-                ((_a25 = activeAppRecord2.value) == null
-                    ? void 0
-                    : _a25.app) !== appRecord.app
-            )
+            if (((_a25 = activeAppRecord2.value) == null ? void 0 : _a25.app) !== appRecord.app)
                 return;
             init();
             if (devtoolsState.highPerfModeEnabled) return;
-            devtoolsContext.hooks.callHook('routerInfoUpdated', {
-                state: target[ROUTER_INFO_KEY]
-            });
+            devtoolsContext.hooks.callHook('routerInfoUpdated', { state: target[ROUTER_INFO_KEY] });
         }, 200)
     );
 }
@@ -3912,9 +3679,7 @@ function createDevToolsApi(hooks2) {
             await new Promise(resolve => {
                 hooks2.callHookWith(
                     async callbacks => {
-                        await Promise.all(
-                            callbacks.map(cb => cb(_payload, ctx))
-                        );
+                        await Promise.all(callbacks.map(cb => cb(_payload, ctx)));
                         resolve();
                     },
                     'getInspectorState'
@@ -3929,18 +3694,12 @@ function createDevToolsApi(hooks2) {
             const _payload = {
                 ...payload,
                 app: activeAppRecord.value.app,
-                set: (
-                    obj,
-                    path = payload.path,
-                    value = payload.state.value,
-                    cb
-                ) => {
+                set: (obj, path = payload.path, value = payload.state.value, cb) => {
                     stateEditor2.set(
                         obj,
                         path,
                         value,
-                        cb ||
-                            stateEditor2.createDefaultSetCallback(payload.state)
+                        cb || stateEditor2.createDefaultSetCallback(payload.state)
                     );
                 }
             };
@@ -3975,10 +3734,7 @@ function createDevToolsApi(hooks2) {
         getComponentRenderCode(id) {
             const instance = getComponentInstance(activeAppRecord.value, id);
             if (instance)
-                return !(
-                    (instance == null ? void 0 : instance.type) instanceof
-                    Function
-                )
+                return !((instance == null ? void 0 : instance.type) instanceof Function)
                     ? instance.render.toString()
                     : instance.type.toString();
         },
@@ -3992,9 +3748,7 @@ function createDevToolsApi(hooks2) {
         getVueInspector: getComponentInspector,
         // toggle app
         toggleApp(id) {
-            const appRecord = devtoolsAppRecords.value.find(
-                record => record.id === id
-            );
+            const appRecord = devtoolsAppRecords.value.find(record => record.id === id);
             if (appRecord) {
                 setActiveAppRecordId(id);
                 setActiveAppRecord(appRecord);
@@ -4005,10 +3759,7 @@ function createDevToolsApi(hooks2) {
         },
         // inspect dom
         inspectDOM(instanceId) {
-            const instance = getComponentInstance(
-                activeAppRecord.value,
-                instanceId
-            );
+            const instance = getComponentInstance(activeAppRecord.value, instanceId);
             if (instance) {
                 const [el] = getRootElementsFromComponentInstance(instance);
                 if (el) {
@@ -4081,8 +3832,7 @@ function onDevToolsClientConnected(fn) {
 }
 init_esm_shims2();
 function toggleHighPerfMode(state) {
-    devtoolsState.highPerfModeEnabled =
-        state != null ? state : !devtoolsState.highPerfModeEnabled;
+    devtoolsState.highPerfModeEnabled = state != null ? state : !devtoolsState.highPerfModeEnabled;
 }
 init_esm_shims2();
 init_esm_shims2();
@@ -4092,17 +3842,14 @@ function updateDevToolsClientDetected(params) {
         ...devtoolsState.devtoolsClientDetected,
         ...params
     };
-    const devtoolsClientVisible = Object.values(
-        devtoolsState.devtoolsClientDetected
-    ).some(Boolean);
+    const devtoolsClientVisible = Object.values(devtoolsState.devtoolsClientDetected).some(Boolean);
     toggleHighPerfMode(!devtoolsClientVisible);
 }
 var _a18;
 var _b18;
 (_b18 = (_a18 = target).__VUE_DEVTOOLS_UPDATE_CLIENT_DETECTED__) != null
     ? _b18
-    : (_a18.__VUE_DEVTOOLS_UPDATE_CLIENT_DETECTED__ =
-          updateDevToolsClientDetected);
+    : (_a18.__VUE_DEVTOOLS_UPDATE_CLIENT_DETECTED__ = updateDevToolsClientDetected);
 init_esm_shims2();
 init_esm_shims2();
 init_esm_shims2();
@@ -4224,9 +3971,7 @@ var CustomTransformerRegistry = class {
         this.transfomers[transformer.name] = transformer;
     }
     findApplicable(v) {
-        return find(this.transfomers, transformer =>
-            transformer.isApplicable(v)
-        );
+        return find(this.transfomers, transformer => transformer.isApplicable(v));
     }
     findByName(name) {
         return this.transfomers[name];
@@ -4243,8 +3988,7 @@ var isPlainObject2 = payload => {
     if (Object.getPrototypeOf(payload) === null) return true;
     return Object.getPrototypeOf(payload) === Object.prototype;
 };
-var isEmptyObject = payload =>
-    isPlainObject2(payload) && Object.keys(payload).length === 0;
+var isEmptyObject = payload => isPlainObject2(payload) && Object.keys(payload).length === 0;
 var isArray = payload => Array.isArray(payload);
 var isString = payload => typeof payload === 'string';
 var isNumber = payload => typeof payload === 'number' && !isNaN(payload);
@@ -4265,8 +4009,7 @@ var isPrimitive2 = payload =>
     isSymbol(payload);
 var isBigint = payload => typeof payload === 'bigint';
 var isInfinite = payload => payload === Infinity || payload === -Infinity;
-var isTypedArray = payload =>
-    ArrayBuffer.isView(payload) && !(payload instanceof DataView);
+var isTypedArray = payload => ArrayBuffer.isView(payload) && !(payload instanceof DataView);
 var isURL = payload => payload instanceof URL;
 init_esm_shims2();
 var escapeKey = key => key.replace(/\./g, '\\.');
@@ -4295,12 +4038,7 @@ var parsePath = string => {
     return result;
 };
 init_esm_shims2();
-function simpleTransformation(
-    isApplicable,
-    annotation,
-    transform,
-    untransform
-) {
+function simpleTransformation(isApplicable, annotation, transform, untransform) {
     return {
         isApplicable,
         annotation,
@@ -4410,12 +4148,7 @@ var simpleRules = [
         v => new URL(v)
     )
 ];
-function compositeTransformation(
-    isApplicable,
-    annotation,
-    transform,
-    untransform
-) {
+function compositeTransformation(isApplicable, annotation, transform, untransform) {
     return {
         isApplicable,
         annotation,
@@ -4472,9 +4205,7 @@ var typedArrayRule = compositeTransformation(
 );
 function isInstanceOfRegisteredClass(potentialClass, superJson) {
     if (potentialClass == null ? void 0 : potentialClass.constructor) {
-        const isRegistered = !!superJson.classRegistry.getIdentifier(
-            potentialClass.constructor
-        );
+        const isRegistered = !!superJson.classRegistry.getIdentifier(potentialClass.constructor);
         return isRegistered;
     }
     return false;
@@ -4482,15 +4213,11 @@ function isInstanceOfRegisteredClass(potentialClass, superJson) {
 var classRule = compositeTransformation(
     isInstanceOfRegisteredClass,
     (clazz, superJson) => {
-        const identifier = superJson.classRegistry.getIdentifier(
-            clazz.constructor
-        );
+        const identifier = superJson.classRegistry.getIdentifier(clazz.constructor);
         return ['class', identifier];
     },
     (clazz, superJson) => {
-        const allowedProps = superJson.classRegistry.getAllowedProps(
-            clazz.constructor
-        );
+        const allowedProps = superJson.classRegistry.getAllowedProps(clazz.constructor);
         if (!allowedProps) {
             return { ...clazz };
         }
@@ -4515,19 +4242,15 @@ var customRule = compositeTransformation(
         return !!superJson.customTransformerRegistry.findApplicable(value);
     },
     (value, superJson) => {
-        const transformer =
-            superJson.customTransformerRegistry.findApplicable(value);
+        const transformer = superJson.customTransformerRegistry.findApplicable(value);
         return ['custom', transformer.name];
     },
     (value, superJson) => {
-        const transformer =
-            superJson.customTransformerRegistry.findApplicable(value);
+        const transformer = superJson.customTransformerRegistry.findApplicable(value);
         return transformer.serialize(value);
     },
     (v, a, superJson) => {
-        const transformer = superJson.customTransformerRegistry.findByName(
-            a[1]
-        );
+        const transformer = superJson.customTransformerRegistry.findByName(a[1]);
         if (!transformer) {
             throw new Error('Trying to deserialize unknown custom value');
         }
@@ -4545,9 +4268,7 @@ var transformValue = (value, superJson) => {
             type: applicableCompositeRule.annotation(value, superJson)
         };
     }
-    const applicableSimpleRule = findArr(simpleRules, rule =>
-        rule.isApplicable(value, superJson)
-    );
+    const applicableSimpleRule = findArr(simpleRules, rule => rule.isApplicable(value, superJson));
     if (applicableSimpleRule) {
         return {
             value: applicableSimpleRule.transform(value, superJson),
@@ -4700,9 +4421,7 @@ function traverse(tree, walker2, origin = []) {
         return;
     }
     if (!isArray(tree)) {
-        forEach(tree, (subtree, key) =>
-            traverse(subtree, walker2, [...origin, ...parsePath(key)])
-        );
+        forEach(tree, (subtree, key) => traverse(subtree, walker2, [...origin, ...parsePath(key)]));
         return;
     }
     const [nodeValue, children] = tree;
@@ -4761,16 +4480,13 @@ function generateReferentialEqualityAnnotations(identitites, dedupe) {
             return;
         }
         if (!dedupe) {
-            paths = paths
-                .map(path => path.map(String))
-                .sort((a, b) => a.length - b.length);
+            paths = paths.map(path => path.map(String)).sort((a, b) => a.length - b.length);
         }
         const [representativePath, ...identicalPaths] = paths;
         if (representativePath.length === 0) {
             rootEqualityPaths = identicalPaths.map(stringifyPath);
         } else {
-            result[stringifyPath(representativePath)] =
-                identicalPaths.map(stringifyPath);
+            result[stringifyPath(representativePath)] = identicalPaths.map(stringifyPath);
         }
     });
     if (rootEqualityPaths) {
@@ -4827,20 +4543,13 @@ var walker = (
     }
     const transformationResult = transformValue(object, superJson);
     const transformed =
-        (_a25 =
-            transformationResult == null
-                ? void 0
-                : transformationResult.value) != null
+        (_a25 = transformationResult == null ? void 0 : transformationResult.value) != null
             ? _a25
             : object;
     const transformedValue = isArray(transformed) ? [] : {};
     const innerAnnotations = {};
     forEach(transformed, (value, index) => {
-        if (
-            index === '__proto__' ||
-            index === 'constructor' ||
-            index === 'prototype'
-        ) {
+        if (index === '__proto__' || index === 'constructor' || index === 'prototype') {
             throw new Error(
                 `Detected property ${index}. This is a prototype pollution risk, please remove it from your object.`
             );
@@ -4866,9 +4575,7 @@ var walker = (
     const result = isEmptyObject(innerAnnotations)
         ? {
               transformedValue,
-              annotations: !!transformationResult
-                  ? [transformationResult.type]
-                  : void 0
+              annotations: !!transformationResult ? [transformationResult.type] : void 0
           }
         : {
               transformedValue,
@@ -4892,22 +4599,14 @@ function isArray2(payload) {
 function isPlainObject3(payload) {
     if (getType2(payload) !== 'Object') return false;
     const prototype = Object.getPrototypeOf(payload);
-    return (
-        !!prototype &&
-        prototype.constructor === Object &&
-        prototype === Object.prototype
-    );
+    return !!prototype && prototype.constructor === Object && prototype === Object.prototype;
 }
 function isNull2(payload) {
     return getType2(payload) === 'Null';
 }
 function isOneOf(a, b, c, d, e) {
     return value =>
-        a(value) ||
-        b(value) ||
-        (!!c && c(value)) ||
-        (!!d && d(value)) ||
-        (!!e && e(value));
+        a(value) || b(value) || (!!c && c(value)) || (!!d && d(value)) || (!!e && e(value));
 }
 function isUndefined2(payload) {
     return getType2(payload) === 'Undefined';
@@ -4972,10 +4671,7 @@ var SuperJSON = class {
                 values: output.annotations
             };
         }
-        const equalityAnnotations = generateReferentialEqualityAnnotations(
-            identities,
-            this.dedupe
-        );
+        const equalityAnnotations = generateReferentialEqualityAnnotations(identities, this.dedupe);
         if (equalityAnnotations) {
             res.meta = {
                 ...res.meta,
@@ -4991,10 +4687,7 @@ var SuperJSON = class {
             result = applyValueAnnotations(result, meta.values, this);
         }
         if (meta == null ? void 0 : meta.referentialEqualities) {
-            result = applyReferentialEqualityAnnotations(
-                result,
-                meta.referentialEqualities
-            );
+            result = applyReferentialEqualityAnnotations(result, meta.referentialEqualities);
         }
         return result;
     }
@@ -5021,27 +4714,13 @@ var SuperJSON = class {
     }
 };
 SuperJSON.defaultInstance = new SuperJSON();
-SuperJSON.serialize = SuperJSON.defaultInstance.serialize.bind(
-    SuperJSON.defaultInstance
-);
-SuperJSON.deserialize = SuperJSON.defaultInstance.deserialize.bind(
-    SuperJSON.defaultInstance
-);
-SuperJSON.stringify = SuperJSON.defaultInstance.stringify.bind(
-    SuperJSON.defaultInstance
-);
-SuperJSON.parse = SuperJSON.defaultInstance.parse.bind(
-    SuperJSON.defaultInstance
-);
-SuperJSON.registerClass = SuperJSON.defaultInstance.registerClass.bind(
-    SuperJSON.defaultInstance
-);
-SuperJSON.registerSymbol = SuperJSON.defaultInstance.registerSymbol.bind(
-    SuperJSON.defaultInstance
-);
-SuperJSON.registerCustom = SuperJSON.defaultInstance.registerCustom.bind(
-    SuperJSON.defaultInstance
-);
+SuperJSON.serialize = SuperJSON.defaultInstance.serialize.bind(SuperJSON.defaultInstance);
+SuperJSON.deserialize = SuperJSON.defaultInstance.deserialize.bind(SuperJSON.defaultInstance);
+SuperJSON.stringify = SuperJSON.defaultInstance.stringify.bind(SuperJSON.defaultInstance);
+SuperJSON.parse = SuperJSON.defaultInstance.parse.bind(SuperJSON.defaultInstance);
+SuperJSON.registerClass = SuperJSON.defaultInstance.registerClass.bind(SuperJSON.defaultInstance);
+SuperJSON.registerSymbol = SuperJSON.defaultInstance.registerSymbol.bind(SuperJSON.defaultInstance);
+SuperJSON.registerCustom = SuperJSON.defaultInstance.registerCustom.bind(SuperJSON.defaultInstance);
 SuperJSON.allowErrorProps = SuperJSON.defaultInstance.allowErrorProps.bind(
     SuperJSON.defaultInstance
 );

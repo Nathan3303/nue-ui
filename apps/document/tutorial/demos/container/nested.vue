@@ -1,49 +1,40 @@
 <template>
-    <nue-div class="wrapper">
-        <nue-container class="vp-raw">
+    <nue-container theme="custom">
+        <nue-container theme="aside" width="30%">
+            <nue-header>LOGO</nue-header>
+            <nue-main>
+                <nue-content>侧栏主体</nue-content>
+            </nue-main>
+        </nue-container>
+        <nue-separator op-target="previous" />
+        <nue-container>
             <nue-header>头部</nue-header>
-            <nue-main aside-width="140px" outline-width="140px">
-                <template #aside>侧栏</template>
-                <template #content>
-                    <nue-container
-                        style="height: 100% !important"
-                        theme="inner,vertical"
-                    >
-                        <nue-header>嵌套头部</nue-header>
-                        <nue-main>嵌套内容</nue-main>
-                        <nue-footer>嵌套底部</nue-footer>
-                    </nue-container>
-                </template>
-                <template #outline>侧栏</template>
+            <nue-main>
+                <nue-content>主体</nue-content>
             </nue-main>
             <nue-footer>底部</nue-footer>
         </nue-container>
-    </nue-div>
+    </nue-container>
 </template>
 
 <style scoped>
-.wrapper {
-    border: 1px solid var(--nue-divider-color);
-    border-radius: var(--nue-primary-radius);
+.nue-container--custom {
+    flex-direction: row;
     height: 512px;
-    overflow: hidden;
 
-    .nue-container {
-        & > .nue-header {
-            background-color: #eefaf2;
-        }
-
-        & > .nue-main {
-            background-color: #f0f5fc;
-
-            &:deep(.nue-aside) {
-                background-color: #f8edfa;
-            }
-        }
-
-        & > .nue-footer {
-            background-color: #fdf5ef;
-        }
+    .nue-header {
+        height: 3rem;
+        flex: none;
     }
+
+    .nue-content {
+        padding: 1rem;
+    }
+}
+
+.nue-container--aside {
+    min-width: 15%;
+    max-width: 45%;
+    flex: none;
 }
 </style>

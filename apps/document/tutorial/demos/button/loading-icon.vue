@@ -1,5 +1,7 @@
 <template>
-    <nue-button :loading="loading" icon="search" @click="changeLoading">搜索</nue-button>
+    <nue-button :loading="loading" icon="search" loading-icon="scan" @click="changeLoading">
+        搜索
+    </nue-button>
 </template>
 
 <script setup>
