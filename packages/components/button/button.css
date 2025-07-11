@@ -4,9 +4,9 @@
     --nue-button-border-radius: 6px;
     --nue-button-box-shadow: 0 0 3px 1px rgba(200, 200, 200, 0.3);
     --nue-button-bg-color: transparent;
-    --nue-button-padding: calc(0.4 * var(--nue-button-height));
+    --nue-button-padding: calc(0.4375 * var(--nue-button-height));
     --nue-button-gap: calc(0.5 * var(--nue-button-padding));
-    --nue-button-font-size: calc(0.4 * var(--nue-button-height));
+    --nue-button-font-size: calc(0.4375 * var(--nue-button-height));
     --nue-button-icon-size: var(--nue-button-font-size);
     --nue-button-hover-bg-color: #cccccc;
     --nue-button-active-bg-color: #acacac;
@@ -20,10 +20,10 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
     transition: all 0.16s ease-out;
     flex: none;
+    user-select: none;
+    -webkit-user-select: none;
 
     height: var(--nue-button-height);
     gap: var(--nue-button-gap);

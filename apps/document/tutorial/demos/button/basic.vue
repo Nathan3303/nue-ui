@@ -1,7 +1,0 @@
-<script lang="ts" setup></script>
-
-<template>
-    <nue-button>按钮 (Button)</nue-button>
-</template>
-
-<style scoped></style>

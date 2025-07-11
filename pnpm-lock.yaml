@@ -133,10 +133,10 @@ importers:
         specifier: ^5.3.0
         version: 5.5.4
       '@vitepress-demo-preview/component':
-        specifier: file:./vitepress-demo-preview/component
+        specifier: file:vitepress-demo-preview\component
         version: file:apps/document/vitepress-demo-preview/component
       '@vitepress-demo-preview/plugin':
-        specifier: file:./vitepress-demo-preview/plugin
+        specifier: file:vitepress-demo-preview\plugin
         version: file:apps/document/vitepress-demo-preview/plugin
       markdown-it:
         specifier: ^13.0.1
@@ -2949,9 +2949,11 @@ packages:
 
   lodash.get@4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+    deprecated: This package is deprecated. Use the optional chaining (?.) operator instead.
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.memoize@4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}

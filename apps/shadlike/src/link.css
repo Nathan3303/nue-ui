@@ -1,11 +1,11 @@
 .nue-link--rl {
     --nue-link-height: 2rem;
-    --nue-link-padding: calc(0.4 * var(--nue-link-height));
+    --nue-link-padding: calc(0.4375 * var(--nue-link-height));
     --nue-link-gap: calc(0.5 * var(--nue-link-padding));
     --nue-link-border-color: transparent;
     --nue-link-border-radius: 6px;
     --nue-link-box-shadow: 0 0 3px 1px rgba(200, 200, 200, 0.3);
-    --nue-link-font-size: calc(0.4 * var(--nue-link-height));
+    --nue-link-font-size: calc(0.4375 * var(--nue-link-height));
     --nue-link-icon-size: var(--nue-link-font-size);
     --nue-link-color: var(--nue-primary-text-color);
     --nue-link-hover-color: var(--nue-primary-text-color);

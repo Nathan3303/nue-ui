@@ -45,18 +45,14 @@
     overflow: hidden;
 }
 .vitepress-demo-preview__ant-design__container .vitepress-demo-preview-preview,
-.vitepress-demo-preview__ant-design__container
-    .vitepress-demo-preview-description,
+.vitepress-demo-preview__ant-design__container .vitepress-demo-preview-description,
 .vitepress-demo-preview__ant-design__container .vitepress-demo-preview-source {
     width: 100%;
 }
-.vitepress-demo-preview__ant-design__container
-    > .vitepress-demo-preview-preview {
+.vitepress-demo-preview__ant-design__container > .vitepress-demo-preview-preview {
     padding: 20px 20px 30px;
 }
-.vitepress-demo-preview__ant-design__container
-    > .vitepress-demo-preview-preview
-    > p {
+.vitepress-demo-preview__ant-design__container > .vitepress-demo-preview-preview > p {
     margin: 0;
     padding: 0;
 }
@@ -123,8 +119,7 @@
     svg:not(:last-of-type) {
     margin-right: 8px;
 }
-.vitepress-demo-preview__ant-design__container
-    > .vitepress-demo-preview-source {
+.vitepress-demo-preview__ant-design__container > .vitepress-demo-preview-source {
     overflow: hidden;
     transition: all 0.3s ease-in-out;
 }
@@ -145,21 +140,15 @@
     margin: 10px 0;
     overflow: hidden;
 }
-.vitepress-demo-preview__element-plus__container
-    .vitepress-demo-preview-preview,
-.vitepress-demo-preview__element-plus__container
-    .vitepress-demo-preview-description,
-.vitepress-demo-preview__element-plus__container
-    .vitepress-demo-preview-source {
+.vitepress-demo-preview__element-plus__container .vitepress-demo-preview-preview,
+.vitepress-demo-preview__element-plus__container .vitepress-demo-preview-description,
+.vitepress-demo-preview__element-plus__container .vitepress-demo-preview-source {
     width: 100%;
 }
-.vitepress-demo-preview__element-plus__container
-    > .vitepress-demo-preview-preview {
+.vitepress-demo-preview__element-plus__container > .vitepress-demo-preview-preview {
     padding: 20px 20px 30px;
 }
-.vitepress-demo-preview__element-plus__container
-    > .vitepress-demo-preview-preview
-    > p {
+.vitepress-demo-preview__element-plus__container > .vitepress-demo-preview-preview > p {
     margin: 0;
     padding: 0;
 }
@@ -227,8 +216,7 @@
     svg:not(:last-of-type) {
     margin-right: 8px;
 }
-.vitepress-demo-preview__element-plus__container
-    > .vitepress-demo-preview-source {
+.vitepress-demo-preview__element-plus__container > .vitepress-demo-preview-source {
     overflow: hidden;
     transition: all 0.3s ease-in-out;
 }
@@ -273,15 +261,12 @@
     margin: 10px 0;
     overflow: hidden;
 }
-.vitepress-demo-preview__naive-ui__container
-    .vitepress-demo-preview-name_handle,
-.vitepress-demo-preview__naive-ui__container
-    .vitepress-demo-preview-description,
+.vitepress-demo-preview__naive-ui__container .vitepress-demo-preview-name_handle,
+.vitepress-demo-preview__naive-ui__container .vitepress-demo-preview-description,
 .vitepress-demo-preview__naive-ui__container .vitepress-demo-preview-source {
     width: 100%;
 }
-.vitepress-demo-preview__naive-ui__container
-    > .vitepress-demo-preview-name_handle {
+.vitepress-demo-preview__naive-ui__container > .vitepress-demo-preview-name_handle {
     padding: 20px;
     display: flex;
     align-items: center;
@@ -314,16 +299,13 @@
     svg:not(:last-of-type) {
     margin-right: 8px;
 }
-.vitepress-demo-preview__naive-ui__container
-    > .vitepress-demo-preview-description {
+.vitepress-demo-preview__naive-ui__container > .vitepress-demo-preview-description {
     padding: 0 20px 20px;
 }
 .vitepress-demo-preview__naive-ui__container > .vitepress-demo-preview-preview {
     padding: 0 20px 20px;
 }
-.vitepress-demo-preview__naive-ui__container
-    > .vitepress-demo-preview-preview
-    > p {
+.vitepress-demo-preview__naive-ui__container > .vitepress-demo-preview-preview > p {
     margin: 0;
     padding: 0;
 }

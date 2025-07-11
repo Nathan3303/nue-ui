@@ -20,5 +20,10 @@
         &:is(sup) {
             transform: translate(50%, -50%);
         }
+
+        &:is(span) {
+            --nue-badge-height: 0.5rem;
+            background-color: var(--nue-badge-bg-color);
+        }
     }
 }

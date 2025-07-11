@@ -1,9 +1,9 @@
 .nue-checkbox {
     --nue-checkbox-height: 2rem;
-    --nue-checkbox-padding: calc(0.4 * var(--nue-checkbox-height));
+    --nue-checkbox-padding: calc(0.4375 * var(--nue-checkbox-height));
     --nue-checkbox-gap: calc(0.5 * var(--nue-checkbox-padding));
-    --nue-checkbox-label-size: calc(0.4 * var(--nue-checkbox-height));
-    --nue-checkbox-icon-size: calc(var(--nue-checkbox-label-size) + 0.4rem);
+    --nue-checkbox-label-size: calc(0.4375 * var(--nue-checkbox-height));
+    --nue-checkbox-icon-size: calc(var(--nue-checkbox-label-size) + 0.25rem);
     --nue-checkbox-icon-color: inherit;
 
     display: flex;
@@ -22,8 +22,8 @@
     padding: 0 var(--nue-checkbox-padding);
 
     .nue-checkbox__icon {
-        --icon-size: var(--nue-checkbox-icon-size);
-        --icon-color: var(--nue-checkbox-icon-color);
+        --nue-icon-size: var(--nue-checkbox-icon-size);
+        --nue-icon-color: var(--nue-checkbox-icon-color);
     }
 
     .nue-checkbox__label {

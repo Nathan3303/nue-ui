@@ -12,7 +12,7 @@
     --nue-link-hover-text-decoration: underline;
     --nue-link-disable-color: #9e9e9e;
     --nue-link-disable-border-color: transparent;
-    --nue-link-disable-background-color: #cccccc99;
+    --nue-link-disable-background-color: transparent;
     --nue-link-actived-color: #0754ff;
 
     color: var(--nue-link-color);
@@ -45,6 +45,6 @@
     }
 
     &.nue-link--actived {
-        color: var(--nue-link-actived-color);
+        --nue-link-color: var(--nue-link-actived-color);
     }
 }

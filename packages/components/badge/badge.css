@@ -5,6 +5,8 @@
     --nue-badge-font-size: 0.75rem;
     --nue-badge-color: white;
 
+    width: fit-content;
+    height: fit-content;
     position: relative;
     flex: none;
     user-select: none;
@@ -17,23 +19,21 @@
         padding: 0 var(--nue-badge-vgap);
         box-sizing: border-box;
 
-        &:is(sup) .nue-text {
-            color: var(--nue-badge-color);
-            font-size: var(--nue-badge-font-size);
+        &:is(sup) {
+            position: absolute;
+            right: 0;
+            top: 0;
+            transform: translate(50%, -60%);
+
+            .nue-text {
+                color: var(--nue-badge-color);
+                font-size: var(--nue-badge-font-size);
+            }
         }
 
         &:is(span) {
             background-color: transparent;
             font-size: var(--nue-badge-font-size);
-        }
-
-        &:is(sup) {
-            --nue-badge-sup-offset: calc(var(--nue-badge-height) / 2);
-
-            position: absolute;
-            right: 0;
-            top: 0;
-            transform: translate(50%, -60%);
         }
     }
 }

@@ -1,7 +1,6 @@
 import type { GlobalProps } from '@nue-ui/utils';
 
 export interface NueContainerProps extends GlobalProps {
-    type?: 'grid' | 'flex';
     height?: string;
     width?: string;
 }

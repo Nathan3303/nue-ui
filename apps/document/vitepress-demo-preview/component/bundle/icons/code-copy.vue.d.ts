@@ -9,8 +9,15 @@ declare const _default: import('vue').DefineComponent<
     {},
     string,
     import('vue').PublicProps,
-    Readonly<import('vue').ExtractPropTypes<{}>>,
+    Readonly<{}> & Readonly<{}>,
     {},
-    {}
+    {},
+    {},
+    {},
+    string,
+    import('vue').ComponentProvideOptions,
+    true,
+    {},
+    any
 >;
 export default _default;

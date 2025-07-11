@@ -15,7 +15,7 @@ const props = defineProps<NueContainerProps>();
 
 const classes = computed(() => {
     const prefix = 'nue-container';
-    return [prefix, `${prefix}--${props.type}`, ...parseTheme(props.theme, prefix)];
+    return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
 const styles = computed(() => ({
