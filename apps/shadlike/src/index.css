@@ -84,16 +84,12 @@ html.nue-html {
     font-size: var(--nue-primary-font-size-base);
     font-weight: var(--nue-primary-font-weight);
 
-    /* unknown attribute */
-    -webkit-text-size-adjust: 100%;
-    tab-size: 4;
-    -webkit-font-smoothing: antialiased;
-    font-synthesis-weight: none;
-    text-rendering: optimizeLegibility;
-    font-optical-sizing: auto;
-    font-feature-settings: normal;
-    font-variation-settings: normal;
-    -webkit-tap-highlight-color: transparent;
+    /* global attribute */
+
+    * {
+        tab-size: 4;
+        font-optical-sizing: auto;
+    }
 
     /* basic support */
 
@@ -114,7 +110,7 @@ html.nue-html {
 
 /* scrollbar */
 
-* {
+html.nue-reset-html * {
     scrollbar-width: thin;
     scrollbar-color: var(--nue-divider-color) transparent;
 

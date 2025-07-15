@@ -11,6 +11,7 @@
     --nue-textarea-max-height: calc(
         calc(var(--nue-textarea-line-height)) * var(--nue-textarea-max-rows)
     );
+    --nue-textarea-min-width: calc(24 * var(--nue-textarea-font-size));
     --nue-textarea-color: #212121;
     --nue-textarea-icon-size: var(--nue-textarea-font-size);
     --nue-textarea-icon-color: var(--nue-textarea-color);
@@ -30,7 +31,7 @@
     flex-direction: column;
     align-items: stretch;
     width: auto;
-    min-width: calc(24 * var(--nue-textarea-font-size));
+    min-width: var(--nue-textarea-min-width);
     padding: var(--nue-textarea-padding);
     border: 1px solid var(--nue-textarea-border-color);
     border-radius: 6px;
@@ -54,6 +55,8 @@
     }
 
     .nue-textarea__textarea {
+        min-width: var(--nue-textarea-min-width);
+        max-width: 100%;
         line-height: var(--nue-textarea-line-height);
         min-height: var(--nue-textarea-min-height);
         max-height: var(--nue-textarea-max-height);

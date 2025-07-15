@@ -2,16 +2,13 @@
     <demo title="基础">
         <nue-div align="center">
             <nue-checkbox v-model="checkbox1" label="基础复选框" />
+            <nue-checkbox v-model="checkbox1" label="基础 Checkbox" />
             <nue-checkbox v-model="checkbox1" disabled label="禁用状态" />
         </nue-div>
     </demo>
     <demo title="加载态">
         <nue-div align="center">
-            <nue-checkbox
-                v-model="checkbox2"
-                :before-check="handleBeforeCheck"
-                :loading="loading"
-            >
+            <nue-checkbox v-model="checkbox2" :before-check="handleBeforeCheck" :loading="loading">
                 {{ loading ? '正在选中...' : '复选框（带有选择前的回调）' }}
             </nue-checkbox>
         </nue-div>

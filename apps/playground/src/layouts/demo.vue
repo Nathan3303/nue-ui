@@ -1,6 +1,6 @@
 <template>
     <nue-container :height="height" class="demo-layout" theme="vertical,inner">
-        <nue-header height="auto">
+        <nue-header height="3rem">
             <nue-text size="df">
                 <slot name="title">{{ title }}</slot>
             </nue-text>

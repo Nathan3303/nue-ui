@@ -1,12 +1,10 @@
 <template>
-    <nue-div>
-        <nue-checkbox
-            v-model="state"
-            :before-check="handleBeforeCheck"
-            :label="label"
-            :loading="loading"
-        />
-    </nue-div>
+    <nue-checkbox
+        v-model="state"
+        :before-check="handleBeforeCheck"
+        :label="label"
+        :loading="loading"
+    />
 </template>
 
 <script lang="ts" setup>
@@ -16,9 +14,7 @@ const state = ref(false);
 const loading = ref(false);
 
 const label = computed(() => {
-    if (loading.value) {
-        return '加载中...';
-    }
+    if (loading.value) return '处理中...';
     return state.value ? '已选中' : '未选中';
 });
 

@@ -1,13 +1,11 @@
 @font-face {
     font-family: 'iconfont'; /* Project id 4165854 */
-    src:
-        url('iconfont.woff2?t=1724922807570') format('woff2'),
-        url('iconfont.ttf?t=1724922807570') format('truetype');
+    src: url('iconfont.woff2?t=1752304831073') format('woff2');
 }
 
 .iconfont {
     font-family: 'iconfont' !important;
-    /*font-size: 16px;*/
+    font-size: 16px;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

@@ -3,16 +3,17 @@
     --nue-icon-color: inherit;
     --nue-icon-size: inherit;
     --nue-icon-weight: inherit;
-    --nue-icon-line-height: 1;
 
-    display: inline-block;
+    &.iconfont {
+        font-size: unset;
+        line-height: 1;
 
-    &.iconfont::before {
-        display: block;
-        color: var(--nue-icon-color);
-        font-size: var(--nue-icon-size);
-        font-weight: var(--nue-icon-weight);
-        line-height: var(--nue-icon-line-height);
+        &:before {
+            /*display: block;*/
+            color: var(--nue-icon-color);
+            font-size: var(--nue-icon-size);
+            font-weight: var(--nue-icon-weight);
+        }
     }
 
     &.nue-icon--spin {

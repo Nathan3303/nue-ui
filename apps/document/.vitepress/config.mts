@@ -111,43 +111,43 @@ export default defineConfig({
                         {
                             text: 'Checkbox 复选框',
                             link: '/tutorial/form/checkbox/index.md'
+                        },
+                        {
+                            text: 'Input 输入框',
+                            link: '/tutorial/form/input/index.md'
+                        },
+                        {
+                            text: 'Select 选择器',
+                            link: '/tutorial/form/select/index.md'
+                        },
+                        {
+                            text: 'Switch 开关',
+                            link: '/tutorial/form/switch/index.md'
+                        },
+                        {
+                            text: 'Textarea 富文本输入框',
+                            link: '/tutorial/form/textarea/index.md'
                         }
-                        // {
-                        //     text: 'Input 输入框',
-                        //     link: '/tutorial/form/input.md'
-                        // },
-                        // {
-                        //     text: 'Select 选择器',
-                        //     link: '/tutorial/form/select.md'
-                        // },
-                        // {
-                        //     text: 'Switch 开关',
-                        //     link: '/tutorial/form/switch.md'
-                        // },
-                        // {
-                        //     text: 'Textarea 富文本输入框',
-                        //     link: '/tutorial/form/textarea.md'
-                        // }
+                    ]
+                },
+                {
+                    text: 'Navigation 导航组件',
+                    items: [
+                        {
+                            text: 'Dropdown 下拉菜单',
+                            link: '/tutorial/navigation/dropdown/index.md'
+                        }
+                    ]
+                },
+                {
+                    text: 'Others 其他组件',
+                    items: [
+                        {
+                            text: 'Divider 分割组件',
+                            link: '/tutorial/others/divider/index.md'
+                        }
                     ]
                 }
-                // {
-                //     text: 'Navigation 导航组件',
-                //     items: [
-                //         {
-                //             text: 'Dropdown 下拉菜单',
-                //             link: '/tutorial/navigation/dropdown.md'
-                //         }
-                //     ]
-                // }
-                // {
-                //     text: 'Others 其他组件',
-                //     items: [
-                //         {
-                //             text: 'Divider 分割组件',
-                //             link: '/tutorial/others/divider.md'
-                //         }
-                //     ]
-                // }
             ],
             '/enhance/': [{}]
         },

@@ -2,8 +2,8 @@
     --nue-checkbox-border-color: transparent;
     --nue-checkbox-border-radius: var(--nue-primary-radius);
     --nue-checkbox-box-shadow: none;
-    --nue-checkbox-label-color: var(--nue-primary-color-900);
-    --nue-checkbox-icon-color: var(--nue-primary-color-900);
+    --nue-checkbox-label-color: var(--nue-primary-color-700);
+    --nue-checkbox-icon-color: var(--nue-primary-color-300);
 
     border: 1px solid var(--nue-checkbox-border-color);
     border-radius: var(--nue-checkbox-border-radius);

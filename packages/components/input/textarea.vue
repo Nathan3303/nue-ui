@@ -66,16 +66,20 @@ const classes = computed(() => {
 
 const rowsStyle = computed(() => {
     const { autosize, rows } = props;
-    if (!autosize) return {};
-    if (typeof autosize === 'boolean') {
-        return {
-            '--nue-textarea-rows': 1,
-            '--nue-textarea-max-rows': rows || 3
-        };
+    const rowsData = { minRows: 3, maxRows: 3 };
+    if (!autosize) {
+        rowsData.minRows = rows || 3;
+        rowsData.maxRows = rows || 3;
+    } else if (typeof autosize === 'boolean') {
+        rowsData.minRows = 1;
+        rowsData.maxRows = rows || Infinity;
+    } else {
+        rowsData.minRows = autosize.minRows;
+        rowsData.maxRows = autosize.maxRows;
     }
     return {
-        '--nue-textarea-rows': autosize.minRows,
-        '--nue-textarea-max-rows': autosize.maxRows
+        '--nue-textarea-rows': rowsData.minRows,
+        '--nue-textarea-max-rows': rowsData.maxRows
     };
 });
 

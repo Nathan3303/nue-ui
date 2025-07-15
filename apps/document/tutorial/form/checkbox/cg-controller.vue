@@ -1,16 +1,7 @@
 <template>
-    <nue-checkbox-group
-        v-model="activeNames"
-        controller-label="全选"
-        use-controller
-    >
-        <nue-div gap="12px" style="margin-top: 12px">
-            <nue-checkbox
-                v-for="name in checkboxes"
-                :key="name"
-                :label="name"
-                :name="name"
-            />
+    <nue-checkbox-group v-model="activeNames" controller-label="全选" use-controller>
+        <nue-div gap="12px">
+            <nue-checkbox v-for="name in checkboxes" :key="name" :label="name" :name="name" />
         </nue-div>
     </nue-checkbox-group>
 </template>

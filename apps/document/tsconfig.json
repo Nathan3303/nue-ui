@@ -2,6 +2,11 @@
     "compilerOptions": {
         "types": [
             "nue-ui/dist/global.d.ts"
+        ],
+        "lib": [
+            "DOM",
+            "ES2020",
+            "ESNext"
         ]
     }
 }
