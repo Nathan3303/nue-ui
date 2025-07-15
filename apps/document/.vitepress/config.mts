@@ -12,7 +12,7 @@ export default defineConfig({
         // https://vitepress.dev/reference/default-theme-config
         nav: [
             { text: '主页', link: '/index.md' },
-            { text: '教程', link: '/tutorial/index.md' },
+            { text: '1.x 教程', link: '/tutorial/index.md' },
             { text: '进阶', link: '/enhance/index.md' }
         ],
         sidebar: {
