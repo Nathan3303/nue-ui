@@ -12,24 +12,3 @@
     vertical-align: baseline;
     zoom: 1;
 }
-
-.app-view {
-    .app-view__aside-collapse-menu {
-        & .nue-collapse-item:first-child {
-            .nue-collapse-item__header {
-                box-shadow: none;
-                height: auto;
-            }
-        }
-
-        .app-view__aside-collapse-menu__item-main {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 4px;
-
-            .nue-link {
-                font-size: var(--nue-text-sm);
-            }
-        }
-    }
-}
