@@ -3,6 +3,7 @@
     --nue-avatar-object-fit: cover;
     --nue-avatar-bg-color: var(--nue-primary-color-400);
     --nue-avatar-color: var(--nue-primary-color-100);
+    --nue-avatar-inner-font-size: calc(0.5 * var(--nue-avatar-size));
 
     width: var(--nue-avatar-size);
     height: var(--nue-avatar-size);
@@ -14,7 +15,7 @@
     border-radius: 6px;
     text-align: center;
     box-sizing: border-box;
-    font-size: calc(0.3 * var(--nue-avatar-size));
+    font-size: var(--nue-avatar-inner-font-size);
     -webkit-user-select: none;
     user-select: none;
 
@@ -29,6 +30,7 @@
 
     .nue-avatar__icon,
     .nue-avatar__text {
-        font-size: calc(0.3 * var(--nue-avatar-size));
+        font-size: var(--nue-avatar-inner-font-size);
+        line-height: var(--nue-avatar-size);
     }
 }
