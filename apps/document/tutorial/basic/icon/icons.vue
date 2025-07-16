@@ -3,8 +3,8 @@
         <nue-input v-model="filterText" clearable icon="filter" placeholder="筛选" />
         <div class="icons">
             <nue-div v-for="icon in filteredIcons" :key="icon" class="icon">
-                <nue-icon :name="icon" />
-                <nue-text>{{ icon }}</nue-text>
+                <nue-icon size="1.75rem" :name="icon" />
+                <nue-text size=".75rem">{{ icon }}</nue-text>
             </nue-div>
         </div>
     </nue-div>
@@ -108,14 +108,6 @@ const filteredIcons = computed(() => {
         gap: 0.5rem;
         height: 96px;
         background-color: white;
-
-        .nue-icon {
-            --icon-size: var(--nue-text-lg);
-        }
-
-        .nue-text {
-            font-size: var(--nue-text-xs);
-        }
     }
 }
 </style>
