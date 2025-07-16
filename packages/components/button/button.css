@@ -6,18 +6,19 @@
     --nue-button-gap: 0.5rem;
     --nue-button-font-size: 0.875rem;
     --nue-button-icon-size: var(--nue-button-font-size);
-    --nue-button-border-color: gray;
-    --nue-button-border-radius: 6px;
-    --nue-button-box-shadow: 0 0 3px 1px rgba(200, 200, 200, 0.3);
+    --nue-button-color: #212121;
     --nue-button-bg-color: transparent;
+    --nue-button-border-color: #e0e0e0;
+    --nue-button-border-radius: 6px;
+    --nue-button-box-shadow: 1px 1px 0.25rem rgba(200, 200, 200, 0.2);
     --nue-button-hover-color: var(--nue-button-color);
-    --nue-button-hover-bg-color: #cccccc;
+    --nue-button-hover-bg-color: #f5f5f5;
     --nue-button-hover-border-color: var(--nue-button-border-color);
     --nue-button-active-color: var(--nue-button-color);
-    --nue-button-active-bg-color: #acacac;
+    --nue-button-active-bg-color: #eeeeee;
     --nue-button-active-border-color: var(--nue-button-border-color);
-    --nue-button-disable-color: gray;
-    --nue-button-disable-bg-color: #cccccc;
+    --nue-button-disable-color: #9e9e9e;
+    --nue-button-disable-bg-color: #f5f5f5;
     --nue-button-disable-border-color: var(--nue-button-border-color);
 
     display: flex;
