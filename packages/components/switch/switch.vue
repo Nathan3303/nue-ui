@@ -9,13 +9,13 @@
             />
         </div>
         <div v-if="showText" class="nue-switch__text">
-            <slot>{{ state ? activeText : inactiveText }}</slot>
+            <slot>{{ text }}</slot>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import { isFunction } from 'lodash-es';
 import { NueIcon } from '../icon';
@@ -46,6 +46,10 @@ const classes = computed(() => {
     ];
 });
 
+const text = computed(() => {
+    return state.value ? props.activeText : props.inactiveText;
+});
+
 const handleClick = async () => {
     const { loading, disabled, beforeSwitch } = props;
     if (loading || disabled) return;
@@ -67,7 +71,7 @@ const handleSwitch = () => {
 };
 
 const handleSetStateWidth = () => {
-    setTimeout(() => {
+    nextTick(() => {
         if (!switchRef.value) return;
         switchRef.value.style.setProperty(
             '--nue-switch-state-width',
@@ -84,6 +88,7 @@ watch(
 
 watch(
     () => state.value,
-    () => handleSetStateWidth()
+    () => handleSetStateWidth(),
+    { immediate: true }
 );
 </script>

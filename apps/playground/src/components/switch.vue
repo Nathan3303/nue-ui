@@ -8,6 +8,12 @@
             {{ sw1 }}
         </nue-div>
     </demo>
+    <demo title="禁用">
+        <nue-div align="center">
+            <nue-switch v-model="sw4.s1" />
+            <nue-switch v-model="sw4.s2" />
+        </nue-div>
+    </demo>
     <demo title="显示 & 自定 内嵌文本">
         <nue-div>
             <nue-switch show-text />
@@ -51,6 +57,7 @@ import Demo from '../layouts/demo.vue';
 const sw1 = ref(false);
 const sw2 = reactive({ loading: true });
 const sw3 = reactive({ value: false, loading: false });
+const sw4 = reactive({ s1: false, s2: true });
 
 const handleBeforeSwitch = async () => {
     sw3.loading = true;
