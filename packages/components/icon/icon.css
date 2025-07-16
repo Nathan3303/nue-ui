@@ -5,11 +5,9 @@
     --nue-icon-weight: inherit;
 
     &.iconfont {
-        font-size: unset;
         line-height: 1;
 
         &:before {
-            /*display: block;*/
             color: var(--nue-icon-color);
             font-size: var(--nue-icon-size);
             font-weight: var(--nue-icon-weight);
