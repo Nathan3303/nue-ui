@@ -1,21 +1,14 @@
 <template>
     <demo title="基础用法">
         <nue-div align="center">
-            <nue-button>简体中文</nue-button>
-            <nue-button icon="theme">前置图标</nue-button>
+            <nue-button icon="theme">中文 English</nue-button>
             <nue-button disabled>禁用状态</nue-button>
         </nue-div>
     </demo>
     <demo title="加载态">
         <nue-div align="center">
-            <nue-button :loading="isSearching" @click="handleSearch">
-                加载状态
-            </nue-button>
-            <nue-button
-                :loading="isSearching"
-                loading-icon="scan"
-                @click="handleSearch"
-            >
+            <nue-button :loading="isSearching" @click="handleSearch">加载状态</nue-button>
+            <nue-button :loading="isSearching" loading-icon="scan" @click="handleSearch">
                 自定加载图标
             </nue-button>
         </nue-div>
@@ -29,9 +22,9 @@
     </demo>
     <demo title="尺寸">
         <nue-div align="center">
-            <nue-button size="small">小尺寸</nue-button>
-            <nue-button>普通尺寸</nue-button>
-            <nue-button size="large">大尺寸</nue-button>
+            <nue-button icon="theme" size="small">小尺寸</nue-button>
+            <nue-button icon="theme">普通尺寸</nue-button>
+            <nue-button icon="theme" size="large">大尺寸</nue-button>
         </nue-div>
     </demo>
     <demo title="样式">
@@ -43,9 +36,7 @@
             <nue-button theme="destructive">破坏</nue-button>
             <nue-button theme="ghost">幽灵</nue-button>
             <nue-button theme="pure">纯净</nue-button>
-            <nue-button :theme="{ round: true, primary: true }">
-                多主题应用：主要+圆角
-            </nue-button>
+            <nue-button :theme="{ round: true, primary: true }">多主题应用：主要+圆角</nue-button>
         </nue-div>
     </demo>
     <demo title="后置插槽">
