@@ -20,8 +20,10 @@
 }
 
 .nue-tooltip {
-    --nue-tooltip-vgap: 0.875rem;
-    --nue-tooltip-font-size: var(--nue-tooltip-vgap);
+    --nue-tooltip-wrapper-gap: 1rem;
+    --nue-tooltip-min-height: 2.25rem;
+    --nue-tooltip-padding: 0.875rem;
+    --nue-tooltip-font-size: 0.875rem;
     --nue-tooltip-font-color: #f5f5f5;
     --nue-tooltip-animation-duration: 0.18s;
     --nue-tooltip-triangle-display: none;
@@ -32,7 +34,8 @@
     width: max-content;
     max-width: 36vw;
     height: max-content;
-    padding: calc(var(--nue-tooltip-vgap) / 2) var(--nue-tooltip-vgap);
+    min-height: var(--nue-tooltip-min-height);
+    padding: calc(var(--nue-tooltip-padding) / 2) var(--nue-tooltip-padding);
     position: absolute;
     background-color: #212121;
     border-radius: 6px;
@@ -40,6 +43,7 @@
     animation-duration: var(--nue-tooltip-animation-duration);
     animation-timing-function: ease;
     animation-fill-mode: forwards;
+    box-sizing: border-box;
 
     .nue-tooltip__padding {
         position: absolute;
@@ -48,14 +52,19 @@
     .nue-tooltip__text {
         color: var(--nue-tooltip-font-color);
         font-size: var(--nue-tooltip-font-size);
+        line-height: 1;
     }
 
     &.nue-tooltip--small {
-        --nue-tooltip-vgap: 0.75rem;
+        --nue-tooltip-min-height: 1.875rem;
+        --nue-tooltip-padding: 0.75rem;
+        --nue-tooltip-font-size: 0.75rem;
     }
 
     &.nue-tooltip--large {
-        --nue-tooltip-vgap: 1.125rem;
+        --nue-tooltip-min-height: 2.625rem;
+        --nue-tooltip-padding: 1rem;
+        --nue-tooltip-font-size: 1rem;
     }
 
     &[data-direction='top'] {
@@ -172,13 +181,53 @@
     }
 }
 
+@keyframes slide-fade-out {
+    to {
+        transform: scale(0.86);
+        opacity: 0;
+    }
+}
+
 @keyframes slide-fade-top {
     0% {
         opacity: 0;
-        transform: translateY(1rem);
+        transform: translateY(var(--nue-tooltip-wrapper-gap));
     }
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes slide-fade-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(calc(0px - var(--nue-tooltip-wrapper-gap)));
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-fade-left {
+    0% {
+        opacity: 0;
+        transform: translateX(var(--nue-tooltip-wrapper-gap));
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-fade-right {
+    0% {
+        opacity: 0;
+        transform: translateX(calc(0px - var(--nue-tooltip-wrapper-gap)));
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
