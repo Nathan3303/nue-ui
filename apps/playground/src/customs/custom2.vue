@@ -4,9 +4,6 @@ import {
     NueDiv,
     NueButton,
     NueDialog,
-    NueConfirm,
-    NuePrompt,
-    NueMessage,
     NueInput,
     NueSelect,
     NueSelectOption
@@ -32,18 +29,6 @@ const handleDialog2Confirm = (close: () => void) => {
         close();
         dialogState.closing = true;
     }, 2000);
-};
-
-const showPromptWithDescription = () => {
-    NueConfirm({
-        title: '确认提示',
-        content: '',
-        confirmButtonText: '确认',
-        cancelButtonText: '取消'
-    }).then(
-        value => NueMessage.success(`输入的文本为：${value as string}`),
-        () => NueMessage.info('操作取消')
-    );
 };
 </script>
 
