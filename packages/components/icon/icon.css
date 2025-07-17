@@ -4,12 +4,16 @@
     --nue-icon-size: inherit;
     --nue-icon-weight: inherit;
 
-    &.iconfont::before {
-        display: block;
-        color: var(--nue-icon-color);
-        font-size: var(--nue-icon-size);
-        font-weight: var(--nue-icon-weight);
-        line-height: var(--nue-icon-size);
+    &.iconfont {
+        display: inline-block;
+
+        &::before {
+            display: block;
+            color: var(--nue-icon-color);
+            font-size: var(--nue-icon-size);
+            font-weight: var(--nue-icon-weight);
+            line-height: var(--nue-icon-size);
+        }
     }
 
     &.nue-icon--spin {
