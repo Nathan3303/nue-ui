@@ -1,4 +1,4 @@
-// ../../node_modules/.pnpm/@vue+devtools-shared@7.6.1/node_modules/@vue/devtools-shared/dist/index.js
+// ../../node_modules/.pnpm/@vue+devtools-shared@7.7.7/node_modules/@vue/devtools-shared/dist/index.js
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -41,7 +41,7 @@ var __toESM = (mod, isNodeMode, target2) => (
     )
 );
 var init_esm_shims = __esm({
-    '../../node_modules/.pnpm/tsup@8.3.0_@microsoft+api-extractor@7.43.0_@types+node@20.16.14__@swc+core@1.5.29_jiti@2.0.0__utvtwgyeu6xd57udthcnogp47u/node_modules/tsup/assets/esm_shims.js'() {
+    '../../node_modules/.pnpm/tsup@8.4.0_@microsoft+api-extractor@7.51.1_@types+node@22.13.14__jiti@2.4.2_postcss@8.5_96eb05a9d65343021e53791dd83f3773/node_modules/tsup/assets/esm_shims.js'() {
         'use strict';
     }
 });
@@ -569,11 +569,11 @@ function createHooks() {
     return new Hookable();
 }
 
-// ../../node_modules/.pnpm/birpc@0.2.19/node_modules/birpc/dist/index.mjs
+// ../../node_modules/.pnpm/birpc@2.5.0/node_modules/birpc/dist/index.mjs
 var { clearTimeout: clearTimeout2, setTimeout: setTimeout2 } = globalThis;
 var random = Math.random.bind(Math);
 
-// ../../node_modules/.pnpm/@vue+devtools-kit@7.6.1/node_modules/@vue/devtools-kit/dist/index.js
+// ../../node_modules/.pnpm/@vue+devtools-kit@7.7.7/node_modules/@vue/devtools-kit/dist/index.js
 var __create2 = Object.create;
 var __defProp2 = Object.defineProperty;
 var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
@@ -616,7 +616,7 @@ var __toESM2 = (mod, isNodeMode, target22) => (
     )
 );
 var init_esm_shims2 = __esm2({
-    '../../node_modules/.pnpm/tsup@8.3.0_@microsoft+api-extractor@7.43.0_@types+node@20.16.14__@swc+core@1.5.29_jiti@2.0.0__utvtwgyeu6xd57udthcnogp47u/node_modules/tsup/assets/esm_shims.js'() {
+    '../../node_modules/.pnpm/tsup@8.4.0_@microsoft+api-extractor@7.51.1_@types+node@22.13.14__jiti@2.4.2_postcss@8.5_96eb05a9d65343021e53791dd83f3773/node_modules/tsup/assets/esm_shims.js'() {
         'use strict';
     }
 });
@@ -2212,45 +2212,6 @@ init_esm_shims2();
 init_esm_shims2();
 init_esm_shims2();
 init_esm_shims2();
-function isReadonly(value) {
-    return !!(
-        value &&
-        value[
-            '__v_isReadonly'
-            /* IS_READONLY */
-        ]
-    );
-}
-function isReactive(value) {
-    if (isReadonly(value)) {
-        return isReactive(
-            value[
-                '__v_raw'
-                /* RAW */
-            ]
-        );
-    }
-    return !!(
-        value &&
-        value[
-            '__v_isReactive'
-            /* IS_REACTIVE */
-        ]
-    );
-}
-function isRef(r) {
-    return !!(r && r.__v_isRef === true);
-}
-function toRaw(observed) {
-    const raw =
-        observed &&
-        observed[
-            '__v_raw'
-            /* RAW */
-        ];
-    return raw ? toRaw(raw) : observed;
-}
-var Fragment = Symbol.for('v-fgt');
 init_esm_shims2();
 function getComponentTypeName(options) {
     var _a25;
@@ -2278,16 +2239,6 @@ function saveComponentGussedName(instance, name) {
 function getAppRecord(instance) {
     if (instance.__VUE_DEVTOOLS_NEXT_APP_RECORD__) return instance.__VUE_DEVTOOLS_NEXT_APP_RECORD__;
     else if (instance.root) return instance.appContext.app.__VUE_DEVTOOLS_NEXT_APP_RECORD__;
-}
-async function getComponentId(options) {
-    const { app, uid, instance } = options;
-    try {
-        if (instance.__VUE_DEVTOOLS_NEXT_UID__) return instance.__VUE_DEVTOOLS_NEXT_UID__;
-        const appRecord = await getAppRecord(app);
-        if (!appRecord) return null;
-        const isRoot = appRecord.rootInstance === instance;
-        return `${appRecord.id}:${isRoot ? 'root' : uid}`;
-    } catch (e) {}
 }
 function isFragment(instance) {
     var _a25, _b25;
@@ -2321,129 +2272,27 @@ function getInstanceName(instance) {
     if (fileName) return fileName;
     return 'Anonymous Component';
 }
+function getUniqueComponentId(instance) {
+    var _a25, _b25, _c;
+    const appId =
+        (_c =
+            (_b25 =
+                (_a25 = instance == null ? void 0 : instance.appContext) == null
+                    ? void 0
+                    : _a25.app) == null
+                ? void 0
+                : _b25.__VUE_DEVTOOLS_NEXT_APP_RECORD_ID__) != null
+            ? _c
+            : 0;
+    const instanceId =
+        instance === (instance == null ? void 0 : instance.root) ? 'root' : instance.uid;
+    return `${appId}:${instanceId}`;
+}
 function getComponentInstance(appRecord, instanceId) {
     instanceId = instanceId || `${appRecord.id}:root`;
     const instance = appRecord.instanceMap.get(instanceId);
     return instance || appRecord.instanceMap.get(':root');
 }
-var StateEditor = class {
-    constructor() {
-        this.refEditor = new RefStateEditor();
-    }
-    set(object, path, value, cb) {
-        const sections = Array.isArray(path) ? path : path.split('.');
-        const markRef = false;
-        while (sections.length > 1) {
-            const section = sections.shift();
-            if (object instanceof Map) object = object.get(section);
-            if (object instanceof Set) object = Array.from(object.values())[section];
-            else object = object[section];
-            if (this.refEditor.isRef(object)) object = this.refEditor.get(object);
-        }
-        const field = sections[0];
-        const item = this.refEditor.get(object)[field];
-        if (cb) {
-            cb(object, field, value);
-        } else {
-            if (this.refEditor.isRef(item)) this.refEditor.set(item, value);
-            else if (markRef) object[field] = value;
-            else object[field] = value;
-        }
-    }
-    get(object, path) {
-        const sections = Array.isArray(path) ? path : path.split('.');
-        for (let i = 0; i < sections.length; i++) {
-            if (object instanceof Map) object = object.get(sections[i]);
-            else object = object[sections[i]];
-            if (this.refEditor.isRef(object)) object = this.refEditor.get(object);
-            if (!object) return void 0;
-        }
-        return object;
-    }
-    has(object, path, parent = false) {
-        if (typeof object === 'undefined') return false;
-        const sections = Array.isArray(path) ? path.slice() : path.split('.');
-        const size = !parent ? 1 : 2;
-        while (object && sections.length > size) {
-            const section = sections.shift();
-            object = object[section];
-            if (this.refEditor.isRef(object)) object = this.refEditor.get(object);
-        }
-        return object != null && Object.prototype.hasOwnProperty.call(object, sections[0]);
-    }
-    createDefaultSetCallback(state) {
-        return (object, field, value) => {
-            if (state.remove || state.newKey) {
-                if (Array.isArray(object)) object.splice(field, 1);
-                else if (toRaw(object) instanceof Map) object.delete(field);
-                else if (toRaw(object) instanceof Set)
-                    object.delete(Array.from(object.values())[field]);
-                else Reflect.deleteProperty(object, field);
-            }
-            if (!state.remove) {
-                const target22 = object[state.newKey || field];
-                if (this.refEditor.isRef(target22)) this.refEditor.set(target22, value);
-                else if (toRaw(object) instanceof Map) object.set(state.newKey || field, value);
-                else if (toRaw(object) instanceof Set) object.add(value);
-                else object[state.newKey || field] = value;
-            }
-        };
-    }
-};
-var RefStateEditor = class {
-    set(ref, value) {
-        if (isRef(ref)) {
-            ref.value = value;
-        } else {
-            if (ref instanceof Set && Array.isArray(value)) {
-                ref.clear();
-                value.forEach(v => ref.add(v));
-                return;
-            }
-            const currentKeys = Object.keys(value);
-            if (ref instanceof Map) {
-                const previousKeysSet2 = new Set(ref.keys());
-                currentKeys.forEach(key => {
-                    ref.set(key, Reflect.get(value, key));
-                    previousKeysSet2.delete(key);
-                });
-                previousKeysSet2.forEach(key => ref.delete(key));
-                return;
-            }
-            const previousKeysSet = new Set(Object.keys(ref));
-            currentKeys.forEach(key => {
-                Reflect.set(ref, key, Reflect.get(value, key));
-                previousKeysSet.delete(key);
-            });
-            previousKeysSet.forEach(key => Reflect.deleteProperty(ref, key));
-        }
-    }
-    get(ref) {
-        return isRef(ref) ? ref.value : ref;
-    }
-    isRef(ref) {
-        return isRef(ref) || isReactive(ref);
-    }
-};
-var stateEditor = new StateEditor();
-init_esm_shims2();
-function getRootElementsFromComponentInstance(instance) {
-    if (isFragment(instance)) return getFragmentRootElements(instance.subTree);
-    if (!instance.subTree) return [];
-    return [instance.subTree.el];
-}
-function getFragmentRootElements(vnode) {
-    if (!vnode.children) return [];
-    const list = [];
-    vnode.children.forEach(childVnode => {
-        if (childVnode.component)
-            list.push(...getRootElementsFromComponentInstance(childVnode.component));
-        else if (childVnode == null ? void 0 : childVnode.el) list.push(childVnode.el);
-    });
-    return list;
-}
-init_esm_shims2();
-init_esm_shims2();
 function createRect() {
     const rect = {
         top: 0,
@@ -2509,6 +2358,22 @@ function getComponentBoundingRect(instance) {
     else if (instance.subTree.component)
         return getComponentBoundingRect(instance.subTree.component);
     else return DEFAULT_RECT;
+}
+init_esm_shims2();
+function getRootElementsFromComponentInstance(instance) {
+    if (isFragment(instance)) return getFragmentRootElements(instance.subTree);
+    if (!instance.subTree) return [];
+    return [instance.subTree.el];
+}
+function getFragmentRootElements(vnode) {
+    if (!vnode.children) return [];
+    const list = [];
+    vnode.children.forEach(childVnode => {
+        if (childVnode.component)
+            list.push(...getRootElementsFromComponentInstance(childVnode.component));
+        else if (childVnode == null ? void 0 : childVnode.el) list.push(childVnode.el);
+    });
+    return list;
 }
 var CONTAINER_ELEMENT_ID = '__vue-devtools-component-inspector__';
 var CARD_ELEMENT_ID = '__vue-devtools-component-inspector__card__';
@@ -2612,6 +2477,7 @@ function update(options) {
 }
 function highlight(instance) {
     const bounds = getComponentBoundingRect(instance);
+    if (!bounds.width && !bounds.height) return;
     const name = getInstanceName(instance);
     const container = getContainerElement();
     container ? update({ bounds, name }) : create({ bounds, name });
@@ -2638,18 +2504,11 @@ function inspectFn(e) {
     }
 }
 function selectComponentFn(e, cb) {
-    var _a25;
     e.preventDefault();
     e.stopPropagation();
     if (inspectInstance) {
-        const app = (_a25 = activeAppRecord.value) == null ? void 0 : _a25.app;
-        getComponentId({
-            app,
-            uid: app.uid,
-            instance: inspectInstance
-        }).then(id => {
-            cb(id);
-        });
+        const uniqueComponentId = getUniqueComponentId(inspectInstance);
+        cb(uniqueComponentId);
     }
 }
 var inspectComponentHighLighterSelectFn = null;
@@ -2757,6 +2616,147 @@ function getComponentInspector() {
 }
 init_esm_shims2();
 init_esm_shims2();
+function isReadonly(value) {
+    return !!(
+        value &&
+        value[
+            '__v_isReadonly'
+            /* IS_READONLY */
+        ]
+    );
+}
+function isReactive(value) {
+    if (isReadonly(value)) {
+        return isReactive(
+            value[
+                '__v_raw'
+                /* RAW */
+            ]
+        );
+    }
+    return !!(
+        value &&
+        value[
+            '__v_isReactive'
+            /* IS_REACTIVE */
+        ]
+    );
+}
+function isRef(r) {
+    return !!(r && r.__v_isRef === true);
+}
+function toRaw(observed) {
+    const raw =
+        observed &&
+        observed[
+            '__v_raw'
+            /* RAW */
+        ];
+    return raw ? toRaw(raw) : observed;
+}
+var Fragment = Symbol.for('v-fgt');
+var StateEditor = class {
+    constructor() {
+        this.refEditor = new RefStateEditor();
+    }
+    set(object, path, value, cb) {
+        const sections = Array.isArray(path) ? path : path.split('.');
+        const markRef = false;
+        while (sections.length > 1) {
+            const section = sections.shift();
+            if (object instanceof Map) object = object.get(section);
+            else if (object instanceof Set) object = Array.from(object.values())[section];
+            else object = object[section];
+            if (this.refEditor.isRef(object)) object = this.refEditor.get(object);
+        }
+        const field = sections[0];
+        const item = this.refEditor.get(object)[field];
+        if (cb) {
+            cb(object, field, value);
+        } else {
+            if (this.refEditor.isRef(item)) this.refEditor.set(item, value);
+            else if (markRef) object[field] = value;
+            else object[field] = value;
+        }
+    }
+    get(object, path) {
+        const sections = Array.isArray(path) ? path : path.split('.');
+        for (let i = 0; i < sections.length; i++) {
+            if (object instanceof Map) object = object.get(sections[i]);
+            else object = object[sections[i]];
+            if (this.refEditor.isRef(object)) object = this.refEditor.get(object);
+            if (!object) return void 0;
+        }
+        return object;
+    }
+    has(object, path, parent = false) {
+        if (typeof object === 'undefined') return false;
+        const sections = Array.isArray(path) ? path.slice() : path.split('.');
+        const size = !parent ? 1 : 2;
+        while (object && sections.length > size) {
+            const section = sections.shift();
+            object = object[section];
+            if (this.refEditor.isRef(object)) object = this.refEditor.get(object);
+        }
+        return object != null && Object.prototype.hasOwnProperty.call(object, sections[0]);
+    }
+    createDefaultSetCallback(state) {
+        return (object, field, value) => {
+            if (state.remove || state.newKey) {
+                if (Array.isArray(object)) object.splice(field, 1);
+                else if (toRaw(object) instanceof Map) object.delete(field);
+                else if (toRaw(object) instanceof Set)
+                    object.delete(Array.from(object.values())[field]);
+                else Reflect.deleteProperty(object, field);
+            }
+            if (!state.remove) {
+                const target22 = object[state.newKey || field];
+                if (this.refEditor.isRef(target22)) this.refEditor.set(target22, value);
+                else if (toRaw(object) instanceof Map) object.set(state.newKey || field, value);
+                else if (toRaw(object) instanceof Set) object.add(value);
+                else object[state.newKey || field] = value;
+            }
+        };
+    }
+};
+var RefStateEditor = class {
+    set(ref, value) {
+        if (isRef(ref)) {
+            ref.value = value;
+        } else {
+            if (ref instanceof Set && Array.isArray(value)) {
+                ref.clear();
+                value.forEach(v => ref.add(v));
+                return;
+            }
+            const currentKeys = Object.keys(value);
+            if (ref instanceof Map) {
+                const previousKeysSet2 = new Set(ref.keys());
+                currentKeys.forEach(key => {
+                    ref.set(key, Reflect.get(value, key));
+                    previousKeysSet2.delete(key);
+                });
+                previousKeysSet2.forEach(key => ref.delete(key));
+                return;
+            }
+            const previousKeysSet = new Set(Object.keys(ref));
+            currentKeys.forEach(key => {
+                Reflect.set(ref, key, Reflect.get(value, key));
+                previousKeysSet.delete(key);
+            });
+            previousKeysSet.forEach(key => Reflect.deleteProperty(ref, key));
+        }
+    }
+    get(ref) {
+        return isRef(ref) ? ref.value : ref;
+    }
+    isRef(ref) {
+        return isRef(ref) || isReactive(ref);
+    }
+};
+var stateEditor = new StateEditor();
+init_esm_shims2();
+init_esm_shims2();
 init_esm_shims2();
 var TIMELINE_LAYERS_STATE_STORAGE_ID = '__VUE_DEVTOOLS_KIT_TIMELINE_LAYERS_STATE__';
 function getTimelineLayersStateFromStorage() {
@@ -2817,9 +2817,14 @@ var callInspectorUpdatedHook = debounce(() => {
     devtoolsContext.hooks.callHook('sendInspectorToClient', getActiveInspectors());
 });
 function addInspector(inspector, descriptor) {
+    var _a25, _b25;
     devtoolsInspector.push({
         options: inspector,
         descriptor,
+        treeFilterPlaceholder:
+            (_a25 = inspector.treeFilterPlaceholder) != null ? _a25 : 'Search tree...',
+        stateFilterPlaceholder:
+            (_b25 = inspector.stateFilterPlaceholder) != null ? _b25 : 'Search state...',
         treeFilter: '',
         selectedNodeId: '',
         appRecord: getAppRecord(descriptor.app)
@@ -3411,6 +3416,9 @@ var DevToolsV6PluginAPI = class {
     // component inspector
     notifyComponentUpdate(instance) {
         var _a25;
+        if (devtoolsState.highPerfModeEnabled) {
+            return;
+        }
         const inspector = getActiveInspectors().find(
             i => i.packageName === this.plugin.descriptor.packageName
         );
@@ -3443,9 +3451,15 @@ var DevToolsV6PluginAPI = class {
         }
     }
     sendInspectorTree(inspectorId) {
+        if (devtoolsState.highPerfModeEnabled) {
+            return;
+        }
         this.hooks.callHook('sendInspectorTree', { inspectorId, plugin: this.plugin });
     }
     sendInspectorState(inspectorId) {
+        if (devtoolsState.highPerfModeEnabled) {
+            return;
+        }
         this.hooks.callHook('sendInspectorState', { inspectorId, plugin: this.plugin });
     }
     selectInspectorNode(inspectorId, nodeId) {
@@ -3460,12 +3474,18 @@ var DevToolsV6PluginAPI = class {
     }
     // timeline
     now() {
+        if (devtoolsState.highPerfModeEnabled) {
+            return 0;
+        }
         return Date.now();
     }
     addTimelineLayer(options) {
         this.hooks.callHook('timelineLayerAdded', { options, plugin: this.plugin });
     }
     addTimelineEvent(options) {
+        if (devtoolsState.highPerfModeEnabled) {
+            return;
+        }
         this.hooks.callHook('timelineEventAdded', { options, plugin: this.plugin });
     }
     // settings
@@ -3547,8 +3567,16 @@ function callDevToolsPluginSetupFn(plugin, app) {
     }
     setupFn(api);
 }
-function registerDevToolsPlugin(app) {
-    if (target.__VUE_DEVTOOLS_KIT__REGISTERED_PLUGIN_APPS__.has(app)) return;
+function registerDevToolsPlugin(app, options) {
+    if (target.__VUE_DEVTOOLS_KIT__REGISTERED_PLUGIN_APPS__.has(app)) {
+        return;
+    }
+    if (
+        devtoolsState.highPerfModeEnabled &&
+        !(options == null ? void 0 : options.inspectingComponent)
+    ) {
+        return;
+    }
     target.__VUE_DEVTOOLS_KIT__REGISTERED_PLUGIN_APPS__.add(app);
     devtoolsPluginBuffer.forEach(plugin => {
         callDevToolsPluginSetupFn(plugin, app);
@@ -3734,7 +3762,7 @@ function createDevToolsApi(hooks2) {
         getComponentRenderCode(id) {
             const instance = getComponentInstance(activeAppRecord.value, id);
             if (instance)
-                return !((instance == null ? void 0 : instance.type) instanceof Function)
+                return !(typeof (instance == null ? void 0 : instance.type) === 'function')
                     ? instance.render.toString()
                     : instance.type.toString();
         },
@@ -3747,14 +3775,14 @@ function createDevToolsApi(hooks2) {
         // get vue inspector
         getVueInspector: getComponentInspector,
         // toggle app
-        toggleApp(id) {
+        toggleApp(id, options) {
             const appRecord = devtoolsAppRecords.value.find(record => record.id === id);
             if (appRecord) {
                 setActiveAppRecordId(id);
                 setActiveAppRecord(appRecord);
                 normalizeRouterInfo(appRecord, activeAppRecord);
                 callInspectorUpdatedHook();
-                registerDevToolsPlugin(appRecord.app);
+                registerDevToolsPlugin(appRecord.app, options);
             }
         },
         // inspect dom
@@ -3815,6 +3843,7 @@ var appRecordInfo =
               id: 0,
               appIds: /* @__PURE__ */ new Set()
           });
+init_esm_shims2();
 function onDevToolsClientConnected(fn) {
     return new Promise(resolve => {
         if (devtoolsState.connected && devtoolsState.clientConnected) {
@@ -3833,6 +3862,9 @@ function onDevToolsClientConnected(fn) {
 init_esm_shims2();
 function toggleHighPerfMode(state) {
     devtoolsState.highPerfModeEnabled = state != null ? state : !devtoolsState.highPerfModeEnabled;
+    if (!state && activeAppRecord.value) {
+        registerDevToolsPlugin(activeAppRecord.value.app);
+    }
 }
 init_esm_shims2();
 init_esm_shims2();
@@ -4231,7 +4263,7 @@ var classRule = compositeTransformation(
         const clazz = superJson.classRegistry.getValue(a[1]);
         if (!clazz) {
             throw new Error(
-                'Trying to deserialize unknown class - check https://github.com/blitz-js/superjson/issues/116#issuecomment-773996564'
+                `Trying to deserialize unknown class '${a[1]}' - check https://github.com/blitz-js/superjson/issues/116#issuecomment-773996564`
             );
         }
         return Object.assign(Object.create(clazz.prototype), v);
@@ -4305,6 +4337,7 @@ var untransformValue = (json, type, superJson) => {
 };
 init_esm_shims2();
 var getNthKey = (value, n) => {
+    if (n > value.size) throw new Error('index out of bounds');
     const keys = value.keys();
     while (n > 0) {
         keys.next();
