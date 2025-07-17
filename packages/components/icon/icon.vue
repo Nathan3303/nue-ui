@@ -7,12 +7,12 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-import type { IconPropsType } from './types';
+import type { NueIconProps } from './types';
 import './icon.css';
 
 defineOptions({ name: 'NueIcon' });
 
-const props = withDefaults(defineProps<IconPropsType>(), {});
+const props = withDefaults(defineProps<NueIconProps>(), {});
 
 const classes = computed(() => {
     const prefix = 'nue-icon';
@@ -27,9 +27,9 @@ const classes = computed(() => {
 
 const styles = computed(() => {
     return {
-        '--icon-size': props.size,
-        '--icon-color': props.color,
-        '--spin-speed': props.spinSpeed
+        '--nue-icon-size': props.size,
+        '--nue-icon-color': props.color,
+        '--nue-icon-spin-speed': props.spinSpeed
     };
 });
 </script>

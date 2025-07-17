@@ -7,42 +7,33 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-import type { TextProps } from './types';
 import { TEXT_SIZE_VALUES } from './constants';
+import type { NueSizeProps } from './types';
 import './text.css';
 
 defineOptions({ name: 'NueText' });
-
-const props = withDefaults(defineProps<TextProps>(), {
+const props = withDefaults(defineProps<NueSizeProps>(), {
     tag: 'span'
 });
 
+const classes = computed(() => {
+    const prefix = 'nue-text';
+    return [prefix, ...parseTheme(props.theme, prefix), props.clamped && `${prefix}--clamped`];
+});
+
 const size = computed(() => {
-    const { size } = props;
-    if (!size) return null;
-    const isPresetValue = TEXT_SIZE_VALUES[size];
-    return isPresetValue || size;
+    if (!props.size) return void 0;
+    return TEXT_SIZE_VALUES[props.size] || props.size;
 });
 
 const style = computed(() => {
-    const { color, decoration, weight, align, clamped } = props;
     return {
-        '--color': color,
-        '--font-size': size.value,
-        '--font-weight': weight,
-        '--text-decoration': decoration,
-        '--text-align': align,
-        '--clamped-lines': clamped
+        '--nue-text-color': props.color,
+        '--nue-text-font-size': size.value,
+        '--nue-text-font-weight': props.weight,
+        '--nue-text-decoration': props.decoration,
+        '--nue-text-align': props.align,
+        '--nue-text-clamped-lines': props.clamped
     };
-});
-
-const classes = computed(() => {
-    const { theme, clamped } = props;
-    const prefix = 'nue-text';
-    let list: string[] = [];
-    list.push(prefix);
-    if (theme) list = list.concat(parseTheme(theme, prefix));
-    if (clamped) list.push(`${prefix}--clamped`);
-    return list;
 });
 </script>

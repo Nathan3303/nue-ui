@@ -1,37 +1,40 @@
-import type { IconNameType } from '../icon';
+import type { NueIconName } from '../icon';
 
-export type MessageType = 'success' | 'error' | 'warning' | 'info' | 'log';
-export type MessageSize = 'small' | 'large';
+export type NueMessageType = 'success' | 'error' | 'warning' | 'info' | 'log';
 
-export type MessageNodeProps = {
+export type NueMessageSize = 'small' | 'large';
+
+export type NueMessageNodeProps = {
     wrapper: HTMLElement;
     node: HTMLElement;
-    icon?: IconNameType;
-    type?: MessageType;
-    size?: MessageSize;
+    icon?: NueIconName;
+    type?: NueMessageType;
+    size?: NueMessageSize;
     message?: string;
     duration?: number;
 };
 
-export type MessagePayloadType = {
+export type NueMessageCallerPayload = {
     message: string;
-    type?: MessageType;
+    type?: NueMessageType;
     duration?: number;
-    icon?: IconNameType;
-    size?: MessageSize;
+    icon?: NueIconName;
+    size?: NueMessageSize;
 };
 
-export type NueMessageSubFnType = (
+export type NueMessageSubCaller = (
     message: string,
     duration?: number,
-    icon?: IconNameType,
-    size?: MessageSize
+    icon?: NueIconName,
+    size?: NueMessageSize
 ) => void;
 
-export type NueMessageType = {
-    success: NueMessageSubFnType;
-    error: NueMessageSubFnType;
-    warn: NueMessageSubFnType;
-    info: NueMessageSubFnType;
-    log: NueMessageSubFnType;
-} & (() => void);
+export interface NueMessageCaller {
+    (payload: NueMessageCallerPayload): void;
+
+    success: NueMessageSubCaller;
+    error: NueMessageSubCaller;
+    warn: NueMessageSubCaller;
+    info: NueMessageSubCaller;
+    log: NueMessageSubCaller;
+}

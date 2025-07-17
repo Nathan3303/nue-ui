@@ -1,69 +1,73 @@
 <template>
-    <demo title="Collapse 折叠面板">
-        <nue-div>
-            <nue-collapse v-model="activeNames1" accordion>
-                <nue-collapse-item name="c1" title="NueUI 组件库描述">
-                    <nue-text size="var(--nue-text-sm)">
-                        NueUI 是一个基于 Vue 的 UI
-                        组件库，它提供了丰富的组件，帮助开发者快速搭建项目，同时，它也提供了丰富的文档和社区支持，
-                        帮助开发者快速上手。NueUI
-                        提供丰富且易于使用的预构建组件，开发者可以快速地将其集成到项目中，
-                        将更多的时间和精力放在业务逻辑的实现上，而不是花费大量时间在界面的搭建上。
-                    </nue-text>
-                </nue-collapse-item>
-                <nue-collapse-item name="c2">
-                    <template #header="{ collapse, state }">
-                        <nue-button
-                            :icon="`arrow-${state ? 'right' : 'down'}`"
-                            theme="small"
-                            @click="collapse"
-                        >
-                            HTML（超文本标记语言）介绍
-                        </nue-button>
-                    </template>
-                    <nue-text size="var(--nue-text-sm)">
-                        HTML（超文本标记语言——HyperText Markup Language）是构成
-                        Web 世界的一砖一瓦。它定义了网页内容的含义和结构。除
-                        HTML
-                        以外的其他技术则通常用来描述一个网页的表现与展示效果（如
-                        CSS），或功能与行为（如 JavaScript）。
-                        “超文本”（hypertext）是指连接单个网站内或多个网站间的网页的链接。链接是网络的一个基本方面。只要将内容上传到互联网，并将其与他人创建的页面相链接，你就成为了万维网的积极参与者。
-                    </nue-text>
-                </nue-collapse-item>
-                <nue-collapse-item name="c3" title="没有内容的折叠面板">
-                </nue-collapse-item>
-            </nue-collapse>
-        </nue-div>
+    <demo title="基础">
+        <nue-collapse v-model="activeNames1" accordion>
+            <nue-collapse-item name="c1" title="NueUI 组件库描述">
+                <nue-text size="var(--nue-text-sm)">
+                    NueUI 是一个基于 Vue 的 UI
+                    组件库，它提供了丰富的组件，帮助开发者快速搭建项目，同时，它也提供了丰富的文档和社区支持，
+                    帮助开发者快速上手。
+                </nue-text>
+            </nue-collapse-item>
+        </nue-collapse>
     </demo>
-    <demo title="Collapse 折叠面板（Menu 主题）">
-        <nue-div align="stretch" style="width: 16rem" theme="card" vertical>
-            <nue-collapse v-model="activeNames2" theme="menu">
-                <nue-collapse-item name="c1" title="菜单 1">
-                    <nue-div align="stretch" gap=".25rem" vertical>
-                        <nue-link theme="rl,actived">链接 1</nue-link>
-                        <nue-link theme="rl">链接 2</nue-link>
-                    </nue-div>
-                </nue-collapse-item>
-                <nue-collapse-item name="c2" title="菜单 2">
-                    <nue-link theme="rl">链接 3</nue-link>
-                </nue-collapse-item>
-            </nue-collapse>
-        </nue-div>
+    <demo title="手风琴模式">
+        <nue-collapse v-model="activeNames2" accordion>
+            <nue-collapse-item name="c1" title="NueUI 组件库描述">
+                <nue-text size="var(--nue-text-sm)">
+                    NueUI 是一个基于 Vue 的 UI
+                    组件库，它提供了丰富的组件，帮助开发者快速搭建项目，同时，它也提供了丰富的文档和社区支持，
+                    帮助开发者快速上手。
+                </nue-text>
+            </nue-collapse-item>
+            <nue-collapse-item name="c2" title="HTML（超文本标记语言）介绍">
+                <nue-text size="var(--nue-text-sm)">
+                    HTML（超文本标记语言——HyperText Markup Language）是构成 Web
+                    世界的一砖一瓦。它定义了网页内容的含义和结构。除 HTML
+                    以外的其他技术则通常用来描述一个网页的表现与展示效果（如
+                    CSS），或功能与行为（如 JavaScript）。
+                </nue-text>
+            </nue-collapse-item>
+        </nue-collapse>
+    </demo>
+    <demo title="空内容">
+        <nue-collapse v-model="activeNames3">
+            <nue-collapse-item name="c1" title="空折叠列表" />
+        </nue-collapse>
+    </demo>
+    <demo title="自定义头部">
+        <nue-collapse v-model="activeNames4">
+            <nue-collapse-item name="c1" title="折叠列表 1">
+                <template #header="{ collapse, state }">
+                    <nue-button
+                        :icon="`arrow-${state ? 'right' : 'down'}`"
+                        theme="small"
+                        @click="collapse"
+                    >
+                        NueUI 组件库描述
+                    </nue-button>
+                </template>
+                <nue-text size="var(--nue-text-sm)">
+                    NueUI 是一个基于 Vue 的 UI
+                    组件库，它提供了丰富的组件，帮助开发者快速搭建项目，同时，它也提供了丰富的文档和社区支持，
+                    帮助开发者快速上手。
+                </nue-text>
+            </nue-collapse-item>
+        </nue-collapse>
     </demo>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import {
-    NueDiv,
     NueText,
-    NueButton,
-    NueLink,
     NueCollapse,
-    NueCollapseItem
+    NueCollapseItem,
+    NueButton
 } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
-const activeNames1 = ref(['c1', 'c2', 'c3']);
-const activeNames2 = ref(['c1', 'c2', 'c3']);
+const activeNames1 = ref([]);
+const activeNames2 = ref([]);
+const activeNames3 = ref([]);
+const activeNames4 = ref([]);
 </script>

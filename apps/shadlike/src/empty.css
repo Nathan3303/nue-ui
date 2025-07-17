@@ -1,0 +1,10 @@
+.nue-empty {
+    .nue-empty__image {
+        border-radius: var(--nue-primary-radius);
+    }
+
+    .nue-empty__description {
+        font-size: var(--nue-text-sm);
+        color: var(--nue-primary-color-600);
+    }
+}

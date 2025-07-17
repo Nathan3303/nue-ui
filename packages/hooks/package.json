@@ -1,10 +1,8 @@
 {
     "name": "@nue-ui/hooks",
-    "version": "0.1.0",
-    "description": "NueUI Hooks",
+    "description": "NueUI hooks package",
     "private": true,
     "main": "index.ts",
-    "scripts": {},
     "author": "Nathan Lee",
     "license": "MIT"
 }

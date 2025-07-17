@@ -29,7 +29,6 @@ import type {
     NueCheckboxGroupEmits,
     NueCheckboxGroupProps
 } from './types';
-import './checkbox-group.css';
 
 defineOptions({ name: 'NueCheckboxGroup' });
 const props = withDefaults(defineProps<NueCheckboxGroupProps>(), {

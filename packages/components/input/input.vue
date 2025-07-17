@@ -45,17 +45,17 @@ import { debounce, parseFlex, parseTheme } from '@nue-ui/utils';
 import { useBoolState } from '@nue-ui/hooks';
 import NueIcon from '../icon/icon.vue';
 import WordCounter from './word-counter.vue';
-import type { InputEmitsType, InputPropsType } from './types';
+import type { NueInputEmits, NueInputProps } from './types';
 import './input.css';
 
 defineOptions({ name: 'NueInput' });
-
-const emit = defineEmits<InputEmitsType>();
-const props = withDefaults(defineProps<InputPropsType>(), {
+const props = withDefaults(defineProps<NueInputProps>(), {
     type: 'text',
     counter: 'off',
-    debounceTime: 0
+    debounceTime: 0,
+    placeholder: 'Input something...'
 });
+const emit = defineEmits<NueInputEmits>();
 
 const inputRef = ref<HTMLInputElement>();
 const [isShowPassword, switchIsShowPassword] = useBoolState(false);

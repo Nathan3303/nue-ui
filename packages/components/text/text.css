@@ -1,93 +1,29 @@
-/* variables */
-
 .nue-text {
-    --color: inherit;
-    --font-size: inherit;
-    --font-weight: inherit;
-    --font-family: inherit;
-    --padding-x: 0px;
-    --padding-y: 0px;
-    --word-wrap: break-word;
-    --word-break: break-all;
-    --flex: 0 1 auto;
-    --background-color: transparent;
-    --clamped-lines: 3;
-    --line-height: normal;
-    --text-align: unset;
-}
+    --nue-text-color: inherit;
+    --nue-text-font-size: inherit;
+    --nue-text-align: initial;
+    --nue-text-decoration: initial;
+    --nue-text-font-weight: initial;
+    --nue-text-line-height: 1.5;
+    --nue-text-clamped-lines: 3;
 
-/* original */
+    color: var(--nue-text-color);
+    font-size: var(--nue-text-font-size);
+    font-weight: var(--nue-text-font-weight);
+    text-align: var(--nue-text-align);
+    text-decoration: var(--nue-text-decoration);
+    line-height: var(--nue-text-line-height);
 
-.nue-text {
-    color: var(--color);
-    text-decoration: var(--text-decoration);
-    text-align: var(--text-align);
-    word-wrap: var(--word-wrap);
-    word-break: var(--word-break);
-    flex: var(--flex);
-    margin: 0;
-    padding: var(--padding-y) var(--padding-x);
-    background-color: var(--background-color);
-    line-height: var(--line-height);
-
-    &:is(h1) {
-        font-size: var(--nue-text-xxxl);
-        font-weight: 800;
-        line-height: 3;
-    }
-
-    &:is(h2) {
-        font-size: var(--nue-text-xxl);
-        font-weight: 700;
-        line-height: 2.75;
-    }
-
-    &:is(h3),
-    &.nue-text--h3 {
-        font-size: var(--nue-text-xl);
-        font-weight: 600;
-        line-height: 2.25;
-    }
-
-    &:is(h4) {
-        font-size: var(--nue-text-md);
-        font-weight: 500;
-        line-height: 1.75;
-    }
-
-    &:is(span) {
-        font-size: var(--font-size, inherit);
-        font-weight: var(--font-weight, inherit);
-        line-height: normal;
-    }
-
-    &:is(p) {
-        font-size: var(--font-size, inherit);
-        font-weight: var(--font-weight, inherit);
-        line-height: normal;
-    }
-
-    .nue-link:not(.nue-link--btnlike) {
-        font-size: inherit;
-        --icon-size: inherit;
-    }
-}
-
-/* Built-in styles */
-
-.nue-text--clamped {
-    display: block;
-    max-height: calc(3 * var(--line-height));
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-@supports (-webkit-line-clamp: var(--clamped-lines)) {
-    .nue-text--clamped {
+    &.nue-text--clamped {
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+}
+
+@supports (-webkit-line-clamp: var(--nue-text-clamped-lines)) {
+    .nue-text.nue-text--clamped {
         display: -webkit-box !important;
-        -webkit-line-clamp: var(--clamped-lines);
+        -webkit-line-clamp: var(--nue-text-clamped-lines);
         -webkit-box-orient: vertical;
     }
 }

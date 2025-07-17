@@ -1,0 +1,19 @@
+.nue-dialog-overlay {
+    --nue-overlay-animation-duration: 0.24s;
+    --nue-overlay-close-animation-duration: 0.24s;
+
+    .nue-dialog {
+        --nue-dialog-animation-name: slide-in-from-top;
+        --nue-dialog-animation-duration: 0.24s;
+        --nue-dialog-close-animation-name: slide-out-to-top;
+        --nue-dialog-close-animation-duration: 0.24s;
+
+        .nue-dialog__header {
+            font-size: var(--nue-text-df);
+        }
+
+        .nue-dialog__content {
+            font-size: var(--nue-text-sm);
+        }
+    }
+}

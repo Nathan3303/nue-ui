@@ -1,20 +1,16 @@
-/* Variables */
-
 .nue-button-group {
-    --flex: none;
-    --border-radius: var(--nue-primary-radius);
-}
+    --nue-button-group-flex: none;
+    --nue-button-group-border-radius: 6px;
+    --nue-button-group-box-shadow: 0 0 3px 1px rgba(200, 200, 200, 0.3);
 
-/* Original styles */
-
-.nue-button-group {
     display: flex;
     align-items: center;
     overflow: hidden;
-    box-shadow: var(--nue-secondary-shadow);
-    flex: var(--flex);
     width: fit-content;
-    border-radius: var(--border-radius);
+
+    flex: var(--nue-button-group-flex);
+    box-shadow: var(--nue-button-group-box-shadow);
+    border-radius: var(--nue-button-group-border-radius);
 
     & > .nue-button {
         border-radius: 0;
@@ -23,14 +19,14 @@
 
         &:first-child {
             margin-left: 0;
-            border-top-left-radius: var(--border-radius);
-            border-bottom-left-radius: var(--border-radius);
+            border-top-left-radius: var(--nue-button-group-border-radius);
+            border-bottom-left-radius: var(--nue-button-group-border-radius);
             box-shadow: none;
         }
 
         &:last-child {
-            border-top-right-radius: var(--border-radius);
-            border-bottom-right-radius: var(--border-radius);
+            border-top-right-radius: var(--nue-button-group-border-radius);
+            border-bottom-right-radius: var(--nue-button-group-border-radius);
             box-shadow: none;
         }
     }

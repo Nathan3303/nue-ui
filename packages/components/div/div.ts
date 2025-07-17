@@ -29,14 +29,14 @@ export default defineComponent({
         const style = computed(() => {
             const { align, justify, flex, wrap, gap, width, height } = props;
             return {
-                '--flex-direction': getDirection(),
-                '--align-items': align,
-                '--justify-content': justify,
-                '--flex': parseFlex(flex as string),
-                '--flex-wrap': parseFlexWrap(wrap as string),
-                '--gap': gap,
-                '--width': width,
-                '--height': height,
+                '--nue-div-flex-direction': getDirection(),
+                '--nue-div-align-items': align,
+                '--nue-div-justify-content': justify,
+                '--nue-div-flex': parseFlex(flex as string),
+                '--nue-div-flex-wrap': parseFlexWrap(wrap as string),
+                '--nue-div-gap': gap,
+                '--nue-div-width': width,
+                '--nue-div-height': height,
                 display: props.inline ? 'inline-flex' : void 0
             };
         });
@@ -45,8 +45,7 @@ export default defineComponent({
             const list = [];
             const { theme } = props;
             list.push('nue-div');
-            if (theme)
-                list.push(...parseTheme(theme as string | string[], 'nue-div'));
+            if (theme) list.push(...parseTheme(theme as string | string[], 'nue-div'));
             return list;
         });
 
@@ -61,23 +60,14 @@ export default defineComponent({
             }
         }
 
-        function generateDividedSlot(
-            defaultSlot: VNode[],
-            spaceElement: VNode
-        ) {
-            return defaultSlot.reduce(
-                (acc: VNode[], cur: VNode, idx: number) => {
-                    acc.push(cur);
-                    if (
-                        typeof cur.type !== 'symbol' &&
-                        idx !== defaultSlot.length - 1
-                    ) {
-                        acc.push(spaceElement);
-                    }
-                    return acc;
-                },
-                []
-            );
+        function generateDividedSlot(defaultSlot: VNode[], spaceElement: VNode) {
+            return defaultSlot.reduce((acc: VNode[], cur: VNode, idx: number) => {
+                acc.push(cur);
+                if (typeof cur.type !== 'symbol' && idx !== defaultSlot.length - 1) {
+                    acc.push(spaceElement);
+                }
+                return acc;
+            }, []);
         }
 
         return () => {

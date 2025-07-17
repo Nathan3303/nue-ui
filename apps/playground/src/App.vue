@@ -1,68 +1,20 @@
 <template>
     <nue-container class="app-view">
         <nue-header>
-            <template #logo>
-                <nue-text size="var(--nue-text-lg)">
-                    NueUI 组件库 PlayGround
-                </nue-text>
-            </template>
+            <nue-div flex="1">
+                <nue-link route="/component" theme="rl">组件演练</nue-link>
+                <nue-link route="/custom" theme="rl">自由演练</nue-link>
+            </nue-div>
+            <nue-div width="fit-content">
+                <nue-text size="lg">NueUI Playground Demos</nue-text>
+            </nue-div>
+            <nue-div flex="1"></nue-div>
         </nue-header>
-        <nue-main aside-width="256px" responsive>
-            <template #aside>
-                <nue-collapse
-                    v-model="collapseValue"
-                    class="app-view__aside-collapse-menu"
-                    theme="menu"
-                >
-                    <nue-collapse-item
-                        v-for="(item, idx) in collapseItemsData"
-                        :key="idx"
-                        :name="item.name"
-                        :title="item.title"
-                    >
-                        <nue-div
-                            class="app-view__aside-collapse-menu__item-main"
-                        >
-                            <nue-link
-                                v-for="(link, idx) in item.links"
-                                :key="idx"
-                                :route="link.route"
-                                theme="rl"
-                            >
-                                {{ link.text }}
-                            </nue-link>
-                        </nue-div>
-                    </nue-collapse-item>
-                </nue-collapse>
-            </template>
-            <template #content>
-                <router-view />
-            </template>
-        </nue-main>
+        <router-view />
     </nue-container>
 </template>
 
 <script lang="ts" setup>
-import { shallowRef } from 'vue';
-import {
-    NueContainer,
-    NueHeader,
-    NueMain,
-    NueLink,
-    NueCollapse,
-    NueCollapseItem,
-    NueText,
-    NueDiv
-} from '@nue-ui/components';
-import { collapseItemsData } from './constants.ts';
+import { NueContainer, NueHeader, NueLink, NueText, NueDiv } from '@nue-ui/components';
 import './main.css';
-
-const collapseValue = shallowRef([
-    'basic',
-    'data',
-    'navigation',
-    'form',
-    'feedback',
-    'others'
-]);
 </script>

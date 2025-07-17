@@ -16,12 +16,12 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
-import type { MarqueePropsType } from './types';
+import type { NueMarqueeProps } from './types';
 import './marquee.css';
 
 defineOptions({ name: 'NueMarquee' });
 
-const props = withDefaults(defineProps<MarqueePropsType>(), {
+const props = withDefaults(defineProps<NueMarqueeProps>(), {
     direction: 'left',
     speedRatio: 1,
     infinite: false
@@ -38,12 +38,9 @@ const trackClasses = computed(() => {
 
 onMounted(() => {
     if (!marqueeRef.value || !marqueeTrackRef.value) return;
+    marqueeRef.value.style.setProperty('--nue-marquee-width', `${marqueeRef.value.offsetWidth}px`);
     marqueeRef.value.style.setProperty(
-        '--marquee-width',
-        `${marqueeRef.value.offsetWidth}px`
-    );
-    marqueeRef.value.style.setProperty(
-        '--marquee-track-width',
+        '--nue-marquee-track-width',
         `${marqueeTrackRef.value.offsetWidth}px`
     );
     marqueeTrackRef.value.style.animationDuration = `${marqueeTrackRef.value.children.length * props.speedRatio}s`;

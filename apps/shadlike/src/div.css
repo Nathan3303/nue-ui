@@ -1,0 +1,7 @@
+.nue-div--card {
+    border: 1px solid var(--nue-divider-color);
+    border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-secondary-shadow);
+    padding: var(--nue-primary-padding);
+    font-family: var(--nue-primary-font-family) sans-serif;
+}

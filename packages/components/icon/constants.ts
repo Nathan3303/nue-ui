@@ -63,5 +63,6 @@ export const IconNames = [
     'arrow-right',
     'arrow-left',
     'arrow-down',
-    'arrow-up'
+    'arrow-up',
+    'arrow-right-circle'
 ] as const;

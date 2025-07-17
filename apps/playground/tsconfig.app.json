@@ -25,7 +25,7 @@
         "noUncheckedSideEffectImports": true,
         /* types */
         "types": [
-            "nue-ui/dist/volar.d.ts"
+            "nue-ui/dist/global.d.ts"
         ]
     },
     "include": [

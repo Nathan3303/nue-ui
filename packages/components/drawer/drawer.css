@@ -1,41 +1,19 @@
-.nue-drawer-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    overflow: hidden;
-}
+.nue-drawer-overlay {
+    .nue-drawer {
+        position: absolute;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        font-size: 0.875rem;
 
-.nue-drawer {
-    position: absolute;
-    background-color: #fff;
-    transition: all 0.3s ease;
+        .nue-drawer__header {
+            height: auto;
+            padding: 1rem;
+            box-sizing: border-box;
 
-    .nue-drawer__header {
-        height: auto;
-        padding: var(--nue-primary-padding);
-        box-sizing: border-box;
-
-        .nue-drawer__title {
-            flex: auto;
-            font-size: var(--nue-text-md);
-        }
-
-        .nue-button {
-            --vgap: 0.5rem;
-            --height: 1.25rem;
+            .nue-drawer__title {
+                flex: auto;
+                font-size: 1rem;
+            }
         }
     }
-}
-
-.nue-drawer-fade-enter-active,
-.nue-drawer-fade-leave-active {
-    transition: opacity 0.3s ease;
-}
-
-.nue-drawer-fade-enter-from,
-.nue-drawer-fade-leave-to {
-    opacity: 0;
 }

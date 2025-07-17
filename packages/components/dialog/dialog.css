@@ -1,86 +1,54 @@
-/* variables */
-
-.nue-dialog-wrapper {
-    --dialog-width: 36%;
-    --dialog-min-width: 24rem;
-    --dialog-max-width: 32rem;
-    --wrapper-animation-name: fade-in;
-    --dialog-animation-name: slide-in-from-top;
-    --dialog-animation-rest-property: 0.24s ease-out forwards;
-}
-
-/* original styles */
-
-.nue-dialog-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
+.nue-dialog-overlay {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.48);
-    overflow: hidden;
-    box-sizing: border-box;
-    opacity: 0;
-    animation: var(--wrapper-animation-name)
-        var(--dialog-animation-rest-property);
-    z-index: 5;
 
-    &[data-open='false'] {
-        --wrapper-animation-name: fade-out;
-        --dialog-animation-name: slide-out-to-top;
-    }
-}
+    .nue-dialog {
+        --nue-dialog-width: 40%;
+        --nue-dialog-min-width: 24rem;
+        --nue-dialog-max-width: 32rem;
+        --nue-dialog-animation-name: unset;
+        --nue-dialog-animation-duration: unset;
+        --nue-dialog-close-animation-name: unset;
+        --nue-dialog-close-animation-duration: unset;
 
-.nue-dialog {
-    display: flex;
-    flex-direction: column;
-    width: var(--dialog-width);
-    min-width: var(--dialog-min-width);
-    max-width: var(--dialog-max-width);
-    padding: 1rem;
-    border-radius: var(--nue-primary-radius);
-    background-color: white;
-    gap: 1rem;
-    animation: var(--dialog-animation-name)
-        var(--dialog-animation-rest-property);
-
-    .nue-dialog__header {
-        width: 100%;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: var(--nue-text-md);
-    }
+        flex-direction: column;
 
-    .nue-dialog__content {
-        width: 100%;
-    }
+        width: var(--nue-dialog-width);
+        min-width: var(--nue-dialog-min-width);
+        max-width: var(--nue-dialog-max-width);
 
-    .nue-dialog__footer {
-        width: 100%;
-        display: flex;
-        align-self: center;
-        justify-content: end;
-        gap: 0.5rem;
+        padding: 1rem;
+        border-radius: var(--nue-primary-radius);
+        background-color: white;
 
-        .cancel-button {
-            --color: #333;
-            --border-color: #ccc;
-            --background-color: #fff;
-            --hover-color: #333;
-            --hover-border-color: #ccc;
-            --hover-background-color: #f5f5f5;
+        animation-name: var(--nue-dialog-animation-name);
+        animation-duration: var(--nue-dialog-animation-duration);
+        animation-timing-function: ease-in;
+        animation-fill-mode: forwards;
+
+        .nue-dialog__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1rem;
         }
 
-        .confirm-button {
-            --color: #fff;
-            --border-color: transparent;
-            --background-color: #90909099;
-            --hover-background-color: #909090cc;
-            --active-background-color: #909090;
+        .nue-dialog__content {
+            margin: 0.5rem 0 1rem;
         }
+
+        .nue-dialog__footer {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            gap: 0.5rem;
+        }
+    }
+
+    .nue-dialog[data-closing='true'] {
+        animation-name: var(--nue-dialog-close-animation-name);
+        animation-duration: var(--nue-dialog-close-animation-duration);
     }
 }

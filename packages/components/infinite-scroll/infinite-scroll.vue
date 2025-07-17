@@ -1,14 +1,15 @@
 <template>
-    <div ref="wrapperRef" :style="styles" class="infinite-scroll-wrapper">
-        <div class="infinite-scroll">
+    <div ref="wrapperRef" :style="styles" class="nue-infinite-scroll-wrapper">
+        <div class="nue-infinite-scroll">
             <slot />
-            <div ref="triggerBarRef" class="infinite-scroll__trigger-bar"></div>
-            <div v-if="loading" class="infinite-scroll__loading">
+            <div ref="triggerBarRef" class="nue-infinite-scroll__trigger-bar" />
+            <div v-if="loading" class="nue-infinite-scroll__loading-bar">
                 <slot name="loading">
+                    <nue-icon name="loading" spin />
                     <nue-text size=".875rem">数据加载中...</nue-text>
                 </slot>
             </div>
-            <div v-if="disabled && !loading" class="infinite-scroll__disabled">
+            <div v-if="disabled && !loading" class="nue-infinite-scroll__disable-bar">
                 <slot name="disabled">
                     <nue-text color="var(--nue-disabled-color)" size=".875rem">
                         没有更多数据了
@@ -22,19 +23,17 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
 import NueText from '../text/text.vue';
-import type { InfiniteScrollEmitsType, InfiniteScrollPropsType } from './types';
+import NueIcon from '../icon/icon.vue';
+import type { NueInfiniteScrollProps, NueInfiniteScrollEmits } from './types';
 import './infinite-scroll.css';
 
 defineOptions({ name: 'NueInfiniteScroll' });
-
-const props = withDefaults(defineProps<InfiniteScrollPropsType>(), {
-    triggerHeight: '150px',
-    disabled: false,
-    loading: false,
-    viewport: null
+const props = withDefaults(defineProps<NueInfiniteScrollProps>(), {
+    triggerHeight: '0px',
+    viewport: null,
+    root: 'wrapper'
 });
-
-const emit = defineEmits<InfiniteScrollEmitsType>();
+const emit = defineEmits<NueInfiniteScrollEmits>();
 
 const wrapperRef = ref<HTMLDivElement>();
 const triggerBarRef = ref<HTMLDivElement>();
@@ -42,29 +41,26 @@ const observer = ref<IntersectionObserver>();
 
 const styles = computed(() => {
     return {
-        '--height': props.height,
-        '--trigger-bar-height': props.triggerHeight
+        '--nue-infinite-scroll-wrapper-height': props.height,
+        '--nue-infinite-scroll-trigger-bar-height': props.triggerHeight
     };
 });
 
 onMounted(() => {
-    const triggerBar = triggerBarRef.value;
+    if (!triggerBarRef.value) return;
     const { root, rootMargin, threshold } = props;
-    if (triggerBar) {
-        observer.value = new IntersectionObserver(
-            entries => {
-                if (props.disabled) return;
-                if (!entries[0].isIntersecting) return;
-                emit('loadMore');
-                console.log('loadMore');
-            },
-            {
-                root: root === 'wrapper' ? wrapperRef.value : root,
-                rootMargin,
-                threshold
-            }
-        );
-        observer.value.observe(triggerBar);
-    }
+    observer.value = new IntersectionObserver(
+        entries => {
+            if (props.disabled) return;
+            if (!entries[0].isIntersecting) return;
+            emit('loadMore');
+        },
+        {
+            root: root === 'wrapper' ? wrapperRef.value : root,
+            rootMargin,
+            threshold
+        }
+    );
+    observer.value.observe(triggerBarRef.value);
 });
 </script>

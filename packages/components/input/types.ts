@@ -1,60 +1,59 @@
-import type { ShapeProp } from '@nue-ui/utils';
-import type { IconNameType } from '../icon';
+import type { NueIconName } from '../icon';
+import type { GlobalProps } from '@nue-ui/utils';
 
-export type InputType = 'text' | 'password' | 'number' | 'email' | 'textarea';
+export type NueInputType = 'text' | 'password' | 'number' | 'email' | 'textarea';
 
-export type InputCounterType = 'off' | 'word-limit' | 'word-left' | 'both';
+export type NueInputCounter = 'off' | 'word-limit' | 'word-left' | 'both';
 
-export type InputShapeType = 'rounded' | 'noshape';
+export type NueInputShape = 'rounded' | 'noshape';
 
-export type InputPropsType = {
-    type?: InputType;
+export interface NueInputProps extends GlobalProps {
+    type?: NueInputType;
     modelValue?: string | number;
     id?: string;
-    theme?: string | string[];
-    shape?: ShapeProp;
-    icon?: IconNameType;
+    shape?: NueInputShape;
+    icon?: NueIconName;
     placeholder?: string;
     maxlength?: string;
     disabled?: boolean;
     readonly?: boolean;
     clearable?: boolean;
     allowShowPassword?: boolean;
-    counter?: InputCounterType;
+    counter?: NueInputCounter;
     width?: string;
     size?: 'small' | 'large';
     debounceTime?: number;
     flex?: string | boolean;
     name?: string;
-};
+}
 
-export type InputEmitsType = {
+export type NueInputEmits = {
     (e: 'update:modelValue', value: HTMLInputElement['value']): void;
     (e: 'input', value: Event): void;
     (e: 'blur', value: Event): void;
     (e: 'change', value: Event): void;
 };
 
-export type TextareaPropsType = {
+export interface NueTextareaProps extends GlobalProps {
     modelValue?: string;
     id?: string;
     placeholder?: string;
     theme?: string | string[];
-    shape?: InputShapeType;
+    shape?: NueInputShape;
     disabled?: boolean;
     readonly?: boolean;
     rows?: number;
     resize?: boolean;
-    autosize?: boolean | { minRows?: number; maxRows?: number };
+    autosize?: boolean | { minRows: number; maxRows: number };
     maxlength?: string;
-    counter?: InputCounterType;
+    counter?: NueInputCounter;
     width?: string;
     size?: 'small' | 'large';
     debounceTime?: number;
     flex?: string;
-};
+}
 
-export type TextareaEmitsType = {
+export type NueTextareaEmits = {
     (e: 'update:modelValue', value: HTMLTextAreaElement['value']): void;
     (e: 'input', value: Event): void;
     (e: 'blur', value: Event): void;
@@ -62,7 +61,7 @@ export type TextareaEmitsType = {
 };
 
 export type WordCounterProps = {
-    mode: InputCounterType;
+    mode: NueInputCounter;
     length: number;
     maxlength: number;
 };

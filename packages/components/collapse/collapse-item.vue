@@ -1,16 +1,8 @@
 <template>
-    <div
-        v-show="!isHidden"
-        :data-collapsed="isCollapsed"
-        class="nue-collapse-item"
-    >
+    <div v-show="!isHidden" :data-collapsed="isCollapsed" class="nue-collapse-item">
         <div class="nue-collapse-item__header">
             <slot :collapse="handleCollapse" :state="isCollapsed" name="header">
-                <nue-text
-                    :clamped="1"
-                    class="nue-collapse-item__title"
-                    @click="handleCollapse"
-                >
+                <nue-text :clamped="1" class="nue-collapse-item__title" @click="handleCollapse">
                     <slot name="title">{{ title }}</slot>
                 </nue-text>
                 <nue-button
@@ -27,6 +19,7 @@
                     <nue-text
                         v-if="!hideWhenEmpty"
                         class="nue-collapse-item__empty"
+                        color="#969696"
                     >
                         暂无内容
                     </nue-text>
@@ -42,20 +35,13 @@ import { COLLAPSE_CONTEXT_KEY } from './constants';
 import NueButton from '../button/button.vue';
 import NueText from '../text/text.vue';
 import { generateId } from '@nue-ui/utils';
-import type {
-    CollapseContextType,
-    CollapseItemName,
-    CollapseItemPropsType
-} from './types';
+import type { NueCollapseContext, CollapseItemName, NueCollapseItemProps } from './types';
 
 defineOptions({ name: 'NueCollapseItem' });
 
-const props = withDefaults(defineProps<CollapseItemPropsType>(), {});
+const props = withDefaults(defineProps<NueCollapseItemProps>(), {});
 
-const { activedItems, pushActivedItem } = inject(
-    COLLAPSE_CONTEXT_KEY,
-    {} as CollapseContextType
-);
+const { activedItems, pushActivedItem } = inject(COLLAPSE_CONTEXT_KEY, {} as NueCollapseContext);
 
 const contentRef = ref<HTMLDivElement>();
 const contentInnerRef = ref<HTMLDivElement>();

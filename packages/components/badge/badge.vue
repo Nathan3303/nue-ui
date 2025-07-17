@@ -11,17 +11,18 @@
     </div>
 </template>
 
+<style src="./badge.css"></style>
+
 <script lang="ts" setup>
 import { computed, useSlots } from 'vue';
-import { isString, parseTheme } from '@nue-ui/utils/';
+import { isString, parseTheme } from '@nue-ui/utils';
 import NueText from '../text/text.vue';
-import type { BadgePropsType } from './types';
-import './badge.css';
+import type { NueBadgeProps } from './types';
 
 defineOptions({ name: 'NueBadge' });
 
 const slots = useSlots();
-const props = withDefaults(defineProps<BadgePropsType>(), {});
+const props = defineProps<NueBadgeProps>();
 
 const classes = computed(() => {
     const prefix = 'nue-badge';

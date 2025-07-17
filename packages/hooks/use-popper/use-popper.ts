@@ -1,197 +1,137 @@
-import { ref, reactive } from 'vue';
-import type { Ref } from 'vue';
-import type { UsePopperOptions } from './types';
+import { ref, reactive, computed } from 'vue';
+import type {
+    PopperAlignment,
+    PopperDirection,
+    PopperPlacement,
+    PopperPositionStyleValue,
+    UsePopperElementRef
+} from './types';
 
-export const usePopper = (
-    wrapperRef: Ref<HTMLElement | undefined>,
-    popperRef: Ref<HTMLElement | undefined>,
-    options: UsePopperOptions
-) => {
-    const placement = ref(options.placement || 'top-center');
+export const usePopper = (wrapperRef: UsePopperElementRef, popperRef: UsePopperElementRef) => {
+    const placement = ref('bottom-start');
     const rectInfo = reactive({
-        popperWidth: 0,
-        popperHeight: 0,
+        popperX: 0,
+        popperY: 0,
+        popperW: 0,
+        popperH: 0,
         wrapperX: 0,
         wrapperY: 0,
-        wrapperWidth: 0,
-        wrapperHeight: 0
+        wrapperW: 0,
+        wrapperH: 0,
+        gap: 8
+    });
+
+    const relativePosition = computed(() => {
+        const [direction, alignment] = placement.value.split('-');
+        return {
+            direction: direction as PopperDirection,
+            alignment: alignment as PopperAlignment,
+            placement: placement.value
+        };
     });
 
     const getRectInfo = () => {
         const popperBCR = popperRef.value?.getBoundingClientRect();
+        rectInfo.popperX = popperBCR?.x || 0;
+        rectInfo.popperY = popperBCR?.y || 0;
+        rectInfo.popperW = popperBCR?.width || 0;
+        rectInfo.popperH = popperBCR?.height || 0;
         const wrapperBCR = wrapperRef.value?.getBoundingClientRect();
-        rectInfo.popperWidth = popperBCR?.width || 0;
-        rectInfo.popperHeight = popperBCR?.height || 0;
         rectInfo.wrapperX = wrapperBCR?.x || 0;
         rectInfo.wrapperY = wrapperBCR?.y || 0;
-        rectInfo.wrapperWidth = wrapperBCR?.width || 0;
-        rectInfo.wrapperHeight = wrapperBCR?.height || 0;
+        rectInfo.wrapperW = wrapperBCR?.width || 0;
+        rectInfo.wrapperH = wrapperBCR?.height || 0;
     };
 
-    const updatePlacement = (
-        direction?: 'top' | 'bottom' | 'left' | 'right',
-        alignment?: 'start' | 'center' | 'end'
-    ) => {
-        const [_direction, _alignment] = placement.value.split('-');
-        const newDirection = direction ?? _direction;
-        const newAlignment = alignment ?? _alignment;
-        const newPlacement = newDirection + '-' + newAlignment;
-        placement.value = (newPlacement as UsePopperOptions['placement'])!;
+    const splitPlacement = (placement: PopperPlacement) => {
+        const [direction, alignment] = placement.split('-');
+        return {
+            direction: direction as PopperDirection,
+            alignment: alignment as PopperAlignment
+        };
     };
 
-    const checkOverflow = () => {
-        const [direction, alignment] = placement.value.split('-');
-        const {
-            popperWidth,
-            popperHeight,
-            wrapperX,
-            wrapperY,
-            wrapperWidth,
-            wrapperHeight
-        } = rectInfo;
+    const makePlacement = (direction: PopperDirection, alignment: PopperAlignment) => {
+        return `${direction}-${alignment}` as PopperPlacement;
+    };
+
+    const adjustPlacement = (placement: PopperPlacement) => {
+        let { direction, alignment } = splitPlacement(placement);
+        const { popperW, popperH, wrapperX, wrapperY, wrapperW, wrapperH, gap } = rectInfo;
+        const windowH = window.innerHeight;
+        const windowW = window.innerWidth;
         switch (direction) {
             case 'top':
-                if (wrapperY - popperHeight < 8) {
-                    updatePlacement('bottom');
-                    return true;
-                }
-                break;
             case 'bottom':
-                if (
-                    wrapperY + wrapperHeight + popperHeight >
-                    window.innerHeight - 8
-                ) {
-                    updatePlacement('top');
-                    return true;
+                {
+                    if (wrapperY + wrapperH + gap + popperH > windowH) direction = 'top';
+                    else if (wrapperY - gap - popperH < 0) direction = 'bottom';
+                    if (alignment === 'end' && wrapperX + wrapperW - popperW < 0)
+                        alignment = 'center';
+                    else if (alignment === 'start' && wrapperX + popperW > windowW)
+                        alignment = 'center';
+                    if (alignment === 'center') {
+                        if (wrapperX + wrapperW / 2 + popperW / 2 > windowW) alignment = 'end';
+                        else if (wrapperX + wrapperW / 2 - popperW / 2 < 0) alignment = 'start';
+                    }
                 }
                 break;
             case 'left':
-                if (wrapperX - popperWidth < 8) {
-                    updatePlacement('right');
-                    return true;
-                }
-                break;
             case 'right':
-                if (
-                    wrapperX + wrapperWidth + popperWidth >
-                    window.innerWidth - 8
-                ) {
-                    updatePlacement('left');
-                    return true;
+                {
+                    if (wrapperX + wrapperW + gap + popperW > windowW) direction = 'left';
+                    else if (wrapperX - gap - popperW < 0) direction = 'right';
+                    if (alignment === 'end' && wrapperY + wrapperH - popperH < 0)
+                        alignment = 'center';
+                    else if (alignment === 'start' && wrapperY + popperH > windowH)
+                        alignment = 'center';
+                    if (alignment === 'center') {
+                        if (wrapperY + wrapperH / 2 + popperH / 2 > windowH) alignment = 'end';
+                        else if (wrapperY + wrapperH / 2 - popperH / 2 < 0) alignment = 'start';
+                    }
                 }
                 break;
         }
-        switch (alignment) {
-            case 'start':
-                if (wrapperX + popperWidth > window.innerWidth - 8) {
-                    updatePlacement(void 0, 'center');
-                    return true;
-                }
-
-                break;
-            case 'end':
-                if (wrapperX < 8) {
-                    updatePlacement(void 0, 'center');
-                    return true;
-                }
-                break;
-            case 'center':
-                if (wrapperX + popperWidth > window.innerWidth - 8) {
-                    updatePlacement(void 0, 'end');
-                    return true;
-                }
-                if (wrapperX < 8) {
-                    updatePlacement(void 0, 'start');
-                    return true;
-                }
-                break;
-        }
-        return false;
+        return makePlacement(direction, alignment);
     };
 
-    const calculatePosition = (
-        initialPlacement?: UsePopperOptions['placement']
-    ) => {
-        const popper = popperRef.value;
-        if (!popper) return;
+    const setPositionStyles = (left: PopperPositionStyleValue, top: PopperPositionStyleValue) => {
+        if (!popperRef.value) return;
+        popperRef.value.style.top = top ? `${top}px` : '';
+        popperRef.value.style.left = left ? `${left}px` : '';
+    };
+
+    const calculatePosition = (originalPlacement?: PopperPlacement) => {
         getRectInfo();
-        if (initialPlacement) placement.value = initialPlacement;
-        if (checkOverflow()) {
-            calculatePosition();
-            return;
-        }
-        const {
-            popperWidth,
-            popperHeight,
-            wrapperX,
-            wrapperY,
-            wrapperWidth,
-            wrapperHeight
-        } = rectInfo;
-        switch (placement.value) {
-            case 'top-center':
-                popper.style.left = `${
-                    wrapperX + wrapperWidth / 2 - popperWidth / 2
-                }px`;
-                popper.style.top = `${wrapperY - popperHeight - 8}px`;
+        placement.value = adjustPlacement(originalPlacement || 'bottom-start');
+        const { popperW, popperH, wrapperX, wrapperY, wrapperW, wrapperH, gap } = rectInfo;
+        const direction = relativePosition.value.direction;
+        switch (direction) {
+            case 'top':
+            case 'bottom':
+                {
+                    const x = {
+                        start: wrapperX,
+                        center: wrapperX + (wrapperW - popperW) / 2,
+                        end: wrapperX + wrapperW - popperW
+                    }[relativePosition.value.alignment];
+                    const y =
+                        direction === 'top' ? wrapperY - gap - popperH : wrapperY + wrapperH + gap;
+                    setPositionStyles(x, y);
+                }
                 break;
-            case 'top-start':
-                popper.style.left = `${wrapperX}px`;
-                popper.style.top = `${wrapperY - popperHeight - 8}px`;
-                break;
-            case 'top-end':
-                popper.style.left = `${
-                    wrapperX + wrapperWidth - popperWidth
-                }px`;
-                popper.style.top = `${wrapperY - popperHeight - 8}px`;
-                break;
-            case 'bottom-center':
-                popper.style.left = `${
-                    wrapperX + wrapperWidth / 2 - popperWidth / 2
-                }px`;
-                popper.style.top = `${wrapperY + wrapperHeight + 8}px`;
-                break;
-            case 'bottom-start':
-                popper.style.left = `${wrapperX}px`;
-                popper.style.top = `${wrapperY + wrapperHeight + 8}px`;
-                break;
-            case 'bottom-end':
-                popper.style.left = `${
-                    wrapperX + wrapperWidth - popperWidth
-                }px`;
-                popper.style.top = `${wrapperY + wrapperHeight + 8}px`;
-                break;
-            case 'left-center':
-                popper.style.left = `${wrapperX - popperWidth - 8}px`;
-                popper.style.top = `${
-                    wrapperY + wrapperHeight / 2 - popperHeight / 2
-                }px`;
-                break;
-            case 'left-start':
-                popper.style.left = `${wrapperX - popperWidth - 8}px`;
-                popper.style.top = `${wrapperY}px`;
-                break;
-            case 'left-end':
-                popper.style.left = `${wrapperX - popperWidth - 8}px`;
-                popper.style.top = `${
-                    wrapperY + wrapperHeight - popperHeight
-                }px`;
-                break;
-            case 'right-center':
-                popper.style.left = `${wrapperX + wrapperWidth + 8}px`;
-                popper.style.top = `${
-                    wrapperY + wrapperHeight / 2 - popperHeight / 2
-                }px`;
-                break;
-            case 'right-start':
-                popper.style.left = `${wrapperX + wrapperWidth + 8}px`;
-                popper.style.top = `${wrapperY}px`;
-                break;
-            case 'right-end':
-                popper.style.left = `${wrapperX + wrapperWidth + 8}px`;
-                popper.style.top = `${
-                    wrapperY + wrapperHeight - popperHeight
-                }px`;
+            case 'left':
+            case 'right':
+                {
+                    const x =
+                        direction === 'left' ? wrapperX - gap - popperW : wrapperX + wrapperW + gap;
+                    const y = {
+                        start: wrapperY,
+                        center: wrapperY + (wrapperH - popperH) / 2,
+                        end: wrapperY + wrapperH - popperH
+                    }[relativePosition.value.alignment];
+                    setPositionStyles(x, y);
+                }
                 break;
             default:
                 break;
@@ -201,6 +141,7 @@ export const usePopper = (
     return {
         rectInfo,
         placement,
+        relativePosition,
         getRectInfo,
         calculatePosition
     };

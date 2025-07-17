@@ -6,16 +6,16 @@
 
 <script lang="ts" setup>
 import { computed, provide, reactive } from 'vue';
-import type { ButtonGroupCtxType, ButtonGroupProps } from './types';
-import { BUTTON_GROUP_CTX_KEY } from './constants';
-import './button-group.css';
 import { parseTheme } from '@nue-ui/utils';
+import { BUTTON_GROUP_CTX_KEY } from './constants';
+import type { NueButtonGroupCtxType, NueButtonGroupProps } from './types';
+import './button-group.css';
 
 defineOptions({ name: 'NueButtonGroup' });
 
-const props = defineProps<ButtonGroupProps>();
+const props = defineProps<NueButtonGroupProps>();
 
-const ButtonGroupCtx = reactive<ButtonGroupCtxType>({
+const ButtonGroupCtx = reactive<NueButtonGroupCtxType>({
     size: props.size,
     disabled: props.disabled
 });

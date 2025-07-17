@@ -4,7 +4,3 @@ import type { NueDropdownProps, NueDropdownEmits } from './types';
 
 export const NueDropdown = withInstall(Dropdown);
 export type { NueDropdownProps, NueDropdownEmits };
-export type {
-    NueDropdownProps as DropdownPropsType,
-    NueDropdownEmits as DropdownEmitsType
-};

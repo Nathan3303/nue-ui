@@ -1,47 +1,42 @@
-/* variables */
-
 .nue-progress {
-    --flex: auto;
-    --stroke-width: 6px;
-    --outer-bar-background-color: #f1f1f1;
-    --inner-bar-background-color: #7777ff;
-    --percentage-text-color: white;
-    --circle-size: 100px;
-    --stroke-dash-array: 314;
-    --stroke-dash-offset: 314;
-}
+    --nue-progress-flex: auto;
+    --nue-progress-stroke-width: 6px;
+    --nue-progress-outerbar-background-color: #f1f1f1;
+    --nue-progress-innerbar-background-color: #7777ff;
+    --nue-progress-text-color: white;
+    --nue-progress-circle-size: 100px;
+    --nue-progress-stroke-dash-array: 314;
+    --nue-progress-stroke-dash-offset: 314;
 
-/* original */
-
-.nue-progress {
-    flex: var(--flex);
-    user-select: none;
-    -webkit-user-select: none;
+    flex: var(--nue-progress-flex);
     display: flex;
     align-items: center;
     position: relative;
+    user-select: none;
+    -webkit-user-select: none;
 
     .nue-progress--line {
-        flex: auto;
+        flex: 1 1 auto;
 
         .nue-progress__outer-bar {
-            background: var(--outer-bar-background-color);
-            border-radius: var(--stroke-width);
+            background: var(--nue-progress-outerbar-background-color);
+            border-radius: var(--nue-progress-stroke-width);
             overflow: hidden;
 
             .nue-progress__inner-bar {
+                box-sizing: border-box;
                 transition: width 0.24s linear;
                 display: flex;
                 align-items: center;
                 justify-content: end;
-                height: var(--stroke-width);
-                padding: 0 6px;
-                background: var(--inner-bar-background-color);
-                border-radius: var(--stroke-width);
+                height: var(--nue-progress-stroke-width);
+                background: var(--nue-progress-innerbar-background-color);
+                border-radius: var(--nue-progress-stroke-width);
 
                 .nue-text {
-                    color: var(--percentage-text-color);
-                    font-size: calc(0.6 * var(--stroke-width));
+                    color: var(--nue-progress-text-color);
+                    font-size: calc(0.6 * var(--nue-progress-stroke-width));
+                    margin-right: 0.5rem;
                 }
             }
         }
@@ -49,11 +44,11 @@
 
     .nue-progress--circle {
         aspect-ratio: 1;
-        width: var(--circle-size);
-        height: var(--circle-size);
+        width: var(--nue-progress-circle-size);
+        height: var(--nue-progress-circle-size);
 
         .nue-progress--circle__circle {
-            stroke-width: var(--stroke-width);
+            stroke-width: var(--nue-progress-stroke-width);
             fill: transparent;
             transform-origin: center;
             transform: scale(0.9) rotate(-90deg);
@@ -61,13 +56,13 @@
         }
 
         .nue-progress__outer-path {
-            stroke: var(--outer-bar-background-color);
+            stroke: var(--nue-progress-outerbar-background-color);
         }
 
         .nue-progress__inner-path {
-            stroke: var(--inner-bar-background-color);
-            stroke-dasharray: var(--stroke-dash-array);
-            stroke-dashoffset: var(--stroke-dash-offset);
+            stroke: var(--nue-progress-innerbar-background-color);
+            stroke-dasharray: var(--nue-progress-stroke-dash-array);
+            stroke-dashoffset: var(--nue-progress-stroke-dash-offset);
             stroke-linecap: round;
         }
     }

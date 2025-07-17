@@ -1,21 +1,19 @@
 import { provide, ref, watchEffect } from 'vue';
 import type {
+    NueCollapseContext,
+    NueCollapseEmit,
+    NueCollapseProps,
     ActivedCollapseItems,
-    CollapseContextType,
-    CollapseEmitType,
-    CollapseItemName,
-    CollapsePropsType
+    CollapseItemName
 } from './types';
 import { COLLAPSE_CONTEXT_KEY } from './constants';
 
-export function useCollapse(props: CollapsePropsType, emit: CollapseEmitType) {
+export function useCollapse(props: NueCollapseProps, emit: NueCollapseEmit) {
     const activedItems = ref<ActivedCollapseItems>([]);
 
     function setActivedItems(items: ActivedCollapseItems) {
         activedItems.value = items;
-        const newValue = props.accordion
-            ? activedItems.value[0]
-            : activedItems.value;
+        const newValue = props.accordion ? activedItems.value[0] : activedItems.value;
         emit('update:modelValue', newValue);
     }
 
@@ -24,7 +22,7 @@ export function useCollapse(props: CollapsePropsType, emit: CollapseEmitType) {
             setActivedItems([activedItems.value[0] === item ? '' : item]);
             return;
         }
-        const items = [...activedItems.value];
+        const items = [...(activedItems.value as CollapseItemName[])];
         const itemIndex = items.indexOf(item);
         if (itemIndex > -1) {
             items.splice(itemIndex, 1);
@@ -37,15 +35,13 @@ export function useCollapse(props: CollapsePropsType, emit: CollapseEmitType) {
     watchEffect(() => {
         if (!props.modelValue) return;
         if (Array.isArray(props.modelValue)) {
-            setActivedItems(
-                props.accordion ? [props.modelValue[0]] : props.modelValue
-            );
+            setActivedItems(props.accordion ? [props.modelValue[0]] : props.modelValue);
         } else {
             setActivedItems([props.modelValue]);
         }
     });
 
-    provide<CollapseContextType>(COLLAPSE_CONTEXT_KEY, {
+    provide<NueCollapseContext>(COLLAPSE_CONTEXT_KEY, {
         activedItems,
         pushActivedItem
     });

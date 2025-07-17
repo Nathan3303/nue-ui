@@ -1,9 +1,10 @@
-export type DividerPropsType = {
-    direction?: 'horizontal' | 'vertical';
-    text?: string;
-    align?: 'start' | 'center' | 'end';
-    borderWidth?: string;
-    borderType?: 'solid' | 'dashed' | 'dotted';
-    borderColor?: string;
+import type { GlobalProps } from '@nue-ui/utils';
+
+export interface NueDividerProps extends GlobalProps {
     vertical?: boolean;
-};
+    alignment?: 'start' | 'center' | 'end';
+    lineWidth?: string;
+    lineStyle?: 'solid' | 'dashed' | 'dotted';
+    lineColor?: string;
+    text?: string;
+}

@@ -1,6 +1,6 @@
 import type { GlobalProps } from '@nue-ui/utils';
 
-export interface BadgePropsType extends GlobalProps {
+export interface NueBadgeProps extends GlobalProps {
     value?: string | number;
     max?: number;
     hidden?: boolean;

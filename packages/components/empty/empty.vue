@@ -1,12 +1,7 @@
 <template>
-    <div :class="classes">
-        <slot name="picture">
-            <img
-                :src="imageSrc"
-                :style="imageStyle"
-                alt="Empty image"
-                class="nue-empty__image"
-            />
+    <div :class="classes" :style="styles">
+        <slot name="image">
+            <img :src="imageSrc" alt="Empty image" class="nue-empty__image" />
         </slot>
         <nue-text class="nue-empty__description">
             <slot name="description">
@@ -37,9 +32,9 @@ const classes = computed(() => {
     return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
-const imageStyle = computed(() => {
+const styles = computed(() => {
     return {
-        '--image-size': props.imageSize
+        '--nue-empty-image-size': props.imageSize
     };
 });
 </script>

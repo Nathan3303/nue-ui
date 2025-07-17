@@ -1,6 +1,6 @@
 import { withInstall } from '@nue-ui/utils';
 import Dialog from './dialog.vue';
-import type { DialogPropsType, DialogEmitsType } from './types';
+import type { NueDialogProps, NueDialogEmits } from './types';
 
 export const NueDialog = withInstall(Dialog);
-export type { DialogPropsType, DialogEmitsType };
+export type { NueDialogProps, NueDialogEmits };

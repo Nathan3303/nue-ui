@@ -1,0 +1,38 @@
+{
+  "name": "nue-ui-theme-shadlike",
+  "version": "0.0.2",
+  "description": "A shadcn-like theme for NueUI",
+  "author": "Nathan Lee",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "./dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js"
+    },
+    "./dist/": {
+      "require": "./dist/",
+      "import": "./dist/"
+    }
+  },
+  "scripts": {
+    "build": "npx rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nathan3303/nue-ui.git"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "rollup": "^4.43.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "tslib": "^2.4.0"
+  }
+}

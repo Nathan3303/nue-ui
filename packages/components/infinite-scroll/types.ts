@@ -1,4 +1,6 @@
-export type InfiniteScrollPropsType = {
+import type { GlobalProps } from '@nue-ui/utils';
+
+export interface NueInfiniteScrollProps extends GlobalProps {
     triggerHeight?: string;
     height?: string;
     disabled?: boolean;
@@ -6,8 +8,8 @@ export type InfiniteScrollPropsType = {
     root?: Element | Document | null | 'wrapper';
     rootMargin?: string;
     threshold?: number | number[];
-};
+}
 
-export type InfiniteScrollEmitsType = {
+export type NueInfiniteScrollEmits = {
     (e: 'loadMore'): void;
 };

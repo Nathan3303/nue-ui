@@ -1,0 +1,10 @@
+.nue-badge {
+    --nue-badge-bg-color: var(--nue-primary-color-700);
+    --nue-badge-font-size: var(--nue-text-xs);
+    --nue-badge-color: var(--nue-primary-color-100);
+
+    .nue-badge__content {
+        background-color: var(--nue-badge-bg-color);
+        border-radius: var(--nue-primary-radius);
+    }
+}

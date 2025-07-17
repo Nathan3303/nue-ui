@@ -1,25 +1,23 @@
 <template>
-    <div ref="asideRef" :style="style" class="nue-aside">
+    <aside :class="classes" :style="styles">
         <slot />
-    </div>
+    </aside>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
+import { parseTheme } from '@nue-ui/utils';
 import type { NueAsideProps } from './types';
-import './aside.css';
 
 defineOptions({ name: 'NueAside' });
-const props = withDefaults(defineProps<NueAsideProps>(), {
-    width: '200px',
-    minWidth: '100px',
-    maxWidth: '300px',
-    collapsedWidth: ''
+const props = defineProps<NueAsideProps>();
+
+const classes = computed(() => {
+    const prefix = 'nue-aside';
+    return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
-const asideRef = ref<HTMLDivElement>();
-
-const style = computed(() => {
+const styles = computed(() => {
     return {
         '--nue-aside-width': props.width,
         '--nue-aside-min-width': props.minWidth,

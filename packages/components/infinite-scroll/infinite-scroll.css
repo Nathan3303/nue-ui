@@ -1,39 +1,39 @@
-/* variables */
+.nue-infinite-scroll-wrapper {
+    --nue-infinite-scroll-wrapper-height: 100%;
+    --nue-infinite-scroll-trigger-bar-height: 1px;
 
-.infinite-scroll-wrapper {
-    --wrapper-height: 100%;
-    --trigger-bar-height: 1px;
-}
-
-/* original */
-
-.infinite-scroll-wrapper {
     width: 100%;
-    height: var(--wrapper-height);
+    height: var(--nue-infinite-scroll-wrapper-height);
+    overflow: auto;
+    position: relative;
 
-    .infinite-scroll {
+    .nue-infinite-scroll {
         position: relative;
         width: 100%;
 
-        .infinite-scroll__trigger-bar {
+        .nue-infinite-scroll__trigger-bar {
             position: absolute;
             width: 100%;
-            height: var(--trigger-bar-height);
+            height: var(--nue-infinite-scroll-trigger-bar-height);
             bottom: 0;
             left: 0;
             opacity: 0;
             z-index: -1;
         }
 
-        .infinite-scroll__loading,
-        .infinite-scroll__disabled {
-            padding: var(--nue-primary-padding);
-            border-radius: var(--nue-primary-radius);
-            text-align: center;
+        .nue-infinite-scroll__loading-bar,
+        .nue-infinite-scroll__disable-bar {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
-        .infinite-scroll__disabled {
-            color: var(--nue-disabled-color);
+        .nue-infinite-scroll__disable-bar {
+            color: gray;
         }
     }
 }

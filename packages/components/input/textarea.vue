@@ -15,14 +15,14 @@
             @compositionend="handleCompositionEnd"
             @compositionstart="handleCompositionStart"
             @input="handleInput"
-        ></textarea>
+        />
         <textarea
             v-if="autosize && !props.disabled && !props.readonly"
             ref="backendTextareaRef"
             class="nue-textarea__textarea nue-textarea__backend-textarea"
             readonly
             tabindex="-1"
-        ></textarea>
+        />
         <word-counter
             v-if="counter !== 'off'"
             :length="textLength"
@@ -33,30 +33,22 @@
 </template>
 
 <script lang="ts" setup>
-import {
-    computed,
-    nextTick,
-    onBeforeUnmount,
-    onMounted,
-    ref,
-    watch
-} from 'vue';
-import type { TextareaEmitsType, TextareaPropsType } from './types';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { debounce, parseTheme } from '@nue-ui/utils';
 import wordCounter from './word-counter.vue';
+import type { NueTextareaProps, NueTextareaEmits } from './types';
 import './textarea.css';
 
 defineOptions({ name: 'NueTextarea' });
-
-const emit = defineEmits<TextareaEmitsType>();
-const props = withDefaults(defineProps<TextareaPropsType>(), {
+const props = withDefaults(defineProps<NueTextareaProps>(), {
     counter: 'off',
     debounceTime: 0
 });
+const emit = defineEmits<NueTextareaEmits>();
 
 const textareaRef = ref();
 const backendTextareaRef = ref();
-const textLength = ref((props.modelValue as string).length);
+const textLength = ref(props.modelValue?.length || 0);
 const isComposing = ref(false);
 
 const classes = computed(() => {
@@ -67,15 +59,34 @@ const classes = computed(() => {
         props.size && `${prefix}--${props.size}`,
         props.shape && `${prefix}--${props.shape}`,
         props.disabled && `${prefix}--disabled`,
-        props.readonly && `${prefix}--readonly`
+        props.readonly && `${prefix}--readonly`,
+        props.resize && `${prefix}--resize`
     ];
+});
+
+const rowsStyle = computed(() => {
+    const { autosize, rows } = props;
+    const rowsData = { minRows: 3, maxRows: 3 };
+    if (!autosize) {
+        rowsData.minRows = rows || 3;
+        rowsData.maxRows = rows || 3;
+    } else if (typeof autosize === 'boolean') {
+        rowsData.minRows = 1;
+        rowsData.maxRows = rows || Infinity;
+    } else {
+        rowsData.minRows = autosize.minRows;
+        rowsData.maxRows = autosize.maxRows;
+    }
+    return {
+        '--nue-textarea-rows': rowsData.minRows,
+        '--nue-textarea-max-rows': rowsData.maxRows
+    };
 });
 
 const style = computed(() => {
     return {
-        '--rows': props.resize ? 999 : props.rows === 0 ? 999 : props.rows,
-        '--resize': props.resize && !props.disabled ? 'vertical' : void 0,
-        '--nue-textarea-overflow': props.autosize ? 'hidden' : 'auto'
+        '--nue-textarea-resize': props.resize && !props.disabled ? 'both' : void 0,
+        ...rowsStyle.value
     };
 });
 
@@ -88,13 +99,13 @@ function handleAutosize(textareaValue: string) {
     if (!props.autosize) return;
     backendTextareaRef.value.value = textareaValue;
     nextTick(() => {
-        textareaRef.value.style.height =
-            backendTextareaRef.value.scrollHeight + 'px';
+        textareaRef.value.style.height = backendTextareaRef.value.scrollHeight + 'px';
     });
 }
 
 function update() {
-    const textareaValue = textareaRef.value.value as string;
+    if (!textareaRef.value) return;
+    const textareaValue = textareaRef.value.value;
     updateModelValue(textareaValue);
     handleAutosize(textareaValue);
 }
@@ -116,7 +127,8 @@ function handleCompositionEnd(): void {
 const unWatch = watch(
     () => props.modelValue,
     newValue => {
-        textLength.value = (newValue as string).length;
+        if (!newValue) return;
+        textLength.value = newValue.length;
         handleAutosize(newValue as string);
     }
 );

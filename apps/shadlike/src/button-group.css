@@ -1,0 +1,4 @@
+.nue-button-group {
+    --nue-button-group-border-radius: var(--nue-primary-radius);
+    --nue-button-group-box-shadow: var(--nue-secondary-shadow);
+}

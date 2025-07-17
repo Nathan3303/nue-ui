@@ -1,9 +1,9 @@
 <template>
     <div :class="classes" @click="handleClick">
         <nue-icon :name="iconName" :spin="loading" class="nue-checkbox__icon" />
-        <span class="nue-checkbox__label">
+        <div v-if="label || $slots.default" class="nue-checkbox__label">
             <slot>{{ label }}</slot>
-        </span>
+        </div>
     </div>
 </template>
 
@@ -11,7 +11,7 @@
 import { computed, inject, onBeforeUnmount, onMounted } from 'vue';
 import { isFunction } from 'lodash-es';
 import { generateId, parseTheme } from '@nue-ui/utils';
-import { NueIcon } from '../icon';
+import NueIcon from '../icon/icon.vue';
 import { CHECKBOX_GROUP_CTX_KEY } from '../checkbox-group/constants';
 import type { NueCheckboxEmits, NueCheckboxProps } from './types';
 import type { NueCheckboxGroupContext } from '../checkbox-group/types';
@@ -47,9 +47,7 @@ const disabled = computed(() => {
     if (checkboxGroupCtx) {
         const { disabled, maximized, minimized } = checkboxGroupCtx;
         return (
-            disabled ||
-            (maximized.value && !checked.value) ||
-            (minimized.value && checked.value)
+            disabled || (maximized.value && !checked.value) || (minimized.value && checked.value)
         );
     }
     return false;
@@ -73,7 +71,7 @@ const classes = computed(() => {
 });
 
 const label = computed(() => {
-    return props.label || props.name;
+    return props.label;
 });
 
 const iconName = computed(() => {

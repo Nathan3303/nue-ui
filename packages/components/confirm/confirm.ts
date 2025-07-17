@@ -1,32 +1,29 @@
-import ConfirmNode from './confirm.vue';
-import { usePopupWrapper } from '../popup-wrapper';
+import NueConfirm from './confirm.vue';
 import { createVNode, render } from 'vue';
-import type { ConfirmPayloadType } from './types';
+import { usePopupAnchor } from '@nue-ui/hooks';
+import type { NueConfirmCallerPayload, NueConfirmCallerReturned } from './types';
 
-export default function (payload: ConfirmPayloadType) {
-    const popupWrapper = usePopupWrapper(payload.wrapperId);
-
+export default function NueConfirmCaller(
+    payload: NueConfirmCallerPayload
+): NueConfirmCallerReturned {
     return new Promise((resolve, reject) => {
-        const confirmWrapper = document.createElement('div');
-        confirmWrapper.classList.add('nue-confirm-prompt-wrapper');
-        popupWrapper.appendChild(confirmWrapper);
-
-        const removeChild = () => {
-            confirmWrapper.dataset.closing = 'true';
-            setTimeout(() => {
-                popupWrapper.removeChild(confirmWrapper);
-            }, 240);
-        };
-
-        const close = async (confirmResult: unknown) => {
-            if (confirmResult instanceof Error || !confirmResult) {
-                reject(confirmResult);
-            } else {
-                resolve(confirmResult);
-            }
-            removeChild();
-        };
-
-        render(createVNode(ConfirmNode, { ...payload, close }), confirmWrapper);
+        const { popupAnchor, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor(
+            payload.wrapperId
+        );
+        mountPopupAnchor();
+        render(
+            createVNode(NueConfirm, {
+                ...payload,
+                close: (confirmResult: NueConfirmCallerReturned) => {
+                    confirmResult instanceof Error || !confirmResult
+                        ? reject(confirmResult)
+                        : resolve(confirmResult);
+                },
+                destroy: () => {
+                    unmountPopupAnchor();
+                }
+            }),
+            popupAnchor
+        );
     });
 }

@@ -1,24 +1,23 @@
-/* variables */
-
 .nue-avatar {
     --nue-avatar-size: 36px;
     --nue-avatar-object-fit: cover;
-}
+    --nue-avatar-bg-color: #bdbdbd;
+    --nue-avatar-color: #f5f5f5;
+    --nue-avatar-inner-font-size: calc(0.5 * var(--nue-avatar-size));
 
-/* original */
-
-.nue-avatar {
-    flex: none;
     width: var(--nue-avatar-size);
     height: var(--nue-avatar-size);
     line-height: var(--nue-avatar-size);
-    text-align: center;
-    overflow: hidden;
-    box-sizing: border-box;
+    background-color: var(--nue-avatar-bg-color);
+    color: var(--nue-avatar-color);
+    flex: none;
     border: none;
-    border-radius: 4px;
-    background-color: var(--nue-primary-color-400);
-    color: var(--nue-primary-color-100);
+    border-radius: 6px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: var(--nue-avatar-inner-font-size);
+    -webkit-user-select: none;
+    user-select: none;
 
     .nue-avatar__image {
         width: 100%;
@@ -26,11 +25,12 @@
         line-height: 100%;
         text-align: center;
         object-fit: var(--nue-avatar-object-fit);
+        border-radius: 6px;
     }
-}
 
-/* rounded */
-
-.nue-avatar--rounded {
-    border-radius: 50%;
+    .nue-avatar__icon,
+    .nue-avatar__text {
+        font-size: var(--nue-avatar-inner-font-size);
+        line-height: var(--nue-avatar-size);
+    }
 }

@@ -1,24 +1,15 @@
-import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
-import { compression } from 'vite-plugin-compression2';
-import { readFile } from 'fs';
-import { defer, delay } from 'lodash-es';
-import shell from 'shelljs';
-import hooksPlugin from './hooks-plugin';
+import useRollupPlugin from './use-rollup-plugin.ts';
 import terser from '@rollup/plugin-terser';
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import { compression } from 'vite-plugin-compression2';
+import { removeOldFiles, moveUMDStyleFiles } from './utils.ts';
 
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = process.env.NODE_ENV === 'development';
 const isTest = process.env.NODE_ENV === 'test';
-
-const moveStyles = () => {
-    readFile('./dist/umd/index.css.gz', err => {
-        if (err) return delay(moveStyles, 800);
-        defer(() => shell.cp('./dist/umd/index.css', './dist/index.css'));
-    });
-};
 
 export default defineConfig({
     plugins: [
@@ -28,9 +19,10 @@ export default defineConfig({
             tsconfigPath: 'tsconfig.build.json'
         }),
         compression({ include: /\.(cjs|css)$/i }),
-        hooksPlugin({
-            fileNames: ['./dist/umd', './dist/index.css'],
-            afterBuild: moveStyles
+        useRollupPlugin({
+            name: 'umd-rollup-plugin',
+            beforeBuild: () => removeOldFiles(),
+            afterBuild: () => moveUMDStyleFiles()
         }),
         terser({
             compress: {

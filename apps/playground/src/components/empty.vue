@@ -1,24 +1,26 @@
 <template>
-    <demo title="Empty 空状态">
-        <nue-div vertical>
-            <nue-div align="center">
-                <nue-empty />
-                <nue-empty description="Empty" />
-                <nue-empty
-                    image-size="64px"
-                    image-src="https://picsum.photos/64/64"
-                />
-            </nue-div>
-            <nue-empty theme="custom">
-                <template #description>当前页面暂无数据</template>
-                <nue-button size="small" theme="primary">返回上一页</nue-button>
-            </nue-empty>
-        </nue-div>
+    <demo title="基础">
+        <nue-empty />
+    </demo>
+    <demo title="描述文本">
+        <nue-empty description="Empty" />
+    </demo>
+    <demo title="图片">
+        <nue-empty image-src="https://picsum.photos/64/64" />
+    </demo>
+    <demo title="大小">
+        <nue-empty image-size="4rem" image-src="https://picsum.photos/64/64" />
+    </demo>
+    <demo title="主题">
+        <nue-empty theme="custom">
+            <template #description>当前页面暂无数据</template>
+            <nue-button size="small" theme="primary">返回上一页</nue-button>
+        </nue-empty>
     </demo>
 </template>
 
 <script lang="ts" setup>
-import { NueDiv, NueEmpty, NueButton } from '@nue-ui/components';
+import { NueEmpty, NueButton } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 </script>
 

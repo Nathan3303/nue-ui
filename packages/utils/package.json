@@ -1,10 +1,8 @@
 {
     "name": "@nue-ui/utils",
-    "version": "0.1.0",
-    "description": "NueUI Utils",
+    "description": "NueUI utils package",
     "private": true,
-    "main": "./src/index.ts",
-    "scripts": {},
+    "main": "index.ts",
     "author": "Nathan Lee",
     "license": "MIT"
 }

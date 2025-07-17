@@ -1,0 +1,30 @@
+.nue-dropdown {
+    border-color: var(--nue-divider-color);
+    border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-secondary-shadow);
+
+    animation-name: slide-fade-out;
+    animation-duration: var(--nue-animation-duration-short);
+    animation-timing-function: var(--nue-animation-timing-function);
+
+    li:hover,
+    .nue-dropdown-item:hover {
+        background-color: var(--nue-primary-color-300);
+    }
+
+    &[data-direction='top'] {
+        animation-name: slide-fade-top;
+    }
+
+    &[data-direction='bottom'] {
+        animation-name: slide-fade-bottom;
+    }
+
+    &[data-direction='left'] {
+        animation-name: slide-fade-left;
+    }
+
+    &[data-direction='right'] {
+        animation-name: slide-fade-right;
+    }
+}

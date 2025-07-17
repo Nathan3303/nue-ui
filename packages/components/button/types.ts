@@ -1,23 +1,23 @@
 import type { GlobalProps } from '@nue-ui/utils';
-import type { IconNameType } from '../icon';
+import type { NueIconName } from '../icon';
 
-export type ButtonSize = 'small' | 'large';
+export type NueButtonSize = 'small' | 'large';
 
-export interface ButtonPropsType extends GlobalProps {
-    icon?: IconNameType;
+export interface NueButtonProps extends GlobalProps {
+    icon?: NueIconName;
     disabled?: boolean;
     loading?: boolean;
-    loadingIcon?: IconNameType;
+    loadingIcon?: NueIconName;
     title?: string;
     alignment?: 'start' | 'center' | 'end';
     flex?: string;
-    size?: ButtonSize;
+    size?: NueButtonSize;
     useThrottle?: boolean;
     throttleDuration?: number;
     flat?: boolean;
     type?: 'submit' | 'reset' | 'button';
 }
 
-export type ButtonEmitsType = {
+export type NueButtonEmits = {
     click: [payload: MouseEvent];
 };
