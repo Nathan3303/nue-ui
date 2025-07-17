@@ -32,3 +32,4 @@ coverage
 .vitepress/dist
 .vitepress/cache
 pnpm-lock.yaml
+apps/document/vitepress-demo-preview-component
