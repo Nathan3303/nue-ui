@@ -27,7 +27,7 @@ export default [
             'apps/**/dist/*',
             '*.test.js',
             'src/legacy/**/*.js',
-            'apps/document/vitepress-demo-preview/*'
+            'apps/document/vitepress-demo-preview-component/'
         ]
     }
 ];
