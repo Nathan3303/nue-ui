@@ -139,8 +139,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
       '@vitepress-demo-preview/plugin':
-        specifier: file:vitepress-demo-preview\plugin
-        version: file:apps/document/vitepress-demo-preview/plugin(markdown-it-container@4.0.0)(vitepress@1.6.3(@algolia/client-search@5.34.0)(@types/node@24.0.3)(change-case@5.4.4)(fuse.js@7.1.0)(postcss@8.4.47)(sass@1.89.2)(search-insights@2.17.2)(terser@5.36.0)(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))
+        specifier: ^1.4.0
+        version: 1.4.0(markdown-it-container@4.0.0)(vitepress@1.6.3(@algolia/client-search@5.34.0)(@types/node@24.0.3)(change-case@5.4.4)(fuse.js@7.1.0)(postcss@8.4.47)(sass@1.89.2)(search-insights@2.17.2)(terser@5.36.0)(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))
       floating-vue:
         specifier: ^5.2.2
         version: 5.2.2(vue@3.5.17(typescript@5.8.3))
@@ -1476,8 +1476,8 @@ packages:
   '@vitepress-demo-preview/core@0.2.0':
     resolution: {integrity: sha512-EjPzGcvklA8u4ALNIa0waWC8EcoouQn9RRocUE9ByGmI7bysKFZuCnsvEZyakA6MuFieXqBtsr2kuQV2fqpUtQ==}
 
-  '@vitepress-demo-preview/plugin@file:apps/document/vitepress-demo-preview/plugin':
-    resolution: {directory: apps/document/vitepress-demo-preview/plugin, type: directory}
+  '@vitepress-demo-preview/plugin@1.4.0':
+    resolution: {integrity: sha512-Kp17j2sRTlBfB5MNHmcec35RTzQkp+yVjW6Rjm8Qs0YJw0AJZ9lDVG65zXupWMj7IinF7GjoZUlY0Jx1SDgL5g==}
     peerDependencies:
       markdown-it-container: ^3.0.0
       vitepress: '*'
@@ -5834,7 +5834,7 @@ snapshots:
     dependencies:
       '@flypeng/tool': 5.7.2
 
-  '@vitepress-demo-preview/plugin@file:apps/document/vitepress-demo-preview/plugin(markdown-it-container@4.0.0)(vitepress@1.6.3(@algolia/client-search@5.34.0)(@types/node@24.0.3)(change-case@5.4.4)(fuse.js@7.1.0)(postcss@8.4.47)(sass@1.89.2)(search-insights@2.17.2)(terser@5.36.0)(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))':
+  '@vitepress-demo-preview/plugin@1.4.0(markdown-it-container@4.0.0)(vitepress@1.6.3(@algolia/client-search@5.34.0)(@types/node@24.0.3)(change-case@5.4.4)(fuse.js@7.1.0)(postcss@8.4.47)(sass@1.89.2)(search-insights@2.17.2)(terser@5.36.0)(typescript@5.8.3))(vue@3.5.17(typescript@5.8.3))':
     dependencies:
       '@flypeng/tool': 5.7.2
       markdown-it: 14.1.0
