@@ -1,0 +1,1 @@
+import{_ as o,C as n,b as s,o as a,w as r,a as _}from"./framework.X628U8jD.js";const c={};function d(u,e){const t=n("nue-button");return a(),s(t,{disabled:""},{default:r(()=>e[0]||(e[0]=[_("禁用状态")])),_:1,__:[0]})}const l=o(c,[["render",d]]);export{l as default};

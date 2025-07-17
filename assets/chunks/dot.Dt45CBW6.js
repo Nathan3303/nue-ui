@@ -1,0 +1,1 @@
+import{_,C as t,b as s,o as c,w as o,G as r,a as u}from"./framework.X628U8jD.js";const d={};function f(l,e){const n=t("nue-button"),a=t("nue-badge");return c(),s(a,{dot:""},{default:o(()=>[r(n,null,{default:o(()=>e[0]||(e[0]=[u("小红点")])),_:1,__:[0]})]),_:1})}const m=_(d,[["render",f]]);export{m as default};

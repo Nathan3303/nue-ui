@@ -1,0 +1,1 @@
+import{_ as o,C as r,b as s,o as t}from"./framework.X628U8jD.js";const n={};function c(_,a){const e=r("nue-progress");return t(),s(e,{percentage:20,"stroke-width":12})}const f=o(n,[["render",c]]);export{f as default};

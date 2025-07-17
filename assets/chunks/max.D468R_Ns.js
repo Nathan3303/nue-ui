@@ -1,0 +1,1 @@
+import{_,C as t,b as s,o as c,w as n,G as r,a as u}from"./framework.X628U8jD.js";const d={};function l(f,e){const o=t("nue-button"),a=t("nue-badge");return c(),s(a,{max:99,value:123},{default:n(()=>[r(o,null,{default:n(()=>e[0]||(e[0]=[u("数字")])),_:1,__:[0]})]),_:1})}const p=_(d,[["render",l]]);export{p as default};

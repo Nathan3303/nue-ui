@@ -1,0 +1,1 @@
+import{p as n,C as s,b as l,o as r,w as u,a as c}from"./framework.X628U8jD.js";const d={__name:"loading",setup(_){const e=n(!1),t=()=>{e.value=!0,setTimeout(()=>e.value=!1,3e3)};return(i,o)=>{const a=s("nue-button");return r(),l(a,{loading:e.value,icon:"search",onClick:t},{default:u(()=>o[0]||(o[0]=[c("搜索")])),_:1,__:[0]},8,["loading"])}}};export{d as default};

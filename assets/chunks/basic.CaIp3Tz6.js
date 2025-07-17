@@ -1,0 +1,1 @@
+import{_ as o,C as n,b as s,o as a,w as r,a as _}from"./framework.X628U8jD.js";const c={};function u(f,t){const e=n("nue-button");return a(),s(e,null,{default:r(()=>t[0]||(t[0]=[_("按钮 (Button)")])),_:1,__:[0]})}const p=o(c,[["render",u]]);export{p as default};
