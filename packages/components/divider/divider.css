@@ -48,7 +48,7 @@
         height: 100%;
         position: absolute;
         top: 0;
-        left: calc(50% + var(--nue-divider-border-width) / 2);
+        left: calc(50% - var(--nue-divider-border-width) / 2);
         border: none;
         border-left-width: var(--nue-divider-border-width);
         border-left-style: var(--nue-divider-border-style);

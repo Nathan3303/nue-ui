@@ -1,14 +1,7 @@
 <template>
     <nue-div vertical>
-        <nue-text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </nue-text>
-        <nue-text>
-            Id hic ex soluta laboriosam blanditiis repudiandae nesciunt,
-        </nue-text>
-        <nue-text>
-            aliquid obcaecati aspernatur illum alias nisi quod placeat modi
-            optio nemo rem pariatur reiciendis.
-        </nue-text>
+        <nue-button icon="plus-circle">新增</nue-button>
+        <nue-button icon="filter">筛选</nue-button>
+        <nue-button icon="refresh">刷新</nue-button>
     </nue-div>
 </template>

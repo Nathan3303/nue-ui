@@ -86,6 +86,7 @@ const handleOpen = () => {
     mountPopupAnchor();
     waitForAnimation(true);
     emit('update:modelValue', true);
+    document.body.style.overflow = 'hidden';
 };
 
 const handleClose: NueDrawerHandleClose = async afterAnimation => {
@@ -93,6 +94,7 @@ const handleClose: NueDrawerHandleClose = async afterAnimation => {
     await waitForAnimation(false);
     if (afterAnimation && isFunction(afterAnimation)) afterAnimation();
     emit('update:modelValue', false);
+    document.body.style.overflow = 'auto';
 };
 
 const handleOverlayClick = () => {

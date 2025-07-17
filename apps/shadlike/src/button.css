@@ -22,14 +22,6 @@
     --nue-button-border-radius: 9999px;
 }
 
-.nue-button--primary {
-    --nue-button-color: white;
-    --nue-button-bg-color: var(--nue-primary-color-900);
-    --nue-button-hover-bg-color: var(--nue-primary-color-800);
-    --nue-button-active-bg-color: var(--nue-primary-color-800);
-    border-color: transparent;
-}
-
 .nue-button--secondary {
     --nue-button-bg-color: var(--nue-primary-color-200);
     --nue-button-hover-bg-color: var(--nue-primary-color-300);
@@ -51,23 +43,4 @@
     --nue-button-active-bg-color: var(--nue-primary-color-300);
     box-shadow: none;
     border-color: transparent;
-}
-
-.nue-button--pure {
-    --nue-button-vgap: 0;
-    --nue-button-height: auto;
-    --nue-button-hover-color: var(--nue-secondary-text-color);
-    --nue-button-active-color: var(--nue-secondary-text-color);
-    --nue-button-border-color: transparet;
-    --nue-button-hover-bg-color: transparent;
-    --nue-button-active-bg-color: transparent;
-    box-shadow: none;
-
-    .nue-button__text {
-        font-size: var(--nue-button-font-size);
-    }
-
-    &.nue-button--disabled {
-        background-color: transparent;
-    }
 }

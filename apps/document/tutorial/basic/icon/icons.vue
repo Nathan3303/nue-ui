@@ -2,9 +2,9 @@
     <nue-div align="stretch" vertical>
         <nue-input v-model="filterText" clearable icon="filter" placeholder="筛选" />
         <div class="icons">
-            <nue-div v-for="icon in filteredIcons" :key="icon" class="icon">
+            <nue-div v-for="icon in filteredIcons" :key="icon" class="icon-block">
                 <nue-icon size="1.75rem" :name="icon" />
-                <nue-text size=".75rem">{{ icon }}</nue-text>
+                <nue-text size=".875rem">{{ icon }}</nue-text>
             </nue-div>
         </div>
     </nue-div>
@@ -91,16 +91,11 @@ const filteredIcons = computed(() => {
 .icons {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
-    gap: 1px;
-    align-content: center;
-    border-radius: var(--nue-primary-radius);
-    border: 1px solid var(--nue-divider-color);
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
     box-sizing: border-box;
-    background-color: var(--nue-divider-color);
     overflow: hidden;
 
-    .icon {
+    .icon-block {
         flex-direction: column;
         align-items: center;
         justify-content: center;

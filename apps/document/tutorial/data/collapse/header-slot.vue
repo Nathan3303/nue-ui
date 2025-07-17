@@ -5,15 +5,17 @@
         </nue-collapse-item>
         <nue-collapse-item>
             <template #header="{ collapse, state }">
-                <nue-button
-                    :icon="`arrow-${state ? 'right' : 'down'}`"
-                    theme="small"
-                    @click="collapse"
-                >
-                    自定义头部
-                </nue-button>
+                <nue-div align="center" gap=".25rem">
+                    <nue-icon
+                        size=".875rem"
+                        :name="state ? 'arrow-right' : 'arrow-down'"
+                        @click="collapse"
+                    />
+                    <nue-text size=".875rem" @click="collapse">自定义头部</nue-text>
+                </nue-div>
             </template>
             <nue-text>Lorem ipsum dolor sit amet, consectetur elit.</nue-text>
         </nue-collapse-item>
     </nue-collapse>
 </template>
+<script setup lang="ts"></script>

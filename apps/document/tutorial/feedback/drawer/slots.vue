@@ -4,7 +4,7 @@
         <template #header="{ close }">
             <nue-div align="center" justify="space-between">
                 <nue-text>自定义头部</nue-text>
-                <nue-button @click="close">关闭</nue-button>
+                <nue-button theme="pure" @click="close">关闭</nue-button>
             </nue-div>
         </template>
         <template #default>

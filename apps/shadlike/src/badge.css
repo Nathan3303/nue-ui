@@ -8,22 +8,3 @@
         border-radius: var(--nue-primary-radius);
     }
 }
-
-.nue-badge--dot {
-    .nue-badge__content {
-        --nue-badge-height: 0.75rem;
-
-        aspect-ratio: 1;
-        padding: 0;
-        border-radius: 99px;
-
-        &:is(sup) {
-            transform: translate(50%, -50%);
-        }
-
-        &:is(span) {
-            --nue-badge-height: 0.5rem;
-            background-color: var(--nue-badge-bg-color);
-        }
-    }
-}

@@ -1,8 +1,8 @@
 .nue-avatar {
     --nue-avatar-size: 36px;
     --nue-avatar-object-fit: cover;
-    --nue-avatar-bg-color: var(--nue-primary-color-400);
-    --nue-avatar-color: var(--nue-primary-color-100);
+    --nue-avatar-bg-color: #bdbdbd;
+    --nue-avatar-color: #f5f5f5;
     --nue-avatar-inner-font-size: calc(0.5 * var(--nue-avatar-size));
 
     width: var(--nue-avatar-size);
