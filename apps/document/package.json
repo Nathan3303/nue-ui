@@ -23,7 +23,7 @@
     },
     "dependencies": {
         "@vitepress-demo-preview/component": "file:vitepress-demo-preview\\component",
-        "@vitepress-demo-preview/plugin": "file:vitepress-demo-preview\\plugin",
+        "@vitepress-demo-preview/plugin": "^1.4.0",
         "floating-vue": "^5.2.2",
         "vue-sonner": "^2.0.1",
         "@vitepress-demo-preview/core": "^0.2.0",
