@@ -35,7 +35,7 @@ import {
     withScopeId
 } from './chunk-FMSNHPEC.js';
 
-// ../../node_modules/.pnpm/@vitepress-demo-preview+com_aeecd1ee5f0478d010bb15a1234d4163/node_modules/@vitepress-demo-preview/component/dist/preview-component.js
+// ../../node_modules/.pnpm/@vitepress-demo-preview+com_464eb081ca67f28d6901b4a58c24021c/node_modules/@vitepress-demo-preview/component/preview-component.js
 var Go = Object.defineProperty;
 var Yo = (e, t, o) =>
     t in e
@@ -5115,7 +5115,7 @@ var hs = defineComponent({
                                 createBaseVNode(
                                     'section',
                                     {
-                                        class: normalizeClass([unref(o).bem('preview')])
+                                        class: normalizeClass(['vp-raw', [unref(o).bem('preview')]])
                                     },
                                     [renderSlot(u.$slots, 'default')],
                                     2
@@ -5123,10 +5123,7 @@ var hs = defineComponent({
                                 createBaseVNode(
                                     'section',
                                     {
-                                        class: normalizeClass([
-                                            'vp-raw',
-                                            [unref(o).bem('description')]
-                                        ])
+                                        class: normalizeClass([unref(o).bem('description')])
                                     },
                                     [
                                         createBaseVNode(
@@ -5155,7 +5152,7 @@ var hs = defineComponent({
                                                             () =>
                                                                 d[2] ||
                                                                 (d[2] = [
-                                                                    createTextVNode(' 复制代码 ')
+                                                                    createTextVNode(' 复制代码')
                                                                 ])
                                                         ),
                                                         default: withCtx(() => [
@@ -5178,7 +5175,7 @@ var hs = defineComponent({
                                                                       d[4] ||
                                                                       (d[4] = [
                                                                           createTextVNode(
-                                                                              ' 展开代码 '
+                                                                              ' 展开代码'
                                                                           )
                                                                       ])
                                                               ),
@@ -5206,7 +5203,7 @@ var hs = defineComponent({
                                                                       d[3] ||
                                                                       (d[3] = [
                                                                           createTextVNode(
-                                                                              ' 折叠代码 '
+                                                                              ' 折叠代码'
                                                                           )
                                                                       ])
                                                               ),

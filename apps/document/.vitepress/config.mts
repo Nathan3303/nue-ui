@@ -11,12 +11,15 @@ export default defineConfig({
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         nav: [
-            { text: '主页', link: '/index.md' },
-            { text: '1.x 教程', link: '/tutorial/index.md' },
-            { text: '进阶', link: '/enhance/index.md' }
+            { text: '主页', link: '/' },
+            { text: '教程', link: '/tutorial', activeMatch: '/tutorial' },
+            { text: '进阶', link: '/enhance', activeMatch: '/enhance' }
         ],
         sidebar: {
             '/tutorial/': [
+                {
+                    items: [{ text: '教程章节引入', link: '/tutorial/index.md' }]
+                },
                 {
                     text: '如何使用',
                     items: [
@@ -25,7 +28,7 @@ export default defineConfig({
                     ]
                 },
                 {
-                    text: 'Basic 基础组件',
+                    text: '基础组件',
                     items: [
                         {
                             text: 'Button 按钮',
@@ -48,7 +51,7 @@ export default defineConfig({
                     ]
                 },
                 {
-                    text: 'Data 数据展示组件',
+                    text: '数据展示组件',
                     items: [
                         {
                             text: 'Avatar 头像',
@@ -81,7 +84,7 @@ export default defineConfig({
                     ]
                 },
                 {
-                    text: 'Feedback 反馈组件',
+                    text: '反馈组件',
                     items: [
                         {
                             text: 'Confirm 确认框',
@@ -106,7 +109,7 @@ export default defineConfig({
                     ]
                 },
                 {
-                    text: 'Form 表单组件',
+                    text: '表单组件',
                     items: [
                         {
                             text: 'Checkbox 复选框',
@@ -131,7 +134,7 @@ export default defineConfig({
                     ]
                 },
                 {
-                    text: 'Navigation 导航组件',
+                    text: '导航组件',
                     items: [
                         {
                             text: 'Dropdown 下拉菜单',
@@ -140,7 +143,7 @@ export default defineConfig({
                     ]
                 },
                 {
-                    text: 'Others 其他组件',
+                    text: '其他组件',
                     items: [
                         {
                             text: 'Divider 分割组件',
@@ -149,7 +152,11 @@ export default defineConfig({
                     ]
                 }
             ],
-            '/enhance/': [{}]
+            '/enhance/': [
+                {
+                    items: [{ text: '进阶章节引入', link: '/enhance/index.md' }]
+                }
+            ]
         },
         socialLinks: [{ icon: 'github', link: 'https://github.com/Nathan3303/nue-ui' }],
         search: {

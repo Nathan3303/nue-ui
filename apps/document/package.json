@@ -23,7 +23,7 @@
     },
     "dependencies": {
         "markdown-it": "^14.1.0",
-        "markdown-it-container": "^4.0.0",
+        "markdown-it-container": "^3.0.0",
         "@vitepress-demo-preview/component": "file:vitepress-demo-preview-component",
         "@vitepress-demo-preview/plugin": "^1.4.0"
     }
