@@ -28,6 +28,10 @@ export default defineConfig({
                     ]
                 },
                 {
+                    text: '全局特性',
+                    items: [{ text: '主题属性', link: '/tutorial/features/theme/index.md' }]
+                },
+                {
                     text: '基础组件',
                     items: [
                         {
