@@ -159,6 +159,10 @@ export default defineConfig({
             '/enhance/': [
                 {
                     items: [{ text: '进阶章节引入', link: '/enhance/index.md' }]
+                },
+                {
+                    text: '反馈组件',
+                    items: [{ text: '命令式下拉列表', link: '/enhance/command/index.md' }]
                 }
             ]
         },
