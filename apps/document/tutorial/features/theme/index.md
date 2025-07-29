@@ -7,7 +7,7 @@
 组件库中的每个组件在实现时都继承了主题属性 `theme`，即每个组件都拥有 `theme` 这个 prop，通过 `theme`
 属性可以实现对组件元素的样式自定义。
 
-:::preview
+::: preview
 demo-preview=./basic.vue
 :::
 
@@ -24,7 +24,7 @@ demo-preview=./basic.vue
 `['custom1', 'custom2']` 转换为 `'nue-xxx--custom1 nue-xxx--custom2'` 两个类名；字符串类型应用多个主题则在编写上通过逗号隔开，如
 `custom1,custom2`，转换结果同上。
 
-:::preview
+::: preview
 demo-preview=./multiple.vue
 :::
 
@@ -34,6 +34,6 @@ demo-preview=./multiple.vue
 
 动态应用指的是主题的应用会根据外部布尔变量决定，当变量为真值则应用，反之不应用。
 
-:::preview
+::: preview
 demo-preview=./dynamic.vue
 :::

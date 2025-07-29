@@ -1,25 +1,3 @@
-<script lang="ts" setup>
-import { ref, computed } from 'vue';
-import { NueMessage } from 'nue-ui';
-
-const defaultDropdownItem = [
-    { id: 'Option 1', text: '下拉选项 1' },
-    { id: 'Option 2', text: '下拉选项 2' },
-    { id: 'Option 3', text: '下拉选项 3' },
-    { id: 'Option 4', text: '下拉选项 4' },
-    { id: 'Option 5', text: '下拉选项 5' }
-];
-
-const inputValue = ref('');
-
-const dropdownItems = computed(() => {
-    return defaultDropdownItem.filter(item => item.text.includes(inputValue.value));
-});
-
-const handleExecute = (value: string) => NueMessage.info(value);
-const handleDropdownClose = () => (inputValue.value = '');
-</script>
-
 <template>
     <nue-dropdown
         close-when-executed
@@ -49,6 +27,33 @@ const handleDropdownClose = () => (inputValue.value = '');
         </nue-div>
     </nue-dropdown>
 </template>
+
+<script lang="ts" setup>
+import { ref, computed } from 'vue';
+import { NueMessage } from 'nue-ui';
+
+const defaultDropdownItem = [
+    { id: 'Option 1', text: '下拉选项 1' },
+    { id: 'Option 2', text: '下拉选项 2' },
+    { id: 'Option 3', text: '下拉选项 3' },
+    { id: 'Option 4', text: '下拉选项 4' },
+    { id: 'Option 5', text: '下拉选项 5' }
+];
+
+const inputValue = ref('');
+
+const dropdownItems = computed(() => {
+    return defaultDropdownItem.filter(item => item.text.includes(inputValue.value));
+});
+
+const handleExecute = (value: string) => {
+    NueMessage.info(value);
+};
+
+const handleDropdownClose = () => {
+    inputValue.value = '';
+};
+</script>
 
 <style>
 .nue-dropdown--command {

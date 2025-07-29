@@ -19,32 +19,42 @@ demo-preview=./basic.vue
 一节。
 :::
 
-<preview path="./icon.vue"></preview>
+::: preview
+demo-preview=./icon.vue
+:::
 
 ### 设置禁用状态
 
 通过属性 `disabled` 使按钮组件处于禁用状态。属性接受 `boolean` 类型的值，为 `true` 时表示禁用。
 
-<preview path="./disabled.vue"></preview>
+::: preview
+demo-preview=./disabled.vue
+:::
 
 ### 设置大小
 
 通过属性 `size` 设置按钮的大小。属性接受 `small` 和 `large` 两个可选值，分别对应小和大两个尺寸。
 
-<preview path="./size.vue"></preview>
+::: preview
+demo-preview=./size.vue
+:::
 
 ## 加载状态
 
 通过属性 `loading` 使按钮组件处于加载状态。属性接受 `boolean` 类型的值，为 `true` 时表示加载中。
 
-<preview path="./loading.vue"></preview>
+::: preview
+demo-preview=./loading.vue
+:::
 
 ### 设置其他的加载图标
 
 通过属性 `loading-icon` 配置按钮在加载中的图标。属性值与 `icon` 属性相同。默认情况下的加载图标为
 `loading`。
 
-<preview path="./loading-icon.vue"></preview>
+::: preview
+demo-preview=./loading-icon.vue
+:::
 
 ## 节流
 
@@ -53,13 +63,17 @@ demo-preview=./basic.vue
 通过属性 `use-throttle` 启用节流模式；属性 `throttle-duration` 设置节流间隔。节流单位为 `ms`，默认值为
 `200` 。
 
-<preview path="./throttle.vue"></preview>
+::: preview
+demo-preview=./throttle.vue
+:::
 
 ## 后置扩展插槽
 
 通过插槽 `#append` 可以在按钮文字的后方插入自定义的元素。
 
-<preview path="./append.vue"></preview>
+::: preview
+demo-preview=./append.vue
+:::
 
 ## 按钮组及统一属性控制
 
@@ -74,4 +88,6 @@ demo-preview=./basic.vue
 当按钮的属性和按钮组的属性同时被指定时，按钮组的属性会优先于按钮自身的属性。
 :::
 
-<preview path="./button-group-basic.vue"></preview>
+::: preview
+demo-preview=./button-group-basic.vue
+:::

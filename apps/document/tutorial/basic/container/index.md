@@ -20,7 +20,9 @@
 容器组件的默认宽度和高度都是占满父容器，也就是 100%。通过属性 `width` 和 `height` 可以修改宽高默认值，接受
 CSS 宽高属性值。也通过 `theme` 属性应用主题样式达到同样的效果。
 
-<preview path="./basic.vue"></preview>
+::: preview
+demo-preview=./basic.vue
+:::
 
 ## 头部组件和底部组件
 
@@ -29,8 +31,13 @@ CSS 宽高属性值。也通过 `theme` 属性应用主题样式达到同样的�
 头部组件的默认高度为 `4rem`；底部组件的默认高度为 `3rem`。通过属性 `width` 和 `height` 可以修改宽高默认值，接受
 CSS 宽高属性值。
 
-<preview path="./header-comp.vue"></preview>
-<preview path="./footer-comp.vue"></preview>
+::: preview
+demo-preview=./header-comp.vue
+:::
+
+::: preview
+demo-preview=./footer-comp.vue
+:::
 
 ## 主体组件
 
@@ -39,7 +46,9 @@ CSS 宽高属性值。
 主体组件的默认布局方向为横向，宽高默认占满容器组件的剩余空间。不支持通过属性 `width` 和 `height`
 直接修改宽高，但可以通过容器组件的 `theme` 属性进行修改。
 
-<preview path="./main-comp.vue"></preview>
+::: preview
+demo-preview=./main-comp.vue
+:::
 
 ## 侧栏组件
 
@@ -50,12 +59,14 @@ CSS 宽高属性值。
 三个属性，分别对应起始宽度、最小宽度以及最大宽度。通过拖拽变宽组件 `NueSeparator`
 实现侧栏宽度变化，最小宽度和最大宽度可以限定宽度变化范围。
 
-<preview path="./aside-comp.vue"></preview>
+::: preview
+demo-preview=./aside-comp.vue
+:::
 
 ## 拖拽变宽组件
 
 拖拽变宽组件 `NueSeparator` 用于实现目标元素宽度（通常为侧栏组件）的动态变化。
-该组件的展示形式为一个垂直线，通过点击这条垂直线，可以拖拽改变侧栏宽度。拖拽变宽组件的默认宽度为 `1px` 
+该组件的展示形式为一个垂直线，通过点击这条垂直线，可以拖拽改变侧栏宽度。拖拽变宽组件的默认宽度为 `1px`
 ，默认高度为占满父元素。
 
 通过属性 `op-target` 指定拖拽变宽时操作的元素，可选值为 `'previous' | 'next' | HTMLElement`，默认为
@@ -63,10 +74,14 @@ CSS 宽高属性值。
 
 通过属性 `disabled` 禁用拖拽变宽功能。
 
-<preview path="./separator.vue"></preview>
+::: preview
+demo-preview=./separator.vue
+:::
 
 ## 容器嵌套
 
 容器组件 `NueContainer` 支持嵌套使用。
 
-<preview path="./nested.vue"></preview>
+::: preview
+demo-preview=./nested.vue
+:::

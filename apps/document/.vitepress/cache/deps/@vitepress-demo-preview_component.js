@@ -33,9 +33,9 @@ import {
     withCtx,
     withKeys,
     withScopeId
-} from './chunk-FMSNHPEC.js';
+} from './chunk-477SOVZ3.js';
 
-// ../../node_modules/.pnpm/@vitepress-demo-preview+com_464eb081ca67f28d6901b4a58c24021c/node_modules/@vitepress-demo-preview/component/preview-component.js
+// ../../node_modules/.pnpm/@vitepress-demo-preview+com_089a2ef94ad0eee519e2b9682d84212f/node_modules/@vitepress-demo-preview/component/preview-component.js
 var Go = Object.defineProperty;
 var Yo = (e, t, o) =>
     t in e
