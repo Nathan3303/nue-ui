@@ -114,7 +114,7 @@ const handleConfirm = async (isConfirmed: boolean) => {
         loading.value = true;
         handleClose(await props.onConfirm());
     } catch (e) {
-        handleClose(e as Error | string);
+        handleClose(e instanceof Error ? e : new Error(e as string));
     } finally {
         loading.value = false;
     }

@@ -57,22 +57,23 @@ function openConfirmWithTheme() {
 }
 
 function openConfirmWithOnConfirm() {
+    const confirmHandler = () => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const randomNumber = Math.random();
+                if (randomNumber > 0.5) {
+                    resolve({ a: 1, b: 2, r: 'success' });
+                } else {
+                    reject('失败，请重试');
+                }
+            }, 1024);
+        });
+    };
     NueConfirm({
         content: '自定义了确实时的回调函数',
-        onConfirm: () => {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    const randomNumber = Math.random();
-                    if (randomNumber > 0.5) {
-                        resolve('成功');
-                    } else {
-                        reject('失败，请重试');
-                    }
-                }, 1024);
-            });
-        }
+        onConfirm: async () => await confirmHandler()
     }).then(
-        res => NueMessage.success(res as string),
+        res => NueMessage.success(res?.r),
         err => {
             if (err instanceof Error) {
                 NueMessage.error(err.message);

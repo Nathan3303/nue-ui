@@ -11,18 +11,14 @@ export interface NueConfirmCallerPayload extends GlobalProps, NueGlobalPopupItem
     loading?: boolean;
     overlayAnimation?: NuePopupItemAnimation;
     overlayCloseAnimation?: NuePopupItemAnimation;
-    onConfirm?: () => Promise<Error | boolean | string> | boolean;
+    onConfirm?: () => Promise<unknown> | unknown;
 }
 
-export type NueConfirmCallerReturnedUnpromise = Error | boolean | string;
+export type NueConfirmCallerReturnedUnpromise = unknown;
 
-export type NueConfirmCallerReturned = Promise<Error | boolean | string>;
+export type NueConfirmCallerReturned = Promise<NueConfirmCallerReturnedUnpromise>;
 
 export interface NueConfirmProps extends NueConfirmCallerPayload {
     close: (confirmResult: NueConfirmCallerReturnedUnpromise) => void;
     destroy: () => void;
 }
-
-// export type NueConfirmEmits = {
-//     (e: 'close', confirmResult: Error | boolean | string): void;
-// };

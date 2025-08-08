@@ -13,11 +13,11 @@ export type NueCollapseEmit = {
     (e: 'update:modelValue', value: ActivedCollapseItems): void;
 };
 
-export type NueCollapseItemProps = {
+export interface NueCollapseItemProps extends GlobalProps {
     title?: string;
     name?: string | number;
     hideWhenEmpty?: boolean;
-};
+}
 
 export type NueCollapseContext = {
     activedItems: Ref<ActivedCollapseItems>;
