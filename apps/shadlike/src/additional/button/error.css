@@ -1,0 +1,9 @@
+.nue-button--error {
+    --nue-button-color: white;
+    --nue-button-border-color: transparent;
+    --nue-button-bg-color: hsl(var(--nue-error-hsl-color));
+    --nue-button-hover-bg-color: hsl(var(--nue-error-hsl-color) / 0.86);
+    --nue-button-active-bg-color: var(--nue-button-hover-bg-color);
+    --nue-button-disable-color: white;
+    --nue-button-disable-bg-color: hsl(var(--nue-error-hsl-color) / 0.5);
+}

@@ -9,10 +9,3 @@
     border-radius: var(--nue-checkbox-border-radius);
     box-shadow: var(--nue-checkbox-box-shadow);
 }
-
-.nue-checkbox--bordered,
-.nue-checkbox--bd {
-    --nue-checkbox-border-color: var(--nue-border-color);
-    --nue-checkbox-border-radius: var(--nue-primary-radius);
-    --nue-checkbox-box-shadow: var(--nue-secondary-shadow);
-}

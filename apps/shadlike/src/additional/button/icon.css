@@ -1,0 +1,9 @@
+.nue-button--icon {
+    --nue-button-border-color: transparent;
+    --nue-button-alignment: center;
+    aspect-ratio: 1;
+
+    .nue-button__text {
+        display: none;
+    }
+}

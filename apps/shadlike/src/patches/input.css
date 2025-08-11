@@ -1,0 +1,26 @@
+.nue-input {
+    --nue-input-font-size: var(--nue-text-sm);
+    --nue-input-color: var(--nue-primary-color-900);
+    --nue-input-icon-size: calc(var(--nue-input-font-size));
+    --nue-input-icon-color: var(--nue-input-color);
+    --nue-input-placeholder-color: var(--nue-primary-color-400);
+    --nue-input-border-color: var(--nue-divider-color);
+    --nue-input-hover-border-color: var(--nue-primary-color-600);
+    --nue-input-focus-border-color: var(--nue-primary-color-600);
+    --nue-input-focus-shadow: var(--nue-primary-shadow);
+    --nue-input-disabled-border-color: var(--nue-divider-color);
+    --nue-input-disabled-background-color: var(--nue-primary-color-100);
+    --nue-input-opbtn-color: var(--nue-primary-color-500);
+    --nue-input-opbtn-hover-color: var(--nue-primary-color-900);
+
+    border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-secondary-shadow);
+
+    &.nue-input--small {
+        --nue-button-font-size: var(--nue-text-xs);
+    }
+
+    &.nue-input--large {
+        --nue-button-font-size: var(--nue-text-md);
+    }
+}
