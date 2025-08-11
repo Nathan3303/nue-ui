@@ -44,5 +44,3 @@ import { componentLayoutAsideLinks } from '../constants.ts';
 
 const collapseValue = shallowRef(['basic', 'data', 'navigation', 'form', 'feedback', 'others']);
 </script>
-
-<style scoped></style>

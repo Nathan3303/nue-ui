@@ -12,7 +12,6 @@ const componentRoutes = [
                 path: '/component/container',
                 component: () => import('./components/container.vue')
             },
-            // {path: '/component/div', component: () => import('./components/div.vue') },
             { path: '/component/link', component: () => import('./components/link.vue') },
             { path: '/component/text', component: () => import('./components/text.vue') },
             { path: '/component/icon', component: () => import('./components/icon.vue') },
@@ -60,6 +59,23 @@ const customRoutes = [
     }
 ];
 
+const shadlikeRoutes = [
+    {
+        path: '/shadlike',
+        name: 'shadlike-home',
+        redirect: '/shadlike/button',
+        component: () => import('./layouts/shadlike.vue'),
+        children: [
+            { path: '/shadlike/button', component: () => import('./shadlike/button.vue') },
+            { path: '/shadlike/link', component: () => import('./shadlike/link.vue') },
+            { path: '/shadlike/avatar', component: () => import('./shadlike/avatar.vue') },
+            { path: '/shadlike/collapse', component: () => import('./shadlike/collapse.vue') },
+            { path: '/shadlike/checkbox', component: () => import('./shadlike/checkbox.vue') },
+            { path: '/shadlike/div', component: () => import('./shadlike/div.vue') }
+        ]
+    }
+];
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -67,7 +83,7 @@ const router = createRouter({
             path: '/',
             name: 'home',
             redirect: '/component',
-            children: [...componentRoutes, ...customRoutes]
+            children: [...componentRoutes, ...customRoutes, ...shadlikeRoutes]
         }
     ]
 });

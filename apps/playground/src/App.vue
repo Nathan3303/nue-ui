@@ -1,20 +1,37 @@
 <template>
-    <nue-container class="app-view">
+    <nue-container id="PlaygroundAppContainer">
         <nue-header>
             <nue-div flex="1">
-                <nue-link route="/component" theme="rl">组件演练</nue-link>
-                <nue-link route="/custom" theme="rl">自由演练</nue-link>
-            </nue-div>
-            <nue-div width="fit-content">
                 <nue-text size="lg">NueUI Playground Demos</nue-text>
             </nue-div>
-            <nue-div flex="1"></nue-div>
+            <nue-div width="fit-content" align="center">
+                <nue-link route="/component" theme="rl">组件</nue-link>
+                <nue-link route="/custom" theme="rl">自由</nue-link>
+                <nue-divider vertical />
+                <nue-link route="/shadlike" theme="rl">Shadlike 主题</nue-link>
+            </nue-div>
         </nue-header>
         <router-view />
     </nue-container>
 </template>
 
 <script lang="ts" setup>
-import { NueContainer, NueHeader, NueLink, NueText, NueDiv } from '@nue-ui/components';
-import './main.css';
+import { NueContainer, NueHeader, NueLink, NueText, NueDiv, NueDivider } from '@nue-ui/components';
 </script>
+
+<style>
+* {
+    font-family:
+        'Poppins', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+        'WenQuanYi Micro Hei', sans-serif;
+    font-size: var(--nue-text-sm);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    word-break: break-word;
+    margin: 0;
+    box-sizing: border-box;
+    vertical-align: baseline;
+    zoom: 1;
+}
+</style>

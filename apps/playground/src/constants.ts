@@ -67,3 +67,12 @@ export const customLayoutAsideLinks = [
     },
     { route: '/custom/custom2', text: '自定义演练 2' }
 ];
+
+export const shadlikeLayoutAsideLinks = [
+    { route: '/shadlike/button', text: 'Button 按钮' },
+    { route: '/shadlike/link', text: 'Link 链接' },
+    { route: '/shadlike/avatar', text: 'Avatar 头像' },
+    { route: '/shadlike/collapse', text: 'Collapse 折叠面板' },
+    { route: '/shadlike/checkbox', text: 'Checkbox 复选框' },
+    { route: '/shadlike/div', text: 'Div 弹性盒' }
+];

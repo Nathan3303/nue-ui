@@ -20,13 +20,6 @@
             。 通过 height 属性设置可视区域的高度，默认为 100% 。
         </nue-text>
     </demo>
-    <demo title="主题">
-        <nue-div align="center">
-            <nue-link theme="rl,rl-sm">链接</nue-link>
-            <nue-link theme="rl" icon="connection">链接</nue-link>
-            <nue-link theme="rl,rl-lg" icon="theme"></nue-link>
-        </nue-div>
-    </demo>
 </template>
 
 <script lang="ts" setup>
