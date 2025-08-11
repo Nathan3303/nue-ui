@@ -1,5 +1,5 @@
 .nue-div {
-    --nue-div-width: 100%;
+    --nue-div-width: auto;
     --nue-div-height: auto;
     --nue-div-flex-direction: row;
     --nue-div-align-items: start;
@@ -20,6 +20,5 @@
     width: var(--nue-div-width);
     height: var(--nue-div-height);
 
-    font-size: 1rem;
-    font-weight: normal;
+    font-size: 0.875rem;
 }
