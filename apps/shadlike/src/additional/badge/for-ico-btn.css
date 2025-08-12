@@ -1,0 +1,8 @@
+.nue-badge--for-ico-btn {
+    .nue-badge__content {
+        &:is(sup) {
+            transform: translate(12%, -12%);
+            border: 1px solid white;
+        }
+    }
+}

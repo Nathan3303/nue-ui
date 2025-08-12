@@ -74,5 +74,8 @@ export const shadlikeLayoutAsideLinks = [
     { route: '/shadlike/avatar', text: 'Avatar 头像' },
     { route: '/shadlike/collapse', text: 'Collapse 折叠面板' },
     { route: '/shadlike/checkbox', text: 'Checkbox 复选框' },
-    { route: '/shadlike/div', text: 'Div 弹性盒' }
+    { route: '/shadlike/div', text: 'Div 弹性盒' },
+    { route: '/shadlike/badge', text: 'Badge 徽标' },
+    { route: '/shadlike/dialog', text: 'Dialog 对话框' },
+    { route: '/shadlike/dropdown', text: 'Dropdown 下拉列表' }
 ];

@@ -1,5 +1,6 @@
 .nue-button--icon {
     --nue-button-border-color: transparent;
+    --nue-button-box-shadow: none;
     --nue-button-alignment: center;
     aspect-ratio: 1;
 
