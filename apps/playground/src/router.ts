@@ -74,7 +74,10 @@ const shadlikeRoutes = [
             { path: '/shadlike/div', component: () => import('./shadlike/div.vue') },
             { path: '/shadlike/badge', component: () => import('./shadlike/badge.vue') },
             { path: '/shadlike/dialog', component: () => import('./shadlike/dialog.vue') },
-            { path: '/shadlike/dropdown', component: () => import('./shadlike/dropdown.vue') }
+            { path: '/shadlike/dropdown', component: () => import('./shadlike/dropdown.vue') },
+            { path: '/shadlike/progress', component: () => import('./shadlike/progress.vue') },
+            { path: '/shadlike/input', component: () => import('./shadlike/input.vue') },
+            { path: '/shadlike/textarea', component: () => import('./shadlike/textarea.vue') }
         ]
     }
 ];

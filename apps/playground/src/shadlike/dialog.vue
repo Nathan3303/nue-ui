@@ -19,7 +19,7 @@ const dialog3 = reactive({ visible: false });
             </template>
         </nue-dialog>
     </demo>
-    <demo title="large 大型对话框主题">
+    <demo title="大型对话框主题" sub-title="large">
         <nue-button @click="dialog2.visible = true">点击打开对话框</nue-button>
         <nue-dialog v-model="dialog2.visible" title="对话框" theme="large">
             <nue-text color="gray" size="var(--nue-text-sm)">这是一个基本的对话框</nue-text>
@@ -29,7 +29,7 @@ const dialog3 = reactive({ visible: false });
             </template>
         </nue-dialog>
     </demo>
-    <demo title="fullscreen 全屏主题">
+    <demo title="全屏主题" sub-title="fullscreen">
         <nue-button @click="dialog3.visible = true">点击打开对话框</nue-button>
         <nue-dialog v-model="dialog3.visible" title="对话框" theme="fullscreen">
             <template #header-actions>

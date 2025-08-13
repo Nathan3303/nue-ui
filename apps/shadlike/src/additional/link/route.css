@@ -1,19 +1,16 @@
-.nue-link--rl,
 .nue-link--route {
     --nue-link-height: 2.25rem;
     --nue-link-padding: 0.875rem;
     --nue-link-gap: 0.5rem;
     --nue-link-font-size: 0.875rem;
-    --nue-link-border-color: transparent;
-    --nue-link-border-radius: 6px;
     --nue-link-box-shadow: 0 0 3px 1px rgba(200, 200, 200, 0.3);
     --nue-link-color: var(--nue-primary-text-color);
     --nue-link-hover-color: var(--nue-primary-text-color);
     --nue-link-hover-background-color: var(--nue-primary-color-300);
     --nue-link-hover-text-decoration: none;
-    --nue-link-disable-color: gray;
+    --nue-link-disable-color: var(--nue-primary-color-400);
     --nue-link-disable-background-color: var(--nue-primary-color-200);
-    --nue-link-disable-border-color: gray;
+    --nue-link-disable-border-color: transparent;
     --nue-link-actived-color: white;
     --nue-link-actived-background-color: var(--nue-primary-color-900);
 
@@ -22,7 +19,6 @@
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
     transition: all 0.16s ease-out;
@@ -41,38 +37,53 @@
         padding: 0;
     }
 
-    .nue-link__content {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        word-break: break-all;
-    }
-
     &:active {
-        color: var(--nue-link-active-color);
-        border-color: var(--nue-link-active-border-color);
-        background-color: var(--nue-link-active-background-color);
+        --nue-link-color: var(--nue-link-active-color);
+        --nue-link-border-color: var(--nue-link-active-border-color);
+        --nue-link-background-color: var(--nue-link-active-background-color);
     }
 
-    &.nue-link--actived {
-        color: var(--nue-link-actived-color);
-        border-color: var(--nue-link-actived-border-color);
-        background-color: var(--nue-link-actived-background-color);
-    }
-
-    &.nue-link--rl-sm,
     &.nue-link--route-sm {
         --nue-link-height: 1.875rem;
         --nue-link-padding: 0.75rem;
         --nue-link-gap: 0.375rem;
-        --nue-link-font-size: 0.75rem;
+        --nue-link-font-size: var(--nue-text-xs);
     }
 
-    &.nue-link--rl-lg,
     &.nue-link--route-lg {
         --nue-link-height: 2.625rem;
         --nue-link-padding: 1rem;
         --nue-link-gap: 0.6rem;
         --nue-link-font-size: 1rem;
+    }
+}
+
+.nue-link--route-icon {
+    --nue-link-font-size: var(--nue-text-md);
+    --nue-link-color: var(--nue-primary-color-500);
+    --nue-link-hover-color: var(--nue-primary-color-900);
+    --nue-link-hover-background-color: transparent;
+    --nue-link-actived-color: var(--nue-primary-color-900);
+    --nue-link-actived-background-color: transparent;
+    --nue-link-disable-color: var(--nue-primary-color-400);
+    --nue-link-disable-background-color: transparent;
+
+    aspect-ratio: 1;
+    justify-content: center;
+
+    .nue-link__content {
+        display: none;
+    }
+
+    &:hover {
+        --nue-link-icon-color: var(--nue-link-hover-color);
+    }
+
+    &.nue-link--route-sm {
+        --nue-link-font-size: var(--nue-text-df);
+    }
+
+    &.nue-link--route-lg {
+        --nue-link-font-size: var(--nue-text-xl);
     }
 }

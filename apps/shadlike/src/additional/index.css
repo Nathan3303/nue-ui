@@ -24,3 +24,9 @@
 @import './dialog/fullscreen.css';
 /* dropdown */
 @import './dropdown/menu.css';
+/* progress */
+@import './progress/bordered.css';
+/* input */
+@import './input/pure.css';
+/* textarea */
+@import './textarea/pure.css';

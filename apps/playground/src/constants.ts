@@ -77,5 +77,8 @@ export const shadlikeLayoutAsideLinks = [
     { route: '/shadlike/div', text: 'Div 弹性盒' },
     { route: '/shadlike/badge', text: 'Badge 徽标' },
     { route: '/shadlike/dialog', text: 'Dialog 对话框' },
-    { route: '/shadlike/dropdown', text: 'Dropdown 下拉列表' }
+    { route: '/shadlike/dropdown', text: 'Dropdown 下拉列表' },
+    { route: '/shadlike/progress', text: 'Progress 进度条' },
+    { route: '/shadlike/input', text: 'Input 输入框' },
+    { route: '/shadlike/textarea', text: 'Textarea 富文本输入框' }
 ];

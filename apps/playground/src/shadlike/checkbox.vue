@@ -5,7 +5,7 @@
             <nue-checkbox v-model="chk1" disabled>Disabled</nue-checkbox>
         </nue-div>
     </demo>
-    <demo title="bordered 边框主题">
+    <demo title="边框主题" sub-title="bordered">
         <nue-div align="center">
             <nue-checkbox v-model="chk1" theme="bordered">Original</nue-checkbox>
             <nue-checkbox v-model="chk1" theme="bordered" disabled>Disabled</nue-checkbox>

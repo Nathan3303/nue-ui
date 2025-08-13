@@ -5,10 +5,10 @@
                 <nue-text size="lg">NueUI Playground Demos</nue-text>
             </nue-div>
             <nue-div width="fit-content" align="center">
-                <nue-link route="/component" theme="rl">组件</nue-link>
-                <nue-link route="/custom" theme="rl">自由</nue-link>
+                <nue-link route="/component" theme="route">组件</nue-link>
+                <nue-link route="/custom" theme="route">自由</nue-link>
                 <nue-divider vertical />
-                <nue-link route="/shadlike" theme="rl">Shadlike 主题</nue-link>
+                <nue-link route="/shadlike" theme="route">Shadlike 主题</nue-link>
             </nue-div>
         </nue-header>
         <router-view />

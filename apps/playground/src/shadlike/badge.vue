@@ -9,7 +9,7 @@
             </nue-badge>
         </nue-div>
     </demo>
-    <demo title="for-ico-btn 适配图标按钮的主题">
+    <demo title="图标按钮的适配主题" sub-title="for-ico-btn">
         <nue-div align="center" gap="2rem">
             <nue-badge dot theme="for-ico-btn">
                 <nue-button theme="icon" icon="theme" />

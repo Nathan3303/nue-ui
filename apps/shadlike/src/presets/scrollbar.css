@@ -1,26 +1,32 @@
-html.nue-reset-html *,
-html.nue-html * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--nue-divider-color) transparent;
+html.nue-html {
+    .nue-div,
+    .nue-header,
+    .nue-main,
+    .nue-aside,
+    .nue-content,
+    .nue-footer {
+        scrollbar-width: thin;
+        scrollbar-color: var(--nue-primary-color-400) transparent;
 
-    &::-webkit-scrollbar {
-        width: var(--nue-primary-radius);
-    }
+        &::-webkit-scrollbar {
+            width: var(--nue-primary-radius);
+        }
 
-    &::-webkit-scrollbar-thumb {
-        background: var(--nue-divider-color);
-        border-radius: var(--nue-primary-radius);
-    }
+        &::-webkit-scrollbar-thumb {
+            background: var(--nue-primary-color-400);
+            border-radius: var(--nue-primary-radius);
+        }
 
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
 
-    &::-webkit-scrollbar-button {
-        display: none;
-    }
+        &::-webkit-scrollbar-button {
+            display: none;
+        }
 
-    &::-webkit-scrollbar-corner {
-        background: transparent;
+        &::-webkit-scrollbar-corner {
+            background: transparent;
+        }
     }
 }

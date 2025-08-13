@@ -6,7 +6,7 @@
                     v-for="(link, idx) in customLayoutAsideLinks"
                     :key="idx"
                     :route="link.route"
-                    theme="rl"
+                    theme="route"
                 >
                     {{ link.text }}
                 </nue-link>

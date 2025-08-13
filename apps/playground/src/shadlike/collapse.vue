@@ -10,7 +10,7 @@
             </nue-collapse-item>
         </nue-collapse>
     </demo>
-    <demo title="menu 菜单主题">
+    <demo title="菜单主题" sub-title="menu">
         <nue-collapse v-model="activeNames2" theme="menu">
             <nue-collapse-item name="c1" title="链接 A - C">
                 <nue-link theme="route,actived">Link A</nue-link>

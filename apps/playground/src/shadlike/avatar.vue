@@ -4,7 +4,7 @@
             <nue-avatar src="https://placehold.co/36" />
         </nue-div>
     </demo>
-    <demo title="round 圆角主题">
+    <demo title="圆角主题" sub-title="round">
         <nue-div align="center">
             <nue-avatar theme="round" src="https://placehold.co/36" />
         </nue-div>

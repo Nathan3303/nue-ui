@@ -11,7 +11,7 @@ import Demo from '../layouts/demo.vue';
             </nue-dropdown>
         </nue-div>
     </demo>
-    <demo title="menu 菜单主题">
+    <demo title="菜单主题" sub-title="menu">
         <nue-div>
             <nue-dropdown trigger-text="基础下拉" theme="menu">
                 <nue-div theme="block">

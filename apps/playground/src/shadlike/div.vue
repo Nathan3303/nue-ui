@@ -2,7 +2,7 @@
     <demo title="默认主题">
         <nue-div align="center"> 123 </nue-div>
     </demo>
-    <demo title="card 卡片主题">
+    <demo title="卡片主题" sub-title="card">
         <nue-div align="center" theme="card"> 123 </nue-div>
     </demo>
 </template>
