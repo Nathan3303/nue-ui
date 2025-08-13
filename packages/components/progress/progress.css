@@ -15,7 +15,7 @@
     user-select: none;
     -webkit-user-select: none;
 
-    .nue-progress--line {
+    .nue-progress__bar {
         flex: 1 1 auto;
 
         .nue-progress__outer-bar {
@@ -42,12 +42,12 @@
         }
     }
 
-    .nue-progress--circle {
+    .nue-progress__circle {
         aspect-ratio: 1;
         width: var(--nue-progress-circle-size);
         height: var(--nue-progress-circle-size);
 
-        .nue-progress--circle__circle {
+        .nue-progress__circle-path {
             stroke-width: var(--nue-progress-stroke-width);
             fill: transparent;
             transform-origin: center;

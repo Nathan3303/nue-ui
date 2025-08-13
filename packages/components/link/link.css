@@ -1,10 +1,10 @@
 .nue-link {
-    --nue-link-color: #5a8dff;
+    --nue-link-color: #276cff;
     --nue-link-font-size: auto;
     --nue-link-font-weight: normal;
     --nue-link-text-decoration: none;
-    --nue-link-icon-size: var(--nue-link-font-size);
     --nue-link-icon-color: var(--nue-link-color);
+    --nue-link-icon-size: var(--nue-link-font-size);
     --nue-link-border-color: transparent;
     --nue-link-border-radius: 6px;
     --nue-link-box-shadow: 0 0 3px 1px rgba(200, 200, 200, 0.3);
@@ -19,20 +19,22 @@
     --nue-link-disable-color: #9e9e9e;
     --nue-link-disable-border-color: transparent;
     --nue-link-disable-background-color: transparent;
-    --nue-link-actived-color: #0754ff;
+    --nue-link-actived-color: #2f00ff;
     --nue-link-actived-border-color: var(--nue-link-active-border-color);
-    --nue-link-actived-background-color: var(--nue-primary-color-900);
+    --nue-link-actived-background-color: transparent;
 
-    color: var(--nue-link-color);
-    font-size: var(--nue-link-font-size);
-    font-weight: var(--nue-link-font-weight);
-    text-decoration: var(--nue-link-text-decoration);
     cursor: pointer;
+    text-decoration: var(--nue-link-text-decoration);
 
     .nue-link__icon {
         --nue-icon-size: var(--nue-link-icon-size);
         --nue-icon-color: var(--nue-link-icon-color);
         padding-right: 0.25rem;
+    }
+
+    .nue-link__content {
+        color: var(--nue-link-color);
+        font-size: var(--nue-link-font-size);
     }
 
     &:hover {
@@ -45,14 +47,19 @@
         }
     }
 
-    &.nue-link--disabled,
-    &.nue-link--disabled:hover {
-        color: var(--nue-link-disable-color);
-        background-color: var(--nue-link-disable-background-color);
+    &.nue-link--disabled {
+        --nue-link-color: var(--nue-link-disable-color);
+        --nue-link-icon-color: var(--nue-link-disable-color);
+        --nue-link-hover-color: var(--nue-link-disable-color);
+        --nue-link-background-color: var(--nue-link-disable-background-color);
         cursor: not-allowed;
     }
 
     &.nue-link--actived {
         --nue-link-color: var(--nue-link-actived-color);
+        --nue-link-border-color: var(--nue-link-actived-border-color);
+        --nue-link-background-color: var(--nue-link-actived-background-color);
+        --nue-link-hover-color: var(--nue-link-actived-color);
+        --nue-link-hover-background-color: var(--nue-link-actived-background-color);
     }
 }

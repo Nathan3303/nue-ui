@@ -126,18 +126,6 @@
         }
     }
 
-    &.nue-textarea--noshape {
-        padding: 0;
-        box-shadow: none;
-        --nue-textarea-width: auto;
-        --nue-textarea-border-color: transparent;
-        --nue-textarea-hover-border-color: transparent;
-        --nue-textarea-focus-border-color: transparent;
-        --nue-textarea-focus-shadow-color: transparent;
-        --nue-textarea-focus-shadow: none;
-        --nue-textarea-disabled-border-color: transparent;
-    }
-
     &.nue-textarea--small {
         --nue-textarea-font-size: 0.75rem;
     }
