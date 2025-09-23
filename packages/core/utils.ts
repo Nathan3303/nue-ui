@@ -4,9 +4,11 @@ import { delay } from 'lodash-es';
 
 // 获取 components 的一级目录名称（即组件名称）
 export const componentNames = (() => {
-    const entries = fs.readdirSync('../components', { withFileTypes: true });
-    const dirName = entries.filter(entry => entry.isDirectory());
-    return dirName.map(item => item.name);
+    const entries1 = fs.readFileSync('./components.ts', 'utf8');
+    return entries1
+        .match(/export\s+default\s+\[([^\]]+)\]/)?.[1]
+        ?.split(',')
+        .map(name => name.trim().replace(/['"]/g, ''));
 })();
 export const getComponentNames = () => componentNames;
 
@@ -54,10 +56,10 @@ const moveGdtsFile = () => {
 // 生成全局类型文件
 export const touchGlobalTypesFile = () => {
     fs.appendFileSync('./global.d.ts.temp', '');
+    if (!componentNames || componentNames.length === 0) return;
     const globalCompsText = componentNames
         .map(name => {
-            const _n = toCamelCase('Nue-' + name);
-            return `\t\t${_n}: (typeof import('nue-ui'))['${_n}'];`;
+            return `\t\t${name}: (typeof import('nue-ui'))['${name}'];`;
         })
         .join('\r\n');
     const ws = fs.createWriteStream('./global.d.ts.temp');
