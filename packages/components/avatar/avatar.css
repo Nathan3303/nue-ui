@@ -1,17 +1,16 @@
 .nue-avatar {
-    --nue-avatar-size: 36px;
+    --nue-avatar-size: 2.675rem;
+    --nue-avatar-width: var(--nue-avatar-size);
+    --nue-avatar-height: var(--nue-avatar-size);
     --nue-avatar-object-fit: cover;
-    --nue-avatar-bg-color: #bdbdbd;
-    --nue-avatar-color: #f5f5f5;
-    --nue-avatar-inner-font-size: calc(0.5 * var(--nue-avatar-size));
+    --nue-avatar-inner-font-size: calc(var(--nue-avatar-height) / 2.75);
 
-    width: var(--nue-avatar-size);
-    height: var(--nue-avatar-size);
-    line-height: var(--nue-avatar-size);
-    background-color: var(--nue-avatar-bg-color);
-    color: var(--nue-avatar-color);
+    width: var(--nue-avatar-width);
+    height: var(--nue-avatar-height);
+    line-height: var(--nue-avatar-height);
+    background-color: #e0e0e0;
+    color: #616161;
     flex: none;
-    border: none;
     border-radius: 6px;
     text-align: center;
     box-sizing: border-box;
@@ -22,8 +21,6 @@
     .nue-avatar__image {
         width: 100%;
         height: 100%;
-        line-height: 100%;
-        text-align: center;
         object-fit: var(--nue-avatar-object-fit);
         border-radius: 6px;
     }
@@ -31,6 +28,6 @@
     .nue-avatar__icon,
     .nue-avatar__text {
         font-size: var(--nue-avatar-inner-font-size);
-        line-height: var(--nue-avatar-size);
+        line-height: var(--nue-avatar-height);
     }
 }

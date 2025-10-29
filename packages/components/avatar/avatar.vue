@@ -1,7 +1,7 @@
 <template>
     <div :class="classes" :style="styles" :title="title">
         <img
-            v-if="src && !loadError"
+            v-if="src && !error"
             :alt="alt || `NueAvatar`"
             :src="src"
             class="nue-avatar__image"
@@ -25,36 +25,23 @@ import NueText from '../text/text.vue';
 import type { NueAvatarEmits, NueAvatarProps } from './types';
 
 defineOptions({ name: 'NueAvatar' });
-
 const emit = defineEmits<NueAvatarEmits>();
-const props = withDefaults(defineProps<NueAvatarProps>(), {
-    alt: 'NueAvatar',
-    size: '36px',
-    rounded: false,
-    icon: 'logo',
-    title: 'NueAvatar'
-});
+const props = defineProps<NueAvatarProps>();
 
-const loadError = ref(false);
-
-const styles = computed(() => {
-    return {
-        '--nue-avatar-size': props.size,
-        '--nue-avatar-object-fit': props.fit
-    };
-});
+const error = ref(false);
 
 const classes = computed(() => {
     const prefix = 'nue-avatar';
-    return [
-        prefix,
-        ...parseTheme(props.theme, prefix),
-        props.rounded && `${prefix}--rounded`
-    ];
+    return [prefix, ...parseTheme(props.theme, prefix), props.rounded && `${prefix}--rounded`];
 });
 
+const styles = computed(() => ({
+    '--nue-avatar-size': props.size,
+    '--nue-avatar-object-fit': props.fit
+}));
+
 const handleError = (e: Event) => {
-    loadError.value = true;
+    error.value = true;
     emit('error', e);
 };
 </script>
