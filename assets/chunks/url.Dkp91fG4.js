@@ -1,1 +1,0 @@
-import{_ as e,C as t,b as c,o as n}from"./framework.X628U8jD.js";const r={};function s(a,_){const o=t("nue-avatar");return n(),c(o,{src:"https://picsum.photos/200?1"})}const u=e(r,[["render",s]]);export{u as default};

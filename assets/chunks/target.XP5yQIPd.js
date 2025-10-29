@@ -1,1 +1,0 @@
-import{_ as n,C as o,b as a,o as r,w as s,a as _}from"./framework.X628U8jD.js";const c={};function f(l,e){const t=o("nue-link");return r(),a(t,{href:"https://www.baidu.com",target:"_blank"},{default:s(()=>e[0]||(e[0]=[_("百度")])),_:1,__:[0]})}const p=n(c,[["render",f]]);export{p as default};

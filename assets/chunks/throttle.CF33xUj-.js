@@ -1,1 +1,0 @@
-import{p as n,C as a,b as r,o as s,w as u,a as l,t as c}from"./framework.X628U8jD.js";const f={__name:"throttle",setup(p){const t=n(0);return(_,e)=>{const o=a("nue-button");return s(),r(o,{"use-throttle":"","throttle-duration":600,onClick:e[0]||(e[0]=i=>t.value++)},{default:u(()=>[l(" 节流计数："+c(t.value),1)]),_:1})}}};export{f as default};

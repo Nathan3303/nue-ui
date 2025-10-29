@@ -1,1 +1,0 @@
-import{p as l,C as r,b as n,o as s}from"./framework.X628U8jD.js";const _={__name:"rows-autosize",setup(u){const e=l("");return(p,o)=>{const a=r("nue-textarea");return s(),n(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),placeholder:"请输入内容（3行最大高度）",autosize:"",rows:3},null,8,["modelValue"])}}};export{_ as default};

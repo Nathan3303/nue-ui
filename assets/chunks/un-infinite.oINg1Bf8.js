@@ -1,1 +1,0 @@
-import{_ as s,C as r,b as o,o as e,w as c,c as _,F as u,B as l,j as i,t as m}from"./framework.X628U8jD.js";const d={};function f(p,B){const a=r("nue-marquee");return e(),o(a,null,{default:c(()=>[(e(),_(u,null,l(12,(t,n)=>i("div",{key:n,class:"nue-marquee-item"},m(t),1)),64))]),_:1})}const x=s(d,[["render",f],["__scopeId","data-v-a5d9ef91"]]);export{x as default};

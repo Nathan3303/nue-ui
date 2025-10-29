@@ -1,0 +1,1 @@
+import{_ as o,C as c,b as r,o as s}from"./framework.DPj99A0l.js";const n={};function t(a,_){const e=c("nue-progress");return s(),r(e,{percentage:75,scale:1.4,"stroke-width":5,type:"circle"})}const l=o(n,[["render",t]]);export{l as default};

@@ -1,0 +1,1 @@
+import{_ as c,C as n,b as t,o as r,w as _,G as o}from"./framework.DPj99A0l.js";const a={};function i(p,f){const e=n("nue-icon"),s=n("nue-div");return r(),t(s,null,{default:_(()=>[o(e,{name:"refresh",spin:""}),o(e,{name:"refresh",spin:"","spin-speed":"1s"})]),_:1})}const d=c(a,[["render",i]]);export{d as default};

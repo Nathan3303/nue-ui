@@ -1,1 +1,0 @@
-import{d as a,p as t,C as p,b as s,o as u}from"./framework.X628U8jD.js";const _=a({__name:"disabled",setup(d){const e=t("");return(r,o)=>{const n=p("nue-input");return u(),s(n,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=l=>e.value=l),placeholder:"禁用状态",disabled:""},null,8,["modelValue"])}}});export{_ as default};

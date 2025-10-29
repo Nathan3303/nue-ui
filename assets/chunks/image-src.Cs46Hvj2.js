@@ -1,1 +1,0 @@
-import{_ as o,C as t,b as c,o as n}from"./framework.X628U8jD.js";const s={};function r(_,a){const e=t("nue-empty");return n(),c(e,{"image-src":"https://picsum.photos/64/64"})}const m=o(s,[["render",r]]);export{m as default};

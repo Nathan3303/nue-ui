@@ -1,1 +1,0 @@
-import{d as n,p as l,C as r,b as s,o as p}from"./framework.X628U8jD.js";const d=n({__name:"basic",setup(u){const e=l("");return(m,o)=>{const a=r("nue-textarea");return p(),s(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),placeholder:"请输入内容 ..."},null,8,["modelValue"])}}});export{d as default};

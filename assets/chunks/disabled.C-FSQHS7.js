@@ -1,0 +1,1 @@
+import{p as l,C as n,b as r,o as s}from"./framework.DPj99A0l.js";const m={__name:"disabled",setup(u){const e=l("");return(d,a)=>{const o=n("nue-textarea");return s(),r(o,{modelValue:e.value,"onUpdate:modelValue":a[0]||(a[0]=t=>e.value=t),disabled:"",placeholder:"禁用状态"},null,8,["modelValue"])}}};export{m as default};

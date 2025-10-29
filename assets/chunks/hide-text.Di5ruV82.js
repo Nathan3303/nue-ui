@@ -1,1 +1,0 @@
-import{_ as o,C as n,b as r,o as t}from"./framework.X628U8jD.js";const s={};function c(_,a){const e=n("nue-progress");return t(),r(e,{percentage:100,"hide-text":""})}const f=o(s,[["render",c]]);export{f as default};

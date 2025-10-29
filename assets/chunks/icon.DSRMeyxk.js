@@ -1,1 +1,0 @@
-import{_ as a,C as o,b as t,o as s,w as r,G as e}from"./framework.X628U8jD.js";const _={};function i(u,l){const n=o("nue-avatar"),c=o("nue-div");return s(),t(c,null,{default:r(()=>[e(n,{icon:"scan"}),e(n,{icon:"location",src:"/abc.jpg"})]),_:1})}const d=a(_,[["render",i]]);export{d as default};

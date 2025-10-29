@@ -1,1 +1,0 @@
-import{_ as r,C as o,b as t,o as a,w as s,G as c}from"./framework.X628U8jD.js";const _={};function p(l,u){const e=o("nue-progress"),n=o("nue-div");return a(),t(n,{gap:"3rem"},{default:s(()=>[c(e,{percentage:32,color:"#579"}),c(e,{color:["#666","#aaa","#ccc"],percentage:64})]),_:1})}const f=r(_,[["render",p]]);export{f as default};

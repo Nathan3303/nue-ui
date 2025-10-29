@@ -1,0 +1,1 @@
+import{_ as o,C as n,b as s,o as a,w as _,a as c}from"./framework.DPj99A0l.js";const r={};function u(f,t){const e=n("nue-button");return a(),s(e,{theme:"custom"},{default:_(()=>t[0]||(t[0]=[c("按钮 Button",-1)])),_:1,__:[0]})}const m=o(r,[["render",u],["__scopeId","data-v-bf8a6e8b"]]);export{m as default};
