@@ -14,10 +14,10 @@
 import './overlay.css';
 import { computed } from 'vue';
 import { parsePopupItemAnimation, parseTheme } from '@nue-ui/utils';
-import type { NueOverlayPropsV2, NueOverlayEmits } from './types';
+import type { NueOverlayProps, NueOverlayEmits } from './types';
 
 defineOptions({ name: 'NueOverlay' });
-const props = defineProps<NueOverlayPropsV2>();
+const props = defineProps<NueOverlayProps>();
 const emit = defineEmits<NueOverlayEmits>();
 
 const classes = computed(() => {
