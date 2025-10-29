@@ -1,5 +1,5 @@
 import { isString } from 'lodash-es';
-import type { ObjectLikeThemes } from './types';
+import type { NuePopupItemAnimation, ObjectLikeThemes } from './types';
 
 export function parseTheme(
     value: string | string[] | ObjectLikeThemes | undefined,
@@ -37,3 +37,16 @@ export function parseAnimationDurationToNumber(value: string | number): number {
     }
     return value;
 }
+
+// @method 解析弹窗动画 props 值至 CSS 样式值
+type ParsePopupItemAnimation = { name: string | undefined; duration: string | undefined };
+export const parsePopupItemAnimation = (value?: NuePopupItemAnimation): ParsePopupItemAnimation => {
+    const result: ParsePopupItemAnimation = { name: void 0, duration: void 0 };
+    if (isString(value)) {
+        result.name = value;
+    } else if (value) {
+        result.name = value.name;
+        result.duration = value.duration + 'ms';
+    }
+    return result;
+};

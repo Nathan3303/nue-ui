@@ -1,12 +1,19 @@
 <template>
     <nue-overlay
+        class="nue-confirm-overlay"
         :animation="overlayAnimation"
         :close-animation="overlayCloseAnimation"
-        :closing="closing"
         :theme="theme"
-        class="nue-confirm-overlay"
+        :visible="visible"
+        @escape="handleCancel"
     >
-        <div ref="confirmRef" :class="classes" :data-closing="closing" :style="styles">
+        <div
+            :class="classes"
+            :style="styles"
+            :data-visible="visible"
+            @animationstart="handleAnimationStart"
+            @animationend="handleAnimationEnd"
+        >
             <nue-text v-if="title" class="nue-confirm__header">
                 {{ title }}
             </nue-text>
@@ -16,16 +23,16 @@
             <div class="nue-confirm__footer">
                 <nue-button
                     v-if="!unuseCancelButton"
-                    :disabled="loading || closing"
-                    @click.stop="handleConfirm(false)"
+                    :disabled="loading || !visible"
+                    @click="handleCancel"
                 >
                     {{ cancelButtonText }}
                 </nue-button>
                 <nue-button
-                    :disabled="closing"
+                    :disabled="!visible"
                     :loading="loading"
                     theme="primary"
-                    @click.stop="handleConfirm(true)"
+                    @click="handleConfirm"
                 >
                     {{ confirmButtonText }}
                 </nue-button>
@@ -39,10 +46,8 @@ import { computed, ref } from 'vue';
 import NueButton from '../button/button.vue';
 import NueText from '../text/text.vue';
 import NueOverlay from '../overlay/overlay.vue';
-import { parseTheme, parseAnimationDurationToNumber } from '@nue-ui/utils';
-import { isString } from 'lodash-es';
-import type { NuePopupItemAnimation } from '@nue-ui/utils';
-import type { NueConfirmProps, NueConfirmCallerReturnedUnpromise } from './types';
+import { parseTheme, parsePopupItemAnimation } from '@nue-ui/utils';
+import type { NueConfirmProps } from './types';
 import './confirm.css';
 
 defineOptions({ name: 'NueConfirmNodeInner' });
@@ -52,71 +57,64 @@ const props = withDefaults(defineProps<NueConfirmProps>(), {
     cancelButtonText: 'Cancel'
 });
 
-const confirmRef = ref<HTMLDivElement | null>(null);
 const loading = ref(false);
-const closing = ref(false);
-const closeAnimationDuration = ref(0);
+const visible = ref(true);
 
 const classes = computed(() => {
     const prefix = 'nue-confirm';
     return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
-const styles = computed(() => {
-    const { animation, closeAnimation } = props;
-    const animationStyles = handleAnimationStyles(animation);
-    const closeAnimationStyles = handleAnimationStyles(closeAnimation, true);
-    return {
-        ...animationStyles,
-        ...closeAnimationStyles
-    };
+const animation = computed(() => {
+    return parsePopupItemAnimation(props.animation);
 });
 
-const handleAnimationStyles = (
-    value: NuePopupItemAnimation | undefined,
-    isCloseState?: boolean
-) => {
-    if (value === null || value === void 0) return {};
-    let result: Record<string, string> = {};
-    let target: Exclude<NuePopupItemAnimation, string> = isString(value) ? { name: value } : value;
-    const prefix = `--nue-confirm${isCloseState ? '-close' : ''}-animation`;
-    result[`${prefix}-name`] = target.name;
-    result[`${prefix}-duration`] = `${target.duration || 240}ms`;
-    if (isCloseState) closeAnimationDuration.value = target.duration || 240;
-    return result;
+const closeAnimation = computed(() => {
+    return parsePopupItemAnimation(props.closeAnimation);
+});
+
+const styles = computed(() => ({
+    '--nue-confirm-animation-name': animation.value.name,
+    '--nue-confirm-animation-duration': animation.value.duration,
+    '--nue-confirm-close-animation-name': closeAnimation.value.name,
+    '--nue-confirm-close-animation-duration': closeAnimation.value.duration
+}));
+
+const handleCancel = async () => {
+    props.close(true, null, null);
+    visible.value = false;
+    props.afterCancel?.();
 };
 
-const waitForAnimation = () => {
-    const timeout = parseAnimationDurationToNumber(
-        closeAnimationDuration.value || window.getComputedStyle(confirmRef.value!).animationDuration
-    );
-    return new Promise(resolve => {
-        setTimeout(() => resolve(1), timeout);
-    });
-};
-
-const handleClose = (result: NueConfirmCallerReturnedUnpromise) => {
-    closing.value = true;
-    props.close(result);
-    waitForAnimation().then(() => {
-        props.destroy();
-    });
-};
-
-const handleConfirm = async (isConfirmed: boolean) => {
-    if (!isConfirmed) {
-        return handleClose(false);
-    }
-    if (!props.onConfirm) {
-        return handleClose(true);
-    }
+const handleConfirm = async () => {
     try {
         loading.value = true;
-        handleClose(await props.onConfirm());
+        const result = props.onConfirm ? await props.onConfirm() : null;
+        props.close(false, result, null);
     } catch (e) {
-        handleClose(e instanceof Error ? e : new Error(e as string));
+        props.close(false, null, e as Error | string);
+        visible.value = false;
     } finally {
+        visible.value = false;
         loading.value = false;
+        props.afterConfirm?.();
+    }
+};
+
+const handleAnimationStart = () => {
+    if (visible.value) {
+        props.beforeOpen?.();
+    } else {
+        props.beforeClose?.();
+    }
+};
+
+const handleAnimationEnd = () => {
+    if (visible.value) {
+        props.afterOpen?.();
+    } else {
+        props.destroy();
+        props.afterClose?.();
     }
 };
 </script>
