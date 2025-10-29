@@ -1,13 +1,6 @@
 import type { GlobalProps } from '@nue-ui/utils';
 
-export type NueLinkRoute =
-    | {
-          name: string;
-          params?: Record<string, unknown>;
-          query?: Record<string, unknown>;
-          meta?: Record<string, unknown>;
-      }
-    | string;
+export type NueLinkRoute = Record<string, unknown> | string;
 
 export interface NueLinkProps extends GlobalProps {
     href?: string;
