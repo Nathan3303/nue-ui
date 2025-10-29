@@ -1,0 +1,12 @@
+.nue-textarea--pure {
+    --nue-textarea-padding: 0;
+    --nue-textarea-border-color: transparent;
+    --nue-textarea-hover-border-color: transparent;
+    --nue-textarea-focus-border-color: transparent;
+    --nue-textarea-focus-shadow: none;
+    --nue-textarea-disabled-border-color: transparent;
+
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+}

@@ -1,0 +1,10 @@
+.nue-button {
+    --nue-button-box-shadow: var(--nue-secondary-shadow);
+    --nue-button-color: var(--nue-primary-text-color);
+    --nue-button-border-radius: var(--nue-primary-radius);
+    --nue-button-border-color: var(--nue-border-color);
+    --nue-button-hover-bg-color: var(--nue-primary-color-100);
+    --nue-button-active-bg-color: var(--nue-primary-color-200);
+    --nue-button-disable-color: var(--nue-disabled-color);
+    --nue-button-disable-bg-color: var(--nue-primary-color-200);
+}

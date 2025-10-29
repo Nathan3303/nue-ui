@@ -1,7 +1,7 @@
 <template>
     <div :class="classes" :style="progressStyle">
         <template v-if="type === 'line'">
-            <div class="nue-progress--line">
+            <div class="nue-progress__bar">
                 <div class="nue-progress__outer-bar">
                     <div :style="{ width: percentage }" class="nue-progress__inner-bar">
                         <nue-text v-if="showInnerText && !hideText">
@@ -12,15 +12,15 @@
             </div>
         </template>
         <template v-else-if="type === 'circle'">
-            <svg :style="circleStyles" class="nue-progress--circle" viewBox="0 0 100 100">
+            <svg :style="circleStyles" class="nue-progress__circle" viewBox="0 0 100 100">
                 <circle
-                    class="nue-progress--circle__circle nue-progress__outer-path"
+                    class="nue-progress__circle-path nue-progress__outer-path"
                     cx="50"
                     cy="50"
                     r="50"
                 ></circle>
                 <circle
-                    class="nue-progress--circle__circle nue-progress__inner-path"
+                    class="nue-progress__circle-path nue-progress__inner-path"
                     cx="50"
                     cy="50"
                     r="50"

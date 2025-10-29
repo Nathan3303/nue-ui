@@ -11,26 +11,29 @@ const openConfirmWithOnConfirm = () => {
         content: '执行此操作将无法撤销。这将永久删除您的帐户，并从我们的服务器上清除您的数据。',
         confirmButtonText: '继续',
         cancelButtonText: '不继续',
-        onConfirm: () => {
+        onConfirm: async () => {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    const randomNumber = Math.random();
-                    if (randomNumber > 0.5) {
-                        resolve('成功');
+                    const randomNumber = Math.floor(Math.random() * 100);
+                    if (randomNumber % 2 === 0) {
+                        resolve('执行成功!');
                     } else {
-                        reject('失败，请重试');
+                        reject(new Error('执行失败!'));
                     }
                 }, 1024);
             });
         }
     }).then(
-        res => NueMessage.success(res as string),
+        ([isByCancel, onConfirmResult]) => {
+            if (isByCancel) return;
+            NueMessage.success(onConfirmResult as string);
+        },
         err => {
             if (err instanceof Error) {
                 NueMessage.error(err.message);
-            } else {
-                NueMessage.info('操作取消!');
+                return;
             }
+            NueMessage.error(err);
         }
     );
 };

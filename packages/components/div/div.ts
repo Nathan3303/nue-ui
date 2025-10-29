@@ -29,14 +29,14 @@ export default defineComponent({
         const style = computed(() => {
             const { align, justify, flex, wrap, gap, width, height } = props;
             return {
+                '--nue-div-width': width,
+                '--nue-div-height': height,
                 '--nue-div-flex-direction': getDirection(),
                 '--nue-div-align-items': align,
                 '--nue-div-justify-content': justify,
-                '--nue-div-flex': parseFlex(flex as string),
                 '--nue-div-flex-wrap': parseFlexWrap(wrap as string),
                 '--nue-div-gap': gap,
-                '--nue-div-width': width,
-                '--nue-div-height': height,
+                '--nue-div-flex': parseFlex(flex as string),
                 display: props.inline ? 'inline-flex' : void 0
             };
         });

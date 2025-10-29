@@ -1,9 +1,5 @@
-import { IconNames } from './constants';
-
-export type NueIconName = (typeof IconNames)[number];
-
 export type NueIconProps = {
-    name: NueIconName | string;
+    name?: string;
     size?: string;
     color?: string;
     spin?: boolean;

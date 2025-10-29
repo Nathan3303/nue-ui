@@ -1,0 +1,30 @@
+.nue-collapse--menu {
+    --nue-collapse-gap: 1rem;
+
+    .nue-collapse-item {
+        border: none;
+
+        .nue-collapse-item__header {
+            box-shadow: none;
+            color: var(--nue-primary-color-600);
+            border: 1px solid transparent;
+            padding-bottom: var(--nue-secondary-padding);
+
+            .nue-collapse-item__title {
+                color: var(--nue-primary-color-500);
+                font-size: var(--nue-text-sm);
+            }
+
+            .nue-collapse-item__toggle-button,
+            .outter-toggle-button {
+                .nue-icon {
+                    --icon-color: var(--nue-primary-color-500);
+                }
+            }
+        }
+
+        .nue-collapse-item__content {
+            margin-bottom: 0;
+        }
+    }
+}

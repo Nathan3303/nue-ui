@@ -1,41 +1,55 @@
 <template>
     <teleport v-if="modelValue" :disabled="tpState.disabled" :to="tpState.to">
         <nue-overlay
-            :closing="closing"
-            :theme="theme"
             class="nue-drawer-overlay"
-            @click="handleOverlayClick"
+            :visible="visible"
+            :theme="theme"
+            @mousedown="handleCloseDrawer"
+            @escape="handleCloseDrawer"
         >
-            <div ref="nueDrawerRef" :class="classes" @click.stop>
-                <nue-container class="vertical,inner">
-                    <nue-header class="nue-drawer__header">
-                        <slot :close="handleClose" name="header">
-                            <span class="nue-drawer__title">{{ title }}</span>
-                            <nue-button icon="clear" theme="pure" @click="() => handleClose()" />
-                        </slot>
-                    </nue-header>
-                    <nue-main>
-                        <slot />
-                    </nue-main>
-                    <nue-footer v-if="$slots.footer">
-                        <slot name="footer" />
-                    </nue-footer>
-                </nue-container>
-            </div>
+            <nue-container
+                :class="classes"
+                :data-visible="visible"
+                :data-direction="openFrom"
+                @animationstart="handleAnimationStart"
+                @animationend="handleAnimationEnd"
+                @mousedown.stop
+            >
+                <nue-header class="nue-drawer__header">
+                    <slot name="header" :close="handleCloseDrawer">
+                        <nue-text class="nue-drawer__title" :clamped="1" style="flex: 1">
+                            {{ title }}
+                        </nue-text>
+                        <nue-button
+                            icon="clear"
+                            theme="icon,ghost,small"
+                            :loading="loading"
+                            @click="handleCloseDrawer"
+                        />
+                    </slot>
+                </nue-header>
+                <nue-main class="nue-drawer__main">
+                    <nue-content fill class="nue-drawer__content">
+                        <slot :close="handleCloseDrawer" />
+                    </nue-content>
+                </nue-main>
+                <nue-footer class="nue-drawer__footer" v-if="$slots.footer">
+                    <slot name="footer" :close="handleCloseDrawer" />
+                </nue-footer>
+            </nue-container>
         </nue-overlay>
     </teleport>
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch, onUnmounted } from 'vue';
-import { NueContainer, NueFooter, NueHeader, NueMain } from '../container';
+import { computed, ref, watch } from 'vue';
+import { NueContainer, NueFooter, NueHeader, NueMain, NueContent } from '../container';
+import NueText from '../text/text.vue';
 import NueButton from '../button/button.vue';
 import NueOverlay from '../overlay/overlay.vue';
-import { parseAnimationDurationToNumber, parseTheme } from '@nue-ui/utils';
-import { isFunction } from 'lodash-es';
-import { playDrawerAnimation } from './animation';
+import { parseTheme } from '@nue-ui/utils';
 import { usePopupAnchor } from '@nue-ui/hooks';
-import type { NueDrawerProps, NueDrawerEmits, NueDrawerHandleClose } from './types';
+import type { NueDrawerProps, NueDrawerEmits } from './types';
 import './drawer.css';
 
 defineOptions({ name: 'NueDrawer' });
@@ -48,63 +62,71 @@ const props = withDefaults(defineProps<NueDrawerProps>(), {
 const emit = defineEmits<NueDrawerEmits>();
 
 const { tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
-const nueDrawerRef = ref<HTMLDivElement>();
-const closing = ref(false);
+const visible = ref(false);
+const loading = ref(false);
 
 const classes = computed(() => {
     const prefix = 'nue-drawer';
     return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
+const handleOpenDrawer = () => {
+    mountPopupAnchor();
+    visible.value = true;
+};
+
+const onCloseExecutor = () => {
+    return new Promise((resolve, reject) => {
+        if (!props.onClose) {
+            resolve(true);
+            return;
+        }
+        const onCloseRes = props.onClose(() => resolve(true));
+        if (!(onCloseRes instanceof Promise)) return;
+        onCloseRes.then(isDone => resolve(isDone)).catch(reject);
+    });
+};
+
+const handleCloseDrawer = async () => {
+    if (visible.value === false) return;
+    loading.value = true;
+    onCloseExecutor()
+        .then(isDone => {
+            console.log(isDone);
+            visible.value = !isDone;
+        })
+        .catch(e => console.error('[NueDrawer] Close error:', e))
+        .finally(() => (loading.value = false));
+};
+
+const handleAnimationStart = () => {
+    if (visible.value) {
+        emit('beforeOpen');
+    } else {
+        emit('beforeClose');
+    }
+};
+
+const handleAnimationEnd = () => {
+    if (visible.value) {
+        emit('afterOpen');
+    } else {
+        emit('afterClose');
+        emit('update:modelValue', false);
+        unmountPopupAnchor();
+    }
+};
+
 watch(
     () => props.modelValue,
     newValue => {
-        const newVisible = !!newValue;
-        nextTick(() => (newVisible ? handleOpen() : handleClose()));
+        if (newValue) {
+            handleOpenDrawer();
+        } else {
+            handleCloseDrawer();
+        }
     }
 );
 
-const waitForAnimation = (visible: boolean) => {
-    if (!nueDrawerRef.value) return;
-    nextTick(() => {
-        playDrawerAnimation({
-            elementRef: nueDrawerRef.value!,
-            openFrom: props.openFrom,
-            minSpan: props.minSpan,
-            span: props.span,
-            visible
-        });
-    });
-    const timeout = parseAnimationDurationToNumber(
-        window.getComputedStyle(nueDrawerRef.value).transitionDuration
-    );
-    return new Promise(resolve => setTimeout(() => resolve(1), timeout));
-};
-
-const handleOpen = () => {
-    closing.value = false;
-    mountPopupAnchor();
-    waitForAnimation(true);
-    emit('update:modelValue', true);
-    document.body.style.overflow = 'hidden';
-};
-
-const handleClose: NueDrawerHandleClose = async afterAnimation => {
-    closing.value = true;
-    await waitForAnimation(false);
-    if (afterAnimation && isFunction(afterAnimation)) afterAnimation();
-    emit('update:modelValue', false);
-    document.body.style.overflow = 'auto';
-};
-
-const handleOverlayClick = () => {
-    if (!props.allowCloseByOverlay) return;
-    handleClose();
-};
-
-onUnmounted(() => {
-    unmountPopupAnchor();
-});
-
-defineExpose({ open: handleOpen, close: handleClose });
+defineExpose({ open: handleOpenDrawer, close: handleCloseDrawer });
 </script>

@@ -100,24 +100,24 @@
     &.nue-button--primary {
         --nue-button-color: white;
         --nue-button-bg-color: #212121;
+        --nue-button-border-color: transparet;
         --nue-button-hover-bg-color: #424242;
         --nue-button-active-bg-color: #424242;
-        border-color: transparent;
     }
 
     &.nue-button--pure {
         --nue-button-height: auto;
         --nue-button-padding: 0;
+        --nue-button-border-color: transparet;
         --nue-button-border-radius: none;
         --nue-button-hover-color: #616161;
-        --nue-button-active-color: #616161;
-        --nue-button-border-color: transparet;
         --nue-button-hover-bg-color: transparent;
+        --nue-button-hover-border-color: transparent;
+        --nue-button-active-color: #616161;
         --nue-button-active-bg-color: transparent;
-        box-shadow: none;
-
-        &.nue-button--disabled {
-            background-color: transparent;
-        }
+        --nue-button-active-border-color: transparent;
+        --nue-button-disable-bg-color: transparent;
+        --nue-button-disable-border-color: transparent;
+        --nue-button-box-shadow: none;
     }
 }

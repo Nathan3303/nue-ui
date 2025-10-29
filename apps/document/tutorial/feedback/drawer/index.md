@@ -69,3 +69,21 @@ demo-preview=./slots.vue
 ::: preview
 demo-preview=./open-more.vue
 :::
+
+## 生命周期事件与回调函数
+
+### 生命周期事件
+
+抽屉组件提供了 `before-open`、`after-open`、`before-close`、`after-close` 四个生命周期事件，分别在抽屉打开前、打开后、关闭前、关闭后触发。
+
+::: preview
+demo-preview=./events.vue
+:::
+
+### 关闭抽屉时回调
+
+通过属性 `on-close` 可以指定一个回调函数，在抽屉关闭时触发。回调函数接收一个参数 `done: () => void`，用于关闭抽屉。
+
+::: preview
+demo-preview=./on-close.vue
+:::

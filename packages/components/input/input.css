@@ -62,6 +62,7 @@
         color: var(--nue-input-color);
         font-size: var(--nue-input-font-size);
         font-family: inherit;
+        line-height: 1.2;
 
         &::-ms-reveal,
         &::-ms-clear {
@@ -107,17 +108,6 @@
 
     &.nue-input--rounded {
         border-radius: 9999px;
-    }
-
-    &.nue-input--noshape {
-        padding: 0;
-        box-shadow: none;
-        --nue-input-border-color: transparent;
-        --nue-input-background-color: transparent;
-        --nue-input-hover-border-color: transparent;
-        --nue-input-focus-border-color: transparent;
-        --nue-input-focus-shadow: none;
-        --nue-input-disabled-border-color: transparent;
     }
 
     &.nue-input--small {

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { NueConfirm, NueMessage } from 'nue-ui';
+import { NueConfirm } from 'nue-ui';
 
 function openConfirm2() {
     NueConfirm({
@@ -11,12 +11,9 @@ function openConfirm2() {
         confirmButtonText: '知道了',
         unuseCancelButton: true,
         animation: 'slide-in-from-top',
-        closeAnimation: { name: 'slide-out-to-top', duration: 512 },
+        closeAnimation: { name: 'slide-out-to-top', duration: 240 },
         overlayAnimation: 'fade-in',
-        overlayCloseAnimation: { name: 'fade-out', duration: 512 }
-    }).then(
-        () => NueMessage.success('确认!'),
-        () => NueMessage.info('取消!')
-    );
+        overlayCloseAnimation: { name: 'fade-out', duration: 240 }
+    });
 }
 </script>

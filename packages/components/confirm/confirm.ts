@@ -1,29 +1,30 @@
 import NueConfirm from './confirm.vue';
-import { createVNode, render } from 'vue';
+import { createVNode, render, type VNode } from 'vue';
 import { usePopupAnchor } from '@nue-ui/hooks';
-import type { NueConfirmCallerPayload, NueConfirmCallerReturned } from './types';
+import type { NueConfirmCallerPayload, NueConfirmCallerResult, NueConfirmProps } from './types';
 
-export default function NueConfirmCaller(
-    payload: NueConfirmCallerPayload
-): NueConfirmCallerReturned {
+const NueConfirmCaller = (payload: NueConfirmCallerPayload): Promise<NueConfirmCallerResult> => {
     return new Promise((resolve, reject) => {
-        const { popupAnchor, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor(
-            payload.wrapperId
-        );
-        mountPopupAnchor();
-        render(
-            createVNode(NueConfirm, {
+        const popupAnchor = usePopupAnchor(payload.wrapperId);
+        popupAnchor.mountPopupAnchor();
+        let confirmVNode: VNode | null = createVNode(NueConfirm, {
+            ...({
                 ...payload,
-                close: (confirmResult: NueConfirmCallerReturned) => {
-                    confirmResult instanceof Error || !confirmResult
-                        ? reject(confirmResult)
-                        : resolve(confirmResult);
+                close: (isByCancel, onConfirmResult, onConfirmError) => {
+                    if (onConfirmError) {
+                        reject(onConfirmError);
+                        return;
+                    }
+                    resolve([isByCancel, onConfirmResult]);
                 },
                 destroy: () => {
-                    unmountPopupAnchor();
+                    popupAnchor.unmountPopupAnchor();
+                    confirmVNode = null;
                 }
-            }),
-            popupAnchor
-        );
+            } as NueConfirmProps)
+        });
+        render(confirmVNode, popupAnchor.popupAnchor);
     });
-}
+};
+
+export default NueConfirmCaller;

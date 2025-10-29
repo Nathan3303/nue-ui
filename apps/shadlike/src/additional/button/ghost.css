@@ -1,0 +1,7 @@
+.nue-button--ghost {
+    --nue-button-box-shadow: none;
+    --nue-button-bg-color: transparent;
+    --nue-button-border-color: transparent;
+    --nue-button-hover-bg-color: var(--nue-primary-color-200);
+    --nue-button-disable-bg-color: transparent;
+}

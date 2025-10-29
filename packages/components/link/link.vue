@@ -25,10 +25,7 @@ import type { NueLinkProps, NueLinkRoute } from './types';
 import './link.css';
 
 defineOptions({ name: 'NueLink' });
-const props = withDefaults(defineProps<NueLinkProps>(), {
-    href: '#',
-    title: 'NueLink'
-});
+const props = withDefaults(defineProps<NueLinkProps>(), {});
 
 const tag = ref('a');
 const to = ref<NueLinkRoute>();

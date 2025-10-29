@@ -1,4 +1,3 @@
-import type { NueIconName } from '../icon';
 import type { GlobalProps } from '@nue-ui/utils';
 
 export type NueInputType = 'text' | 'password' | 'number' | 'email' | 'textarea';
@@ -12,7 +11,7 @@ export interface NueInputProps extends GlobalProps {
     modelValue?: string | number;
     id?: string;
     shape?: NueInputShape;
-    icon?: NueIconName;
+    icon?: string;
     placeholder?: string;
     maxlength?: string;
     disabled?: boolean;

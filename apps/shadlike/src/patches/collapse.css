@@ -1,0 +1,29 @@
+.nue-collapse {
+    --nue-collapse-gap: var(--nue-secondary-gap);
+    --nue-collapse-item-border-color: var(--nue-divider-color);
+    --nue-collapse-item-header-padding: var(--nue-secondary-padding);
+    --nue-collapse-item-empty-color: var(--nue-primary-color-500);
+    --nue-collapse-item-empty-font-size: var(--nue-text-sm);
+
+    gap: var(--nue-collapse-gap);
+
+    .nue-collapse-item {
+        border-bottom-color: var(--nue-collapse-item-border-color);
+
+        .nue-collapse-item__header {
+            padding-bottom: var(--nue-collapse-gap);
+
+            gap: var(--nue-collapse-gap);
+            color: var(--nue-primary-text-color);
+        }
+
+        .nue-collapse-item__content {
+            margin-bottom: var(--nue-collapse-gap);
+
+            .nue-collapse-item__empty {
+                color: var(--nue-collapse-item-empty-color);
+                font-size: var(--nue-collapse-item-empty-font-size);
+            }
+        }
+    }
+}

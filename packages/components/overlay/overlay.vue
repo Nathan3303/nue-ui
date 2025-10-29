@@ -1,45 +1,42 @@
 <template>
-    <div :class="classes" :data-closing="closing" :style="styles">
+    <div
+        :class="classes"
+        :style="styles"
+        :data-visible="visible"
+        tabindex="-1"
+        @keydown.esc.exact="emit('escape')"
+    >
         <slot />
     </div>
 </template>
 
 <script lang="ts" setup>
 import './overlay.css';
-import { isString } from 'lodash-es';
 import { computed } from 'vue';
-import { parseTheme } from '@nue-ui/utils';
-import type { NuePopupItemAnimation } from '@nue-ui/utils';
-import type { NueOverlayProps } from './types';
+import { parsePopupItemAnimation, parseTheme } from '@nue-ui/utils';
+import type { NueOverlayProps, NueOverlayEmits } from './types';
 
 defineOptions({ name: 'NueOverlay' });
 const props = defineProps<NueOverlayProps>();
+const emit = defineEmits<NueOverlayEmits>();
 
 const classes = computed(() => {
     const prefix = 'nue-overlay';
     return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
-const styles = computed(() => {
-    const { animation, closeAnimation } = props;
-    const animationStyles = handleAnimationStyles(animation);
-    const closeAnimationStyles = handleAnimationStyles(closeAnimation, true);
-    return {
-        ...animationStyles,
-        ...closeAnimationStyles
-    };
+const animationStyles = computed(() => {
+    return parsePopupItemAnimation(props.animation);
 });
 
-const handleAnimationStyles = (
-    value: NuePopupItemAnimation | undefined,
-    isCloseState?: boolean
-) => {
-    if (value === null || value === void 0) return {};
-    let result: Record<string, string> = {};
-    let target: Exclude<NuePopupItemAnimation, string> = isString(value) ? { name: value } : value;
-    const prefix = `--nue-overlay${isCloseState ? '-close' : ''}-animation`;
-    result[`${prefix}-name`] = target.name;
-    result[`${prefix}-duration`] = `${target.duration || 240}ms`;
-    return result;
-};
+const closeAnimationStyles = computed(() => {
+    return parsePopupItemAnimation(props.closeAnimation);
+});
+
+const styles = computed(() => ({
+    '--nue-overlay-animation-name': animationStyles.value.name,
+    '--nue-overlay-animation-duration': animationStyles.value.duration,
+    '--nue-overlay-close-animation-name': closeAnimationStyles.value.name,
+    '--nue-overlay-close-animation-duration': closeAnimationStyles.value.duration
+}));
 </script>

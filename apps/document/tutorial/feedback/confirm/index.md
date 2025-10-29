@@ -12,10 +12,23 @@
 - `title` 用于指定确认框的标题文字
 - `confirmButtonText` 用于指定确认按钮的文字
 - `cancelButtonText` 用于指定取消按钮的文字。
-
 ::: preview
 demo-preview=./basic.vue
 :::
+
+### 关于返回值
+
+需要注意的是，确认框的返回值为一个 Promise 对象。不管用户点击了确认按钮还是取消按钮，Promise 都将被 resolve。resolve 值为一个数组，其中包含一个布尔值 `isByCancel`，用于表示用户是否点击了取消按钮；以及回调函数 `onConfirm` 的返回值（如果有，没有则为 `null`）。当回调函数 `onConfirm` 或者组件内部执行出现错误时，Promise 会被 reject。
+
+具体的类型定义如下（简化）：
+
+```typescript
+type IsByCancel = boolean;
+type OnConfirmResult = unknown;
+type CallerResult = [IsByCancel, OnConfirmResult]
+// 确认框的返回值类型
+type CallerReturn = Promise<CallerResult>
+```
 
 ## 自定义确认回调
 

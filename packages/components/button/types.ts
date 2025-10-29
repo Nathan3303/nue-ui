@@ -1,13 +1,12 @@
 import type { GlobalProps } from '@nue-ui/utils';
-import type { NueIconName } from '../icon';
 
 export type NueButtonSize = 'small' | 'large';
 
 export interface NueButtonProps extends GlobalProps {
-    icon?: NueIconName;
+    icon?: string;
     disabled?: boolean;
     loading?: boolean;
-    loadingIcon?: NueIconName;
+    loadingIcon?: string;
     title?: string;
     alignment?: 'start' | 'center' | 'end';
     flex?: string;

@@ -1,35 +1,28 @@
 .nue-confirm {
-    --nue-confirm-animation-name: unset;
+    --nue-confirm-animation-name: var(--nue-overlay-animation-name);
     --nue-confirm-animation-duration: var(--nue-overlay-animation-duration, 0.24s);
-    --nue-confirm-close-animation-name: unset;
+    --nue-confirm-close-animation-name: var(--nue-overlay-close-animation-name);
     --nue-confirm-close-animation-duration: var(--nue-overlay-close-animation-duration, 0.24s);
-    --nue-confirm-header-font-size: 1rem;
-    --nue-confirm-header-color: #212121;
-    --nue-confirm-content-font-size: 0.875rem;
-    --nue-confirm-content-color: #757575;
-    --nue-confirm-bg-color: #f5f5f5;
-    --nue-confirm-border-radius: 6px;
 
     display: flex;
     flex-direction: column;
-    width: 32%;
-    min-width: 24rem;
+    width: auto;
+    max-width: calc(100vw - 2rem);
+    height: auto;
+    max-height: calc(100vh - 2rem);
     padding: 1rem;
     box-sizing: border-box;
-
-    animation-name: var(--nue-confirm-animation-name);
-    animation-duration: var(--nue-confirm-animation-duration);
+    background-color: #f5f5f5;
+    border-radius: 6px;
     animation-timing-function: ease-in;
     animation-fill-mode: forwards;
-    background-color: var(--nue-confirm-bg-color);
-    border-radius: var(--nue-confirm-border-radius);
 
     .nue-confirm__header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: var(--nue-confirm-header-font-size);
-        color: var(--nue-confirm-header-color);
+        font-size: 1rem;
+        color: #212121;
     }
 
     .nue-confirm__content {
@@ -39,8 +32,8 @@
         width: 100%;
         flex: auto;
         margin: 0.5rem 0 1rem;
-        font-size: var(--nue-confirm-content-font-size);
-        color: var(--nue-confirm-content-color);
+        font-size: 0.875rem;
+        color: #757575;
     }
 
     .nue-confirm__footer {
@@ -50,11 +43,14 @@
         justify-content: end;
         gap: 0.5rem;
     }
-}
 
-.nue-confirm[data-closing='true'] {
-    animation-name: var(--nue-confirm-close-animation-name);
-    animation-duration: var(--nue-confirm-close-animation-duration);
-    animation-timing-function: ease-in;
-    animation-fill-mode: forwards;
+    &[data-visible='true'] {
+        animation-name: var(--nue-confirm-animation-name);
+        animation-duration: var(--nue-confirm-animation-duration);
+    }
+
+    &[data-visible='false'] {
+        animation-name: var(--nue-confirm-close-animation-name);
+        animation-duration: var(--nue-confirm-close-animation-duration);
+    }
 }

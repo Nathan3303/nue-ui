@@ -1,5 +1,5 @@
 <template>
-    <nue-button @click="showConfirm">打开确认对话框</nue-button>
+    <nue-button @click="showConfirm">基础确认对话框</nue-button>
 </template>
 
 <script lang="ts" setup>
@@ -11,9 +11,12 @@ const showConfirm = () => {
         content: '执行此操作将无法撤销。这将永久删除您的帐户，并从我们的服务器上清除您的数据。',
         confirmButtonText: '继续',
         cancelButtonText: '不继续'
-    }).then(
-        () => NueMessage.success('确认!'),
-        () => NueMessage.info('取消!')
-    );
+    }).then(([isByCancel]) => {
+        if (isByCancel) {
+            NueMessage.info('取消!');
+            return;
+        }
+        NueMessage.success('确认!');
+    });
 };
 </script>

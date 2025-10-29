@@ -1,0 +1,9 @@
+.nue-avatar--round {
+    border-radius: 9999px;
+
+    .nue-avatar__image,
+    &::before,
+    &::after {
+        border-radius: 9999px;
+    }
+}

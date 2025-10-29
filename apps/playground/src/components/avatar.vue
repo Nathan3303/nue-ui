@@ -19,15 +19,6 @@
             <nue-avatar src="123">A</nue-avatar>
         </nue-div>
     </demo>
-    <demo title="主题">
-        <nue-div align="center" gap="2rem">
-            <nue-avatar rounded src="https://placehold.co/48" />
-            <nue-avatar
-                src="https://picsum.photos/96"
-                theme="rounded,outline"
-            />
-        </nue-div>
-    </demo>
 </template>
 
 <script lang="ts" setup>
@@ -44,11 +35,7 @@ import Demo from '../layouts/demo.vue';
         var(--nue-avatar-outline-gap) + var(--nue-avatar-outline-width)
     );
     --nue-avatar-outline-pos-offset: calc(
-        -1 *
-            calc(
-                var(--nue-avatar-outline-offset) +
-                    var(--nue-avatar-outline-width)
-            )
+        -1 * calc(var(--nue-avatar-outline-offset) + var(--nue-avatar-outline-width))
     );
     --nue-avatar-bg-color: #ea9d38;
 

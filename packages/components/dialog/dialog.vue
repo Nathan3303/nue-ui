@@ -5,7 +5,7 @@
                 <div class="nue-dialog__header">
                     <slot :close="handleClose" name="header">
                         <nue-text>{{ title }}</nue-text>
-                        <slot name="header-actions" />
+                        <slot name="header-actions" :close="handleClose" />
                     </slot>
                 </div>
                 <div class="nue-dialog__content">
