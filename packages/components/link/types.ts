@@ -1,5 +1,4 @@
 import type { GlobalProps } from '@nue-ui/utils';
-import type { NueIconName } from '../icon';
 
 export type NueLinkRoute =
     | {
@@ -13,7 +12,7 @@ export type NueLinkRoute =
 export interface NueLinkProps extends GlobalProps {
     href?: string;
     disabled?: boolean;
-    icon?: NueIconName;
+    icon?: string;
     route?: NueLinkRoute;
     flex?: string;
     align?: string;

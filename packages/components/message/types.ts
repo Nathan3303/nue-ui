@@ -1,5 +1,3 @@
-import type { NueIconName } from '../icon';
-
 export type NueMessageType = 'success' | 'error' | 'warning' | 'info' | 'log';
 
 export type NueMessageSize = 'small' | 'large';
@@ -7,7 +5,7 @@ export type NueMessageSize = 'small' | 'large';
 export type NueMessageNodeProps = {
     wrapper: HTMLElement;
     node: HTMLElement;
-    icon?: NueIconName;
+    icon?: string;
     type?: NueMessageType;
     size?: NueMessageSize;
     message?: string;
@@ -18,14 +16,14 @@ export type NueMessageCallerPayload = {
     message: string;
     type?: NueMessageType;
     duration?: number;
-    icon?: NueIconName;
+    icon?: string;
     size?: NueMessageSize;
 };
 
 export type NueMessageSubCaller = (
     message: string,
     duration?: number,
-    icon?: NueIconName,
+    icon?: string,
     size?: NueMessageSize
 ) => void;
 

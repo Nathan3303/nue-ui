@@ -1,9 +1,8 @@
 import type { GlobalProps } from '@nue-ui/utils';
-import type { NueIconName } from '../icon';
 
 export interface NueAvatarProps extends GlobalProps {
     src?: string;
-    icon?: NueIconName;
+    icon?: string;
     size?: string;
     title?: string;
     fit?: 'fill' | 'cover' | 'contain' | 'none' | 'scale-down';

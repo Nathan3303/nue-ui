@@ -1,5 +1,4 @@
 import type { GlobalProps } from '@nue-ui/utils';
-import type { NueIconName } from '../icon';
 
 export type NueSwitchSize = 'small' | 'normal' | 'large';
 
@@ -9,7 +8,7 @@ export interface NueSwitchProps extends GlobalProps {
     size?: NueSwitchSize;
     disabled?: boolean;
     loading?: boolean;
-    loadingIcon?: NueIconName;
+    loadingIcon?: string;
     showText?: boolean;
     activeText?: string;
     inactiveText?: string;

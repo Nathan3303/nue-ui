@@ -19,17 +19,15 @@ const classes = computed(() => {
     return [
         prefix,
         'iconfont',
-        `icon-${props.name}`,
+        props.name ? `icon-${props.name}` : '',
         { 'nue-icon--spin': props.spin },
         ...parseTheme(props.theme, prefix)
     ];
 });
 
-const styles = computed(() => {
-    return {
-        '--nue-icon-size': props.size,
-        '--nue-icon-color': props.color,
-        '--nue-icon-spin-speed': props.spinSpeed
-    };
-});
+const styles = computed(() => ({
+    '--nue-icon-size': props.size,
+    '--nue-icon-color': props.color,
+    '--nue-icon-spin-speed': props.spinSpeed
+}));
 </script>
