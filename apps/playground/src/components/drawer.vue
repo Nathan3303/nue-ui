@@ -47,15 +47,51 @@
             </nue-div>
         </nue-drawer>
     </demo>
+    <demo title="自定义事件">
+        <nue-div>
+            <nue-button @click="events.visible = true">自定义事件</nue-button>
+        </nue-div>
+        <nue-drawer
+            v-model="events.visible"
+            @before-open="() => console.log('beforeOpen')"
+            @after-open="() => console.log('afterOpen')"
+            @before-close="() => console.log('beforeClose')"
+            @after-close="() => console.log('afterClose')"
+            title="自定义事件抽屉"
+        >
+            这是一个自定义事件抽屉
+        </nue-drawer>
+    </demo>
+    <demo title="关闭抽屉时回调">
+        <nue-div>
+            <nue-button @click="closeCallback.visible = true">关闭抽屉时回调</nue-button>
+        </nue-div>
+        <nue-drawer
+            v-model="closeCallback.visible"
+            title="指定了关闭抽屉时回调的抽屉"
+            :on-close="handleOnClose"
+        >
+            这是一个指定了关闭抽屉时回调的抽屉
+        </nue-drawer>
+    </demo>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from 'vue';
-import { NueDiv, NueButton, NueDrawer, NueText } from '@nue-ui/components';
+import { NueDiv, NueButton, NueDrawer, NueText, NueConfirm } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
 const basic = reactive({ visible: false });
 const direction = reactive({ visible1: false, visible2: false, visible3: false });
 const allowCloseByOverlay = reactive({ visible: false });
 const multiple = reactive({ visible1: false, visible2: false });
+const events = reactive({ visible: false });
+const closeCallback = reactive({ visible: false });
+
+const handleOnClose = (done: () => void) => {
+    NueConfirm({ title: '确认关闭抽屉吗？' }).then(([isByCancel]) => {
+        if (isByCancel) return;
+        done();
+    });
+};
 </script>
