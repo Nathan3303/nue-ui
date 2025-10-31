@@ -1,4 +1,5 @@
 import type {
+    CalculatePopperPositionResult,
     CheckPopperPositionResult,
     HTMLElementRef,
     PopperAlignment,
@@ -123,7 +124,7 @@ const usePopper = (wrapperRef: HTMLElementRef, popperRef: HTMLElementRef, gap: n
     const calculatePopperPosition = (
         direction: PopperDirection,
         alignment: PopperAlignment
-    ): PopperPosition => {
+    ): CalculatePopperPositionResult => {
         // 定义变量
         const popperPosition: PopperPosition = { x: 0, y: 0 };
         const alignmentTemp = { start: 0, center: 0, end: 0 };
@@ -175,9 +176,10 @@ const usePopper = (wrapperRef: HTMLElementRef, popperRef: HTMLElementRef, gap: n
             );
             popperPosition.x = x;
             popperPosition.y = y;
+            return { ...popperPosition, direction: newPlacement.direction };
         }
         // 返回
-        return popperPosition;
+        return { ...popperPosition };
     };
 
     // @returns

@@ -39,3 +39,19 @@ export type NueDropdownEmits = {
     (e: 'beforeClose'): void;
     (e: 'afterClose'): void;
 };
+
+export interface NueDropdownItemProps extends GlobalProps {
+    text?: string;
+    disabled?: boolean;
+    executeId?: string;
+    size?: NueDropdownSize;
+    icon?: string;
+    loading?: boolean;
+    loadingIcon?: string;
+    closeWhenExecuted?: boolean;
+    useSuffixIcon?: boolean;
+}
+
+export type NueDropdownContext = {
+    execute: (executeId: NueDropdownItemProps['executeId'], closeWhenExecuted: boolean) => void;
+};

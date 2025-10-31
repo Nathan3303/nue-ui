@@ -1,5 +1,10 @@
 <template>
-    <div ref="wrapperRef" :data-visible="visible" class="nue-dropdown-wrapper">
+    <div
+        ref="wrapperRef"
+        class="nue-dropdown-wrapper"
+        :data-visible="visible"
+        :data-direction="realDirection"
+    >
         <slot :trigger="handleSwitchByMouseEvent" :visible="visible" name="trigger">
             <nue-button :disabled="disabled" :size="size" @click="handleSwitchByMouseEvent">
                 {{ triggerText || text }}
@@ -21,14 +26,14 @@
                         ref="popperRef"
                         :class="classes"
                         :style="styles"
-                        :data-direction="placement.direction"
+                        :data-direction="realDirection"
                         :data-visible="visible"
                         @click.stop="handleExecute"
                         @animationstart="handleAnimationStart"
                         @animationend="handleAnimationEnd"
                     >
                         <slot>
-                            <span class="nue-dropdown__empty-text">No options.</span>
+                            <span class="nue-dropdown__empty-text">无选项</span>
                         </slot>
                     </ul>
                 </nue-overlay>
@@ -38,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, reactive, ref } from 'vue';
+import { computed, nextTick, provide, reactive, ref } from 'vue';
 import NueButton from '../button/button.vue';
 import NueIcon from '../icon/icon.vue';
 import NueOverlay from '../overlay/overlay.vue';
@@ -46,7 +51,12 @@ import { parseTheme } from '@nue-ui/utils';
 import { throttle, debounce } from 'lodash-es';
 import { usePopupAnchor, usePopperV2 } from '@nue-ui/hooks';
 import { register, unregister, closeDropdownsInGroup } from './dropdown-group';
-import type { NueDropdownProps, NueDropdownEmits } from './types';
+import type {
+    NueDropdownProps,
+    NueDropdownEmits,
+    NueDropdownItemProps,
+    NueDropdownContext
+} from './types';
 import type { PopperPlacementObject, PopperPosition } from '@nue-ui/hooks/use-popper-v2/types';
 import './dropdown.css';
 
@@ -65,6 +75,7 @@ const popperRef = ref<HTMLElement>();
 const { popupAnchorId, tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
 const { calculatePopperPosition } = usePopperV2(wrapperRef, popperRef);
 const visible = ref(false);
+const realDirection = ref('bottom');
 const popperPosition = reactive<PopperPosition>({ x: 0, y: 0 });
 
 // @computed 下拉菜单的类名
@@ -79,8 +90,8 @@ const styles = computed(() => ({
     '--nue-dropdown-y': `${popperPosition.y}px`
 }));
 
-// @computed 下拉菜单的位置 - 方向和对齐方式
-const placement = computed<PopperPlacementObject>(() => {
+// @method 下拉菜单的位置 - 方向和对齐方式
+const getPlacementObject = (): PopperPlacementObject => {
     try {
         const [direction, alignment] = props.placement.split('-');
         return { direction, alignment } as PopperPlacementObject;
@@ -91,7 +102,7 @@ const placement = computed<PopperPlacementObject>(() => {
         );
         return { direction: 'bottom', alignment: 'start' } as PopperPlacementObject;
     }
-});
+};
 
 // @method 注册下拉菜单到下拉菜单组 - 如果有指定的下拉菜单组
 const handleGroupRegistering = () => {
@@ -126,9 +137,13 @@ const handleAnimationEnd = () => {
 
 // @method 计算下拉菜单的位置 - x, y 坐标
 const handleCalculatePopperPosition = throttle(() => {
-    const { x, y } = calculatePopperPosition(placement.value.direction, placement.value.alignment);
+    const { direction, alignment } = getPlacementObject();
+    realDirection.value = direction;
+    const { x, y, direction: newDirection } = calculatePopperPosition(direction, alignment);
     popperPosition.x = x;
     popperPosition.y = y;
+    if (!newDirection) return;
+    realDirection.value = newDirection;
 }, 4);
 
 // @method 打开下拉菜单
@@ -184,7 +199,7 @@ const handleSwitchByMouseEvent = (event: MouseEvent) => {
     }
 };
 
-// @method 执行下拉菜单中的操作 - 触发事件
+// @method 执行下拉菜单中的操作 - 点击事件触发
 const handleExecute = (event: MouseEvent) => {
     const clickedElement = event.target as HTMLElement;
     const executeId = clickedElement.dataset.executeid;
@@ -197,6 +212,27 @@ const handleExecute = (event: MouseEvent) => {
     }
     handleDropdownClose();
 };
+
+// @method 执行下拉菜单中的操作 - 上下文触发
+const handleExecuteByContext = (
+    executeId: NueDropdownItemProps['executeId'],
+    closeWhenExecuted: boolean
+) => {
+    if (executeId === void 0) return;
+    emit('execute', executeId);
+    const isCloseWhenExecuted = props.closeWhenExecuted ? true : closeWhenExecuted;
+    if (!isCloseWhenExecuted) return;
+    if (props.group) {
+        closeDropdownsInGroup(props.group);
+        return;
+    }
+    handleDropdownClose();
+};
+
+// @provide 为 dropdownItem 等子组件提供上下文
+provide<NueDropdownContext>('NueDropdownContext', {
+    execute: handleExecuteByContext
+});
 
 // @export 暴露打开和关闭下拉菜单的方法
 defineExpose({ open: handleDropdownOpen, close: handleDropdownClose });

@@ -1,10 +1,12 @@
-import { Ref } from 'vue';
+import type { Ref } from 'vue';
 
 export type HTMLElementRef = Ref<HTMLElement | undefined>;
 
 export type Rect = DOMRect | null;
 
 export type PopperPosition = { x: number; y: number };
+
+export type CalculatePopperPositionResult = PopperPosition & { direction?: PopperDirection };
 
 export type PopperDirection = 'top' | 'bottom' | 'left' | 'right';
 

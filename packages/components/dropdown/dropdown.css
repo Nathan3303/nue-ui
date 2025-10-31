@@ -37,11 +37,7 @@
     --nue-dropdown-right-open-animation-duration: var(--nue-overlay-animation-duration);
     --nue-dropdown-right-close-animation-name: dropdown-right-close;
     --nue-dropdown-right-close-animation-duration: var(--nue-overlay-close-animation-duration);
-    --nue-dropdown-item-height: 2rem;
-    --nue-dropdown-item-vgap: 1rem;
-    --nue-dropdown-item-padding: calc(0.4 * var(--nue-dropdown-item-height));
-    --nue-dropdown-item-gap: calc(0.5 * var(--nue-dropdown-item-padding));
-    --nue-dropdown-item-font-size: calc(0.4 * var(--nue-dropdown-item-height));
+    --nue-dropdown-item-font-size: 0.875rem;
 
     width: max-content;
     height: max-content;
@@ -60,27 +56,68 @@
     box-shadow: 1px 1px 0.25rem rgba(200, 200, 200, 0.2);
     box-sizing: border-box;
 
-    li,
+    > .nue-dropdown-wrapper {
+        width: 100%;
+    }
+
     .nue-dropdown-item,
     .nue-dropdown__empty-text {
         display: flex;
+        line-height: 1;
         align-items: center;
         box-sizing: border-box;
         overflow: hidden;
-        cursor: pointer;
         user-select: none;
         -webkit-user-select: none;
-
-        height: var(--nue-dropdown-item-height);
-        line-height: var(--nue-dropdown-item-height);
-        gap: var(--nue-dropdown-item-vgap);
-        padding: 0 var(--nue-dropdown-item-padding);
-        font-size: var(--nue-dropdown-item-font-size);
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
         background-color: transparent;
         border-radius: 6px;
+        font-size: var(--nue-dropdown-item-font-size);
 
         &:hover {
             background-color: #eeeeee;
+        }
+    }
+
+    .nue-dropdown-item {
+        width: 100%;
+
+        .nue-dropdown-item__icon,
+        .nue-dropdown-item__text,
+        .nue-dropdown-item__append__suffix-icon {
+            font-size: var(--nue-dropdown-item-font-size);
+        }
+
+        .nue-dropdown-item__append {
+            width: fit-content;
+            height: 100%;
+            margin-left: auto;
+            align-items: center;
+        }
+
+        &[data-executeid] {
+            cursor: pointer;
+        }
+
+        &.nue-dropdown-item--small {
+            --nue-dropdown-item-font-size: 0.75rem;
+        }
+
+        &.nue-dropdown-item--large {
+            --nue-dropdown-item-font-size: 0.9625rem;
+        }
+
+        &.nue-dropdown-item--disabled {
+            background-color: #eeeeee;
+            color: #969696;
+            cursor: default;
+            opacity: 0.8;
+        }
+
+        &.nue-dropdown-item--loading {
+            color: #969696;
+            cursor: default;
         }
     }
 
@@ -145,18 +182,18 @@
     }
 
     &.nue-dropdown--small {
-        --nue-dropdown-item-height: 1.75rem;
+        --nue-dropdown-item-font-size: 0.75rem;
     }
 
     &.nue-dropdown--large {
-        --nue-dropdown-item-height: 2.625rem;
+        --nue-dropdown-item-font-size: 0.9625rem;
     }
 }
 
 @keyframes dropdown-top-open {
     0% {
         opacity: 0;
-        transform: translateY(10%);
+        transform: translateY(1rem);
     }
     100% {
         opacity: 1;
@@ -171,14 +208,14 @@
     }
     100% {
         opacity: 0;
-        transform: translateY(-10%);
+        transform: translateY(1rem);
     }
 }
 
 @keyframes dropdown-bottom-open {
     0% {
         opacity: 0;
-        transform: translateY(-10%);
+        transform: translateY(-1rem);
     }
     100% {
         opacity: 1;
@@ -193,14 +230,14 @@
     }
     100% {
         opacity: 0;
-        transform: translateY(-10%);
+        transform: translateY(-1rem);
     }
 }
 
 @keyframes dropdown-left-open {
     0% {
         opacity: 0;
-        transform: translateX(10%);
+        transform: translateX(1rem);
     }
     100% {
         opacity: 1;
@@ -215,14 +252,14 @@
     }
     100% {
         opacity: 0;
-        transform: translateX(10%);
+        transform: translateX(1rem);
     }
 }
 
 @keyframes dropdown-right-open {
     0% {
         opacity: 0;
-        transform: translateX(-10%);
+        transform: translateX(-1rem);
     }
     100% {
         opacity: 1;
@@ -237,6 +274,6 @@
     }
     100% {
         opacity: 0;
-        transform: translateX(-10%);
+        transform: translateX(-1rem);
     }
 }
