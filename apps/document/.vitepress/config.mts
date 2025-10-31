@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+// @ts-expect-error  临时忽略类型检查，等待上游库修复 package.json exports 字段
 import { componentPreview, containerPreview } from '@vitepress-demo-preview/plugin';
 
 // https://vitepress.dev/reference/site-config
@@ -192,5 +193,6 @@ export default defineConfig({
             md.use(containerPreview, { clientOnly: true });
             md.use(componentPreview, { clientOnly: true });
         }
-    }
+    },
+    lastUpdated: true
 });
