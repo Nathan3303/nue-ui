@@ -1,9 +1,9 @@
 <template>
     <div
-        ref="dropdownWrapperRef"
-        :data-visible="visible"
-        :data-closing="closing"
+        ref="wrapperRef"
         class="nue-dropdown-wrapper"
+        :data-visible="visible"
+        :data-direction="realDirection"
     >
         <slot :trigger="handleSwitchByMouseEvent" :visible="visible" name="trigger">
             <nue-button :disabled="disabled" :size="size" @click="handleSwitchByMouseEvent">
@@ -13,23 +13,27 @@
                 </template>
             </nue-button>
         </slot>
-        <template v-if="visible || keepalive">
+        <template>
             <teleport :disabled="tpState.disabled" :to="tpState.to">
                 <nue-overlay
-                    :closing="closing"
-                    :theme="transparent || keepalive ? 'transparent' : 'no-background'"
-                    @click="handleClose"
+                    class="nue-dropdown-overlay"
+                    :theme="transparent ? 'transparent' : 'no-background'"
+                    :visible="visible"
+                    @click="handleDropdownClose"
+                    @escape="handleDropdownClose"
                 >
                     <ul
-                        v-show="visible"
-                        ref="dropdownRef"
+                        ref="popperRef"
                         :class="classes"
-                        :data-direction="relativePosition.direction"
                         :style="styles"
+                        :data-direction="realDirection"
+                        :data-visible="visible"
                         @click.stop="handleExecute"
+                        @animationstart="handleAnimationStart"
+                        @animationend="handleAnimationEnd"
                     >
                         <slot>
-                            <span class="nue-dropdown__empty-text">No options.</span>
+                            <span class="nue-dropdown__empty-text">无选项</span>
                         </slot>
                     </ul>
                 </nue-overlay>
@@ -39,152 +43,163 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onUnmounted, ref } from 'vue';
+import { computed, nextTick, provide, reactive, ref } from 'vue';
 import NueButton from '../button/button.vue';
 import NueIcon from '../icon/icon.vue';
 import NueOverlay from '../overlay/overlay.vue';
-import { parseAnimationDurationToNumber, parseTheme } from '@nue-ui/utils';
-import { usePopper, usePopperController } from '@nue-ui/hooks';
-import { throttle } from 'lodash-es';
-import { usePopupAnchor } from '@nue-ui/hooks';
+import { parseTheme } from '@nue-ui/utils';
+import { throttle, debounce } from 'lodash-es';
+import { usePopupAnchor, usePopperV2 } from '@nue-ui/hooks';
 import { register, unregister, closeDropdownsInGroup } from './dropdown-group';
-import type { NueDropdownProps, NueDropdownEmits } from './types';
+import type {
+    NueDropdownProps,
+    NueDropdownEmits,
+    NueDropdownItemProps,
+    NueDropdownContext
+} from './types';
+import type { PopperPlacementObject, PopperPosition } from '@nue-ui/hooks/use-popper-v2/types';
 import './dropdown.css';
 
 defineOptions({ name: 'NueDropdown' });
 const props = withDefaults(defineProps<NueDropdownProps>(), {
     transparent: false,
     disabled: false,
-    text: 'Dropdown',
-    triggerText: 'Dropdown',
     placement: 'bottom-start',
     dropType: 'click',
     closeWhenExecuted: false
 });
 const emit = defineEmits<NueDropdownEmits>();
 
-const dropdownRef = ref<HTMLDivElement>();
-const dropdownWrapperRef = ref<HTMLDivElement>();
+const wrapperRef = ref<HTMLElement>();
+const popperRef = ref<HTMLElement>();
 const { popupAnchorId, tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
-const { relativePosition, rectInfo, calculatePosition } = usePopper(
-    dropdownWrapperRef,
-    dropdownRef
-);
+const { calculatePopperPosition } = usePopperV2(wrapperRef, popperRef);
 const visible = ref(false);
-const { show, hide } = usePopperController(visible);
-const closing = ref(false);
-const closeAnimationDuration = ref(0);
-let dropdownTimer: number | null = 0;
+const realDirection = ref('bottom');
+const popperPosition = reactive<PopperPosition>({ x: 0, y: 0 });
 
+// @computed 下拉菜单的类名
 const classes = computed(() => {
     const prefix = 'nue-dropdown';
     return [prefix, ...parseTheme(props.theme, prefix), props.size && `${prefix}--${props.size}`];
 });
 
-const styles = computed(() => {
-    return {
-        '--dropdown-wrapper-width': `${rectInfo.wrapperW.toFixed(2)}px`
-    };
-});
+// @computed 下拉菜单的样式
+const styles = computed(() => ({
+    '--nue-dropdown-x': `${popperPosition.x}px`,
+    '--nue-dropdown-y': `${popperPosition.y}px`
+}));
 
-const transparent = computed(() => {
-    return props.transparent || props.keepalive;
-});
-
-const handleCalculatePosition = throttle(() => calculatePosition(props.placement), 4);
-
-const handleGroupRegistering = () => {
-    if (!props.group) return;
-    register(props.group, popupAnchorId, handleClose);
+// @method 下拉菜单的位置 - 方向和对齐方式
+const getPlacementObject = (): PopperPlacementObject => {
+    try {
+        const [direction, alignment] = props.placement.split('-');
+        return { direction, alignment } as PopperPlacementObject;
+    } catch (error) {
+        console.error(
+            '[NueDropdown] Invalid placement value. Please use the format "vertical-horizontal".',
+            error
+        );
+        return { direction: 'bottom', alignment: 'start' } as PopperPlacementObject;
+    }
 };
 
+// @method 注册下拉菜单到下拉菜单组 - 如果有指定的下拉菜单组
+const handleGroupRegistering = () => {
+    if (!props.group) return;
+    register(props.group, popupAnchorId, handleDropdownClose);
+};
+
+// @method 注销下拉菜单从下拉菜单组 - 如果有指定的下拉菜单组
 const handleGroupUnregistering = () => {
     if (!props.group) return;
     unregister(props.group, popupAnchorId);
 };
 
-const waitForAnimation = () => {
-    const timeout = parseAnimationDurationToNumber(
-        closeAnimationDuration.value ||
-            window.getComputedStyle(dropdownRef.value!).animationDuration
-    );
-    return new Promise(resolve => {
-        setTimeout(() => resolve(1), timeout);
+// @method 下拉菜单动画开始时的回调
+const handleAnimationStart = () => {
+    if (visible.value) {
+        emit('beforeOpen');
+        return;
+    }
+    emit('beforeClose');
+};
+
+// @method 下拉菜单动画结束时的回调
+const handleAnimationEnd = () => {
+    if (visible.value) {
+        emit('afterOpen');
+        return;
+    }
+    unmountPopupAnchor();
+    emit('afterClose');
+};
+
+// @method 计算下拉菜单的位置 - x, y 坐标
+const handleCalculatePopperPosition = throttle(() => {
+    const { direction, alignment } = getPlacementObject();
+    realDirection.value = direction;
+    const { x, y, direction: newDirection } = calculatePopperPosition(direction, alignment);
+    popperPosition.x = x;
+    popperPosition.y = y;
+    if (!newDirection) return;
+    realDirection.value = newDirection;
+}, 4);
+
+// @method 打开下拉菜单
+const handleDropdownOpen = () => {
+    if (visible.value) return;
+    visible.value = true;
+    mountPopupAnchor();
+    nextTick(() => {
+        handleCalculatePopperPosition();
+        handleGroupRegistering();
+        emit('open');
+        if (!props.transparent) return;
+        window.addEventListener('scroll', handleCalculatePopperPosition, true);
+        window.addEventListener('resize', handleCalculatePopperPosition, true);
+        window.addEventListener('click', handleDropdownClose, false);
     });
 };
 
-const handleOpen = () => {
-    show(
-        () => {
-            closing.value = false;
-            if (!visible.value) document.body.click();
-        },
-        () => {
-            handleCalculatePosition();
-            emit('open');
-            mountPopupAnchor();
-            handleGroupRegistering();
-        }
-    );
-    if (!transparent.value) return;
-    window.addEventListener('scroll', handleCalculatePosition, true);
-    window.addEventListener('resize', handleCalculatePosition, true);
-    window.addEventListener('click', handleClose, false);
+// @method 关闭下拉菜单
+const handleDropdownClose = () => {
+    if (!visible.value) return;
+    visible.value = false;
+    handleGroupUnregistering();
+    emit('close');
+    if (!props.transparent) return;
+    window.removeEventListener('scroll', handleCalculatePopperPosition, true);
+    window.removeEventListener('resize', handleCalculatePopperPosition, true);
+    window.removeEventListener('click', handleDropdownClose, false);
 };
 
-const handleClose = () => {
-    hide(
-        160,
-        async () => {
-            closing.value = true;
-            await waitForAnimation();
-        },
-        () => {
-            handleGroupUnregistering();
-            emit('close');
-        }
-    );
-    if (!transparent.value) return;
-    window.removeEventListener('scroll', handleCalculatePosition, true);
-    window.removeEventListener('resize', handleCalculatePosition, true);
-    window.removeEventListener('click', handleClose, false);
-};
+// @methods 打开和关闭下拉菜单的防抖版本 - 360ms 防抖
+const debounceHandleDropdownOpen = debounce(handleDropdownOpen, 360);
+const debounceHandleDropdownClose = debounce(handleDropdownClose, 360);
 
-const handleDrop = (type: 'close' | 'open') => {
-    if (dropdownTimer) return;
-    switch (type) {
-        case 'open':
-            handleOpen();
-            break;
-        case 'close':
-            handleClose();
-            break;
-    }
-    dropdownTimer = setTimeout(() => {
-        dropdownTimer = null;
-    }, 200) as unknown as number;
-};
-
+// @method 切换下拉菜单的显示状态 - 鼠标事件
 const handleSwitchByMouseEvent = (event: MouseEvent) => {
     event.stopPropagation();
-    switch (props.dropType) {
+    switch (props.triggerType) {
         case 'hover':
             switch (event.type) {
                 case 'mouseenter':
-                    handleDrop('open');
+                    debounceHandleDropdownOpen();
                     break;
                 case 'mouseleave':
-                    handleDrop('close');
+                    debounceHandleDropdownClose();
                     break;
             }
             break;
         case 'click':
         default:
-            handleDrop(visible.value ? 'close' : 'open');
+            visible.value ? handleDropdownClose() : handleDropdownOpen();
             break;
     }
 };
 
+// @method 执行下拉菜单中的操作 - 点击事件触发
 const handleExecute = (event: MouseEvent) => {
     const clickedElement = event.target as HTMLElement;
     const executeId = clickedElement.dataset.executeid;
@@ -193,12 +208,32 @@ const handleExecute = (event: MouseEvent) => {
     if (!props.closeWhenExecuted) return;
     if (props.group) {
         closeDropdownsInGroup(props.group);
-    } else {
-        handleClose();
+        return;
     }
+    handleDropdownClose();
 };
 
-onUnmounted(() => unmountPopupAnchor());
+// @method 执行下拉菜单中的操作 - 上下文触发
+const handleExecuteByContext = (
+    executeId: NueDropdownItemProps['executeId'],
+    closeWhenExecuted: boolean
+) => {
+    if (executeId === void 0) return;
+    emit('execute', executeId);
+    const isCloseWhenExecuted = props.closeWhenExecuted ? true : closeWhenExecuted;
+    if (!isCloseWhenExecuted) return;
+    if (props.group) {
+        closeDropdownsInGroup(props.group);
+        return;
+    }
+    handleDropdownClose();
+};
 
-defineExpose({ open: handleOpen, close: handleClose });
+// @provide 为 dropdownItem 等子组件提供上下文
+provide<NueDropdownContext>('NueDropdownContext', {
+    execute: handleExecuteByContext
+});
+
+// @export 暴露打开和关闭下拉菜单的方法
+defineExpose({ open: handleDropdownOpen, close: handleDropdownClose });
 </script>

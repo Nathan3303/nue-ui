@@ -15,6 +15,7 @@
     box-sizing: border-box;
     animation-timing-function: ease-in;
     animation-fill-mode: forwards;
+    outline: none;
 
     &[data-visible='true'] {
         animation-name: var(--nue-overlay-animation-name);
@@ -29,6 +30,7 @@
     &.nue-overlay--transparent {
         width: 0;
         height: 0;
+        overflow: unset;
         background-color: transparent;
     }
 

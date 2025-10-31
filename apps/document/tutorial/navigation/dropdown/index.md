@@ -6,6 +6,8 @@
 
 通过标签 `<NueDropdown>` 创建一个基本的下拉菜单组件。
 
+下拉菜单组件主体内部标签为 `<ul>`，每个下拉菜单选项为 `<li>` 标签，通过类名 `nue-dropdown-item` 应用基础样式。
+
 ### 触发按钮文本
 
 通过属性 `trigger-text` 设置下拉菜单触发按钮中的文字。
@@ -86,4 +88,34 @@ demo-preview=./trigger-slot.vue
 
 ::: preview
 demo-preview=./nested.vue
+:::
+
+## 下拉菜单选项组件 <Badge text="1.1.14 以上版本" type="tip" />
+
+通过标签 `<NueDropdownItem>` 创建下拉菜单中的选项。
+
+选项组件支持更为丰富的属性和事件，满足更多的需求。
+
+::: preview
+demo-preview=./dropdown-item.vue
+:::
+
+### 选项组件属性
+
+- `text`：选项的文字内容，通过默认插槽也可以指定选项内部的内容。
+- `disabled`：是否禁用选项。
+- `icon`：选项左侧的图标名称。
+- `size`：选项的大小，可选值为 `small` 和 `large`。
+- `loading`：是否显示加载状态。
+- `loading-icon`：加载状态时显示的图标名称。
+- `execute-id`：选项的执行标识，用于在事件处理中识别选项。
+- `close-when-executed`：是否在执行后关闭下拉菜单（当下拉列表组件也设置了 `close-when-executed` 属性时，该属性无效，优先级低）。
+- `useSuffixIcon`：是否在选项文字内容后添加状态标识图标，通常用于在列表嵌套时使用。
+
+### 选项组件插槽
+
+`#append` 选项内容的追加插槽，用于在选项文字内容后添加额外的元素，如状态标识图标
+
+::: preview
+demo-preview=./dropdown-item-append.vue
 :::

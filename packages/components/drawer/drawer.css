@@ -1,113 +1,105 @@
-.nue-drawer-overlay {
-    .nue-drawer {
-        --nue-drawer-span: 32%;
-        --nue-drawer-min-span: 18rem;
-        --nue-drawer-from-top-open-animation-name: slide-in-from-top;
-        --nue-drawer-from-top-open-animation-duration: var(--nue-overlay-animation-duration);
-        --nue-drawer-from-top-close-animation-name: slide-out-to-top;
-        --nue-drawer-from-top-close-animation-duration: var(--nue-overlay-close-animation-duration);
-        --nue-drawer-from-bottom-open-animation-name: slide-in-from-bottom;
-        --nue-drawer-from-bottom-open-animation-duration: var(--nue-overlay-animation-duration);
-        --nue-drawer-from-bottom-close-animation-name: slide-out-to-bottom;
-        --nue-drawer-from-bottom-close-animation-duration: var(
-            --nue-overlay-close-animation-duration
-        );
-        --nue-drawer-from-left-open-animation-name: slide-in-from-left;
-        --nue-drawer-from-left-open-animation-duration: var(--nue-overlay-animation-duration);
-        --nue-drawer-from-left-close-animation-name: slide-out-to-left;
-        --nue-drawer-from-left-close-animation-duration: var(
-            --nue-overlay-close-animation-duration
-        );
-        --nue-drawer-from-right-open-animation-name: slide-in-from-right;
-        --nue-drawer-from-right-open-animation-duration: var(--nue-overlay-animation-duration);
-        --nue-drawer-from-right-close-animation-name: slide-out-to-right;
-        --nue-drawer-from-right-close-animation-duration: var(
-            --nue-overlay-close-animation-duration
-        );
+.nue-drawer-overlay .nue-drawer {
+    --nue-drawer-span: 32%;
+    --nue-drawer-min-span: 18rem;
+    --nue-drawer-top-open-animation-name: drawer-top-open;
+    --nue-drawer-top-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-drawer-top-close-animation-name: drawer-top-close;
+    --nue-drawer-top-close-animation-duration: var(--nue-overlay-close-animation-duration);
+    --nue-drawer-bottom-open-animation-name: drawer-bottom-open;
+    --nue-drawer-bottom-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-drawer-bottom-close-animation-name: drawer-bottom-close;
+    --nue-drawer-bottom-close-animation-duration: var(--nue-overlay-close-animation-duration);
+    --nue-drawer-left-open-animation-name: drawer-left-open;
+    --nue-drawer-left-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-drawer-left-close-animation-name: drawer-left-close;
+    --nue-drawer-left-close-animation-duration: var(--nue-overlay-close-animation-duration);
+    --nue-drawer-right-open-animation-name: drawer-right-open;
+    --nue-drawer-right-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-drawer-right-close-animation-name: drawer-right-close;
+    --nue-drawer-right-close-animation-duration: var(--nue-overlay-close-animation-duration);
 
-        position: absolute;
-        background-color: white;
-        overflow: hidden;
-        animation-timing-function: ease-out;
-        animation-fill-mode: forwards;
-        width: auto;
-        height: auto;
+    position: absolute;
+    background-color: white;
+    overflow: hidden;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    width: auto;
+    height: auto;
 
-        &[data-direction='top'] {
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--nue-drawer-span);
-            min-height: var(--nue-drawer-min-span);
-            transform-origin: top;
+    &[data-direction='top'] {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--nue-drawer-span);
+        min-height: var(--nue-drawer-min-span);
+        transform-origin: top;
 
-            &[data-visible='true'] {
-                animation-name: var(--nue-drawer-from-top-open-animation-name);
-                animation-duration: var(--nue-drawer-from-top-open-animation-duration);
-            }
-            &[data-visible='false'] {
-                animation-name: var(--nue-drawer-from-top-close-animation-name);
-                animation-duration: var(--nue-drawer-from-top-close-animation-duration);
-            }
+        &[data-visible='true'] {
+            animation-name: var(--nue-drawer-top-open-animation-name);
+            animation-duration: var(--nue-drawer-top-open-animation-duration);
         }
-
-        &[data-direction='bottom'] {
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: var(--nue-drawer-span);
-            min-height: var(--nue-drawer-min-span);
-            transform-origin: bottom;
-
-            &[data-visible='true'] {
-                animation-name: var(--nue-drawer-from-bottom-open-animation-name);
-                animation-duration: var(--nue-drawer-from-bottom-open-animation-duration);
-            }
-            &[data-visible='false'] {
-                animation-name: var(--nue-drawer-from-bottom-close-animation-name);
-                animation-duration: var(--nue-drawer-from-bottom-close-animation-duration);
-            }
+        &[data-visible='false'] {
+            animation-name: var(--nue-drawer-top-close-animation-name);
+            animation-duration: var(--nue-drawer-top-close-animation-duration);
         }
+    }
 
-        &[data-direction='left'] {
-            top: 0;
-            left: 0;
-            width: var(--nue-drawer-span);
-            height: 100%;
-            min-width: var(--nue-drawer-min-span);
-            transform-origin: left;
+    &[data-direction='bottom'] {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: var(--nue-drawer-span);
+        min-height: var(--nue-drawer-min-span);
+        transform-origin: bottom;
 
-            &[data-visible='true'] {
-                animation-name: var(--nue-drawer-from-left-open-animation-name);
-                animation-duration: var(--nue-drawer-from-left-open-animation-duration);
-            }
-            &[data-visible='false'] {
-                animation-name: var(--nue-drawer-from-left-close-animation-name);
-                animation-duration: var(--nue-drawer-from-left-close-animation-duration);
-            }
+        &[data-visible='true'] {
+            animation-name: var(--nue-drawer-bottom-open-animation-name);
+            animation-duration: var(--nue-drawer-bottom-open-animation-duration);
         }
+        &[data-visible='false'] {
+            animation-name: var(--nue-drawer-bottom-close-animation-name);
+            animation-duration: var(--nue-drawer-bottom-close-animation-duration);
+        }
+    }
 
-        &[data-direction='right'] {
-            top: 0;
-            right: 0;
-            width: var(--nue-drawer-span);
-            height: 100%;
-            min-width: var(--nue-drawer-min-span);
-            transform-origin: right;
+    &[data-direction='left'] {
+        top: 0;
+        left: 0;
+        width: var(--nue-drawer-span);
+        height: 100%;
+        min-width: var(--nue-drawer-min-span);
+        transform-origin: left;
 
-            &[data-visible='true'] {
-                animation-name: var(--nue-drawer-from-right-open-animation-name);
-                animation-duration: var(--nue-drawer-from-right-open-animation-duration);
-            }
-            &[data-visible='false'] {
-                animation-name: var(--nue-drawer-from-right-close-animation-name);
-                animation-duration: var(--nue-drawer-from-right-close-animation-duration);
-            }
+        &[data-visible='true'] {
+            animation-name: var(--nue-drawer-left-open-animation-name);
+            animation-duration: var(--nue-drawer-left-open-animation-duration);
+        }
+        &[data-visible='false'] {
+            animation-name: var(--nue-drawer-left-close-animation-name);
+            animation-duration: var(--nue-drawer-left-close-animation-duration);
+        }
+    }
+
+    &[data-direction='right'] {
+        top: 0;
+        right: 0;
+        width: var(--nue-drawer-span);
+        height: 100%;
+        min-width: var(--nue-drawer-min-span);
+        transform-origin: right;
+
+        &[data-visible='true'] {
+            animation-name: var(--nue-drawer-right-open-animation-name);
+            animation-duration: var(--nue-drawer-right-open-animation-duration);
+        }
+        &[data-visible='false'] {
+            animation-name: var(--nue-drawer-right-close-animation-name);
+            animation-duration: var(--nue-drawer-right-close-animation-duration);
         }
     }
 }
 
-@keyframes slide-in-from-top {
+@keyframes drawer-top-open {
     0% {
         opacity: 0;
         transform: translateY(-100%);
@@ -118,7 +110,7 @@
     }
 }
 
-@keyframes slide-out-to-top {
+@keyframes drawer-top-close {
     0% {
         opacity: 1;
         transform: translateY(0);
@@ -129,7 +121,7 @@
     }
 }
 
-@keyframes slide-in-from-bottom {
+@keyframes drawer-bottom-open {
     0% {
         opacity: 0;
         transform: translateY(100%);
@@ -140,7 +132,7 @@
     }
 }
 
-@keyframes slide-out-to-bottom {
+@keyframes drawer-bottom-close {
     0% {
         opacity: 1;
         transform: translateY(0);
@@ -151,7 +143,7 @@
     }
 }
 
-@keyframes slide-in-from-left {
+@keyframes drawer-left-open {
     0% {
         opacity: 0;
         transform: translateX(-100%);
@@ -162,7 +154,7 @@
     }
 }
 
-@keyframes slide-out-to-left {
+@keyframes drawer-left-close {
     0% {
         opacity: 1;
         transform: translateX(0);
@@ -173,7 +165,7 @@
     }
 }
 
-@keyframes slide-in-from-right {
+@keyframes drawer-right-open {
     0% {
         opacity: 0;
         transform: translateX(100%);
@@ -184,7 +176,7 @@
     }
 }
 
-@keyframes slide-out-to-right {
+@keyframes drawer-right-close {
     0% {
         opacity: 1;
         transform: translateX(0);

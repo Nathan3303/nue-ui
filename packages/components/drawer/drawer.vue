@@ -4,11 +4,12 @@
             class="nue-drawer-overlay"
             :visible="visible"
             :theme="theme"
-            @mousedown="handleCloseDrawer"
-            @escape="handleCloseDrawer"
+            @mousedown="handleCloseDrawerByOverlay"
+            @escape="handleCloseDrawerByOverlay"
         >
             <nue-container
                 :class="classes"
+                :style="styles"
                 :data-visible="visible"
                 :data-direction="openFrom"
                 @animationstart="handleAnimationStart"
@@ -24,7 +25,7 @@
                             icon="clear"
                             theme="icon,ghost,small"
                             :loading="loading"
-                            @click="handleCloseDrawer"
+                            @click.stop="handleCloseDrawer"
                         />
                     </slot>
                 </nue-header>
@@ -53,11 +54,11 @@ import type { NueDrawerProps, NueDrawerEmits } from './types';
 import './drawer.css';
 
 defineOptions({ name: 'NueDrawer' });
-
 const props = withDefaults(defineProps<NueDrawerProps>(), {
     span: '36%',
     minSpan: '240px',
-    openFrom: 'right'
+    openFrom: 'right',
+    allowCloseByOverlay: false
 });
 const emit = defineEmits<NueDrawerEmits>();
 
@@ -65,16 +66,25 @@ const { tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
 const visible = ref(false);
 const loading = ref(false);
 
+// @computed 抽屉的类名
 const classes = computed(() => {
     const prefix = 'nue-drawer';
     return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
+// @computed 抽屉的样式
+const styles = computed(() => ({
+    '--nue-drawer-span': props.span,
+    '--nue-drawer-min-span': props.minSpan
+}));
+
+// @method 打开抽屉
 const handleOpenDrawer = () => {
     mountPopupAnchor();
     visible.value = true;
 };
 
+// @method 抽屉的关闭回调函数执行器
 const onCloseExecutor = () => {
     return new Promise((resolve, reject) => {
         if (!props.onClose) {
@@ -87,18 +97,17 @@ const onCloseExecutor = () => {
     });
 };
 
+// @method 关闭抽屉
 const handleCloseDrawer = async () => {
     if (visible.value === false) return;
     loading.value = true;
     onCloseExecutor()
-        .then(isDone => {
-            console.log(isDone);
-            visible.value = !isDone;
-        })
+        .then(isDone => (visible.value = !isDone))
         .catch(e => console.error('[NueDrawer] Close error:', e))
         .finally(() => (loading.value = false));
 };
 
+// @method 抽屉动画开始时的回调函数
 const handleAnimationStart = () => {
     if (visible.value) {
         emit('beforeOpen');
@@ -107,6 +116,7 @@ const handleAnimationStart = () => {
     }
 };
 
+// @method 抽屉动画结束时的回调函数
 const handleAnimationEnd = () => {
     if (visible.value) {
         emit('afterOpen');
@@ -117,6 +127,13 @@ const handleAnimationEnd = () => {
     }
 };
 
+// @method 抽屉点击遮罩层关闭抽屉
+const handleCloseDrawerByOverlay = () => {
+    if (!props.allowCloseByOverlay) return;
+    handleCloseDrawer();
+};
+
+// @watch 监听抽屉的显示状态 - 打开或关闭抽屉
 watch(
     () => props.modelValue,
     newValue => {
@@ -128,5 +145,6 @@ watch(
     }
 );
 
+// @expose 暴露抽屉的打开和关闭方法
 defineExpose({ open: handleOpenDrawer, close: handleCloseDrawer });
 </script>
