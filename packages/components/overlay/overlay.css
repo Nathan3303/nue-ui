@@ -29,6 +29,7 @@
     &.nue-overlay--transparent {
         width: 0;
         height: 0;
+        overflow: unset;
         background-color: transparent;
     }
 
