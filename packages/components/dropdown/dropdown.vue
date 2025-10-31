@@ -106,26 +106,22 @@ const handleGroupUnregistering = () => {
 };
 
 // @method 下拉菜单动画开始时的回调
-const handleAnimationStart = (e: AnimationEvent) => {
+const handleAnimationStart = () => {
     if (visible.value) {
         emit('beforeOpen');
-        console.log('beforeOpen', e);
-    } else {
-        emit('beforeClose');
-        console.log('beforeClose', e);
+        return;
     }
+    emit('beforeClose');
 };
 
 // @method 下拉菜单动画结束时的回调
-const handleAnimationEnd = (e: AnimationEvent) => {
+const handleAnimationEnd = () => {
     if (visible.value) {
         emit('afterOpen');
-        console.log('afterOpen', e);
-    } else {
-        unmountPopupAnchor();
-        emit('afterClose');
-        console.log('afterClose', e);
+        return;
     }
+    unmountPopupAnchor();
+    emit('afterClose');
 };
 
 // @method 计算下拉菜单的位置 - x, y 坐标
@@ -197,9 +193,9 @@ const handleExecute = (event: MouseEvent) => {
     if (!props.closeWhenExecuted) return;
     if (props.group) {
         closeDropdownsInGroup(props.group);
-    } else {
-        handleDropdownClose();
+        return;
     }
+    handleDropdownClose();
 };
 
 // @export 暴露打开和关闭下拉菜单的方法
