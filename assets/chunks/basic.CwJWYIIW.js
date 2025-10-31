@@ -1,1 +1,0 @@
-import{_ as t,C as r,b as s,o as a,w as _,j as o}from"./framework.DPj99A0l.js";const c={};function l(d,e){const n=r("nue-dropdown");return a(),s(n,{"trigger-text":"点击打开下拉菜单"},{default:_(()=>e[0]||(e[0]=[o("li",null,"下拉菜单选项 A",-1),o("li",null,"下拉菜单选项 B",-1)])),_:1,__:[0]})}const p=t(c,[["render",l]]);export{p as default};
