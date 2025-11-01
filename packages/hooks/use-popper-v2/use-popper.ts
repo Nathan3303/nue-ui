@@ -131,13 +131,13 @@ const usePopper = (wrapperRef: HTMLElementRef, popperRef: HTMLElementRef, gap: n
         // 获取 wrapperRect
         wrapperRect = getWrapperRect();
         if (!wrapperRect) {
-            console.warn('[UsePopperV2] Cannot get wrapper rect info. Wrapper:', wrapperRef);
+            // console.warn('[UsePopperV2] Cannot get wrapper rect info. Wrapper:', wrapperRef);
             return popperPosition;
         }
         // 获取 popperRect
         popperRect = getPopperRect();
         if (!popperRect) {
-            console.warn('[UsePopperV2] Cannot get popper rect info. Popper:', popperRef);
+            // console.warn('[UsePopperV2] Cannot get popper rect info. Popper:', popperRef);
             return popperPosition;
         }
         // 计算 popper 位置
@@ -169,7 +169,7 @@ const usePopper = (wrapperRef: HTMLElementRef, popperRef: HTMLElementRef, gap: n
         const { isOverflow, newPlacement } = checkPopperPosition(direction, alignment);
         // 如果超出视口，则使用新的 placement 和 alignment 重新计算位置
         if (isOverflow) {
-            console.log('[UsePopperV2] Popper position is overflow. Popper:', popperRef);
+            // console.log('[UsePopperV2] Popper position is overflow. Popper:', popperRef);
             const { x, y } = calculatePopperPosition(
                 newPlacement.direction,
                 newPlacement.alignment

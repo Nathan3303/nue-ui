@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, provide, reactive, ref } from 'vue';
+import { computed, nextTick, provide, reactive, ref, onMounted, onUnmounted } from 'vue';
 import NueButton from '../button/button.vue';
 import NueIcon from '../icon/icon.vue';
 import NueOverlay from '../overlay/overlay.vue';
@@ -62,11 +62,8 @@ import './dropdown.css';
 
 defineOptions({ name: 'NueDropdown' });
 const props = withDefaults(defineProps<NueDropdownProps>(), {
-    transparent: false,
-    disabled: false,
     placement: 'bottom-start',
-    dropType: 'click',
-    closeWhenExecuted: false
+    dropType: 'click'
 });
 const emit = defineEmits<NueDropdownEmits>();
 
@@ -77,6 +74,7 @@ const { calculatePopperPosition } = usePopperV2(wrapperRef, popperRef);
 const visible = ref(false);
 const realDirection = ref('bottom');
 const popperPosition = reactive<PopperPosition>({ x: 0, y: 0 });
+let dropdownResizeObserver: ResizeObserver | null = null;
 
 // @computed 下拉菜单的类名
 const classes = computed(() => {
@@ -86,8 +84,8 @@ const classes = computed(() => {
 
 // @computed 下拉菜单的样式
 const styles = computed(() => ({
-    '--nue-dropdown-x': `${popperPosition.x}px`,
-    '--nue-dropdown-y': `${popperPosition.y}px`
+    '--nue-dropdown-x': `${popperPosition.x.toFixed(0)}px`,
+    '--nue-dropdown-y': `${popperPosition.y.toFixed(0)}px`
 }));
 
 // @method 下拉菜单的位置 - 方向和对齐方式
@@ -137,14 +135,30 @@ const handleAnimationEnd = () => {
 
 // @method 计算下拉菜单的位置 - x, y 坐标
 const handleCalculatePopperPosition = throttle(() => {
+    if (!visible.value) return;
     const { direction, alignment } = getPlacementObject();
     realDirection.value = direction;
     const { x, y, direction: newDirection } = calculatePopperPosition(direction, alignment);
-    popperPosition.x = x;
-    popperPosition.y = y;
+    // 处理浏览器不支持 requestAnimationFrame 的情况
+    if (window.requestAnimationFrame) {
+        // 浏览器支持 requestAnimationFrame 时，使用它来更新位置
+        window.requestAnimationFrame(() => {
+            popperPosition.x = x;
+            popperPosition.y = y;
+        });
+    } else {
+        // 浏览器不支持 requestAnimationFrame 时，直接更新位置
+        popperPosition.x = x;
+        popperPosition.y = y;
+    }
     if (!newDirection) return;
     realDirection.value = newDirection;
-}, 4);
+}, 8);
+
+// @method ResizeObserver 处理函数
+const resizeObserverHandler = () => {
+    handleCalculatePopperPosition();
+};
 
 // @method 打开下拉菜单
 const handleDropdownOpen = () => {
@@ -157,7 +171,7 @@ const handleDropdownOpen = () => {
         emit('open');
         if (!props.transparent) return;
         window.addEventListener('scroll', handleCalculatePopperPosition, true);
-        window.addEventListener('resize', handleCalculatePopperPosition, true);
+        // window.addEventListener('resize', handleCalculatePopperPosition, true);
         window.addEventListener('click', handleDropdownClose, false);
     });
 };
@@ -170,7 +184,7 @@ const handleDropdownClose = () => {
     emit('close');
     if (!props.transparent) return;
     window.removeEventListener('scroll', handleCalculatePopperPosition, true);
-    window.removeEventListener('resize', handleCalculatePopperPosition, true);
+    // window.removeEventListener('resize', handleCalculatePopperPosition, true);
     window.removeEventListener('click', handleDropdownClose, false);
 };
 
@@ -229,10 +243,24 @@ const handleExecuteByContext = (
     handleDropdownClose();
 };
 
-// @provide 为 dropdownItem 等子组件提供上下文
-provide<NueDropdownContext>('NueDropdownContext', {
-    execute: handleExecuteByContext
+// @onmounted 初始化 ResizeObserver
+onMounted(() => {
+    if (!wrapperRef.value || !props.transparent) return;
+    // 初始化 ResizeObserver
+    dropdownResizeObserver = new ResizeObserver(resizeObserverHandler);
+    // 监听下拉菜单容器的变化
+    dropdownResizeObserver.observe(wrapperRef.value);
+    dropdownResizeObserver.observe(document.documentElement);
 });
+
+// @onunmounted 取消监听 ResizeObserver
+onUnmounted(() => {
+    if (!wrapperRef.value || !props.transparent || !dropdownResizeObserver) return;
+    dropdownResizeObserver.disconnect();
+});
+
+// @provide 为 dropdownItem 等子组件提供上下文
+provide<NueDropdownContext>('NueDropdownContext', { execute: handleExecuteByContext });
 
 // @export 暴露打开和关闭下拉菜单的方法
 defineExpose({ open: handleDropdownOpen, close: handleDropdownClose });
