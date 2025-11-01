@@ -28,13 +28,12 @@ export interface NueSelectProps extends GlobalProps {
     size?: NueButtonSize;
     disabled?: boolean;
     clearable?: boolean;
-    closeWhenSelected?: boolean;
+    persistent?: boolean;
 }
 
 export type NueSelectEmits = {
     (e: 'update:modelValue', value: unknown): void;
     (e: 'change', value: unknown): void;
-    (e: 'drop'): void;
     (e: 'close'): void;
 };
 

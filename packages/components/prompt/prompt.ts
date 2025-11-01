@@ -1,25 +1,29 @@
-import PromptNode from './prompt.vue';
-import { createVNode, render } from 'vue';
+import NuePrompt from './prompt.vue';
+import { createVNode, render, type VNode } from 'vue';
 import { usePopupAnchor } from '@nue-ui/hooks';
-import type { NuePromptCaller, NuePromptClose } from './types';
+import type { NuePromptCallerPayload, NuePromptCallerResult, NuePromptProps } from './types';
 
-const nuePromptCaller: NuePromptCaller = payload => {
+const nuePromptCaller = (payload: NuePromptCallerPayload): Promise<NuePromptCallerResult> => {
     return new Promise((resolve, reject) => {
-        const { popupAnchor, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor(
-            payload.wrapperId
-        );
-        const close: NuePromptClose = (isConfirmed, payload) => {
-            isConfirmed ? resolve(payload) : reject(payload);
-        };
-        mountPopupAnchor();
-        render(
-            createVNode(PromptNode, {
+        const popupAnchor = usePopupAnchor(payload.wrapperId);
+        popupAnchor.mountPopupAnchor();
+        let promptVNode: VNode | null = createVNode(NuePrompt, {
+            ...({
                 ...payload,
-                close,
-                destroy: () => unmountPopupAnchor()
-            }),
-            popupAnchor
-        );
+                close: (isByCancel, onConfirmResult, onConfirmError) => {
+                    if (onConfirmError) {
+                        reject(onConfirmError);
+                        return;
+                    }
+                    resolve([isByCancel, onConfirmResult]);
+                },
+                destroy: () => {
+                    popupAnchor.unmountPopupAnchor();
+                    promptVNode = null;
+                }
+            } as NuePromptProps)
+        });
+        render(promptVNode, popupAnchor.popupAnchor);
     });
 };
 

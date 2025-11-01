@@ -4,7 +4,16 @@
             <nue-select placeholder="基础选择器">
                 <nue-select-option label="一些选项..." value="some options..." />
             </nue-select>
-            <nue-select placeholder="基础选择器" />
+            <nue-select placeholder="空选择器" />
+        </nue-div>
+    </demo>
+    <demo title="禁用">
+        <nue-div>
+            <nue-select placeholder="禁用选择器" disabled></nue-select>
+            <nue-select placeholder="禁用选项">
+                <nue-select-option label="选项 A" value="option-a" />
+                <nue-select-option label="选项 B" value="option-b" disabled />
+            </nue-select>
         </nue-div>
     </demo>
     <demo title="大小">

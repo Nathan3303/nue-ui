@@ -1,14 +1,22 @@
 <template>
-    <li :class="classes" :data-executeid="executeId" @click="handleClick">
-        {{ label }}
-        <nue-icon v-if="selected" name="completed" />
-    </li>
+    <nue-dropdown-item
+        :class="classes"
+        :data-selected="selected"
+        :execute-id="executeId"
+        :disabled="disabled"
+        :text="label"
+        @click="handleClick"
+    >
+        <template #append>
+            <nue-icon v-if="selected" name="check" />
+        </template>
+    </nue-dropdown-item>
 </template>
 
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { generateId, parseTheme } from '@nue-ui/utils';
-import NueIcon from '../icon/icon.vue';
+import { NueIcon, NueDropdownItem } from '@nue-ui/components';
 import { NueSelectContextKey } from './constants';
 import type { NueSelectContext, NueSelectOptionProps } from './types';
 import './option.css';
@@ -27,12 +35,7 @@ const selected = computed(() => {
 
 const classes = computed(() => {
     const prefix = 'nue-select-option';
-    return [
-        prefix,
-        ...parseTheme(props.theme, prefix),
-        props.disabled && `${prefix}--disabled`,
-        selected.value && `${prefix}--selected`
-    ];
+    return [prefix, ...parseTheme(props.theme, prefix), props.disabled && `${prefix}--disabled`];
 });
 
 const handleClick = (e: MouseEvent) => {

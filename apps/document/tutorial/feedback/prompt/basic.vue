@@ -11,9 +11,9 @@ const showPrompt = () => {
         placeholder: '请输入您的姓名',
         confirmButtonText: '确定',
         cancelButtonText: '取消'
-    }).then(
-        value => NueMessage.success(`您的姓名是: ${value}`),
-        () => NueMessage.warn('操作取消')
-    );
+    }).then(([isByCancel, inputValue]) => {
+        if (isByCancel) return;
+        NueMessage.success(`输入的文本为：${inputValue as string}`);
+    });
 };
 </script>

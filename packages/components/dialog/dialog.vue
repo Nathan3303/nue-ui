@@ -1,99 +1,112 @@
 <template>
     <teleport v-if="modelValue" :disabled="tpState.disabled" :to="tpState.to">
-        <nue-overlay :closing="closing" :theme="theme" class="nue-dialog-overlay">
-            <div ref="nueDialogRef" :class="classes" :data-closing="closing">
-                <div class="nue-dialog__header">
-                    <slot :close="handleClose" name="header">
-                        <nue-text>{{ title }}</nue-text>
-                        <slot name="header-actions" :close="handleClose" />
-                    </slot>
-                </div>
-                <div class="nue-dialog__content">
-                    <slot />
-                    <slot name="content" />
-                </div>
-                <div class="nue-dialog__footer">
-                    <slot :close="handleClose" :confirm="handleConfirm" name="footer" />
-                </div>
-            </div>
+        <nue-overlay
+            class="nue-dialog-overlay"
+            :theme="theme"
+            :visible="visible"
+            @escape="handleDialogClose"
+        >
+            <nue-container
+                :class="classes"
+                :data-visible="visible"
+                @animationstart="handleAnimationStart"
+                @animationend="handleAnimationEnd"
+            >
+                <slot name="reset" :close="handleDialogClose">
+                    <nue-header class="nue-dialog__header">
+                        <slot name="header" :close="handleDialogClose">
+                            <nue-text class="nue-dialog__header__title">{{ title }}</nue-text>
+                            <nue-button
+                                class="nue-dialog__header__closebtn"
+                                theme="icon,ghost,small"
+                                icon="clear"
+                                @click="handleDialogClose"
+                            />
+                        </slot>
+                    </nue-header>
+                    <nue-main v-if="$slots.content || $slots.default" class="nue-dialog__main">
+                        <nue-content fill class="nue-dialog__content">
+                            <slot />
+                            <slot name="content" :close="handleDialogClose" />
+                        </nue-content>
+                    </nue-main>
+                    <nue-footer v-if="$slots.footer" class="nue-dialog__footer">
+                        <slot name="footer" :close="handleDialogClose" />
+                    </nue-footer>
+                </slot>
+            </nue-container>
         </nue-overlay>
     </teleport>
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, onUnmounted, ref, watch } from 'vue';
-import NueText from '../text/text.vue';
+import { computed, ref, watch } from 'vue';
 import NueOverlay from '../overlay/overlay.vue';
-import { parseAnimationDurationToNumber, parseTheme } from '@nue-ui/utils';
-import { isFunction } from 'lodash-es';
+import {
+    NueText,
+    NueContainer,
+    NueHeader,
+    NueMain,
+    NueContent,
+    NueFooter,
+    NueButton
+} from '@nue-ui/components';
+import { parseTheme } from '@nue-ui/utils';
 import { usePopupAnchor } from '@nue-ui/hooks';
-import type { NueDialogEmits, NueDialogHandleClose, NueDialogProps } from './types';
+import type { NueDialogEmits, NueDialogProps } from './types';
 import './dialog.css';
 
 defineOptions({ name: 'NueDialog' });
 
-const props = withDefaults(defineProps<NueDialogProps>(), {
-    title: 'Dialog title'
-});
+const props = defineProps<NueDialogProps>();
 const emit = defineEmits<NueDialogEmits>();
 
 const { tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
-const nueDialogRef = ref<HTMLDivElement>();
-const closing = ref(false);
+const visible = ref(false);
 
 const classes = computed(() => {
     const prefix = 'nue-dialog';
     return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
+const handleDialogOpen = () => {
+    mountPopupAnchor();
+    visible.value = true;
+};
+
+const handleDialogClose = () => {
+    if (visible.value === false) return;
+    visible.value = false;
+};
+
+const handleAnimationStart = () => {
+    if (visible.value) {
+        emit('beforeOpen');
+    } else {
+        emit('beforeClose');
+    }
+};
+
+const handleAnimationEnd = () => {
+    if (visible.value) {
+        emit('afterOpen');
+    } else {
+        emit('afterClose');
+        emit('update:modelValue', false);
+        unmountPopupAnchor();
+    }
+};
+
 watch(
     () => props.modelValue,
     newValue => {
-        const newVisible = !!newValue;
-        nextTick(() => (newVisible ? handleOpen() : handleClose()));
+        if (newValue) {
+            handleDialogOpen();
+            return;
+        }
+        handleDialogClose();
     }
 );
 
-const waitForAnimation = async () => {
-    let timeout = 240;
-    if (nueDialogRef.value) {
-        const closeAnimationDuration = window.getComputedStyle(
-            nueDialogRef.value
-        ).animationDuration;
-        timeout = parseAnimationDurationToNumber(closeAnimationDuration);
-    }
-    return new Promise(resolve => setTimeout(() => resolve(1), timeout));
-};
-
-const handleOpen = async () => {
-    closing.value = false;
-    emit('update:modelValue', true);
-    mountPopupAnchor();
-};
-
-const handleClose: NueDialogHandleClose = async afterAnimation => {
-    closing.value = true;
-    await waitForAnimation();
-    if (afterAnimation && isFunction(afterAnimation)) afterAnimation();
-    emit('update:modelValue', false);
-};
-
-const handleConfirm = async () => {
-    try {
-        const beforeConfirmCb = isFunction(props.beforeConfirm) ? props.beforeConfirm : () => true;
-        const result = await beforeConfirmCb();
-        if (!result) return false;
-        emit('confirm');
-        await handleClose();
-    } catch (err) {
-        console.log('[NueDialog] Confirm error:', err);
-        return false;
-    }
-};
-
-onUnmounted(() => {
-    unmountPopupAnchor();
-});
-
-defineExpose({ open: handleOpen, close: handleClose, confirm: handleConfirm });
+defineExpose({ open: handleDialogOpen, close: handleDialogClose });
 </script>

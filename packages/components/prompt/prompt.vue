@@ -1,12 +1,19 @@
 <template>
     <nue-overlay
+        class="nue-prompt-overlay"
         :animation="overlayAnimation"
         :close-animation="overlayCloseAnimation"
-        :closing="closing"
         :theme="theme"
-        class="nue-prompt-overlay"
+        :visible="visible"
+        @escape="handleCancel"
     >
-        <div ref="promptRef" :class="classes" :data-closing="closing" :style="styles">
+        <div
+            :class="classes"
+            :style="styles"
+            :data-visible="visible"
+            @animationstart="handleAnimationStart"
+            @animationend="handleAnimationEnd"
+        >
             <nue-text v-if="title" class="nue-prompt__header">
                 {{ title }}
             </nue-text>
@@ -21,20 +28,21 @@
                     :disabled="loading"
                     :placeholder="placeholder"
                     :type="inputType"
+                    @focus="() => (errorMessage = '')"
                 />
             </div>
             <div class="nue-prompt__footer">
-                <nue-text v-if="isInvalid" class="nue-prompt__value-error">
-                    {{ invalidMessage }}
+                <nue-text v-if="errorMessage" class="nue-prompt__value-error">
+                    {{ errorMessage }}
                 </nue-text>
-                <nue-button :disabled="loading || closing" @click.stop="handleConfirm(false)">
+                <nue-button :disabled="loading || !visible" @click.stop="handleCancel">
                     {{ cancelButtonText }}
                 </nue-button>
                 <nue-button
-                    :disabled="closing"
+                    :disabled="!visible"
                     :loading="loading"
                     theme="primary"
-                    @click.stop="handleConfirm(true)"
+                    @click.stop="handleConfirm"
                 >
                     {{ confirmButtonText }}
                 </nue-button>
@@ -45,158 +53,153 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch } from 'vue';
-import NueButton from '../button/button.vue';
-import NueInput from '../input/input.vue';
-import NueTextarea from '../input/textarea.vue';
-import NueText from '../text/text.vue';
 import NueOverlay from '../overlay/overlay.vue';
-import {
-    type NuePopupItemAnimation,
-    parseAnimationDurationToNumber,
-    parseTheme
-} from '@nue-ui/utils';
-import { isString } from 'lodash-es';
-import type { NuePromptClose, NuePromptProps } from './types';
+import { NueButton, NueInput, NueTextarea, NueText } from '@nue-ui/components';
+import { parseTheme, parsePopupItemAnimation } from '@nue-ui/utils';
+import type { NuePromptProps } from './types';
 import './prompt.css';
 
 defineOptions({ name: 'NuePromptNode' });
 const props = withDefaults(defineProps<NuePromptProps>(), {
-    title: 'Prompt',
-    description: '',
-    placeholder: 'Input here...',
+    placeholder: '请输入',
     inputType: 'text',
-    inputValue: '',
-    confirmButtonText: 'Confirm',
-    cancelButtonText: 'Cancel'
+    confirmButtonText: '确认',
+    cancelButtonText: '取消'
 });
 
-const promptRef = ref<HTMLDivElement>();
-const promptInputRef = ref();
-const loading = ref(false);
-const closing = ref(false);
+const promptInputRef = ref<InstanceType<typeof NueInput | typeof NueTextarea>>();
 const inputValue = ref(props.inputValue);
-const isInvalid = ref(false);
-const invalidMessage = ref('Invalid value');
-const closeAnimationDuration = ref(0);
+const errorMessage = ref('');
+const loading = ref(false);
+const visible = ref(true);
 
+// @computed 组件类名
 const classes = computed(() => {
     const prefix = 'nue-prompt';
     return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
-const styles = computed(() => {
-    const { animation, closeAnimation } = props;
-    const animationStyles = handleAnimationStyles(animation);
-    const closeAnimationStyles = handleAnimationStyles(closeAnimation, true);
-    return {
-        ...animationStyles,
-        ...closeAnimationStyles
-    };
+// @computed 计算组件起始动画
+const animation = computed(() => {
+    return parsePopupItemAnimation(props.animation);
 });
 
-const handleAnimationStyles = (
-    value: NuePopupItemAnimation | undefined,
-    isCloseState?: boolean
-) => {
-    if (value === null || value === void 0) return {};
-    let result: Record<string, string> = {};
-    let target: Exclude<NuePopupItemAnimation, string> = isString(value) ? { name: value } : value;
-    const prefix = `--nue-prompt${isCloseState ? '-close' : ''}-animation`;
-    result[`${prefix}-name`] = target.name;
-    result[`${prefix}-duration`] = `${target.duration || 240}ms`;
-    if (isCloseState) closeAnimationDuration.value = target.duration || 240;
-    return result;
+// @computed 计算组件关闭动画
+const closeAnimation = computed(() => {
+    return parsePopupItemAnimation(props.closeAnimation);
+});
+
+// @computed 计算组件样式
+const styles = computed(() => ({
+    '--nue-prompt-open-animation-name': animation.value.name,
+    '--nue-prompt-open-animation-duration': animation.value.duration,
+    '--nue-prompt-close-animation-name': closeAnimation.value.name,
+    '--nue-prompt-close-animation-duration': closeAnimation.value.duration
+}));
+
+// @method 处理取消操作
+const handleCancel = async () => {
+    props.close(true, null, null);
+    visible.value = false;
+    await props.afterCancel?.();
 };
 
-const waitForAnimation = () => {
-    const timeout = parseAnimationDurationToNumber(
-        closeAnimationDuration.value || window.getComputedStyle(promptRef.value!).animationDuration
-    );
-    return new Promise(resolve => {
-        setTimeout(() => resolve(1), timeout);
-    });
-};
-
-const handleClose: NuePromptClose = (result, payload) => {
-    closing.value = true;
-    props.close(result, payload);
-    waitForAnimation().then(() => {
-        props.destroy();
-    });
-};
-
+// @method 处理验证器
 const handleValidate = async () => {
-    const { validator } = props;
-    let validateResult: boolean | Error = false;
-    if (!validator) return true;
-    isInvalid.value = false;
-    loading.value = true;
-    try {
-        validateResult = await validator(inputValue.value);
-    } catch (error) {
-        console.warn('[NuePrompt/validator] Await error:', error);
-        validateResult = false;
-    }
-    if (!validateResult) {
-        validateResult = new Error('Invalid value');
-    }
-    if (validateResult instanceof Error) {
-        isInvalid.value = true;
-        invalidMessage.value = validateResult.message || 'Invalid value';
-        loading.value = false;
-        validateResult = false;
-    }
-    return validateResult;
-};
-
-const handleConfirm = async (isConfirmed: boolean) => {
-    // 点击了取消按钮
-    if (!isConfirmed) {
-        return handleClose(false, null);
-    }
-    // 验证器验证失败
-    try {
-        const validateResult = await handleValidate();
-        if (!validateResult) return;
-    } catch (error) {
-        console.warn('[NuePrompt] props.validator:', error);
-    }
-    // 没有 onConfirm 回调
-    if (!props.onConfirm) {
-        return handleClose(true, inputValue.value);
-    }
+    // 当没有验证器时，直接返回 true
+    if (!props.validator) return true;
+    // 执行验证器
     try {
         loading.value = true;
-        // 获取 onConfirm 回调的返回值
-        const onConfirmResult = await props.onConfirm(inputValue.value);
-        handleClose(true, onConfirmResult);
-    } catch (error) {
-        console.warn('[NuePrompt] props.onConfirm:', error);
-        // 判断结果
-        if (!(error instanceof Error)) {
-            handleClose(false, error);
-        } else {
-            // 判断是否 closeOnError
-            if (props.closeOnError) {
-                handleClose(false, error.message);
-            } else {
-                isInvalid.value = true;
-                invalidMessage.value = error.message || 'Failed to confirm';
-            }
+        // 执行验证器 - 获取验证器结果
+        const error = await props.validator(inputValue.value);
+        // 处理验证失败结果
+        if (error) {
+            errorMessage.value =
+                (error instanceof Error ? error.message : error) || 'Invalid value';
+            return false;
         }
+        // 处理验证成功结果
+        errorMessage.value = '';
+        return true;
+    } catch (error) {
+        // 处理验证器异常情况
+        console.warn('[NuePrompt] Validate error:', error);
+        return false;
     } finally {
-        loading.value = false;
+        loading.value = !errorMessage.value;
     }
 };
 
-onMounted(() => {
-    requestAnimationFrame(() => {
-        promptInputRef.value!.innerInputRef.focus();
+// @method 处理确认回调
+const handleOnConfirm = () => {
+    return new Promise((resolve, reject) => {
+        // 当没有确认回调时，直接返回 true
+        if (!props.onConfirm) {
+            resolve(true);
+            return;
+        }
+        // 执行确认回调
+        const onConfirmRes = props.onConfirm(inputValue.value, () => resolve(true));
+        // 处理确认回调返回值为非 Promise 的情况
+        if (!(onConfirmRes instanceof Promise)) {
+            // onConfirmRes 为错误，如果有错误则 reject 错误
+            if (onConfirmRes) reject(onConfirmRes);
+            return;
+        }
+        // 处理确认回调返回值为 Promise 的情况
+        onConfirmRes.then(error => (error ? reject(error) : resolve(true))).catch(reject);
     });
-});
+};
 
+// @method 处理确认操作
+const handleConfirm = async () => {
+    // 验证器
+    const validateResult = await handleValidate();
+    if (!validateResult) return;
+    // 执行确认回调前的回调
+    // await props.beforeConfirm?.(inputValue.value);
+    // 执行确认回调
+    loading.value = true;
+    handleOnConfirm()
+        .then(isDone => {
+            visible.value = !isDone;
+            props.close(false, inputValue.value, null);
+        })
+        .catch(e => {
+            errorMessage.value = (e instanceof Error ? e.message : e) || 'Invalid value';
+        })
+        .finally(() => {
+            loading.value = false;
+            props.afterConfirm?.();
+        });
+};
+
+// @method 处理动画开始事件
+const handleAnimationStart = () => {
+    if (visible.value) {
+        props.beforeOpen?.();
+    } else {
+        props.beforeClose?.();
+    }
+};
+
+// @method 处理动画结束事件
+const handleAnimationEnd = () => {
+    if (visible.value) {
+        props.afterOpen?.();
+    } else {
+        props.destroy();
+        props.afterClose?.();
+    }
+};
+
+// @onmounted 组件挂载时，聚焦输入框
+onMounted(() => promptInputRef.value!.innerInputRef.focus());
+
+// @watch 监听输入值变化，清空错误信息
 watch(
     () => inputValue.value,
-    () => (isInvalid.value = false)
+    () => (errorMessage.value = '')
 );
 </script>

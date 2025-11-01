@@ -14,17 +14,18 @@
 
 <script lang="ts" setup>
 import { NueMessage, NuePrompt } from 'nue-ui';
+import type { NueInputType } from 'nue-ui';
 
-function showPromptWithInputType(type) {
+function showPromptWithInputType(type: NueInputType) {
     NuePrompt({
         title: '输入确认',
         placeholder: '请输入内容',
         inputType: type,
         confirmButtonText: '确定',
         cancelButtonText: '取消'
-    }).then(
-        value => NueMessage.success(`内容: ${value}`),
-        () => NueMessage.warn('操作取消')
-    );
+    }).then(([isByCancel, inputValue]) => {
+        if (isByCancel) return;
+        NueMessage.success(`输入的文本为：${inputValue as string}`);
+    });
 }
 </script>

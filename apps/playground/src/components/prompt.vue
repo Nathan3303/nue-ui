@@ -18,7 +18,10 @@
         </nue-div>
     </demo>
     <demo title="定义确认回调">
-        <nue-button @click="showPromptWithOnConfirm">确认回调</nue-button>
+        <nue-div>
+            <nue-button @click="showPromptWithOnConfirm">同步确认回调</nue-button>
+            <nue-button @click="showPromptWithAsyncOnConfirm">异步确认回调</nue-button>
+        </nue-div>
     </demo>
 </template>
 
@@ -34,10 +37,13 @@ const showPrompt = () => {
         placeholder: '请输入 ...',
         confirmButtonText: '确认',
         cancelButtonText: '取消'
-    }).then(
-        value => NueMessage.success(`输入的文本为：${value as string}`),
-        () => NueMessage.info('操作取消')
-    );
+    }).then(([isByCancel, inputValue]) => {
+        if (isByCancel) {
+            NueMessage.info('操作取消');
+            return;
+        }
+        NueMessage.success(`输入的文本为：${inputValue as string}`);
+    });
 };
 
 const showPromptWithInitialValue = () => {
@@ -47,10 +53,13 @@ const showPromptWithInitialValue = () => {
         confirmButtonText: '确认',
         cancelButtonText: '取消',
         inputValue: '一些初始文本 ...'
-    }).then(
-        value => NueMessage.success(`输入的文本为：${value as string}`),
-        () => NueMessage.info('操作取消')
-    );
+    }).then(([isByCancel, inputValue]) => {
+        if (isByCancel) {
+            NueMessage.info('操作取消');
+            return;
+        }
+        NueMessage.success(`输入的文本为：${inputValue as string}`);
+    });
 };
 
 const showPromptWithDescription = () => {
@@ -60,10 +69,13 @@ const showPromptWithDescription = () => {
         confirmButtonText: '确认',
         cancelButtonText: '取消',
         description: '请在下方输入一些文本，100 至 200 字左右。'
-    }).then(
-        value => NueMessage.success(`输入的文本为：${value as string}`),
-        () => NueMessage.info('操作取消')
-    );
+    }).then(([isByCancel, inputValue]) => {
+        if (isByCancel) {
+            NueMessage.info('操作取消');
+            return;
+        }
+        NueMessage.success(`输入的文本为：${inputValue as string}`);
+    });
 };
 
 const showPromptWithTextarea = () => {
@@ -73,10 +85,13 @@ const showPromptWithTextarea = () => {
         confirmButtonText: '确认',
         cancelButtonText: '取消',
         inputType: 'textarea'
-    }).then(
-        value => NueMessage.success(`输入的文本为：${value as string}`),
-        () => NueMessage.info('操作取消')
-    );
+    }).then(([isByCancel, inputValue]) => {
+        if (isByCancel) {
+            NueMessage.info('操作取消');
+            return;
+        }
+        NueMessage.success(`输入的文本为：${inputValue as string}`);
+    });
 };
 
 const showPromptWithValidator = () => {
@@ -87,9 +102,16 @@ const showPromptWithValidator = () => {
         cancelButtonText: '取消',
         validator: value => {
             const regExp = new RegExp(/^(?:(?:\+|00)86)?1[3456789]\d{9}$/);
-            return regExp.test(value as string);
+            const isMatched = regExp.test(value as string);
+            return isMatched ? null : '请输入正确的手机号码';
         }
-    }).then(value => NueMessage.success(`输入的手机号码为：${value as string}`));
+    }).then(([isByCancel, inputValue]) => {
+        if (isByCancel) {
+            NueMessage.info('操作取消');
+            return;
+        }
+        NueMessage.success(`输入的手机号码为：${inputValue as string}`);
+    });
 };
 
 const showPromptWithAsyncValidator = () => {
@@ -101,12 +123,16 @@ const showPromptWithAsyncValidator = () => {
         validator: async value => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             const regExp = new RegExp(/^(?:(?:\+|00)86)?1[3456789]\d{9}$/);
-            return regExp.test(value as string);
+            const isMatched = regExp.test(value as string);
+            return isMatched ? null : '请输入正确的手机号码';
         }
-    }).then(
-        value => NueMessage.success(`输入的手机号码为：${value as string}`),
-        () => NueMessage.info('操作取消')
-    );
+    }).then(([isByCancel, inputValue]) => {
+        if (isByCancel) {
+            NueMessage.info('操作取消');
+            return;
+        }
+        NueMessage.success(`输入的手机号码为：${inputValue as string}`);
+    });
 };
 
 const showPromptWithOnConfirm = () => {
@@ -115,20 +141,53 @@ const showPromptWithOnConfirm = () => {
         placeholder: '请输入您的手机号 ...',
         confirmButtonText: '确认',
         cancelButtonText: '取消',
+        validator: value => {
+            const regExp = new RegExp(/^(?:(?:\+|00)86)?1[3456789]\d{9}$/);
+            const isMatched = regExp.test(value as string);
+            return isMatched ? null : '请输入正确的手机号码';
+        },
+        onConfirm: (value, done) => {
+            if (value === '13536563303') {
+                done();
+                return null;
+            }
+            return '手机号码错误';
+        }
+    }).then(([isByCancel, inputValue]) => {
+        if (isByCancel) {
+            NueMessage.info('操作取消');
+            return;
+        }
+        NueMessage.success(`输入的手机号码为：${inputValue as string}`);
+    });
+};
+
+const showPromptWithAsyncOnConfirm = () => {
+    NuePrompt({
+        title: '手机号码填写',
+        placeholder: '请输入您的手机号 ...',
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
         validator: async value => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             const regExp = new RegExp(/^(?:(?:\+|00)86)?1[3456789]\d{9}$/);
-            return regExp.test(value as string);
+            const isMatched = regExp.test(value as string);
+            return isMatched ? null : '请输入正确的手机号码';
         },
-        onConfirm: async value => {
+        onConfirm: async (value, done) => {
             await new Promise(resolve => setTimeout(resolve, 1000));
-            const isSuccess = value && Math.random() > 0.7;
-            if (!isSuccess) throw new Error('数据库更新失败');
-            return value;
+            if (value === '13536563303') {
+                done();
+                return null;
+            }
+            return '手机号码错误';
         }
-    }).then(
-        value => NueMessage.success(`输入的手机号码为：${value as string}`),
-        err => err && NueMessage.error(err)
-    );
+    }).then(([isByCancel, inputValue]) => {
+        if (isByCancel) {
+            NueMessage.info('操作取消');
+            return;
+        }
+        NueMessage.success(`输入的手机号码为：${inputValue as string}`);
+    });
 };
 </script>

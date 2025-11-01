@@ -48,3 +48,29 @@ demo-preview=./size.vue
 ::: preview
 demo-preview=./clearable.vue
 :::
+
+## 组件生命周期事件
+
+### 选择器打开 & 关闭事件
+
+通过事件 `before-open` 和 `after-open` 监听选择器打开前和打开后的事件；`before-close` 和 `after-close` 监听选择器关闭前和关闭后的事件。
+
+::: preview
+demo-preview=./e-open-close.vue
+:::
+
+### 选择器值变化事件
+
+通过事件 `change` 监听选择器值变化事件。
+
+::: preview
+demo-preview=./e-change.vue
+:::
+
+## 选择后保持打开
+
+默认情况下，选择器会在选择后关闭，通过属性 `persistent` 启用选择后保持打开状态。
+
+::: preview
+demo-preview=./persistent.vue
+:::

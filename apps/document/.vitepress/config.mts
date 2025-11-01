@@ -96,6 +96,10 @@ export default defineConfig({
                             link: '/tutorial/feedback/confirm/index.md'
                         },
                         {
+                            text: 'Dialog 对话框',
+                            link: '/tutorial/feedback/dialog/index.md'
+                        },
+                        {
                             text: 'Drawer 抽屉',
                             link: '/tutorial/feedback/drawer/index.md'
                         },

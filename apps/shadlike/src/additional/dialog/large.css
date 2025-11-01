@@ -1,4 +1,4 @@
-.nue-dialog-overlay .nue-dialog--large {
+.nue-dialog--large {
     width: 72vw;
     height: 72vh;
     max-width: 72vw;
@@ -6,8 +6,4 @@
     min-width: 16vw;
     min-height: 16vh;
     overflow: hidden;
-
-    .nue-dialog__content {
-        flex: 1 1 auto;
-    }
 }

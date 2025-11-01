@@ -4,23 +4,7 @@
     justify-content: space-between;
     gap: 1rem;
 
-    &.nue-select-option--disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        background-color: #eeeeee;
-
-        &:hover {
-            background-color: #eeeeee;
-        }
-    }
-
-    &.nue-select-option--selected {
-        transition: all 0.18s ease-in-out;
-        background-color: #e0e0e0;
-        border-radius: 6px;
-
-        &:hover {
-            background-color: #e0e0e0;
-        }
+    .nue-dropdown-item__text {
+        margin-right: 1rem;
     }
 }
