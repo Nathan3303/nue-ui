@@ -51,9 +51,21 @@ CSS 中的 `animation-duration` 的值，单位建议为 `ms`。
 `overlayAnimation` 和 `overlayCloseAnimation` 配置组件遮罩层动画效果。属性值接受类型值分别与
 `animation` 和 `closeAnimation` 属性一致。
 
-> 根据上述描述，动画相关属性分别为：`animation`、`closeAnimation`、`overlayAnimation` 以及
+根据上述描述，动画相关属性分别为：`animation`、`closeAnimation`、`overlayAnimation` 以及
 `overlayCloseAnimation`。
+
+:::warning 注意
+请确保自定义动画效果在某个 CSS 文件中被定义，否则会导致动画失效。
+:::
 
 ::: preview
 demo-preview=./animation.vue
+:::
+
+## 自定义主题
+
+通过 `theme` 属性可以自定义确认框的主题。属性值为一个字符串，用于指定自定义主题的类名。
+
+::: preview
+demo-preview=./theme.vue
 :::
