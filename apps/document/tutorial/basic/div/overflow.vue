@@ -1,10 +1,14 @@
 <template>
     <nue-div vertical>
-        <nue-div wrap="wrap">
+        <nue-div overflow="auto">
             <nue-button v-for="i in 12" :key="i">按钮</nue-button>
         </nue-div>
         <nue-divider />
-        <nue-div wrap="wrap-reverse">
+        <nue-div overflow="hidden">
+            <nue-button v-for="i in 12" :key="i">按钮</nue-button>
+        </nue-div>
+        <nue-divider />
+        <nue-div overflow="visible">
             <nue-button v-for="i in 12" :key="i">按钮</nue-button>
         </nue-div>
     </nue-div>

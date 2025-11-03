@@ -8,11 +8,8 @@ export type NueDropdownTriggerType = 'click' | 'hover';
 export type NueDropdownSize = 'small' | 'large';
 
 export type NueDropdownGroupId = string;
-
 export type NueDropdownGroupMember = { dropdownId: string; close: () => void };
-
 export type NueDropdownGroup = NueDropdownGroupMember[];
-
 export type NueDropdownGroups = Map<NueDropdownGroupId, NueDropdownGroup>;
 
 export interface NueDropdownProps extends GlobalProps {

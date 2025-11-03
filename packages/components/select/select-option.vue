@@ -1,19 +1,12 @@
-<template>
-    <li :class="classes" :data-executeid="executeId" @click="handleClick">
-        {{ label }}
-        <nue-icon v-if="selected" name="completed" />
-    </li>
-</template>
-
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { generateId, parseTheme } from '@nue-ui/utils';
-import NueIcon from '../icon/icon.vue';
+import { NueIcon, NueDropdownItem } from '@nue-ui/components';
 import { NueSelectContextKey } from './constants';
 import type { NueSelectContext, NueSelectOptionProps } from './types';
 import './option.css';
 
-defineOptions({ name: 'NueSelectOption' });
+defineOptions({ name: 'NueSelectOption', inheritAttrs: false });
 const props = defineProps<NueSelectOptionProps>();
 
 const selectContext = inject<NueSelectContext>(NueSelectContextKey);
@@ -27,17 +20,8 @@ const selected = computed(() => {
 
 const classes = computed(() => {
     const prefix = 'nue-select-option';
-    return [
-        prefix,
-        ...parseTheme(props.theme, prefix),
-        props.disabled && `${prefix}--disabled`,
-        selected.value && `${prefix}--selected`
-    ];
+    return [prefix, ...parseTheme(props.theme, prefix), props.disabled && `${prefix}--disabled`];
 });
-
-const handleClick = (e: MouseEvent) => {
-    if (props.disabled) e.stopPropagation();
-};
 
 selectContext?.optionRegister({
     label: props.label,
@@ -45,3 +29,22 @@ selectContext?.optionRegister({
     executeId
 });
 </script>
+
+<template>
+    <nue-dropdown-item
+        :class="classes"
+        :text="label"
+        :icon="icon"
+        :loading="loading"
+        :loading-icon="loadingIcon"
+        :data-selected="selected"
+        :execute-id="executeId"
+        :disabled="disabled"
+    >
+        <slot />
+        <template #append>
+            <slot name="append" />
+            <nue-icon v-if="selected" name="check" />
+        </template>
+    </nue-dropdown-item>
+</template>

@@ -1,5 +1,5 @@
 .nue-button {
-    --nue-button-flex: 0 1 auto;
+    --nue-button-flex: none;
     --nue-button-alignment: start;
     --nue-button-height: 2.25rem;
     --nue-button-padding: 0.875rem;

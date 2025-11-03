@@ -4,7 +4,7 @@
     --nue-text-align: initial;
     --nue-text-decoration: initial;
     --nue-text-font-weight: initial;
-    --nue-text-line-height: 1.5;
+    --nue-text-line-height: normal;
     --nue-text-clamped-lines: 3;
 
     color: var(--nue-text-color);
@@ -24,6 +24,7 @@
     .nue-text.nue-text--clamped {
         display: -webkit-box !important;
         -webkit-line-clamp: var(--nue-text-clamped-lines);
+        line-clamp: var(--nue-text-clamped-lines);
         -webkit-box-orient: vertical;
     }
 }

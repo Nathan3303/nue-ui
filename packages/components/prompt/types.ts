@@ -1,15 +1,10 @@
 import type { NueInputProps, NueInputType, NueTextareaProps } from '../input';
-import type { GlobalProps, NueGlobalPopupItemProps, NuePopupItemAnimation } from '@nue-ui/utils';
+import type { GlobalProps, NueGlobalPopupItemProps } from '@nue-ui/utils';
 
-export type NuePromptClose = (isConfirmed: boolean, payload: unknown) => void;
+type NuePromptErrorRaw = string | Error | null;
+type NuePromptError = NuePromptErrorRaw | Promise<NuePromptErrorRaw>;
 
-export type NuePromptValidator = (value: unknown) => boolean | Error | Promise<boolean | Error>;
-
-export type NuePromptBeforeConfirm = (value: unknown) => void;
-
-export type NuePromptOnConfirm = (value: unknown) => unknown | Error | Promise<unknown | Error>;
-
-export interface NuePromptCallerPayload {
+export interface NuePromptCallerPayload extends GlobalProps, NueGlobalPopupItemProps {
     wrapperId?: string;
     title?: string;
     description?: string;
@@ -18,20 +13,30 @@ export interface NuePromptCallerPayload {
     inputValue?: NueInputProps['modelValue'] | NueTextareaProps['modelValue'];
     confirmButtonText?: string;
     cancelButtonText?: string;
-    closeOnError?: boolean;
-    validator?: NuePromptValidator;
-    beforeConfirm?: NuePromptBeforeConfirm;
-    onConfirm?: NuePromptOnConfirm;
+    overlayAnimation?: NueGlobalPopupItemProps['animation'];
+    overlayCloseAnimation?: NueGlobalPopupItemProps['closeAnimation'];
+    validator?: (value: unknown) => NuePromptError;
+    // beforeConfirm?: (value: unknown) => void | Promise<void>;
+    onConfirm?: (value: unknown, done: () => void) => NuePromptError;
+    afterConfirm?: () => void | Promise<void>;
+    afterCancel?: () => void | Promise<void>;
+    beforeOpen?: () => void;
+    afterOpen?: () => void;
+    beforeClose?: () => void;
+    afterClose?: () => void;
 }
 
-export type NuePromptCaller = (payload: NuePromptCallerPayload) => Promise<unknown>;
+type NuePromptIsByCancel = boolean;
+type NuePromptInputValue = unknown;
+type NuePromptOnConfirmError = Error | string | null;
 
-export interface NuePromptProps
-    extends NuePromptCallerPayload,
-        GlobalProps,
-        NueGlobalPopupItemProps {
-    overlayAnimation?: NuePopupItemAnimation;
-    overlayCloseAnimation?: NuePopupItemAnimation;
-    close: NuePromptClose;
+export type NuePromptCallerResult = [NuePromptIsByCancel, NuePromptInputValue];
+
+export interface NuePromptProps extends NuePromptCallerPayload {
+    close: (
+        isByCancel: NuePromptIsByCancel,
+        inputValue: NuePromptInputValue,
+        onConfirmError: NuePromptOnConfirmError
+    ) => void;
     destroy: () => void;
 }

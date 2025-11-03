@@ -1,7 +1,7 @@
 <template>
     <nue-dropdown
         :class="classes"
-        :close-when-executed="closeWhenSelected"
+        :close-when-executed="!persistent"
         :size="size"
         keepalive
         @execute="handleExecute"
@@ -27,29 +27,23 @@
 <script lang="ts" setup>
 import { computed, provide, shallowRef, watch, onMounted } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-import NueButton from '../button/button.vue';
-import NueDropdown from '../dropdown/dropdown.vue';
-import NueIcon from '../icon/icon.vue';
-import NueText from '../text/text.vue';
-import type {
-    NueSelectContext,
-    NueSelectEmits,
-    NueSelectOption,
-    NueSelectOptions,
-    NueSelectProps,
-    NueSelectValue
-} from './types';
+// import NueButton from '../button/button.vue';
+// import NueDropdown from '../dropdown/dropdown.vue';
+// import NueIcon from '../icon/icon.vue';
+// import NueText from '../text/text.vue';
+import { NueButton, NueDropdown, NueIcon, NueText } from '@nue-ui/components';
 import { NueSelectContextKey } from './constants';
+import type { NueSelectContext, NueSelectEmits, NueSelectOption, NueSelectProps } from './types';
 
 defineOptions({ name: 'NueSelect' });
 const props = withDefaults(defineProps<NueSelectProps>(), {
     closeWhenSelected: true,
-    placeholder: 'Select here...',
+    placeholder: '请选择 ...',
     clearable: false
 });
 const emit = defineEmits<NueSelectEmits>();
 
-const selectOptions = shallowRef<NueSelectOptions>([]);
+const selectOptions = shallowRef<NueSelectOption[]>([]);
 const selectedOption = shallowRef<NueSelectOption | undefined>();
 
 const classes = computed(() => {
@@ -87,7 +81,7 @@ const handleExecute = (executeId: string) => {
     emit('change', shouldSelectedOption.value);
 };
 
-const handleSelect = (newValue: NueSelectValue) => {
+const handleSelect = (newValue: NueSelectProps['modelValue']) => {
     const _selectOptions = selectOptions.value;
     const shouldSelectedOption = _selectOptions.find(option => option.value === newValue);
     if (!shouldSelectedOption) return;
@@ -101,8 +95,5 @@ watch(
 
 onMounted(() => handleSelect(props.modelValue));
 
-provide<NueSelectContext>(NueSelectContextKey, {
-    optionRegister,
-    selectedOption
-});
+provide<NueSelectContext>(NueSelectContextKey, { optionRegister, selectedOption });
 </script>

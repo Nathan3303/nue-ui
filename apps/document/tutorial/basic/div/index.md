@@ -4,15 +4,15 @@
 
 ## 基础用法
 
-通过标签 `NueDiv` 声明一个盒组件。
+通过标签 `NueDiv` 声明一个盒组件，默认的布局方向为水平。
 
-盒组件默认的布局方向为水平，排列间距为 `1rem`。
+排列间距 `gap` 默认为 `1rem`，可以通过属性 `gap` 自定义。
 
 ::: preview
 demo-preview=./basic.vue
 :::
 
-## 垂直排列
+### 垂直排列
 
 通过属性 `vertical` 设置布局方向为垂直，具体应用为 `flex-direction` 为 `column`。
 
@@ -20,7 +20,7 @@ demo-preview=./basic.vue
 demo-preview=./vertical.vue
 :::
 
-## 对齐方式
+### 对齐方式
 
 流式布局的对齐方式拥有主轴和副轴两个方向，具体应用到 CSS 的 `justify-content` 和 `align-items` 两个属性。
 
@@ -30,11 +30,20 @@ demo-preview=./vertical.vue
 demo-preview=./justify-align.vue
 :::
 
-## 溢出断行
+## 溢出控制
 
-通过属性 `wrap` 设置是否在溢出时断行，具体应用到 CSS 的 `flex-wrap` 样式，属性值类型同 CSS
-属性值，默认产生断行。
+### 溢出断行
+
+通过属性 `wrap` 设置是否在溢出时断行，具体应用到 CSS 的 `flex-wrap`，属性值类型同 CSS 属性值，默认不换行。
 
 ::: preview
 demo-preview=./wrap.vue
+:::
+
+### 溢出隐藏或滚动
+
+通过属性 `overflow` 设置溢出时的处理方式，值类型为 CSS `overflow` 属性值，默认值为 `hidden`。
+
+::: preview
+demo-preview=./overflow.vue
 :::

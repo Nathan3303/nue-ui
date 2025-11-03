@@ -1,14 +1,8 @@
 .nue-prompt {
-    --nue-prompt-animation-name: unset;
-    --nue-prompt-animation-duration: var(--nue-overlay-animation-duration, 0.24s);
-    --nue-prompt-close-animation-name: unset;
-    --nue-prompt-close-animation-duration: var(--nue-overlay-close-animation-duration, 0.24s);
-    --nue-prompt-header-font-size: 1rem;
-    --nue-prompt-header-color: #212121;
-    --nue-prompt-content-font-size: 0.875rem;
-    --nue-prompt-content-color: #757575;
-    --nue-prompt-bg-color: #f5f5f5;
-    --nue-prompt-border-radius: 6px;
+    --nue-prompt-open-animation-name: prompt-open;
+    --nue-prompt-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-prompt-close-animation-name: prompt-close;
+    --nue-prompt-close-animation-duration: var(--nue-overlay-close-animation-duration);
 
     display: flex;
     flex-direction: column;
@@ -17,20 +11,16 @@
     padding: 1rem;
     box-sizing: border-box;
     gap: 1rem;
-
-    animation-name: var(--nue-prompt-animation-name);
-    animation-duration: var(--nue-prompt-animation-duration);
+    background-color: white;
+    border-radius: 6px;
     animation-timing-function: ease-in;
     animation-fill-mode: forwards;
-    background-color: var(--nue-prompt-bg-color);
-    border-radius: var(--nue-prompt-border-radius);
 
     .nue-prompt__header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: var(--nue-confirm-header-font-size);
-        color: var(--nue-confirm-header-color);
+        font-size: 1rem;
     }
 
     .nue-prompt__content {
@@ -38,8 +28,6 @@
         flex-direction: column;
         width: 100%;
         flex: auto;
-        font-size: var(--nue-confirm-content-font-size);
-        color: var(--nue-confirm-content-color);
         gap: 0.5rem;
 
         .nue-prompt__description {
@@ -60,11 +48,36 @@
         color: #f44336;
         font-size: 0.875rem;
     }
+
+    &[data-visible='true'] {
+        animation-name: var(--nue-prompt-open-animation-name);
+        animation-duration: var(--nue-prompt-open-animation-duration);
+    }
+
+    &[data-visible='false'] {
+        animation-name: var(--nue-prompt-close-animation-name);
+        animation-duration: var(--nue-prompt-close-animation-duration);
+    }
 }
 
-.nue-prompt[data-closing='true'] {
-    animation-name: var(--nue-prompt-close-animation-name);
-    animation-duration: var(--nue-prompt-close-animation-duration);
-    animation-timing-function: ease-in;
-    animation-fill-mode: forwards;
+@keyframes prompt-open {
+    from {
+        opacity: 0;
+        transform: translateY(-1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes prompt-close {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-1rem);
+    }
 }

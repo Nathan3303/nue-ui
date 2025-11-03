@@ -124,32 +124,27 @@ function openConfirm3() {
 </script>
 
 <style>
-.nue-overlay--custom {
-    --nue-overlay-animation-name: fade-in;
-    --nue-overlay-animation-duration: 0.36s;
-    --nue-overlay-close-animation-name: fade-out;
-    --nue-overlay-close-animation-duration: 0.512s;
+.nue-confirm--custom {
+    --nue-confirm-animation-name: slide-in-from-top;
+    --nue-confirm-close-animation-name: slide-out-to-top;
 
-    .nue-confirm--custom {
-        --nue-confirm-bg-color: var(--nue-primary-color-900);
-        --nue-confirm-header-color: var(--nue-primary-color-100);
-        --nue-confirm-content-color: var(--nue-primary-color-500);
-        --nue-confirm-animation-name: slide-in-from-top;
-        --nue-confirm-close-animation-name: slide-out-to-top;
+    width: 16rem;
+    height: 9rem;
+    background-color: #212121;
 
-        .nue-confirm__footer {
-            .nue-button {
-                font-size: 14px;
-                color: var(--nue-primary-color-100);
-                --nue-button-hover-bg-color: #363636;
-                --nue-button-active-bg-color: #363636;
-            }
+    .nue-confirm__header {
+        font-size: 1rem;
+        color: #f9f9f9;
+    }
 
-            .nue-button--primary {
-                background-color: var(--nue-primary-color-200);
-                color: var(--nue-primary-color-900);
-            }
-        }
+    .nue-confirm__content {
+        font-size: 0.875rem;
+        color: #c5c5c5;
+    }
+
+    .nue-confirm__footer .nue-button--primary {
+        background-color: #f2f2f2;
+        color: #212121;
     }
 }
 </style>

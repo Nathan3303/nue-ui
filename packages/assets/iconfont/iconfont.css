@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'iconfont'; /* Project id 4165854 */
-    src: url('iconfont.woff2?t=1752304831073') format('woff2');
+    src: url('iconfont.woff2?t=1761899122755') format('woff2');
 }
 
 .iconfont {
@@ -9,6 +9,10 @@
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-blank:before {
+    content: '\e640';
 }
 
 .icon-arrow-right-more:before {
