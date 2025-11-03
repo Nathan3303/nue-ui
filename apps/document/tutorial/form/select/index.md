@@ -49,11 +49,19 @@ demo-preview=./size.vue
 demo-preview=./clearable.vue
 :::
 
+## 选择后保持打开
+
+默认情况下，选择器会在选择后关闭，通过属性 `persistent` 启用选择后保持打开状态。
+
+::: preview
+demo-preview=./persistent.vue
+:::
+
 ## 组件生命周期事件
 
 ### 选择器打开 & 关闭事件
 
-通过事件 `before-open` 和 `after-open` 监听选择器打开前和打开后的事件；`before-close` 和 `after-close` 监听选择器关闭前和关闭后的事件。
+通过事件 `@before-open` 和 `@after-open` 监听选择器打开前和打开后的事件；`@before-close` 和 `@after-close` 监听选择器关闭前和关闭后的事件。
 
 ::: preview
 demo-preview=./e-open-close.vue
@@ -61,16 +69,44 @@ demo-preview=./e-open-close.vue
 
 ### 选择器值变化事件
 
-通过事件 `change` 监听选择器值变化事件。
+通过事件 `@change` 监听选择器值变化事件。
 
 ::: preview
 demo-preview=./e-change.vue
 :::
 
-## 选择后保持打开
+## 选择器选项组件
 
-默认情况下，选择器会在选择后关闭，通过属性 `persistent` 启用选择后保持打开状态。
+`<NueSelectOption>` 选择器选项组件拥有多个属性，用于设置选项值、标识文字、禁用状态等。
+
+### 禁用选项组件
+
+通过属性 `disabled` 禁用选择选项组件。
 
 ::: preview
-demo-preview=./persistent.vue
+demo-preview=./option-disabled.vue
+:::
+
+### 图标选项
+
+通过属性 `icon` 设置选择选项组件的图标。属性值为图标名称。
+
+::: preview
+demo-preview=./option-icon.vue
+:::
+
+### 默认插槽
+
+选择器选项组件支持通过默认插槽自定义选项内容。但选择器组件只会显示选项组件 `label` 属性值。
+
+::: preview
+demo-preview=./option-default-slot.vue
+:::
+
+### 追加插槽
+
+追加插槽 `#append` 用于在选项组件内容后，选中标识图标前追加自定义内容。
+
+::: preview
+demo-preview=./option-append-slot.vue
 :::

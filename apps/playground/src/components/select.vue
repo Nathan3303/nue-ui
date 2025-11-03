@@ -47,13 +47,36 @@
             <nue-avatar :size="`${s1}px`" theme="round">{{ s1 }}</nue-avatar>
         </nue-div>
     </demo>
+    <demo title="选项组件">
+        <nue-select v-model="s3">
+            <nue-select-option icon="theme" value="icon" label="图标选项" />
+            <nue-select-option value="custom-content" label="自定义主体">
+                <nue-div align="center" gap="0.5rem">
+                    <nue-avatar
+                        theme="round"
+                        size="1.75rem"
+                        src="https://avatars.githubusercontent.com/u/67311306?v=4&size=64"
+                    />
+                    <nue-text>Nathan</nue-text>
+                </nue-div>
+            </nue-select-option>
+            <nue-select-option value="append-slot" label="自定义追加插槽">
+                <template #append>
+                    <nue-text size="0.875rem" color="orange">+5</nue-text>
+                </template>
+            </nue-select-option>
+            <nue-select-option value="loading" label="加载中" loading />
+            <nue-select-option value="disabled" label="禁用选项" disabled />
+        </nue-select>
+    </demo>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { NueDiv, NueSelect, NueSelectOption, NueAvatar } from '@nue-ui/components';
+import { NueDiv, NueSelect, NueSelectOption, NueAvatar, NueText } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
 const s1 = ref(128);
 const s2 = ref('option a');
+const s3 = ref('');
 </script>

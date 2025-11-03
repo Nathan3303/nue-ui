@@ -1,6 +1,7 @@
 import type { Ref } from 'vue';
 import type { GlobalProps } from '@nue-ui/utils';
 import type { NueButtonSize } from '../button';
+import type { NueDropdownItemProps } from '../dropdown/types';
 
 export type NueSelectValue =
     | string
@@ -43,5 +44,8 @@ export type NueSelectContext = {
 };
 
 export interface NueSelectOptionProps extends GlobalProps, NueSelectOptionRaw {
+    icon?: NueDropdownItemProps['icon'];
+    loading?: NueDropdownItemProps['loading'];
+    loadingIcon?: NueDropdownItemProps['loadingIcon'];
     disabled?: boolean;
 }

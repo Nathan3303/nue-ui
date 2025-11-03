@@ -1,9 +1,4 @@
 .nue-select-option {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-
     .nue-dropdown-item__text {
         margin-right: 1rem;
     }
