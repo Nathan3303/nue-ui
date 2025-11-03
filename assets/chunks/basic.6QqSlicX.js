@@ -1,1 +1,0 @@
-import{a as s}from"./theme.BLZUSHN8.js";import{d as n,C as a,b as r,o as _,w as c,a as m}from"./framework.DPj99A0l.js";const l=n({__name:"basic",setup(p){const o=()=>{s({message:"创建Message成功"})};return(u,e)=>{const t=a("nue-button");return _(),r(t,{onClick:o},{default:c(()=>e[0]||(e[0]=[m("创建一个消息提示",-1)])),_:1,__:[0]})}}});export{l as default};
