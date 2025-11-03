@@ -17,37 +17,40 @@ export default defineComponent({
         width: String,
         height: String,
         divider: { type: [String, Number, Boolean, Object], default: null },
-        theme: [String, Array],
-        inline: Boolean
+        theme: [String, Array<string>],
+        inline: Boolean,
+        overflow: [String, Boolean]
     },
     setup(props, { slots }) {
-        function getDirection() {
-            const { direction, vertical } = props;
-            return direction ? direction : vertical ? 'column' : void 0;
-        }
-
-        const style = computed(() => {
-            const { align, justify, flex, wrap, gap, width, height } = props;
-            return {
-                '--nue-div-width': width,
-                '--nue-div-height': height,
-                '--nue-div-flex-direction': getDirection(),
-                '--nue-div-align-items': align,
-                '--nue-div-justify-content': justify,
-                '--nue-div-flex-wrap': parseFlexWrap(wrap as string),
-                '--nue-div-gap': gap,
-                '--nue-div-flex': parseFlex(flex as string),
-                display: props.inline ? 'inline-flex' : void 0
-            };
-        });
-
         const classes = computed(() => {
-            const list = [];
-            const { theme } = props;
-            list.push('nue-div');
-            if (theme) list.push(...parseTheme(theme as string | string[], 'nue-div'));
-            return list;
+            const prefix = 'nue-div';
+            return [prefix, ...parseTheme(props.theme, prefix)];
         });
+
+        const direction = computed(() => {
+            return props.direction ? props.direction : props.vertical ? 'column' : 'row';
+        });
+
+        const overflow = computed(() => {
+            let _overflow = props.overflow;
+            if (typeof props.overflow === 'boolean') {
+                _overflow = props.overflow ? 'auto' : 'hidden';
+            }
+            return _overflow;
+        });
+
+        const style = computed(() => ({
+            '--nue-div-width': props.width,
+            '--nue-div-height': props.height,
+            '--nue-div-flex-direction': direction.value,
+            '--nue-div-align-items': props.align,
+            '--nue-div-justify-content': props.justify,
+            '--nue-div-flex-wrap': parseFlexWrap(props.wrap as string),
+            '--nue-div-gap': props.gap,
+            '--nue-div-flex': parseFlex(props.flex as string),
+            '--nue-div-overflow': overflow.value || void 0,
+            display: props.inline ? 'inline-flex' : void 0
+        }));
 
         function createDivider() {
             const { divider, vertical } = props;
@@ -71,7 +74,10 @@ export default defineComponent({
         }
 
         return () => {
-            const options = { class: classes.value, style: style.value };
+            const options = {
+                class: classes.value,
+                style: style.value
+            };
             if (props.divider !== null) {
                 const defaultSlot = slots.default!();
                 const divider = createDivider();

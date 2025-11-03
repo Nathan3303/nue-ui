@@ -5,7 +5,7 @@ export const componentLayoutAsideLinks = [
         links: [
             { route: '/component/button', text: 'Button 按钮' },
             { route: '/component/container', text: 'Container 布局容器' },
-            // { route: '/component/div', text: '(Flex)Div 弹性盒子' },
+            { route: '/component/div', text: '(Flex)Div 弹性盒子' },
             { route: '/component/link', text: 'Link 链接' },
             { route: '/component/text', text: 'Text 文本' },
             { route: '/component/icon', text: 'Icon 图标' }

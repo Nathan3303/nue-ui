@@ -1,24 +1,13 @@
 .nue-div {
-    --nue-div-width: auto;
-    --nue-div-height: auto;
-    --nue-div-flex-direction: row;
-    --nue-div-align-items: start;
-    --nue-div-justify-content: start;
-    --nue-div-flex-wrap: wrap;
-    --nue-div-gap: 1rem;
-    --nue-div-flex: none;
-
     display: flex;
-    flex-direction: var(--nue-div-flex-direction);
+    box-sizing: border-box;
+    width: var(--nue-div-width, auto);
+    height: var(--nue-div-height, auto);
+    flex-direction: var(--nue-div-flex-direction, row);
+    gap: var(--nue-div-gap, 1rem);
     align-items: var(--nue-div-align-items);
     justify-content: var(--nue-div-justify-content);
-    flex-wrap: var(--nue-div-flex-wrap);
-    gap: var(--nue-div-gap);
-    flex: var(--nue-div-flex);
-
-    box-sizing: border-box;
-    width: var(--nue-div-width);
-    height: var(--nue-div-height);
-
-    font-size: 0.875rem;
+    flex-wrap: var(--nue-div-flex-wrap, nowrap);
+    flex: var(--nue-div-flex, none);
+    overflow: var(--nue-div-overflow, hidden);
 }

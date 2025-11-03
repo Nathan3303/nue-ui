@@ -41,7 +41,8 @@ const componentRoutes = [
             {
                 path: '/component/breadcrumb',
                 component: () => import('./components/breadcrumb.vue')
-            }
+            },
+            { path: '/component/div', component: () => import('./components/div.vue') }
         ]
     }
 ];
