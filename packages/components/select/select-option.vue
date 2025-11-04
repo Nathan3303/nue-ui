@@ -26,6 +26,7 @@ const classes = computed(() => {
 selectContext?.optionRegister({
     label: props.label,
     value: props.value,
+    icon: props.icon,
     executeId
 });
 </script>

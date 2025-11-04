@@ -15,6 +15,7 @@ export type NueSelectValue =
 export interface NueSelectOptionRaw {
     label: string;
     value: NueSelectValue;
+    icon?: NueDropdownItemProps['icon'];
 }
 
 export interface NueSelectOption extends NueSelectOptionRaw {
@@ -44,7 +45,6 @@ export type NueSelectContext = {
 };
 
 export interface NueSelectOptionProps extends GlobalProps, NueSelectOptionRaw {
-    icon?: NueDropdownItemProps['icon'];
     loading?: NueDropdownItemProps['loading'];
     loadingIcon?: NueDropdownItemProps['loadingIcon'];
     disabled?: boolean;
