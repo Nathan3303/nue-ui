@@ -80,7 +80,11 @@ const styles = computed(() => ({
 
 // @method 打开抽屉
 const handleOpenDrawer = () => {
+    // 判断 vm 是否为真值，并赋值为真，否则抽屉元素不渲染
+    if (!props.modelValue) emit('update:modelValue', true);
+    // 抽屉打开时，挂载抽屉的锚点
     mountPopupAnchor();
+    // 执行动画
     visible.value = true;
 };
 
