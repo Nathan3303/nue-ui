@@ -1,7 +1,7 @@
 <template>
-    <div :class="classes" :style="styles">
+    <nue-div :class="classes" :style="styles">
         <slot name="image">
-            <img :src="imageSrc" alt="Empty image" class="nue-empty__image" />
+            <img v-if="imageSrc" :src="imageSrc" class="nue-empty__image" />
         </slot>
         <nue-text class="nue-empty__description">
             <slot name="description">
@@ -9,22 +9,19 @@
             </slot>
         </nue-text>
         <slot />
-    </div>
+    </nue-div>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-import NueText from '../text/text.vue';
-import emptyImage from './empty.png';
+import { NueText, NueDiv } from '@nue-ui/components';
 import type { NueEmptyProps } from './types';
 import './empty.css';
 
 defineOptions({ name: 'NueEmpty' });
 const props = withDefaults(defineProps<NueEmptyProps>(), {
-    imageSrc: emptyImage,
-    imageSize: '96px',
-    description: '暂无数据'
+    imageSrc: new URL('./empty.png', import.meta.url).href
 });
 
 const classes = computed(() => {
@@ -32,9 +29,7 @@ const classes = computed(() => {
     return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
-const styles = computed(() => {
-    return {
-        '--nue-empty-image-size': props.imageSize
-    };
-});
+const styles = computed(() => ({
+    '--nue-empty-image-size': props.imageSize
+}));
 </script>
