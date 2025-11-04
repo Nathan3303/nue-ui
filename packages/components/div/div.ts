@@ -1,5 +1,4 @@
-import type { VNode } from 'vue';
-import { computed, createVNode, defineComponent } from 'vue';
+import { computed, createVNode, defineComponent, type VNode } from 'vue';
 import { NueDivider } from '../divider';
 import { parseFlex, parseFlexWrap, parseTheme } from '@nue-ui/utils';
 import './div.css';
@@ -19,7 +18,8 @@ export default defineComponent({
         divider: { type: [String, Number, Boolean, Object], default: null },
         theme: [String, Array<string>],
         inline: Boolean,
-        overflow: [String, Boolean]
+        overflow: [String, Boolean],
+        autoFit: Boolean
     },
     setup(props, { slots }) {
         const classes = computed(() => {
@@ -76,7 +76,8 @@ export default defineComponent({
         return () => {
             const options = {
                 class: classes.value,
-                style: style.value
+                style: style.value,
+                'data-direction': props.autoFit ? direction.value : void 0
             };
             if (props.divider !== null) {
                 const defaultSlot = slots.default!();
