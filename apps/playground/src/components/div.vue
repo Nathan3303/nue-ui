@@ -44,8 +44,13 @@
         </nue-div>
     </demo>
     <demo title="使用滚动">
-        <nue-div overflow="auto">
-            <nue-button v-for="i in 12" :key="i">按钮</nue-button>
+        <nue-div vertical>
+            <nue-div width="fit-content">
+                <nue-button>按钮</nue-button>
+            </nue-div>
+            <nue-div overflow="auto">
+                <nue-button v-for="i in 12" :key="i">按钮</nue-button>
+            </nue-div>
         </nue-div>
     </demo>
     <demo title="水平嵌套自动适应">

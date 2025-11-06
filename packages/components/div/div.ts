@@ -18,7 +18,7 @@ export default defineComponent({
         divider: { type: [String, Number, Boolean, Object], default: null },
         theme: [String, Array<string>],
         inline: Boolean,
-        overflow: [String, Boolean],
+        overflow: String,
         autoFit: Boolean
     },
     setup(props, { slots }) {
@@ -31,14 +31,6 @@ export default defineComponent({
             return props.direction ? props.direction : props.vertical ? 'column' : 'row';
         });
 
-        const overflow = computed(() => {
-            let _overflow = props.overflow;
-            if (typeof props.overflow === 'boolean') {
-                _overflow = props.overflow ? 'auto' : 'hidden';
-            }
-            return _overflow;
-        });
-
         const style = computed(() => ({
             '--nue-div-width': props.width,
             '--nue-div-height': props.height,
@@ -48,7 +40,7 @@ export default defineComponent({
             '--nue-div-flex-wrap': parseFlexWrap(props.wrap as string),
             '--nue-div-gap': props.gap,
             '--nue-div-flex': parseFlex(props.flex as string),
-            '--nue-div-overflow': overflow.value || void 0,
+            '--nue-div-overflow': props.overflow,
             display: props.inline ? 'inline-flex' : void 0
         }));
 

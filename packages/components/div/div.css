@@ -7,7 +7,7 @@
     --nue-div-justify-content: flex-start;
     --nue-div-flex-wrap: nowrap;
     --nue-div-flex: none;
-    --nue-div-overflow: hidden;
+    --nue-div-overflow: visible;
 
     display: flex;
     box-sizing: border-box;
