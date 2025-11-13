@@ -1,7 +1,7 @@
 {
-    "name": "nue-ui-theme-shadlike",
-    "version": "0.6.9",
-    "description": "A shadcn-like theme for NueUI",
+    "name": "nue-ui-iconfont",
+    "version": "0.1.1",
+    "description": "Iconfonts for NueUI",
     "author": "Nathan Lee",
     "license": "MIT",
     "type": "module",
@@ -15,7 +15,9 @@
         }
     },
     "scripts": {
-        "build": "npx postcss src/**/*.css --dir dist --base src",
+        "build-css": "npx postcss src/**/*.css --dir dist --base src --no-map",
+        "move-woff2": "node src/move-woff2.js",
+        "build": "pnpm build-css && pnpm move-woff2",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -23,6 +25,7 @@
         "url": "https://github.com/Nathan3303/nue-ui.git"
     },
     "devDependencies": {
+        "shelljs": "^0.8.5",
         "postcss-cli": "^11.0.1",
         "postcss-nested": "^6.2.0",
         "autoprefixer": "^10.4.22",

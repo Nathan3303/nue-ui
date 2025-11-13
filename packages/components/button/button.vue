@@ -17,8 +17,6 @@
     </button>
 </template>
 
-<style src="./button.css"></style>
-
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { parseFlex, parseTheme, throttle } from '@nue-ui/utils';
@@ -27,6 +25,7 @@ import NueIcon from '../icon/icon.vue';
 import NueText from '../text/text.vue';
 import type { NueButtonProps, NueButtonEmits } from './types';
 import type { NueButtonGroupCtxType } from '../button-group';
+import './button.css'
 
 defineOptions({ name: 'NueButton' });
 

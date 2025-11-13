@@ -15,14 +15,13 @@
     </div>
 </template>
 
-<style src="./avatar.css" />
-
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import NueIcon from '../icon/icon.vue';
 import NueText from '../text/text.vue';
 import type { NueAvatarEmits, NueAvatarProps } from './types';
+import './avatar.css';
 
 defineOptions({ name: 'NueAvatar' });
 const emit = defineEmits<NueAvatarEmits>();

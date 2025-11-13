@@ -1,6 +1,5 @@
 import { makeInstaller } from '@nue-ui/utils';
 import components from './components';
-import '@nue-ui/assets';
 
 const installer = makeInstaller(components);
 
@@ -23,10 +22,7 @@ if (PROD) {
             `
     );
 } else if (DEV) {
-    console.info(
-        `%c NueUI is running in development mode.`,
-        `font-size: 12px; font-weight: bold;`
-    );
+    console.info(`%c NueUI is running in development mode.`, `font-size: 12px; font-weight: bold;`);
 }
 
 export * from '@nue-ui/components';

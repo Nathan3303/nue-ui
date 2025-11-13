@@ -11,13 +11,12 @@
     </div>
 </template>
 
-<style src="./badge.css"></style>
-
 <script lang="ts" setup>
 import { computed, useSlots } from 'vue';
 import { isString, parseTheme } from '@nue-ui/utils';
 import NueText from '../text/text.vue';
 import type { NueBadgeProps } from './types';
+import './badge.css'
 
 defineOptions({ name: 'NueBadge' });
 
