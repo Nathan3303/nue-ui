@@ -183,6 +183,13 @@
     }
 }
 
+@keyframes slide-fade-out {
+    100% {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+}
+
 @keyframes tooltip-showup-from-top {
     0% {
         opacity: 0;

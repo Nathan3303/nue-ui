@@ -98,10 +98,9 @@ const closeCallback = reactive({ visible: false });
 const reference = reactive({ visible: false });
 const drawerRef = ref<InstanceType<typeof NueDrawer>>();
 
-const handleOnClose = (done: () => void) => {
-    NueConfirm({ title: '确认关闭抽屉吗？' }).then(([isByCancel]) => {
-        if (isByCancel) return;
-        done();
-    });
+const handleOnClose = async (done: () => void) => {
+    const [isByCancel] = await NueConfirm({ title: '确认关闭抽屉吗？' });
+    if (isByCancel) return;
+    done();
 };
 </script>

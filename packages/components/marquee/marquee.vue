@@ -1,13 +1,6 @@
 <template>
-    <div ref="marqueeRef" class="nue-marquee">
-        <div
-            ref="marqueeTrackRef"
-            :class="trackClasses"
-            :style="{
-                animationPlayState: $slots.default ? 'running' : 'paused'
-            }"
-            class="nue-marquee__track"
-        >
+    <div ref="marqueeRef" :class="classes">
+        <div ref="marqueeTrackRef" class="nue-marquee__track" :style="trackStyles">
             <slot />
             <slot v-if="infinite" />
         </div>
@@ -15,8 +8,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, onUpdated, ref, useSlots } from 'vue';
 import type { NueMarqueeProps } from './types';
+import { parseTheme } from '@nue-ui/utils';
 
 defineOptions({ name: 'NueMarquee' });
 
@@ -26,22 +20,42 @@ const props = withDefaults(defineProps<NueMarqueeProps>(), {
     infinite: false
 });
 
+const slots = useSlots();
+
 const marqueeRef = ref<HTMLDivElement>();
 const marqueeTrackRef = ref<HTMLDivElement>();
 
-const trackClasses = computed(() => {
-    return {
-        'nue-marquee__track--infinite': props.infinite
-    };
+const classes = computed(() => {
+    const prefix = 'nue-marquee';
+    return [prefix, ...parseTheme(props.theme, prefix), props.infinite && `${prefix}--infinite`];
+});
+
+const trackStyles = computed(() => ({
+    animationPlayState: slots.default ? 'running' : 'paused'
+}));
+
+const calculateWidth = () => {
+    if (!marqueeRef.value || !marqueeTrackRef.value) return;
+    const marqueeWidth = marqueeRef.value.clientWidth;
+    const marqueeTrackWidth = marqueeTrackRef.value.offsetWidth;
+    marqueeRef.value.style.setProperty('--nue-marquee-width', `${marqueeWidth}px`);
+    marqueeRef.value.style.setProperty('--nue-marquee-track-width', `${marqueeTrackWidth}px`);
+};
+
+const calculateDuration = () => {
+    if (!marqueeRef.value || !marqueeTrackRef.value) return;
+    const marqueeTrackChildNodesLength = marqueeTrackRef.value.childNodes.length;
+    const marqueeTrackAnimationDuration = marqueeTrackChildNodesLength * props.speedRatio;
+    marqueeTrackRef.value.style.animationDuration = `${marqueeTrackAnimationDuration}s`;
+};
+
+onUpdated(() => {
+    calculateWidth();
+    calculateDuration();
 });
 
 onMounted(() => {
-    if (!marqueeRef.value || !marqueeTrackRef.value) return;
-    marqueeRef.value.style.setProperty('--nue-marquee-width', `${marqueeRef.value.offsetWidth}px`);
-    marqueeRef.value.style.setProperty(
-        '--nue-marquee-track-width',
-        `${marqueeTrackRef.value.offsetWidth}px`
-    );
-    marqueeTrackRef.value.style.animationDuration = `${marqueeTrackRef.value.children.length * props.speedRatio}s`;
+    calculateWidth();
+    calculateDuration();
 });
 </script>

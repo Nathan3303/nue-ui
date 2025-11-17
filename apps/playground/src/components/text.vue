@@ -17,8 +17,8 @@
     </demo>
     <demo title="颜色">
         <nue-div>
-            <nue-text color="red">红色文本</nue-text>
-            <nue-text color="green">绿色文本</nue-text>
+            <nue-text color="#F00">红色文本</nue-text>
+            <nue-text color="var(--nue-success-color-50)">绿色文本</nue-text>
             <nue-text color="blue">蓝色文本</nue-text>
         </nue-div>
     </demo>

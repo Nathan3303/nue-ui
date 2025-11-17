@@ -69,14 +69,14 @@ const handleBeforeSwitch = async () => {
 
 <style scoped>
 .nue-switch--custom1 {
-    --nue-switch-background-active-color: var(--nue-success-color);
+    --nue-switch-background-active-color: var(--nue-success-color-50);
 }
 
 .nue-switch--custom2 {
-    --nue-switch-background-active-color: var(--nue-warning-color);
+    --nue-switch-background-active-color: var(--nue-warning-color-50);
 }
 
 .nue-switch--custom3 {
-    --nue-switch-background-active-color: var(--nue-error-color);
+    --nue-switch-background-active-color: var(--nue-error-color-50);
 }
 </style>

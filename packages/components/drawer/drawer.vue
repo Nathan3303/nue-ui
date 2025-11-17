@@ -95,7 +95,7 @@ const onCloseExecutor = () => {
             return;
         }
         const onCloseRes = props.onClose(() => resolve(true));
-        if (!(onCloseRes instanceof Promise)) return;
+        if (!(onCloseRes instanceof Promise)) return resolve(false);
         onCloseRes.then(isDone => resolve(isDone)).catch(reject);
     });
 };

@@ -78,7 +78,7 @@
     }
 }
 
-.nue-link.nue-link--route {
+.nue-link--route {
     --nue-link-font-size: var(--nue-text-df);
 
     --nue-link-color: var(--nue-primary-text-color);
@@ -91,7 +91,7 @@
     --nue-link-actived-background-color: var(--nue-primary-color-900);
 }
 
-.nue-link.nue-link--route {
+.nue-link--route {
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -130,7 +130,7 @@
     }
 }
 
-.nue-link.nue-link--route.nue-link--route-icon {
+.nue-link--route.nue-link--route-icon {
     --nue-link-font-size: var(--nue-text-2xl);
 
     --nue-link-color: var(--nue-primary-color-600);
@@ -143,7 +143,7 @@
     --nue-link-actived-background-color: transparent;
 }
 
-.nue-link.nue-link--route.nue-link--route-icon {
+.nue-link--route.nue-link--route-icon {
     height: auto;
     padding: 0;
     gap: var(--nue-padding-df);

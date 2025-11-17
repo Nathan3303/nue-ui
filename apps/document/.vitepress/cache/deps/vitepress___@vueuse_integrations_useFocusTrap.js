@@ -479,11 +479,11 @@ function ownKeys(e, r) {
     var t = Object.keys(e);
     if (Object.getOwnPropertySymbols) {
         var o = Object.getOwnPropertySymbols(e);
-        r &&
+        (r &&
             (o = o.filter(function (r2) {
                 return Object.getOwnPropertyDescriptor(e, r2).enumerable;
             })),
-            t.push.apply(t, o);
+            t.push.apply(t, o));
     }
     return t;
 }

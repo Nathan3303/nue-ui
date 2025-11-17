@@ -46,7 +46,7 @@
             width: 100%;
             height: var(--nue-collapse-item-height);
             max-height: var(--nue-collapse-item-max-height);
-            transition: all var(--nue-animation-duration-short) ease-in-out;
+            transition: all var(--nue-animation-duration) ease-in-out;
             overflow: var(--nue-collapse-item-overflow);
         }
 
@@ -86,7 +86,7 @@
         }
 
         &[data-collapsed='false'] .nue-collapse-item__content {
-            padding-top: 1rem;
+            margin-top: 1rem;
         }
     }
 }

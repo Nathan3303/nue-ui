@@ -37,7 +37,7 @@
     </demo>
     <demo title="主题">
         <nue-div align="center">
-            <nue-textarea v-model="t5" placeholder="theme=noshape" theme="noshape" />
+            <nue-textarea v-model="t5" placeholder="theme=pure" theme="pure" />
         </nue-div>
     </demo>
     <demo title="自动高度 & 最大高度">
