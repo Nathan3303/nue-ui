@@ -1,6 +1,6 @@
 {
     "name": "@nue-ui/repo",
-    "version": "0.1.4",
+    "version": "0.2.4",
     "description": "NueUI repo",
     "author": "Nathan Lee",
     "license": "MIT",
@@ -16,8 +16,9 @@
         "document": "pnpm --filter @nue-ui/document",
         "playground": "pnpm --filter @nue-ui/playground",
         "histoire": "pnpm --filter @nue-ui/histoire",
-        "shadlike": "pnpm --filter nue-ui-theme-shadlike",
-        "iconfont": "pnpm --filter nue-ui-iconfont"
+        "shadlike-theme": "pnpm --filter nue-ui-theme-shadlike",
+        "iconfont": "pnpm --filter nue-ui-iconfont",
+        "build": "pnpm core build && pnpm shadlike-theme build && pnpm iconfont build"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx,json,css,scss,md}": [
@@ -35,7 +36,6 @@
         "ui",
         "components"
     ],
-    "bugs": {},
     "devDependencies": {
         "@eslint/js": "^9.29.0",
         "@types/lodash-es": "^4.17.12",
@@ -76,6 +76,7 @@
         "@nue-ui/components": "workspace:*",
         "@nue-ui/hooks": "workspace:*",
         "@nue-ui/utils": "workspace:*",
+        "@nue-ui/themes": "workspace:*",
         "vue": "^3.5.17",
         "lodash-es": "^4.17.21"
     }

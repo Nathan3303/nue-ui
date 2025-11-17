@@ -12,7 +12,6 @@ import NueIcon from '../icon/icon.vue';
 import NueText from '../text/text.vue';
 import { handlePop } from './message';
 import type { NueMessageNodeProps } from './types';
-import './message-inner.css';
 
 defineOptions({ name: 'MessageNode' });
 

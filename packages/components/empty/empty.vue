@@ -17,7 +17,6 @@ import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import { NueText, NueDiv } from '@nue-ui/components';
 import type { NueEmptyProps } from './types';
-import './empty.css';
 
 defineOptions({ name: 'NueEmpty' });
 const props = withDefaults(defineProps<NueEmptyProps>(), {

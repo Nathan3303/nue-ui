@@ -1,0 +1,42 @@
+.nue-overlay {
+    --nue-overlay-animation-name: fade-in;
+    --nue-overlay-animation-duration: 0.24s;
+    --nue-overlay-close-animation-name: fade-out;
+    --nue-overlay-close-animation-duration: 0.24s;
+}
+
+.nue-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.64);
+    overflow: hidden;
+    box-sizing: border-box;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    outline: none;
+
+    &[data-visible='true'] {
+        animation-name: var(--nue-overlay-animation-name);
+        animation-duration: var(--nue-overlay-animation-duration);
+    }
+
+    &[data-visible='false'] {
+        animation-name: var(--nue-overlay-close-animation-name);
+        animation-duration: var(--nue-overlay-close-animation-duration);
+    }
+}
+
+.nue-overlay.nue-overlay--transparent {
+    width: 0;
+    height: 0;
+    overflow: unset;
+    background-color: transparent;
+}
+
+.nue-overlay.nue-overlay--no-background {
+    background-color: transparent;
+}

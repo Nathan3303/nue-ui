@@ -1,0 +1,76 @@
+.nue-text {
+    --nue-text-color: inherit;
+    --nue-text-font-size: inherit;
+    --nue-text-align: initial;
+    --nue-text-decoration: initial;
+    --nue-text-font-weight: initial;
+    --nue-text-clamped-lines: 3;
+}
+
+.nue-text {
+    font-family: inherit;
+    line-height: inherit;
+    color: var(--nue-text-color);
+    font-size: var(--nue-text-font-size);
+    font-weight: var(--nue-text-font-weight);
+    text-align: var(--nue-text-align);
+    text-decoration: var(--nue-text-decoration);
+    margin: 0;
+    padding: 0;
+}
+
+.nue-text:is(h1) {
+    --nue-text-font-size: var(--nue-text-3xl);
+    --nue-text-font-weight: 800;
+    --nue-text-line-height: 3;
+    margin: var(--nue-padding-sm) 0;
+}
+
+.nue-text:is(h2) {
+    --nue-text-font-size: var(--nue-text-2xl);
+    --nue-text-font-weight: 700;
+    --nue-text-line-height: 2.75;
+    margin: var(--nue-padding-sm) 0;
+}
+
+.nue-text:is(h3) {
+    --nue-text-font-size: var(--nue-text-xl);
+    --nue-text-font-weight: 600;
+    --nue-text-line-height: 2.25;
+}
+
+.nue-text:is(h4) {
+    --nue-text-font-size: var(--nue-text-md);
+    --nue-text-font-weight: 600;
+    --nue-text-line-height: 1.75;
+}
+
+.nue-text:is(h5),
+.nue-text:is(h6) {
+    --nue-text-font-size: var(--nue-text-df);
+    --nue-text-font-weight: 600;
+}
+
+.nue-text:is(span) {
+    --nue-text-font-size: var(--nue-text-df);
+    --nue-text-line-height: 1.3;
+}
+
+.nue-text:is(p) {
+    --nue-text-font-size: var(--nue-text-df);
+    --nue-text-line-height: 1.5;
+}
+
+.nue-text.nue-text--clamped {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@supports (-webkit-line-clamp: var(--nue-text-clamped-lines)) {
+    .nue-text.nue-text--clamped {
+        display: -webkit-box;
+        -webkit-line-clamp: var(--nue-text-clamped-lines);
+        line-clamp: var(--nue-text-clamped-lines);
+        -webkit-box-orient: vertical;
+    }
+}

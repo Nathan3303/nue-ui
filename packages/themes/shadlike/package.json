@@ -1,0 +1,31 @@
+{
+    "name": "nue-ui-theme-shadlike",
+    "version": "0.7.9",
+    "description": "A shadcn-like theme for NueUI",
+    "author": "Nathan Lee",
+    "license": "MIT",
+    "type": "module",
+    "files": [
+        "./dist"
+    ],
+    "exports": {
+        "./dist/": {
+            "require": "./dist/",
+            "import": "./dist/"
+        }
+    },
+    "scripts": {
+        "build": "npx postcss src/**/*.css --dir dist --base src",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Nathan3303/nue-ui.git"
+    },
+    "devDependencies": {
+        "postcss-cli": "^11.0.1",
+        "postcss-nested": "^6.2.0",
+        "autoprefixer": "^10.4.22",
+        "cssnano": "^7.1.0"
+    }
+}

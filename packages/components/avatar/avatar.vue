@@ -2,7 +2,7 @@
     <div :class="classes" :style="styles" :title="title">
         <img
             v-if="src && !error"
-            :alt="alt || `NueAvatar`"
+            :alt="alt"
             :src="src"
             class="nue-avatar__image"
             @error="handleError($event)"
@@ -21,7 +21,6 @@ import { parseTheme } from '@nue-ui/utils';
 import NueIcon from '../icon/icon.vue';
 import NueText from '../text/text.vue';
 import type { NueAvatarEmits, NueAvatarProps } from './types';
-import './avatar.css';
 
 defineOptions({ name: 'NueAvatar' });
 const emit = defineEmits<NueAvatarEmits>();

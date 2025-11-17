@@ -1,6 +1,0 @@
-.nue-button--secondary {
-    --nue-button-border-color: transparent;
-    --nue-button-bg-color: var(--nue-primary-color-200);
-    --nue-button-hover-bg-color: var(--nue-primary-color-300);
-    --nue-button-active-bg-color: var(--nue-primary-color-300);
-}

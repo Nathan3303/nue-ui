@@ -51,7 +51,6 @@ import NueOverlay from '../overlay/overlay.vue';
 import { parseTheme } from '@nue-ui/utils';
 import { usePopupAnchor } from '@nue-ui/hooks';
 import type { NueDrawerProps, NueDrawerEmits } from './types';
-import './drawer.css';
 
 defineOptions({ name: 'NueDrawer' });
 const props = withDefaults(defineProps<NueDrawerProps>(), {

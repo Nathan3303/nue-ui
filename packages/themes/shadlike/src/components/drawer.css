@@ -1,0 +1,102 @@
+.nue-drawer {
+    --nue-drawer-span: 32%;
+    --nue-drawer-min-span: 18rem;
+    --nue-drawer-top-open-animation-name: move-in-from-top;
+    --nue-drawer-top-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-drawer-top-close-animation-name: move-out-to-top;
+    --nue-drawer-top-close-animation-duration: var(--nue-overlay-close-animation-duration);
+    --nue-drawer-bottom-open-animation-name: move-in-from-bottom;
+    --nue-drawer-bottom-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-drawer-bottom-close-animation-name: move-out-to-bottom;
+    --nue-drawer-bottom-close-animation-duration: var(--nue-overlay-close-animation-duration);
+    --nue-drawer-left-open-animation-name: move-in-from-left;
+    --nue-drawer-left-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-drawer-left-close-animation-name: move-out-to-left;
+    --nue-drawer-left-close-animation-duration: var(--nue-overlay-close-animation-duration);
+    --nue-drawer-right-open-animation-name: move-in-from-right;
+    --nue-drawer-right-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-drawer-right-close-animation-name: move-out-to-right;
+    --nue-drawer-right-close-animation-duration: var(--nue-overlay-close-animation-duration);
+}
+
+.nue-drawer {
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background-color: white;
+    position: absolute;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+
+    &[data-direction='top'] {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--nue-drawer-span);
+        min-height: var(--nue-drawer-min-span);
+        transform-origin: top;
+
+        &[data-visible='true'] {
+            animation-name: var(--nue-drawer-top-open-animation-name);
+            animation-duration: var(--nue-drawer-top-open-animation-duration);
+        }
+        &[data-visible='false'] {
+            animation-name: var(--nue-drawer-top-close-animation-name);
+            animation-duration: var(--nue-drawer-top-close-animation-duration);
+        }
+    }
+
+    &[data-direction='bottom'] {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: var(--nue-drawer-span);
+        min-height: var(--nue-drawer-min-span);
+        transform-origin: bottom;
+
+        &[data-visible='true'] {
+            animation-name: var(--nue-drawer-bottom-open-animation-name);
+            animation-duration: var(--nue-drawer-bottom-open-animation-duration);
+        }
+        &[data-visible='false'] {
+            animation-name: var(--nue-drawer-bottom-close-animation-name);
+            animation-duration: var(--nue-drawer-bottom-close-animation-duration);
+        }
+    }
+
+    &[data-direction='left'] {
+        top: 0;
+        left: 0;
+        width: var(--nue-drawer-span);
+        height: 100%;
+        min-width: var(--nue-drawer-min-span);
+        transform-origin: left;
+
+        &[data-visible='true'] {
+            animation-name: var(--nue-drawer-left-open-animation-name);
+            animation-duration: var(--nue-drawer-left-open-animation-duration);
+        }
+        &[data-visible='false'] {
+            animation-name: var(--nue-drawer-left-close-animation-name);
+            animation-duration: var(--nue-drawer-left-close-animation-duration);
+        }
+    }
+
+    &[data-direction='right'] {
+        top: 0;
+        right: 0;
+        width: var(--nue-drawer-span);
+        height: 100%;
+        min-width: var(--nue-drawer-min-span);
+        transform-origin: right;
+
+        &[data-visible='true'] {
+            animation-name: var(--nue-drawer-right-open-animation-name);
+            animation-duration: var(--nue-drawer-right-open-animation-duration);
+        }
+        &[data-visible='false'] {
+            animation-name: var(--nue-drawer-right-close-animation-name);
+            animation-duration: var(--nue-drawer-right-close-animation-duration);
+        }
+    }
+}

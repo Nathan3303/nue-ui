@@ -25,7 +25,6 @@ import NueIcon from '../icon/icon.vue';
 import NueText from '../text/text.vue';
 import type { NueButtonProps, NueButtonEmits } from './types';
 import type { NueButtonGroupCtxType } from '../button-group';
-import './button.css'
 
 defineOptions({ name: 'NueButton' });
 
@@ -48,8 +47,8 @@ const disabled = computed(() => {
 
 const styles = computed(() => {
     return {
-        '--alignment': props.alignment,
-        '--flex': props.flex && parseFlex(props.flex)
+        '--nue-button-alignment': props.alignment,
+        '--nue-button-flex': props.flex && parseFlex(props.flex)
     };
 });
 

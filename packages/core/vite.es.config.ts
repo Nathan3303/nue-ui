@@ -84,7 +84,7 @@ export default defineConfig({
                     if (id.includes('node_modules')) return 'vendor';
                     else if (id.includes('/packages/hooks')) return 'hooks';
                     else if (id.includes('/packages/utils')) return 'utils';
-                    else if (id.includes('/packages/components')) {
+                    else {
                         const names = mcComponentNames.map(n => n.replace(/(nue-)/g, ''));
                         for (const name of names) {
                             if (id.includes(name)) return name;

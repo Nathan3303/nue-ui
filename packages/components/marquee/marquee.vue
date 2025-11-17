@@ -17,7 +17,6 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
 import type { NueMarqueeProps } from './types';
-import './marquee.css';
 
 defineOptions({ name: 'NueMarquee' });
 

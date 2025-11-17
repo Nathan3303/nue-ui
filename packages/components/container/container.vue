@@ -8,7 +8,6 @@
 import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import type { NueContainerProps } from './types';
-import './container.css';
 
 defineOptions({ name: 'NueContainer' });
 const props = defineProps<NueContainerProps>();

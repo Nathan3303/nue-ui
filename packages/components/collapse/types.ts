@@ -1,25 +1,26 @@
-import type { GlobalProps } from '@nue-ui/utils';
 import type { Ref } from 'vue';
+import type { GlobalProps } from '@nue-ui/utils';
 
-export type CollapseItemName = string;
-export type ActivedCollapseItems = CollapseItemName | CollapseItemName[];
+export type NueCollapseItemName = string;
+
+export type NueCollapseActivedItemNames = NueCollapseItemName[];
 
 export interface NueCollapseProps extends GlobalProps {
-    modelValue?: ActivedCollapseItems;
+    modelValue?: NueCollapseActivedItemNames;
     accordion?: boolean;
 }
 
 export type NueCollapseEmit = {
-    (e: 'update:modelValue', value: ActivedCollapseItems): void;
+    (e: 'update:modelValue', value: NueCollapseActivedItemNames): void;
+};
+
+export type NueCollapseContext = {
+    active: (itemName: NueCollapseItemName) => void;
+    activedItemNames: Ref<NueCollapseItemName[]>;
 };
 
 export interface NueCollapseItemProps extends GlobalProps {
     title?: string;
-    name?: string | number;
-    hideWhenEmpty?: boolean;
+    name?: string;
+    maxHeight?: string;
 }
-
-export type NueCollapseContext = {
-    activedItems: Ref<ActivedCollapseItems>;
-    pushActivedItem: (item: CollapseItemName) => void;
-};

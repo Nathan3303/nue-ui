@@ -10,7 +10,6 @@
 import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import type { NueDividerProps } from './types';
-import './divider.css';
 
 defineOptions({ name: 'NueDivider' });
 

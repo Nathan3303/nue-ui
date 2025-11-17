@@ -9,7 +9,6 @@ import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import { TEXT_SIZE_VALUES } from './constants';
 import type { NueSizeProps } from './types';
-import './text.css';
 
 defineOptions({ name: 'NueText' });
 const props = withDefaults(defineProps<NueSizeProps>(), {

@@ -20,7 +20,6 @@ import { parseTheme } from '@nue-ui/utils';
 import { isFunction } from 'lodash-es';
 import { NueIcon } from '../icon';
 import type { NueSwitchEmits, NueSwitchProps } from './types';
-import './switch.css';
 
 defineOptions({ name: 'NueSwitch' });
 const props = withDefaults(defineProps<NueSwitchProps>(), {

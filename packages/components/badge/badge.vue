@@ -6,7 +6,7 @@
             v-if="!hidden && (content || dot)"
             class="nue-badge__content"
         >
-            <nue-text :clamped="1">{{ content }}</nue-text>
+            <nue-text :clamped="clamped || 1">{{ content }}</nue-text>
         </component>
     </div>
 </template>
@@ -16,7 +16,6 @@ import { computed, useSlots } from 'vue';
 import { isString, parseTheme } from '@nue-ui/utils';
 import NueText from '../text/text.vue';
 import type { NueBadgeProps } from './types';
-import './badge.css'
 
 defineOptions({ name: 'NueBadge' });
 

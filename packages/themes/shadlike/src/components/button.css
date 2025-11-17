@@ -1,0 +1,175 @@
+.nue-button {
+    --nue-button-flex: none;
+    --nue-button-alignment: start;
+    --nue-button-base-color: var(--nue-primary-color-0);
+    --nue-button-font-size: var(--nue-text-df);
+    --nue-button-lo: 5;
+
+    --nue-button-color: var(--nue-primary-text-color);
+    --nue-button-bg-color: var(--nue-button-base-color);
+    --nue-button-border-color: hsl(
+        from var(--nue-button-base-color) h s calc(l - calc(var(--nue-button-lo) * 2))
+    );
+
+    --nue-button-hover-color: var(--nue-button-color);
+    --nue-button-hover-bg-color: hsl(
+        from var(--nue-button-bg-color) h s calc(l - var(--nue-button-lo))
+    );
+    --nue-button-hover-border-color: hsl(
+        from var(--nue-button-border-color) h s calc(l - var(--nue-button-lo))
+    );
+
+    --nue-button-active-color: var(--nue-button-color);
+    --nue-button-active-bg-color: hsl(
+        from var(--nue-button-hover-bg-color) h s calc(l - var(--nue-button-lo))
+    );
+    --nue-button-active-border-color: hsl(
+        from var(--nue-button-hover-border-color) h s calc(l - var(--nue-button-lo))
+    );
+
+    --nue-button-disable-color: var(--nue-button-color);
+    --nue-button-disable-bg-color: var(--nue-button-hover-bg-color);
+    --nue-button-disable-border-color: var(--nue-button-hover-border-color);
+}
+
+.nue-button {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.16s ease-out;
+    user-select: none;
+    -webkit-user-select: none;
+    flex: var(--nue-button-flex);
+    justify-content: var(--nue-button-alignment);
+    border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-secondary-shadow);
+    font-family: var(--nue-primary-font-family);
+
+    width: auto;
+    height: var(--nue-box-size-df);
+    padding: 0 var(--nue-padding-df);
+    gap: var(--nue-gap-sm);
+
+    color: var(--nue-button-color);
+    border: 1px solid var(--nue-button-border-color);
+    background-color: var(--nue-button-bg-color);
+
+    &:hover {
+        color: var(--nue-button-hover-color);
+        border-color: var(--nue-button-hover-border-color);
+        background-color: var(--nue-button-hover-bg-color);
+    }
+
+    &:active {
+        color: var(--nue-button-active-color);
+        border-color: var(--nue-button-active-border-color);
+        background-color: var(--nue-button-active-bg-color);
+    }
+
+    &.nue-button--disabled {
+        opacity: 0.8;
+        cursor: not-allowed;
+        color: var(--nue-button-disable-color);
+        border-color: var(--nue-button-disable-border-color);
+        background-color: var(--nue-button-disable-bg-color);
+    }
+
+    > .nue-button__icon,
+    > .nue-button__text {
+        color: inherit;
+        font-size: var(--nue-button-font-size);
+        line-height: 1;
+    }
+
+    > .nue-button__append {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: end;
+        flex: auto;
+        gap: var(--nue-gap-sm);
+        overflow: hidden;
+    }
+}
+
+.nue-button.nue-button--small {
+    --nue-button-font-size: var(--nue-text-sm);
+    height: var(--nue-box-size-sm);
+    padding: 0 var(--nue-padding-sm);
+    gap: var(--nue-gap-xs);
+}
+
+.nue-button.nue-button--large {
+    --nue-button-font-size: var(--nue-text-md);
+    height: var(--nue-box-size-lg);
+    padding: 0 var(--nue-padding-lg);
+    gap: var(--nue-padding-df);
+}
+
+.nue-button.nue-button--primary {
+    --nue-button-color: white;
+    --nue-button-base-color: var(--nue-primary-color-900);
+    --nue-button-lo: -5;
+}
+
+.nue-button.nue-button--secondary {
+    --nue-button-border-color: transparent;
+    --nue-button-base-color: var(--nue-primary-color-200);
+}
+
+.nue-button.nue-button--destructive {
+    --nue-button-base-color: transparent;
+    --nue-button-color: var(--nue-error-color-40);
+    --nue-button-border-color: var(--nue-error-color-40);
+    --nue-button-hover-bg-color: var(--nue-error-color-10);
+    --nue-button-lo: 3;
+}
+
+.nue-button.nue-button--success {
+    --nue-button-color: white;
+    --nue-button-base-color: var(--nue-success-color-40);
+    --nue-button-border-color: transparent;
+}
+
+.nue-button.nue-button--warning {
+    --nue-button-color: white;
+    --nue-button-base-color: var(--nue-warning-color-40);
+    --nue-button-border-color: transparent;
+}
+
+.nue-button.nue-button--error {
+    --nue-button-color: white;
+    --nue-button-base-color: var(--nue-error-color-40);
+    --nue-button-border-color: transparent;
+}
+
+.nue-button.nue-button--ghost {
+    box-shadow: none;
+    --nue-button-border-color: transparent;
+}
+
+.nue-button.nue-button--icon {
+    --nue-button-alignment: center;
+    aspect-ratio: 1;
+
+    .nue-button__text {
+        display: none;
+    }
+}
+
+.nue-button.nue-button--round {
+    border-radius: 9999px;
+}
+
+.nue-button.nue-button--pure {
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+
+    --nue-button-base-color: transparent;
+    --nue-button-color: var(--nue-primary-text-color);
+    --nue-button-hover-color: var(--nue-primary-color-800);
+    --nue-button-active-color: var(--nue-primary-color-700);
+}

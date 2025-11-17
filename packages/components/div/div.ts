@@ -1,7 +1,6 @@
 import { computed, createVNode, defineComponent, type VNode } from 'vue';
 import { NueDivider } from '../divider';
 import { parseFlex, parseFlexWrap, parseTheme } from '@nue-ui/utils';
-import './div.css';
 
 export default defineComponent({
     name: 'NueDiv',

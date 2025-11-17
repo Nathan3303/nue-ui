@@ -3,11 +3,13 @@
         <nue-text>在那遥远而神秘的夜晚，星辰如同细碎的钻石，点缀着深邃的天幕。</nue-text>
     </demo>
     <demo title="自定标签">
-        <nue-div align="end" gap="24px">
+        <nue-div vertical>
             <nue-text tag="h1">一级标题(h1)</nue-text>
             <nue-text tag="h2">二级标题(h2)</nue-text>
             <nue-text tag="h3">三级标题(h3)</nue-text>
             <nue-text tag="h4">四级标题(h4)</nue-text>
+            <nue-text tag="h5">五级标题(h5)</nue-text>
+            <nue-text tag="h6">六级标题(h6)</nue-text>
             <nue-text tag="p">段落(p)</nue-text>
             <nue-text tag="strong">粗体(strong)</nue-text>
             <nue-text>默认(span)</nue-text>

@@ -37,7 +37,6 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { debounce, parseTheme } from '@nue-ui/utils';
 import wordCounter from './word-counter.vue';
 import type { NueTextareaProps, NueTextareaEmits } from './types';
-import './textarea.css';
 
 defineOptions({ name: 'NueTextarea' });
 const props = withDefaults(defineProps<NueTextareaProps>(), {

@@ -58,7 +58,6 @@ import type {
     NueDropdownContext
 } from './types';
 import type { PopperPlacementObject, PopperPosition } from '@nue-ui/hooks/use-popper-v2/types';
-import './dropdown.css';
 
 defineOptions({ name: 'NueDropdown' });
 const props = withDefaults(defineProps<NueDropdownProps>(), {

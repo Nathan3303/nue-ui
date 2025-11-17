@@ -15,7 +15,6 @@ import NueIcon from '../icon/icon.vue';
 import { CHECKBOX_GROUP_CTX_KEY } from '../checkbox-group/constants';
 import type { NueCheckboxEmits, NueCheckboxProps } from './types';
 import type { NueCheckboxGroupContext } from '../checkbox-group/types';
-import './checkbox.css';
 
 defineOptions({ name: 'NueCheckbox' });
 const props = withDefaults(defineProps<NueCheckboxProps>(), {

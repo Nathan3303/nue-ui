@@ -1,7 +1,7 @@
 <template>
     <demo title="基础用法">
         <nue-div align="center">
-            <nue-button icon="theme">中文 English</nue-button>
+            <nue-button icon="theme">中文 Chinese</nue-button>
             <nue-button disabled>禁用状态</nue-button>
         </nue-div>
     </demo>
@@ -20,15 +20,24 @@
     </demo>
     <demo title="尺寸">
         <nue-div align="center">
-            <nue-button size="small">小尺寸</nue-button>
-            <nue-button>普通尺寸</nue-button>
-            <nue-button size="large">大尺寸</nue-button>
+            <nue-button size="small" icon="priority-1">小尺寸</nue-button>
+            <nue-button icon="priority-2">普通尺寸</nue-button>
+            <nue-button size="large" icon="priority-3">大尺寸</nue-button>
         </nue-div>
     </demo>
     <demo title="样式">
-        <nue-div align="center">
-            <nue-button theme="primary">主要按钮</nue-button>
-            <nue-button theme="pure">纯净按钮</nue-button>
+        <nue-div wrap="wrap" align="center">
+            <nue-button theme="primary" icon="theme">主要</nue-button>
+            <nue-button theme="secondary" icon="theme">次要</nue-button>
+            <nue-button theme="destructive" icon="theme">销毁</nue-button>
+            <nue-button theme="success" icon="theme">成功</nue-button>
+            <nue-button theme="warning" icon="theme">警告</nue-button>
+            <nue-button theme="error" icon="theme">错误</nue-button>
+            <nue-button theme="ghost" icon="theme">幽灵</nue-button>
+            <nue-button theme="pure" icon="theme">纯净</nue-button>
+            <nue-button theme="icon" icon="theme">图标</nue-button>
+            <nue-button theme="round" icon="theme">胶囊</nue-button>
+            <nue-button theme="round,primary" icon="search">多主题复合使用（主要 + 胶囊）</nue-button>
         </nue-div>
     </demo>
     <demo title="后置插槽">
@@ -40,7 +49,7 @@
         </nue-button>
     </demo>
     <demo title="ButtonGroup 按钮组">
-        <nue-div>
+        <nue-div wrap="wrap">
             <nue-button-group>
                 <nue-button icon="plus">添加</nue-button>
                 <nue-button disabled icon="search">搜索</nue-button>

@@ -46,7 +46,6 @@ import { useBoolState } from '@nue-ui/hooks';
 import NueIcon from '../icon/icon.vue';
 import WordCounter from './word-counter.vue';
 import type { NueInputEmits, NueInputProps } from './types';
-import './input.css';
 
 defineOptions({ name: 'NueInput' });
 const props = withDefaults(defineProps<NueInputProps>(), {
