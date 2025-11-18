@@ -15,17 +15,20 @@
         }
     },
     "scripts": {
-        "build": "npx postcss src/**/*.css --dir dist --base src",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build-css": "npx postcss src/**/*.css --dir dist --base src",
+        "remove-dist": "node src/remove-dist.js",
+        "build": "pnpm remove-dist && pnpm build-css"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/Nathan3303/nue-ui.git"
     },
     "devDependencies": {
+        "cssnano": "^7.1.2",
+        "cssnano-preset-advanced": "^7.0.10",
+        "postcss": "^8.5.6",
         "postcss-cli": "^11.0.1",
-        "postcss-nested": "^6.2.0",
-        "autoprefixer": "^10.4.22",
-        "cssnano": "^7.1.0"
+        "postcss-nested": "^7.0.2"
     }
 }

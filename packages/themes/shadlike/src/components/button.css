@@ -8,23 +8,38 @@
     --nue-button-color: var(--nue-primary-text-color);
     --nue-button-bg-color: var(--nue-button-base-color);
     --nue-button-border-color: hsl(
-        from var(--nue-button-base-color) h s calc(l - calc(var(--nue-button-lo) * 2))
+        from var(--nue-button-base-color),
+        h,
+        s,
+        calc(l - var(--nue-button-lo) * 2)
     );
 
     --nue-button-hover-color: var(--nue-button-color);
     --nue-button-hover-bg-color: hsl(
-        from var(--nue-button-bg-color) h s calc(l - var(--nue-button-lo))
+        from var(--nue-button-bg-color),
+        h,
+        s,
+        calc(l - var(--nue-button-lo))
     );
     --nue-button-hover-border-color: hsl(
-        from var(--nue-button-border-color) h s calc(l - var(--nue-button-lo))
+        from var(--nue-button-border-color),
+        h,
+        s,
+        calc(l - var(--nue-button-lo))
     );
 
     --nue-button-active-color: var(--nue-button-color);
     --nue-button-active-bg-color: hsl(
-        from var(--nue-button-hover-bg-color) h s calc(l - var(--nue-button-lo))
+        from var(--nue-button-hover-bg-color),
+        h,
+        s,
+        calc(l - var(--nue-button-lo))
     );
     --nue-button-active-border-color: hsl(
-        from var(--nue-button-hover-border-color) h s calc(l - var(--nue-button-lo))
+        from var(--nue-button-hover-border-color),
+        h,
+        s,
+        calc(l - var(--nue-button-lo))
     );
 
     --nue-button-disable-color: var(--nue-button-color);

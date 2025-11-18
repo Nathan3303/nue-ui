@@ -4,5 +4,17 @@
     "description": "Default theme package for Nue UI",
     "private": true,
     "author": "Nathan Lee",
-    "license": "MIT"
+    "license": "MIT",
+    "files": [
+        "./shadlike",
+        "./iconfont"
+    ],
+    "exports": {
+        "./shadlike/": {
+            "import": "./shadlike/"
+        },
+        "./iconfont/": {
+            "import": "./iconfont/"
+        }
+    }
 }
