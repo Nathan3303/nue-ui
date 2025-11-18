@@ -9,9 +9,7 @@
     color: var(--nue-icon-color);
     font-size: var(--nue-icon-size);
     font-weight: var(--nue-icon-weight);
-    line-height: var(--nue-icon-size);
 
-    &.iconfont,
     &::before {
         color: inherit;
         font-size: inherit;

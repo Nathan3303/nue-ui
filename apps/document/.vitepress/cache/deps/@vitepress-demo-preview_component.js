@@ -33,7 +33,7 @@ import {
     withCtx,
     withKeys,
     withScopeId
-} from './chunk-477SOVZ3.js';
+} from './chunk-HYY3Y2FS.js';
 
 // ../../node_modules/.pnpm/@vitepress-demo-preview+com_089a2ef94ad0eee519e2b9682d84212f/node_modules/@vitepress-demo-preview/component/preview-component.js
 var Go = Object.defineProperty;

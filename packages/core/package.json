@@ -26,12 +26,13 @@
         }
     },
     "scripts": {
+        "remove-dist": "node ./scripts/remove-dist.js",
+        "touch-dts-file": "node ./scripts/touch-dts-file.js",
         "build-es": "cross-env NODE_ENV=production vite build --config vite.es.config.ts",
         "build-umd": "cross-env NODE_ENV=production vite build --config vite.umd.config.ts",
-        "build": "run-p build-es build-umd",
-        "build-es-watch": "cross-env NODE_ENV=development vite build --watch --config vite.es.config.ts",
-        "build-umd-watch": "cross-env NODE_ENV=development vite build --watch --config vite.umd.config.ts",
-        "build-watch": "run-p build-es-watch build-umd-watch"
+        "before-build": "pnpm remove-dist",
+        "after-build": "pnpm touch-dts-file",
+        "build": "pnpm before-build && run-p build-es build-umd && pnpm after-build"
     },
     "keywords": [
         "NueUI",

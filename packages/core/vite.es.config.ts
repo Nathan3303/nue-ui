@@ -1,15 +1,9 @@
 import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
 import terser from '@rollup/plugin-terser';
-import useRollupPlugin from './use-rollup-plugin.ts';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import {
-    removeOldFiles,
-    moveESStyleFiles,
-    touchGlobalTypesFile,
-    mcComponentNames
-} from './utils.ts';
+import { mcComponentNames } from './utils.ts';
 import type { PluginOption } from 'vite';
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -48,14 +42,6 @@ export default defineConfig({
                 eval: isProd,
                 keep_classnames: isDev,
                 keep_fnames: isDev
-            }
-        }),
-        useRollupPlugin({
-            name: 'es-rollup-plugin',
-            beforeBuild: () => removeOldFiles(),
-            afterBuild: () => {
-                moveESStyleFiles();
-                touchGlobalTypesFile();
             }
         })
     ],

@@ -1,4 +1,4 @@
-// ../../node_modules/.pnpm/@vue+devtools-shared@7.7.7/node_modules/@vue/devtools-shared/dist/index.js
+// ../../node_modules/.pnpm/@vue+devtools-shared@7.7.8/node_modules/@vue/devtools-shared/dist/index.js
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -569,11 +569,11 @@ function createHooks() {
     return new Hookable();
 }
 
-// ../../node_modules/.pnpm/birpc@2.5.0/node_modules/birpc/dist/index.mjs
+// ../../node_modules/.pnpm/birpc@2.8.0/node_modules/birpc/dist/index.mjs
 var { clearTimeout: clearTimeout2, setTimeout: setTimeout2 } = globalThis;
 var random = Math.random.bind(Math);
 
-// ../../node_modules/.pnpm/@vue+devtools-kit@7.7.7/node_modules/@vue/devtools-kit/dist/index.js
+// ../../node_modules/.pnpm/@vue+devtools-kit@7.7.8/node_modules/@vue/devtools-kit/dist/index.js
 var __create2 = Object.create;
 var __defProp2 = Object.defineProperty;
 var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
@@ -2770,7 +2770,10 @@ function getTimelineLayersStateFromStorage() {
             selected: ''
         };
     }
-    const state = localStorage.getItem(TIMELINE_LAYERS_STATE_STORAGE_ID);
+    const state =
+        typeof localStorage.getItem !== 'undefined'
+            ? localStorage.getItem(TIMELINE_LAYERS_STATE_STORAGE_ID)
+            : null;
     return state
         ? JSON.parse(state)
         : {

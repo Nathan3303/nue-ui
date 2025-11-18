@@ -3,44 +3,29 @@
     --nue-link-base-color: transparent;
     --nue-link-lo: 10;
 
-    --nue-link-color: hsl(220, var(--nue-hsl-s100), var(--nue-hsl-l60));
+    --nue-link-color: hsl(220 var(--nue-hsl-s100) var(--nue-hsl-l60));
     --nue-link-text-decoration: none;
     --nue-link-background-color: var(--nue-link-base-color);
     --nue-link-border-color: hsl(
-        from var(--nue-link-base-color),
-        h,
-        s,
-        calc(l - var(--nue-link-lo) * 2)
+        from var(--nue-link-base-color) h s calc(l - var(--nue-link-lo) * 2)
     );
 
-    --nue-link-hover-color: hsl(from var(--nue-link-color), h, s, calc(l - var(--nue-link-lo)));
+    --nue-link-hover-color: hsl(from var(--nue-link-color) h s calc(l - var(--nue-link-lo)));
     --nue-link-hover-text-decoration: underline;
     --nue-link-hover-background-color: hsl(
-        from var(--nue-link-background-color),
-        h,
-        s,
-        calc(l - var(--nue-link-lo))
+        from var(--nue-link-background-color) h s calc(l - var(--nue-link-lo))
     );
     --nue-link-hover-border-color: hsl(
-        from var(--nue-link-border-color),
-        h,
-        s,
-        calc(l - var(--nue-link-lo))
+        from var(--nue-link-border-color) h s calc(l - var(--nue-link-lo))
     );
 
     --nue-link-active-color: var(--nue-link-hover-color);
     --nue-link-active-text-decoration: var(--nue-link-hover-text-decoration);
     --nue-link-active-background-color: hsl(
-        from var(--nue-link-hover-background-color),
-        h,
-        s,
-        calc(l - var(--nue-link-lo))
+        from var(--nue-link-hover-background-color) h s calc(l - var(--nue-link-lo))
     );
     --nue-link-active-border-color: hsl(
-        from var(--nue-link-hover-border-color),
-        h,
-        s,
-        calc(l - var(--nue-link-lo))
+        from var(--nue-link-hover-border-color) h s calc(l - var(--nue-link-lo))
     );
 
     --nue-link-actived-color: var(--nue-link-active-color);
@@ -48,12 +33,7 @@
     --nue-link-actived-background-color: var(--nue-link-active-background-color);
     --nue-link-actived-border-color: var(--nue-link-active-border-color);
 
-    --nue-link-disable-color: hsl(
-        from var(--nue-link-color),
-        h,
-        s,
-        calc(l + var(--nue-link-lo) * 2)
-    );
+    --nue-link-disable-color: hsl(from var(--nue-link-color) h s calc(l + var(--nue-link-lo) * 2));
     --nue-link-disable-text-decoration: var(--nue-link-text-decoration);
     --nue-link-disable-background-color: var(--nue-link-background-color);
     --nue-link-disable-border-color: var(--nue-link-border-color);

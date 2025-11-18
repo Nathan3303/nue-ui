@@ -6,15 +6,17 @@ export default {
     plugins: [
         postcssNano({
             preset: advancedPreset({
+                autoprefixer: true,
                 discardComments: { removeAll: true },
                 discardDuplicates: true,
                 discardEmpty: true,
-                // discardUnused: false
-                // discardOverridden: false
+                discardUnused: false,
+                discardOverridden: true,
                 mergeRules: true,
-                autoprefixer: true,
                 normalizeWhitespace: true,
-                calc: false
+                calc: false,
+                zindex: false,
+                reduceIdents: false
             }),
             plugins: [postcssNested]
         })

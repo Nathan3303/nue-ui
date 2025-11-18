@@ -1,5 +1,4 @@
 import { defineConfig } from 'vitepress';
-// @ts-expect-error  临时忽略类型检查，等待上游库修复 package.json exports 字段
 import { componentPreview, containerPreview } from '@vitepress-demo-preview/plugin';
 
 // https://vitepress.dev/reference/site-config
@@ -190,7 +189,15 @@ export default defineConfig({
     },
     head: [
         ['link', { rel: 'icon', href: '/nue-ui/favicon.ico' }],
-        ['link', { ref: 'stylesheet', href: 'https://fonts.font.im/css?family=Poppins' }]
+        ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+        ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com' }],
+        [
+            'link',
+            {
+                rel: 'stylesheet',
+                href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+            }
+        ]
     ],
     markdown: {
         config(md) {

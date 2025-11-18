@@ -1,7 +1,7 @@
-import { notNullish, toArray, tryOnScopeDispose, unrefElement } from './chunk-RD6636AA.js';
-import { computed, shallowRef, toValue, watch } from './chunk-477SOVZ3.js';
+import { notNullish, toArray, tryOnScopeDispose, unrefElement } from './chunk-5HQGAAWS.js';
+import { computed, shallowRef, toValue, watch } from './chunk-HYY3Y2FS.js';
 
-// ../../node_modules/.pnpm/tabbable@6.2.0/node_modules/tabbable/dist/index.esm.js
+// ../../node_modules/.pnpm/tabbable@6.3.0/node_modules/tabbable/dist/index.esm.js
 var candidateSelectors = [
     'input:not([inert])',
     'select:not([inert])',
@@ -36,7 +36,7 @@ var getRootNode =
         : function (element) {
               return element === null || element === void 0 ? void 0 : element.ownerDocument;
           };
-var isInert = function isInert2(node, lookUp) {
+var _isInert = function isInert(node, lookUp) {
     var _node$getAttribute;
     if (lookUp === void 0) {
         lookUp = true;
@@ -48,7 +48,7 @@ var isInert = function isInert2(node, lookUp) {
               ? void 0
               : _node$getAttribute.call(node, 'inert');
     var inert = inertAtt === '' || inertAtt === 'true';
-    var result = inert || (lookUp && node && isInert2(node.parentNode));
+    var result = inert || (lookUp && node && _isInert(node.parentNode));
     return result;
 };
 var isContentEditable = function isContentEditable2(node) {
@@ -62,7 +62,7 @@ var isContentEditable = function isContentEditable2(node) {
     return attValue === '' || attValue === 'true';
 };
 var getCandidates = function getCandidates2(el, includeContainer, filter) {
-    if (isInert(el)) {
+    if (_isInert(el)) {
         return [];
     }
     var candidates = Array.prototype.slice.apply(el.querySelectorAll(candidateSelector));
@@ -72,7 +72,7 @@ var getCandidates = function getCandidates2(el, includeContainer, filter) {
     candidates = candidates.filter(filter);
     return candidates;
 };
-var getCandidatesIteratively = function getCandidatesIteratively2(
+var _getCandidatesIteratively = function getCandidatesIteratively(
     elements,
     includeContainer,
     options
@@ -81,13 +81,13 @@ var getCandidatesIteratively = function getCandidatesIteratively2(
     var elementsToCheck = Array.from(elements);
     while (elementsToCheck.length) {
         var element = elementsToCheck.shift();
-        if (isInert(element, false)) {
+        if (_isInert(element, false)) {
             continue;
         }
         if (element.tagName === 'SLOT') {
             var assigned = element.assignedElements();
             var content = assigned.length ? assigned : element.children;
-            var nestedCandidates = getCandidatesIteratively2(content, true, options);
+            var nestedCandidates = _getCandidatesIteratively(content, true, options);
             if (options.flatten) {
                 candidates.push.apply(candidates, nestedCandidates);
             } else {
@@ -109,10 +109,10 @@ var getCandidatesIteratively = function getCandidatesIteratively2(
                 element.shadowRoot || // check for an undisclosed shadow
                 (typeof options.getShadowRoot === 'function' && options.getShadowRoot(element));
             var validShadowRoot =
-                !isInert(shadowRoot, false) &&
+                !_isInert(shadowRoot, false) &&
                 (!options.shadowRootFilter || options.shadowRootFilter(element));
             if (shadowRoot && validShadowRoot) {
-                var _nestedCandidates = getCandidatesIteratively2(
+                var _nestedCandidates = _getCandidatesIteratively(
                     shadowRoot === true ? element.children : shadowRoot.children,
                     true,
                     options
@@ -262,6 +262,24 @@ var isZeroArea = function isZeroArea2(node) {
 var isHidden = function isHidden2(node, _ref) {
     var displayCheck = _ref.displayCheck,
         getShadowRoot = _ref.getShadowRoot;
+    if (displayCheck === 'full-native') {
+        if ('checkVisibility' in node) {
+            var visible = node.checkVisibility({
+                // Checking opacity might be desirable for some use cases, but natively,
+                // opacity zero elements _are_ focusable and tabbable.
+                checkOpacity: false,
+                opacityProperty: false,
+                contentVisibilityAuto: true,
+                visibilityProperty: true,
+                // This is an alias for `visibilityProperty`. Contemporary browsers
+                // support both. However, this alias has wider browser support (Chrome
+                // >= 105 and Firefox >= 106, vs. Chrome >= 121 and Firefox >= 122), so
+                // we include it anyway.
+                checkVisibilityCSS: true
+            });
+            return !visible;
+        }
+    }
     if (getComputedStyle(node).visibility === 'hidden') {
         return true;
     }
@@ -270,7 +288,13 @@ var isHidden = function isHidden2(node, _ref) {
     if (matches.call(nodeUnderDetails, 'details:not([open]) *')) {
         return true;
     }
-    if (!displayCheck || displayCheck === 'full' || displayCheck === 'legacy-full') {
+    if (
+        !displayCheck ||
+        displayCheck === 'full' || // full-native can run this branch when it falls through in case
+        // Element#checkVisibility is unsupported
+        displayCheck === 'full-native' ||
+        displayCheck === 'legacy-full'
+    ) {
         if (typeof getShadowRoot === 'function') {
             var originalNode = node;
             while (node) {
@@ -328,7 +352,7 @@ var isNodeMatchingSelectorFocusable = function isNodeMatchingSelectorFocusable2(
         node.disabled || // we must do an inert look up to filter out any elements inside an inert ancestor
         //  because we're limited in the type of selectors we can use in JSDom (see related
         //  note related to `candidateSelectors`)
-        isInert(node) ||
+        _isInert(node) ||
         isHiddenInput(node) ||
         isHidden(node, options) || // For a details element with a summary, the summary element gets the focus
         isDetailsWithSummary(node) ||
@@ -348,21 +372,21 @@ var isNodeMatchingSelectorTabbable = function isNodeMatchingSelectorTabbable2(op
     }
     return true;
 };
-var isValidShadowRootTabbable = function isValidShadowRootTabbable2(shadowHostNode) {
+var isShadowRootTabbable = function isShadowRootTabbable2(shadowHostNode) {
     var tabIndex = parseInt(shadowHostNode.getAttribute('tabindex'), 10);
     if (isNaN(tabIndex) || tabIndex >= 0) {
         return true;
     }
     return false;
 };
-var sortByOrder = function sortByOrder2(candidates) {
+var _sortByOrder = function sortByOrder(candidates) {
     var regularTabbables = [];
     var orderedTabbables = [];
     candidates.forEach(function (item, i) {
         var isScope = !!item.scopeParent;
         var element = isScope ? item.scopeParent : item;
         var candidateTabindex = getSortOrderTabIndex(element, isScope);
-        var elements = isScope ? sortByOrder2(item.candidates) : element;
+        var elements = isScope ? _sortByOrder(item.candidates) : element;
         if (candidateTabindex === 0) {
             isScope
                 ? regularTabbables.push.apply(regularTabbables, elements)
@@ -389,11 +413,11 @@ var tabbable = function tabbable2(container, options) {
     options = options || {};
     var candidates;
     if (options.getShadowRoot) {
-        candidates = getCandidatesIteratively([container], options.includeContainer, {
+        candidates = _getCandidatesIteratively([container], options.includeContainer, {
             filter: isNodeMatchingSelectorTabbable.bind(null, options),
             flatten: false,
             getShadowRoot: options.getShadowRoot,
-            shadowRootFilter: isValidShadowRootTabbable
+            shadowRootFilter: isShadowRootTabbable
         });
     } else {
         candidates = getCandidates(
@@ -402,13 +426,13 @@ var tabbable = function tabbable2(container, options) {
             isNodeMatchingSelectorTabbable.bind(null, options)
         );
     }
-    return sortByOrder(candidates);
+    return _sortByOrder(candidates);
 };
 var focusable = function focusable2(container, options) {
     options = options || {};
     var candidates;
     if (options.getShadowRoot) {
-        candidates = getCandidatesIteratively([container], options.includeContainer, {
+        candidates = _getCandidatesIteratively([container], options.includeContainer, {
             filter: isNodeMatchingSelectorFocusable.bind(null, options),
             flatten: true,
             getShadowRoot: options.getShadowRoot
@@ -444,7 +468,7 @@ var isFocusable = function isFocusable2(node, options) {
     return isNodeMatchingSelectorFocusable(options, node);
 };
 
-// ../../node_modules/.pnpm/focus-trap@7.6.5/node_modules/focus-trap/dist/focus-trap.esm.js
+// ../../node_modules/.pnpm/focus-trap@7.6.6/node_modules/focus-trap/dist/focus-trap.esm.js
 function _arrayLikeToArray(r, a) {
     (null == a || a > r.length) && (a = r.length);
     for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
@@ -1303,7 +1327,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
     return trap;
 };
 
-// ../../node_modules/.pnpm/@vueuse+integrations@12.8.2_ac3dcb368f07a6a146661baa37c672d8/node_modules/@vueuse/integrations/useFocusTrap.mjs
+// ../../node_modules/.pnpm/@vueuse+integrations@12.8.2_ecaebf11dccda199d0ecf1ac51df8b73/node_modules/@vueuse/integrations/useFocusTrap.mjs
 function useFocusTrap(target, options = {}) {
     let trap;
     const { immediate, ...focusTrapOptions } = options;
@@ -1366,13 +1390,13 @@ export { useFocusTrap };
 
 tabbable/dist/index.esm.js:
   (*!
-  * tabbable 6.2.0
+  * tabbable 6.3.0
   * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
   *)
 
 focus-trap/dist/focus-trap.esm.js:
   (*!
-  * focus-trap 7.6.5
+  * focus-trap 7.6.6
   * @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
   *)
 */

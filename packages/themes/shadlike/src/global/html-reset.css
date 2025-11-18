@@ -6,6 +6,7 @@
     overflow: hidden;
     font-size: var(--nue-primary-font-size-base);
     font-family: var(--nue-primary-font-family), sans-serif;
+    font-optical-sizing: auto;
     font-weight: var(--nue-primary-font-weight);
     line-height: var(--nue-primary-line-height);
     color: var(--nue-primary-text-color);

@@ -3,8 +3,8 @@
         <nue-input v-model="filterText" clearable icon="filter" placeholder="筛选" />
         <div class="icons">
             <nue-div v-for="icon in filteredIcons" :key="icon" class="icon-block">
-                <nue-icon size="1.75rem" :name="icon" />
-                <nue-text size=".875rem">{{ icon }}</nue-text>
+                <nue-icon size="2rem" :name="icon" />
+                <nue-text size=".75rem">{{ icon }}</nue-text>
             </nue-div>
         </div>
     </nue-div>
@@ -15,9 +15,30 @@ import { computed, ref } from 'vue';
 
 const filterText = ref('');
 const icons = [
+    'blank',
+    'arrow-right-more',
+    'arrow-left-more',
+    'menu',
+    'time',
+    'projects',
+    'board',
+    'files',
+    'drive',
+    'history',
+    'chat',
+    'subscribe',
+    'theme',
+    'mail',
+    'clear-circle',
+    'clear',
+    'arrow-left-circle',
+    'clear-circle-fill',
+    'arrow-down-circle',
+    'arrow-up-circle',
+    'arrow-right-circle',
+    'inbox',
     'archive',
     'inbox-fill',
-    'inbox',
     'square-check-fill',
     'square-check',
     'square',
@@ -29,27 +50,16 @@ const icons = [
     'connection',
     'logo',
     'lock',
-    'files',
-    'menu',
-    'arrow-right-more',
-    'arrow-left-more',
-    'projects',
-    'board',
-    'drive',
     'plus',
     'location',
     'download',
     'upload',
     'picture',
-    'history',
-    'chat',
-    'subscribe',
     'refresh',
     'warning',
     'setting',
     'loading',
     'eye',
-    'clear',
     'fail',
     'tag',
     'more-vertical',
@@ -70,10 +80,9 @@ const icons = [
     'heart-fill',
     'success-fill',
     'completed',
+    'invoices',
     'plus-circle-fill',
     'more2',
-    'mail',
-    'theme',
     'scan',
     'eye-close',
     'arrow-right',

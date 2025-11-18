@@ -1,10 +1,8 @@
 import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
-import useRollupPlugin from './use-rollup-plugin.ts';
 import terser from '@rollup/plugin-terser';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { removeOldFiles, moveUMDStyleFiles } from './utils.ts';
 import type { PluginOption } from 'vite';
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -29,11 +27,6 @@ export default defineConfig({
                     '@TEST': JSON.stringify(isTest)
                 }
             }
-        }),
-        useRollupPlugin({
-            name: 'umd-rollup-plugin',
-            beforeBuild: () => removeOldFiles(),
-            afterBuild: () => moveUMDStyleFiles()
         })
     ],
     build: {
