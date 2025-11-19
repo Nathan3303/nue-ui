@@ -1,0 +1,1 @@
+import{_ as o,C as n,b as t,o as c}from"./framework.Cf4lWgu7.js";const r={};function s(_,a){const e=n("nue-empty");return c(),t(e,{"image-size":"4rem"})}const p=o(r,[["render",s]]);export{p as default};

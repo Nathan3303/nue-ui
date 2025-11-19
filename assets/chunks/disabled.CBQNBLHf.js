@@ -1,1 +1,0 @@
-import{_ as o,C as n,b as s,o as a,w as r,a as _}from"./framework.DPj99A0l.js";const c={};function d(i,e){const t=n("nue-link");return a(),s(t,{disabled:"",href:"https://www.baidu.com"},{default:r(()=>e[0]||(e[0]=[_("百度",-1)])),_:1,__:[0]})}const f=o(c,[["render",d]]);export{f as default};

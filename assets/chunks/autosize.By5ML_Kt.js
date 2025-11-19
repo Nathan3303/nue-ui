@@ -1,0 +1,1 @@
+import{p as l,C as n,b as r,o as s}from"./framework.Cf4lWgu7.js";const _={__name:"autosize",setup(u){const e=l("");return(p,o)=>{const a=n("nue-textarea");return s(),r(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),placeholder:"请输入内容",autosize:""},null,8,["modelValue"])}}};export{_ as default};

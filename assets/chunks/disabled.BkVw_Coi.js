@@ -1,0 +1,1 @@
+import{_ as o,C as n,b as s,o as a,w as r,a as c}from"./framework.Cf4lWgu7.js";const _={};function d(u,e){const t=n("nue-button");return a(),s(t,{disabled:""},{default:r(()=>[...e[0]||(e[0]=[c("禁用状态",-1)])]),_:1})}const l=o(_,[["render",d]]);export{l as default};

@@ -1,1 +1,0 @@
-import{_ as a,C as n,b as o,o as r,w as s,a as c}from"./framework.DPj99A0l.js";const _={};function f(p,e){const t=n("nue-avatar");return r(),o(t,{src:"/abc.jpg"},{default:s(()=>e[0]||(e[0]=[c("A",-1)])),_:1,__:[0]})}const x=a(_,[["render",f]]);export{x as default};

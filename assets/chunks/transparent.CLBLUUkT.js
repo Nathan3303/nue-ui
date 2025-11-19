@@ -1,0 +1,1 @@
+import{_ as n,C as o,b as r,o as s,w as a,j as c}from"./framework.Cf4lWgu7.js";const d={};function p(_,e){const t=o("nue-dropdown");return s(),r(t,{transparent:"","trigger-text":"下拉选择"},{default:a(()=>[...e[0]||(e[0]=[c("li",{class:"nue-dropdown-item"},"下拉选项 ...",-1)])]),_:1})}const i=n(d,[["render",p]]);export{i as default};

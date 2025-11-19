@@ -1,1 +1,0 @@
-import{_ as t,C as n,b as c,o as a,w as s,G as o}from"./framework.DPj99A0l.js";const p={};function _(i,u){const e=n("nue-progress"),r=n("nue-div");return a(),c(r,{align:"center",gap:"3rem",wrap:"nowrap"},{default:s(()=>[o(e,{percentage:64}),o(e,{percentage:64,type:"circle"})]),_:1})}const f=t(p,[["render",_]]);export{f as default};

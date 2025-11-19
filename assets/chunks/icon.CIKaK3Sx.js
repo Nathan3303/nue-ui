@@ -1,1 +1,0 @@
-import{_ as t,C as n,b as c,o as r,w as s,a}from"./framework.DPj99A0l.js";const _={};function u(f,e){const o=n("nue-button");return r(),c(o,{icon:"search"},{default:s(()=>e[0]||(e[0]=[a("搜索 (Search)",-1)])),_:1,__:[0]})}const p=t(_,[["render",u]]);export{p as default};

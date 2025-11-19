@@ -1,0 +1,1 @@
+import{_ as o,C as n,b as s,o as a,w as c,a as r}from"./framework.Cf4lWgu7.js";const _={};function u(f,t){const e=n("nue-button");return a(),s(e,{theme:"custom"},{default:c(()=>[...t[0]||(t[0]=[r("按钮 Button",-1)])]),_:1})}const m=o(_,[["render",u],["__scopeId","data-v-bf8a6e8b"]]);export{m as default};

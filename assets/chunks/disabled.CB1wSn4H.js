@@ -1,0 +1,1 @@
+import{_ as o,C as n,b as r,o as t}from"./framework.Cf4lWgu7.js";const c={};function s(_,a){const e=n("nue-dropdown");return t(),r(e,{disabled:"","trigger-text":"禁用状态"})}const p=o(c,[["render",s]]);export{p as default};

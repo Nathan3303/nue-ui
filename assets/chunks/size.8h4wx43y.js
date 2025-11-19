@@ -1,1 +1,0 @@
-import{_ as o,C as t,b as c,o as s,w as _,G as a}from"./framework.DPj99A0l.js";const r={};function i(d,p){const e=t("nue-avatar"),n=t("nue-div");return s(),c(n,{align:"center"},{default:_(()=>[a(e,{size:"36px"}),a(e,{size:"var(--custom-size)"})]),_:1})}const f=o(r,[["render",i],["__scopeId","data-v-649bcf51"]]);export{f as default};

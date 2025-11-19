@@ -1,0 +1,1 @@
+import{p as l,C as r,b as n,o as s}from"./framework.Cf4lWgu7.js";const _={__name:"rows",setup(u){const e=l("");return(p,o)=>{const a=r("nue-textarea");return s(),n(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),placeholder:"请输入内容 ...",rows:2},null,8,["modelValue"])}}};export{_ as default};

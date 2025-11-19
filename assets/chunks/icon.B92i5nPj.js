@@ -1,0 +1,1 @@
+import{d as t,p as l,C as p,b as u,o as r}from"./framework.Cf4lWgu7.js";const d=t({__name:"icon",setup(s){const e=l("");return(c,o)=>{const n=p("nue-input");return r(),u(n,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=a=>e.value=a),placeholder:"Search",icon:"search"},null,8,["modelValue"])}}});export{d as default};

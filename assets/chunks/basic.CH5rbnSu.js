@@ -1,0 +1,1 @@
+import{_ as t,C as s,b as r,o as a,w as c,j as o}from"./framework.Cf4lWgu7.js";const d={};function _(i,e){const n=s("nue-dropdown");return a(),r(n,{"trigger-text":"点击打开下拉菜单"},{default:c(()=>[...e[0]||(e[0]=[o("li",{class:"nue-dropdown-item"},"下拉菜单选项 A",-1),o("li",{class:"nue-dropdown-item"},"下拉菜单选项 B",-1)])]),_:1})}const l=t(d,[["render",_]]);export{l as default};

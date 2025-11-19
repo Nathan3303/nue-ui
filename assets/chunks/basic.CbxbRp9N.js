@@ -1,1 +1,0 @@
-import{d as a,p as l,C as p,b as u,o as s}from"./framework.DPj99A0l.js";const d=a({__name:"basic",setup(r){const e=l("");return(m,o)=>{const n=p("nue-input");return s(),u(n,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),placeholder:"请输入内容 ..."},null,8,["modelValue"])}}});export{d as default};

@@ -1,0 +1,1 @@
+import{_ as n,C as o,b as a,o as r,w as s,a as c}from"./framework.Cf4lWgu7.js";const _={};function f(l,e){const t=o("nue-link");return r(),a(t,{href:"https://www.baidu.com",target:"_blank"},{default:s(()=>[...e[0]||(e[0]=[c("百度",-1)])]),_:1})}const p=n(_,[["render",f]]);export{p as default};
