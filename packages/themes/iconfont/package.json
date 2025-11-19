@@ -16,9 +16,9 @@
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build-css": "postcss src/**/*.css --dir dist --base src --no-map",
-        "move-woff2": "node src/move-woff2.js",
-        "remove-dist": "node src/remove-dist.js",
+        "build-css": "postcss src/index.css src/**/*.css --dir dist --base src --no-map --verbose",
+        "move-woff2": "node ./scripts/move-woff2.js",
+        "remove-dist": "node ./scripts/remove-dist.js",
         "build": "pnpm remove-dist && pnpm build-css && pnpm move-woff2"
     },
     "repository": {
