@@ -16,7 +16,7 @@
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build-css": "npx postcss src/**/*.css --dir dist --base src",
+        "build-css": "postcss src/**/*.css --dir dist --base src",
         "remove-dist": "node src/remove-dist.js",
         "build": "pnpm remove-dist && pnpm build-css"
     },
