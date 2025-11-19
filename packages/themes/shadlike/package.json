@@ -16,7 +16,7 @@
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build-css": "postcss src/**/*.css --dir dist --base src --no-map",
+        "build-css": "postcss src/**/*.css --dir dist --base src --no-map --verbose",
         "remove-dist": "node ./scripts/remove-dist.js",
         "build": "pnpm remove-dist && pnpm build-css"
     },
