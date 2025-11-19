@@ -1,12 +1,12 @@
 {
     "name": "@nue-ui/repo",
-    "version": "0.1.0",
+    "version": "0.2.4",
     "description": "NueUI repo",
     "author": "Nathan Lee",
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "test": "echo \"todo\"",
+        "test": "echo \"NueUI Test\"",
         "lint": "npx eslint -c eslint.config.mjs",
         "lint-on-debug": "npx eslint -c eslint.config.mjs --debug",
         "lint:lint-staged": "lint-staged",
@@ -16,7 +16,9 @@
         "document": "pnpm --filter @nue-ui/document",
         "playground": "pnpm --filter @nue-ui/playground",
         "histoire": "pnpm --filter @nue-ui/histoire",
-        "shadlike": "pnpm --filter nue-ui-theme-shadlike"
+        "shadlike-theme": "pnpm --filter nue-ui-theme-shadlike",
+        "iconfont": "pnpm --filter nue-ui-iconfont",
+        "build": "pnpm core build && pnpm shadlike-theme build && pnpm iconfont build"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx,json,css,scss,md}": [
@@ -26,16 +28,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/nathanlee323/nue-ui.git"
+        "url": "https://github.com/Nathan3303/nue-ui"
     },
     "keywords": [
         "nue-ui",
         "nue",
-        "nuxt",
         "ui",
         "components"
     ],
-    "bugs": {},
     "devDependencies": {
         "@eslint/js": "^9.29.0",
         "@types/lodash-es": "^4.17.12",
@@ -67,16 +67,17 @@
         "typescript-eslint": "^8.34.1",
         "vite": "6.3.4",
         "vitest": "3.0.5",
-        "vue": "^3.5.17",
         "vue-tsc": "^1.8.27"
     },
     "dependencies": {
         "nue-ui": "workspace:*",
+        "nue-ui-theme-shadlike": "workspace:*",
+        "nue-ui-iconfont": "workspace:*",
         "@nue-ui/components": "workspace:*",
         "@nue-ui/hooks": "workspace:*",
-        "@nue-ui/assets": "workspace:*",
         "@nue-ui/utils": "workspace:*",
-        "nue-ui-theme-shadlike": "workspace:*",
+        "@nue-ui/themes": "workspace:*",
+        "vue": "^3.5.17",
         "lodash-es": "^4.17.21"
     }
 }

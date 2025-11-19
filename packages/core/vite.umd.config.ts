@@ -1,11 +1,9 @@
 import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
-import useRollupPlugin from './use-rollup-plugin.ts';
 import terser from '@rollup/plugin-terser';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { compression } from 'vite-plugin-compression2';
-import { removeOldFiles, moveUMDStyleFiles } from './utils.ts';
+import type { PluginOption } from 'vite';
 
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = process.env.NODE_ENV === 'development';
@@ -17,16 +15,10 @@ export default defineConfig({
         dts({
             outDir: 'dist/types',
             tsconfigPath: 'tsconfig.build.json'
-        }),
-        compression({ include: /\.(cjs|css)$/i }),
-        useRollupPlugin({
-            name: 'umd-rollup-plugin',
-            beforeBuild: () => removeOldFiles(),
-            afterBuild: () => moveUMDStyleFiles()
-        }),
+        }) as PluginOption,
         terser({
             compress: {
-                drop_console: ['log'],
+                drop_console: ['log', 'warn'],
                 drop_debugger: true,
                 passes: 3,
                 global_defs: {
@@ -49,14 +41,12 @@ export default defineConfig({
             external: ['vue'],
             output: {
                 exports: 'named',
-                globals: {
-                    vue: 'Vue'
-                },
+                globals: { vue: 'Vue' },
                 assetFileNames: assetInfo => {
-                    if (assetInfo.name === 'style.css') {
+                    if (assetInfo.type === 'asset' && assetInfo.name?.endsWith('.css')) {
                         return 'index.css';
                     }
-                    return assetInfo.name as string;
+                    return '[name]-[hash][extname]';
                 }
             }
         }

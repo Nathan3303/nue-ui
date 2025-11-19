@@ -1,0 +1,35 @@
+{
+    "name": "nue-ui-iconfont",
+    "version": "0.1.1",
+    "description": "Iconfonts for NueUI",
+    "author": "Nathan Lee",
+    "license": "MIT",
+    "type": "module",
+    "files": [
+        "./dist"
+    ],
+    "exports": {
+        "./dist/": {
+            "require": "./dist/",
+            "import": "./dist/"
+        }
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build-css": "npx postcss src/**/*.css --dir dist --base src --no-map",
+        "move-woff2": "node src/move-woff2.js",
+        "remove-dist": "node src/remove-dist.js",
+        "build": "pnpm remove-dist && pnpm build-css && pnpm move-woff2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Nathan3303/nue-ui.git"
+    },
+    "devDependencies": {
+        "shelljs": "^0.8.5",
+        "postcss-cli": "^11.0.1",
+        "postcss-nested": "^6.2.0",
+        "autoprefixer": "^10.4.22",
+        "cssnano": "^7.1.0"
+    }
+}

@@ -2,12 +2,9 @@
 <html lang="en" class="nue-html">
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-        <link href="https://fonts.googleapis.com" rel="preconnect">
-        <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-            rel="stylesheet">
+        <link href="/vite.svg" rel="icon" type="image/svg+xml" />
+        <link href="/fonts/pf/font.css" rel="stylesheet" />
+        <link href="/fonts/poppins/font.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>NueUI Playground</title>
     </head>
@@ -15,4 +12,11 @@
         <div id="app"></div>
         <script type="module" src="/src/main.ts"></script>
     </body>
+    <style>
+        .nue-html {
+            --nue-primary-font-family:
+                'Poppins-Regular', 'pf', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji',
+                sans-serif;
+        }
+    </style>
 </html>

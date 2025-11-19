@@ -1,0 +1,23 @@
+.nue-empty {
+    --nue-empty-image-size: 6rem;
+    --nue-empty-image-width: var(--nue-empty-image-size);
+    --nue-empty-image-height: var(--nue-empty-image-size);
+}
+
+.nue-empty {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .nue-empty__image {
+        width: var(--nue-empty-image-width);
+        height: var(--nue-empty-image-height);
+        border-radius: var(--nue-primary-radius);
+        object-fit: contain;
+    }
+
+    .nue-empty__description {
+        font-size: var(--nue-text-df);
+        color: var(--nue-primary-text-color);
+    }
+}

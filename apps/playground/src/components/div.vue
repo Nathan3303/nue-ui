@@ -44,31 +44,43 @@
         </nue-div>
     </demo>
     <demo title="使用滚动">
-        <nue-div overflow="auto">
-            <nue-button v-for="i in 12" :key="i">按钮</nue-button>
+        <nue-div vertical>
+            <nue-div width="fit-content">
+                <nue-button>按钮</nue-button>
+            </nue-div>
+            <nue-div overflow="auto">
+                <nue-button v-for="i in 12" :key="i">按钮</nue-button>
+            </nue-div>
         </nue-div>
     </demo>
     <demo title="水平嵌套自动适应">
-        <nue-div>
+        <nue-div auto-fit>
             <nue-button>按钮</nue-button>
-            <nue-div>
+            <nue-div flex="1">
                 <nue-button>按钮</nue-button>
             </nue-div>
             <nue-button>按钮</nue-button>
         </nue-div>
     </demo>
     <demo title="垂直嵌套自动适应">
-        <nue-div vertical>
-            <nue-button>按钮</nue-button>
-            <nue-div justify="center">
+        <nue-div vertical auto-fit>
+            <nue-div justify="space-between">
+                <nue-text>Title</nue-text>
+                <nue-button theme="pure">Close</nue-button>
+            </nue-div>
+            <nue-text>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat eveniet, eaque iste
+                iure atque, voluptatum sed laborum corporis quae, non soluta. Repellat odio eaque
+                rem reprehenderit molestiae quod tenetur sunt!
+            </nue-text>
+            <nue-div justify="flex-end">
                 <nue-button>按钮</nue-button>
             </nue-div>
-            <nue-button>按钮</nue-button>
         </nue-div>
     </demo>
 </template>
 
 <script lang="ts" setup>
 import Demo from '../layouts/demo.vue';
-import { NueDiv, NueButton } from '@nue-ui/components';
+import { NueDiv, NueButton, NueText } from '@nue-ui/components';
 </script>

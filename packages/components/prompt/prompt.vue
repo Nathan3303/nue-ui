@@ -57,7 +57,6 @@ import NueOverlay from '../overlay/overlay.vue';
 import { NueButton, NueInput, NueTextarea, NueText } from '@nue-ui/components';
 import { parseTheme, parsePopupItemAnimation } from '@nue-ui/utils';
 import type { NuePromptProps } from './types';
-import './prompt.css';
 
 defineOptions({ name: 'NuePromptNode' });
 const props = withDefaults(defineProps<NuePromptProps>(), {

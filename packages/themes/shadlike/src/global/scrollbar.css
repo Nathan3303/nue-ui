@@ -1,0 +1,37 @@
+.nue-div,
+.nue-header,
+.nue-main,
+.nue-aside,
+.nue-content,
+.nue-footer,
+.nue-infinite-scroll,
+.nue-collapse,
+.nue-collapse-item__content,
+.nue-empty,
+.nue-overlay,
+.nue-select,
+.nue-tooltip {
+    scrollbar-width: thin;
+    scrollbar-color: var(--nue-primary-color-400) transparent;
+
+    &::-webkit-scrollbar {
+        width: var(--nue-primary-radius);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--nue-primary-color-400);
+        border-radius: var(--nue-primary-radius);
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+}

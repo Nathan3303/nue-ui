@@ -1,8 +1,0 @@
-{
-    "name": "@nue-ui/assets",
-    "description": "NueUI assets package",
-    "private": true,
-    "main": "index.ts",
-    "author": "Nathan Lee",
-    "license": "MIT"
-}

@@ -1,0 +1,29 @@
+.nue-html {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: var(--nue-primary-font-size-base);
+    font-family: var(--nue-primary-font-family), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: var(--nue-primary-font-weight);
+    line-height: var(--nue-primary-line-height);
+    color: var(--nue-primary-text-color);
+
+    /* Basic vue support */
+
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        margin: 0;
+        padding: 0;
+
+        #app {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

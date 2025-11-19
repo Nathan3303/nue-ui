@@ -65,20 +65,6 @@ export const customLayoutAsideLinks = [
         route: '/custom/custom1',
         text: '自定义演练 1'
     },
-    { route: '/custom/custom2', text: '自定义演练 2' }
-];
-
-export const shadlikeLayoutAsideLinks = [
-    { route: '/shadlike/button', text: 'Button 按钮' },
-    { route: '/shadlike/link', text: 'Link 链接' },
-    { route: '/shadlike/avatar', text: 'Avatar 头像' },
-    { route: '/shadlike/collapse', text: 'Collapse 折叠面板' },
-    { route: '/shadlike/checkbox', text: 'Checkbox 复选框' },
-    { route: '/shadlike/div', text: 'Div 弹性盒' },
-    { route: '/shadlike/badge', text: 'Badge 徽标' },
-    { route: '/shadlike/dialog', text: 'Dialog 对话框' },
-    { route: '/shadlike/dropdown', text: 'Dropdown 下拉列表' },
-    { route: '/shadlike/progress', text: 'Progress 进度条' },
-    { route: '/shadlike/input', text: 'Input 输入框' },
-    { route: '/shadlike/textarea', text: 'Textarea 富文本输入框' }
+    { route: '/custom/custom2', text: '自定义演练 2' },
+    { route: '/custom/custom3', text: '自定义演练 3' }
 ];

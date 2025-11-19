@@ -1,0 +1,6 @@
+:root {
+    --vp-font-family-base:
+        'Poppins', 'Noto Sans SC', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji', sans-serif;
+    --nue-primary-font-family: var(--vp-font-family-base);
+}

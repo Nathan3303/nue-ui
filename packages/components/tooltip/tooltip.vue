@@ -32,7 +32,6 @@ import { usePopper, usePopperController } from '@nue-ui/hooks';
 import { parseTheme } from '@nue-ui/utils';
 import NueText from '../text/text.vue';
 import type { NueTooltipProps } from './types';
-import './tooltip.css';
 
 defineOptions({ name: 'NueTooltip' });
 const props = withDefaults(defineProps<NueTooltipProps>(), {

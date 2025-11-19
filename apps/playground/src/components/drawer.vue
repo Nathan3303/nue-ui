@@ -74,10 +74,18 @@
             这是一个指定了关闭抽屉时回调的抽屉
         </nue-drawer>
     </demo>
+    <demo title="抽屉组件元素引用">
+        <nue-div>
+            <nue-button @click="drawerRef?.open()">打开抽屉</nue-button>
+        </nue-div>
+        <nue-drawer v-model="reference.visible" ref="drawerRef" title="抽屉组件元素引用">
+            <nue-button @click="drawerRef?.close()">关闭抽屉</nue-button>
+        </nue-drawer>
+    </demo>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { NueDiv, NueButton, NueDrawer, NueText, NueConfirm } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
 
@@ -87,11 +95,12 @@ const allowCloseByOverlay = reactive({ visible: false });
 const multiple = reactive({ visible1: false, visible2: false });
 const events = reactive({ visible: false });
 const closeCallback = reactive({ visible: false });
+const reference = reactive({ visible: false });
+const drawerRef = ref<InstanceType<typeof NueDrawer>>();
 
-const handleOnClose = (done: () => void) => {
-    NueConfirm({ title: '确认关闭抽屉吗？' }).then(([isByCancel]) => {
-        if (isByCancel) return;
-        done();
-    });
+const handleOnClose = async (done: () => void) => {
+    const [isByCancel] = await NueConfirm({ title: '确认关闭抽屉吗？' });
+    if (isByCancel) return;
+    done();
 };
 </script>

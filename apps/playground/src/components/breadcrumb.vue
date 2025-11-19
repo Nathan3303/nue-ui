@@ -29,8 +29,8 @@
                             <nue-icon class="state-icon" name="arrow-down" />
                         </li>
                     </template>
-                    <nue-link class="nue-dropdown-item" href="/button">Button</nue-link>
-                    <nue-link class="nue-dropdown-item" href="/link">Link</nue-link>
+                    <nue-link class="nue-dropdown-item" href="/component/button">Button</nue-link>
+                    <nue-link class="nue-dropdown-item" href="/component/link">Link</nue-link>
                 </nue-dropdown>
             </nue-breadcrumb-item>
             <nue-breadcrumb-item>Breadcrumb</nue-breadcrumb-item>
@@ -42,7 +42,7 @@
                 <nue-link route="/">Index</nue-link>
             </nue-breadcrumb-item>
             <nue-breadcrumb-item>
-                <nue-link route="/breadcrumb">Breadcrumb</nue-link>
+                <nue-link route="/component/breadcrumb">Breadcrumb</nue-link>
             </nue-breadcrumb-item>
         </nue-breadcrumb>
     </demo>

@@ -48,7 +48,6 @@ import NueText from '../text/text.vue';
 import NueOverlay from '../overlay/overlay.vue';
 import { parseTheme, parsePopupItemAnimation } from '@nue-ui/utils';
 import type { NueConfirmProps } from './types';
-import './confirm.css';
 
 defineOptions({ name: 'NueConfirmNodeInner' });
 const props = withDefaults(defineProps<NueConfirmProps>(), {

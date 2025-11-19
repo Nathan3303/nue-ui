@@ -1,0 +1,92 @@
+.nue-collapse {
+    --nue-collapse-gap: 0.5rem;
+
+    .nue-collapse-item {
+        --nue-collapse-item-height: auto;
+        --nue-collapse-item-max-height: unset;
+        --nue-collapse-item-overflow: hidden;
+    }
+}
+
+.nue-collapse {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nue-collapse-gap);
+
+    .nue-collapse-item {
+        display: flex;
+        flex-direction: column;
+
+        & + .nue-collapse-item {
+            padding-top: var(--nue-collapse-gap);
+            border-top: 1px solid var(--nue-divider-color);
+        }
+
+        .nue-collapse-item__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            -webkit-user-select: none;
+
+            .nue-collapse-item-state-icon {
+                transform-origin: center center;
+            }
+
+            .nue-collapse-item__title {
+                font-size: 0.95rem;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .nue-collapse-item__content {
+            width: 100%;
+            height: var(--nue-collapse-item-height);
+            max-height: var(--nue-collapse-item-max-height);
+            transition: all var(--nue-animation-duration) ease-in-out;
+            overflow: var(--nue-collapse-item-overflow);
+        }
+
+        &[data-collapsed='true'] .nue-collapse-item-state-icon {
+            transform: rotate(180deg);
+        }
+
+        &[data-collapsed='false'] .nue-collapse-item-state-icon {
+            transform: rotate(0deg);
+        }
+    }
+}
+
+.nue-collapse.nue-collapse--menu {
+    --nue-collapse-gap: 1rem;
+
+    .nue-collapse-item {
+        .nue-collapse-item__header {
+            color: var(--nue-primary-color-600);
+
+            .nue-collapse-item__title {
+                color: var(--nue-primary-color-500);
+                font-size: var(--nue-text-sm);
+            }
+
+            .nue-collapse-item__toggle-button,
+            .outter-toggle-button {
+                .nue-icon {
+                    --icon-color: var(--nue-primary-color-500);
+                }
+            }
+        }
+
+        &[data-collapsed='true'] .nue-collapse-item__content {
+            padding-top: 0;
+            opacity: 0;
+        }
+
+        &[data-collapsed='false'] .nue-collapse-item__content {
+            margin-top: 1rem;
+        }
+    }
+}

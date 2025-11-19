@@ -1,8 +1,0 @@
-.nue-confirm {
-    --nue-confirm-border-radius: var(--nue-primary-radius);
-    --nue-confirm-bg-color: var(--nue-primary-color-100);
-    --nue-confirm-header-font-size: var(--nue-text-df);
-    --nue-confirm-header-color: var(--nue-primary-color-900);
-    --nue-confirm-content-font-size: var(--nue-text-sm);
-    --nue-confirm-content-color: var(--nue-primary-color-600);
-}

@@ -8,7 +8,6 @@
 import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import type { NueIconProps } from './types';
-import './icon.css';
 
 defineOptions({ name: 'NueIcon' });
 

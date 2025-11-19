@@ -50,8 +50,7 @@
     </demo>
     <demo title="主题">
         <nue-div align="center">
-            <nue-input v-model="i7" theme="noshape" />
-            <nue-input v-model="i7" theme="linear" />
+            <nue-input v-model="i7" theme="pure" />
             <nue-input v-model="i7" theme="rounded" />
         </nue-div>
     </demo>

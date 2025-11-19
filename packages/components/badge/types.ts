@@ -5,4 +5,5 @@ export interface NueBadgeProps extends GlobalProps {
     max?: number;
     hidden?: boolean;
     dot?: boolean;
+    clamped?: number;
 }

@@ -1,0 +1,35 @@
+.nue-button-group {
+    --nue-button-group-flex: none;
+    --nue-button-group-border-radius: var(--nue-primary-radius);
+}
+
+.nue-button-group {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+
+    flex: var(--nue-button-group-flex);
+    border-radius: var(--nue-button-group-border-radius);
+    box-shadow: var(--nue-secondary-shadow);
+}
+
+.nue-button-group > .nue-button {
+    border-radius: 0;
+    margin-left: -1px;
+    box-shadow: none;
+
+    &:first-child {
+        margin-left: 0;
+        border-top-left-radius: var(--nue-button-group-border-radius);
+        border-bottom-left-radius: var(--nue-button-group-border-radius);
+        box-shadow: none;
+    }
+
+    &:last-child {
+        border-top-right-radius: var(--nue-button-group-border-radius);
+        border-bottom-right-radius: var(--nue-button-group-border-radius);
+        box-shadow: none;
+    }
+}

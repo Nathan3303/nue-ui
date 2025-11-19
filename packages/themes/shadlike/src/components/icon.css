@@ -1,0 +1,24 @@
+.nue-icon {
+    --nue-icon-color: inherit;
+    --nue-icon-size: inherit;
+    --nue-icon-weight: inherit;
+    --nue-icon-spin-speed: 2s;
+}
+
+.nue-icon {
+    color: var(--nue-icon-color);
+    font-size: var(--nue-icon-size);
+    font-weight: var(--nue-icon-weight);
+
+    &::before {
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+}
+
+.nue-icon.nue-icon--spin {
+    transform-origin: center center;
+    animation: spin var(--nue-icon-spin-speed) infinite ease-out;
+}

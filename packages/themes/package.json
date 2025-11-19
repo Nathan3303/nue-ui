@@ -1,0 +1,20 @@
+{
+    "name": "@nue-ui/themes",
+    "version": "0.1.0",
+    "description": "Default theme package for Nue UI",
+    "private": true,
+    "author": "Nathan Lee",
+    "license": "MIT",
+    "files": [
+        "./shadlike",
+        "./iconfont"
+    ],
+    "exports": {
+        "./shadlike/": {
+            "import": "./shadlike/"
+        },
+        "./iconfont/": {
+            "import": "./iconfont/"
+        }
+    }
+}

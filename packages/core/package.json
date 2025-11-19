@@ -1,6 +1,6 @@
 {
     "name": "nue-ui",
-    "version": "1.2.19",
+    "version": "1.7.24",
     "description": "Components library by Vue3 + TS",
     "author": "Nathan33",
     "license": "MIT",
@@ -26,12 +26,13 @@
         }
     },
     "scripts": {
+        "remove-dist": "node ./scripts/remove-dist.js",
+        "touch-dts-file": "node ./scripts/touch-dts-file.js",
         "build-es": "cross-env NODE_ENV=production vite build --config vite.es.config.ts",
         "build-umd": "cross-env NODE_ENV=production vite build --config vite.umd.config.ts",
-        "build": "run-p build-es build-umd",
-        "build-es-watch": "cross-env NODE_ENV=development vite build --watch --config vite.es.config.ts",
-        "build-umd-watch": "cross-env NODE_ENV=development vite build --watch --config vite.umd.config.ts",
-        "build-watch": "run-p build-es-watch build-umd-watch"
+        "before-build": "pnpm remove-dist",
+        "after-build": "pnpm touch-dts-file",
+        "build": "pnpm before-build && run-p build-es build-umd && pnpm after-build"
     },
     "keywords": [
         "NueUI",
@@ -41,9 +42,9 @@
     ],
     "devDependencies": {
         "@rollup/plugin-terser": "^0.4.4",
-        "vite-plugin-compression2": "^1.1.3",
-        "vite-plugin-dts": "^4.5.4",
-        "shelljs": "^0.8.5"
+        "shelljs": "^0.8.5",
+        "vite-plugin-compression2": "^2.3.1",
+        "vite-plugin-dts": "^4.5.4"
     },
     "peerDependencies": {
         "vue": "^3.5.18"

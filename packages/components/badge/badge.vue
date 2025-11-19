@@ -6,12 +6,10 @@
             v-if="!hidden && (content || dot)"
             class="nue-badge__content"
         >
-            <nue-text :clamped="1">{{ content }}</nue-text>
+            <nue-text :clamped="clamped || 1">{{ content }}</nue-text>
         </component>
     </div>
 </template>
-
-<style src="./badge.css"></style>
 
 <script lang="ts" setup>
 import { computed, useSlots } from 'vue';

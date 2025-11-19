@@ -51,7 +51,6 @@ import NueOverlay from '../overlay/overlay.vue';
 import { parseTheme } from '@nue-ui/utils';
 import { usePopupAnchor } from '@nue-ui/hooks';
 import type { NueDrawerProps, NueDrawerEmits } from './types';
-import './drawer.css';
 
 defineOptions({ name: 'NueDrawer' });
 const props = withDefaults(defineProps<NueDrawerProps>(), {
@@ -80,7 +79,11 @@ const styles = computed(() => ({
 
 // @method 打开抽屉
 const handleOpenDrawer = () => {
+    // 判断 vm 是否为真值，并赋值为真，否则抽屉元素不渲染
+    if (!props.modelValue) emit('update:modelValue', true);
+    // 抽屉打开时，挂载抽屉的锚点
     mountPopupAnchor();
+    // 执行动画
     visible.value = true;
 };
 
@@ -92,7 +95,7 @@ const onCloseExecutor = () => {
             return;
         }
         const onCloseRes = props.onClose(() => resolve(true));
-        if (!(onCloseRes instanceof Promise)) return;
+        if (!(onCloseRes instanceof Promise)) return resolve(false);
         onCloseRes.then(isDone => resolve(isDone)).catch(reject);
     });
 };

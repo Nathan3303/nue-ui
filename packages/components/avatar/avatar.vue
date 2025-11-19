@@ -2,7 +2,7 @@
     <div :class="classes" :style="styles" :title="title">
         <img
             v-if="src && !error"
-            :alt="alt || `NueAvatar`"
+            :alt="alt"
             :src="src"
             class="nue-avatar__image"
             @error="handleError($event)"
@@ -14,8 +14,6 @@
         <nue-icon v-else :name="icon" class="nue-avatar__icon" />
     </div>
 </template>
-
-<style src="./avatar.css" />
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';

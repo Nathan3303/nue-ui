@@ -1,8 +1,0 @@
-.nue-prompt {
-    --nue-prompt-border-radius: var(--nue-primary-radius);
-    --nue-prompt-bg-color: var(--nue-primary-color-100);
-    --nue-prompt-header-font-size: var(--nue-text-df);
-    --nue-prompt-header-color: var(--nue-primary-color-900);
-    --nue-prompt-content-font-size: var(--nue-text-sm);
-    --nue-prompt-content-color: var(--nue-primary-color-600);
-}

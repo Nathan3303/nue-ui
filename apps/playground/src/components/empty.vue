@@ -6,13 +6,13 @@
         <nue-empty description="Empty" />
     </demo>
     <demo title="图片">
-        <nue-empty image-src="https://picsum.photos/64/64" />
+        <nue-empty image-src="https://picsum.photos/96/96" />
     </demo>
     <demo title="大小">
         <nue-empty image-size="4rem" image-src="https://picsum.photos/64/64" />
     </demo>
     <demo title="主题">
-        <nue-empty theme="custom">
+        <nue-empty theme="custom" image-src="https://picsum.photos/96/96?t=1">
             <template #description>当前页面暂无数据</template>
             <nue-button size="small" theme="primary">返回上一页</nue-button>
         </nue-empty>
@@ -27,17 +27,7 @@ import Demo from '../layouts/demo.vue';
 <style scoped>
 .nue-empty--custom {
     width: 100%;
-    height: 256px;
+    height: 18rem;
     background-color: var(--nue-primary-color-100);
-    border-radius: var(--nue-primary-radius);
-    gap: 4px;
-
-    &:deep().nue-empty__image {
-        margin-bottom: 0;
-    }
-
-    &:deep().nue-empty__description {
-        margin-bottom: 8px;
-    }
 }
 </style>

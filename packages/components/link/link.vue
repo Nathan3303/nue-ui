@@ -10,9 +10,9 @@
         v-bind="$attrs"
     >
         <nue-icon v-if="icon" :name="icon" class="nue-link__icon" />
-        <span v-if="$slots.default" class="nue-link__content">
+        <nue-text v-if="$slots.default" class="nue-link__content">
             <slot>{{ href }}</slot>
-        </span>
+        </nue-text>
         <slot name="append" />
     </component>
 </template>
@@ -20,9 +20,8 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import { parseFlex, parseTheme } from '@nue-ui/utils';
-import { NueIcon } from '../icon';
+import { NueIcon, NueText } from '@nue-ui/components';
 import type { NueLinkProps, NueLinkRoute } from './types';
-import './link.css';
 
 defineOptions({ name: 'NueLink' });
 const props = withDefaults(defineProps<NueLinkProps>(), {});

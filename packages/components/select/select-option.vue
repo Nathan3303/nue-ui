@@ -4,7 +4,6 @@ import { generateId, parseTheme } from '@nue-ui/utils';
 import { NueIcon, NueDropdownItem } from '@nue-ui/components';
 import { NueSelectContextKey } from './constants';
 import type { NueSelectContext, NueSelectOptionProps } from './types';
-import './option.css';
 
 defineOptions({ name: 'NueSelectOption', inheritAttrs: false });
 const props = defineProps<NueSelectOptionProps>();
@@ -26,6 +25,7 @@ const classes = computed(() => {
 selectContext?.optionRegister({
     label: props.label,
     value: props.value,
+    icon: props.icon,
     executeId
 });
 </script>

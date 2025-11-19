@@ -5,7 +5,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { NuePopupPoolProps } from './types';
-import './popup-pool.css';
 
 defineOptions({ name: 'NuePopupPool' });
 defineProps<NuePopupPoolProps>();

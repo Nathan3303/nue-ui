@@ -1,0 +1,39 @@
+.nue-infinite-scroll-wrapper {
+    --nue-infinite-scroll-wrapper-height: 100%;
+    --nue-infinite-scroll-trigger-bar-height: 1px;
+
+    width: 100%;
+    height: var(--nue-infinite-scroll-wrapper-height);
+    overflow: auto;
+    position: relative;
+
+    .nue-infinite-scroll {
+        position: relative;
+        width: 100%;
+
+        > .nue-infinite-scroll__trigger-bar {
+            position: absolute;
+            width: 100%;
+            height: var(--nue-infinite-scroll-trigger-bar-height);
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        > .nue-infinite-scroll__loading-bar,
+        > .nue-infinite-scroll__disable-bar {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        > .nue-infinite-scroll__disable-bar {
+            color: gray;
+        }
+    }
+}

@@ -17,8 +17,6 @@
     </button>
 </template>
 
-<style src="./button.css"></style>
-
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { parseFlex, parseTheme, throttle } from '@nue-ui/utils';
@@ -49,8 +47,8 @@ const disabled = computed(() => {
 
 const styles = computed(() => {
     return {
-        '--alignment': props.alignment,
-        '--flex': props.flex && parseFlex(props.flex)
+        '--nue-button-alignment': props.alignment,
+        '--nue-button-flex': props.flex && parseFlex(props.flex)
     };
 });
 

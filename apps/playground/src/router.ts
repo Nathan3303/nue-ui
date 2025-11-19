@@ -4,7 +4,7 @@ const componentRoutes = [
     {
         path: '/component',
         name: 'component-home',
-        component: () => import('./layouts/components.vue'),
+        component: () => import('./views/components.vue'),
         redirect: '/component/button',
         children: [
             { path: '/component/button', component: () => import('./components/button.vue') },
@@ -52,33 +52,11 @@ const customRoutes = [
         path: '/custom',
         name: 'custom-home',
         redirect: '/custom/custom1',
-        component: () => import('./layouts/customs.vue'),
+        component: () => import('./views/customs.vue'),
         children: [
             { path: '/custom/custom1', component: () => import('./customs/custom1.vue') },
-            { path: '/custom/custom2', component: () => import('./customs/custom2.vue') }
-        ]
-    }
-];
-
-const shadlikeRoutes = [
-    {
-        path: '/shadlike',
-        name: 'shadlike-home',
-        redirect: '/shadlike/button',
-        component: () => import('./layouts/shadlike.vue'),
-        children: [
-            { path: '/shadlike/button', component: () => import('./shadlike/button.vue') },
-            { path: '/shadlike/link', component: () => import('./shadlike/link.vue') },
-            { path: '/shadlike/avatar', component: () => import('./shadlike/avatar.vue') },
-            { path: '/shadlike/collapse', component: () => import('./shadlike/collapse.vue') },
-            { path: '/shadlike/checkbox', component: () => import('./shadlike/checkbox.vue') },
-            { path: '/shadlike/div', component: () => import('./shadlike/div.vue') },
-            { path: '/shadlike/badge', component: () => import('./shadlike/badge.vue') },
-            { path: '/shadlike/dialog', component: () => import('./shadlike/dialog.vue') },
-            { path: '/shadlike/dropdown', component: () => import('./shadlike/dropdown.vue') },
-            { path: '/shadlike/progress', component: () => import('./shadlike/progress.vue') },
-            { path: '/shadlike/input', component: () => import('./shadlike/input.vue') },
-            { path: '/shadlike/textarea', component: () => import('./shadlike/textarea.vue') }
+            { path: '/custom/custom2', component: () => import('./customs/custom2.vue') },
+            { path: '/custom/custom3', component: () => import('./customs/custom3.vue') }
         ]
     }
 ];
@@ -90,7 +68,7 @@ const router = createRouter({
             path: '/',
             name: 'home',
             redirect: '/component',
-            children: [...componentRoutes, ...customRoutes, ...shadlikeRoutes]
+            children: [...componentRoutes, ...customRoutes]
         }
     ]
 });

@@ -1,1 +1,1 @@
-export const COLLAPSE_CONTEXT_KEY = 'CollapseContextKey';
+export const NUE_COLLAPSE_CONTEXT_KEY = Symbol('NUE_COLLAPSE_CONTEXT_KEY');

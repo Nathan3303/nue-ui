@@ -1,0 +1,164 @@
+.nue-link {
+    --nue-link-font-size: inherit;
+    --nue-link-base-color: transparent;
+    --nue-link-lo: 10;
+
+    --nue-link-color: hsl(220 var(--nue-hsl-s100) var(--nue-hsl-l60));
+    --nue-link-text-decoration: none;
+    --nue-link-background-color: var(--nue-link-base-color);
+    --nue-link-border-color: hsl(
+        from var(--nue-link-base-color) h s calc(l - var(--nue-link-lo) * 2)
+    );
+
+    --nue-link-hover-color: hsl(from var(--nue-link-color) h s calc(l - var(--nue-link-lo)));
+    --nue-link-hover-text-decoration: underline;
+    --nue-link-hover-background-color: hsl(
+        from var(--nue-link-background-color) h s calc(l - var(--nue-link-lo))
+    );
+    --nue-link-hover-border-color: hsl(
+        from var(--nue-link-border-color) h s calc(l - var(--nue-link-lo))
+    );
+
+    --nue-link-active-color: var(--nue-link-hover-color);
+    --nue-link-active-text-decoration: var(--nue-link-hover-text-decoration);
+    --nue-link-active-background-color: hsl(
+        from var(--nue-link-hover-background-color) h s calc(l - var(--nue-link-lo))
+    );
+    --nue-link-active-border-color: hsl(
+        from var(--nue-link-hover-border-color) h s calc(l - var(--nue-link-lo))
+    );
+
+    --nue-link-actived-color: var(--nue-link-active-color);
+    --nue-link-actived-text-decoration: var(--nue-link-active-text-decoration);
+    --nue-link-actived-background-color: var(--nue-link-active-background-color);
+    --nue-link-actived-border-color: var(--nue-link-active-border-color);
+
+    --nue-link-disable-color: hsl(from var(--nue-link-color) h s calc(l + var(--nue-link-lo) * 2));
+    --nue-link-disable-text-decoration: var(--nue-link-text-decoration);
+    --nue-link-disable-background-color: var(--nue-link-background-color);
+    --nue-link-disable-border-color: var(--nue-link-border-color);
+}
+
+.nue-link {
+    cursor: pointer;
+    text-decoration: var(--nue-link-text-decoration);
+    line-height: inherit;
+    color: var(--nue-link-color);
+    font-size: var(--nue-link-font-size);
+
+    &:hover {
+        color: var(--nue-link-hover-color);
+        background-color: var(--nue-link-hover-background-color);
+        text-decoration: var(--nue-link-hover-text-decoration);
+    }
+
+    &:active {
+        color: var(--nue-link-active-color);
+        background-color: var(--nue-link-active-background-color);
+        text-decoration: var(--nue-link-active-text-decoration);
+    }
+
+    &.nue-link--actived {
+        color: var(--nue-link-actived-color);
+        background-color: var(--nue-link-actived-background-color);
+        text-decoration: var(--nue-link-actived-text-decoration);
+    }
+
+    &.nue-link--disabled {
+        opacity: 0.8;
+        cursor: not-allowed;
+        color: var(--nue-link-disable-color);
+        background-color: var(--nue-link-disable-background-color);
+        text-decoration: var(--nue-link-disable-text-decoration);
+    }
+
+    .nue-link__icon {
+        font-size: var(--nue-button-font-size);
+        padding-right: 0.25rem;
+    }
+}
+
+.nue-link--route {
+    --nue-link-font-size: var(--nue-text-df);
+
+    --nue-link-color: var(--nue-primary-text-color);
+
+    --nue-link-hover-text-decoration: none;
+    --nue-link-hover-background-color: var(--nue-primary-color-200);
+    --nue-link-hover-border-color: transparent;
+
+    --nue-link-actived-color: var(--nue-primary-color-0);
+    --nue-link-actived-background-color: var(--nue-primary-color-900);
+}
+
+.nue-link--route {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.16s ease-out;
+    user-select: none;
+    -webkit-user-select: none;
+    border-radius: var(--nue-primary-radius);
+    font-family: var(--nue-primary-font-family);
+
+    width: auto;
+    height: var(--nue-box-size-df);
+    padding: 0 var(--nue-padding-df);
+    gap: var(--nue-gap-sm);
+
+    border: 1px solid var(--nue-link-border-color);
+    background-color: var(--nue-link-background-color);
+
+    > .nue-link__icon,
+    > .nue-link__content {
+        padding: 0;
+        line-height: 1;
+    }
+
+    &.nue-link--route-small {
+        --nue-link-font-size: var(--nue-text-sm);
+        height: var(--nue-box-size-sm);
+        padding: 0 var(--nue-padding-sm);
+        gap: var(--nue-gap-xs);
+    }
+
+    &.nue-link--route-large {
+        --nue-link-font-size: var(--nue-text-md);
+        height: var(--nue-box-size-lg);
+        padding: 0 var(--nue-padding-lg);
+        gap: var(--nue-padding-df);
+    }
+}
+
+.nue-link--route.nue-link--route-icon {
+    --nue-link-font-size: var(--nue-text-2xl);
+
+    --nue-link-color: var(--nue-primary-color-600);
+
+    --nue-link-hover-text-decoration: none;
+    --nue-link-hover-background-color: transparent;
+    --nue-link-hover-border-color: transparent;
+
+    --nue-link-actived-color: var(--nue-primary-color-900);
+    --nue-link-actived-background-color: transparent;
+}
+
+.nue-link--route.nue-link--route-icon {
+    height: auto;
+    padding: 0;
+    gap: var(--nue-padding-df);
+    aspect-ratio: 1;
+    justify-content: center;
+
+    > .nue-link__content {
+        display: none;
+    }
+
+    &.nue-link--route-small {
+        --nue-link-font-size: var(--nue-text-xl);
+    }
+
+    &.nue-link--route-large {
+        --nue-link-font-size: var(--nue-text-3xl);
+    }
+}

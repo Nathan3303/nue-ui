@@ -1,0 +1,149 @@
+.nue-input {
+    --nue-input-vgap: 0.75rem;
+    --nue-input-width: auto;
+    --nue-input-height: 2.25rem;
+
+    --nue-input-font-size: var(--nue-text-df);
+    --nue-input-color: var(--nue-primary-color-900);
+    --nue-input-placeholder-color: var(--nue-primary-color-500);
+    --nue-input-icon-size: var(--nue-input-font-size);
+    --nue-input-icon-color: var(--nue-input-color);
+
+    --nue-input-border-color: var(--nue-divider-color);
+    --nue-input-background-color: transparent;
+
+    --nue-input-hover-border-color: var(--nue-primary-color-600);
+    --nue-input-hover-background-color: transparent;
+
+    --nue-input-focus-border-color: var(--nue-primary-color-600);
+    --nue-input-focus-background-color: transparent;
+    --nue-input-focus-shadow: var(--nue-primary-shadow);
+
+    --nue-input-disabled-color: var(--nue-primary-color-500);
+    --nue-input-disabled-border-color: var(--nue-divider-color);
+    --nue-input-disabled-background-color: var(--nue-primary-color-100);
+
+    --nue-input-opbtn-size: var(--nue-input-font-size);
+    --nue-input-opbtn-color: var(--nue-primary-color-500);
+    --nue-input-opbtn-border-color: var(--nue-input-border-color);
+    --nue-input-opbtn-hover-color: var(--nue-primary-color-900);
+}
+
+.nue-input {
+    display: flex;
+    align-items: center;
+    gap: var(--nue-input-vgap);
+    width: var(--nue-input-width);
+    height: var(--nue-input-height);
+    line-height: var(--nue-input-height);
+    padding: 0 var(--nue-input-vgap);
+    border: 1px solid var(--nue-input-border-color);
+    border-radius: 6px;
+    background-color: var(--nue-input-background-color);
+    box-shadow: 1px 1px 0.25rem rgba(200, 200, 200, 0.2);
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.16s ease;
+    -webkit-user-select: none;
+    user-select: none;
+
+    &:hover {
+        border-color: var(--nue-input-hover-border-color);
+        background-color: var(--nue-input-hover-background-color);
+    }
+
+    &:focus-within {
+        border-color: var(--nue-input-focus-border-color);
+        background-color: var(--nue-input-focus-background-color);
+        box-shadow: var(--nue-input-focus-shadow);
+    }
+
+    &.nue-input--disabled {
+        --hover-border-color: var(--nue-input-disabled-border-color);
+        --hover-background-color: var(--nue-input-disabled-background-color);
+
+        color: var(--nue-input-disabled-color);
+        border-color: var(--nue-input-disabled-border-color);
+        background-color: var(--nue-input-disabled-background-color);
+        cursor: not-allowed;
+        -webkit-user-select: none;
+        user-select: none;
+
+        & * {
+            cursor: not-allowed;
+        }
+    }
+
+    > .nue-input__input {
+        min-width: 5rem;
+        height: auto;
+        outline: none;
+        border: none;
+        padding: 0;
+        background-color: transparent;
+        flex: auto;
+        color: var(--nue-input-color);
+        font-size: var(--nue-input-font-size);
+        font-family: inherit;
+        line-height: 1.2;
+
+        &::-ms-reveal,
+        &::-ms-clear {
+            display: none;
+        }
+
+        &::placeholder {
+            color: var(--nue-input-placeholder-color);
+        }
+    }
+
+    > .word-counter {
+        flex: none;
+        color: var(--nue-primary-color-500);
+        font-size: 0.75rem;
+    }
+
+    > .nue-input__icon-button {
+        transition: all 0.16s ease;
+        cursor: pointer;
+        --nue-icon-color: var(--nue-input-opbtn-color);
+
+        &:hover {
+            --nue-icon-color: var(--nue-input-opbtn-hover-color);
+        }
+    }
+}
+
+.nue-input.nue-input--rounded {
+    border-radius: 9999px;
+}
+
+.nue-input.nue-input--small {
+    --nue-input-vgap: 0.75rem;
+    --nue-input-height: 1.75rem;
+    --nue-input-font-size: 0.75rem;
+}
+
+.nue-input.nue-input--large {
+    --nue-input-vgap: 1.25rem;
+    --nue-input-height: 2.625rem;
+    --nue-input-font-size: 1.125rem;
+}
+
+.nue-input.nue-input--pure {
+    --nue-input-height: auto;
+    --nue-input-border-color: transparent;
+    --nue-input-border-radius: 0;
+    --nue-input-hover-border-color: transparent;
+    --nue-input-hover-background-color: transparent;
+    --nue-input-focus-border-color: transparent;
+    --nue-input-focus-background-color: transparent;
+    --nue-input-focus-shadow: none;
+    --nue-input-disabled-color: #9e9e9e;
+    --nue-input-disabled-border-color: transparent;
+    --nue-input-disabled-background-color: transparent;
+
+    box-shadow: none;
+    padding: 0;
+}

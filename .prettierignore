@@ -8,10 +8,6 @@ node_modules/
 dist/
 coverage
 *.log
-*.md
-*.yml
-*.yaml
-*.json
 *.zip
 *.gz
 *.tgz

@@ -12,7 +12,6 @@
 </template>
 
 <script lang="ts" setup>
-import './overlay.css';
 import { computed, ref, watch } from 'vue';
 import { parsePopupItemAnimation, parseTheme } from '@nue-ui/utils';
 import type { NueOverlayProps, NueOverlayEmits } from './types';

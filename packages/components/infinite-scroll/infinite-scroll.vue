@@ -25,7 +25,6 @@ import { computed, onMounted, ref } from 'vue';
 import NueText from '../text/text.vue';
 import NueIcon from '../icon/icon.vue';
 import type { NueInfiniteScrollProps, NueInfiniteScrollEmits } from './types';
-import './infinite-scroll.css';
 
 defineOptions({ name: 'NueInfiniteScroll' });
 const props = withDefaults(defineProps<NueInfiniteScrollProps>(), {

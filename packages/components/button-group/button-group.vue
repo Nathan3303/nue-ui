@@ -9,7 +9,6 @@ import { computed, provide, reactive } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import { BUTTON_GROUP_CTX_KEY } from './constants';
 import type { NueButtonGroupCtxType, NueButtonGroupProps } from './types';
-import './button-group.css';
 
 defineOptions({ name: 'NueButtonGroup' });
 

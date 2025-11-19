@@ -54,7 +54,6 @@ import {
 import { parseTheme } from '@nue-ui/utils';
 import { usePopupAnchor } from '@nue-ui/hooks';
 import type { NueDialogEmits, NueDialogProps } from './types';
-import './dialog.css';
 
 defineOptions({ name: 'NueDialog' });
 

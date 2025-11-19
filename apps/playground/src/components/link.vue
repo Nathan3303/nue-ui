@@ -1,6 +1,9 @@
 <template>
     <demo title="基础">
-        <nue-link>链接</nue-link>
+        <nue-div>
+            <nue-link>链接</nue-link>
+            <nue-link disabled>禁用链接</nue-link>
+        </nue-div>
     </demo>
     <demo title="定义地址">
         <nue-div>
@@ -19,6 +22,16 @@
             加载阈值表示当前滚动位置与列表底部的距离，可以通过属性 trigger-height 设置，默认为 150px
             。 通过 height 属性设置可视区域的高度，默认为 100% 。
         </nue-text>
+    </demo>
+    <demo title="样式">
+        <nue-div wrap="wrap" align="center">
+            <nue-link theme="route" icon="more2">路由链接</nue-link>
+            <nue-link theme="route,actived" icon="more2">路由链接（激活）</nue-link>
+            <nue-link theme="route,route-small">小型路由链接</nue-link>
+            <nue-link theme="route,route-large">大型路由链接</nue-link>
+            <nue-link theme="route,route-icon" icon="projects">图标型路由链接</nue-link>
+            <nue-link theme="route,route-icon,actived" icon="projects">图标型路由链接（激活）</nue-link>
+        </nue-div>
     </demo>
 </template>
 

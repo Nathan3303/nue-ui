@@ -7,7 +7,12 @@
         @execute="handleExecute"
     >
         <template #trigger="{ trigger }">
-            <nue-button :disabled="disabled" :size="size" @click="trigger">
+            <nue-button
+                :icon="selectedOption?.icon"
+                :disabled="disabled"
+                :size="size"
+                @click="trigger"
+            >
                 <template v-if="label">{{ label }}</template>
                 <nue-text v-else color="gray">{{ placeholder }}</nue-text>
                 <template #append>
@@ -27,10 +32,6 @@
 <script lang="ts" setup>
 import { computed, provide, shallowRef, watch, onMounted } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-// import NueButton from '../button/button.vue';
-// import NueDropdown from '../dropdown/dropdown.vue';
-// import NueIcon from '../icon/icon.vue';
-// import NueText from '../text/text.vue';
 import { NueButton, NueDropdown, NueIcon, NueText } from '@nue-ui/components';
 import { NueSelectContextKey } from './constants';
 import type { NueSelectContext, NueSelectEmits, NueSelectOption, NueSelectProps } from './types';
@@ -57,11 +58,8 @@ const label = computed(() => {
 });
 
 const optionRegister = (option: NueSelectOption) => {
-    const _selectOptions = selectOptions.value;
-    for (const _option of _selectOptions) {
-        if (option.label === _option.label && option.value === _option.value) {
-            return;
-        }
+    for (const _option of selectOptions.value) {
+        if (option.value === _option.value) return;
     }
     selectOptions.value.push(option);
 };
