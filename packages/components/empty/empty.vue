@@ -16,7 +16,6 @@
 import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import { NueText, NueDiv } from '@nue-ui/components';
-// @ts-expect-error 忽略空图片的类型错误
 import EmptyImage from './empty.png';
 import type { NueEmptyProps } from './types';
 
