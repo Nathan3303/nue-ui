@@ -1,4 +1,4 @@
-name: Test and deploy
+name: Build and deploy documentation
 
 on:
     push:
@@ -6,20 +6,17 @@ on:
             - master
 
 jobs:
+
     lint:
         name: Run Lint
         runs-on: ubuntu-latest
-
         steps:
             - name: Checkout repo
               uses: actions/checkout@v3
-
             - name: Setup Node
               uses: actions/setup-node@v3
-
             - name: Install pnpm
               run: npm install -g pnpm
-
             - name: Install dependencies
               run: pnpm install
 
@@ -27,47 +24,63 @@ jobs:
               run: npm run lint
 
     build:
-        name: Build docs
+        name: Build NueUI document app
         runs-on: ubuntu-latest
         needs: lint
-
         steps:
             - name: Checkout repo
               uses: actions/checkout@v3
-
             - name: Setup Node
               uses: actions/setup-node@v3
-
             - name: Install pnpm
               run: npm install -g pnpm
-
             - name: Install dependencies
               run: pnpm install
 
-            - name: Build needed packages
-              run: pnpm build
-
-            - name: Build docs
-              run: pnpm document build
-
-            - name: Upload docs
+            - name: Build NueUI Core
+              run: pnpm core build
+            - name: Upload NueUI Core dist as artifact
               uses: actions/upload-artifact@v4
               with:
-                  name: docs
-                  path: ./apps/document/.vitepress/dist
+                  name: nueui-core-dist
+                  path: ./packages/core/dist
 
-    deploy:
-        name: Deploy to GitHub Pages
-        runs-on: ubuntu-latest
-        needs: build
-        steps:
-            - name: Download docs
-              uses: actions/download-artifact@v4
+            - name: Build NueUI shadlike theme package
+              run: pnpm shadlike-theme build
+            - name: Upload NueUI shadlike theme dist as artifact
+              uses: actions/upload-artifact@v4
               with:
-                  name: docs
+                  name: nueui-shadlike-theme-dist
+                  path: ./packages/themes/shadlike/dist
 
-            - name: Deploy to GitHub Pages
-              uses: peaceiris/actions-gh-pages@v3
+            - name: Build NueUI iconfont package
+              run: pnpm iconfont build
+            - name: Upload NueUI iconfont dist as artifact
+              uses: actions/upload-artifact@v4
               with:
-                  github_token: ${{ secrets.NUEUI_GH_TOKEN }}
-                  publish_dir: .
+                  name: nueui-iconfont-dist
+                  path: ./packages/themes/iconfont/dist
+
+            # - name: Build NueUI document app
+            #   run: pnpm document build
+            # - name: Upload docs
+            #   uses: actions/upload-artifact@v4
+            #   with:
+            #       name: nueui-document-app-dist
+            #       path: ./apps/document/.vitepress/dist
+
+    # deploy:
+    #     name: Deploy documentation to GitHub Pages
+    #     runs-on: ubuntu-latest
+    #     needs: build
+    #     steps:
+    #         - name: Download nueui-document-app-dist
+    #           uses: actions/download-artifact@v4
+    #           with:
+    #               name: nueui-document-app-dist
+
+    #         - name: Deploy to GitHub Pages
+    #           uses: peaceiris/actions-gh-pages@v3
+    #           with:
+    #               github_token: ${{ secrets.NUEUI_GH_TOKEN }}
+    #               publish_dir: .
