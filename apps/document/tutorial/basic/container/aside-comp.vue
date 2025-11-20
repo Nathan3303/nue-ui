@@ -1,21 +1,22 @@
 <template>
     <nue-container height="512px">
         <nue-main>
-            <nue-aside max-width="32%" min-width="8%" width="16%">左侧栏</nue-aside>
+            <nue-aside max-width="32%" min-width="16%" width="24%">左侧栏</nue-aside>
             <nue-separator op-target="previous" />
-            <nue-content fill>主体</nue-content>
+            <nue-content fill>
+                <nue-div style="padding: 1rem">主体</nue-div>
+            </nue-content>
             <nue-separator op-target="next" />
-            <nue-aside max-width="32%" min-width="8%" width="16%">右侧栏</nue-aside>
+            <nue-aside max-width="32%" min-width="16%" width="24%">右侧栏</nue-aside>
         </nue-main>
     </nue-container>
 </template>
 
 <style scoped>
-.nue-aside {
-    background-color: #edf8ed;
-}
-
-.nue-content {
-    background-color: #eaeaf5;
+.nue-header,
+.nue-main,
+.nue-footer {
+    color: var(--nue-primary-text-color);
+    background-color: var(--nue-primary-color-100);
 }
 </style>

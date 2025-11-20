@@ -1,7 +1,7 @@
 .nue-divider {
     --nue-divider-border-width: 1px;
     --nue-divider-border-style: solid;
-    --nue-divider-border-color: #e0e0e0;
+    --nue-divider-border-color: var(--nue-divider-color);
     --nue-divider-alignment: start;
 }
 
@@ -34,7 +34,7 @@
         height: auto;
         margin: 0 0.5rem;
         padding: 0 0.5rem;
-        background-color: white;
+        background-color: var(--nue-primary-color-0);
         color: var(--nue-primary-text-color);
         font-size: var(--nue-text-df);
         z-index: 2;

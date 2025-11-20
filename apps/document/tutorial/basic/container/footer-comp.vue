@@ -9,7 +9,10 @@
 </template>
 
 <style scoped>
+.nue-header,
+.nue-main,
 .nue-footer {
-    background-color: #fbe5ff;
+    color: var(--nue-primary-text-color);
+    background-color: var(--nue-primary-color-100);
 }
 </style>

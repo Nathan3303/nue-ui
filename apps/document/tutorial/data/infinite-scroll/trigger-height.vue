@@ -29,7 +29,7 @@ const loadMore = () => (items.value += 8);
         justify-content: center;
         align-items: center;
         height: 240px;
-        background-color: #e4e4e7;
+        background-color: var(--nue-primary-color-200);
         border-radius: 12px;
         margin: 0;
         padding: 0;

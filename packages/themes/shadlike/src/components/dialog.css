@@ -15,7 +15,7 @@
     padding: 1rem;
     gap: 1rem;
     border-radius: 6px;
-    background-color: white;
+    background-color: var(--nue-primary-color-0);
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 

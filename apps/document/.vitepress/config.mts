@@ -7,7 +7,7 @@ export default defineConfig({
     title: 'NueUI',
     description: '一个基于 Vue3 的 UI 组件库',
     base: '/nue-ui/',
-    appearance: false,
+    appearance: true,
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         nav: [

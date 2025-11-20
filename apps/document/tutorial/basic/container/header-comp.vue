@@ -14,7 +14,10 @@
 </template>
 
 <style scoped>
-.nue-header {
-    background-color: #f8f0f0;
+.nue-header,
+.nue-main,
+.nue-footer {
+    color: var(--nue-primary-text-color);
+    background-color: var(--nue-primary-color-100);
 }
 </style>

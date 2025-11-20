@@ -3,8 +3,8 @@
         <nue-input v-model="filterText" clearable icon="filter" placeholder="筛选" />
         <div class="icons">
             <nue-div v-for="icon in filteredIcons" :key="icon" class="icon-block">
-                <nue-icon size="2rem" :name="icon" />
-                <nue-text size=".75rem">{{ icon }}</nue-text>
+                <nue-icon size="1.75rem" :name="icon" />
+                <nue-text size="0.75rem">{{ icon }}</nue-text>
             </nue-div>
         </div>
     </nue-div>
@@ -89,7 +89,7 @@ const icons = [
     'arrow-left',
     'arrow-down',
     'arrow-up'
-];
+].sort((a, b) => a.localeCompare(b));
 
 const filteredIcons = computed(() => {
     return icons.filter(icon => icon.includes(filterText.value));
@@ -100,7 +100,7 @@ const filteredIcons = computed(() => {
 .icons {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
     box-sizing: border-box;
     overflow: hidden;
 
@@ -111,7 +111,7 @@ const filteredIcons = computed(() => {
         flex-wrap: nowrap;
         gap: 0.5rem;
         height: 96px;
-        background-color: white;
+        background-color: var(--nue-primary-color-100);
     }
 }
 </style>

@@ -20,12 +20,12 @@
 }
 
 .nue-tooltip {
-    --nue-tooltip-wrapper-gap: 1rem;
-    --nue-tooltip-min-height: 2.25rem;
-    --nue-tooltip-padding: 0.875rem;
-    --nue-tooltip-font-size: 0.875rem;
-    --nue-tooltip-font-color: #f5f5f5;
-    --nue-tooltip-animation-duration: 0.18s;
+    --nue-tooltip-wrapper-gap: var(--nue-gap-df);
+    --nue-tooltip-min-height: var(--nue-box-size-df);
+    --nue-tooltip-padding: var(--nue-padding-df);
+    --nue-tooltip-font-size: var(--nue-text-sm);
+    --nue-tooltip-font-color: var(--nue-primary-color-100);
+    --nue-tooltip-animation-duration: var(--nue-animation-duration-short);
     --nue-tooltip-triangle-display: none;
 }
 
@@ -39,8 +39,8 @@
     min-height: var(--nue-tooltip-min-height);
     padding: calc(var(--nue-tooltip-padding) / 2) var(--nue-tooltip-padding);
     position: absolute;
-    background-color: #212121;
-    border-radius: 6px;
+    background-color: var(--nue-primary-color-900);
+    border-radius: var(--nue-primary-radius);
     animation-name: unset;
     animation-duration: var(--nue-tooltip-animation-duration);
     animation-timing-function: ease;
@@ -58,15 +58,15 @@
     }
 
     &.nue-tooltip--small {
-        --nue-tooltip-min-height: 1.875rem;
-        --nue-tooltip-padding: 0.75rem;
-        --nue-tooltip-font-size: 0.75rem;
+        --nue-tooltip-min-height: var(--nue-box-size-sm);
+        --nue-tooltip-padding: var(--nue-padding-sm);
+        --nue-tooltip-font-size: var(--nue-text-xs);
     }
 
     &.nue-tooltip--large {
-        --nue-tooltip-min-height: 2.625rem;
-        --nue-tooltip-padding: 1rem;
-        --nue-tooltip-font-size: 1rem;
+        --nue-tooltip-min-height: var(--nue-box-size-lg);
+        --nue-tooltip-padding: var(--nue-padding-lg);
+        --nue-tooltip-font-size: var(--nue-text-md);
     }
 
     &[data-direction='top'] {

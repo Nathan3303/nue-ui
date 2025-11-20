@@ -1,6 +1,6 @@
 <template>
     <nue-main>
-        <nue-aside>
+        <nue-aside width="32%" min-width="24%" max-width="48%">
             <nue-collapse v-model="collapseValue" theme="menu">
                 <nue-collapse-item
                     v-for="(item, idx) in componentLayoutAsideLinks"

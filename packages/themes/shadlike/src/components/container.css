@@ -1,7 +1,7 @@
 .nue-container {
     --nue-container-width: 100%;
     --nue-container-height: 100%;
-    --nue-container-inner-border-color: #e0e0e0;
+    --nue-container-inner-border-color: var(--nue-divider-color);
     --nue-container-inner-gap: 1rem;
 }
 
@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     width: var(--nue-container-width);
+    max-width: 99%;
     height: var(--nue-container-height);
 
     box-sizing: border-box;
@@ -59,9 +60,9 @@
         }
 
         > .nue-aside {
-            --nue-aside-width: 16rem;
-            --nue-aside-min-width: 12rem;
-            --nue-aside-max-width: 18rem;
+            --nue-aside-width: 24%;
+            --nue-aside-min-width: 16%;
+            --nue-aside-max-width: 32%;
             --nue-aside-gap: var(--nue-container-inner-gap);
             --nue-aside-animation-duration: 0.18s;
 
@@ -86,7 +87,7 @@
 
         > .nue-content {
             --nue-content-width: auto;
-            --nue-content-min-width: unset;
+            --nue-content-min-width: 1%;
             --nue-content-max-width: unset;
             --nue-content-gap: var(--nue-container-inner-gap);
 
@@ -117,6 +118,28 @@
         gap: var(--nue-footer-gap);
         padding: 0 var(--nue-footer-gap);
         flex: none;
+    }
+}
+
+.nue-container--nested {
+    flex-direction: row;
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    flex: none;
+
+    > .nue-container--nested__aside {
+        flex: none;
+        height: 100%;
+        width: 24%;
+        min-width: 16%;
+        max-width: 32%;
+    }
+
+    > .nue-container--nested__main {
+        flex: none;
+        height: 100%;
+        min-width: 32%;
     }
 }
 

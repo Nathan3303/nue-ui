@@ -1,13 +1,14 @@
 .nue-link {
     --nue-link-font-size: inherit;
     --nue-link-base-color: transparent;
-    --nue-link-lo: 10;
+    --nue-link-lo: calc(var(--nue-dark-prefix) * 10);
+    --nue-link-lop: calc(var(--nue-dark-prefix) * 10%);
 
-    --nue-link-color: hsl(220 var(--nue-hsl-s100) var(--nue-hsl-l60));
+    --nue-link-color: hsl(220 var(--nue-hsl-s100) calc(var(--nue-hsl-l60) + var(--nue-link-lop)));
     --nue-link-text-decoration: none;
     --nue-link-background-color: var(--nue-link-base-color);
     --nue-link-border-color: hsl(
-        from var(--nue-link-base-color) h s calc(l - var(--nue-link-lo) * 2)
+        from var(--nue-link-base-color) h s calc(l + var(--nue-link-lo) * 2)
     );
 
     --nue-link-hover-color: hsl(from var(--nue-link-color) h s calc(l - var(--nue-link-lo)));
@@ -33,7 +34,7 @@
     --nue-link-actived-background-color: var(--nue-link-active-background-color);
     --nue-link-actived-border-color: var(--nue-link-active-border-color);
 
-    --nue-link-disable-color: hsl(from var(--nue-link-color) h s calc(l + var(--nue-link-lo) * 2));
+    --nue-link-disable-color: hsl(from var(--nue-link-color) h s calc(l + var(--nue-link-lo)));
     --nue-link-disable-text-decoration: var(--nue-link-text-decoration);
     --nue-link-disable-background-color: var(--nue-link-background-color);
     --nue-link-disable-border-color: var(--nue-link-border-color);
@@ -42,9 +43,17 @@
 .nue-link {
     cursor: pointer;
     text-decoration: var(--nue-link-text-decoration);
-    line-height: inherit;
     color: var(--nue-link-color);
     font-size: var(--nue-link-font-size);
+
+    > .nue-link__icon {
+        font-size: var(--nue-link-font-size);
+        padding-right: 0.25rem;
+    }
+
+    > .nue-link__content {
+        font-size: var(--nue-link-font-size);
+    }
 
     &:hover {
         color: var(--nue-link-hover-color);
@@ -71,11 +80,6 @@
         background-color: var(--nue-link-disable-background-color);
         text-decoration: var(--nue-link-disable-text-decoration);
     }
-
-    .nue-link__icon {
-        font-size: var(--nue-button-font-size);
-        padding-right: 0.25rem;
-    }
 }
 
 .nue-link--route {
@@ -95,7 +99,6 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    transition: all 0.16s ease-out;
     user-select: none;
     -webkit-user-select: none;
     border-radius: var(--nue-primary-radius);
@@ -108,6 +111,10 @@
 
     border: 1px solid var(--nue-link-border-color);
     background-color: var(--nue-link-background-color);
+
+    transition-property: background-color;
+    transition-duration: var(--nue-animation-duration-short);
+    transition-timing-function: ease-in;
 
     > .nue-link__icon,
     > .nue-link__content {

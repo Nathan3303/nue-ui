@@ -4,3 +4,7 @@
         'Noto Color Emoji', sans-serif;
     --nue-primary-font-family: var(--vp-font-family-base);
 }
+
+.dark:root {
+    --nue-dark-switch: 1;
+}

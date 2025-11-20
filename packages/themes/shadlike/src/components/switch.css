@@ -3,11 +3,11 @@
     --nue-switch-width: fit-content;
     --nue-switch-min-width: calc(var(--nue-switch-height) * 2);
     --nue-switch-state-width: auto;
-    --nue-switch-background-color: #e0e0e0;
-    --nue-switch-background-active-color: #424242;
+    --nue-switch-background-color: var(--nue-primary-color-200);
+    --nue-switch-background-active-color: var(--nue-primary-color-800);
     --nue-switch-circle-size: calc(var(--nue-switch-height) - 0.25rem);
-    --nue-switch-circle-color: #f5f5f5;
-    --nue-switch-circle-active-color: #f5f5f5;
+    --nue-switch-circle-color: var(--nue-primary-color-0);
+    --nue-switch-circle-active-color: var(--nue-primary-color-0);
     --nue-switch-font-size: 0.875rem;
 }
 
@@ -19,9 +19,9 @@
     background-color: var(--nue-switch-background-color);
     box-sizing: border-box;
     padding: 2px;
-    transition: all 0.18s ease;
+    transition: all 0.18s ease-out;
     cursor: pointer;
-    box-shadow: 1px 1px 0.25rem rgba(200, 200, 200, 0.2);
+    box-shadow: 0 0 0.25rem var(--nue-primary-shadow-color);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -37,8 +37,7 @@
         border-radius: 50%;
         flex: none;
         background-color: var(--nue-switch-circle-color);
-        transition: all 0.18s ease;
-        box-shadow: 1px 1px 0.25rem rgba(200, 200, 200, 0.2);
+        transition: all 0.18s ease-out;
 
         .nue-switch__loading-icon {
             font-size: calc(var(--nue-switch-circle-size) * 0.7);
@@ -47,7 +46,7 @@
     }
 
     .nue-switch__text {
-        transition: all 0.18s ease;
+        transition: all 0.18s ease-out;
         transform: translateX(0);
         text-overflow: ellipsis;
         overflow: hidden;
@@ -77,7 +76,7 @@
         .nue-switch__text {
             padding: 0 0.25rem 0 0.5rem;
             transform: translateX(calc(0.1875rem - var(--nue-switch-height)));
-            color: white;
+            color: var(--nue-primary-color-0);
         }
     }
 }
