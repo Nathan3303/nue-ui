@@ -23,7 +23,7 @@
     width: auto;
     height: auto;
     overflow: hidden;
-    background-color: white;
+    background-color: var(--nue-primary-color-0);
     position: absolute;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;

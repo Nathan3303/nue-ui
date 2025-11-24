@@ -12,7 +12,7 @@
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.64);
+    background-color: hsl(from var(--nue-primary-color-700) h s l / 0.6);
     overflow: hidden;
     box-sizing: border-box;
     animation-timing-function: ease-in;

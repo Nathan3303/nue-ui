@@ -13,14 +13,16 @@
         <nue-text v-if="$slots.default" class="nue-link__content">
             <slot>{{ href }}</slot>
         </nue-text>
-        <slot name="append" />
+        <nue-div v-if="$slots.append" class="nue-link__append">
+            <slot name="append" />
+        </nue-div>
     </component>
 </template>
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import { parseFlex, parseTheme } from '@nue-ui/utils';
-import { NueIcon, NueText } from '@nue-ui/components';
+import { NueIcon, NueText, NueDiv } from '@nue-ui/components';
 import type { NueLinkProps, NueLinkRoute } from './types';
 
 defineOptions({ name: 'NueLink' });

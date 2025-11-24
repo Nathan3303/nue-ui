@@ -1,40 +1,44 @@
 /* Colors */
 :root {
+    /* Dark theme switch */
+    --nue-dark-switch: 0;
+    --nue-dark-prefix: calc(cos(pi * var(--nue-dark-switch)) * -1);
+
     /* Saturations */
     --nue-hsl-s0: 0%;
-    --nue-hsl-s10: 10%;
-    --nue-hsl-s20: 20%;
-    --nue-hsl-s30: 30%;
-    --nue-hsl-s40: 40%;
-    --nue-hsl-s50: 50%;
-    --nue-hsl-s60: 60%;
-    --nue-hsl-s70: 70%;
-    --nue-hsl-s80: 80%;
-    --nue-hsl-s90: 90%;
-    --nue-hsl-s100: 100%;
+    --nue-hsl-s10: calc(10% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s20: calc(20% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s30: calc(30% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s40: calc(40% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s50: calc(50% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s60: calc(60% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s70: calc(70% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s80: calc(80% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s90: calc(90% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s100: calc(100% - var(--nue-dark-switch) * 10%);
 
     /* Lightness */
-    --nue-hsl-l0: 0%;
-    --nue-hsl-l5: 5%;
-    --nue-hsl-l10: 10%;
-    --nue-hsl-l15: 15%;
-    --nue-hsl-l20: 20%;
-    --nue-hsl-l25: 25%;
-    --nue-hsl-l30: 30%;
-    --nue-hsl-l35: 35%;
-    --nue-hsl-l40: 40%;
-    --nue-hsl-l45: 45%;
-    --nue-hsl-l50: 50%;
-    --nue-hsl-l55: 55%;
-    --nue-hsl-l60: 60%;
-    --nue-hsl-l65: 65%;
-    --nue-hsl-l70: 70%;
-    --nue-hsl-l75: 75%;
-    --nue-hsl-l80: 80%;
-    --nue-hsl-l85: 85%;
-    --nue-hsl-l90: 90%;
-    --nue-hsl-l95: 95%;
-    --nue-hsl-l100: 100%;
+    --nue-hsl-l0: calc(0% + var(--nue-dark-switch) * 90%);
+    --nue-hsl-l5: calc(5% + var(--nue-dark-switch) * 85%);
+    --nue-hsl-l10: calc(10% + var(--nue-dark-switch) * 80%);
+    --nue-hsl-l15: calc(15% + var(--nue-dark-switch) * 70%);
+    --nue-hsl-l20: calc(20% + var(--nue-dark-switch) * 60%);
+    --nue-hsl-l25: calc(25% + var(--nue-dark-switch) * 50%);
+    --nue-hsl-l30: calc(30% + var(--nue-dark-switch) * 40%);
+    --nue-hsl-l35: calc(35% + var(--nue-dark-switch) * 30%);
+    --nue-hsl-l40: calc(40% + var(--nue-dark-switch) * 20%);
+    --nue-hsl-l45: calc(45% + var(--nue-dark-switch) * 10%);
+    --nue-hsl-l50: calc(50% + var(--nue-dark-switch) * 0%);
+    --nue-hsl-l55: calc(55% + var(--nue-dark-switch) * -10%);
+    --nue-hsl-l60: calc(60% + var(--nue-dark-switch) * -20%);
+    --nue-hsl-l65: calc(65% + var(--nue-dark-switch) * -30%);
+    --nue-hsl-l70: calc(70% + var(--nue-dark-switch) * -40%);
+    --nue-hsl-l75: calc(75% + var(--nue-dark-switch) * -50%);
+    --nue-hsl-l80: calc(80% + var(--nue-dark-switch) * -60%);
+    --nue-hsl-l85: calc(85% + var(--nue-dark-switch) * -70%);
+    --nue-hsl-l90: calc(90% + var(--nue-dark-switch) * -80%);
+    --nue-hsl-l95: calc(95% + var(--nue-dark-switch) * -85%);
+    --nue-hsl-l100: calc(100% + var(--nue-dark-switch) * -90%);
 
     /* Opacity */
     --nue-hsl-o0: 0%;
@@ -53,47 +57,72 @@
     /* Primary */
     --nue-primary-color-0: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l100));
     --nue-primary-color-100: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l95));
-    --nue-primary-color-200: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l90));
-    --nue-primary-color-300: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l80));
-    --nue-primary-color-400: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l70));
-    --nue-primary-color-500: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l60));
-    --nue-primary-color-600: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l50));
-    --nue-primary-color-700: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l40));
-    --nue-primary-color-800: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l30));
-    --nue-primary-color-900: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l20));
+    --nue-primary-color-200: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l80));
+    --nue-primary-color-300: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l70));
+    --nue-primary-color-400: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l60));
+    --nue-primary-color-500: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l50));
+    --nue-primary-color-600: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l40));
+    --nue-primary-color-700: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l30));
+    --nue-primary-color-800: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l20));
+    --nue-primary-color-900: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l10));
+    --nue-primary-color-1000: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l0));
 
     /* Success */
-    --nue-success-color-10: hsl(var(--nue-success-hue), var(--nue-hsl-s80), var(--nue-hsl-l95));
-    --nue-success-color-20: hsl(var(--nue-success-hue), var(--nue-hsl-s80), var(--nue-hsl-l85));
-    --nue-success-color-30: hsl(var(--nue-success-hue), var(--nue-hsl-s80), var(--nue-hsl-l75));
-    --nue-success-color-40: hsl(var(--nue-success-hue), var(--nue-hsl-s80), var(--nue-hsl-l65));
-    --nue-success-color-50: hsl(var(--nue-success-hue), var(--nue-hsl-s80), var(--nue-hsl-l55));
+    --nue-success-color-0: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l100));
+    --nue-success-color-10: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l90));
+    --nue-success-color-20: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l80));
+    --nue-success-color-30: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l70));
+    --nue-success-color-40: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l60));
+    --nue-success-color-50: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l50));
+    --nue-success-color-60: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l45));
+    --nue-success-color-70: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l40));
+    --nue-success-color-80: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l35));
+    --nue-success-color-90: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l30));
+    --nue-success-color-100: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l25));
 
     /* Warning */
-    --nue-warning-color-10: hsl(var(--nue-warning-hue), var(--nue-hsl-s90), var(--nue-hsl-l95));
-    --nue-warning-color-20: hsl(var(--nue-warning-hue), var(--nue-hsl-s90), var(--nue-hsl-l85));
-    --nue-warning-color-30: hsl(var(--nue-warning-hue), var(--nue-hsl-s90), var(--nue-hsl-l75));
-    --nue-warning-color-40: hsl(var(--nue-warning-hue), var(--nue-hsl-s90), var(--nue-hsl-l65));
-    --nue-warning-color-50: hsl(var(--nue-warning-hue), var(--nue-hsl-s90), var(--nue-hsl-l55));
+    --nue-warning-color-0: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l100));
+    --nue-warning-color-10: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l90));
+    --nue-warning-color-20: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l80));
+    --nue-warning-color-30: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l70));
+    --nue-warning-color-40: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l60));
+    --nue-warning-color-50: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l50));
+    --nue-warning-color-60: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l45));
+    --nue-warning-color-70: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l40));
+    --nue-warning-color-80: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l35));
+    --nue-warning-color-90: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l30));
+    --nue-warning-color-100: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l25));
 
     /* Error */
-    --nue-error-color-10: hsl(var(--nue-error-hue), var(--nue-hsl-s90), var(--nue-hsl-l95));
-    --nue-error-color-20: hsl(var(--nue-error-hue), var(--nue-hsl-s90), var(--nue-hsl-l85));
-    --nue-error-color-30: hsl(var(--nue-error-hue), var(--nue-hsl-s90), var(--nue-hsl-l75));
-    --nue-error-color-40: hsl(var(--nue-error-hue), var(--nue-hsl-s90), var(--nue-hsl-l65));
-    --nue-error-color-50: hsl(var(--nue-error-hue), var(--nue-hsl-s90), var(--nue-hsl-l55));
+    --nue-error-color-0: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l100));
+    --nue-error-color-10: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l90));
+    --nue-error-color-20: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l80));
+    --nue-error-color-30: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l70));
+    --nue-error-color-40: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l60));
+    --nue-error-color-50: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l50));
+    --nue-error-color-60: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l45));
+    --nue-error-color-70: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l40));
+    --nue-error-color-80: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l35));
+    --nue-error-color-90: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l30));
+    --nue-error-color-100: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l25));
 
     /* Theme */
-    --nue-link-color: hsl(200, var(--nue-hsl-90), var(--nue-hsl-l90));
-    --nue-border-color: var(--nue-primary-color-200);
-    --nue-divider-color: var(--nue-primary-color-200);
+    --nue-link-color: hsl(200, var(--nue-hsl-90), var(--nue-hsl-l80));
+    --nue-divider-color: hsl(
+        from var(--nue-primary-color-200) h s calc(l + var(--nue-dark-switch) * 10)
+    );
+    --nue-border-color: var(--nue-divider-color);
     --nue-disabled-color: var(--nue-primary-color-500);
-    --nue-primary-text-color: var(--nue-primary-color-900);
-    --nue-secondary-text-color: var(--nue-primary-color-700);
+    --nue-primary-text-color: var(--nue-primary-color-800);
+    --nue-secondary-text-color: var(--nue-primary-color-600);
 
     /* Shadows */
-    --nue-primary-shadow-color: color(from var(--nue-primary-color-500) srgb r g b / 0.5);
-    --nue-secondary-shadow-color: color(from var(--nue-primary-color-200) srgb r g b / 0.5);
+    --nue-primary-shadow-color: hsl(
+        from var(--nue-primary-color-500) h s calc(l + var(--nue-dark-switch) * 10) / 0.5
+    );
+    --nue-secondary-shadow-color: hsl(
+        from var(--nue-primary-color-200) h s calc(l + var(--nue-dark-switch) * 10) / 0.5
+    );
 }
 
 /* Typography */
@@ -125,7 +154,7 @@
     --nue-secondary-padding: 0.5rem;
     --nue-padding-xs: 0.25rem;
     --nue-padding-sm: 0.5rem;
-    --nue-padding-df: 0.875rem;
+    --nue-padding-df: 0.75rem;
     --nue-padding-lg: 1rem;
 
     /* Gaps */

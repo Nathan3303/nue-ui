@@ -8,23 +8,27 @@
     --nue-button-color: var(--nue-primary-text-color);
     --nue-button-bg-color: var(--nue-button-base-color);
     --nue-button-border-color: hsl(
-        from var(--nue-button-base-color) h s calc(l - var(--nue-button-lo) * 2)
+        from var(--nue-button-base-color) h s
+            calc(l + var(--nue-dark-prefix) * var(--nue-button-lo) * 3)
     );
 
     --nue-button-hover-color: var(--nue-button-color);
     --nue-button-hover-bg-color: hsl(
-        from var(--nue-button-bg-color) h s calc(l - var(--nue-button-lo))
+        from var(--nue-button-bg-color) h s calc(l + var(--nue-dark-prefix) * var(--nue-button-lo))
     );
     --nue-button-hover-border-color: hsl(
-        from var(--nue-button-border-color) h s calc(l - var(--nue-button-lo))
+        from var(--nue-button-border-color) h s
+            calc(l + var(--nue-dark-prefix) * var(--nue-button-lo))
     );
 
     --nue-button-active-color: var(--nue-button-color);
     --nue-button-active-bg-color: hsl(
-        from var(--nue-button-hover-bg-color) h s calc(l - var(--nue-button-lo))
+        from var(--nue-button-hover-bg-color) h s
+            calc(l + var(--nue-dark-prefix) * var(--nue-button-lo))
     );
     --nue-button-active-border-color: hsl(
-        from var(--nue-button-hover-border-color) h s calc(l - var(--nue-button-lo))
+        from var(--nue-button-hover-border-color) h s
+            calc(l + var(--nue-dark-prefix) * var(--nue-button-lo))
     );
 
     --nue-button-disable-color: var(--nue-button-color);
@@ -37,9 +41,7 @@
     align-items: center;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.16s ease-out;
     user-select: none;
-    -webkit-user-select: none;
     flex: var(--nue-button-flex);
     justify-content: var(--nue-button-alignment);
     border-radius: var(--nue-primary-radius);
@@ -54,6 +56,23 @@
     color: var(--nue-button-color);
     border: 1px solid var(--nue-button-border-color);
     background-color: var(--nue-button-bg-color);
+
+    > .nue-button__icon,
+    > .nue-button__text {
+        color: inherit;
+        font-size: var(--nue-button-font-size);
+        line-height: 1;
+    }
+
+    > .nue-button__append {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: end;
+        flex: auto;
+        gap: var(--nue-gap-sm);
+        overflow: hidden;
+    }
 
     &:hover {
         color: var(--nue-button-hover-color);
@@ -74,23 +93,6 @@
         border-color: var(--nue-button-disable-border-color);
         background-color: var(--nue-button-disable-bg-color);
     }
-
-    > .nue-button__icon,
-    > .nue-button__text {
-        color: inherit;
-        font-size: var(--nue-button-font-size);
-        line-height: 1;
-    }
-
-    > .nue-button__append {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: end;
-        flex: auto;
-        gap: var(--nue-gap-sm);
-        overflow: hidden;
-    }
 }
 
 .nue-button.nue-button--small {
@@ -108,9 +110,12 @@
 }
 
 .nue-button.nue-button--primary {
-    --nue-button-color: white;
-    --nue-button-base-color: var(--nue-primary-color-900);
-    --nue-button-lo: -5;
+    --nue-button-color: var(--nue-primary-color-100);
+    --nue-button-base-color: hsl(
+        from var(--nue-primary-color-900) h s calc(l - var(--nue-dark-switch) * 10)
+    );
+    --nue-button-border-color: var(--nue-button-base-color);
+    --nue-button-lo: 15;
 }
 
 .nue-button.nue-button--secondary {

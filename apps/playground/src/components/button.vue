@@ -1,9 +1,18 @@
 <template>
     <demo title="基础用法">
         <nue-div align="center">
-            <nue-button icon="theme">中文 Chinese</nue-button>
-            <nue-button disabled>禁用状态</nue-button>
+            <nue-button>中文</nue-button>
+            <nue-button>English</nue-button>
         </nue-div>
+    </demo>
+    <demo title="图标按钮">
+        <nue-div align="center">
+            <nue-button icon="theme">图标按钮</nue-button>
+            <nue-button icon="search">搜索</nue-button>
+        </nue-div>
+    </demo>
+    <demo title="禁用状态">
+        <nue-button disabled>禁用状态</nue-button>
     </demo>
     <demo title="加载态">
         <nue-div align="center">
@@ -37,7 +46,9 @@
             <nue-button theme="pure" icon="theme">纯净</nue-button>
             <nue-button theme="icon" icon="theme">图标</nue-button>
             <nue-button theme="round" icon="theme">胶囊</nue-button>
-            <nue-button theme="round,primary" icon="search">多主题复合使用（主要 + 胶囊）</nue-button>
+            <nue-button theme="round,primary" icon="search"
+                >多主题复合使用（主要 + 胶囊）</nue-button
+            >
         </nue-div>
     </demo>
     <demo title="后置插槽">

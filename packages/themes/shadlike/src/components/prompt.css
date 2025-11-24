@@ -1,7 +1,7 @@
 .nue-prompt {
-    --nue-prompt-open-animation-name: prompt-open;
+    --nue-prompt-open-animation-name: slide-in-from-top;
     --nue-prompt-open-animation-duration: var(--nue-overlay-animation-duration);
-    --nue-prompt-close-animation-name: prompt-close;
+    --nue-prompt-close-animation-name: slide-out-to-top;
     --nue-prompt-close-animation-duration: var(--nue-overlay-close-animation-duration);
 
     display: flex;
@@ -11,7 +11,7 @@
     padding: 1rem;
     box-sizing: border-box;
     gap: 1rem;
-    background-color: white;
+    background-color: var(--nue-primary-color-0);
     border-radius: 6px;
     animation-timing-function: ease-in;
     animation-fill-mode: forwards;
@@ -20,7 +20,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: 1rem;
+        font-size: var(--nue-text-md);
     }
 
     .nue-prompt__content {
@@ -28,10 +28,10 @@
         flex-direction: column;
         width: 100%;
         flex: auto;
-        gap: 0.5rem;
+        gap: var(--nue-gap-sm);
 
         .nue-prompt__description {
-            font-size: 0.875rem;
+            font-size: var(--nue-text-sm);
             color: #757575;
         }
     }
@@ -41,12 +41,12 @@
         display: flex;
         align-items: center;
         justify-content: end;
-        gap: 0.5rem;
+        gap: var(--nue-gap-sm);
     }
 
     .nue-prompt__value-error {
-        color: #f44336;
-        font-size: 0.875rem;
+        color: var(--nue-error-color-30);
+        font-size: var(--nue-text-sm);
     }
 
     &[data-visible='true'] {
@@ -57,27 +57,5 @@
     &[data-visible='false'] {
         animation-name: var(--nue-prompt-close-animation-name);
         animation-duration: var(--nue-prompt-close-animation-duration);
-    }
-}
-
-@keyframes prompt-open {
-    from {
-        opacity: 0;
-        transform: translateY(-1rem);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes prompt-close {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(-1rem);
     }
 }

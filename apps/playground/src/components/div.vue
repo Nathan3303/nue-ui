@@ -33,7 +33,7 @@
             align="center"
             justify="center"
             height="128px"
-            style="background-color: #f9f9f9"
+            style="background-color: var(--nue-primary-color-100)"
         >
             <nue-button>按钮</nue-button>
         </nue-div>

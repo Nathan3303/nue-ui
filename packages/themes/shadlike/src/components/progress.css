@@ -1,9 +1,9 @@
 .nue-progress {
     --nue-progress-flex: auto;
     --nue-progress-stroke-width: 6px;
-    --nue-progress-outerbar-background-color: #f1f1f1;
-    --nue-progress-innerbar-background-color: #7777ff;
-    --nue-progress-text-color: white;
+    --nue-progress-outerbar-background-color: var(--nue-primary-color-200);
+    --nue-progress-innerbar-background-color: var(--nue-primary-color-500);
+    --nue-progress-text-color: var(--nue-primary-color-0);
     --nue-progress-circle-size: 100px;
     --nue-progress-stroke-dash-array: 314;
     --nue-progress-stroke-dash-offset: 314;
@@ -73,7 +73,7 @@
         width: 42px;
         text-align: right;
         color: inherit;
-        font-size: 14px;
+        font-size: var(--nue-text-sm);
     }
 }
 

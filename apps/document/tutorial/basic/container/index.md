@@ -80,7 +80,9 @@ demo-preview=./separator.vue
 
 ## 容器嵌套
 
-容器组件 `NueContainer` 支持嵌套使用。
+容器组件 `NueContainer` 默认支持一套嵌套布局，通过主题 `nested`、`nested_aside` 以及 `nested_main` 搭配使用。需要分别应用于包裹容器、侧栏容器以及主体容器。
+
+其中侧栏容器的默认宽度为 `24%`、最小宽度为 `16%`、最大宽度为 `32%`，能够通过拖拽变宽组件调整宽度。
 
 ::: preview
 demo-preview=./nested.vue
