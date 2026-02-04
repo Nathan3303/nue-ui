@@ -58,23 +58,74 @@
         <nue-collapse>
             <nue-collapse-item name="c1" title="NueUI 组件库描述" max-height="256px">
                 <nue-text size="var(--nue-text-sm)">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis velit placeat nam odit eaque ratione est, perferendis expedita molestias, quo molestiae assumenda voluptatum in facere fugiat vel fugit at! Fugiat.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto eveniet excepturi dolor sequi quam atque labore, ipsum odio vel blanditiis laboriosam sit repudiandae corrupti magnam vero enim accusantium maiores officiis?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, repellat. Asperiores vitae, illo quia soluta id illum quae, omnis autem veritatis fugiat, ea minus perferendis possimus? Quod ad quos aspernatur?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis aliquam minus neque maxime asperiores fugit numquam quis nam necessitatibus placeat saepe sit esse nesciunt quibusdam reprehenderit voluptate, eaque sunt consequuntur!
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, corporis? Quidem veniam consequatur incidunt magnam quaerat cum, placeat hic omnis, nihil aliquid quo alias rem deserunt, laboriosam asperiores ducimus quas.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos consequatur unde esse pariatur cupiditate! Reiciendis quibusdam provident, optio facilis doloribus illo eos quidem iste culpa expedita, aspernatur, error quaerat ullam.
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate aliquid asperiores eius sit reiciendis earum similique voluptatum beatae vel molestiae numquam, nisi amet rem incidunt sequi tenetur id nihil assumenda.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, odio neque praesentium nobis quidem ad! Magnam, in rem? Assumenda placeat ad quo distinctio, minus esse rem. Alias laudantium nobis architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, odit obcaecati a minus laborum, incidunt iure quis nobis facere illo alias hic. At officiis quas libero aperiam minima consectetur reprehenderit.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa consequatur qui amet omnis reiciendis fuga odit. Distinctio, facilis ducimus, fugit fugiat expedita nulla aperiam facere placeat perferendis molestiae sit quae.
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis velit
+                    placeat nam odit eaque ratione est, perferendis expedita molestias, quo
+                    molestiae assumenda voluptatum in facere fugiat vel fugit at! Fugiat. Lorem
+                    ipsum dolor sit amet consectetur, adipisicing elit. Architecto eveniet excepturi
+                    dolor sequi quam atque labore, ipsum odio vel blanditiis laboriosam sit
+                    repudiandae corrupti magnam vero enim accusantium maiores officiis? Lorem ipsum
+                    dolor sit amet consectetur adipisicing elit. Omnis, repellat. Asperiores vitae,
+                    illo quia soluta id illum quae, omnis autem veritatis fugiat, ea minus
+                    perferendis possimus? Quod ad quos aspernatur? Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Omnis aliquam minus neque maxime asperiores fugit
+                    numquam quis nam necessitatibus placeat saepe sit esse nesciunt quibusdam
+                    reprehenderit voluptate, eaque sunt consequuntur! Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Eius, corporis? Quidem veniam consequatur incidunt
+                    magnam quaerat cum, placeat hic omnis, nihil aliquid quo alias rem deserunt,
+                    laboriosam asperiores ducimus quas. Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Eos consequatur unde esse pariatur cupiditate! Reiciendis
+                    quibusdam provident, optio facilis doloribus illo eos quidem iste culpa
+                    expedita, aspernatur, error quaerat ullam. Lorem, ipsum dolor sit amet
+                    consectetur adipisicing elit. Cupiditate aliquid asperiores eius sit reiciendis
+                    earum similique voluptatum beatae vel molestiae numquam, nisi amet rem incidunt
+                    sequi tenetur id nihil assumenda. Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Quasi, odio neque praesentium nobis quidem ad! Magnam, in rem?
+                    Assumenda placeat ad quo distinctio, minus esse rem. Alias laudantium nobis
+                    architecto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores,
+                    odit obcaecati a minus laborum, incidunt iure quis nobis facere illo alias hic.
+                    At officiis quas libero aperiam minima consectetur reprehenderit. Lorem ipsum,
+                    dolor sit amet consectetur adipisicing elit. Culpa consequatur qui amet omnis
+                    reiciendis fuga odit. Distinctio, facilis ducimus, fugit fugiat expedita nulla
+                    aperiam facere placeat perferendis molestiae sit quae.
                 </nue-text>
+            </nue-collapse-item>
+        </nue-collapse>
+    </demo>
+    <demo title="最小高度">
+        <nue-collapse>
+            <nue-collapse-item name="c1" title="NueUI 组件库描述" min-height="64px">
+                <nue-text size="var(--nue-text-sm)">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis velit
+                    placeat nam odit eaque ratione est,
+                </nue-text>
+            </nue-collapse-item>
+        </nue-collapse>
+    </demo>
+    <demo title="内容变化">
+        <nue-collapse>
+            <nue-collapse-item name="c1" title="NueUI 组件库描述">
+                <nue-button theme="small" @click="handleAddContent" icon="plus">
+                    添加内容
+                </nue-button>
+                <nue-div vertical gap="0">
+                    <nue-text
+                        v-for="(content, index) in contents"
+                        :key="index"
+                        size="var(--nue-text-sm)"
+                    >
+                        {{ content }}
+                    </nue-text>
+                </nue-div>
             </nue-collapse-item>
         </nue-collapse>
     </demo>
 </template>
 
 <script lang="ts" setup>
-import { NueText, NueCollapse, NueCollapseItem, NueButton } from '@nue-ui/components';
+import { NueText, NueCollapse, NueCollapseItem, NueButton, NueDiv } from '@nue-ui/components';
 import Demo from '../layouts/demo.vue';
+import { ref } from 'vue';
+
+const contents = ref(['']);
+const handleAddContent = () => contents.value.push(`内容 ${contents.value.length + 1}`);
 </script>

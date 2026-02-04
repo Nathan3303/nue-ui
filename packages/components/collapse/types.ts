@@ -22,5 +22,6 @@ export type NueCollapseContext = {
 export interface NueCollapseItemProps extends GlobalProps {
     title?: string;
     name?: string;
+    minHeight?: string;
     maxHeight?: string;
 }

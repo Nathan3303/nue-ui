@@ -13,7 +13,11 @@
                 />
             </slot>
         </div>
-        <div ref="contentRef" class="nue-collapse-item__content">
+        <div
+            ref="contentRef"
+            class="nue-collapse-item__content"
+            @transitionend="handleTransitionEnd"
+        >
             <slot>
                 <nue-text class="nue-collapse-item__empty" color="#969696">暂无内容</nue-text>
             </slot>
@@ -22,7 +26,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, ref } from 'vue';
+import { computed, inject, nextTick, onMounted, reactive, ref, watch } from 'vue';
 import { NueButton, NueText } from '@nue-ui/components';
 import { generateId, parseTheme } from '@nue-ui/utils';
 import { NUE_COLLAPSE_CONTEXT_KEY } from './constants';
@@ -31,9 +35,15 @@ import type { NueCollapseContext, NueCollapseItemName, NueCollapseItemProps } fr
 defineOptions({ name: 'NueCollapseItem' });
 const props = defineProps<NueCollapseItemProps>();
 
-const { activedItemNames, active } = inject(NUE_COLLAPSE_CONTEXT_KEY) as NueCollapseContext;
+const { activedItemNames, active } = inject<NueCollapseContext>(NUE_COLLAPSE_CONTEXT_KEY)!;
 
 const contentRef = ref<HTMLDivElement>();
+const styleVO = reactive({
+    height: '0px',
+    minHeight: 'unset',
+    maxHeight: props.maxHeight || 'unset',
+    overflow: 'hidden'
+});
 
 const itemName = computed(() => {
     return props.name || (generateId() as NueCollapseItemName);
@@ -48,23 +58,59 @@ const classes = computed(() => {
     return [prefix, ...parseTheme(props.theme, prefix)];
 });
 
-const height = computed(() => {
-    if (!contentRef.value) return 'auto';
-    if (isCollapsed.value) return '0px';
-    return contentRef.value.scrollHeight + 'px';
-});
-
 const styles = computed(() => ({
-    '--nue-collapse-item-overflow': props.maxHeight ? 'auto' : 'hidden',
-    '--nue-collapse-item-max-height': props.maxHeight,
-    '--nue-collapse-item-height': height.value
+    '--nue-collapse-item-height': styleVO.height,
+    '--nue-collapse-item-min-height': styleVO.minHeight,
+    '--nue-collapse-item-max-height': styleVO.maxHeight,
+    '--nue-collapse-item-overflow': styleVO.overflow
 }));
 
-const handleCollapse = () => active(itemName.value);
+const handleExpandAnimation = () => {
+    styleVO.height = '0px';
+    nextTick(() => {
+        if (!contentRef.value) return;
+        contentRef.value.scrollHeight;
+        styleVO.height = `max(${props.minHeight || '0px'}, min(${props.maxHeight || '9999px'}, ${contentRef.value.scrollHeight}px))`;
+        styleVO.overflow = props.maxHeight ? 'auto' : 'hidden';
+    });
+};
 
-defineExpose({
-    name: itemName,
-    isCollapsed,
-    handleCollapse
+const handleCollapseAnimation = () => {
+    if (!contentRef.value) return;
+    styleVO.height = `${contentRef.value.clientHeight}px`;
+    styleVO.minHeight = 'unset';
+    nextTick(() => {
+        if (!contentRef.value) return;
+        contentRef.value.clientHeight;
+        styleVO.height = '0px';
+        styleVO.overflow = 'hidden';
+    });
+};
+
+const handleTransitionEnd = () => {
+    // if (!contentRef.value) return;
+    if (isCollapsed.value) return;
+    styleVO.minHeight = props.minHeight || 'unset';
+    styleVO.height = 'auto';
+};
+
+const handleCollapse = () => {
+    active(itemName.value);
+};
+
+watch(isCollapsed, value => {
+    if (value) {
+        handleCollapseAnimation();
+    } else {
+        handleExpandAnimation();
+    }
 });
+
+onMounted(() => {
+    // if (!contentRef.value) return;
+    styleVO.height = isCollapsed.value ? '0px' : 'auto';
+    styleVO.minHeight = !isCollapsed.value && props.minHeight ? props.minHeight : 'unset';
+});
+
+defineExpose({ name: itemName, isCollapsed, handleCollapse });
 </script>
