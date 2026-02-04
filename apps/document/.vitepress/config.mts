@@ -184,7 +184,7 @@ export default defineConfig({
         },
         footer: {
             message: 'Released under the MIT License.',
-            copyright: 'Copyright © 2024-present Nathan Lee'
+            copyright: 'Copyright © 2026-present Nathan Lee'
         }
     },
     head: [
