@@ -38,3 +38,11 @@ demo-preview=./accordion.vue
 ::: preview
 demo-preview=./header-slot.vue
 :::
+
+### 内容部分的高度控制 <Badge text="v 1.7.27 +" />
+
+通过 `min-height` 和 `max-height` 属性设置面板的最小高度和最大高度。
+
+::: preview
+demo-preview=./min-max-height.vue
+:::

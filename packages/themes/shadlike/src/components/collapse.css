@@ -3,6 +3,7 @@
 
     .nue-collapse-item {
         --nue-collapse-item-height: auto;
+        --nue-collapse-item-min-height: unset;
         --nue-collapse-item-max-height: unset;
         --nue-collapse-item-overflow: hidden;
     }
@@ -43,19 +44,21 @@
         }
 
         .nue-collapse-item__content {
+            box-sizing: border-box;
             width: 100%;
             height: var(--nue-collapse-item-height);
+            min-height: var(--nue-collapse-item-min-height);
             max-height: var(--nue-collapse-item-max-height);
-            transition: all var(--nue-animation-duration) ease-in-out;
             overflow: var(--nue-collapse-item-overflow);
+            transition: all var(--nue-animation-duration) ease-in-out;
         }
 
         &[data-collapsed='true'] .nue-collapse-item-state-icon {
-            transform: rotate(180deg);
+            transform: rotate(0deg);
         }
 
         &[data-collapsed='false'] .nue-collapse-item-state-icon {
-            transform: rotate(0deg);
+            transform: rotate(180deg);
         }
     }
 }
