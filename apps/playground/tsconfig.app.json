@@ -4,11 +4,7 @@
         "target": "ES2020",
         "useDefineForClassFields": true,
         "module": "ESNext",
-        "lib": [
-            "ES2020",
-            "DOM",
-            "DOM.Iterable"
-        ],
+        "lib": ["ES2020", "DOM", "DOM.Iterable"],
         "skipLibCheck": true,
         /* Bundler mode */
         "moduleResolution": "Bundler",
@@ -24,13 +20,11 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true,
         /* types */
-        "types": [
-            "nue-ui/dist/global.d.ts"
-        ]
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "types": ["nue-ui/dist/global.d.ts"]
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue"
-    ]
+    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
