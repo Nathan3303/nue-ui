@@ -47,3 +47,26 @@ demo-preview=./wrap.vue
 ::: preview
 demo-preview=./overflow.vue
 :::
+
+## 组件属性与事件
+
+下方涵盖了 `NueDiv` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性        | 类型                                    | 默认值 | 说明         |
+| ----------- | --------------------------------------- | ------ | ------------ |
+| `direction` | `string`                                | -      | 布局方向     |
+| `vertical`  | `boolean`                               | -      | 垂直排列     |
+| `align`     | `string`                                | -      | 副轴对齐方式 |
+| `justify`   | `string`                                | -      | 主轴对齐方式 |
+| `flex`      | `string`                                | -      | 弹性布局     |
+| `wrap`      | `string`                                | -      | 换行方式     |
+| `gap`       | `string`                                | -      | 间距         |
+| `width`     | `string`                                | -      | 宽度         |
+| `height`    | `string`                                | -      | 高度         |
+| `divider`   | `string \| number \| boolean \| object` | -      | 分割线       |
+| `theme`     | `string \| string[]`                    | -      | 主题样式     |
+| `inline`    | `boolean`                               | -      | 行内元素     |
+| `overflow`  | `string`                                | -      | 溢出处理     |
+| `autoFit`   | `boolean`                               | -      | 自动适应     |

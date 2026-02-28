@@ -51,3 +51,25 @@ demo-preview=./max.vue
 ::: preview
 demo-preview=./inner.vue
 :::
+
+## 注意事项
+
+1. **最大值**：`max` 属性仅在 `value` 为数值类型时生效，超过最大值显示 `max+`。
+2. **小红点模式**：`dot` 属性为 `true` 时，`value` 属性失效，只显示一个小红点。
+3. **隐藏徽标**：`hidden` 属性可用于控制徽标的显示隐藏。
+4. **插槽内容**：组件没有默认插槽内容时，徽标会水平显示；有插槽内容时，徽标会定位到右上角。
+
+## 组件属性与事件
+
+下方涵盖了 `NueBadge` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性      | Type                                            | 默认值  | 说明                           |
+| --------- | ----------------------------------------------- | ------- | ------------------------------ |
+| `value`   | `string \| number`                              | -       | 徽标显示内容                   |
+| `max`     | `number`                                        | -       | 最大值，超过显示 max+          |
+| `hidden`  | `boolean`                                       | `false` | 是否隐藏徽标                   |
+| `dot`     | `boolean`                                       | `false` | 小红点模式                     |
+| `clamped` | `number`                                        | -       | 数值位数限制                   |
+| `theme`   | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps） |

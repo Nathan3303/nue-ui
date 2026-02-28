@@ -109,3 +109,37 @@ demo-preview=./cg-controller.vue
 ::: preview
 demo-preview=./cg-min-max.vue
 :::
+
+## 注意事项
+
+1. **HTML 实现**：组件没有使用原生 `<input type="checkbox">` 元素，而是自定义实现的选中状态样式。
+2. **中间状态**：`indeterminate` 状态的优先级高于选中状态，高于未选中状态。
+3. **异步验证**：`beforeCheck` 回调支持返回 Promise，可用于处理异步验证逻辑。
+4. **CheckboxGroup**：使用 `NueCheckboxGroup` 时，通过 `v-model` 绑定的数组会记录所有选中项的 `name` 值。
+
+## 组件属性与事件
+
+下方涵盖了 `NueCheckbox` 组件所有的可用属性与事件。
+
+### NueCheckbox 属性
+
+| 属性            | Type                                              | 默认值  | 说明                              |
+| --------------- | ------------------------------------------------- | ------- | --------------------------------- |
+| `modelValue`    | `boolean`                                         | -       | 绑定值                            |
+| `label`         | `string`                                          | -       | 标签文本                          |
+| `name`          | `string`                                          | -       | 名称（用于CheckboxGroup记录）     |
+| `size`          | `'small' \| 'large'`                              | -       | 尺寸                              |
+| `disabled`      | `boolean`                                         | `false` | 是否禁用                          |
+| `loading`       | `boolean`                                         | `false` | 加载状态                          |
+| `indeterminate` | `boolean`                                         | `false` | 中间状态（部分选中）              |
+| `beforeCheck`   | `(state: boolean) => boolean \| Promise<boolean>` | -       | 选择前回调，返回 false 可阻止选择 |
+| `theme`         | `string \| string[] \| Record<string, boolean>`   | -       | 主题样式（继承自 GlobalProps）    |
+
+### NueCheckbox 事件
+
+| 事件                | 参数             | 说明         |
+| ------------------- | ---------------- | ------------ |
+| `update:modelValue` | `value: boolean` | 值更新事件   |
+| `change`            | `value: boolean` | 状态变化事件 |
+| `checked`           | -                | 选中事件     |
+| `unchecked`         | -                | 取消选中事件 |

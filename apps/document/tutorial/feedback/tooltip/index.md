@@ -46,3 +46,23 @@ demo-preview=./content.vue
 ::: preview
 demo-preview=./theme.vue
 :::
+
+## 注意事项
+
+1. **弹出位置**：`placement` 属性格式为 `[方向]-[对齐]`，如 `top-start`、`bottom-center`。
+2. **内容插槽**：除了 `content` 属性，还可以通过 `#content` 插槽自定义提示内容。
+3. **自定义样式**：由于使用了 Teleport，自定义样式需要放在全局（非 scoped）样式中。
+
+## 组件属性与事件
+
+下方涵盖了 `NueTooltip` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性           | Type                                            | 默认值 | 说明                           |
+| -------------- | ----------------------------------------------- | ------ | ------------------------------ |
+| `content`      | `string`                                        | -      | 提示内容                       |
+| `placement`    | `string`                                        | -      | 弹出位置，格式：`方向-对齐`    |
+| `size`         | `'small' \| 'normal' \| 'large'`                | -      | 提示框尺寸                     |
+| `showTriangle` | `boolean`                                       | `true` | 是否显示三角箭头               |
+| `theme`        | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |

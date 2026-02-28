@@ -55,3 +55,39 @@ demo-preview=./tag.vue
 ::: preview
 demo-preview=./clamped.vue
 :::
+
+## 组合使用
+
+文本组件的多个属性可以组合使用，实现丰富的文本样式效果。
+
+### 标题与正文
+
+结合使用不同大小、粗细的文本组件来构建标题和正文结构。
+
+### 状态文本
+
+使用颜色和装饰属性来展示不同状态的文本，如链接、删除线等。
+
+## 注意事项
+
+1. **标签选择**：根据语义化需求选择合适的 HTML 标签，如标题使用 `h1`-`h4`，段落使用 `p`。
+2. **溢出处理**：`clamped` 属性使用 `-webkit-line-clamp` 实现，需要注意浏览器兼容性。
+3. **尺寸预设**：预设尺寸 `xs` 到 `xxl` 是组件内置的样式，如需自定义大小可直接传入 CSS 值。
+4. **颜色继承**：默认情况下文本颜色会继承父元素，通过 `color` 属性可覆盖。
+
+## 组件属性与事件
+
+下方涵盖了 `NueText` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性         | Type                                            | 默认值 | 说明                                              |
+| ------------ | ----------------------------------------------- | ------ | ------------------------------------------------- |
+| `tag`        | `string`                                        | `span` | HTML 标签                                         |
+| `size`       | `string`                                        | -      | 文本大小，支持预设值 xs/sm/md/lg/xl/xxl 或 CSS 值 |
+| `color`      | `string`                                        | -      | 文本颜色，接受 CSS Color 值                       |
+| `decoration` | `string`                                        | -      | 文本装饰，接受 CSS text-decoration 值             |
+| `weight`     | `string \| number`                              | -      | 文本粗细，接受 CSS font-weight 值                 |
+| `align`      | `string`                                        | -      | 文本对齐，接受 CSS text-align 值                  |
+| `clamped`    | `number`                                        | -      | 溢出行数限制，使用 -webkit-line-clamp             |
+| `theme`      | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps）                    |

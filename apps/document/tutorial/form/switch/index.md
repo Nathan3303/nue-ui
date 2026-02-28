@@ -49,3 +49,36 @@ demo-preview=./disabled.vue
 ::: preview
 demo-preview=./loading.vue
 :::
+
+## 注意事项
+
+1. **双向绑定**：使用 `v-model` 绑定布尔值，实现双向数据同步。
+2. **异步切换**：`beforeSwitch` 回调函数支持返回 Promise，可用于处理异步操作（如 API 请求）。
+3. **加载状态**：`loading` 状态时组件会自动禁用，防止用户重复操作。
+4. **状态文字**：`showText` 需要设置为 `true` 才能显示 `activeText` 和 `inactiveText`。
+
+## 组件属性与事件
+
+下方涵盖了 `NueSwitch` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性           | Type                                            | 默认值  | 说明                              |
+| -------------- | ----------------------------------------------- | ------- | --------------------------------- |
+| `modelValue`   | `boolean`                                       | -       | 绑定值                            |
+| `size`         | `'small' \| 'normal' \| 'large'`                | -       | 尺寸                              |
+| `disabled`     | `boolean`                                       | `false` | 是否禁用                          |
+| `loading`      | `boolean`                                       | `false` | 加载状态                          |
+| `loadingIcon`  | `string`                                        | -       | 加载图标                          |
+| `showText`     | `boolean`                                       | `false` | 显示状态文字                      |
+| `activeText`   | `string`                                        | -       | 开启状态显示的文字                |
+| `inactiveText` | `string`                                        | -       | 关闭状态显示的文字                |
+| `beforeSwitch` | `(value: boolean) => Promise<boolean>`          | -       | 切换前回调，返回 false 可阻止切换 |
+| `theme`        | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps）    |
+
+### 事件
+
+| 事件                | 参数             | 说明         |
+| ------------------- | ---------------- | ------------ |
+| `update:modelValue` | `value: boolean` | 值更新事件   |
+| `change`            | `value: boolean` | 状态变化事件 |

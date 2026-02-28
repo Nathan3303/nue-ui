@@ -92,3 +92,45 @@ demo-preview=./rows-autosize.vue
 ::: preview
 demo-preview=./resize.vue
 :::
+
+## 注意事项
+
+1. **与 Input 的区别**：`NueTextarea` 是多行输入框，适用于长文本输入；`NueInput` 是单行输入框。
+2. **自动高度**：`autosize` 属性可以设置布尔值或对象，设置为对象时可以指定最小和最大行数。
+3. **调整大小**：`resize` 属性映射原生 `<textarea>` 元素的 resize 属性。
+4. **防抖机制**：与 Input 组件类似，`debounceTime` 仅影响 `update:modelValue` 事件的触发。
+5. **字数统计**：需要配合 `maxlength` 属性使用才能显示统计效果。
+
+## 组件属性与事件
+
+下方涵盖了 `NueTextarea` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性           | Type                                              | 默认值  | 说明                           |
+| -------------- | ------------------------------------------------- | ------- | ------------------------------ |
+| `modelValue`   | `string`                                          | -       | 绑定值                         |
+| `id`           | `string`                                          | -       | ID（原生属性）                 |
+| `placeholder`  | `string`                                          | -       | 占位符                         |
+| `theme`        | `string \| string[]`                              | -       | 主题样式（继承自 GlobalProps） |
+| `shape`        | `'rounded' \| 'noshape'`                          | -       | 形状样式                       |
+| `disabled`     | `boolean`                                         | `false` | 是否禁用                       |
+| `readonly`     | `boolean`                                         | `false` | 只读                           |
+| `rows`         | `number`                                          | `3`     | 行数                           |
+| `resize`       | `boolean`                                         | -       | 调整大小                       |
+| `autosize`     | `boolean \| { minRows: number; maxRows: number }` | -       | 自动高度                       |
+| `maxlength`    | `string`                                          | -       | 最大长度                       |
+| `counter`      | `string`                                          | -       | 字数统计模式                   |
+| `width`        | `string`                                          | -       | 宽度                           |
+| `size`         | `'small' \| 'large'`                              | -       | 尺寸                           |
+| `debounceTime` | `number`                                          | `0`     | 防抖时间(ms)                   |
+| `flex`         | `string`                                          | -       | 弹性布局                       |
+
+### 事件
+
+| 事件                | 参数    | 说明                     |
+| ------------------- | ------- | ------------------------ |
+| `update:modelValue` | `value` | 值更新事件               |
+| `input`             | `Event` | 输入事件（实时触发）     |
+| `blur`              | `Event` | 失去焦点事件             |
+| `change`            | `Event` | 值变化事件（失焦后触发） |
