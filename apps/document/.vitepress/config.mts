@@ -166,7 +166,7 @@ export default defineConfig({
                 },
                 {
                     text: '反馈组件',
-                    items: [{ text: '命令式下拉列表', link: '/enhance/command/index.md' }]
+                    items: [{ text: '下拉列表进阶', link: '/enhance/dropdown/index.md' }]
                 }
             ]
         },
