@@ -5,10 +5,10 @@ NueUI 是一个基于 Vue 3 的 UI 组件库，旨在提供一套简洁、易用
 ## 项目信息
 
 - **名称**: `nue-ui`
-- **版本**: `0.8.0`
-- **作者**: Nathan3303
+- **版本**: `1.7.27`
+- **作者**: Nathan Lee
 - **许可证**: MIT
-- **仓库**: [GitHub](https://github.com/nathanlee323/nue-ui)
+- **仓库**: [GitHub](https://github.com/Nathan3303/nue-ui)
 
 ## 在其他项目中使用 NueUI 组件库
 
@@ -60,13 +60,15 @@ NueUI 项目采用 Monorepo 结构，包含以下几个主要模块：
     - **`@nue-ui/document`**: 文档站点
     - **`@nue-ui/playground`**: 组件演练
     - **`@nue-ui/histoire`**: Histoire 组件测试
-    - **`nue-ui-theme-shadlike`**: Shadlike 主题（单独包）
 - **Packages**
     - **`@nue-ui/components`**: 组件
     - **`@nue-ui/core`**: 构建核心
     - **`@nue-ui/hooks`**: 功能钩子
-    - **`@nue-ui/assets`**: 组件公共资源
+    - **`@nue-ui/themes`**: 主题
     - **`@nue-ui/utils`**: 工具
+- **独立包**
+    - **`nue-ui-theme-shadlike`**: Shadlike 主题
+    - **`nue-ui-iconfont`**: 图标字体
 
 ### 开发
 
@@ -84,6 +86,9 @@ pnpm install
 
 ```bash
 pnpm core build # 构建组件库
+pnpm shadlike-theme build # 构建 Shadlike 主题
+pnpm iconfont build # 构建图标字体
+pnpm build # 构建全部
 pnpm document [dev|build|preview] # 文档
 pnpm histoire [dev|build|preview] # Histoire
 pnpm playground [dev|build|preview] # 演练
