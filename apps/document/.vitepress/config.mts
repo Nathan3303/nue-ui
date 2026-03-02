@@ -24,7 +24,8 @@ export default defineConfig({
                     text: '如何使用',
                     items: [
                         { text: '安装', link: '/tutorial/usage/install.md' },
-                        { text: '使用', link: '/tutorial/usage/use.md' }
+                        { text: '使用', link: '/tutorial/usage/use.md' },
+                        { text: '自动导入', link: '/tutorial/usage/resolver.md' }
                     ]
                 },
                 {

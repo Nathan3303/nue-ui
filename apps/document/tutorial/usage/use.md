@@ -1,3 +1,9 @@
+---
+next:
+    text: Button 按钮
+    link: /tutorial/basic/button/index
+---
+
 # 使用
 
 ## 完整导入
@@ -30,12 +36,10 @@ app.mount('#app');
 ```json5 {5-7}
 {
     // ...
-    "compilerOptions": {
+    compilerOptions: {
         // ...
-        "types": [
-            "nue-ui/dist/global"
-        ]
-    },
+        types: ['nue-ui/dist/global']
+    }
     // ...
 }
 ```
@@ -47,6 +51,14 @@ app.mount('#app');
 ```typescript
 import { NueButton, NueText } from 'nue-ui';
 ```
+
+## 自动导入
+
+如果希望在减少构建体积的同时，又不想手动编写 import 语句，可以使用 `nue-ui-resolver` 插件配合 `unplugin-vue-components` 实现自动导入。
+
+::: tip 提示
+自动导入需要在项目中安装 `nue-ui-resolver` 并进行相应的配置。详细使用说明请参阅 [自动导入](./resolver.md)。
+:::
 
 ## 开始使用
 
