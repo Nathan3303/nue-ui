@@ -16,4 +16,5 @@ export type NueDatePickerEmits = {
     (e: 'update:modelValue', value: NueDatePickerValue): void;
     (e: 'change', value: NueDatePickerValue): void;
     (e: 'clear'): void;
+    (e: 'close'): void;
 };

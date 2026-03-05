@@ -38,6 +38,14 @@ demo-preview=./disabled.vue
 demo-preview=./clearable.vue
 :::
 
+## 生命周期 <Badge type="warning" text="1.8.28 +" />
+
+通过事件 `close` 可以在日期选择器关闭时触发回调。
+
+::: preview
+demo-preview=./lifecycle.vue
+:::
+
 ## 注意事项
 
 1. **v-model**：组件使用 `v-model` 双向绑定数据，底层实现为 `modelValue` 属性和 `update:modelValue` 事件。
