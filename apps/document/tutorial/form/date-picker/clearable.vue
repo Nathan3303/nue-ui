@@ -1,5 +1,5 @@
 <template>
-    <nue-date-picker v-model="dateValue" clearable placeholder="可清除" />
+    <nue-date-picker v-model="dateValue" clearable />
 </template>
 
 <script lang="ts" setup>

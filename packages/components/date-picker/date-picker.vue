@@ -1,5 +1,10 @@
 <template>
-    <nue-dropdown :class="classes" :disabled="disabled" placement="bottom-start">
+    <nue-dropdown
+        :class="classes"
+        :disabled="disabled"
+        placement="bottom-start"
+        @close="emit('close')"
+    >
         <template #trigger="{ trigger }">
             <nue-button :disabled="disabled" @click="trigger">
                 <template v-if="modelValue">
