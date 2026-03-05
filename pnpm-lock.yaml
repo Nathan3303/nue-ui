@@ -252,10 +252,6 @@ importers:
 
   packages/plugins/resolver:
     dependencies:
-      '@nue-ui/utils':
-        specifier: workspace:*
-        version: link:../../utils
-    devDependencies:
       unplugin-vue-components:
         specifier: ^0.27.0
         version: 0.27.5(@babel/parser@7.28.5)(rollup@4.53.2)(vue@3.5.24(typescript@5.9.3))
