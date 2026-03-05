@@ -39,10 +39,45 @@ demo-preview=./accordion.vue
 demo-preview=./header-slot.vue
 :::
 
-### 内容部分的高度控制 <Badge text="v 1.7.27 +" />
+### 内容部分的高度控制 <Badge text="1.7.27 +" />
 
 通过 `min-height` 和 `max-height` 属性设置面板的最小高度和最大高度。
 
 ::: preview
 demo-preview=./min-max-height.vue
 :::
+
+## 注意事项
+
+1. **手风琴模式**：`accordion` 属性设置为 `true` 时，同时只能展开一个面板。
+2. **双向绑定**：`v-model` 绑定的值是展开面板的 `name` 组成的数组。
+3. **标识符**：`name` 属性用于标识每个面板，建议设置具有唯一性的值。
+4. **高度控制**：`minHeight` 和 `maxHeight` 用于控制面板内容区域的高度。
+
+## 组件属性与事件
+
+下方涵盖了 `NueCollapse` 和 `NueCollapseItem` 组件所有的可用属性与事件。
+
+### NueCollapse 属性
+
+| 属性         | Type                                            | 默认值  | 说明                           |
+| ------------ | ----------------------------------------------- | ------- | ------------------------------ |
+| `modelValue` | `string[]`                                      | -       | 展开面板的 name 数组           |
+| `accordion`  | `boolean`                                       | `false` | 手风琴模式（同时只能展开一个） |
+| `theme`      | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps） |
+
+### NueCollapse 事件
+
+| 事件                | 参数              | 说明             |
+| ------------------- | ----------------- | ---------------- |
+| `update:modelValue` | `value: string[]` | 展开状态变化事件 |
+
+### NueCollapseItem 属性
+
+| 属性        | Type                                            | 默认值 | 说明                           |
+| ----------- | ----------------------------------------------- | ------ | ------------------------------ |
+| `title`     | `string`                                        | -      | 面板标题                       |
+| `name`      | `string`                                        | -      | 面板唯一标识符                 |
+| `minHeight` | `string`                                        | -      | 最小高度                       |
+| `maxHeight` | `string`                                        | -      | 最大高度                       |
+| `theme`     | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |

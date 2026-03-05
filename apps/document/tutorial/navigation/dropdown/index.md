@@ -119,3 +119,59 @@ demo-preview=./dropdown-item.vue
 ::: preview
 demo-preview=./dropdown-item-append.vue
 :::
+
+## 注意事项
+
+1. **触发方式**：`triggerType` 支持 `click` 和 `hover` 两种触发方式。
+2. **执行标识**：通过 `executeId` 为每个选项设置唯一标识，在 `execute` 事件中获取并处理。
+3. **分组管理**：`group` 属性可以用于分组管理多个下拉菜单。
+4. **背景穿透**：`transparent` 属性启用后，下拉菜单打开时仍可与其他元素交互。
+
+## 组件属性与事件
+
+下方涵盖了 `NueDropdown` 和 `NueDropdownItem` 组件所有的可用属性与事件。
+
+### NueDropdown 属性
+
+| 属性                | Type                                            | 默认值  | 说明                           |
+| ------------------- | ----------------------------------------------- | ------- | ------------------------------ |
+| `transparent`       | `boolean`                                       | `false` | 背景层穿透                     |
+| `teleportTo`        | `string`                                        | -       | 传送到指定 DOM 节点            |
+| `text`              | `string`                                        | -       | 触发按钮文本                   |
+| `triggerText`       | `string`                                        | -       | 触发按钮文本（备用）           |
+| `disabled`          | `boolean`                                       | `false` | 是否禁用                       |
+| `triggerType`       | `'click' \| 'hover'`                            | `click` | 触发方式                       |
+| `size`              | `'small' \| 'large'`                            | -       | 尺寸                           |
+| `placement`         | `string`                                        | -       | 弹出位置                       |
+| `closeWhenExecuted` | `boolean`                                       | `true`  | 执行后关闭                     |
+| `group`             | `string`                                        | -       | 分组ID，用于分组管理           |
+| `beforeExecute`     | `() => void`                                    | -       | 执行前回调                     |
+| `afterExecute`      | `() => void`                                    | -       | 执行后回调                     |
+| `theme`             | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps） |
+
+### NueDropdown 事件
+
+| 事件          | 参数            | 说明         |
+| ------------- | --------------- | ------------ |
+| `execute`     | `value: string` | 选项执行事件 |
+| `open`        | -               | 打开事件     |
+| `close`       | -               | 关闭事件     |
+| `beforeOpen`  | -               | 打开前事件   |
+| `afterOpen`   | -               | 打开后事件   |
+| `beforeClose` | -               | 关闭前事件   |
+| `afterClose`  | -               | 关闭后事件   |
+
+### NueDropdownItem 属性
+
+| 属性                | Type                                            | 默认值  | 说明                           |
+| ------------------- | ----------------------------------------------- | ------- | ------------------------------ |
+| `text`              | `string`                                        | -       | 选项文本                       |
+| `disabled`          | `boolean`                                       | `false` | 是否禁用                       |
+| `executeId`         | `string`                                        | -       | 执行标识                       |
+| `size`              | `'small' \| 'large'`                            | -       | 尺寸（继承父级）               |
+| `icon`              | `string`                                        | -       | 选项图标                       |
+| `loading`           | `boolean`                                       | `false` | 加载状态                       |
+| `loadingIcon`       | `string`                                        | -       | 加载图标                       |
+| `closeWhenExecuted` | `boolean`                                       | -       | 执行后关闭（优先级高于父级）   |
+| `useSuffixIcon`     | `boolean`                                       | `false` | 显示后缀图标（用于嵌套场景）   |
+| `theme`             | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps） |

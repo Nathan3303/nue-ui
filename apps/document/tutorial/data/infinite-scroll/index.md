@@ -37,3 +37,26 @@ demo-preview=./trigger-height.vue
 ::: preview
 demo-preview=./loading-disabled.vue
 :::
+
+## 组件属性与事件
+
+下方涵盖了 `NueInfiniteScroll` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性            | 类型                                            | 默认值 | 说明                           |
+| --------------- | ----------------------------------------------- | ------ | ------------------------------ |
+| `triggerHeight` | `string`                                        | -      | 触发阈值                       |
+| `height`        | `string`                                        | -      | 容器高度                       |
+| `disabled`      | `boolean`                                       | -      | 是否禁用                       |
+| `loading`       | `boolean`                                       | -      | 加载状态                       |
+| `root`          | `Element \| Document \| null \| 'wrapper'`      | -      | 滚动根元素                     |
+| `rootMargin`    | `string`                                        | -      | 根元素边距                     |
+| `threshold`     | `number \| number[]`                            | -      | 阈值                           |
+| `theme`         | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+
+### 事件
+
+| 事件       | 参数 | 说明         |
+| ---------- | ---- | ------------ |
+| `loadMore` | -    | 加载更多事件 |

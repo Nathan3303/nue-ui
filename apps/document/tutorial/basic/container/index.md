@@ -87,3 +87,81 @@ demo-preview=./separator.vue
 ::: preview
 demo-preview=./nested.vue
 :::
+
+## 注意事项
+
+1. **Flex 布局**：所有布局组件都采用 Flex 布局，了解 Flex 布局有助于更好地使用这些组件。
+2. **宽高设置**：
+    - `NueContainer` 支持通过 `width` 和 `height` 设置宽高
+    - `NueHeader` 和 `NueFooter` 支持设置宽高
+    - `NueMain` 不支持直接设置宽高，通过父容器控制
+    - `NueAside` 支持 `width`、`minWidth`、`maxWidth` 控制宽度范围
+3. **拖拽调整**：`NueSeparator` 组件需要与 `NueAside` 配合使用，通过 `opTarget` 属性指定操作目标。
+4. **嵌套布局**：使用 `nested` 系列主题时，需要为不同容器应用不同的主题类。
+
+## 组件属性与事件
+
+下方涵盖了布局容器组件所有的可用属性与事件。
+
+### NueContainer 属性
+
+| 属性     | 类型                                            | 默认值 | 说明                           |
+| -------- | ----------------------------------------------- | ------ | ------------------------------ |
+| `height` | `string`                                        | -      | 容器高度                       |
+| `width`  | `string`                                        | -      | 容器宽度                       |
+| `theme`  | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+
+### NueHeader 属性
+
+| 属性     | 类型                                            | 默认值 | 说明                           |
+| -------- | ----------------------------------------------- | ------ | ------------------------------ |
+| `width`  | `string`                                        | -      | 宽度                           |
+| `height` | `string`                                        | -      | 高度                           |
+| `theme`  | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+
+### NueMain 属性
+
+| 属性         | Type                                            | 默认值 | 说明                           |
+| ------------ | ----------------------------------------------- | ------ | ------------------------------ |
+| `responsive` | `boolean`                                       | -      | 是否响应式                     |
+| `theme`      | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+
+### NueAside 属性
+
+| 属性             | Type                                            | 默认值 | 说明                           |
+| ---------------- | ----------------------------------------------- | ------ | ------------------------------ |
+| `width`          | `string`                                        | -      | 宽度                           |
+| `minWidth`       | `string`                                        | -      | 最小宽度                       |
+| `maxWidth`       | `string`                                        | -      | 最大宽度                       |
+| `collapsedWidth` | `string`                                        | -      | 折叠宽度                       |
+| `theme`          | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+
+### NueContent 属性
+
+| 属性    | Type                                            | 默认值 | 说明                           |
+| ------- | ----------------------------------------------- | ------ | ------------------------------ |
+| `pure`  | `boolean`                                       | -      | 是否纯净模式                   |
+| `fill`  | `boolean`                                       | -      | 是否填充                       |
+| `theme` | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+
+### NueSeparator 属性
+
+| 属性       | Type                                            | 默认值 | 说明                           |
+| ---------- | ----------------------------------------------- | ------ | ------------------------------ |
+| `opTarget` | `'previous' \| 'next' \| HTMLElement`           | -      | 操作目标                       |
+| `disabled` | `boolean`                                       | -      | 是否禁用                       |
+| `theme`    | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+
+### NueSeparator 事件
+
+| 事件     | 参数            | 说明         |
+| -------- | --------------- | ------------ |
+| `resize` | `width: number` | 调整宽度事件 |
+
+### NueFooter 属性
+
+| 属性     | Type                                            | 默认值 | 说明                           |
+| -------- | ----------------------------------------------- | ------ | ------------------------------ |
+| `width`  | `string`                                        | -      | 宽度                           |
+| `height` | `string`                                        | -      | 高度                           |
+| `theme`  | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |

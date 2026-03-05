@@ -71,3 +71,38 @@ demo-preview=./type.vue
 ::: preview
 demo-preview=./scale.vue
 :::
+
+## 注意事项
+
+1. **百分比范围**：`percentage` 属性值应在 0-100 之间。
+2. **颜色设置**：`color` 属性可以接受字符串或字符串数组（渐变色）。
+3. **文字显示**：
+    - `showInnerText` 将文字显示在进度条内部
+    - `hideText` 完全隐藏百分比文字
+    - 两者可同时使用控制文字显示位置
+4. **格式化函数**：`formatter` 属性可以自定义百分比显示格式。
+5. **环形进度条**：目前为实验性功能，对部分属性支持度有限。
+
+## 组件属性与事件
+
+下方涵盖了 `NueProgress` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性            | Type                                            | 默认值  | 说明                           |
+| --------------- | ----------------------------------------------- | ------- | ------------------------------ |
+| `type`          | `'line' \| 'circle' \| 'dashboard'`             | `line`  | 进度条类型                     |
+| `color`         | `string \| string[]`                            | -       | 进度颜色，支持渐变色           |
+| `strokeWidth`   | `number`                                        | `6`     | 进度条粗细（px）               |
+| `percentage`    | `number`                                        | -       | 百分比值（0-100）              |
+| `showInnerText` | `boolean`                                       | `false` | 显示内部文字                   |
+| `hideText`      | `boolean`                                       | `false` | 隐藏文字                       |
+| `scale`         | `number`                                        | `1`     | 缩放比例（环形进度条）         |
+| `formatter`     | `(p: string) => void \| string`                 | -       | 百分比格式化函数               |
+| `theme`         | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps） |
+
+### 事件
+
+| 事件   | 参数 | 说明               |
+| ------ | ---- | ------------------ |
+| `full` | -    | 进度达到100%的事件 |

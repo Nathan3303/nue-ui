@@ -1,0 +1,21 @@
+{
+    "name": "nue-ui-resolver",
+    "version": "0.2.1",
+    "description": "NueUI resolver for unplugin-vue-components",
+    "type": "module",
+    "main": "index.ts",
+    "types": "index.ts",
+    "author": "Nathan Lee",
+    "license": "MIT",
+    "exports": {
+        ".": {
+            "types": "./index.ts",
+            "import": "./index.ts",
+            "require": "./index.ts"
+        }
+    },
+    "peerDependencies": {
+        "unplugin-vue-components": "^0.27.0",
+        "vue": "^3.5.0"
+    }
+}

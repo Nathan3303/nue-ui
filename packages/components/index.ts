@@ -8,6 +8,7 @@ export * from './checkbox-group';
 export * from './collapse';
 export * from './confirm';
 export * from './container';
+export * from './date-picker';
 export * from './dialog';
 export * from './div';
 export * from './divider';

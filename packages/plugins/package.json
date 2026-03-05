@@ -1,0 +1,16 @@
+{
+    "name": "@nue-ui/plugins",
+    "version": "0.1.0",
+    "description": "Plugins package for Nue UI",
+    "private": true,
+    "author": "Nathan Lee",
+    "license": "MIT",
+    "files": [
+        "./resolver"
+    ],
+    "exports": {
+        "./resolver/": {
+            "import": "./resolver/"
+        }
+    }
+}

@@ -34,3 +34,22 @@ demo-preview=./image-src.vue
 ::: preview
 demo-preview=./image-size.vue
 :::
+
+## 注意事项
+
+1. **图片设置**：`imageSize` 属性用于设置图片的显示大小，接受 CSS 宽度值。
+2. **描述文本**：`description` 属性和 `#description` 插槽可以同时使用，插槽内容会覆盖属性值。
+3. **自定义图片**：可以使用 `imageSrc` 属性设置自定义的空状态图片。
+
+## 组件属性与事件
+
+下方涵盖了 `NueEmpty` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性          | Type                                            | 默认值 | 说明                           |
+| ------------- | ----------------------------------------------- | ------ | ------------------------------ |
+| `imageSrc`    | `string`                                        | -      | 自定义图片路径                 |
+| `imageSize`   | `string`                                        | -      | 图片大小，接受 CSS 宽度值      |
+| `description` | `string`                                        | -      | 描述文本                       |
+| `theme`       | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |

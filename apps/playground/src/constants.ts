@@ -38,7 +38,8 @@ export const componentLayoutAsideLinks = [
             { route: '/component/textarea', text: 'Textarea 富文本输入框' },
             { route: '/component/select', text: 'Select 选择器' },
             { route: '/component/switch', text: 'Switch 开关' },
-            { route: '/component/checkbox', text: 'Checkbox 复选框' }
+            { route: '/component/checkbox', text: 'Checkbox 复选框' },
+            { route: '/component/date-picker', text: 'DatePicker 日期选择器' }
         ]
     },
     {
