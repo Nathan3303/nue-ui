@@ -139,6 +139,10 @@ export default defineConfig({
                         {
                             text: 'Textarea 富文本输入框',
                             link: '/tutorial/form/textarea/index.md'
+                        },
+                        {
+                            text: 'Date Picker 日期选择器',
+                            link: '/tutorial/form/date-picker/index.md'
                         }
                     ]
                 },

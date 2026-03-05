@@ -88,22 +88,6 @@ demo-preview=./max-count.vue
 demo-preview=./debounce.vue
 :::
 
-## 形状样式
-
-输入框组件支持不同的形状样式，通过 `shape` 属性设置。
-
-### 圆角输入框
-
-设置 `shape` 为 `rounded` 可以获得圆角样式的输入框。
-
-### 无形状输入框
-
-设置 `shape` 为 `noshape` 可以获得无边框圆角的扁平样式。
-
-## 主题定制
-
-输入框组件支持通过 `theme` 属性进行主题定制，可以自定义输入框的样式。
-
 ## 注意事项
 
 1. **v-model**：组件使用 `v-model` 双向绑定数据，底层实现为 `modelValue` 属性和 `update:modelValue` 事件。

@@ -1,6 +1,6 @@
 {
     "name": "@nue-ui/plugins",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Plugins package for Nue UI",
     "private": true,
     "author": "Nathan Lee",

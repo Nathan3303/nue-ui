@@ -110,6 +110,7 @@ import 'nue-ui-shadlike-theme/dist/components/div.css';
 | NueCheckbox / NueCheckboxGroup                                         | 复选框 / 复选框组 |
 | NueCollapse / NueCollapseItem                                          | 折叠面板          |
 | NueContainer / NueHeader / NueAside / NueMain / NueContent / NueFooter | 布局容器          |
+| NueDatePicker                                                          | 日期选择器        |
 | NueDialog                                                              | 对话框            |
 | NueDiv                                                                 | 弹性盒            |
 | NueDivider                                                             | 分割线            |

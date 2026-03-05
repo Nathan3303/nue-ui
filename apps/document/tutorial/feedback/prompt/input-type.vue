@@ -1,14 +1,8 @@
 <template>
     <nue-div>
-        <nue-button @click="showPromptWithInputType('password')">
-            创建一个密码类型的输入确认框
-        </nue-button>
-        <nue-button @click="showPromptWithInputType('number')">
-            创建一个数字类型的输入确认框
-        </nue-button>
-        <nue-button @click="showPromptWithInputType('textarea')">
-            创建一个富文本类型的输入确认框
-        </nue-button>
+        <nue-button @click="showPromptWithInputType('password')">密码类型</nue-button>
+        <nue-button @click="showPromptWithInputType('number')">数字类型</nue-button>
+        <nue-button @click="showPromptWithInputType('textarea')">富文本类型</nue-button>
     </nue-div>
 </template>
 

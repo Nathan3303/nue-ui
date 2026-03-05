@@ -2,8 +2,8 @@
 
 用于在一组备选项中进行多选。
 
-:::warning ❗ 警告
-该组件在设计上没有使用到 HTML 的 Input 元素。
+:::tip 提示
+NueCheckbox 组件在设计上没有使用到 HTML 的 Input 元素。
 :::
 
 ## 基础用法

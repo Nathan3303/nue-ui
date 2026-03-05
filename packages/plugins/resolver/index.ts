@@ -16,6 +16,7 @@ const COMPONENTS = [
     'NueCollapse',
     'NueConfirm',
     'NueContainer',
+    'NueDatePicker',
     'NueDialog',
     'NueDiv',
     'NueDivider',
