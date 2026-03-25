@@ -24,7 +24,8 @@ export default defineConfig({
                     text: '如何使用',
                     items: [
                         { text: '安装', link: '/tutorial/usage/install.md' },
-                        { text: '使用', link: '/tutorial/usage/use.md' }
+                        { text: '使用', link: '/tutorial/usage/use.md' },
+                        { text: '自动导入', link: '/tutorial/usage/resolver.md' }
                     ]
                 },
                 {
@@ -138,6 +139,10 @@ export default defineConfig({
                         {
                             text: 'Textarea 富文本输入框',
                             link: '/tutorial/form/textarea/index.md'
+                        },
+                        {
+                            text: 'Date Picker 日期选择器',
+                            link: '/tutorial/form/date-picker/index.md'
                         }
                     ]
                 },
@@ -166,7 +171,7 @@ export default defineConfig({
                 },
                 {
                     text: '反馈组件',
-                    items: [{ text: '命令式下拉列表', link: '/enhance/command/index.md' }]
+                    items: [{ text: '下拉列表进阶', link: '/enhance/dropdown/index.md' }]
                 }
             ]
         },

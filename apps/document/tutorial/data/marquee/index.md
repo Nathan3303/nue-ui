@@ -32,3 +32,16 @@ demo-preview=./infinite.vue
 ::: preview
 demo-preview=./speed-ratio.vue
 :::
+
+## 组件属性与事件
+
+下方涵盖了 `NueMarquee` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性         | 类型                                            | 默认值 | 说明                           |
+| ------------ | ----------------------------------------------- | ------ | ------------------------------ |
+| `infinite`   | `boolean`                                       | -      | 循环播放                       |
+| `speedRatio` | `number`                                        | -      | 速度比率                       |
+| `direction`  | `'left' \| 'right'`                             | -      | 方向                           |
+| `theme`      | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |

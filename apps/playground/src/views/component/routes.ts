@@ -56,7 +56,11 @@ const routes: RouteRecordRaw = {
             path: '/component/breadcrumb',
             component: () => import('@/layouts/component/breadcrumb.vue')
         },
-        { path: '/component/div', component: () => import('@/layouts/component/div.vue') }
+        { path: '/component/div', component: () => import('@/layouts/component/div.vue') },
+        {
+            path: '/component/date-picker',
+            component: () => import('@/layouts/component/date-picker.vue')
+        }
     ]
 };
 

@@ -73,9 +73,11 @@
         "nue-ui": "workspace:*",
         "nue-ui-theme-shadlike": "workspace:*",
         "nue-ui-iconfont": "workspace:*",
+        "nue-ui-resolver": "workspace:*",
         "@nue-ui/components": "workspace:*",
         "@nue-ui/hooks": "workspace:*",
         "@nue-ui/utils": "workspace:*",
+        "@nue-ui/plugins": "workspace:*",
         "@nue-ui/themes": "workspace:*",
         "vue": "^3.5.17",
         "lodash-es": "^4.17.21"

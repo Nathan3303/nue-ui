@@ -61,3 +61,34 @@ demo-preview=./open-multiple.vue
 ::: preview
 demo-preview=./lifecycle.vue
 :::
+
+## 注意事项
+
+1. **双向绑定**：使用 `v-model` 控制对话框的显示隐藏。
+2. **传送机制**：通过 `teleportTo` 属性可以将对话框传送到指定 DOM 节点下。
+3. **生命周期**：四个生命周期事件可用于执行打开/关闭前后的逻辑。
+4. **多实例**：支持同时打开多个对话框，互不影响。
+
+## 组件属性与事件
+
+下方涵盖了 `NueDialog` 组件所有的可用属性与事件。
+
+### 属性
+
+| 属性         | Type                                            | 默认值 | 说明                           |
+| ------------ | ----------------------------------------------- | ------ | ------------------------------ |
+| `modelValue` | `boolean`                                       | -      | 控制显示隐藏                   |
+| `teleportTo` | `string`                                        | -      | 传送到指定 DOM 节点            |
+| `title`      | `string`                                        | -      | 对话框标题                     |
+| `theme`      | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+
+### 事件
+
+| 事件                | 参数             | 说明             |
+| ------------------- | ---------------- | ---------------- |
+| `update:modelValue` | `value: boolean` | 显示状态变化事件 |
+| `confirm`           | -                | 确认按钮点击事件 |
+| `beforeOpen`        | -                | 打开前事件       |
+| `afterOpen`         | -                | 打开后事件       |
+| `beforeClose`       | -                | 关闭前事件       |
+| `afterClose`        | -                | 关闭后事件       |

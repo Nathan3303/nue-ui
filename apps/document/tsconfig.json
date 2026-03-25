@@ -1,12 +1,8 @@
 {
+    "include": ["**/*"],
+    "exclude": [],
     "compilerOptions": {
-        "types": [
-            "nue-ui/dist/global.d.ts"
-        ],
-        "lib": [
-            "DOM",
-            "ES2020",
-            "ESNext"
-        ]
+        "types": ["nue-ui/dist/global.d.ts"],
+        "lib": ["DOM", "ES2020", "ESNext"]
     }
 }
