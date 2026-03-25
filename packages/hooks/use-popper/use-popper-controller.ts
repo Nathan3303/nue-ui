@@ -16,11 +16,7 @@ export const usePopperController = (visible: Ref<boolean>) => {
         });
     };
 
-    const hide = (
-        delay: number,
-        beforeHide?: () => void,
-        afterHide?: () => void
-    ) => {
+    const hide = (delay: number, beforeHide?: () => void, afterHide?: () => void) => {
         if (hideTimer) {
             clearTimeout(hideTimer);
             hideTimer = null;

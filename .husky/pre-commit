@@ -1,3 +1,5 @@
 #!/usr/bin/env sh
 
 pnpm lint:lint-staged
+pnpm format
+pnpm test:run

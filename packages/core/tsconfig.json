@@ -1,17 +1,10 @@
 {
-    "extends": [
-        "@vue/tsconfig/tsconfig.dom.json"
-    ],
+    "extends": ["@vue/tsconfig/tsconfig.dom.json"],
     "compilerOptions": {
         "target": "ES2020",
         "useDefineForClassFields": true,
         "module": "ESNext",
-        "lib": [
-            "ES2020",
-            "ESNext",
-            "DOM",
-            "DOM.Iterable"
-        ],
+        "lib": ["ES2020", "ESNext", "DOM", "DOM.Iterable"],
         "skipLibCheck": true,
         /* Bundler mode */
         "moduleResolution": "bundler",
@@ -27,10 +20,5 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": [
-        "env.d.ts",
-        "../**/*.ts",
-        "../**/*.tsx",
-        "../**/*.vue"
-    ]
+    "include": ["env.d.ts", "../**/*.ts", "../**/*.tsx", "../**/*.vue"]
 }
