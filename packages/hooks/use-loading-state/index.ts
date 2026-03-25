@@ -12,9 +12,7 @@ export const useLoadingState = (initialValue: InitialValue = false) => {
         if (callback) callback(done);
     };
 
-    const loadSync = (
-        action: (fn: (message: unknown) => void) => void | undefined
-    ) => {
+    const loadSync = (action: (fn: (message: unknown) => void) => void | undefined) => {
         isLoading.value = true;
         return new Promise(resolve => {
             action((message: unknown) => {

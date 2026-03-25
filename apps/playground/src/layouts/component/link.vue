@@ -30,7 +30,9 @@
             <nue-link theme="route,route-small">小型路由链接</nue-link>
             <nue-link theme="route,route-large">大型路由链接</nue-link>
             <nue-link theme="route,route-icon" icon="projects">图标型路由链接</nue-link>
-            <nue-link theme="route,route-icon,actived" icon="projects">图标型路由链接（激活）</nue-link>
+            <nue-link theme="route,route-icon,actived" icon="projects"
+                >图标型路由链接（激活）</nue-link
+            >
         </nue-div>
     </demo>
 </template>

@@ -42,11 +42,7 @@
             </nue-button>
             <template #controls>
                 <HstCheckbox v-model="data.useThrottle" title="UseThrottle" />
-                <HstNumber
-                    v-model="data.throttleDuration"
-                    :step="1"
-                    title="ThrottleDuration"
-                />
+                <HstNumber v-model="data.throttleDuration" :step="1" title="ThrottleDuration" />
             </template>
         </Variant>
         <Variant title="Size">
@@ -60,9 +56,7 @@
             </template>
         </Variant>
         <Variant title="Theme">
-            <nue-button :icon="data.icon" :theme="data.theme">
-                Button
-            </nue-button>
+            <nue-button :icon="data.icon" :theme="data.theme"> Button </nue-button>
             <template #controls>
                 <HstSelect
                     v-model="data.theme"
