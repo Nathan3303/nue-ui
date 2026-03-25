@@ -1,4 +1,6 @@
 {
+    // 修复：添加 "files" 或确保 "include" 能匹配到实际文件
+    // 如果当前目录没有文件，可以添加一个空文件或调整配置
     "include": ["**/*"],
     "exclude": [],
     "compilerOptions": {
