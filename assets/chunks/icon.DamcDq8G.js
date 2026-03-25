@@ -1,1 +1,0 @@
-import{E as s}from"./theme.kX9fkazz.js";import{d as a,C as r,b as m,o as p,w as u,a as c}from"./framework.BVB1_a36.js";const f=a({__name:"icon",setup(i){const t=o=>{s({message:"创建Message成功",icon:o})};return(o,e)=>{const n=r("nue-button");return p(),m(n,{onClick:e[0]||(e[0]=_=>t("completed"))},{default:u(()=>[...e[1]||(e[1]=[c("创建一个带图标的消息提示",-1)])]),_:1})}}});export{f as default};
