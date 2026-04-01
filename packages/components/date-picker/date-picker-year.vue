@@ -1,16 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { NueDatePickerYearProps, NueDatePickerYearEmits } from './types';
 
-interface Props {
-    year: number;
-}
-
-const props = defineProps<Props>();
-
-const emit = defineEmits<{
-    (e: 'select', year: number): void;
-    (e: 'update:view', view: 'date' | 'month' | 'year'): void;
-}>();
+const props = defineProps<NueDatePickerYearProps>();
+const emit = defineEmits<NueDatePickerYearEmits>();
 
 // 计算当前十年的起始年份
 const decadeStart = computed(() => {
@@ -38,7 +31,7 @@ function handleYearClick(year: number) {
 </script>
 
 <template>
-    <div class="date-picker-year">
+    <div class="nue-date-picker-year">
         <div class="year-grid">
             <div
                 v-for="y in years"

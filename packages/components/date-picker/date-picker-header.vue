@@ -1,42 +1,40 @@
 <template>
-    <div class="date-picker-header">
-        <div class="date-picker-header__row">
-            <!-- 年份视图: 上十年按钮 -->
-            <nue-button
-                v-if="currentView === 'year'"
-                title="上十年"
-                icon="arrow-left-more"
-                @click="handlePrevDecade"
-            />
-
-            <!-- 月份视图: 上一年按钮 -->
-            <nue-button
-                v-if="currentView === 'month'"
-                title="上一年"
-                icon="arrow-left-more"
-                @click="handlePrevYear"
-            />
-
-            <!-- 日期视图: 上一年按钮 -->
-            <nue-button
-                v-if="currentView === 'date'"
-                title="上一年"
-                icon="arrow-left-more"
-                @click="handlePrevYear"
-            />
-
-            <!-- 日期视图: 上个月按钮 -->
-            <nue-button
-                v-if="currentView === 'date'"
-                title="上个月"
-                icon="arrow-left"
-                @click="handlePrevMonth"
-            />
-
+    <div class="nue-date-picker-header">
+        <div class="nue-date-picker-header__row">
+            <nue-button-group :size="datePickerCtx.size">
+                <!-- 年份视图: 上十年按钮 -->
+                <nue-button
+                    v-if="currentView === 'year'"
+                    title="上十年"
+                    icon="arrow-left-more"
+                    @click="handlePrevDecade"
+                />
+                <!-- 月份视图: 上一年按钮 -->
+                <nue-button
+                    v-if="currentView === 'month'"
+                    title="上一年"
+                    icon="arrow-left-more"
+                    @click="handlePrevYear"
+                />
+                <!-- 日期视图: 上一年按钮 -->
+                <nue-button
+                    v-if="currentView === 'date'"
+                    title="上一年"
+                    icon="arrow-left-more"
+                    @click="handlePrevYear"
+                />
+                <!-- 日期视图: 上个月按钮 -->
+                <nue-button
+                    v-if="currentView === 'date'"
+                    title="上个月"
+                    icon="arrow-left"
+                    @click="handlePrevMonth"
+                />
+            </nue-button-group>
             <!-- 当前年月显示 -->
-            <div class="date-picker-header__current">
+            <div class="nue-date-picker-header__current">
                 <span
-                    class="date-picker-header__year"
+                    class="nue-date-picker-header__year"
                     :class="{ clickable: currentView === 'date' }"
                     @click="handleYearClick"
                 >
@@ -44,74 +42,64 @@
                 </span>
                 <span
                     v-if="currentView === 'date'"
-                    class="date-picker-header__month clickable"
+                    class="nue-date-picker-header__month clickable"
                     @click="handleMonthClick"
                 >
                     {{ currentMonth }}
                 </span>
             </div>
-
-            <!-- 日期视图: 下个月按钮 -->
-            <nue-button
-                v-if="currentView === 'date'"
-                title="下个月"
-                icon="arrow-right"
-                @click="handleNextMonth"
-            />
-
-            <!-- 日期视图: 下一年按钮 -->
-            <nue-button
-                v-if="currentView === 'date'"
-                title="下一年"
-                icon="arrow-right-more"
-                @click="handleNextYear"
-            />
-
-            <!-- 月份视图: 下一年按钮 -->
-            <nue-button
-                v-if="currentView === 'month'"
-                title="下一年"
-                icon="arrow-right-more"
-                @click="handleNextYear"
-            />
-
-            <!-- 年份视图: 下十年按钮 -->
-            <nue-button
-                v-if="currentView === 'year'"
-                title="下十年"
-                icon="arrow-right-more"
-                @click="handleNextDecade"
-            />
+            <nue-button-group :size="datePickerCtx.size">
+                <!-- 日期视图: 下个月按钮 -->
+                <nue-button
+                    v-if="currentView === 'date'"
+                    title="下个月"
+                    icon="arrow-right"
+                    @click="handleNextMonth"
+                />
+                <!-- 日期视图: 下一年按钮 -->
+                <nue-button
+                    v-if="currentView === 'date'"
+                    title="下一年"
+                    icon="arrow-right-more"
+                    @click="handleNextYear"
+                />
+                <!-- 月份视图: 下一年按钮 -->
+                <nue-button
+                    v-if="currentView === 'month'"
+                    title="下一年"
+                    icon="arrow-right-more"
+                    @click="handleNextYear"
+                />
+                <!-- 年份视图: 下十年按钮 -->
+                <nue-button
+                    v-if="currentView === 'year'"
+                    title="下十年"
+                    icon="arrow-right-more"
+                    @click="handleNextDecade"
+                />
+            </nue-button-group>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 import NueButton from '../button/button.vue';
-import { MONTHS } from './constants';
+import NueButtonGroup from '../button-group/button-group.vue';
+import { MONTHS, NUE_DATE_PICKER_CTX_KEY } from './constants';
+import { NueDatePickerHeaderProps, NueDatePickerHeaderEmits, NueDatePickerContext } from './types';
 
 defineOptions({ name: 'NueDatePickerHeader' });
 
-export type DatePickerViewMode = 'date' | 'month' | 'year';
+const props = defineProps<NueDatePickerHeaderProps>();
 
-const props = defineProps<{
-    year: number;
-    month: number;
-    mode?: DatePickerViewMode;
-}>();
+const emit = defineEmits<NueDatePickerHeaderEmits>();
 
-const emit = defineEmits<{
-    'update:year': [year: number];
-    'update:month': [month: number];
-    'update:view': [view: DatePickerViewMode];
-}>();
+const datePickerCtx = inject<NueDatePickerContext>(NUE_DATE_PICKER_CTX_KEY)!;
 
 const currentView = computed(() => props.mode || 'date');
 
-const currentMonth = computed(() => {
-    return MONTHS[props.month - 1];
-});
+const currentMonth = computed(() => MONTHS[props.month - 1]);
 
 // 显示的年份文本
 const displayYear = computed(() => {

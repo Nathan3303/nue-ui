@@ -43,7 +43,6 @@ defineProps<{ title?: string; height?: string; description?: string; subTitle?: 
         .nue-text--subtitle {
             color: gray;
             font-size: var(--nue-text-sm);
-            font-family: 'Consolas', 'Noto Sans SC', sans-serif;
         }
 
         .nue-text--description {

@@ -1,18 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { MONTHS } from './constants';
+import { NueDatePickerMonthProps, NueDatePickerMonthEmits } from './types';
 
-interface Props {
-    year: number;
-    month: number;
-}
-
-const props = defineProps<Props>();
-
-const emit = defineEmits<{
-    (e: 'select', month: number): void;
-    (e: 'update:view', view: 'date' | 'month' | 'year'): void;
-}>();
+const props = defineProps<NueDatePickerMonthProps>();
+const emit = defineEmits<NueDatePickerMonthEmits>();
 
 // 生成月份数组 (1-12)
 const months = computed(() => {
@@ -32,7 +24,7 @@ function handleMonthClick(month: number) {
 </script>
 
 <template>
-    <div class="date-picker-month">
+    <div class="nue-date-picker-month">
         <div class="month-grid">
             <div
                 v-for="m in months"

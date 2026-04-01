@@ -1,25 +1,19 @@
 <script lang="ts" setup>
-import { ref, computed, watch } from 'vue';
-import { NueButton } from '@nue-ui/components';
+import { ref, computed, watch, inject } from 'vue';
+import { NueButton, NueDivider } from '@nue-ui/components';
 import DatePickerHeader from './date-picker-header.vue';
 import DatePickerBody from './date-picker-body.vue';
 import DatePickerYear from './date-picker-year.vue';
 import DatePickerMonth from './date-picker-month.vue';
 import TimePicker from './time-picker.vue';
-import type { NueDatePickerType } from './types';
+import type {
+    NueDatePickerPanelProps,
+    NueDatePickerPanelEmits,
+    NueDatePickerContext
+} from './types';
+import { NUE_DATE_PICKER_CTX_KEY } from './constants';
 
 defineOptions({ name: 'NueDatePickerPanel' });
-
-export interface NueDatePickerPanelProps {
-    modelValue?: string | null;
-    type?: NueDatePickerType;
-}
-
-export interface NueDatePickerPanelEmits {
-    (e: 'update:modelValue', value: string | null): void;
-    (e: 'change', value: string | null): void;
-    (e: 'clear'): void;
-}
 
 const props = withDefaults(defineProps<NueDatePickerPanelProps>(), {
     type: 'date',
@@ -27,6 +21,8 @@ const props = withDefaults(defineProps<NueDatePickerPanelProps>(), {
 });
 
 const emit = defineEmits<NueDatePickerPanelEmits>();
+
+const datePickerCtx = inject<NueDatePickerContext>(NUE_DATE_PICKER_CTX_KEY)!;
 
 // 当前视图的年月
 const currentYear = ref(new Date().getFullYear());
@@ -39,6 +35,16 @@ const currentMinute = ref(new Date().getMinutes());
 
 // 当前选择的日期（内部状态）
 const selectedDate = ref<string | null>(null);
+
+// 计算类名
+const classes = computed(() => {
+    const prefix = 'nue-date-picker-panel';
+    return [
+        prefix,
+        props.type === 'datetime' && `${prefix}--datetime`,
+        props.size && `${prefix}--${props.size}`
+    ];
+});
 
 // 解析日期时间
 function parseDateTime(value: string | null) {
@@ -146,11 +152,6 @@ const canClear = computed(() => {
     return selectedDate.value !== null;
 });
 
-// 日期面板类名
-const datePanelClass = computed(() => {
-    return 'date-picker-panel__date';
-});
-
 // 是否显示时间选择器
 const showTimePicker = computed(() => {
     return (
@@ -160,7 +161,7 @@ const showTimePicker = computed(() => {
 </script>
 
 <template>
-    <div class="date-picker-panel" :class="{ 'date-picker-panel--datetime': type === 'datetime' }">
+    <div :class="classes">
         <!-- 头部 -->
         <DatePickerHeader
             :year="currentYear"
@@ -170,10 +171,9 @@ const showTimePicker = computed(() => {
             @update:month="handleMonthUpdate"
             @update:view="handleViewChange"
         />
-
         <!-- 日期部分 -->
-        <div class="date-picker-panel__body">
-            <div :class="datePanelClass">
+        <div class="nue-date-picker-panel__body">
+            <div class="nue-date-picker-panel__date">
                 <!-- 日期网格视图 -->
                 <DatePickerBody
                     v-if="currentView === 'date'"
@@ -182,7 +182,6 @@ const showTimePicker = computed(() => {
                     :selected-date="selectedDate?.split(' ')[0] || null"
                     @select="handleDateSelect"
                 />
-
                 <!-- 年份选择视图 -->
                 <DatePickerYear
                     v-if="currentView === 'year'"
@@ -190,7 +189,6 @@ const showTimePicker = computed(() => {
                     @select="handleYearSelect"
                     @update:view="handleViewChange"
                 />
-
                 <!-- 月份选择视图 -->
                 <DatePickerMonth
                     v-if="currentView === 'month'"
@@ -200,20 +198,26 @@ const showTimePicker = computed(() => {
                     @update:view="handleViewChange"
                 />
             </div>
-
-            <!-- 时间选择器（datetime 类型时在日历下方） -->
-            <div v-if="showTimePicker" class="date-picker-panel__time">
+            <template v-if="showTimePicker">
+                <nue-divider />
+                <!-- 时间选择器（datetime 类型时在日历下方） -->
                 <TimePicker
                     :hour="currentHour"
                     :minute="currentMinute"
                     @change="handleTimeChange"
                 />
-            </div>
+            </template>
         </div>
-
+        <nue-divider />
         <!-- 底部 -->
-        <div class="date-picker-panel__footer">
-            <nue-button :disabled="!canClear" icon="clear" theme="ghost,small" @click="handleClear">
+        <div class="nue-date-picker-panel__footer">
+            <nue-button
+                :size="datePickerCtx.size"
+                :disabled="!canClear"
+                icon="clear"
+                theme="ghost,small"
+                @click="handleClear"
+            >
                 清除
             </nue-button>
         </div>

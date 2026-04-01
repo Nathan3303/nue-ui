@@ -2,6 +2,9 @@
  * NueDatePicker 常量定义
  */
 
+// 上下文名称
+export const NUE_DATE_PICKER_CTX_KEY = 'datePickerCtx';
+
 /** 星期几 */
 export const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六'] as const;
 

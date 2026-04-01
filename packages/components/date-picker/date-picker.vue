@@ -6,13 +6,9 @@
         @close="emit('close')"
     >
         <template #trigger="{ trigger }">
-            <nue-button :disabled="disabled" @click="trigger">
-                <template v-if="modelValue">
-                    {{ displayValue }}
-                </template>
-                <nue-text v-else color="gray">
-                    {{ realPlaceholder }}
-                </nue-text>
+            <nue-button :size="size" :disabled="disabled" @click="trigger">
+                <template v-if="modelValue">{{ displayValue }}</template>
+                <span v-else style="color: gray">{{ realPlaceholder }}</span>
                 <template #append>
                     <nue-icon name="calendar" />
                     <nue-icon
@@ -24,6 +20,7 @@
             </nue-button>
         </template>
         <date-picker-panel
+            :size="size"
             :model-value="modelValue"
             :type="type"
             @update:model-value="handleDateSelect"
@@ -33,12 +30,17 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { NueButton, NueDropdown, NueIcon, NueText } from '@nue-ui/components';
+import { computed, provide } from 'vue';
+import { NueButton, NueDropdown, NueIcon } from '@nue-ui/components';
 import { parseTheme } from '@nue-ui/utils';
 import DatePickerPanel from './date-picker-panel.vue';
-import { PLACEHOLDERS } from './constants';
-import type { NueDatePickerProps, NueDatePickerEmits, NueDatePickerValue } from './types';
+import { NUE_DATE_PICKER_CTX_KEY, PLACEHOLDERS } from './constants';
+import type {
+    NueDatePickerProps,
+    NueDatePickerEmits,
+    NueDatePickerValue,
+    NueDatePickerContext
+} from './types';
 
 defineOptions({ name: 'NueDatePicker' });
 
@@ -50,6 +52,11 @@ const props = withDefaults(defineProps<NueDatePickerProps>(), {
 });
 
 const emit = defineEmits<NueDatePickerEmits>();
+
+provide<NueDatePickerContext>(NUE_DATE_PICKER_CTX_KEY, {
+    size: props.size,
+    disabled: props.disabled
+});
 
 const classes = computed(() => {
     const prefix = 'nue-date-picker';

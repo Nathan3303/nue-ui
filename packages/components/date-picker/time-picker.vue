@@ -1,22 +1,14 @@
 <script setup lang="ts">
 import { NueButton } from '@nue-ui/components';
 import { ref, watch, nextTick } from 'vue';
+import { NueDatePickerTimeProps, NueDatePickerTimeEmits } from './types';
 
-interface Props {
-    hour?: number;
-    minute?: number;
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<NueDatePickerTimeProps>(), {
     hour: () => new Date().getHours(),
     minute: () => new Date().getMinutes()
 });
 
-const emit = defineEmits<{
-    (e: 'update:hour', hour: number): void;
-    (e: 'update:minute', minute: number): void;
-    (e: 'change', time: { hour: number; minute: number }): void;
-}>();
+const emit = defineEmits<NueDatePickerTimeEmits>();
 
 // 本地状态
 const localHour = ref(props.hour);
@@ -165,63 +157,55 @@ function handleKeydown(event: KeyboardEvent, type: 'hour' | 'minute') {
 </script>
 
 <template>
-    <div class="time-picker" @click.self="cancelEdit">
+    <div class="nue-time-picker" @click.self="cancelEdit">
         <!-- 小时 -->
-        <div class="time-picker__item">
-            <span class="time-picker__label">小时</span>
-            <div class="time-picker__controls">
+        <div class="nue-time-picker__item">
+            <span class="nue-time-picker__label">小时</span>
+            <div class="nue-time-picker__controls">
                 <nue-button size="small" icon="arrow-left" @click="decreaseHour" />
-
                 <span
                     v-if="!editingHour"
-                    class="time-picker__value time-picker__value--editable"
+                    class="nue-time-picker__value nue-time-picker__value--editable"
                     @click="startEditHour"
                     >{{ String(localHour).padStart(2, '0') }}</span
                 >
-
                 <input
                     v-else
                     ref="hourInput"
                     type="number"
-                    class="time-picker__input"
+                    class="nue-time-picker__input"
                     :value="localHour"
                     min="0"
                     max="23"
                     @blur="commitHourEdit"
                     @keydown="handleKeydown($event, 'hour')"
                 />
-
                 <nue-button size="small" icon="arrow-right" @click="increaseHour" />
             </div>
         </div>
-
-        <span class="time-picker__separator">:</span>
-
+        <span class="nue-time-picker__separator">:</span>
         <!-- 分钟 -->
-        <div class="time-picker__item">
-            <span class="time-picker__label">分钟</span>
-            <div class="time-picker__controls">
+        <div class="nue-time-picker__item">
+            <span class="nue-time-picker__label">分钟</span>
+            <div class="nue-time-picker__controls">
                 <nue-button size="small" icon="arrow-left" @click="decreaseMinute" />
-
                 <span
                     v-if="!editingMinute"
-                    class="time-picker__value time-picker__value--editable"
+                    class="nue-time-picker__value nue-time-picker__value--editable"
                     @click="startEditMinute"
                     >{{ String(localMinute).padStart(2, '0') }}</span
                 >
-
                 <input
                     v-else
                     ref="minuteInput"
                     type="number"
-                    class="time-picker__input"
+                    class="nue-time-picker__input"
                     :value="localMinute"
                     min="0"
                     max="59"
                     @blur="commitMinuteEdit"
                     @keydown="handleKeydown($event, 'minute')"
                 />
-
                 <nue-button size="small" icon="arrow-right" @click="increaseMinute" />
             </div>
         </div>

@@ -2,24 +2,15 @@
 import { computed } from 'vue';
 import { WEEKDAYS } from './constants';
 import { getDaysInMonth, getWeekday, isSameDay } from './utils/date-utils';
+import { NueDatePickerBodyProps, NueDatePickerBodyEmits } from './types';
 
-interface Props {
-    year: number;
-    month: number;
-    selectedDate?: string | null;
-    minDate?: string;
-    maxDate?: string;
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<NueDatePickerBodyProps>(), {
     selectedDate: null,
     minDate: '',
     maxDate: ''
 });
 
-const emit = defineEmits<{
-    (e: 'select', date: string): void;
-}>();
+const emit = defineEmits<NueDatePickerBodyEmits>();
 
 // 当天日期字符串
 const todayStr = computed(() => {
@@ -144,14 +135,13 @@ function handleDateClick(day: { date: Date; dateStr: string; isCurrentMonth: boo
 </script>
 
 <template>
-    <div class="date-picker-body">
+    <div class="nue-date-picker-body">
         <!-- 星期头部 -->
         <div class="weekday-header">
             <div v-for="day in WEEKDAYS" :key="day" class="weekday-item">
                 {{ day }}
             </div>
         </div>
-
         <!-- 日期网格 -->
         <div class="date-grid">
             <div
