@@ -35,3 +35,7 @@ dist/*
 
 # OhMyOpenCode
 .sisyphus
+
+# Trae
+.trae
+.trae/
