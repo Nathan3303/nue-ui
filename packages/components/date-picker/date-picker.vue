@@ -6,9 +6,14 @@
         @close="emit('close')"
     >
         <template #trigger="{ trigger }">
-            <nue-button :size="size" :disabled="disabled" @click="trigger">
-                <template v-if="modelValue">{{ displayValue }}</template>
-                <span v-else style="color: gray">{{ realPlaceholder }}</span>
+            <nue-button :disabled="disabled" @click="trigger">
+                <template v-if="modelValue">
+                    <nue-text v-if="isInvalidDate" color="danger">{{ '无效日期' }}</nue-text>
+                    <template v-else>{{ displayValue }}</template>
+                </template>
+                <nue-text v-else color="gray">
+                    {{ realPlaceholder }}
+                </nue-text>
                 <template #append>
                     <nue-icon name="calendar" />
                     <nue-icon
@@ -41,6 +46,7 @@ import type {
     NueDatePickerValue,
     NueDatePickerContext
 } from './types';
+import { formatDateFriendly, formatDateTimeFriendly, parseDate } from './utils/date-utils';
 
 defineOptions({ name: 'NueDatePicker' });
 
@@ -68,8 +74,21 @@ const realPlaceholder = computed(() => {
     return PLACEHOLDERS.single;
 });
 
+const isInvalidDate = computed(() => {
+    if (!props.modelValue) return false;
+    return parseDate(props.modelValue.split(' ')[0]) === null;
+});
+
 const displayValue = computed(() => {
-    return props.modelValue || '';
+    if (!props.modelValue || isInvalidDate.value) return '';
+
+    const date = new Date(props.modelValue);
+    if (isNaN(date.getTime())) return props.modelValue;
+
+    if (props.type === 'datetime') {
+        return formatDateTimeFriendly(date);
+    }
+    return formatDateFriendly(date);
 });
 
 const handleClear = () => {
@@ -86,3 +105,4 @@ const handleChange = (value: NueDatePickerValue) => {
     emit('change', value);
 };
 </script>
+

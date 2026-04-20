@@ -130,11 +130,7 @@
 :root {
     /* Fonts */
     --nue-primary-font-size-base: 16px;
-    --nue-primary-font-family-custom:
-        ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-        Ubuntu, Cantarell, Helvetica Neue, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-        Segoe UI Symbol, Noto Color Emoji;
-    --nue-primary-font-family: var(--nue-primary-font-family-custom);
+    --nue-primary-font-family: sans-serif, 'Noto Color Emoji';
     --nue-primary-font-size: 1rem;
     --nue-primary-font-weight: 400;
     --nue-primary-line-height: normal;

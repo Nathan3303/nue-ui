@@ -8,7 +8,7 @@
 
 ### 日期选择
 
-设置 `type` 为 `date` 可以选择日期，返回格式为 `YYYY-MM-DD`。
+设置 `type` 为 `date` 可以选择日期。
 
 ::: preview
 demo-preview=./date.vue
@@ -16,10 +16,14 @@ demo-preview=./date.vue
 
 ### 日期时间选择
 
-设置 `type` 为 `datetime` 可以选择日期和时间，返回格式为 `YYYY-MM-DD HH:mm`。
+设置 `type` 为 `datetime` 可以选择日期和时间。
 
 ::: preview
 demo-preview=./datetime.vue
+:::
+
+:::warning 关于输出格式
+不管是什么输入格式，通过组件面板更新后都会转换为 ISO 8601 格式（`YYYY-MM-DDTHH:mm:ss.sssZ`）输出。当 `type="date"` 时，时间部分固定为 00:00:00。（可能因时区不同导致 “时” 部分有不同显示，本质为 00:00:00）
 :::
 
 ## 禁用状态
@@ -50,10 +54,17 @@ demo-preview=./lifecycle.vue
 
 1. **v-model**：组件使用 `v-model` 双向绑定数据，底层实现为 `modelValue` 属性和 `update:modelValue` 事件。
 2. **日期格式**：
-    - `type="date"` 时，返回格式为 `YYYY-MM-DD`
-    - `type="datetime"` 时，返回格式为 `YYYY-MM-DD HH:mm`
-3. **时间选择**：当 `type="datetime"` 时，可以点击小时或分钟数值进行手动输入修改。
-4. **年份/月份选择**：点击年份或月份可快速切换到对应选择视图，再次点击即可返回。
+    - 组件统一输出 ISO 8601 格式
+    - `type="date"` 时，返回格式为 `YYYY-MM-DDTHH:mm:ss.sssZ`（时间部分固定为 00:00:00）
+    - `type="datetime"` 时，返回格式为 `YYYY-MM-DDTHH:mm:ss.sssZ`（时间部分为用户选择的时间）
+3. **输入格式支持**：
+    - 支持基本格式：`YYYY-MM-DD`、`YYYY-MM-DD HH:mm`
+    - 支持 ISO 格式：`YYYY-MM-DDTHH:mm:ss`、`YYYY-MM-DDTHH:mm:ssZ`、`YYYY-MM-DDTHH:mm:ss.SSS+08:00` 等
+4. **无效日期处理**：
+    - 当传入的日期字符串无法正确解析时，按钮上会显示红色的"无效日期"字样
+    - 选择面板中的日期和时间默认从当前时间中取值
+5. **时间选择**：当 `type="datetime"` 时，可以点击小时或分钟数值进行手动输入修改。
+6. **年份/月份选择**：点击年份或月份可快速切换到对应选择视图，再次点击即可返回。
 
 ## 组件属性与事件
 
@@ -78,3 +89,4 @@ demo-preview=./lifecycle.vue
 | `update:modelValue` | `value` | 值更新事件 |
 | `change`            | `value` | 值变化事件 |
 | `clear`             | -       | 清除事件   |
+| `close`             | -       | 关闭事件   |

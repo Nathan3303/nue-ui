@@ -15,25 +15,150 @@ export function formatDate(date: Date): string {
 }
 
 /**
+ * 格式化日期为友好格式 (YYYY年MM月DD日)
+ * @param date - 日期对象
+ * @returns 格式化后的日期字符串
+ */
+export function formatDateFriendly(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}年${month}月${day}日`;
+}
+
+/**
+ * 格式化日期时间为友好格式 (YYYY年MM月DD日 HH:mm)
+ * @param date - 日期对象
+ * @returns 格式化后的日期时间字符串
+ */
+export function formatDateTimeFriendly(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hour = String(date.getHours()).padStart(2, '0');
+    const minute = String(date.getMinutes()).padStart(2, '0');
+    return `${year}年${month}月${day}日 ${hour}:${minute}`;
+}
+
+/**
+ * 检测日期字符串的格式类型
+ * @param str - 日期字符串
+ * @returns 格式类型: 'iso', 'standard', 或 null
+ */
+export function detectDateFormat(str: string): 'iso' | 'standard' | null {
+    if (!str || typeof str !== 'string') return null;
+
+    // ISO 格式检查 (带 T 或带时区)
+    if (
+        /^\d{4}-\d{2}-\d{2}T/.test(str) ||
+        /^\d{4}-\d{2}-\d{2}.*[+-]\d{2}:?\d{2}$/.test(str) ||
+        /^\d{4}-\d{2}-\d{2}.*Z$/.test(str)
+    ) {
+        return 'iso';
+    }
+
+    // 标准格式检查
+    if (/^\d{4}-\d{2}-\d{2}$/.test(str) || /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(str)) {
+        return 'standard';
+    }
+
+    return null;
+}
+
+/**
+ * 格式化日期为 ISO 格式 (YYYY-MM-DDTHH:mm:ssZ)
+ * @param date - 日期对象
+ * @returns ISO 格式的日期字符串
+ */
+export function formatDateISO(date: Date): string {
+    return date.toISOString();
+}
+
+/**
+ * 格式化日期时间为 ISO 格式 (YYYY-MM-DDTHH:mm:ssZ)
+ * @param date - 日期对象
+ * @returns ISO 格式的日期时间字符串
+ */
+export function formatDateTimeISO(date: Date): string {
+    return date.toISOString();
+}
+
+/**
+ * 根据检测到的格式类型格式化日期
+ * @param date - 日期对象
+ * @param formatType - 格式类型 ('iso' 或 'standard')
+ * @param includeTime - 是否包含时间
+ * @returns 格式化后的日期字符串
+ */
+export function formatDateByType(
+    date: Date,
+    formatType: 'iso' | 'standard',
+    includeTime: boolean = false
+): string {
+    if (formatType === 'iso') {
+        if (includeTime) {
+            return formatDateTimeISO(date);
+        }
+        // 对于只包含日期的 ISO 格式，我们取日期部分
+        return date.toISOString().split('T')[0];
+    }
+
+    // standard 格式
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    if (includeTime) {
+        const hour = String(date.getHours()).padStart(2, '0');
+        const minute = String(date.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hour}:${minute}`;
+    }
+
+    return `${year}-${month}-${day}`;
+}
+
+/**
  * 解析日期字符串为 Date 对象
- * @param str - 日期字符串 (YYYY-MM-DD 格式)
+ * @param str - 日期字符串 (支持 YYYY-MM-DD 或 ISO 格式)
  * @returns Date 对象或 null (如果解析失败)
  */
 export function parseDate(str: string): Date | null {
+    if (!str || typeof str !== 'string') {
+        return null;
+    }
+
+    // 检查是否是 ISO 格式的变种（带 T 或带时区）
+    const isISOFormat = /^\d{4}-\d{2}-\d{2}(T| )/.test(str);
+
+    if (isISOFormat) {
+        const date = new Date(str);
+        if (!isNaN(date.getTime())) {
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            return new Date(year, month - 1, day);
+        }
+    }
+
+    // 严格的 YYYY-MM-DD 格式解析
     const regex = /^\d{4}-\d{2}-\d{2}$/;
     if (!regex.test(str)) {
         return null;
     }
 
     const [year, month, day] = str.split('-').map(Number);
-    const date = new Date(year, month - 1, day);
+    const parsedDate = new Date(year, month - 1, day);
 
     // 验证日期有效性
-    if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+    if (
+        parsedDate.getFullYear() !== year ||
+        parsedDate.getMonth() !== month - 1 ||
+        parsedDate.getDate() !== day
+    ) {
         return null;
     }
 
-    return date;
+    return parsedDate;
 }
 
 /**

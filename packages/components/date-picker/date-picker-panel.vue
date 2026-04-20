@@ -46,21 +46,36 @@ const classes = computed(() => {
     ];
 });
 
-// 解析日期时间
+// 解析日期时间，增加安全检查
 function parseDateTime(value: string | null) {
     if (!value) return null;
+
+    const now = new Date();
+
+    // 先尝试解析 ISO 格式 (带 T 分隔符)
+    if (value.includes('T')) {
+        const date = new Date(value);
+        if (!isNaN(date.getTime())) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hour = date.getHours();
+            const minute = date.getMinutes();
+            return { date: `${year}-${month}-${day}`, hour, minute };
+        }
+    }
+
+    // 回退到原有的格式解析 (空格分隔)
     const parts = value.split(' ');
     if (parts.length === 2) {
         const [datePart, timePart] = parts;
-        const [hour, minute] = timePart.split(':').map(Number);
+        let [hour, minute] = timePart.split(':').map(Number);
+        // 安全检查，确保 hour 和 minute 有效
+        if (isNaN(hour) || hour < 0 || hour > 23) hour = now.getHours();
+        if (isNaN(minute) || minute < 0 || minute > 59) minute = now.getMinutes();
         return { date: datePart, hour, minute };
     }
-    return { date: value, hour: 0, minute: 0 };
-}
-
-// 格式化日期时间
-function formatDateTime(date: string, hour: number, minute: number): string {
-    return `${date} ${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+    return { date: value, hour: now.getHours(), minute: now.getMinutes() };
 }
 
 // 监听外部 modelValue 变化
@@ -68,6 +83,8 @@ watch(
     () => props.modelValue,
     val => {
         selectedDate.value = val;
+        const now = new Date();
+
         // 如果有选中日期时间，更新当前年月和时间
         if (val) {
             const parsed = parseDateTime(val);
@@ -76,10 +93,20 @@ watch(
                 if (!isNaN(date.getTime())) {
                     currentYear.value = date.getFullYear();
                     currentMonth.value = date.getMonth() + 1;
+                } else {
+                    // 日期无效，使用当前年月
+                    currentYear.value = now.getFullYear();
+                    currentMonth.value = now.getMonth() + 1;
                 }
                 currentHour.value = parsed.hour;
                 currentMinute.value = parsed.minute;
             }
+        } else {
+            // 没有值，使用当前时间
+            currentYear.value = now.getFullYear();
+            currentMonth.value = now.getMonth() + 1;
+            currentHour.value = now.getHours();
+            currentMinute.value = now.getMinutes();
         }
     },
     { immediate: true }
@@ -97,11 +124,14 @@ function handleClear() {
 function handleDateSelect(date: string) {
     selectedDate.value = date;
 
+    const dateObj = new Date(date);
     let value: string;
     if (props.type === 'datetime') {
-        value = formatDateTime(date, currentHour.value, currentMinute.value);
+        dateObj.setHours(currentHour.value, currentMinute.value, 0, 0);
+        value = dateObj.toISOString();
     } else {
-        value = date;
+        dateObj.setHours(0, 0, 0, 0);
+        value = dateObj.toISOString();
     }
 
     emit('update:modelValue', value);
@@ -125,8 +155,11 @@ function handleTimeChange(time: { hour: number; minute: number }) {
 
     // 如果已有日期选择，更新完整日期时间
     if (selectedDate.value) {
-        const dateStr = selectedDate.value.split(' ')[0];
-        const value = formatDateTime(dateStr, time.hour, time.minute);
+        const dateStr = selectedDate.value.split(' ')[0].split('T')[0];
+        const dateObj = new Date(dateStr);
+        dateObj.setHours(time.hour, time.minute, 0, 0);
+        const value = dateObj.toISOString();
+
         emit('update:modelValue', value);
         emit('change', value);
     }
@@ -223,3 +256,4 @@ const showTimePicker = computed(() => {
         </div>
     </div>
 </template>
+

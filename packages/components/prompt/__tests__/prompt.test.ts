@@ -83,7 +83,7 @@ describe('NuePrompt', () => {
             expect(() =>
                 NuePrompt({
                     title: '测试',
-                    onConfirm: (value, done) => {
+                    onConfirm: (_, done) => {
                         done();
                         return null;
                     },

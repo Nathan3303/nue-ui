@@ -10,9 +10,15 @@ const props = withDefaults(defineProps<NueDatePickerTimeProps>(), {
 
 const emit = defineEmits<NueDatePickerTimeEmits>();
 
-// 本地状态
-const localHour = ref(props.hour);
-const localMinute = ref(props.minute);
+// 本地状态，确保初始值有效
+const localHour = ref(
+    isNaN(props.hour) || props.hour < 0 || props.hour > 23 ? new Date().getHours() : props.hour
+);
+const localMinute = ref(
+    isNaN(props.minute) || props.minute < 0 || props.minute > 59
+        ? new Date().getMinutes()
+        : props.minute
+);
 
 // 编辑状态
 const editingHour = ref(false);
@@ -20,18 +26,18 @@ const editingMinute = ref(false);
 const hourInput = ref<HTMLInputElement | null>(null);
 const minuteInput = ref<HTMLInputElement | null>(null);
 
-// 监听外部变化
+// 监听外部变化，增加安全检查
 watch(
     () => props.hour,
     val => {
-        localHour.value = val;
+        localHour.value = isNaN(val) || val < 0 || val > 23 ? new Date().getHours() : val;
     }
 );
 
 watch(
     () => props.minute,
     val => {
-        localMinute.value = val;
+        localMinute.value = isNaN(val) || val < 0 || val > 59 ? new Date().getMinutes() : val;
     }
 );
 
@@ -211,3 +217,4 @@ function handleKeydown(event: KeyboardEvent, type: 'hour' | 'minute') {
         </div>
     </div>
 </template>
+
