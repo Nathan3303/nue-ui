@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { WEEKDAYS } from './constants';
 import { getDaysInMonth, getWeekday, isSameDay } from './utils/date-utils';
-import { NueDatePickerBodyProps, NueDatePickerBodyEmits } from './types';
+import type { NueDatePickerBodyProps, NueDatePickerBodyEmits } from './types';
 
 const props = withDefaults(defineProps<NueDatePickerBodyProps>(), {
     selectedDate: null,

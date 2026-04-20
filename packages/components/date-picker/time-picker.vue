@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NueButton } from '@nue-ui/components';
 import { ref, watch, nextTick } from 'vue';
-import { NueDatePickerTimeProps, NueDatePickerTimeEmits } from './types';
+import type { NueDatePickerTimeProps, NueDatePickerTimeEmits } from './types';
 
 const props = withDefaults(defineProps<NueDatePickerTimeProps>(), {
     hour: () => new Date().getHours(),

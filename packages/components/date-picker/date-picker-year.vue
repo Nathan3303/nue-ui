@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { NueDatePickerYearProps, NueDatePickerYearEmits } from './types';
+import type { NueDatePickerYearProps, NueDatePickerYearEmits } from './types';
 
 const props = defineProps<NueDatePickerYearProps>();
 const emit = defineEmits<NueDatePickerYearEmits>();

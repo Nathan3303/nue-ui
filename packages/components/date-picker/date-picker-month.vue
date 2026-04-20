@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { MONTHS } from './constants';
-import { NueDatePickerMonthProps, NueDatePickerMonthEmits } from './types';
+import type { NueDatePickerMonthProps, NueDatePickerMonthEmits } from './types';
 
 const props = defineProps<NueDatePickerMonthProps>();
 const emit = defineEmits<NueDatePickerMonthEmits>();

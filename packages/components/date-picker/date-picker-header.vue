@@ -87,7 +87,11 @@ import { computed, inject } from 'vue';
 import NueButton from '../button/button.vue';
 import NueButtonGroup from '../button-group/button-group.vue';
 import { MONTHS, NUE_DATE_PICKER_CTX_KEY } from './constants';
-import { NueDatePickerHeaderProps, NueDatePickerHeaderEmits, NueDatePickerContext } from './types';
+import type {
+    NueDatePickerHeaderProps,
+    NueDatePickerHeaderEmits,
+    NueDatePickerContext
+} from './types';
 
 defineOptions({ name: 'NueDatePickerHeader' });
 
@@ -165,3 +169,4 @@ function handleNextMonth() {
     emit('update:month', newMonth);
 }
 </script>
+
