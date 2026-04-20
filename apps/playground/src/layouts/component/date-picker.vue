@@ -5,6 +5,13 @@
     <demo title="日期和时间选择 & 占位符">
         <nue-date-picker v-model="datetime" type="datetime" placeholder="选择日期和时间！😁" />
     </demo>
+    <demo title="大小">
+        <nue-div align="center">
+            <nue-date-picker v-model="size" clearable placeholder="选择日期（小）" size="small" />
+            <nue-date-picker v-model="size" clearable placeholder="选择日期" />
+            <nue-date-picker v-model="size" clearable placeholder="选择日期（大）" size="large" />
+        </nue-div>
+    </demo>
     <demo title="按钮中直接可清除">
         <nue-date-picker v-model="clearable" type="date" clearable />
     </demo>
@@ -64,6 +71,7 @@ import { NueMessage } from 'nue-ui';
 
 const date = ref('');
 const datetime = ref('');
+const size = ref('');
 const clearable = ref('');
 const lifecycle = ref('2026-03-05');
 const isoDate = ref('2024-04-20T14:30:00Z');

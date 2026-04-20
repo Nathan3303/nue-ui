@@ -1,5 +1,12 @@
 /* NueDatePicker Component Styles */
 
+.nue-date-picker {
+    .nue-text--placeholder {
+        font-size: inherit;
+        color: var(--nue-primary-color-500);
+    }
+}
+
 .nue-date-picker-panel {
     --nue-date-picker-cell-size: 2rem;
     --nue-date-picker-font-size: var(--nue-text-df);

@@ -6,14 +6,11 @@
         @close="emit('close')"
     >
         <template #trigger="{ trigger }">
-            <nue-button :disabled="disabled" @click="trigger">
+            <nue-button :disabled="disabled" :size="size" @click="trigger">
                 <template v-if="modelValue">
-                    <nue-text v-if="isInvalidDate" color="danger">{{ '无效日期' }}</nue-text>
-                    <template v-else>{{ displayValue }}</template>
+                    {{ displayValue || "无效日期" }}
                 </template>
-                <nue-text v-else color="gray">
-                    {{ realPlaceholder }}
-                </nue-text>
+                <nue-text theme="placeholder" v-else>{{ realPlaceholder }}</nue-text>
                 <template #append>
                     <nue-icon name="calendar" />
                     <nue-icon
@@ -36,7 +33,7 @@
 
 <script lang="ts" setup>
 import { computed, provide } from 'vue';
-import { NueButton, NueDropdown, NueIcon } from '@nue-ui/components';
+import { NueButton, NueDropdown, NueIcon, NueText } from '@nue-ui/components';
 import { parseTheme } from '@nue-ui/utils';
 import DatePickerPanel from './date-picker-panel.vue';
 import { NUE_DATE_PICKER_CTX_KEY, PLACEHOLDERS } from './constants';
@@ -52,7 +49,7 @@ defineOptions({ name: 'NueDatePicker' });
 
 const props = withDefaults(defineProps<NueDatePickerProps>(), {
     type: 'date',
-    placeholder: '',
+    placeholder: '选择日期',
     disabled: false,
     clearable: false
 });
