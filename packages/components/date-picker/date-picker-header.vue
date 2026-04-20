@@ -169,4 +169,3 @@ function handleNextMonth() {
     emit('update:month', newMonth);
 }
 </script>
-

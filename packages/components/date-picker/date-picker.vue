@@ -8,7 +8,7 @@
         <template #trigger="{ trigger }">
             <nue-button :disabled="disabled" :size="size" @click="trigger">
                 <template v-if="modelValue">
-                    {{ displayValue || "无效日期" }}
+                    {{ displayValue || '无效日期' }}
                 </template>
                 <nue-text theme="placeholder" v-else>{{ realPlaceholder }}</nue-text>
                 <template #append>
@@ -102,4 +102,3 @@ const handleChange = (value: NueDatePickerValue) => {
     emit('change', value);
 };
 </script>
-

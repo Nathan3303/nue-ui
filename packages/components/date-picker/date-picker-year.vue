@@ -45,4 +45,3 @@ function handleYearClick(year: number) {
         </div>
     </div>
 </template>
-
