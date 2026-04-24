@@ -2,7 +2,7 @@
     --nue-badge-background-color: hsl(
         from var(--nue-warning-color-50) h s calc(l + var(--nue-dark-switch) * 20)
     );
-    --nue-badge-font-size: var(--nue-text-sm);
+    --nue-badge-font-size: var(--nue-text-xs);
     --nue-badge-color: var(--nue-primary-color-0);
 }
 
@@ -19,7 +19,7 @@
         max-width: 200%;
         height: fit-content;
         max-height: 100%;
-        padding: var(--nue-padding-xs) var(--nue-padding-sm);
+        padding: var(--nue-padding-2xs) var(--nue-padding-xs);
         background-color: var(--nue-badge-background-color);
         border-radius: 0.375rem;
         box-sizing: border-box;

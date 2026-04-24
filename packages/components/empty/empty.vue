@@ -15,7 +15,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-import { NueText, NueDiv } from '@nue-ui/components';
+import { NueText } from '../text';
+import { NueDiv } from '../div';
 import EmptyImageBase64 from './empty-image-base64';
 import type { NueEmptyProps } from './types';
 

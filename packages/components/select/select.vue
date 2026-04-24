@@ -32,7 +32,10 @@
 <script lang="ts" setup>
 import { computed, provide, shallowRef, watch, onMounted } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-import { NueButton, NueDropdown, NueIcon, NueText } from '@nue-ui/components';
+import { NueButton } from '../button';
+import { NueDropdown } from '../dropdown';
+import { NueIcon } from '../icon';
+import { NueText } from '../text';
 import { NueSelectContextKey } from './constants';
 import type { NueSelectContext, NueSelectEmits, NueSelectOption, NueSelectProps } from './types';
 

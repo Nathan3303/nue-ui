@@ -1,17 +1,13 @@
 <script lang="ts" setup>
-import { ref, computed, watch, inject } from 'vue';
-import { NueButton, NueDivider } from '@nue-ui/components';
+import { ref, computed, watch } from 'vue';
+import { NueButton } from '../button';
+import { NueDivider } from '../divider';
 import DatePickerHeader from './date-picker-header.vue';
 import DatePickerBody from './date-picker-body.vue';
 import DatePickerYear from './date-picker-year.vue';
 import DatePickerMonth from './date-picker-month.vue';
 import TimePicker from './time-picker.vue';
-import type {
-    NueDatePickerPanelProps,
-    NueDatePickerPanelEmits,
-    NueDatePickerContext
-} from './types';
-import { NUE_DATE_PICKER_CTX_KEY } from './constants';
+import type { NueDatePickerPanelProps, NueDatePickerPanelEmits } from './types';
 
 defineOptions({ name: 'NueDatePickerPanel' });
 
@@ -21,8 +17,6 @@ const props = withDefaults(defineProps<NueDatePickerPanelProps>(), {
 });
 
 const emit = defineEmits<NueDatePickerPanelEmits>();
-
-const datePickerCtx = inject<NueDatePickerContext>(NUE_DATE_PICKER_CTX_KEY)!;
 
 // 当前视图的年月
 const currentYear = ref(new Date().getFullYear());
@@ -245,10 +239,10 @@ const showTimePicker = computed(() => {
         <!-- 底部 -->
         <div class="nue-date-picker-panel__footer">
             <nue-button
-                :size="datePickerCtx.size"
+                :size="size"
                 :disabled="!canClear"
                 icon="clear"
-                theme="ghost,small"
+                theme="ghost"
                 @click="handleClear"
             >
                 清除

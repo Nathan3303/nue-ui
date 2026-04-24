@@ -22,19 +22,19 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: var(--nue-text-md);
+        font-size: var(--nue-text-df);
         color: var(--nue-primary-color-900);
     }
 
     > .nue-confirm__content {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: var(--nue-gap-sm);
         width: 100%;
         flex: auto;
-        margin: 0.5rem 0 1rem;
-        font-size: var(--nue-text-df);
-        color: var(--nue-primary-color-800);
+        margin: var(--nue-gap-xs) 0 var(--nue-gap-df);
+        font-size: var(--nue-text-sm);
+        color: var(--nue-primary-color-600);
     }
 
     > .nue-confirm__footer {
@@ -42,7 +42,7 @@
         display: flex;
         align-items: center;
         justify-content: end;
-        gap: 0.5rem;
+        gap: var(--nue-gap-sm);
     }
 
     &[data-visible='true'] {

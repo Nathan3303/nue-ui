@@ -44,8 +44,9 @@
     </demo>
     <demo title="大小">
         <nue-div align="center">
-            <nue-input v-model="i6" placeholder="size=small" size="small" />
-            <nue-input v-model="i6" placeholder="size=large" size="large" />
+            <nue-input v-model="i6" icon="more2" placeholder="size=small" size="small" />
+            <nue-input v-model="i6" icon="more2" placeholder="size=normal" />
+            <nue-input v-model="i6" icon="more2" placeholder="size=large" size="large" />
         </nue-div>
     </demo>
     <demo title="主题">

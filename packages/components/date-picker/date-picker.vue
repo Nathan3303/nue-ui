@@ -33,7 +33,10 @@
 
 <script lang="ts" setup>
 import { computed, provide } from 'vue';
-import { NueButton, NueDropdown, NueIcon, NueText } from '@nue-ui/components';
+import { NueButton } from '../button';
+import { NueDropdown } from '../dropdown';
+import { NueIcon } from '../icon';
+import { NueText } from '../text';
 import { parseTheme } from '@nue-ui/utils';
 import DatePickerPanel from './date-picker-panel.vue';
 import { NUE_DATE_PICKER_CTX_KEY, PLACEHOLDERS } from './constants';

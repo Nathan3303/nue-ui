@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NueButton } from '@nue-ui/components';
+import { NueButton } from '../button';
 import { ref, watch, nextTick } from 'vue';
 import type { NueDatePickerTimeProps, NueDatePickerTimeEmits } from './types';
 
@@ -173,8 +173,9 @@ function handleKeydown(event: KeyboardEvent, type: 'hour' | 'minute') {
                     v-if="!editingHour"
                     class="nue-time-picker__value nue-time-picker__value--editable"
                     @click="startEditHour"
-                    >{{ String(localHour).padStart(2, '0') }}</span
                 >
+                    {{ String(localHour).padStart(2, '0') }}
+                </span>
                 <input
                     v-else
                     ref="hourInput"
@@ -199,8 +200,9 @@ function handleKeydown(event: KeyboardEvent, type: 'hour' | 'minute') {
                     v-if="!editingMinute"
                     class="nue-time-picker__value nue-time-picker__value--editable"
                     @click="startEditMinute"
-                    >{{ String(localMinute).padStart(2, '0') }}</span
                 >
+                    {{ String(localMinute).padStart(2, '0') }}
+                </span>
                 <input
                     v-else
                     ref="minuteInput"

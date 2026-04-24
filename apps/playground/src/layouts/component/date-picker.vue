@@ -7,13 +7,25 @@
     </demo>
     <demo title="大小">
         <nue-div align="center">
-            <nue-date-picker v-model="size" clearable placeholder="选择日期（小）" size="small" />
-            <nue-date-picker v-model="size" clearable placeholder="选择日期" />
-            <nue-date-picker v-model="size" clearable placeholder="选择日期（大）" size="large" />
+            <nue-date-picker
+                v-model="size"
+                type="datetime"
+                clearable
+                placeholder="选择日期（小）"
+                size="small"
+            />
+            <nue-date-picker v-model="size" type="datetime" clearable placeholder="选择日期" />
+            <nue-date-picker
+                v-model="size"
+                type="datetime"
+                clearable
+                placeholder="选择日期（大）"
+                size="large"
+            />
         </nue-div>
     </demo>
     <demo title="按钮中直接可清除">
-        <nue-date-picker v-model="clearable" type="date" clearable />
+        <nue-date-picker v-model="clearable" type="datetime" clearable />
     </demo>
     <demo title="生命周期">
         <nue-date-picker v-model="lifecycle" type="date" @close="NueMessage.info(lifecycle)" />

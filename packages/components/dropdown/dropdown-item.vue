@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { computed, ref, inject } from 'vue';
+import { computed, inject } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
-import { NueIcon, NueText, NueDiv } from '@nue-ui/components';
+import { NueIcon } from '../icon';
+import { NueText } from '../text';
+import { NueDiv } from '../div';
 import type { NueDropdownContext, NueDropdownItemProps } from './types';
 
 defineOptions({ name: 'NueDropdownItem' });
@@ -12,8 +14,11 @@ const props = withDefaults(defineProps<NueDropdownItemProps>(), {
 // @inject 从 dropdown 组件提供的上下文获取 execute 方法
 const dropdownContext = inject<NueDropdownContext>('NueDropdownContext');
 
-// @ref 下拉菜单项的 DOM 元素引用
-const dropdownItemRef = ref<HTMLElement>();
+// @computed 下拉菜单项上下文继承
+const extendsAttr = computed(() => ({
+    size: dropdownContext?.size || props.size,
+    disabled: dropdownContext?.disabled || props.disabled
+}));
 
 // @computed 下拉菜单项的类名
 const classes = computed(() => {
@@ -21,9 +26,9 @@ const classes = computed(() => {
     return [
         prefix,
         ...parseTheme(props.theme, prefix),
-        props.size && `${prefix}--${props.size}`,
-        props.disabled && `${prefix}--disabled`,
-        props.loading && `${prefix}--loading`
+        extendsAttr.value.size ? `${prefix}--${extendsAttr.value.size}` : void 0,
+        extendsAttr.value.disabled ? `${prefix}--disabled` : void 0,
+        props.loading ? `${prefix}--loading` : void 0
     ];
 });
 
@@ -33,7 +38,7 @@ const iconName = computed(() => {
 });
 
 // @computed 下拉菜单项是否禁用
-const disabled = computed(() => props.loading || props.disabled);
+const disabled = computed(() => props.loading || extendsAttr.value.disabled);
 
 // @method 执行下拉菜单项的操作
 const handleExecute = () => {
@@ -44,7 +49,6 @@ const handleExecute = () => {
 
 <template>
     <li
-        ref="dropdownItemRef"
         :class="classes"
         :data-executeid="disabled ? void 0 : executeId"
         @click.stop="handleExecute"
@@ -54,6 +58,7 @@ const handleExecute = () => {
             class="nue-dropdown-item__icon"
             :name="iconName"
             :spin="loading"
+            :hinting="false"
         />
         <nue-text class="nue-dropdown-item__text" :clamped="1">
             <slot>{{ text }}</slot>

@@ -1,7 +1,5 @@
 <template>
-    <component :is="tag" :class="classes" :style="style">
-        <slot />
-    </component>
+    <component :is="tag" :class="classes" :style="style"> <slot /> </component>
 </template>
 
 <script lang="ts" setup>
@@ -17,7 +15,11 @@ const props = withDefaults(defineProps<NueSizeProps>(), {
 
 const classes = computed(() => {
     const prefix = 'nue-text';
-    return [prefix, ...parseTheme(props.theme, prefix), props.clamped && `${prefix}--clamped`];
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        props.clamped ? `${prefix}--clamped` : void 0
+    ];
 });
 
 const size = computed(() => {
@@ -25,14 +27,12 @@ const size = computed(() => {
     return TEXT_SIZE_VALUES[props.size] || props.size;
 });
 
-const style = computed(() => {
-    return {
-        '--nue-text-color': props.color,
-        '--nue-text-font-size': size.value,
-        '--nue-text-font-weight': props.weight,
-        '--nue-text-decoration': props.decoration,
-        '--nue-text-align': props.align,
-        '--nue-text-clamped-lines': props.clamped
-    };
-});
+const style = computed(() => ({
+    '--nue-text-color': props.color,
+    '--nue-text-font-size': size.value,
+    '--nue-text-font-weight': props.weight,
+    '--nue-text-decoration': props.decoration,
+    '--nue-text-align': props.align,
+    '--nue-text-clamped-lines': props.clamped
+}));
 </script>

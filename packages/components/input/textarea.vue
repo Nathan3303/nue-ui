@@ -23,12 +23,16 @@
             readonly
             tabindex="-1"
         />
-        <word-counter
-            v-if="counter !== 'off'"
-            :length="textLength"
-            :maxlength="parseInt(maxlength || '0')"
-            :mode="counter"
-        />
+        <nue-div v-if="counter !== 'off' || $slots.actions" class="nue-textarea__actions-bar">
+            <nue-div class="nue-textarea__actions">
+                <slot name="actions" />
+            </nue-div>
+            <word-counter
+                :length="textLength"
+                :maxlength="parseInt(maxlength || '0')"
+                :mode="counter"
+            />
+        </nue-div>
     </div>
 </template>
 
@@ -36,12 +40,14 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { debounce, parseTheme } from '@nue-ui/utils';
 import wordCounter from './word-counter.vue';
+import { NueDiv } from '../div';
 import type { NueTextareaProps, NueTextareaEmits } from './types';
 
 defineOptions({ name: 'NueTextarea' });
 const props = withDefaults(defineProps<NueTextareaProps>(), {
     counter: 'off',
-    debounceTime: 0
+    debounceTime: 0,
+    placeholder: '...'
 });
 const emit = defineEmits<NueTextareaEmits>();
 

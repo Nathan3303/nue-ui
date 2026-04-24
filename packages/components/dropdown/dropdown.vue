@@ -259,7 +259,10 @@ onUnmounted(() => {
 });
 
 // @provide 为 dropdownItem 等子组件提供上下文
-provide<NueDropdownContext>('NueDropdownContext', { execute: handleExecuteByContext });
+provide<NueDropdownContext>('NueDropdownContext', {
+    execute: handleExecuteByContext,
+    size: props.size
+});
 
 // @export 暴露打开和关闭下拉菜单的方法
 defineExpose({ open: handleDropdownOpen, close: handleDropdownClose });

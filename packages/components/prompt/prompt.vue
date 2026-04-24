@@ -54,7 +54,10 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import NueOverlay from '../overlay/overlay.vue';
-import { NueButton, NueInput, NueTextarea, NueText } from '@nue-ui/components';
+import { NueButton } from '../button';
+import { NueInput } from '../input';
+import { NueTextarea } from '../input';
+import { NueText } from '../text';
 import { parseTheme, parsePopupItemAnimation } from '@nue-ui/utils';
 import type { NuePromptProps } from './types';
 

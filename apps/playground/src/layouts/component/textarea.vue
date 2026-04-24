@@ -55,12 +55,26 @@
             <nue-textarea v-model="t7" :rows="4" resize />
         </nue-div>
     </demo>
+    <demo title="自定义操作插槽">
+        <nue-textarea
+            v-model="t8"
+            :autosize="{ minRows: 1, maxRows: 6 }"
+            :debounce-time="256"
+            counter="word-limit"
+            maxlength="256"
+        >
+            <template #actions>
+                <nue-button theme="icon,small,ghost" icon="edit" />
+                <nue-button theme="icon,small,ghost" icon="connection" />
+            </template>
+        </nue-textarea>
+    </demo>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import Demo from '@/components/demo.vue';
-import { NueDiv, NueTextarea, NueText } from '@nue-ui/components';
+import { NueDiv, NueTextarea, NueText, NueButton } from '@nue-ui/components';
 
 const t1 = ref('');
 const t2 = ref('');
@@ -69,6 +83,7 @@ const t4 = ref('');
 const t5 = ref('');
 const t6 = ref('');
 const t7 = ref('');
+const t8 = ref('');
 </script>
 
 <style scoped></style>

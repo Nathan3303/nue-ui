@@ -1,34 +1,32 @@
 import { isString } from 'lodash-es';
-import type { NuePopupItemAnimation, ObjectLikeThemes } from './types';
+import type { NuePopupItemAnimation } from './types';
 
-export function parseTheme(
-    value: string | string[] | ObjectLikeThemes | undefined,
-    prefix: string
-): string[] {
-    if (!value) return [];
-    let themeNames: string[];
-    if (isString(value)) {
-        themeNames = value.trim().split(',');
-    } else if (Array.isArray(value)) {
-        themeNames = value;
-    } else {
-        themeNames = Object.keys(value).filter(key => value[key]);
-    }
-    return themeNames.map(item => `${prefix}--${item.trim()}`);
-}
-
+/**
+ * 解析 flex 值（后续将禁用）
+ * @param value flex 值
+ * @returns flex 值
+ */
 export function parseFlex(value: string): string {
     if (value === '') return 'auto';
     return value;
 }
 
+/**
+ * 解析 flex-wrap 值（后续将禁用）
+ * @param value flex-wrap 值
+ * @returns flex-wrap 值
+ */
 export function parseFlexWrap(value: string): string {
     if (value === '') return 'wrap';
     return value;
 }
 
+/**
+ * 解析动画持续时间值为数字
+ * @param value 动画持续时间值
+ * @returns 动画持续时间值
+ */
 export function parseAnimationDurationToNumber(value: string | number): number {
-    // maybe 'xxx s' or 'xxx ms', please convert to number
     if (typeof value === 'string') {
         if (value.endsWith('s')) {
             return parseFloat(value.slice(0, -1)) * 1000;
@@ -38,7 +36,11 @@ export function parseAnimationDurationToNumber(value: string | number): number {
     return value;
 }
 
-// @method 解析弹窗动画 props 值至 CSS 样式值
+/**
+ * 解析弹窗动画 props 值至 CSS 样式值
+ * @param value 弹窗动画 props 值
+ * @returns 弹窗动画 props 值
+ */
 type ParsePopupItemAnimation = { name: string | undefined; duration: string | undefined };
 export const parsePopupItemAnimation = (value?: NuePopupItemAnimation): ParsePopupItemAnimation => {
     const result: ParsePopupItemAnimation = { name: void 0, duration: void 0 };

@@ -6,7 +6,7 @@
     gap: 0;
     width: 0;
     position: fixed;
-    top: 8px;
+    top: var(--nue-gap-df);
     left: 50%;
     z-index: 100;
 }
@@ -20,9 +20,9 @@
 }
 
 .nue-message-node-inner {
-    --nue-message-node-inner-vgap: 1rem;
-    --nue-message-node-inner-height: 2.25rem;
-    --nue-message-node-inner-font-size: 0.8rem;
+    --nue-message-node-inner-vgap: var(--nue-gap-df);
+    --nue-message-node-inner-height: var(--nue-box-size-df);
+    --nue-message-node-inner-font-size: var(--nue-text-sm);
     --nue-message-node-inner-color: var(--nue-primary-color-900);
     --nue-message-node-inner-icon-size: var(--nue-message-node-inner-font-size);
     --nue-message-node-inner-icon-color: var(--nue-message-node-inner-color);
@@ -44,9 +44,9 @@
     border-radius: var(--nue-primary-radius);
     box-shadow: 0 0 0.25rem 1px var(--nue-message-node-inner-shadow-color);
     box-sizing: border-box;
-    transition: all 0.5s ease-in;
+    transition: all var(--nue-animation-duration-long) ease-in;
     margin-top: -3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--nue-gap-xs);
     opacity: 0;
     font-size: var(--nue-message-node-inner-font-size);
     color: var(--nue-message-node-inner-color);
@@ -58,21 +58,21 @@
 }
 
 .nue-message-node-inner.nue-message-node-inner--push {
-    transition: all 0.2s ease-out;
-    margin-top: 0.25rem !important;
+    transition: all var(--nue-animation-duration-short) ease-out;
+    margin-top: 0 !important;
     opacity: 1;
 }
 
 .nue-message-node-inner.nue-message-node-inner--small {
-    --nue-message-node-inner-vgap: 0.75rem;
-    --nue-message-node-inner-height: 1.75rem;
-    --nue-message-node-inner-font-size: 0.75rem;
+    --nue-message-node-inner-vgap: var(--nue-gap-sm);
+    --nue-message-node-inner-height: var(--nue-box-size-sm);
+    --nue-message-node-inner-font-size: var(--nue-text-xs);
 }
 
 .nue-message-node-inner.nue-message-node-inner--large {
-    --nue-message-node-inner-vgap: 1.25rem;
-    --nue-message-node-inner-height: 2.625rem;
-    --nue-message-node-inner-font-size: 1.125rem;
+    --nue-message-node-inner-vgap: var(--nue-gap-md);
+    --nue-message-node-inner-height: var(--nue-box-size-md);
+    --nue-message-node-inner-font-size: var(--nue-text-df);
 }
 
 .nue-message-node-inner.nue-message-node-inner--success {
@@ -94,13 +94,13 @@
 }
 
 .nue-message-node-inner.nue-message-node-inner--info {
-    --nue-message-node-inner-color: var(--nue-primary-color-700);
+    --nue-message-node-inner-color: var(--nue-primary-color-900);
     --nue-message-node-inner-background-color: var(--nue-primary-color-100);
-    --nue-message-node-inner-border-color: var(--nue-primary-color-500);
+    --nue-message-node-inner-border-color: var(--nue-primary-color-700);
 }
 
 .nue-message-node-inner.nue-message-node-inner--log {
     --nue-message-node-inner-color: var(--nue-primary-color-900);
-    --nue-message-node-inner-background-color: var(--nue-primary-color-100);
+    --nue-message-node-inner-background-color: var(--nue-primary-color-300);
     --nue-message-node-inner-border-color: var(--nue-primary-color-700);
 }

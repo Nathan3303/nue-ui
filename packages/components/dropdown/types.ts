@@ -51,4 +51,6 @@ export interface NueDropdownItemProps extends GlobalProps {
 
 export type NueDropdownContext = {
     execute: (executeId: NueDropdownItemProps['executeId'], closeWhenExecuted: boolean) => void;
+    size?: NueDropdownSize;
+    disabled?: boolean;
 };

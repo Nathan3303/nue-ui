@@ -4,13 +4,12 @@
         :active-class="activeClass"
         :class="classes"
         :href="disabled || !href ? void 0 : href"
-        :style="styles"
         :title="href || title || void 0"
         :to="to"
         v-bind="$attrs"
     >
-        <nue-icon v-if="icon" :name="icon" class="nue-link__icon" />
-        <nue-text v-if="$slots.default" class="nue-link__content">
+        <nue-icon v-if="icon" :hinting="false" :name="icon" class="nue-link__icon" />
+        <nue-text v-if="$slots.default" :clamped="1" class="nue-link__content">
             <slot>{{ href }}</slot>
         </nue-text>
         <nue-div v-if="$slots.append" class="nue-link__append">
@@ -21,8 +20,10 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
-import { parseFlex, parseTheme } from '@nue-ui/utils';
-import { NueIcon, NueText, NueDiv } from '@nue-ui/components';
+import { parseTheme } from '@nue-ui/utils';
+import { NueIcon } from '../icon';
+import { NueText } from '../text';
+import { NueDiv } from '../div';
 import type { NueLinkProps, NueLinkRoute } from './types';
 
 defineOptions({ name: 'NueLink' });
@@ -35,26 +36,20 @@ const activeClass = ref('');
 watch(
     () => props.route,
     newValue => {
-        if (newValue) {
-            tag.value = 'router-link';
-            to.value = newValue;
-            activeClass.value = 'nue-link--actived';
-        }
+        if (!newValue) return;
+        tag.value = 'router-link';
+        to.value = newValue;
+        activeClass.value = 'nue-link--actived';
     },
     { immediate: true }
 );
 
 const classes = computed(() => {
     const prefix = 'nue-link';
-    return [prefix, ...parseTheme(props.theme, prefix), props.disabled && `${prefix}--disabled`];
-});
-
-const styles = computed(() => {
-    const { flex, align, size } = props;
-    return {
-        '--flex': flex ? parseFlex(flex) : void 0,
-        '--text-align': align,
-        '--font-size': size
-    };
+    return [
+        prefix,
+        ...parseTheme(props.theme, prefix),
+        props.disabled ? `${prefix}--disabled` : void 0
+    ];
 });
 </script>

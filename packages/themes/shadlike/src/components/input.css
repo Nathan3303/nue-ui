@@ -1,9 +1,9 @@
 .nue-input {
-    --nue-input-vgap: 0.75rem;
+    --nue-input-vgap: var(--nue-gap-sm);
     --nue-input-width: auto;
-    --nue-input-height: 2.25rem;
+    --nue-input-height: var(--nue-box-size-df);
 
-    --nue-input-font-size: var(--nue-text-df);
+    --nue-input-font-size: var(--nue-text-sm);
     --nue-input-color: var(--nue-primary-color-900);
     --nue-input-placeholder-color: var(--nue-primary-color-500);
     --nue-input-icon-size: var(--nue-input-font-size);
@@ -32,21 +32,22 @@
 .nue-input {
     display: flex;
     align-items: center;
-    gap: var(--nue-input-vgap);
-    width: var(--nue-input-width);
-    height: var(--nue-input-height);
-    line-height: var(--nue-input-height);
-    padding: 0 var(--nue-input-vgap);
     border: 1px solid var(--nue-input-border-color);
-    border-radius: 6px;
+    border-radius: var(--nue-primary-radius);
     background-color: var(--nue-input-background-color);
-    box-shadow: 1px 1px 0.25rem rgba(200, 200, 200, 0.2);
+    box-shadow: var(--nue-secondary-shadow);
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
-    transition: all 0.16s ease;
+    transition: all var(--nue-animation-duration-short) ease-in;
     -webkit-user-select: none;
     user-select: none;
+
+    font-size: var(--nue-input-font-size);
+    gap: var(--nue-input-vgap);
+    width: var(--nue-input-width);
+    height: var(--nue-input-height);
+    padding: 0 var(--nue-input-vgap);
 
     &:hover {
         border-color: var(--nue-input-hover-border-color);
@@ -76,7 +77,6 @@
     }
 
     > .nue-input__input {
-        min-width: 5rem;
         height: auto;
         outline: none;
         border: none;
@@ -84,9 +84,8 @@
         background-color: transparent;
         flex: auto;
         color: var(--nue-input-color);
-        font-size: var(--nue-input-font-size);
         font-family: inherit;
-        line-height: 1.2;
+        font-size: inherit;
 
         &::-ms-reveal,
         &::-ms-clear {
@@ -99,13 +98,13 @@
     }
 
     > .word-counter {
-        flex: none;
+        flex-shrink: 0;
         color: var(--nue-primary-color-500);
-        font-size: 0.75rem;
+        font-size: var(--nue-text-xs);
     }
 
     > .nue-input__icon-button {
-        transition: all 0.16s ease;
+        transition: all var(--nue-animation-duration-short) ease-in;
         cursor: pointer;
         --nue-icon-color: var(--nue-input-opbtn-color);
 
@@ -120,15 +119,15 @@
 }
 
 .nue-input.nue-input--small {
-    --nue-input-vgap: 0.75rem;
-    --nue-input-height: 1.75rem;
-    --nue-input-font-size: 0.75rem;
+    --nue-input-font-size: var(--nue-text-xs);
+    --nue-input-vgap: var(--nue-gap-xs);
+    --nue-input-height: var(--nue-box-size-sm);
 }
 
 .nue-input.nue-input--large {
-    --nue-input-vgap: 1.25rem;
-    --nue-input-height: 2.625rem;
-    --nue-input-font-size: 1.125rem;
+    --nue-input-font-size: var(--nue-text-df);
+    --nue-input-vgap: var(--nue-gap-df);
+    --nue-input-height: var(--nue-box-size-md);
 }
 
 .nue-input.nue-input--pure {

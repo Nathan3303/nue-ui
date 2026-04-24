@@ -8,6 +8,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: var(--nue-gap-sm);
 
     .nue-empty__image {
         width: var(--nue-empty-image-width);
@@ -17,7 +18,7 @@
     }
 
     .nue-empty__description {
-        font-size: var(--nue-text-df);
+        font-size: var(--nue-text-sm);
         color: var(--nue-primary-text-color);
     }
 }

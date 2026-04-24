@@ -23,8 +23,8 @@
     </demo>
     <demo title="大小">
         <nue-div align="center">
-            <nue-switch size="small" />
-            <nue-switch size="large" />
+            <nue-switch size="small" show-text />
+            <nue-switch size="large" show-text />
         </nue-div>
     </demo>
     <demo title="加载态 & 加载图标">

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
 import { generateId, parseTheme } from '@nue-ui/utils';
-import { NueIcon, NueDropdownItem } from '@nue-ui/components';
+import { NueIcon } from '../icon';
+import { NueDropdownItem } from '../dropdown';
 import { NueSelectContextKey } from './constants';
 import type { NueSelectContext, NueSelectOptionProps } from './types';
 

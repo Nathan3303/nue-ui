@@ -1,6 +1,6 @@
 <template>
     <div :class="classes" :style="style">
-        <nue-icon v-if="icon" :name="icon" class="nue-input__icon" />
+        <nue-icon v-if="icon" :name="icon" :hinting="false" class="nue-input__icon" />
         <input
             :id="id"
             ref="inputRef"

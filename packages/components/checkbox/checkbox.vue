@@ -11,7 +11,7 @@
 import { computed, inject, onBeforeUnmount, onMounted } from 'vue';
 import { isFunction } from 'lodash-es';
 import { generateId, parseTheme } from '@nue-ui/utils';
-import NueIcon from '../icon/icon.vue';
+import { NueIcon } from '../icon';
 import { CHECKBOX_GROUP_CTX_KEY } from '../checkbox-group/constants';
 import type { NueCheckboxEmits, NueCheckboxProps } from './types';
 import type { NueCheckboxGroupContext } from '../checkbox-group/types';
