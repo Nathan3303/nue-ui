@@ -1,4 +1,5 @@
 {
+    "extends": "../../tsconfig.base.json",
     "compilerOptions": {
         "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
         "target": "ES2020",
@@ -13,17 +14,15 @@
         "moduleDetection": "force",
         "noEmit": true,
         "jsx": "preserve",
-        /* Linting */
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true,
-        /* types */
-        "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"]
+            "@/*": ["./src/*"]
         },
+        /* types */
         "types": ["nue-ui/dist/global.d.ts"]
     },
     "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]

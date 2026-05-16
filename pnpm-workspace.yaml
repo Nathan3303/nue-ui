@@ -1,5 +1,8 @@
 packages:
-    - 'apps/*'
-    - 'packages/*'
-    - 'packages/plugins/*'
-    - 'packages/themes/*'
+  - 'apps/*'
+  - 'packages/*'
+  - 'packages/plugins/*'
+  - 'packages/themes/*'
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
