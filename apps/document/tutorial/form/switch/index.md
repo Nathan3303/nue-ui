@@ -41,6 +41,14 @@ demo-preview=./state-text.vue
 demo-preview=./disabled.vue
 :::
 
+## 滑块内容插槽
+
+通过插槽 `#circle` 可以在开关的圆形滑块内插入自定义内容。
+
+::: preview
+demo-preview=./circle-slot.vue
+:::
+
 ## 加载态 & 状态切换前的回调函数
 
 通过属性 `loading` 设置开关组件的加载状态。属性 `loading` 通常与状态切换前回调函数 `before-switch`

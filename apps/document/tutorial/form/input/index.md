@@ -78,6 +78,14 @@ demo-preview=./clearable-show.vue
 demo-preview=./max-count.vue
 :::
 
+## 扩展插槽
+
+通过插槽 `#prefix` 和 `#suffix` 分别可以在输入框组件包装器的开头和末尾插入自定义元素。
+
+::: preview
+demo-preview=./slots.vue
+:::
+
 ## 防抖
 
 组件内部在输入时会对输入内容进行防抖处理，防止短时间内大量输入导致的性能问题。

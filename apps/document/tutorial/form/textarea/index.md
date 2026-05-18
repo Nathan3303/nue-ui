@@ -68,6 +68,14 @@ demo-preview=./max-count.vue
 demo-preview=./debounce.vue
 :::
 
+## 扩展插槽
+
+通过插槽 `#prefix` 和 `#suffix` 分别可以在文本域组件包装器的开头和末尾插入自定义元素。
+
+::: preview
+demo-preview=./slots.vue
+:::
+
 ## 自动高度
 
 通过属性 `autosize` 设置是否启用自适应内容高度，开启后文本框的高度会随着内容的增加而变高，即文本框会完全显示所输入的内容而非使用滚动条。

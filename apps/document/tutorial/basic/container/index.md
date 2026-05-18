@@ -74,6 +74,8 @@ demo-preview=./aside-comp.vue
 
 通过属性 `disabled` 禁用拖拽变宽功能。
 
+此外，`NueSeparator` 支持通过默认插槽自定义拖拽手柄的指示器内容。
+
 ::: preview
 demo-preview=./separator.vue
 :::

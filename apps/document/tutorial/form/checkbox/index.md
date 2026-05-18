@@ -49,6 +49,14 @@ demo-preview=./size.vue
 demo-preview=./indeterminate.vue
 :::
 
+## 扩展插槽
+
+通过插槽 `#prefix` 和 `#suffix` 分别可以在复选框图标前方和标签文字后方插入自定义元素。
+
+::: preview
+demo-preview=./slots.vue
+:::
+
 ## 加载态和值变更前的回调函数
 
 通过属性 `loading` 设置复选框处于加载状态。通常搭配状态变更前的回调函数属性 `before-check` 使用。在

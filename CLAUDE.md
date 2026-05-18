@@ -32,7 +32,7 @@ pnpm playground dev    # Playground app
 
 ### Monorepo Structure
 
-```
+```text
 apps/          - Dev tools (not published)
   document/    - VitePress documentation site
   histoire/     - Histoire-based component explorer
@@ -85,3 +85,15 @@ Every component follows the same pattern. Example (`button/`):
 ### Pre-commit
 
 Husky runs `lint-staged` + `prettier --write .` + `pnpm test:run` on commit.
+
+## 功能规划与开发日志
+
+### Feature Planning
+
+- Before developing new features, create a plan. Planning documents should be placed in the docs/plans directory. If the directory doesn't exist, create it and add a new .md file.
+- When planning new features, ensure all work revolves around the MVP approach - only the core features needed are developed, and everything else is not considered.
+
+### Development Logs
+
+- When executing plans, work is typically done in phases. Development logs for each phase should be saved in docs/devlogs/`<plan-name>/`/`<phase-x.md>` files.
+- Log content should briefly record: what was implemented, how it was implemented, and which files were affected.

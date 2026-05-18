@@ -84,6 +84,14 @@ demo-preview=./transparent.vue
 demo-preview=./trigger-slot.vue
 :::
 
+## 自定义菜单头部与底部
+
+通过插槽 `#header` 和 `#footer` 可以分别在菜单选项列表的顶部和底部插入自定义内容。
+
+::: preview
+demo-preview=./header-footer.vue
+:::
+
 ## 下拉列表嵌套
 
 ::: preview

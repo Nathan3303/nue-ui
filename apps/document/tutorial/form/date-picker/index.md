@@ -42,6 +42,14 @@ demo-preview=./disabled.vue
 demo-preview=./clearable.vue
 :::
 
+## 自定义日期单元格
+
+通过 `DatePickerBody` 组件的 `#cell` 作用域插槽可以自定义单个日期单元格的内容。插槽传递出 `date`（日期对象）、`dateStr`（日期字符串）和 `isCurrentMonth`（是否为当前月）三个属性。
+
+## 自定义底部操作
+
+通过 `DatePickerPanel` 组件的 `#footer` 插槽可以替换日期选择面板底部的默认清除按钮。
+
 ## 生命周期 <Badge type="warning" text="1.8.28 +" />
 
 通过事件 `close` 可以在日期选择器关闭时触发回调。

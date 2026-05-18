@@ -65,6 +65,14 @@ demo-preview=./route.vue
 
 可以通过自定义主题移除下划线，实现更简洁的视觉效果。
 
+## 扩展插槽
+
+通过插槽 `#prepend` 和 `#append` 分别可以在链接文字的前方和后方插入自定义元素。
+
+::: preview
+demo-preview=./slots.vue
+:::
+
 ## 注意事项
 
 1. **路由跳转**：`route` 属性需要项目配置了 VueRouter 才能使用，否则会导致渲染错误。

@@ -88,6 +88,14 @@ demo-preview=./throttle.vue
 demo-preview=./append.vue
 :::
 
+### 前置扩展插槽
+
+通过插槽 `#prepend` 可以在按钮文字的前方、图标的后方插入自定义的元素。
+
+::: preview
+demo-preview=./prepend.vue
+:::
+
 ## 按钮组及统一属性控制
 
 通过 `NueButtonGroup` 组件可以将多个按钮以按钮组的形式排列。
