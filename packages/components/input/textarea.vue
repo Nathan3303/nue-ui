@@ -1,5 +1,6 @@
 <template>
     <div :class="classes" :style="style">
+        <slot name="prefix" />
         <textarea
             :id="id"
             ref="textareaRef"
@@ -33,6 +34,7 @@
                 :mode="counter"
             />
         </nue-div>
+        <slot name="suffix" />
     </div>
 </template>
 

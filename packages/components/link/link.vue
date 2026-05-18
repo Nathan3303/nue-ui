@@ -8,6 +8,9 @@
         :to="to"
         v-bind="$attrs"
     >
+        <nue-div v-if="$slots.prepend" class="nue-link__prepend">
+            <slot name="prepend" />
+        </nue-div>
         <nue-icon v-if="icon" :hinting="false" :name="icon" class="nue-link__icon" />
         <nue-text v-if="$slots.default" :clamped="1" class="nue-link__content">
             <slot>{{ href }}</slot>

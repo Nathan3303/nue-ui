@@ -242,6 +242,22 @@ describe('NueInput', () => {
         });
     });
 
+    describe('插槽渲染', () => {
+        it('应该渲染 prefix 插槽', () => {
+            const wrapper = mount(NueInput, {
+                slots: { prefix: '<span class="prefix-content">前缀</span>' }
+            });
+            expect(wrapper.find('.prefix-content').exists()).toBe(true);
+        });
+
+        it('应该渲染 suffix 插槽', () => {
+            const wrapper = mount(NueInput, {
+                slots: { suffix: '<span class="suffix-content">后缀</span>' }
+            });
+            expect(wrapper.find('.suffix-content').exists()).toBe(true);
+        });
+    });
+
     describe('暴露的方法', () => {
         it('应该暴露 innerInputRef', () => {
             const wrapper = mount(NueInput);

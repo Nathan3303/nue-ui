@@ -1,6 +1,7 @@
 <template>
     <div ref="switchRef" :class="classes" @click.stop="handleClick">
         <div class="nue-switch__circle">
+            <slot name="circle" />
             <nue-icon
                 v-if="loading"
                 class="nue-switch__loading-icon"

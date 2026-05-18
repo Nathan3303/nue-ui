@@ -32,9 +32,11 @@
                         @animationstart="handleAnimationStart"
                         @animationend="handleAnimationEnd"
                     >
+                        <slot name="header" />
                         <slot>
                             <span class="nue-dropdown__empty-text">无选项</span>
                         </slot>
+                        <slot name="footer" />
                     </ul>
                 </nue-overlay>
             </teleport>

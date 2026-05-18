@@ -1,7 +1,29 @@
 import { describe, it, expect } from 'vitest';
+import { mount } from '@vue/test-utils';
 import { NuePrompt } from '../index';
+import PromptInner from '../prompt.vue';
 
 describe('NuePrompt', () => {
+    describe('插槽渲染', () => {
+        const mockProps = { close: () => {}, destroy: () => {} };
+
+        it('应该渲染 header 插槽', () => {
+            const wrapper = mount(PromptInner, {
+                props: mockProps,
+                slots: { header: '<span class="header-content">自定义头部</span>' }
+            });
+            expect(wrapper.find('.header-content').exists()).toBe(true);
+        });
+
+        it('应该渲染 footer 插槽', () => {
+            const wrapper = mount(PromptInner, {
+                props: mockProps,
+                slots: { footer: '<span class="footer-content">自定义底部</span>' }
+            });
+            expect(wrapper.find('.footer-content').exists()).toBe(true);
+        });
+    });
+
     describe('API 测试', () => {
         it('应该导出 NuePrompt 函数', () => {
             expect(typeof NuePrompt).toBe('function');

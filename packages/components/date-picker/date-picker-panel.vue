@@ -238,15 +238,17 @@ const showTimePicker = computed(() => {
         <nue-divider />
         <!-- 底部 -->
         <div class="nue-date-picker-panel__footer">
-            <nue-button
-                :size="size"
-                :disabled="!canClear"
-                icon="clear"
-                theme="ghost"
-                @click="handleClear"
-            >
-                清除
-            </nue-button>
+            <slot name="footer">
+                <nue-button
+                    :size="size"
+                    :disabled="!canClear"
+                    icon="clear"
+                    theme="ghost"
+                    @click="handleClear"
+                >
+                    清除
+                </nue-button>
+            </slot>
         </div>
     </div>
 </template>

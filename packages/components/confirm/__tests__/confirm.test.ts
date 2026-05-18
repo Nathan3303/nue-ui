@@ -1,7 +1,37 @@
 import { describe, it, expect } from 'vitest';
+import { mount } from '@vue/test-utils';
 import { NueConfirm } from '../index';
+import ConfirmInner from '../confirm.vue';
 
 describe('NueConfirm', () => {
+    describe('插槽渲染', () => {
+        const mockProps = { close: () => {}, destroy: () => {} };
+
+        it('应该渲染 header 插槽', () => {
+            const wrapper = mount(ConfirmInner, {
+                props: mockProps,
+                slots: { header: '<span class="header-content">自定义头部</span>' }
+            });
+            expect(wrapper.find('.header-content').exists()).toBe(true);
+        });
+
+        it('应该渲染默认插槽', () => {
+            const wrapper = mount(ConfirmInner, {
+                props: mockProps,
+                slots: { default: '<span class="body-content">自定义内容</span>' }
+            });
+            expect(wrapper.find('.body-content').exists()).toBe(true);
+        });
+
+        it('应该渲染 footer 插槽', () => {
+            const wrapper = mount(ConfirmInner, {
+                props: mockProps,
+                slots: { footer: '<span class="footer-content">自定义底部</span>' }
+            });
+            expect(wrapper.find('.footer-content').exists()).toBe(true);
+        });
+    });
+
     describe('API 测试', () => {
         it('应该导出 NueConfirm 函数', () => {
             expect(typeof NueConfirm).toBe('function');

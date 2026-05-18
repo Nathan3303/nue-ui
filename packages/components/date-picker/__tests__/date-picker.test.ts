@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { NueDatePicker } from '../index';
+import DatePickerBody from '../date-picker-body.vue';
+import DatePickerPanel from '../date-picker-panel.vue';
+import { NUE_DATE_PICKER_CTX_KEY } from '../constants';
 import { parseDate } from '../utils/date-utils';
 
 describe('NueDatePicker', () => {
@@ -65,6 +68,43 @@ describe('NueDatePicker', () => {
             });
             expect(wrapper.text()).not.toContain('无效日期');
             expect(wrapper.text()).toContain('2024年04月20日');
+        });
+    });
+});
+
+describe('NueDatePickerBody', () => {
+    describe('插槽渲染', () => {
+        it('应该渲染 cell 作用域插槽', () => {
+            const wrapper = mount(DatePickerBody, {
+                props: { year: 2024, month: 4 },
+                slots: {
+                    cell: '<template #cell="{ dateStr }"><span class="custom-cell">{{ dateStr }}</span></template>'
+                }
+            });
+            expect(wrapper.find('.custom-cell').exists()).toBe(true);
+        });
+
+        it('cell 插槽默认应渲染日期数字', () => {
+            const wrapper = mount(DatePickerBody, {
+                props: { year: 2024, month: 4 }
+            });
+            expect(wrapper.find('.date-cell').text()).toBeTruthy();
+        });
+    });
+});
+
+describe('NueDatePickerPanel', () => {
+    describe('插槽渲染', () => {
+        it('应该渲染 footer 插槽替换默认清除按钮', () => {
+            const wrapper = mount(DatePickerPanel, {
+                global: {
+                    provide: {
+                        [NUE_DATE_PICKER_CTX_KEY]: { size: undefined, disabled: false }
+                    }
+                },
+                slots: { footer: '<span class="custom-footer">自定义操作</span>' }
+            });
+            expect(wrapper.find('.custom-footer').exists()).toBe(true);
         });
     });
 });

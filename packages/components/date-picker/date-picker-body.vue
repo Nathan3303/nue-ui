@@ -156,7 +156,9 @@ function handleDateClick(day: { date: Date; dateStr: string; isCurrentMonth: boo
                 }"
                 @click="handleDateClick(day)"
             >
-                {{ day.date.getDate() }}
+                <slot name="cell" :date="day.date" :dateStr="day.dateStr" :isCurrentMonth="day.isCurrentMonth">
+                    {{ day.date.getDate() }}
+                </slot>
             </div>
         </div>
     </div>

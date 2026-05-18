@@ -4,7 +4,9 @@
         :class="classes"
         @mousedown.stop="handleMouseDown"
         @dblclick.stop="handleResetOpElementWidth"
-    />
+    >
+        <slot />
+    </div>
 </template>
 
 <script lang="ts" setup>

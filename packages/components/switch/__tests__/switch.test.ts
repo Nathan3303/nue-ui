@@ -64,6 +64,15 @@ describe('NueSwitch', () => {
         });
     });
 
+    describe('插槽渲染', () => {
+        it('应该渲染 circle 插槽', () => {
+            const wrapper = mount(NueSwitch, {
+                slots: { circle: '<span class="circle-content">✓</span>' }
+            });
+            expect(wrapper.find('.circle-content').exists()).toBe(true);
+        });
+    });
+
     describe('状态文本', () => {
         it('应该渲染激活状态文本', () => {
             const wrapper = mount(NueSwitch, {

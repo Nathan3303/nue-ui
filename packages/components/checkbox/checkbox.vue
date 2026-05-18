@@ -1,9 +1,11 @@
 <template>
     <div :class="classes" @click="handleClick">
+        <slot name="prefix" />
         <nue-icon :name="iconName" :spin="loading" class="nue-checkbox__icon" />
         <div v-if="label || $slots.default" class="nue-checkbox__label">
             <slot>{{ label }}</slot>
         </div>
+        <slot name="suffix" />
     </div>
 </template>
 

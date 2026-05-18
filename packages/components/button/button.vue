@@ -7,6 +7,16 @@
         :type="type"
         @click="handleClick"
     >
+        <nue-div
+            v-if="$slots.prepend"
+            class="nue-button__prepend"
+            flex="1"
+            align="center"
+            justify="start"
+            gap="var(--nue-gap-sm)"
+        >
+            <slot name="prepend" />
+        </nue-div>
         <nue-icon
             v-if="iconName"
             :name="iconName"

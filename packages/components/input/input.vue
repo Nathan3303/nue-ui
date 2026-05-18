@@ -1,5 +1,6 @@
 <template>
     <div :class="classes" :style="style">
+        <slot name="prefix" />
         <nue-icon v-if="icon" :name="icon" :hinting="false" class="nue-input__icon" />
         <input
             :id="id"
@@ -36,6 +37,7 @@
             name="clear"
             @click.stop="handleClear"
         />
+        <slot name="suffix" />
     </div>
 </template>
 
