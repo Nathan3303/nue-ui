@@ -68,15 +68,68 @@
                     设置不存在的日期
                 </nue-button>
                 <nue-button size="small" @click="invalidDate = '2024-04-20'">
-                    设置有效日期
+                    设置有效日期F
                 </nue-button>
             </nue-div>
         </nue-div>
     </demo>
+    <demo title="插槽">
+        <nue-date-picker size="small" v-model="slots" type="datetime" clearable>
+            <template #cell="{ date }">
+                <nue-div vertical gap="0" align="center">
+                    <span>{{ date.getDate() }}</span>
+                    <span style="font-size: 10px">
+                        {{ date.getDate() === new Date().getDate() ? '今天' : '' }}
+                    </span>
+                </nue-div>
+            </template>
+            <template #footer>
+                <nue-div vertical gap="0" align="stretch" width="100%">
+                    <nue-div
+                        justify="space-between"
+                        align="center"
+                        style="height: var(--nue-box-size-sm); padding: 0 var(--nue-padding-sm)"
+                    >
+                        <nue-text size="var(--nue-text-xs)">提醒</nue-text>
+                        <nue-switch size="small" style="--nue-switch-height: 1rem" />
+                    </nue-div>
+                    <nue-div
+                        justify="space-between"
+                        align="center"
+                        style="height: var(--nue-box-size-sm); padding: 0 var(--nue-padding-sm)"
+                    >
+                        <nue-text size="var(--nue-text-xs)">提醒时间</nue-text>
+                        <nue-text size="var(--nue-text-xs)">xx : xx</nue-text>
+                    </nue-div>
+                    <nue-dropdown style="width: 100%" size="small" placement="right-start">
+                        <template #trigger="{ trigger }">
+                            <nue-dropdown-item @click="trigger" size="small" use-suffix-icon>
+                                提醒周期
+                            </nue-dropdown-item>
+                        </template>
+                        <nue-dropdown-item execute-id="reminder-repeat-day" size="small">
+                            每天
+                        </nue-dropdown-item>
+                        <nue-dropdown-item execute-id="reminder-repeat-week" size="small">
+                            每周
+                        </nue-dropdown-item>
+                    </nue-dropdown>
+                </nue-div>
+            </template>
+        </nue-date-picker>
+    </demo>
 </template>
 
 <script lang="ts" setup>
-import { NueDatePicker, NueButton, NueDiv, NueText } from '@nue-ui/components';
+import {
+    NueDatePicker,
+    NueButton,
+    NueDiv,
+    NueText,
+    NueDropdown,
+    NueDropdownItem,
+    NueSwitch
+} from '@nue-ui/components';
 import Demo from '@/components/demo.vue';
 import { ref } from 'vue';
 import { NueMessage } from 'nue-ui';
@@ -89,4 +142,5 @@ const lifecycle = ref('2026-03-05');
 const isoDate = ref('2024-04-20T14:30:00Z');
 const isoDatetime = ref('2024-04-20T14:30:45.123+08:00');
 const invalidDate = ref('invalid-date');
+const slots = ref('');
 </script>

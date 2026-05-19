@@ -48,6 +48,7 @@
     width: var(--nue-input-width);
     height: var(--nue-input-height);
     padding: 0 var(--nue-input-vgap);
+    flex: 0 0 auto;
 
     &:hover {
         border-color: var(--nue-input-hover-border-color);
@@ -78,11 +79,12 @@
 
     > .nue-input__input {
         height: auto;
+        min-width: 2rem;
         outline: none;
         border: none;
         padding: 0;
         background-color: transparent;
-        flex: auto;
+        flex: 1 1 auto;
         color: var(--nue-input-color);
         font-family: inherit;
         font-size: inherit;
@@ -106,10 +108,21 @@
     > .nue-input__icon-button {
         transition: all var(--nue-animation-duration-short) ease-in;
         cursor: pointer;
-        --nue-icon-color: var(--nue-input-opbtn-color);
+        color: var(--nue-input-opbtn-color);
 
         &:hover {
-            --nue-icon-color: var(--nue-input-opbtn-hover-color);
+            color: var(--nue-input-opbtn-hover-color);
+        }
+    }
+
+    > .nue-input__suffix {
+        display: flex;
+        gap: var(--nue-gap-sm);
+        flex-shrink: 0;
+        color: var(--nue-input-opbtn-color);
+
+        &:hover {
+            color: var(--nue-input-opbtn-hover-color);
         }
     }
 }

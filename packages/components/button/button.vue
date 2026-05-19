@@ -7,6 +7,13 @@
         :type="type"
         @click="handleClick"
     >
+        <nue-icon
+            v-if="iconName"
+            :name="iconName"
+            :spin="loading"
+            :hinting="false"
+            class="nue-button__icon"
+        />
         <nue-div
             v-if="$slots.prepend"
             class="nue-button__prepend"
@@ -17,13 +24,6 @@
         >
             <slot name="prepend" />
         </nue-div>
-        <nue-icon
-            v-if="iconName"
-            :name="iconName"
-            :spin="loading"
-            :hinting="false"
-            class="nue-button__icon"
-        />
         <nue-text v-if="$slots.default" class="nue-button__text" :clamped="1">
             <slot />
         </nue-text>

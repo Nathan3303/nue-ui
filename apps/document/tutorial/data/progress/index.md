@@ -52,7 +52,7 @@ demo-preview=./show-inner-text.vue
 demo-preview=./hide-text.vue
 :::
 
-## 自定义文本
+## 自定义文本 <Badge text="1.8.53 以上版本" type="warning" />
 
 通过默认插槽可以自定义进度条旁边显示的文本，替换默认的百分比文字。
 

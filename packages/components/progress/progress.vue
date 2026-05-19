@@ -28,9 +28,11 @@
             </svg>
         </template>
         <div v-if="!showInnerText && !hideText" class="nue-progress__text">
-            <slot
-                ><nue-text>{{ formatter(percentage) }}</nue-text></slot
-            >
+            <slot>
+                <nue-text>
+                    {{ formatter(percentage) }}
+                </nue-text>
+            </slot>
         </div>
     </div>
 </template>

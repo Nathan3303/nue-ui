@@ -1,7 +1,7 @@
 <template>
     <div :class="classes" :style="style">
-        <slot name="prefix" />
         <nue-icon v-if="icon" :name="icon" :hinting="false" class="nue-input__icon" />
+        <slot name="prefix" />
         <input
             :id="id"
             ref="inputRef"
@@ -19,6 +19,7 @@
             @compositionstart="handleCompositionStart"
             @input="handleInput($event)"
         />
+        <slot name="suffix" />
         <word-counter
             v-if="type !== 'number' && counter !== 'off'"
             :length="textLength"
@@ -37,7 +38,6 @@
             name="clear"
             @click.stop="handleClear"
         />
-        <slot name="suffix" />
     </div>
 </template>
 
@@ -83,12 +83,12 @@ const style = computed(() => {
 
 const passwordVisible = computed(() => {
     const { type, allowShowPassword, modelValue } = props;
-    return type === 'password' && allowShowPassword && modelValue !== '';
+    return type === 'password' && allowShowPassword && !modelValue;
 });
 
 const clearButtonVisible = computed(() => {
     const { disabled, readonly, clearable, modelValue } = props;
-    return !disabled && !readonly && clearable && modelValue !== '';
+    return !disabled && !readonly && clearable && !modelValue;
 });
 
 const debounceUpdater = debounce(() => {

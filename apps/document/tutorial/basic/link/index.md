@@ -65,7 +65,7 @@ demo-preview=./route.vue
 
 可以通过自定义主题移除下划线，实现更简洁的视觉效果。
 
-## 扩展插槽
+## 扩展插槽 <Badge text="1.8.53 以上版本" type="warning" />
 
 通过插槽 `#prepend` 和 `#append` 分别可以在链接文字的前方和后方插入自定义元素。
 

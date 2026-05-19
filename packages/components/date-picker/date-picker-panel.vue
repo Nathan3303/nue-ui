@@ -208,7 +208,16 @@ const showTimePicker = computed(() => {
                     :month="currentMonth"
                     :selected-date="selectedDate?.split(' ')[0] || null"
                     @select="handleDateSelect"
-                />
+                >
+                    <template #cell="{ date, dateStr, isCurrentMonth }">
+                        <slot
+                            name="cell"
+                            :date="date"
+                            :dateStr="dateStr"
+                            :isCurrentMonth="isCurrentMonth"
+                        ></slot>
+                    </template>
+                </DatePickerBody>
                 <!-- 年份选择视图 -->
                 <DatePickerYear
                     v-if="currentView === 'year'"
@@ -238,7 +247,7 @@ const showTimePicker = computed(() => {
         <nue-divider />
         <!-- 底部 -->
         <div class="nue-date-picker-panel__footer">
-            <slot name="footer">
+            <slot name="footer" :clear="handleClear">
                 <nue-button
                     :size="size"
                     :disabled="!canClear"

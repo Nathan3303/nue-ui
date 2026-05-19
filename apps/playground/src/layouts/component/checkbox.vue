@@ -57,6 +57,7 @@
             </nue-div>
         </nue-checkbox-group>
     </demo>
+    <demo title="插槽"> </demo>
 </template>
 
 <script lang="ts" setup>

@@ -78,9 +78,9 @@ demo-preview=./clearable-show.vue
 demo-preview=./max-count.vue
 :::
 
-## 扩展插槽
+## 扩展插槽 <Badge text="1.8.53 以上版本" type="warning" />
 
-通过插槽 `#prefix` 和 `#suffix` 分别可以在输入框组件包装器的开头和末尾插入自定义元素。
+通过插槽 `#prefix` 和 `#suffix` 分别可以在输入元素的两边插入自定义元素。
 
 ::: preview
 demo-preview=./slots.vue

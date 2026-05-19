@@ -5,6 +5,7 @@ export type NueSwitchSize = 'small' | 'normal' | 'large';
 export interface NueSwitchProps extends GlobalProps {
     // properties
     modelValue?: boolean;
+    icon?: string;
     size?: NueSwitchSize;
     disabled?: boolean;
     loading?: boolean;

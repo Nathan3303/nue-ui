@@ -1,10 +1,9 @@
-收集工作区变更、编写提交消息并提交。
+编写提交消息并提交 (Git)。
 
 ## 流程
 
 根据规范生成符合格式的提交消息，并完成文件的 `git commit`。注意：
 
-- 接受变更（`git add`）
 - 检查当前暂存的文件变更（`git diff --cached` 和 `git diff --cached --stat`）
 - 并查看最近的提交历史（`git log --oneline -10`）以了解提交风格
 - 按规范中的格式选择正确的 type 前缀（feat|fix|chore|change）

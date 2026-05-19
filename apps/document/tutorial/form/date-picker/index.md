@@ -26,7 +26,7 @@ demo-preview=./datetime.vue
 不管是什么输入格式，通过组件面板更新后都会转换为 ISO 8601 格式（`YYYY-MM-DDTHH:mm:ss.sssZ`）输出。当 `type="date"` 时，时间部分固定为 00:00:00。（可能因时区不同导致 “时” 部分有不同显示，本质为 00:00:00）
 :::
 
-## 禁用状态
+### 禁用状态
 
 通过属性 `disabled` 设置禁用状态。
 
@@ -34,7 +34,7 @@ demo-preview=./datetime.vue
 demo-preview=./disabled.vue
 :::
 
-## 清除功能
+### 清除功能
 
 通过属性 `clearable` 设置是否显示清除按钮。
 
@@ -42,20 +42,23 @@ demo-preview=./disabled.vue
 demo-preview=./clearable.vue
 :::
 
-## 自定义日期单元格
-
-通过 `DatePickerBody` 组件的 `#cell` 作用域插槽可以自定义单个日期单元格的内容。插槽传递出 `date`（日期对象）、`dateStr`（日期字符串）和 `isCurrentMonth`（是否为当前月）三个属性。
-
-## 自定义底部操作
-
-通过 `DatePickerPanel` 组件的 `#footer` 插槽可以替换日期选择面板底部的默认清除按钮。
-
-## 生命周期 <Badge type="warning" text="1.8.28 +" />
+## 生命周期 <Badge text="1.8.28 以上版本" type="warning" />
 
 通过事件 `close` 可以在日期选择器关闭时触发回调。
 
 ::: preview
 demo-preview=./lifecycle.vue
+:::
+
+## 插槽 <Badge text="1.8.53 以上版本" type="warning" />
+
+`<NueDatePicker>` 组件目前支持如下两个插槽：
+
+- `#cell` 插槽，用于自定义日期单元格的内容。插槽传递出 `date`（日期对象）、`dateStr`（日期字符串）和 `isCurrentMonth`（是否为当前月）三个属性。
+- `#footer` 插槽，用于自定义日期选择面板底部的操作按钮。插槽传递出清除函数 `clear`。
+
+::: preview
+demo-preview=./slots.vue
 :::
 
 ## 注意事项

@@ -49,9 +49,9 @@ demo-preview=./size.vue
 demo-preview=./indeterminate.vue
 :::
 
-## 扩展插槽
+## 扩展插槽 <Badge text="1.8.53 以上版本" type="warning" />
 
-通过插槽 `#prefix` 和 `#suffix` 分别可以在复选框图标前方和标签文字后方插入自定义元素。
+通过插槽 `#prefix` 和 `#suffix` 分别可以在复选框图标前方和后方插入自定义元素。
 
 ::: preview
 demo-preview=./slots.vue

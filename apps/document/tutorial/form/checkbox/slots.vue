@@ -7,7 +7,7 @@
         </nue-checkbox>
         <nue-checkbox label="后缀">
             <template #suffix>
-                <nue-icon name="info" />
+                <nue-icon name="theme" />
             </template>
         </nue-checkbox>
     </nue-div>

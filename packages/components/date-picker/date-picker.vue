@@ -27,7 +27,19 @@
             :type="type"
             @update:model-value="handleDateSelect"
             @change="handleChange"
-        />
+        >
+            <template #cell="{ date, dateStr, isCurrentMonth }">
+                <slot
+                    name="cell"
+                    :date="date"
+                    :dateStr="dateStr"
+                    :isCurrentMonth="isCurrentMonth"
+                ></slot>
+            </template>
+            <template #footer="{ clear }">
+                <slot name="footer" :clear="clear"></slot>
+            </template>
+        </date-picker-panel>
     </nue-dropdown>
 </template>
 

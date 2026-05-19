@@ -1,6 +1,6 @@
 {
     "name": "@nue-ui/repo",
-    "version": "0.2.4",
+    "version": "0.3.4",
     "description": "NueUI repo",
     "author": "Nathan Lee",
     "license": "MIT",
@@ -53,6 +53,7 @@
         "@vitest/coverage-v8": "^4.1.1",
         "@vue/test-utils": "^2.4.6",
         "@vue/tsconfig": "^0.5.1",
+        "baseline-browser-mapping": "^2.10.30",
         "cross-env": "^7.0.3",
         "eslint": "^9.29.0",
         "eslint-config-prettier": "^9.1.0",

@@ -80,13 +80,9 @@ demo-preview=./throttle.vue
 节流功能适用于高频点击场景，如提交表单、点赞等操作，可以有效防止用户重复提交。
 :::
 
-## 后置扩展插槽
+## 扩展插槽 <Badge text="1.8.53 以上版本" type="warning" />
 
-通过插槽 `#append` 可以在按钮文字的后方插入自定义的元素。
-
-::: preview
-demo-preview=./append.vue
-:::
+`<NueButton>` 组件支持前置和后置扩展插槽。
 
 ### 前置扩展插槽
 
@@ -94,6 +90,14 @@ demo-preview=./append.vue
 
 ::: preview
 demo-preview=./prepend.vue
+:::
+
+### 后置扩展插槽
+
+通过插槽 `#append` 可以在按钮文字的后方插入自定义的元素。
+
+::: preview
+demo-preview=./append.vue
 :::
 
 ## 按钮组及统一属性控制

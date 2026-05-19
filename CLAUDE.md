@@ -86,7 +86,7 @@ Every component follows the same pattern. Example (`button/`):
 
 Husky runs `lint-staged` + `prettier --write .` + `pnpm test:run` on commit.
 
-## 功能规划与开发日志
+## Feature Planning & Development Logs
 
 ### Feature Planning
 

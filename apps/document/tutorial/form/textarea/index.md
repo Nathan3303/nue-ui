@@ -39,6 +39,16 @@ demo-preview=./size.vue
 demo-preview=./rows.vue
 :::
 
+### 防抖
+
+组件内部在输入时会对输入内容进行防抖处理，防止短时间内大量输入导致可能出现的性能问题。
+
+通过 `debounceTime` 属性设置防抖时间，单位为 `ms`，接收 `number` 类型，默认值为 `0`。
+
+::: preview
+demo-preview=./debounce.vue
+:::
+
 ## 字数限制与计数
 
 通过属性 `maxlength` 设置最大字符限制。属性值类型同 `HTMLElement.maxlength` 属性类型，属于属性映射。
@@ -58,27 +68,10 @@ demo-preview=./rows.vue
 demo-preview=./max-count.vue
 :::
 
-## 防抖
-
-组件内部在输入时会对输入内容进行防抖处理，防止短时间内大量输入导致可能出现的性能问题。
-
-通过 `debounceTime` 属性设置防抖时间，单位为 `ms`，接收 `number` 类型，默认值为 `0`。
-
-::: preview
-demo-preview=./debounce.vue
-:::
-
-## 扩展插槽
-
-通过插槽 `#prefix` 和 `#suffix` 分别可以在文本域组件包装器的开头和末尾插入自定义元素。
-
-::: preview
-demo-preview=./slots.vue
-:::
-
 ## 自动高度
 
-通过属性 `autosize` 设置是否启用自适应内容高度，开启后文本框的高度会随着内容的增加而变高，即文本框会完全显示所输入的内容而非使用滚动条。
+通过属性 `autosize`
+设置是否启用自适应内容高度，开启后文本框的高度会随着内容的增加而变高，即文本框会完全显示所输入的内容而非使用滚动条。
 
 ::: preview
 demo-preview=./autosize.vue
@@ -99,6 +92,21 @@ demo-preview=./rows-autosize.vue
 
 ::: preview
 demo-preview=./resize.vue
+:::
+
+## 扩展插槽 <Badge text="1.8.53 以上版本" type="warning" />
+
+`<NueTextarea>` 组件支持如下扩展插槽：
+
+- `#prefix` 插槽：在文本域组件包装器的开头插入自定义元素。
+- `#actions` 插槽：在文本域组件包装器的末的动作栏中插入自定义元素。
+- `#suffix` 插槽：在文本域组件包装器的末尾插入自定义元素。
+
+三个插槽同时暴露出 `length` 和 `maxlength` 属性，用于获取当前输入内容的字数和最大字数限制；以及 `clear`
+方法，用于清空输入内容。
+
+::: preview
+demo-preview=./slots.vue
 :::
 
 ## 注意事项
