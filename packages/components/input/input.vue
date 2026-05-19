@@ -83,12 +83,12 @@ const style = computed(() => {
 
 const passwordVisible = computed(() => {
     const { type, allowShowPassword, modelValue } = props;
-    return type === 'password' && allowShowPassword && !modelValue;
+    return type === 'password' && allowShowPassword && modelValue !== '';
 });
 
 const clearButtonVisible = computed(() => {
     const { disabled, readonly, clearable, modelValue } = props;
-    return !disabled && !readonly && clearable && !modelValue;
+    return !disabled && !readonly && clearable && modelValue !== '';
 });
 
 const debounceUpdater = debounce(() => {
