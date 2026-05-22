@@ -8,7 +8,12 @@ import type {
     Rect
 } from './types';
 
-const usePopper = (wrapperRef: HTMLElementRef, popperRef: HTMLElementRef, gap: number = 8) => {
+const usePopper = (
+    wrapperRef: HTMLElementRef,
+    popperRef: HTMLElementRef,
+    gap: number = 8,
+    overflowPadding: number = 8
+) => {
     // @state wrapperRect & popperRect
     let wrapperRect: Rect = null;
     let popperRect: Rect = null;
@@ -25,11 +30,6 @@ const usePopper = (wrapperRef: HTMLElementRef, popperRef: HTMLElementRef, gap: n
         return popperRef.value.getBoundingClientRect();
     };
 
-    // @method 获取视口宽高信息
-    const getViewportRect = (): Rect => {
-        return document.body.getBoundingClientRect();
-    };
-
     // @method 检查 popper 位置渲染后是否会超出视口
     const checkPopperPosition = (
         direction: PopperDirection,
@@ -40,39 +40,58 @@ const usePopper = (wrapperRef: HTMLElementRef, popperRef: HTMLElementRef, gap: n
             isOverflow: false,
             newPlacement: { direction, alignment }
         };
-        // 获取 viewportRect
-        const viewportRect = getViewportRect();
         // 判断是否获取了正常的宽高和位置信息
-        if (!viewportRect || !wrapperRect || !popperRect) return result;
+        if (!wrapperRect || !popperRect) return result;
+        // 获取视口宽高和有效边界
+        const viewportW = window.innerWidth;
+        const viewportH = window.innerHeight;
+        const vpLeft = overflowPadding;
+        const vpRight = viewportW - overflowPadding;
+        const vpTop = overflowPadding;
+        const vpBottom = viewportH - overflowPadding;
         // 判断是否超出
         switch (direction) {
             case 'top':
             case 'bottom':
                 {
-                    if (
-                        wrapperRect.y + wrapperRect.height + gap + popperRect.height >
-                        viewportRect.height
-                    ) {
-                        result.newPlacement.direction = 'top';
-                    } else if (wrapperRect.y - gap - popperRect.height < 0)
-                        result.newPlacement.direction = 'bottom';
+                    // 方向翻转：检查当前方向是否超出，超出则尝试翻转
+                    if (direction === 'bottom') {
+                        if (
+                            wrapperRect.y + wrapperRect.height + gap + popperRect.height >
+                            vpBottom
+                        ) {
+                            if (wrapperRect.y - gap - popperRect.height >= vpTop) {
+                                result.newPlacement.direction = 'top';
+                            }
+                        }
+                    } else {
+                        if (wrapperRect.y - gap - popperRect.height < vpTop) {
+                            if (
+                                wrapperRect.y + wrapperRect.height + gap + popperRect.height <=
+                                vpBottom
+                            ) {
+                                result.newPlacement.direction = 'bottom';
+                            }
+                        }
+                    }
+                    // 对齐检查
                     if (
                         result.newPlacement.alignment === 'end' &&
-                        wrapperRect.x + wrapperRect.width - popperRect.width < 0
+                        wrapperRect.x + wrapperRect.width - popperRect.width < vpLeft
                     )
                         result.newPlacement.alignment = 'center';
                     else if (
                         result.newPlacement.alignment === 'start' &&
-                        wrapperRect.x + popperRect.width > viewportRect.width
+                        wrapperRect.x + popperRect.width > vpRight
                     )
                         result.newPlacement.alignment = 'center';
                     if (result.newPlacement.alignment === 'center') {
-                        if (
-                            wrapperRect.x + wrapperRect.width / 2 + popperRect.width / 2 >
-                            viewportRect.width
-                        )
+                        if (wrapperRect.x + wrapperRect.width / 2 + popperRect.width / 2 > vpRight)
                             result.newPlacement.alignment = 'end';
-                        else if (wrapperRect.x + wrapperRect.width / 2 - popperRect.width / 2 < 0)
+                        else if (
+                            wrapperRect.x + wrapperRect.width / 2 - popperRect.width / 2 <
+                            vpLeft
+                        )
                             result.newPlacement.alignment = 'start';
                     }
                 }
@@ -80,30 +99,44 @@ const usePopper = (wrapperRef: HTMLElementRef, popperRef: HTMLElementRef, gap: n
             case 'left':
             case 'right':
                 {
-                    if (
-                        wrapperRect.x + wrapperRect.width + gap + popperRect.width >
-                        viewportRect.width
-                    )
-                        result.newPlacement.direction = 'left';
-                    else if (wrapperRect.x - gap - popperRect.width < 0)
-                        result.newPlacement.direction = 'right';
+                    // 方向翻转：检查当前方向是否超出，超出则尝试翻转
+                    if (direction === 'right') {
+                        if (wrapperRect.x + wrapperRect.width + gap + popperRect.width > vpRight) {
+                            if (wrapperRect.x - gap - popperRect.width >= vpLeft) {
+                                result.newPlacement.direction = 'left';
+                            }
+                        }
+                    } else {
+                        if (wrapperRect.x - gap - popperRect.width < vpLeft) {
+                            if (
+                                wrapperRect.x + wrapperRect.width + gap + popperRect.width <=
+                                vpRight
+                            ) {
+                                result.newPlacement.direction = 'right';
+                            }
+                        }
+                    }
+                    // 对齐检查
                     if (
                         result.newPlacement.alignment === 'end' &&
-                        wrapperRect.y + wrapperRect.height - popperRect.width < 0
+                        wrapperRect.y + wrapperRect.height - popperRect.height < vpTop
                     )
                         result.newPlacement.alignment = 'center';
                     else if (
                         result.newPlacement.alignment === 'start' &&
-                        wrapperRect.y + popperRect.width > viewportRect.height
+                        wrapperRect.y + popperRect.height > vpBottom
                     )
                         result.newPlacement.alignment = 'center';
                     if (result.newPlacement.alignment === 'center') {
                         if (
-                            wrapperRect.y + wrapperRect.height / 2 + popperRect.width / 2 >
-                            viewportRect.height
+                            wrapperRect.y + wrapperRect.height / 2 + popperRect.height / 2 >
+                            vpBottom
                         )
                             result.newPlacement.alignment = 'end';
-                        else if (wrapperRect.y + wrapperRect.height / 2 - popperRect.width / 2 < 0)
+                        else if (
+                            wrapperRect.y + wrapperRect.height / 2 - popperRect.height / 2 <
+                            vpTop
+                        )
                             result.newPlacement.alignment = 'start';
                     }
                 }
@@ -131,13 +164,11 @@ const usePopper = (wrapperRef: HTMLElementRef, popperRef: HTMLElementRef, gap: n
         // 获取 wrapperRect
         wrapperRect = getWrapperRect();
         if (!wrapperRect) {
-            // console.warn('[UsePopperV2] Cannot get wrapper rect info. Wrapper:', wrapperRef);
             return popperPosition;
         }
         // 获取 popperRect
         popperRect = getPopperRect();
         if (!popperRect) {
-            // console.warn('[UsePopperV2] Cannot get popper rect info. Popper:', popperRef);
             return popperPosition;
         }
         // 计算 popper 位置
@@ -169,7 +200,6 @@ const usePopper = (wrapperRef: HTMLElementRef, popperRef: HTMLElementRef, gap: n
         const { isOverflow, newPlacement } = checkPopperPosition(direction, alignment);
         // 如果超出视口，则使用新的 placement 和 alignment 重新计算位置
         if (isOverflow) {
-            // console.log('[UsePopperV2] Popper position is overflow. Popper:', popperRef);
             const { x, y } = calculatePopperPosition(
                 newPlacement.direction,
                 newPlacement.alignment
