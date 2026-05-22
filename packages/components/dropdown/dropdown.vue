@@ -71,7 +71,10 @@ const emit = defineEmits<NueDropdownEmits>();
 const wrapperRef = ref<HTMLElement>();
 const popperRef = ref<HTMLElement>();
 const { popupAnchorId, tpState, mountPopupAnchor, unmountPopupAnchor } = usePopupAnchor();
-const { calculatePopperPosition } = usePopperV2(wrapperRef, popperRef);
+const { calculatePopperPosition, startResizeObserver, stopResizeObserver } = usePopperV2(
+    wrapperRef,
+    popperRef
+);
 const visible = ref(false);
 const realDirection = ref('bottom');
 const popperPosition = reactive<PopperPosition>({ x: 0, y: 0 });
@@ -174,6 +177,7 @@ const handleDropdownOpen = () => {
         window.addEventListener('scroll', handleCalculatePopperPosition, true);
         // window.addEventListener('resize', handleCalculatePopperPosition, true);
         window.addEventListener('click', handleDropdownClose, false);
+        startResizeObserver(handleCalculatePopperPosition);
     });
 };
 
@@ -187,6 +191,7 @@ const handleDropdownClose = () => {
     window.removeEventListener('scroll', handleCalculatePopperPosition, true);
     // window.removeEventListener('resize', handleCalculatePopperPosition, true);
     window.removeEventListener('click', handleDropdownClose, false);
+    stopResizeObserver();
 };
 
 // @methods 打开和关闭下拉菜单的防抖版本 - 360ms 防抖
