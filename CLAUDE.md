@@ -1,99 +1,70 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
 
-## Repository Overview
+**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
-NueUI is a Vue 3 UI component library (~30+ components) organized as a pnpm monorepo. Published package: `nue-ui`.
+## 1. Think Before Coding
 
-## Commands
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
 
-```bash
-# Testing
-pnpm test              # Vitest in watch mode
-pnpm test:run          # Single run
-pnpm test:coverage     # With coverage report
+Before implementing:
 
-# Code quality
-pnpm lint              # ESLint (flat config: eslint.config.mjs)
-pnpm format            # Prettier
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
 
-# Build
-pnpm build             # Build all: core + shadlike theme + iconfont
-pnpm core build        # Build just the component library (ES + UMD)
+## 2. Simplicity First
 
-# Dev servers
-pnpm document dev      # VitePress docs site
-pnpm histoire dev      # Histoire component explorer
-pnpm playground dev    # Playground app
+**Minimum code that solves the problem. Nothing speculative.**
+
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
+
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+
+## 3. Surgical Changes
+
+**Touch only what you must. Clean up only your own mess.**
+
+When editing existing code:
+
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it - don't delete it.
+
+When your changes create orphans:
+
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
+
+The test: Every changed line should trace directly to the user's request.
+
+## 4. Goal-Driven Execution
+
+**Define success criteria. Loop until verified.**
+
+Transform tasks into verifiable goals:
+
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
+
+For multi-step tasks, state a brief plan:
+
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
 ```
 
-## Architecture
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
-### Monorepo Structure
+---
 
-```text
-apps/          - Dev tools (not published)
-  document/    - VitePress documentation site
-  histoire/     - Histoire-based component explorer
-  playground/  - Component sandbox
-packages/
-  components/  - Vue components (one directory each: *.vue, index.ts, types.ts, __tests__/)
-  core/        - Build assembly: aggregates all components into the publishable `nue-ui` package
-  hooks/       - Vue 3 composables (usePopper, useBoolState, useLoadingState, etc.)
-  plugins/     - Plugins (e.g., unplugin-vue-components resolver for auto-import)
-  themes/      - Theme packages (shadlike, iconfont)
-  utils/       - Shared utilities (install.ts, parsers.ts, utils.ts, types.ts)
-```
-
-### Component Pattern
-
-Every component follows the same pattern. Example (`button/`):
-
-- `button.vue` - SFC using `<script lang="ts" setup>`, named `NueButton` via `defineOptions({ name: 'NueButton' })`
-- `types.ts` - Props interface extends `GlobalProps` (from `@nue-ui/utils`), which provides `theme?: string | string[] | ObjectLikeThemes`
-- `index.ts` - Wraps component with `withInstall()` from `@nue-ui/utils`, re-exports types
-- `__tests__/` - Vitest tests using `@vue/test-utils`
-
-### Key Abstractions
-
-**`@nue-ui/utils`** — The shared foundation:
-
-- `withInstall(component)` — Makes a component installable as a Vue plugin (`app.component(name, comp)`)
-- `makeInstaller(components[])` — Creates the global installer used by `nue-ui`'s default export
-- `parseTheme(value, prefix)` — Normalizes theme prop (string/array/object) to CSS class array like `['nue-button--primary']`
-- `parseFlex()`, `parseFlexWrap()`, `parsePopupItemAnimation()` — Other CSS value parsers
-- `debounce()`, `throttle()`, `generateId()` — Generic utilities
-- `GlobalProps` — Base interface with `theme` prop, extended by all component props
-
-**`packages/core/`** — Build aggregation (not component source):
-
-- `components.ts` — Imports all components from `@nue-ui/components` into a flat `Plugin[]` array
-- `index.ts` — Calls `makeInstaller(components)`, re-exports everything from `@nue-ui/components` and `@nue-ui/utils`, adds dev/prod console banner
-- `vite.es.config.ts` / `vite.umd.config.ts` — Vite lib mode builds; ES build does manual chunk splitting per component
-
-**Compound components** — Parent-child communication via `provide/inject` (e.g., `ButtonGroup` provides `BUTTON_GROUP_CTX_KEY` with shared size/disabled; children inject it).
-
-### Testing
-
-- Framework: Vitest with jsdom, globals enabled
-- Setup: `test-setup.ts` mocks `ResizeObserver`, `matchMedia`, `IntersectionObserver`, `getComputedStyle`
-- Test utils: `test-utils.ts` provides `waitFor()`, `flushPromises()`, `getComponentWrapper()`
-- Tests co-located in each component's `__tests__/` directory
-- `vitest.config.ts` maps workspace aliases (`@nue-ui/components`, `@nue-ui/hooks`, `@nue-ui/utils`) to source directories
-
-### Pre-commit
-
-Husky runs `lint-staged` + `prettier --write .` + `pnpm test:run` on commit.
-
-## Feature Planning & Development Logs
-
-### Feature Planning
-
-- Before developing new features, create a plan. Planning documents should be placed in the docs/plans directory. If the directory doesn't exist, create it and add a new .md file.
-- When planning new features, ensure all work revolves around the MVP approach - only the core features needed are developed, and everything else is not considered.
-
-### Development Logs
-
-- When executing plans, work is typically done in phases. Development logs for each phase should be saved in docs/devlogs/`<plan-name>/`/`<phase-x.md>` files.
-- Log content should briefly record: what was implemented, how it was implemented, and which files were affected.
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
