@@ -1,9 +1,11 @@
 <template>
     <div :class="classes" @click="handleClick">
+        <slot name="prefix" />
         <nue-icon :name="iconName" :spin="loading" class="nue-checkbox__icon" />
         <div v-if="label || $slots.default" class="nue-checkbox__label">
             <slot>{{ label }}</slot>
         </div>
+        <slot name="suffix" />
     </div>
 </template>
 
@@ -11,7 +13,7 @@
 import { computed, inject, onBeforeUnmount, onMounted } from 'vue';
 import { isFunction } from 'lodash-es';
 import { generateId, parseTheme } from '@nue-ui/utils';
-import NueIcon from '../icon/icon.vue';
+import { NueIcon } from '../icon';
 import { CHECKBOX_GROUP_CTX_KEY } from '../checkbox-group/constants';
 import type { NueCheckboxEmits, NueCheckboxProps } from './types';
 import type { NueCheckboxGroupContext } from '../checkbox-group/types';

@@ -50,6 +50,17 @@ demo-preview=./disabled.vue
 demo-preview=./loading.vue
 :::
 
+## 扩展插槽 <Badge text="1.8.53 以上版本" type="warning" />
+
+`<NueSwitch>` 组件支持如下扩展插槽：
+
+- `#circle`：在开关的圆形滑块内插入自定义内容。
+- `#text`：在开关的描述文字位置插入自定义内容。
+
+::: preview
+demo-preview=./slots.vue
+:::
+
 ## 注意事项
 
 1. **双向绑定**：使用 `v-model` 绑定布尔值，实现双向数据同步。

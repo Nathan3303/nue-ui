@@ -51,13 +51,21 @@
             >
         </nue-div>
     </demo>
-    <demo title="后置插槽">
-        <nue-button>
-            后置插槽
-            <template #append>
-                <nue-icon name="arrow-right-more" />
-            </template>
-        </nue-button>
+    <demo title="插槽">
+        <nue-div>
+            <nue-button>
+                前置插槽
+                <template #prepend>
+                    <nue-icon name="arrow-left-more" />
+                </template>
+            </nue-button>
+            <nue-button>
+                后置插槽
+                <template #append>
+                    <nue-icon name="arrow-right-more" />
+                </template>
+            </nue-button>
+        </nue-div>
     </demo>
     <demo title="ButtonGroup 按钮组">
         <nue-div wrap="wrap">

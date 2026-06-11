@@ -1,15 +1,17 @@
 <template>
     <div ref="switchRef" :class="classes" @click.stop="handleClick">
         <div class="nue-switch__circle">
-            <nue-icon
-                v-if="loading"
-                class="nue-switch__loading-icon"
-                :name="loadingIcon || 'loading'"
-                spin
-            />
+            <slot name="circle" :loading="loading">
+                <nue-icon
+                    v-if="iconName"
+                    class="nue-switch__loading-icon"
+                    :name="iconName"
+                    :spin="loading"
+                />
+            </slot>
         </div>
-        <div v-if="showText" class="nue-switch__text">
-            <slot>{{ text }}</slot>
+        <div v-if="showText || $slots.text" class="nue-switch__text">
+            <slot name="text">{{ text }}</slot>
         </div>
     </div>
 </template>
@@ -26,6 +28,7 @@ const props = withDefaults(defineProps<NueSwitchProps>(), {
     disabled: false,
     showText: false,
     loading: false,
+    loadingIcon: 'loading',
     activeText: 'I',
     inactiveText: 'O'
 });
@@ -33,6 +36,11 @@ const emit = defineEmits<NueSwitchEmits>();
 
 const state = ref(false);
 const switchRef = ref<HTMLDivElement>();
+
+const iconName = computed(() => {
+    const { icon, loadingIcon, loading } = props;
+    return loading ? loadingIcon : icon;
+});
 
 const classes = computed(() => {
     const prefix = 'nue-switch';

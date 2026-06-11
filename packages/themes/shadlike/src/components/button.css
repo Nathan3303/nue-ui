@@ -2,7 +2,7 @@
     --nue-button-flex: none;
     --nue-button-alignment: start;
     --nue-button-base-color: var(--nue-primary-color-0);
-    --nue-button-font-size: var(--nue-text-df);
+    --nue-button-font-size: var(--nue-text-sm);
     --nue-button-lo: 5;
 
     --nue-button-color: var(--nue-primary-text-color);
@@ -46,33 +46,18 @@
     justify-content: var(--nue-button-alignment);
     border-radius: var(--nue-primary-radius);
     box-shadow: var(--nue-secondary-shadow);
+
     font-family: var(--nue-primary-font-family);
+    font-size: var(--nue-button-font-size);
 
     width: auto;
     height: var(--nue-box-size-df);
-    padding: 0 var(--nue-padding-df);
-    gap: var(--nue-gap-sm);
+    padding: 0 var(--nue-padding-sm);
+    gap: var(--nue-gap-xs);
 
     color: var(--nue-button-color);
     border: 1px solid var(--nue-button-border-color);
     background-color: var(--nue-button-bg-color);
-
-    > .nue-button__icon,
-    > .nue-button__text {
-        color: inherit;
-        font-size: var(--nue-button-font-size);
-        line-height: 1;
-    }
-
-    > .nue-button__append {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: end;
-        flex: auto;
-        gap: var(--nue-gap-sm);
-        overflow: hidden;
-    }
 
     &:hover {
         color: var(--nue-button-hover-color);
@@ -96,17 +81,17 @@
 }
 
 .nue-button.nue-button--small {
-    --nue-button-font-size: var(--nue-text-sm);
-    height: var(--nue-box-size-sm);
-    padding: 0 var(--nue-padding-sm);
-    gap: var(--nue-gap-xs);
+    --nue-button-font-size: var(--nue-text-xs);
+    height: var(--nue-box-size-xs);
+    padding: 0 var(--nue-padding-xs);
+    gap: var(--nue-gap-2xs);
 }
 
 .nue-button.nue-button--large {
-    --nue-button-font-size: var(--nue-text-md);
-    height: var(--nue-box-size-lg);
-    padding: 0 var(--nue-padding-lg);
-    gap: var(--nue-padding-df);
+    --nue-button-font-size: var(--nue-text-df);
+    height: var(--nue-box-size-md);
+    padding: 0 var(--nue-padding-df);
+    gap: var(--nue-padding-xs);
 }
 
 .nue-button.nue-button--primary {

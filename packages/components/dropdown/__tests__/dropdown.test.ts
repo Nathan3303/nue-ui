@@ -47,11 +47,33 @@ describe('NueDropdown', () => {
         it('应该渲染默认插槽', () => {
             const wrapper = mount(NueDropdown, {
                 slots: {
-                    default: '<div class="trigger">触发器</div>',
-                    content: '<div class="content">下拉内容</div>'
+                    trigger: '<div class="trigger">触发器</div>',
+                    default: '<div class="content">下拉内容</div>'
                 }
             });
-            expect(wrapper.find('.trigger').exists()).toBe(true);
+            expect(wrapper.find('.content').exists()).toBe(true);
+        });
+
+        it('应该渲染 header 插槽', () => {
+            const wrapper = mount(NueDropdown, {
+                slots: {
+                    trigger: '<div class="trigger">触发器</div>',
+                    default: '<div class="content">下拉内容</div>',
+                    header: '<div class="header-content">顶部</div>'
+                }
+            });
+            expect(wrapper.find('.header-content').exists()).toBe(true);
+        });
+
+        it('应该渲染 footer 插槽', () => {
+            const wrapper = mount(NueDropdown, {
+                slots: {
+                    trigger: '<div class="trigger">触发器</div>',
+                    default: '<div class="content">下拉内容</div>',
+                    footer: '<div class="footer-content">底部</div>'
+                }
+            });
+            expect(wrapper.find('.footer-content').exists()).toBe(true);
         });
     });
 });

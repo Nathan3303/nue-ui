@@ -20,9 +20,9 @@
 }
 
 .nue-tooltip {
-    --nue-tooltip-wrapper-gap: var(--nue-gap-df);
+    --nue-tooltip-wrapper-gap: var(--nue-gap-sm);
     --nue-tooltip-min-height: var(--nue-box-size-df);
-    --nue-tooltip-padding: var(--nue-padding-df);
+    --nue-tooltip-padding: var(--nue-padding-sm);
     --nue-tooltip-font-size: var(--nue-text-sm);
     --nue-tooltip-font-color: var(--nue-primary-color-100);
     --nue-tooltip-animation-duration: var(--nue-animation-duration-short);
@@ -54,7 +54,6 @@
     .nue-tooltip__text {
         color: var(--nue-tooltip-font-color);
         font-size: var(--nue-tooltip-font-size);
-        line-height: 1;
     }
 
     &.nue-tooltip--small {
@@ -71,115 +70,18 @@
 
     &[data-direction='top'] {
         animation-name: tooltip-showup-from-top;
-
-        .nue-tooltip__padding {
-            width: 100%;
-            height: 0.5rem;
-            top: 100%;
-        }
     }
 
     &[data-direction='bottom'] {
         animation-name: tooltip-showup-from-bottom;
-
-        .nue-tooltip__padding {
-            width: 100%;
-            height: 0.5rem;
-            bottom: 100%;
-        }
     }
 
     &[data-direction='left'] {
         animation-name: tooltip-showup-from-left;
-
-        .nue-tooltip__padding {
-            width: 0.5rem;
-            height: 100%;
-            left: 100%;
-        }
     }
 
     &[data-direction='right'] {
         animation-name: tooltip-showup-from-right;
-
-        .nue-tooltip__padding {
-            width: 0.5rem;
-            height: 100%;
-            right: 100%;
-        }
-    }
-
-    &::after {
-        content: '';
-        display: var(--nue-tooltip-triangle-display);
-        position: absolute;
-        aspect-ratio: 1;
-        width: 0.5rem;
-        height: 0.5rem;
-        background: inherit;
-        transform-origin: center;
-        transform: rotate(45deg);
-        border-radius: 1px;
-    }
-
-    &.nue-tooltip--top-start::after {
-        top: calc(100% - 0.25rem);
-        left: calc(1rem - 0.25rem);
-    }
-
-    &.nue-tooltip--top-center::after {
-        top: calc(100% - 0.25rem);
-        left: calc(50% - 0.25rem);
-    }
-
-    &.nue-tooltip--top-end::after {
-        top: calc(100% - 0.25rem);
-        right: calc(1rem - 0.25rem);
-    }
-
-    &.nue-tooltip--bottom-start::after {
-        top: calc(0px - 0.25rem);
-        left: calc(1rem - 0.25rem);
-    }
-
-    &.nue-tooltip--bottom-center::after {
-        top: calc(0px - 0.25rem);
-        left: calc(50% - 0.25rem);
-    }
-
-    &.nue-tooltip--bottom-end::after {
-        top: calc(0px - 0.25rem);
-        right: calc(1rem - 0.25rem);
-    }
-
-    &.nue-tooltip--left-start::after {
-        top: calc(1rem - 0.25rem);
-        right: calc(0px - 0.25rem);
-    }
-
-    &.nue-tooltip--left-center::after {
-        top: calc(50% - 0.25rem);
-        right: calc(0px - 0.25rem);
-    }
-
-    &.nue-tooltip--left-end::after {
-        bottom: calc(1rem - 0.25rem);
-        right: calc(0px - 0.25rem);
-    }
-
-    &.nue-tooltip--right-start::after {
-        top: calc(1rem - 0.25rem);
-        right: calc(100% + 0.25rem);
-    }
-
-    &.nue-tooltip--right-center::after {
-        top: calc(50% - 0.25rem);
-        right: calc(100% + 0.25rem);
-    }
-
-    &.nue-tooltip--right-end::after {
-        bottom: calc(1rem - 0.25rem);
-        right: calc(100% + 0.25rem);
     }
 }
 

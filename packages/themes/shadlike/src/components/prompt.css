@@ -8,11 +8,11 @@
     flex-direction: column;
     width: 32%;
     min-width: 24rem;
-    padding: 1rem;
+    padding: var(--nue-padding-df);
     box-sizing: border-box;
-    gap: 1rem;
+    gap: var(--nue-gap-df);
     background-color: var(--nue-primary-color-0);
-    border-radius: 6px;
+    border-radius: var(--nue-primary-radius);
     animation-timing-function: ease-in;
     animation-fill-mode: forwards;
 
@@ -20,24 +20,25 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: var(--nue-text-md);
+        font-size: var(--nue-text-df);
+        color: var(--nue-primary-color-900);
     }
 
     .nue-prompt__content {
         display: flex;
         flex-direction: column;
-        width: 100%;
         flex: auto;
         gap: var(--nue-gap-sm);
+        font-size: var(--nue-text-sm);
+        font-family: var(--nue-primary-font-family);
 
         .nue-prompt__description {
-            font-size: var(--nue-text-sm);
-            color: #757575;
+            font-size: var(--nue-text-xs);
+            color: var(--nue-primary-color-500);
         }
     }
 
     .nue-prompt__footer {
-        width: 100%;
         display: flex;
         align-items: center;
         justify-content: end;

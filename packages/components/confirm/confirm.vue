@@ -14,28 +14,34 @@
             @animationstart="handleAnimationStart"
             @animationend="handleAnimationEnd"
         >
-            <nue-text v-if="title" class="nue-confirm__header">
-                {{ title }}
-            </nue-text>
-            <nue-text v-if="content" class="nue-confirm__content">
-                {{ content }}
-            </nue-text>
+            <div class="nue-confirm__header">
+                <slot name="header">
+                    <nue-text v-if="title">{{ title }}</nue-text>
+                </slot>
+            </div>
+            <div class="nue-confirm__content">
+                <slot>
+                    <nue-text v-if="content">{{ content }}</nue-text>
+                </slot>
+            </div>
             <div class="nue-confirm__footer">
-                <nue-button
-                    v-if="!unuseCancelButton"
-                    :disabled="loading || !visible"
-                    @click="handleCancel"
-                >
-                    {{ cancelButtonText }}
-                </nue-button>
-                <nue-button
-                    :disabled="!visible"
-                    :loading="loading"
-                    theme="primary"
-                    @click="handleConfirm"
-                >
-                    {{ confirmButtonText }}
-                </nue-button>
+                <slot name="footer">
+                    <nue-button
+                        v-if="!unuseCancelButton"
+                        :disabled="loading || !visible"
+                        @click="handleCancel"
+                    >
+                        {{ cancelButtonText }}
+                    </nue-button>
+                    <nue-button
+                        :disabled="!visible"
+                        :loading="loading"
+                        theme="primary"
+                        @click="handleConfirm"
+                    >
+                        {{ confirmButtonText }}
+                    </nue-button>
+                </slot>
             </div>
         </div>
     </nue-overlay>

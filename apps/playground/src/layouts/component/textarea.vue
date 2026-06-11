@@ -55,12 +55,25 @@
             <nue-textarea v-model="t7" :rows="4" resize />
         </nue-div>
     </demo>
+    <demo title="自定义操作插槽">
+        <nue-textarea placeholder="请输入内容" v-model="t8">
+            <template #prefix="{ length, maxlength }">
+                <nue-text>前置插槽（{{ length }}/{{ maxlength }}）</nue-text>
+            </template>
+            <template #actions="{ clear }">
+                <nue-button theme="secondary,small" icon="clear" @click="clear">清除</nue-button>
+            </template>
+            <template #suffix="{ length, maxlength }">
+                <nue-text>后置插槽（{{ length }}/{{ maxlength }}）</nue-text>
+            </template>
+        </nue-textarea>
+    </demo>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import Demo from '@/components/demo.vue';
-import { NueDiv, NueTextarea, NueText } from '@nue-ui/components';
+import { NueDiv, NueTextarea, NueText, NueButton } from '@nue-ui/components';
 
 const t1 = ref('');
 const t2 = ref('');
@@ -69,6 +82,7 @@ const t4 = ref('');
 const t5 = ref('');
 const t6 = ref('');
 const t7 = ref('');
+const t8 = ref('lorem ipsum dolor sit amet, consectetur adipiscing elit.');
 </script>
 
 <style scoped></style>

@@ -17,7 +17,7 @@
     <demo title="内联">
         <nue-text>
             使用
-            <nue-link href="/infinite-scroll">InfiniteScroll</nue-link>
+            <nue-link icon="connection" href="/infinite-scroll">InfiniteScroll</nue-link>
             组件时需要绑定事件 load-more 的执行函数，事件会在滚动到加载阈值时触发。
             加载阈值表示当前滚动位置与列表底部的距离，可以通过属性 trigger-height 设置，默认为 150px
             。 通过 height 属性设置可视区域的高度，默认为 100% 。

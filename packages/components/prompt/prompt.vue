@@ -14,38 +14,44 @@
             @animationstart="handleAnimationStart"
             @animationend="handleAnimationEnd"
         >
-            <nue-text v-if="title" class="nue-prompt__header">
-                {{ title }}
-            </nue-text>
+            <div class="nue-prompt__header">
+                <slot name="header">
+                    <nue-text v-if="title">{{ title }}</nue-text>
+                </slot>
+            </div>
             <div class="nue-prompt__content">
-                <nue-text v-if="description" class="nue-prompt__description">
-                    {{ description }}
-                </nue-text>
-                <component
-                    :is="inputType === 'textarea' ? NueTextarea : NueInput"
-                    ref="promptInputRef"
-                    v-model="inputValue"
-                    :disabled="loading"
-                    :placeholder="placeholder"
-                    :type="inputType"
-                    @focus="() => (errorMessage = '')"
-                />
+                <slot>
+                    <nue-text v-if="description" class="nue-prompt__description">
+                        {{ description }}
+                    </nue-text>
+                    <component
+                        :is="inputType === 'textarea' ? NueTextarea : NueInput"
+                        ref="promptInputRef"
+                        v-model="inputValue"
+                        :disabled="loading"
+                        :placeholder="placeholder"
+                        :type="inputType"
+                        @focus="() => (errorMessage = '')"
+                    />
+                </slot>
             </div>
             <div class="nue-prompt__footer">
-                <nue-text v-if="errorMessage" class="nue-prompt__value-error">
-                    {{ errorMessage }}
-                </nue-text>
-                <nue-button :disabled="loading || !visible" @click.stop="handleCancel">
-                    {{ cancelButtonText }}
-                </nue-button>
-                <nue-button
-                    :disabled="!visible"
-                    :loading="loading"
-                    theme="primary"
-                    @click.stop="handleConfirm"
-                >
-                    {{ confirmButtonText }}
-                </nue-button>
+                <slot name="footer">
+                    <nue-text v-if="errorMessage" class="nue-prompt__value-error">
+                        {{ errorMessage }}
+                    </nue-text>
+                    <nue-button :disabled="loading || !visible" @click.stop="handleCancel">
+                        {{ cancelButtonText }}
+                    </nue-button>
+                    <nue-button
+                        :disabled="!visible"
+                        :loading="loading"
+                        theme="primary"
+                        @click.stop="handleConfirm"
+                    >
+                        {{ confirmButtonText }}
+                    </nue-button>
+                </slot>
             </div>
         </div>
     </nue-overlay>
@@ -54,7 +60,10 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import NueOverlay from '../overlay/overlay.vue';
-import { NueButton, NueInput, NueTextarea, NueText } from '@nue-ui/components';
+import { NueButton } from '../button';
+import { NueInput } from '../input';
+import { NueTextarea } from '../input';
+import { NueText } from '../text';
 import { parseTheme, parsePopupItemAnimation } from '@nue-ui/utils';
 import type { NuePromptProps } from './types';
 

@@ -44,8 +44,9 @@
     </demo>
     <demo title="大小">
         <nue-div align="center">
-            <nue-input v-model="i6" placeholder="size=small" size="small" />
-            <nue-input v-model="i6" placeholder="size=large" size="large" />
+            <nue-input v-model="i6" icon="more2" placeholder="size=small" size="small" />
+            <nue-input v-model="i6" icon="more2" placeholder="size=normal" />
+            <nue-input v-model="i6" icon="more2" placeholder="size=large" size="large" />
         </nue-div>
     </demo>
     <demo title="主题">
@@ -53,6 +54,16 @@
             <nue-input v-model="i7" theme="pure" />
             <nue-input v-model="i7" theme="rounded" />
         </nue-div>
+    </demo>
+    <demo title="插槽">
+        <nue-input v-model="i8" placeholder="请输入..." type="number">
+            <template #prefix>
+                <nue-text>¥</nue-text>
+            </template>
+            <template #suffix>
+                <nue-text>元</nue-text>
+            </template>
+        </nue-input>
     </demo>
 </template>
 
@@ -68,6 +79,11 @@ const i4 = ref('');
 const i5 = ref('');
 const i6 = ref('');
 const i7 = ref('');
+const i8 = ref('');
 </script>
 
-<style scoped></style>
+<style scoped>
+.nue-div {
+    flex-wrap: wrap;
+}
+</style>

@@ -140,6 +140,16 @@ describe('NueButton', () => {
             });
             expect(wrapper.find('.append-content').exists()).toBe(true);
         });
+
+        it('应该渲染 prepend 插槽', () => {
+            const wrapper = mount(NueButton, {
+                slots: {
+                    default: '按钮',
+                    prepend: '<span class="prepend-content">前缀</span>'
+                }
+            });
+            expect(wrapper.find('.prepend-content').exists()).toBe(true);
+        });
     });
 
     describe('节流功能', () => {

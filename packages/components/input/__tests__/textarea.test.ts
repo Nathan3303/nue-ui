@@ -95,6 +95,22 @@ describe('NueTextarea', () => {
         });
     });
 
+    describe('插槽渲染', () => {
+        it('应该渲染 prefix 插槽', () => {
+            const wrapper = mount(NueTextarea, {
+                slots: { prefix: '<span class="prefix-content">前缀</span>' }
+            });
+            expect(wrapper.find('.prefix-content').exists()).toBe(true);
+        });
+
+        it('应该渲染 suffix 插槽', () => {
+            const wrapper = mount(NueTextarea, {
+                slots: { suffix: '<span class="suffix-content">后缀</span>' }
+            });
+            expect(wrapper.find('.suffix-content').exists()).toBe(true);
+        });
+    });
+
     describe('字符计数', () => {
         it('应该显示字符计数', () => {
             const wrapper = mount(NueTextarea, {

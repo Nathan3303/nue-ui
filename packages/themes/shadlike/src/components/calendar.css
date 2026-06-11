@@ -1,0 +1,313 @@
+/* NueCalendar Component Styles */
+
+.nue-calendar {
+    --nue-calendar-cell-size: var(--nue-box-size-df);
+    --nue-calendar-font-size: var(--nue-text-sm);
+    --nue-calendar-gap: var(--nue-gap-xs);
+    --nue-calendar-padding: var(--nue-padding-sm);
+
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    background-color: var(--nue-primary-color-0);
+    border-radius: var(--nue-primary-radius);
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: var(--nue-primary-font-family);
+    gap: var(--nue-calendar-gap);
+    padding: var(--nue-padding-2xs);
+
+    .nue-calendar__body {
+        display: flex;
+        flex-direction: column;
+        gap: var(--nue-calendar-gap);
+
+        .nue-calendar__date {
+            padding: var(--nue-padding-xs);
+        }
+    }
+
+    .nue-calendar__footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Header */
+    .nue-calendar-header {
+        display: flex;
+        align-items: center;
+        gap: var(--nue-gap-2xs);
+
+        .nue-calendar-header__current {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: auto;
+            gap: var(--nue-gap-2xs);
+            font-size: var(--nue-calendar-font-size);
+            font-weight: 500;
+            color: var(--nue-primary-color-900);
+        }
+    }
+
+    /* Body */
+    .nue-calendar-body {
+        display: flex;
+        flex-direction: column;
+        gap: var(--nue-calendar-gap);
+
+        .weekday-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: var(--nue-calendar-gap);
+
+            .weekday-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: var(--nue-calendar-cell-size);
+                height: var(--nue-calendar-cell-size);
+                font-size: var(--nue-calendar-font-size);
+                color: var(--nue-primary-color-700);
+                text-transform: uppercase;
+            }
+        }
+
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: var(--nue-calendar-gap);
+
+            .date-cell {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: var(--nue-calendar-cell-size);
+                height: var(--nue-calendar-cell-size);
+                font-size: var(--nue-calendar-font-size);
+                color: var(--nue-primary-color-900);
+                background-color: transparent;
+                border: 1px solid transparent;
+                border-radius: var(--nue-primary-radius);
+                cursor: pointer;
+                transition: all var(--nue-animation-duration-short) ease;
+
+                &:hover:not(.disabled):not(.selected) {
+                    background-color: var(--nue-primary-color-100);
+                    border-color: var(--nue-border-color);
+                }
+
+                &.other-month {
+                    color: var(--nue-primary-color-300);
+                }
+
+                &.selected {
+                    color: var(--nue-primary-color-0);
+                    background-color: var(--nue-primary-color-900);
+                    border-color: var(--nue-primary-color-900);
+
+                    &:hover {
+                        background-color: var(--nue-primary-color-900);
+                        border-color: var(--nue-primary-color-900);
+                    }
+                }
+
+                &.disabled {
+                    color: var(--nue-primary-color-400);
+                    cursor: not-allowed;
+                    opacity: 0.6;
+
+                    &:hover {
+                        background-color: transparent;
+                        border-color: transparent;
+                    }
+                }
+
+                &.today {
+                    border-color: var(--nue-primary-color-900);
+
+                    &:not(.selected):not(.disabled) {
+                        color: var(--nue-primary-color-700);
+                    }
+                }
+            }
+        }
+    }
+
+    /* Month Picker */
+    .nue-calendar-month {
+        padding: var(--nue-calendar-padding);
+
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--nue-calendar-gap);
+        }
+
+        .month-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: var(--nue-calendar-cell-size);
+            font-size: var(--nue-calendar-font-size);
+            color: var(--nue-primary-color-900);
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-radius: var(--nue-primary-radius);
+            cursor: pointer;
+            transition: all var(--nue-animation-duration-short) ease;
+            padding: 0 var(--nue-calendar-padding);
+
+            &:hover {
+                background-color: var(--nue-primary-color-100);
+            }
+
+            &.selected {
+                color: var(--nue-primary-color-0);
+                background-color: var(--nue-primary-color-900);
+            }
+
+            &.selected:hover {
+                background-color: var(--nue-primary-color-900);
+            }
+        }
+    }
+
+    /* Year Picker */
+    .nue-calendar-year {
+        padding: var(--nue-calendar-padding);
+
+        .year-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--nue-calendar-gap);
+        }
+
+        .year-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: var(--nue-calendar-cell-size, 2rem);
+            font-size: var(--nue-calendar-font-size);
+            color: var(--nue-primary-color-900);
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-radius: var(--nue-primary-radius);
+            cursor: pointer;
+            transition: all var(--nue-animation-duration-short) ease;
+            padding: 0 var(--nue-calendar-padding);
+
+            &:hover {
+                background-color: var(--nue-primary-color-100);
+            }
+
+            &.selected {
+                color: var(--nue-primary-color-0);
+                background-color: var(--nue-primary-color-900);
+            }
+
+            &.selected:hover {
+                background-color: var(--nue-primary-color-900);
+            }
+        }
+    }
+
+    /* Time Picker */
+    .nue-calendar-time-picker {
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        gap: var(--nue-calendar-gap);
+
+        .nue-calendar-time-picker__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--nue-gap-2xs);
+
+            .nue-calendar-time-picker__label {
+                font-size: var(--nue-text-xs);
+                color: var(--nue-primary-color-500);
+            }
+
+            .nue-calendar-time-picker__controls {
+                display: flex;
+                align-items: center;
+                gap: var(--nue-calendar-gap);
+
+                .nue-calendar-time-picker__value {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 2rem;
+                    height: 1.5rem;
+                    font-size: var(--nue-calendar-font-size);
+                    font-weight: 500;
+                    color: var(--nue-primary-color-900);
+                    background-color: var(--nue-primary-color-100);
+                    border-radius: var(--nue-primary-radius);
+                    padding: 0 var(--nue-calendar-gap);
+                    border: 1px solid var(--nue-primary-color-100);
+
+                    &.nue-calendar-time-picker__value--editable {
+                        cursor: pointer;
+                        transition: all var(--nue-animation-duration-short) ease;
+
+                        &:hover {
+                            background-color: var(--nue-primary-color-200);
+                        }
+                    }
+                }
+
+                .nue-calendar-time-picker__input {
+                    width: 2rem;
+                    height: 1.5rem;
+                    padding: 0 var(--nue-gap-xs);
+                    font-size: var(--nue-calendar-font-size);
+                    font-weight: 500;
+                    text-align: center;
+                    color: var(--nue-primary-color-900);
+                    background-color: var(--nue-primary-color-0);
+                    border: 1px solid var(--nue-primary-color-600);
+                    border-radius: var(--nue-primary-radius);
+                    outline: none;
+
+                    &[type='number'] {
+                        -moz-appearance: textfield;
+                    }
+                }
+
+                .nue-calendar-time-picker__input::-webkit-outer-spin-button,
+                .nue-calendar-time-picker__input::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+            }
+        }
+
+        .nue-calendar-time-picker__separator {
+            font-size: var(--nue-calendar-font-size);
+            font-weight: 600;
+            color: var(--nue-primary-color-700);
+            margin: 0.25rem;
+        }
+    }
+}
+
+/* Size Variants */
+.nue-calendar--small {
+    --nue-calendar-cell-size: var(--nue-box-size-sm);
+    --nue-calendar-font-size: var(--nue-text-xs);
+    --nue-calendar-padding: var(--nue-padding-xs);
+    --nue-calendar-gap: var(--nue-gap-2xs);
+    padding: 0;
+}
+
+.nue-calendar--large {
+    --nue-calendar-cell-size: var(--nue-box-size-md);
+    --nue-calendar-font-size: var(--nue-text-df);
+    --nue-calendar-padding: var(--nue-padding-df);
+    --nue-calendar-gap: var(--nue-gap-sm);
+}

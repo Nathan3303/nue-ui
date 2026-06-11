@@ -1,5 +1,5 @@
 .nue-link {
-    --nue-link-font-size: inherit;
+    --nue-link-font-size: var(--nue-text-df);
     --nue-link-base-color: transparent;
     --nue-link-lo: calc(var(--nue-dark-prefix) * 10);
     --nue-link-lop: calc(var(--nue-dark-prefix) * 10%);
@@ -41,24 +41,20 @@
 }
 
 .nue-link {
+    display: inline-flex;
     cursor: pointer;
+    gap: var(--nue-gap-2xs);
     text-decoration: var(--nue-link-text-decoration);
     color: var(--nue-link-color);
     font-size: var(--nue-link-font-size);
 
-    > .nue-link__icon {
-        font-size: var(--nue-link-font-size);
-        padding-right: 0.25rem;
-    }
-
-    > .nue-link__content {
-        font-size: var(--nue-link-font-size);
-    }
-
     &:hover {
         color: var(--nue-link-hover-color);
         background-color: var(--nue-link-hover-background-color);
-        text-decoration: var(--nue-link-hover-text-decoration);
+
+        > .nue-link__content {
+            text-decoration: var(--nue-link-hover-text-decoration);
+        }
     }
 
     &:active {
@@ -101,11 +97,12 @@
     overflow: hidden;
     user-select: none;
     -webkit-user-select: none;
+    box-sizing: border-box;
     border-radius: var(--nue-primary-radius);
     font-family: var(--nue-primary-font-family);
 
     width: auto;
-    height: var(--nue-box-size-df);
+    height: var(--nue-box-size-md);
     padding: 0 var(--nue-padding-df);
     gap: var(--nue-gap-sm);
 
@@ -119,12 +116,11 @@
     > .nue-link__icon,
     > .nue-link__content {
         padding: 0;
-        line-height: 1;
     }
 
     &.nue-link--route-small {
         --nue-link-font-size: var(--nue-text-sm);
-        height: var(--nue-box-size-sm);
+        height: var(--nue-box-size-df);
         padding: 0 var(--nue-padding-sm);
         gap: var(--nue-gap-xs);
     }
@@ -132,7 +128,7 @@
     &.nue-link--route-large {
         --nue-link-font-size: var(--nue-text-md);
         height: var(--nue-box-size-lg);
-        padding: 0 var(--nue-padding-lg);
+        padding: 0 var(--nue-padding-md);
         gap: var(--nue-padding-df);
     }
 }
@@ -162,10 +158,10 @@
     }
 
     &.nue-link--route-small {
-        --nue-link-font-size: var(--nue-text-xl);
+        --nue-link-font-size: var(--nue-text-df);
     }
 
     &.nue-link--route-large {
-        --nue-link-font-size: var(--nue-text-3xl);
+        --nue-link-font-size: var(--nue-text-2xl);
     }
 }

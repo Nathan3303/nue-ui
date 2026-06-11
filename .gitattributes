@@ -1,0 +1,6 @@
+# 强制所有文本文件使用 LF
+* text=auto eol=lf
+
+# 如果有必须使用 CRLF 的特定文件（如 Windows 批处理），单独指定
+*.bat text eol=crlf
+*.cmd text eol=crlf

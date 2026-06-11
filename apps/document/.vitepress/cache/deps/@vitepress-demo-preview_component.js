@@ -36,7 +36,7 @@ import {
     withScopeId
 } from './chunk-HYY3Y2FS.js';
 
-// ../../node_modules/.pnpm/@vitepress-demo-preview+com_414d5f85ce8128340154fa03b70eb535/node_modules/@vitepress-demo-preview/component/dist/preview-component.js
+// ../../node_modules/.pnpm/@vitepress-demo-preview+component@2.6.1_vitepress@1.6.4_@algolia+client-search@5.44.0_@_414d5f85ce8128340154fa03b70eb535/node_modules/@vitepress-demo-preview/component/dist/preview-component.js
 var Qo = Object.defineProperty;
 var Jo = (e, t, o) =>
     t in e

@@ -1,20 +1,22 @@
 .nue-textarea {
     --nue-textarea-min-height: calc(
-        calc(var(--nue-textarea-line-height)) * var(--nue-textarea-rows)
+        calc(var(--nue-textarea-line-height) * var(--nue-textarea-font-size)) *
+            var(--nue-textarea-rows)
     );
     --nue-textarea-max-height: calc(
-        calc(var(--nue-textarea-line-height)) * var(--nue-textarea-max-rows)
+        calc(var(--nue-textarea-line-height) * var(--nue-textarea-font-size)) *
+            var(--nue-textarea-max-rows)
     );
-    --nue-textarea-min-width: calc(24 * var(--nue-textarea-font-size));
-    --nue-textarea-padding: calc(0.4 * var(--nue-textarea-line-height));
-    --nue-textarea-line-height: calc(1.4 * var(--nue-textarea-font-size));
+    --nue-textarea-min-width: unset;
+    --nue-textarea-padding: var(--nue-padding-xs) var(--nue-padding-sm);
+    --nue-textarea-line-height: 1.4;
 
     --nue-textarea-rows: 3;
     --nue-textarea-max-rows: 3;
     --nue-textarea-resize: none;
     --nue-textarea-overflow: auto;
 
-    --nue-textarea-font-size: var(--nue-text-df);
+    --nue-textarea-font-size: var(--nue-text-sm);
     --nue-textarea-color: var(--nue-primary-text-color);
     --nue-textarea-icon-size: var(--nue-textarea-font-size);
     --nue-textarea-icon-color: var(--nue-textarea-color);
@@ -42,14 +44,16 @@
     min-width: var(--nue-textarea-min-width);
     padding: var(--nue-textarea-padding);
     border: 1px solid var(--nue-textarea-border-color);
-    border-radius: 6px;
+    border-radius: var(--nue-primary-radius);
     background-color: var(--nue-textarea-background-color);
-    box-shadow: 1px 1px 0.25rem rgba(200, 200, 200, 0.2);
+    box-shadow: var(--nue-secondary-shadow);
     position: relative;
     overflow: hidden;
     -webkit-user-select: none;
     user-select: none;
-    transition: all 0.16s ease;
+    transition: all var(--nue-animation-duration-short) ease-in;
+    flex: 0 0 auto;
+    font-size: var(--nue-textarea-font-size);
 
     &:hover {
         border-color: var(--nue-textarea-hover-border-color);
@@ -78,8 +82,6 @@
     }
 
     .nue-textarea__textarea {
-        min-width: var(--nue-textarea-min-width);
-        max-width: 100%;
         line-height: var(--nue-textarea-line-height);
         min-height: var(--nue-textarea-min-height);
         max-height: var(--nue-textarea-max-height);
@@ -113,19 +115,33 @@
         overflow: hidden !important;
     }
 
-    .word-counter {
-        display: block;
-        width: max-content;
-        padding: 0.25rem;
-        margin-top: 0.25rem;
-        margin-left: auto;
-        background-color: rgba(200, 200, 200, 0.2);
-        cursor: text;
-        z-index: 1;
-        line-height: 1;
-        border-radius: var(--nue-primary-radius);
+    .nue-textarea__actions-bar {
+        flex-shrink: 0;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--nue-textarea-border-color);
+        padding-top: var(--nue-gap-xs);
+        margin-top: var(--nue-gap-xs);
+
+        font-size: var(--nue-textarea-font-size);
         color: var(--nue-primary-color-500);
-        font-size: var(--nue-text-sm);
+
+        > .nue-textarea__actions {
+            flex: auto;
+            width: auto;
+            gap: var(--nue-gap-2xs);
+        }
+
+        > .word-counter {
+            font-size: var(--nue-text-sm);
+        }
+
+        & + * {
+            border-top: 1px solid var(--nue-textarea-border-color);
+            padding-top: var(--nue-gap-xs);
+            margin-top: var(--nue-gap-xs);
+        }
     }
 
     &.nue-textarea--resize .nue-textarea__textarea {
@@ -133,15 +149,23 @@
     }
 }
 
-.nue-textarea.nue-textarea--small {
-    --nue-textarea-font-size: 0.75rem;
+.nue-textarea--small {
+    --nue-textarea-font-size: var(--nue-text-xs);
+
+    .nue-textarea__actions-bar > .nue-textarea__actions {
+        gap: var(--nue-gap-2xs);
+    }
 }
 
-.nue-textarea.nue-textarea--large {
-    --nue-textarea-font-size: 1.125rem;
+.nue-textarea--large {
+    --nue-textarea-font-size: var(--nue-text-df);
+
+    .nue-textarea__actions-bar > .nue-textarea__actions {
+        gap: var(--nue-gap-sm);
+    }
 }
 
-.nue-textarea.nue-textarea--pure {
+.nue-textarea--pure {
     --nue-textarea-padding: 0;
     --nue-textarea-border-color: transparent;
     --nue-textarea-hover-border-color: transparent;

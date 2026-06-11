@@ -54,5 +54,15 @@ describe('NueLink', () => {
             });
             expect(wrapper.text()).toContain('链接文本');
         });
+
+        it('应该渲染 prepend 插槽', () => {
+            const wrapper = mount(NueLink, {
+                slots: {
+                    default: '链接',
+                    prepend: '<span class="prepend-content">前缀</span>'
+                }
+            });
+            expect(wrapper.find('.prepend-content').exists()).toBe(true);
+        });
     });
 });

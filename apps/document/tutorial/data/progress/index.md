@@ -52,6 +52,14 @@ demo-preview=./show-inner-text.vue
 demo-preview=./hide-text.vue
 :::
 
+## 自定义文本 <Badge text="1.8.53 以上版本" type="warning" />
+
+通过默认插槽可以自定义进度条旁边显示的文本，替换默认的百分比文字。
+
+::: preview
+demo-preview=./slot.vue
+:::
+
 ## 环形进度条 <Badge text="实验性🧪" type="warning" />
 
 通过属性 `type` 设置进度展示的类型。属性可选值为 `line` 和 `circle`，默认值为 `line` 。

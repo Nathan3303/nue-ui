@@ -78,6 +78,14 @@ demo-preview=./clearable-show.vue
 demo-preview=./max-count.vue
 :::
 
+## 扩展插槽 <Badge text="1.8.53 以上版本" type="warning" />
+
+通过插槽 `#prefix` 和 `#suffix` 分别可以在输入元素的两边插入自定义元素。
+
+::: preview
+demo-preview=./slots.vue
+:::
+
 ## 防抖
 
 组件内部在输入时会对输入内容进行防抖处理，防止短时间内大量输入导致的性能问题。

@@ -3,3 +3,6 @@ packages:
     - 'packages/*'
     - 'packages/plugins/*'
     - 'packages/themes/*'
+allowBuilds:
+    '@parcel/watcher': true
+    esbuild: true

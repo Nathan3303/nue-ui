@@ -1,24 +1,44 @@
 .nue-icon {
-    --nue-icon-color: inherit;
-    --nue-icon-size: inherit;
-    --nue-icon-weight: inherit;
+    --nue-icon-color: unset;
+    --nue-icon-size: unset;
+    --nue-icon-weight: unset;
     --nue-icon-spin-speed: 2s;
+    /* 图标比例，用于调整图标大小 */
+    --nue-icon-ratio: 1.025em;
+    /* 针对 iconfont 的修正值 */
+    --nue-icon-align-offset: 0.025em;
 }
 
 .nue-icon {
-    color: var(--nue-icon-color);
-    font-size: var(--nue-icon-size);
-    font-weight: var(--nue-icon-weight);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0;
+
+    font-style: normal;
+    color: var(--nue-icon-color, inherit);
+    font-size: var(--nue-icon-size, inherit);
+    font-weight: var(--nue-icon-weight, inherit);
 
     &::before {
-        color: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        line-height: inherit;
+        font-size: var(--nue-icon-ratio);
+    }
+
+    &.icon-blank::before {
+        opacity: 0;
+        color: var(--nue-primary-color-0);
     }
 }
 
-.nue-icon.nue-icon--spin {
-    transform-origin: center center;
+.nue-icon--spin {
+    transform-origin: center;
     animation: spin var(--nue-icon-spin-speed) infinite ease-out;
+}
+
+.nue-icon--hinting {
+    display: inline-block;
+
+    &::before {
+        vertical-align: var(--nue-icon-align-offset);
+    }
 }

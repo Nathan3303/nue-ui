@@ -1,7 +1,25 @@
 import { describe, it, expect } from 'vitest';
+import { mount } from '@vue/test-utils';
 import { NueMessage } from '../index';
+import MessageNodeInner from '../message-inner.vue';
 
 describe('NueMessage', () => {
+    describe('插槽渲染', () => {
+        it('应该渲染默认插槽替换消息文本', () => {
+            const mockNode = document.createElement('div');
+            const mockWrapper = document.createElement('div');
+            const wrapper = mount(MessageNodeInner, {
+                props: {
+                    node: mockNode,
+                    wrapper: mockWrapper,
+                    message: '默认消息'
+                },
+                slots: { default: '自定义消息内容' }
+            });
+            expect(wrapper.text()).toContain('自定义消息内容');
+        });
+    });
+
     describe('API 测试', () => {
         it('应该导出 NueMessage 函数', () => {
             expect(typeof NueMessage).toBe('function');

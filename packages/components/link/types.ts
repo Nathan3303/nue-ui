@@ -7,8 +7,6 @@ export interface NueLinkProps extends GlobalProps {
     disabled?: boolean;
     icon?: string;
     route?: NueLinkRoute;
-    flex?: string;
-    align?: string;
     size?: string;
     title?: string;
 }

@@ -6,13 +6,11 @@
         @close="emit('close')"
     >
         <template #trigger="{ trigger }">
-            <nue-button :disabled="disabled" @click="trigger">
+            <nue-button :disabled="disabled" :size="size" @click="trigger">
                 <template v-if="modelValue">
-                    {{ displayValue }}
+                    {{ displayValue || '无效日期' }}
                 </template>
-                <nue-text v-else color="gray">
-                    {{ realPlaceholder }}
-                </nue-text>
+                <nue-text theme="placeholder" v-else>{{ realPlaceholder }}</nue-text>
                 <template #append>
                     <nue-icon name="calendar" />
                     <nue-icon
@@ -24,32 +22,56 @@
             </nue-button>
         </template>
         <date-picker-panel
+            :size="size"
             :model-value="modelValue"
             :type="type"
             @update:model-value="handleDateSelect"
             @change="handleChange"
-        />
+        >
+            <template #cell="{ date, dateStr, isCurrentMonth }">
+                <slot
+                    name="cell"
+                    :date="date"
+                    :dateStr="dateStr"
+                    :isCurrentMonth="isCurrentMonth"
+                ></slot>
+            </template>
+            <template #footer="{ clear }">
+                <slot name="footer" :clear="clear"></slot>
+            </template>
+        </date-picker-panel>
     </nue-dropdown>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { NueButton, NueDropdown, NueIcon, NueText } from '@nue-ui/components';
+import { computed, provide } from 'vue';
+import { NueButton } from '../button';
+import { NueDropdown } from '../dropdown';
+import { NueIcon } from '../icon';
+import { NueText } from '../text';
 import { parseTheme } from '@nue-ui/utils';
 import DatePickerPanel from './date-picker-panel.vue';
+import { NUE_CALENDAR_CTX_KEY } from '../calendar/calendar-constants';
 import { PLACEHOLDERS } from './constants';
 import type { NueDatePickerProps, NueDatePickerEmits, NueDatePickerValue } from './types';
+import type { NueCalendarContext } from '../calendar/calendar-types';
+import { formatDateFriendly, formatDateTimeFriendly, parseDate } from '@nue-ui/utils';
 
 defineOptions({ name: 'NueDatePicker' });
 
 const props = withDefaults(defineProps<NueDatePickerProps>(), {
     type: 'date',
-    placeholder: '',
+    placeholder: '选择日期',
     disabled: false,
     clearable: false
 });
 
 const emit = defineEmits<NueDatePickerEmits>();
+
+provide<NueCalendarContext>(NUE_CALENDAR_CTX_KEY, {
+    size: props.size,
+    disabled: props.disabled
+});
 
 const classes = computed(() => {
     const prefix = 'nue-date-picker';
@@ -61,8 +83,21 @@ const realPlaceholder = computed(() => {
     return PLACEHOLDERS.single;
 });
 
+const isInvalidDate = computed(() => {
+    if (!props.modelValue) return false;
+    return parseDate(props.modelValue.split(' ')[0]) === null;
+});
+
 const displayValue = computed(() => {
-    return props.modelValue || '';
+    if (!props.modelValue || isInvalidDate.value) return '';
+
+    const date = new Date(props.modelValue);
+    if (isNaN(date.getTime())) return props.modelValue;
+
+    if (props.type === 'datetime') {
+        return formatDateTimeFriendly(date);
+    }
+    return formatDateFriendly(date);
 });
 
 const handleClear = () => {

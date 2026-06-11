@@ -1,5 +1,6 @@
 <template>
     <div :class="classes" :style="style">
+        <slot name="prefix" :length="textLength" :maxlength="maxlengthInt" :clear="handleClear" />
         <textarea
             :id="id"
             ref="textareaRef"
@@ -23,12 +24,23 @@
             readonly
             tabindex="-1"
         />
-        <word-counter
-            v-if="counter !== 'off'"
-            :length="textLength"
-            :maxlength="parseInt(maxlength || '0')"
-            :mode="counter"
-        />
+        <nue-div v-if="counter !== 'off' || $slots.actions" class="nue-textarea__actions-bar">
+            <nue-div class="nue-textarea__actions">
+                <slot
+                    name="actions"
+                    :length="textLength"
+                    :maxlength="maxlengthInt"
+                    :clear="handleClear"
+                />
+            </nue-div>
+            <word-counter
+                v-if="counter !== 'off'"
+                :length="textLength"
+                :maxlength="maxlengthInt"
+                :mode="counter"
+            />
+        </nue-div>
+        <slot name="suffix" :length="textLength" :maxlength="maxlengthInt" :clear="handleClear" />
     </div>
 </template>
 
@@ -36,12 +48,14 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { debounce, parseTheme } from '@nue-ui/utils';
 import wordCounter from './word-counter.vue';
+import { NueDiv } from '../div';
 import type { NueTextareaProps, NueTextareaEmits } from './types';
 
 defineOptions({ name: 'NueTextarea' });
 const props = withDefaults(defineProps<NueTextareaProps>(), {
     counter: 'off',
-    debounceTime: 0
+    debounceTime: 0,
+    placeholder: '...'
 });
 const emit = defineEmits<NueTextareaEmits>();
 
@@ -49,6 +63,11 @@ const textareaRef = ref();
 const backendTextareaRef = ref();
 const textLength = ref(props.modelValue?.length || 0);
 const isComposing = ref(false);
+
+const maxlengthInt = computed(() => {
+    const i = parseInt(props.maxlength || '0');
+    return i < 0 ? 0 : i;
+});
 
 const classes = computed(() => {
     const prefix = 'nue-textarea';
@@ -123,11 +142,20 @@ function handleCompositionEnd(): void {
     update();
 }
 
+const handleClear = () => {
+    updateModelValue('');
+    textLength.value = 0;
+    handleAutosize('');
+    nextTick(() => {
+        if (!textareaRef.value) return;
+        textareaRef.value.focus();
+    });
+};
+
 const unWatch = watch(
     () => props.modelValue,
     newValue => {
-        if (!newValue) return;
-        textLength.value = newValue.length;
+        textLength.value = newValue?.length || 0;
         handleAutosize(newValue as string);
     }
 );

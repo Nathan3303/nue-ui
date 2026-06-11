@@ -1,7 +1,9 @@
 <template>
     <div ref="nodeInnerRef" :class="classes">
         <nue-icon v-if="icon" :name="icon" />
-        <nue-text class="nue-message-node-inner__text">{{ message }}</nue-text>
+        <nue-text class="nue-message-node-inner__text">
+            <slot>{{ message }}</slot>
+        </nue-text>
         <nue-icon v-if="!duration" name="clear" @click="handlePopAnimation" />
     </div>
 </template>

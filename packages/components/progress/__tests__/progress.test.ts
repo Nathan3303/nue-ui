@@ -25,6 +25,17 @@ describe('NueProgress', () => {
             expect(wrapper.find('.nue-progress__circle').exists()).toBe(true);
         });
 
+        describe('插槽渲染', () => {
+            it('应该渲染默认插槽替换百分比文本', () => {
+                const wrapper = mount(NueProgress, {
+                    props: { percentage: 75 },
+                    slots: { default: '已处理 75/100' }
+                });
+                expect(wrapper.text()).toContain('已处理 75/100');
+                expect(wrapper.text()).not.toContain('75%');
+            });
+        });
+
         it('应该渲染不同主题的进度条', () => {
             const themes = ['primary', 'success', 'warning', 'danger'] as const;
             themes.forEach(theme => {

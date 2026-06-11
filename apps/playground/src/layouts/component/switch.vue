@@ -1,6 +1,9 @@
 <template>
     <demo title="基础">
-        <nue-switch />
+        <nue-div align="center">
+            <nue-switch />
+            <nue-switch icon="check" />
+        </nue-div>
     </demo>
     <demo title="值">
         <nue-div align="center">
@@ -23,8 +26,8 @@
     </demo>
     <demo title="大小">
         <nue-div align="center">
-            <nue-switch size="small" />
-            <nue-switch size="large" />
+            <nue-switch size="small" show-text />
+            <nue-switch size="large" show-text />
         </nue-div>
     </demo>
     <demo title="加载态 & 加载图标">
@@ -47,6 +50,16 @@
             <nue-switch theme="custom3" />
         </nue-div>
     </demo>
+    <demo title="插槽">
+        <nue-switch v-model="sw5">
+            <template #circle>
+                <img :src="`https://picsum.photos/32?t=${sw5}`" />
+            </template>
+            <template #text>
+                {{ sw5 ? '开' : '关' }}
+            </template>
+        </nue-switch>
+    </demo>
 </template>
 
 <script lang="ts" setup>
@@ -58,6 +71,7 @@ const sw1 = ref(false);
 const sw2 = reactive({ loading: true });
 const sw3 = reactive({ value: false, loading: false });
 const sw4 = reactive({ s1: false, s2: true });
+const sw5 = ref(false);
 
 const handleBeforeSwitch = async () => {
     sw3.loading = true;

@@ -199,6 +199,23 @@ describe('NueCheckbox', () => {
         });
     });
 
+    describe('插槽渲染', () => {
+        it('应该渲染 prefix 插槽', () => {
+            const wrapper = mount(NueCheckbox, {
+                slots: { prefix: '<span class="prefix-content">[前缀]</span>' }
+            });
+            expect(wrapper.find('.prefix-content').exists()).toBe(true);
+        });
+
+        it('应该渲染 suffix 插槽', () => {
+            const wrapper = mount(NueCheckbox, {
+                props: { label: '选项' },
+                slots: { suffix: '<span class="suffix-content">[后缀]</span>' }
+            });
+            expect(wrapper.find('.suffix-content').exists()).toBe(true);
+        });
+    });
+
     describe('标签渲染', () => {
         it('应该渲染 label 属性', () => {
             const wrapper = mount(NueCheckbox, {

@@ -13,7 +13,8 @@
                             v-for="(link, idx) in item.links"
                             :key="idx"
                             :route="link.route"
-                            theme="route"
+                            theme="route,route-small"
+                            icon="more2"
                         >
                             {{ link.text }}
                         </nue-link>

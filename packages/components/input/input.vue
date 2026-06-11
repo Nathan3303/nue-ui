@@ -1,6 +1,7 @@
 <template>
     <div :class="classes" :style="style">
-        <nue-icon v-if="icon" :name="icon" class="nue-input__icon" />
+        <nue-icon v-if="icon" :name="icon" :hinting="false" class="nue-input__icon" />
+        <slot name="prefix" />
         <input
             :id="id"
             ref="inputRef"
@@ -18,6 +19,7 @@
             @compositionstart="handleCompositionStart"
             @input="handleInput($event)"
         />
+        <slot name="suffix" />
         <word-counter
             v-if="type !== 'number' && counter !== 'off'"
             :length="textLength"

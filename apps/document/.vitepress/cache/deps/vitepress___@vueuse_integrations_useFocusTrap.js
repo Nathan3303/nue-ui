@@ -1327,7 +1327,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
     return trap;
 };
 
-// ../../node_modules/.pnpm/@vueuse+integrations@12.8.2_ecaebf11dccda199d0ecf1ac51df8b73/node_modules/@vueuse/integrations/useFocusTrap.mjs
+// ../../node_modules/.pnpm/@vueuse+integrations@12.8.2_change-case@5.4.4_focus-trap@7.6.6_fuse.js@7.1.0_typescript@5.9.3/node_modules/@vueuse/integrations/useFocusTrap.mjs
 function useFocusTrap(target, options = {}) {
     let trap;
     const { immediate, ...focusTrapOptions } = options;
