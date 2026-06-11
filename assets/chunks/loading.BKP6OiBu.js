@@ -1,1 +1,0 @@
-import{p as n,C as s,b as l,o as r,w as u,a as c}from"./framework.BVB1_a36.js";const d={__name:"loading",setup(i){const e=n(!1),t=()=>{e.value=!0,setTimeout(()=>e.value=!1,3e3)};return(_,o)=>{const a=s("nue-button");return r(),l(a,{loading:e.value,icon:"search",onClick:t},{default:u(()=>[...o[0]||(o[0]=[c("搜索",-1)])]),_:1},8,["loading"])}}};export{d as default};

@@ -1,1 +1,0 @@
-import{d as t,p as l,C as p,b as r,o as s}from"./framework.BVB1_a36.js";const m=t({__name:"date",setup(u){const e=l("");return(d,o)=>{const a=p("nue-date-picker");return s(),r(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=n=>e.value=n),placeholder:"选择日期"},null,8,["modelValue"])}}});export{m as default};

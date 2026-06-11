@@ -1,0 +1,1 @@
+import{z as s}from"./theme.BcHaZaYu.js";import{d as n,C as a,b as r,o as c,w as m,a as p}from"./framework.D5rG3MdX.js";const l=n({__name:"basic",setup(_){const o=()=>{s({message:"创建Message成功"})};return(u,e)=>{const t=a("nue-button");return c(),r(t,{onClick:o},{default:m(()=>[...e[0]||(e[0]=[p("创建一个消息提示",-1)])]),_:1})}}});export{l as default};

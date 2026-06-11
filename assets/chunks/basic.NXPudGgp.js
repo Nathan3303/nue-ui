@@ -1,0 +1,1 @@
+import{d as l,p as t,C as s,b as r,o as u}from"./framework.D5rG3MdX.js";const m=l({__name:"basic",setup(p){const e=t("");return(c,a)=>{const o=s("nue-calendar");return u(),r(o,{modelValue:e.value,"onUpdate:modelValue":a[0]||(a[0]=n=>e.value=n)},null,8,["modelValue"])}}});export{m as default};

@@ -1,1 +1,0 @@
-import{_ as s,C as t,b as _,o as c,w as o,G as r,a as u}from"./framework.BVB1_a36.js";const d={};function f(l,e){const n=t("nue-button"),a=t("nue-badge");return c(),_(a,{dot:""},{default:o(()=>[r(n,null,{default:o(()=>[...e[0]||(e[0]=[u("小红点",-1)])]),_:1})]),_:1})}const m=s(d,[["render",f]]);export{m as default};
