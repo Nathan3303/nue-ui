@@ -1,6 +1,6 @@
 <template>
-    <div class="nue-date-picker-header">
-        <nue-button-group :size="datePickerCtx.size">
+    <div class="nue-calendar-header">
+        <nue-button-group :size="calendarCtx.size">
             <!-- 年份视图: 上十年按钮 -->
             <nue-button
                 v-if="currentView === 'year'"
@@ -31,11 +31,11 @@
             />
         </nue-button-group>
         <!-- 当前年月显示 -->
-        <div class="nue-date-picker-header__current">
+        <div class="nue-calendar-header__current">
             <nue-button
-                class="nue-date-picker-header__year"
+                class="nue-calendar-header__year"
                 :class="{ clickable: currentView === 'date' }"
-                :size="datePickerCtx.size"
+                :size="calendarCtx.size"
                 theme="ghost"
                 @click="handleYearClick"
             >
@@ -43,15 +43,15 @@
             </nue-button>
             <nue-button
                 v-if="currentView === 'date'"
-                class="nue-date-picker-header__month clickable"
-                :size="datePickerCtx.size"
+                class="nue-calendar-header__month clickable"
+                :size="calendarCtx.size"
                 theme="ghost"
                 @click="handleMonthClick"
             >
                 {{ currentMonth }}
             </nue-button>
         </div>
-        <nue-button-group :size="datePickerCtx.size">
+        <nue-button-group :size="calendarCtx.size">
             <!-- 日期视图: 下个月按钮 -->
             <nue-button
                 v-if="currentView === 'date'"
@@ -88,20 +88,20 @@
 import { computed, inject } from 'vue';
 import NueButton from '../button/button.vue';
 import NueButtonGroup from '../button-group/button-group.vue';
-import { MONTHS, NUE_DATE_PICKER_CTX_KEY } from './constants';
+import { MONTHS, NUE_CALENDAR_CTX_KEY } from './calendar-constants';
 import type {
-    NueDatePickerHeaderProps,
-    NueDatePickerHeaderEmits,
-    NueDatePickerContext
-} from './types';
+    NueCalendarHeaderProps,
+    NueCalendarHeaderEmits,
+    NueCalendarContext
+} from './calendar-types';
 
-defineOptions({ name: 'NueDatePickerHeader' });
+defineOptions({ name: 'NueCalendarHeader' });
 
-const props = defineProps<NueDatePickerHeaderProps>();
+const props = defineProps<NueCalendarHeaderProps>();
 
-const emit = defineEmits<NueDatePickerHeaderEmits>();
+const emit = defineEmits<NueCalendarHeaderEmits>();
 
-const datePickerCtx = inject<NueDatePickerContext>(NUE_DATE_PICKER_CTX_KEY)!;
+const calendarCtx = inject<NueCalendarContext>(NUE_CALENDAR_CTX_KEY)!;
 
 const currentView = computed(() => props.mode || 'date');
 

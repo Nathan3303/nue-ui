@@ -51,14 +51,11 @@ import { NueIcon } from '../icon';
 import { NueText } from '../text';
 import { parseTheme } from '@nue-ui/utils';
 import DatePickerPanel from './date-picker-panel.vue';
-import { NUE_DATE_PICKER_CTX_KEY, PLACEHOLDERS } from './constants';
-import type {
-    NueDatePickerProps,
-    NueDatePickerEmits,
-    NueDatePickerValue,
-    NueDatePickerContext
-} from './types';
-import { formatDateFriendly, formatDateTimeFriendly, parseDate } from './utils/date-utils';
+import { NUE_CALENDAR_CTX_KEY } from '../calendar/calendar-constants';
+import { PLACEHOLDERS } from './constants';
+import type { NueDatePickerProps, NueDatePickerEmits, NueDatePickerValue } from './types';
+import type { NueCalendarContext } from '../calendar/calendar-types';
+import { formatDateFriendly, formatDateTimeFriendly, parseDate } from '@nue-ui/utils';
 
 defineOptions({ name: 'NueDatePicker' });
 
@@ -71,7 +68,7 @@ const props = withDefaults(defineProps<NueDatePickerProps>(), {
 
 const emit = defineEmits<NueDatePickerEmits>();
 
-provide<NueDatePickerContext>(NUE_DATE_PICKER_CTX_KEY, {
+provide<NueCalendarContext>(NUE_CALENDAR_CTX_KEY, {
     size: props.size,
     disabled: props.disabled
 });

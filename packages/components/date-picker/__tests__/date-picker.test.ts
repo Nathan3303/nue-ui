@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { NueDatePicker } from '../index';
-import DatePickerBody from '../date-picker-body.vue';
+import { NueCalendarBody } from '../../calendar';
 import DatePickerPanel from '../date-picker-panel.vue';
 import { NUE_DATE_PICKER_CTX_KEY } from '../constants';
-import { parseDate } from '../utils/date-utils';
+import { parseDate } from '@nue-ui/utils';
 
 describe('NueDatePicker', () => {
     describe('Props 渲染', () => {
@@ -72,10 +72,10 @@ describe('NueDatePicker', () => {
     });
 });
 
-describe('NueDatePickerBody', () => {
+describe('NueCalendarBody', () => {
     describe('插槽渲染', () => {
         it('应该渲染 cell 作用域插槽', () => {
-            const wrapper = mount(DatePickerBody, {
+            const wrapper = mount(NueCalendarBody, {
                 props: { year: 2024, month: 4 },
                 slots: {
                     cell: '<template #cell="{ dateStr }"><span class="custom-cell">{{ dateStr }}</span></template>'
@@ -85,7 +85,7 @@ describe('NueDatePickerBody', () => {
         });
 
         it('cell 插槽默认应渲染日期数字', () => {
-            const wrapper = mount(DatePickerBody, {
+            const wrapper = mount(NueCalendarBody, {
                 props: { year: 2024, month: 4 }
             });
             expect(wrapper.find('.date-cell').text()).toBeTruthy();

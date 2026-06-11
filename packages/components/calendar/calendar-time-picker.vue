@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { NueButton } from '../button';
 import { ref, watch, nextTick } from 'vue';
-import type { NueDatePickerTimeProps, NueDatePickerTimeEmits } from './types';
+import type { NueCalendarTimeProps, NueCalendarTimeEmits } from './calendar-types';
 
-const props = withDefaults(defineProps<NueDatePickerTimeProps>(), {
+defineOptions({ name: 'NueCalendarTimePicker' });
+
+const props = withDefaults(defineProps<NueCalendarTimeProps>(), {
     hour: () => new Date().getHours(),
     minute: () => new Date().getMinutes()
 });
 
-const emit = defineEmits<NueDatePickerTimeEmits>();
+const emit = defineEmits<NueCalendarTimeEmits>();
 
 // 本地状态，确保初始值有效
 const localHour = ref(
@@ -163,15 +165,15 @@ function handleKeydown(event: KeyboardEvent, type: 'hour' | 'minute') {
 </script>
 
 <template>
-    <div class="nue-time-picker" @click.self="cancelEdit">
+    <div class="nue-calendar-time-picker" @click.self="cancelEdit">
         <!-- 小时 -->
-        <div class="nue-time-picker__item">
-            <span class="nue-time-picker__label">小时</span>
-            <div class="nue-time-picker__controls">
+        <div class="nue-calendar-time-picker__item">
+            <span class="nue-calendar-time-picker__label">小时</span>
+            <div class="nue-calendar-time-picker__controls">
                 <nue-button size="small" icon="arrow-left" @click="decreaseHour" />
                 <span
                     v-if="!editingHour"
-                    class="nue-time-picker__value nue-time-picker__value--editable"
+                    class="nue-calendar-time-picker__value nue-calendar-time-picker__value--editable"
                     @click="startEditHour"
                 >
                     {{ String(localHour).padStart(2, '0') }}
@@ -180,7 +182,7 @@ function handleKeydown(event: KeyboardEvent, type: 'hour' | 'minute') {
                     v-else
                     ref="hourInput"
                     type="number"
-                    class="nue-time-picker__input"
+                    class="nue-calendar-time-picker__input"
                     :value="localHour"
                     min="0"
                     max="23"
@@ -190,15 +192,15 @@ function handleKeydown(event: KeyboardEvent, type: 'hour' | 'minute') {
                 <nue-button size="small" icon="arrow-right" @click="increaseHour" />
             </div>
         </div>
-        <span class="nue-time-picker__separator">:</span>
+        <span class="nue-calendar-time-picker__separator">:</span>
         <!-- 分钟 -->
-        <div class="nue-time-picker__item">
-            <span class="nue-time-picker__label">分钟</span>
-            <div class="nue-time-picker__controls">
+        <div class="nue-calendar-time-picker__item">
+            <span class="nue-calendar-time-picker__label">分钟</span>
+            <div class="nue-calendar-time-picker__controls">
                 <nue-button size="small" icon="arrow-left" @click="decreaseMinute" />
                 <span
                     v-if="!editingMinute"
-                    class="nue-time-picker__value nue-time-picker__value--editable"
+                    class="nue-calendar-time-picker__value nue-calendar-time-picker__value--editable"
                     @click="startEditMinute"
                 >
                     {{ String(localMinute).padStart(2, '0') }}
@@ -207,7 +209,7 @@ function handleKeydown(event: KeyboardEvent, type: 'hour' | 'minute') {
                     v-else
                     ref="minuteInput"
                     type="number"
-                    class="nue-time-picker__input"
+                    class="nue-calendar-time-picker__input"
                     :value="localMinute"
                     min="0"
                     max="59"

@@ -121,8 +121,16 @@ export default defineConfig({
                     text: '表单组件',
                     items: [
                         {
+                            text: 'Calendar 日历',
+                            link: '/tutorial/form/calendar/index.md'
+                        },
+                        {
                             text: 'Checkbox 复选框',
                             link: '/tutorial/form/checkbox/index.md'
+                        },
+                        {
+                            text: 'Date Picker 日期选择器',
+                            link: '/tutorial/form/date-picker/index.md'
                         },
                         {
                             text: 'Input 输入框',
@@ -139,10 +147,6 @@ export default defineConfig({
                         {
                             text: 'Textarea 富文本输入框',
                             link: '/tutorial/form/textarea/index.md'
-                        },
-                        {
-                            text: 'Date Picker 日期选择器',
-                            link: '/tutorial/form/date-picker/index.md'
                         }
                     ]
                 },

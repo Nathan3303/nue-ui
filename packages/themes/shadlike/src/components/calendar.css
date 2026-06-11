@@ -1,13 +1,6 @@
-/* NueDatePicker Component Styles */
+/* NueCalendar Component Styles */
 
-.nue-date-picker {
-    .nue-text--placeholder {
-        font-size: inherit;
-        color: var(--nue-primary-color-500);
-    }
-}
-
-.nue-date-picker-panel {
+.nue-calendar {
     --nue-calendar-cell-size: var(--nue-box-size-df);
     --nue-calendar-font-size: var(--nue-text-sm);
     --nue-calendar-gap: var(--nue-gap-xs);
@@ -25,17 +18,17 @@
     gap: var(--nue-calendar-gap);
     padding: var(--nue-padding-2xs);
 
-    .nue-date-picker-panel__body {
+    .nue-calendar__body {
         display: flex;
         flex-direction: column;
         gap: var(--nue-calendar-gap);
 
-        .nue-date-picker-panel__date {
+        .nue-calendar__date {
             padding: var(--nue-padding-xs);
         }
     }
 
-    .nue-date-picker-panel__footer {
+    .nue-calendar__footer {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -65,7 +58,6 @@
         flex-direction: column;
         gap: var(--nue-calendar-gap);
 
-        /* Weekday Header */
         .weekday-header {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -83,7 +75,6 @@
             }
         }
 
-        /* Date Grid */
         .date-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -108,12 +99,10 @@
                     border-color: var(--nue-border-color);
                 }
 
-                /* Other month dates */
                 &.other-month {
                     color: var(--nue-primary-color-300);
                 }
 
-                /* Selected state */
                 &.selected {
                     color: var(--nue-primary-color-0);
                     background-color: var(--nue-primary-color-900);
@@ -125,7 +114,6 @@
                     }
                 }
 
-                /* Disabled state */
                 &.disabled {
                     color: var(--nue-primary-color-400);
                     cursor: not-allowed;
@@ -137,7 +125,6 @@
                     }
                 }
 
-                /* Today indicator */
                 &.today {
                     border-color: var(--nue-primary-color-900);
 
@@ -150,7 +137,6 @@
     }
 
     /* Month Picker */
-
     .nue-calendar-month {
         padding: var(--nue-calendar-padding);
 
@@ -190,7 +176,6 @@
     }
 
     /* Year Picker */
-
     .nue-calendar-year {
         padding: var(--nue-calendar-padding);
 
@@ -230,7 +215,6 @@
     }
 
     /* Time Picker */
-
     .nue-calendar-time-picker {
         display: flex;
         align-items: end;
@@ -313,8 +297,7 @@
 }
 
 /* Size Variants */
-
-.nue-date-picker-panel--small {
+.nue-calendar--small {
     --nue-calendar-cell-size: var(--nue-box-size-sm);
     --nue-calendar-font-size: var(--nue-text-xs);
     --nue-calendar-padding: var(--nue-padding-xs);
@@ -322,7 +305,7 @@
     padding: 0;
 }
 
-.nue-date-picker-panel--large {
+.nue-calendar--large {
     --nue-calendar-cell-size: var(--nue-box-size-md);
     --nue-calendar-font-size: var(--nue-text-df);
     --nue-calendar-padding: var(--nue-padding-df);

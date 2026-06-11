@@ -1,16 +1,53 @@
+<template>
+    <div class="nue-calendar-body">
+        <!-- 星期头部 -->
+        <div class="weekday-header">
+            <div v-for="day in WEEKDAYS" :key="day" class="weekday-item">
+                {{ day }}
+            </div>
+        </div>
+        <!-- 日期网格 -->
+        <div class="date-grid">
+            <div
+                v-for="day in allDays"
+                :key="day.dateStr"
+                class="date-cell"
+                :class="{
+                    'other-month': !day.isCurrentMonth,
+                    selected: isSelected(day.dateStr),
+                    today: isToday(day.dateStr),
+                    disabled: isDisabled(day.dateStr)
+                }"
+                @click="handleDateClick(day)"
+            >
+                <slot
+                    name="cell"
+                    :date="day.date"
+                    :dateStr="day.dateStr"
+                    :isCurrentMonth="day.isCurrentMonth"
+                >
+                    {{ day.date.getDate() }}
+                </slot>
+            </div>
+        </div>
+    </div>
+</template>
+
 <script setup lang="ts">
 import { computed } from 'vue';
-import { WEEKDAYS } from './constants';
-import { getDaysInMonth, getWeekday, isSameDay } from './utils/date-utils';
-import type { NueDatePickerBodyProps, NueDatePickerBodyEmits } from './types';
+import { WEEKDAYS } from './calendar-constants';
+import { getDaysInMonth, getWeekday, isSameDay } from '@nue-ui/utils';
+import type { NueCalendarBodyProps, NueCalendarBodyEmits } from './calendar-types';
 
-const props = withDefaults(defineProps<NueDatePickerBodyProps>(), {
+defineOptions({ name: 'NueCalendarBody' });
+
+const props = withDefaults(defineProps<NueCalendarBodyProps>(), {
     selectedDate: null,
     minDate: '',
     maxDate: ''
 });
 
-const emit = defineEmits<NueDatePickerBodyEmits>();
+const emit = defineEmits<NueCalendarBodyEmits>();
 
 // 当天日期字符串
 const todayStr = computed(() => {
@@ -133,38 +170,3 @@ function handleDateClick(day: { date: Date; dateStr: string; isCurrentMonth: boo
     emit('select', day.dateStr);
 }
 </script>
-
-<template>
-    <div class="nue-date-picker-body">
-        <!-- 星期头部 -->
-        <div class="weekday-header">
-            <div v-for="day in WEEKDAYS" :key="day" class="weekday-item">
-                {{ day }}
-            </div>
-        </div>
-        <!-- 日期网格 -->
-        <div class="date-grid">
-            <div
-                v-for="(day, index) in allDays"
-                :key="index"
-                class="date-cell"
-                :class="{
-                    'other-month': !day.isCurrentMonth,
-                    selected: isSelected(day.dateStr),
-                    today: isToday(day.dateStr),
-                    disabled: isDisabled(day.dateStr)
-                }"
-                @click="handleDateClick(day)"
-            >
-                <slot
-                    name="cell"
-                    :date="day.date"
-                    :dateStr="day.dateStr"
-                    :isCurrentMonth="day.isCurrentMonth"
-                >
-                    {{ day.date.getDate() }}
-                </slot>
-            </div>
-        </div>
-    </div>
-</template>
