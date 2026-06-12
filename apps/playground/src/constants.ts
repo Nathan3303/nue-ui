@@ -57,7 +57,10 @@ export const componentLayoutAsideLinks = [
     {
         name: 'others',
         title: 'Others 其他组件',
-        links: [{ route: '/component/divider', text: 'Divider 分割线' }]
+        links: [
+            { route: '/component/divider', text: 'Divider 分割线' },
+            { route: '/component/scroll-bar', text: 'ScrollBar 滚动条' }
+        ]
     }
 ];
 

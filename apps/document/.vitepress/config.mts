@@ -165,6 +165,10 @@ export default defineConfig({
                         {
                             text: 'Divider 分割组件',
                             link: '/tutorial/others/divider/index.md'
+                        },
+                        {
+                            text: 'ScrollBar 滚动条',
+                            link: '/tutorial/others/scroll-bar/index.md'
                         }
                     ]
                 }

@@ -29,3 +29,4 @@ export * from './text';
 export * from './tooltip';
 export * from './marquee';
 export * from './message';
+export * from './scroll-bar';
