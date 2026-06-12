@@ -86,6 +86,27 @@ function tick() {
     scrollTick.value++;
 }
 
+// --- 轨道 padding 缓存（仅 mount/resize 时通过 getComputedStyle 读取，避免滚动热点路径开销） ---
+const vTrackPadding = ref({ top: 0, bottom: 0 });
+const hTrackPadding = ref({ left: 0, right: 0 });
+
+function readTrackPadding() {
+    if (verticalTrackRef.value) {
+        const s = window.getComputedStyle(verticalTrackRef.value);
+        vTrackPadding.value = {
+            top: parseFloat(s.paddingTop) || 0,
+            bottom: parseFloat(s.paddingBottom) || 0
+        };
+    }
+    if (horizontalTrackRef.value) {
+        const s = window.getComputedStyle(horizontalTrackRef.value);
+        hTrackPadding.value = {
+            left: parseFloat(s.paddingLeft) || 0,
+            right: parseFloat(s.paddingRight) || 0
+        };
+    }
+}
+
 // Computed
 const wrapperClasses = computed(() => {
     const prefix = 'nue-scroll-bar';
@@ -109,16 +130,26 @@ const bothState = computed(() => {
     return verticalState.value && horizontalState.value;
 });
 
+/** 获取轨道 content 区尺寸（clientHeight/Width 减去已缓存的 padding） */
+function contentSize(el: HTMLElement, padding: { top: number; bottom: number }) {
+    return Math.max(0, el.clientHeight - padding.top - padding.bottom);
+}
+function contentSizeH(el: HTMLElement, padding: { left: number; right: number }) {
+    return Math.max(0, el.clientWidth - padding.left - padding.right);
+}
+
 // Size calculations
 const verticalThumbSize = computed(() => {
     void scrollTick.value;
     if (!viewportRef.value || !wrapperRef.value || !verticalState.value) return '0px';
     const viewport = viewportRef.value;
-    const trackHeight = verticalTrackRef.value?.offsetHeight ?? 0;
+    const track = verticalTrackRef.value!;
+    const pad = vTrackPadding.value;
+    const contentH = contentSize(track, pad);
+    if (contentH <= 0) return '0px';
     const ratio = viewport.clientHeight / viewport.scrollHeight;
-    const size = Math.max(ratio * trackHeight, props.minThumbSize);
-    // Ensure thumb doesn't exceed track
-    const clamped = Math.min(size, trackHeight);
+    const size = Math.max(ratio * contentH, props.minThumbSize);
+    const clamped = Math.min(size, contentH);
     return `${clamped}px`;
 });
 
@@ -128,8 +159,11 @@ const verticalThumbTranslate = computed(() => {
     const viewport = viewportRef.value;
     const track = verticalTrackRef.value;
     const thumbH = parseFloat(verticalThumbSize.value);
-    const maxTranslate = track.offsetHeight - thumbH;
-    const ratio = viewport.scrollTop / (viewport.scrollHeight - viewport.clientHeight);
+    const pad = vTrackPadding.value;
+    const contentH = contentSize(track, pad);
+    const maxTranslate = Math.max(0, contentH - thumbH);
+    const maxScroll = viewport.scrollHeight - viewport.clientHeight;
+    const ratio = maxScroll > 0 ? viewport.scrollTop / maxScroll : 0;
     return ratio * maxTranslate || 0;
 });
 
@@ -137,10 +171,13 @@ const horizontalThumbSize = computed(() => {
     void scrollTick.value;
     if (!viewportRef.value || !horizontalState.value) return '0px';
     const viewport = viewportRef.value;
-    const trackWidth = horizontalTrackRef.value?.offsetWidth ?? 0;
+    const track = horizontalTrackRef.value!;
+    const pad = hTrackPadding.value;
+    const contentW = contentSizeH(track, pad);
+    if (contentW <= 0) return '0px';
     const ratio = viewport.clientWidth / viewport.scrollWidth;
-    const size = Math.max(ratio * trackWidth, props.minThumbSize);
-    const clamped = Math.min(size, trackWidth);
+    const size = Math.max(ratio * contentW, props.minThumbSize);
+    const clamped = Math.min(size, contentW);
     return `${clamped}px`;
 });
 
@@ -150,8 +187,11 @@ const horizontalThumbTranslate = computed(() => {
     const viewport = viewportRef.value;
     const track = horizontalTrackRef.value;
     const thumbW = parseFloat(horizontalThumbSize.value);
-    const maxTranslate = track.offsetWidth - thumbW;
-    const ratio = viewport.scrollLeft / (viewport.scrollWidth - viewport.clientWidth);
+    const pad = hTrackPadding.value;
+    const contentW = contentSizeH(track, pad);
+    const maxTranslate = Math.max(0, contentW - thumbW);
+    const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+    const ratio = maxScroll > 0 ? viewport.scrollLeft / maxScroll : 0;
     return ratio * maxTranslate || 0;
 });
 
@@ -188,9 +228,14 @@ const handleDragMove = (evt: MouseEvent) => {
             : evt.clientX - dragStartData.value.startPos;
     const track = dir === 'vertical' ? verticalTrackRef.value! : horizontalTrackRef.value!;
     const thumb = dir === 'vertical' ? verticalThumbRef.value! : horizontalThumbRef.value!;
-    const trackSize = dir === 'vertical' ? track.clientHeight : track.clientWidth;
+    const padV = vTrackPadding.value;
+    const padH = hTrackPadding.value;
+    const trackSize =
+        dir === 'vertical'
+            ? track.clientHeight - padV.top - padV.bottom
+            : track.clientWidth - padH.left - padH.right;
     const thumbSize = dir === 'vertical' ? thumb.clientHeight : thumb.clientWidth;
-    const maxTranslate = trackSize - thumbSize;
+    const maxTranslate = Math.max(0, trackSize - thumbSize);
     const translateRatio = delta / maxTranslate;
     const viewport = viewportRef.value;
     const maxScroll =
@@ -215,12 +260,24 @@ const handleTrackClick = (direction: 'vertical' | 'horizontal', evt: MouseEvent)
     if ((evt.target as HTMLElement).classList.contains('nue-scroll-bar__thumb')) return;
     const track = direction === 'vertical' ? verticalTrackRef.value! : horizontalTrackRef.value!;
     const thumb = direction === 'vertical' ? verticalThumbRef.value! : horizontalThumbRef.value!;
+    const padV = vTrackPadding.value;
+    const padH = hTrackPadding.value;
     const trackRect = track.getBoundingClientRect();
     const trackSize = direction === 'vertical' ? trackRect.height : trackRect.width;
     const thumbSize = direction === 'vertical' ? thumb.clientHeight : thumb.clientWidth;
     const clickPos =
         direction === 'vertical' ? evt.clientY - trackRect.top : evt.clientX - trackRect.left;
-    const ratio = (clickPos - thumbSize / 2) / (trackSize - thumbSize);
+    let contentSize: number;
+    let clickOffset: number;
+    if (direction === 'vertical') {
+        contentSize = trackSize - padV.top - padV.bottom;
+        clickOffset = clickPos - padV.top;
+    } else {
+        contentSize = trackSize - padH.left - padH.right;
+        clickOffset = clickPos - padH.left;
+    }
+    const ratio =
+        contentSize > thumbSize ? (clickOffset - thumbSize / 2) / (contentSize - thumbSize) : 0;
     if (!viewportRef.value) return;
     const maxScroll =
         direction === 'vertical'
@@ -246,8 +303,10 @@ const handleMouseLeave = () => {
 let resizeObserver: ResizeObserver | null = null;
 
 onMounted(() => {
+    readTrackPadding();
     if (viewportRef.value) {
         resizeObserver = new ResizeObserver(() => {
+            readTrackPadding();
             tick();
         });
         resizeObserver.observe(viewportRef.value);

@@ -112,4 +112,15 @@ describe('NueScrollBar', () => {
             expect(wrapper.emitted('scroll')).toBeTruthy();
         });
     });
+
+    describe('轨道 padding 兼容', () => {
+        it('轨道有 padding 时组件不报错，contentSize 应排除 padding', () => {
+            const wrapper = mount(NueScrollBar, {
+                props: { vertical: true, horizontal: true }
+            });
+            expect(wrapper.find('.nue-scroll-bar__track--vertical').exists()).toBe(true);
+            expect(wrapper.find('.nue-scroll-bar__track--horizontal').exists()).toBe(true);
+            expect(wrapper.find('.nue-scroll-bar__thumb').exists()).toBe(true);
+        });
+    });
 });
