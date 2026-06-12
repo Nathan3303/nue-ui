@@ -50,6 +50,15 @@ const scrollBarMode = ref<'hover' | 'always' | 'hidden'>('hover');
             </nue-scroll-bar>
         </nue-div>
     </demo>
+    <demo title="自定义样式">
+        <nue-scroll-bar vertical horizontal theme="demo,custom">
+            <nue-div vertical>
+                <nue-div theme="block2" v-for="i in 10" :key="i">
+                    {{ i }}
+                </nue-div>
+            </nue-div>
+        </nue-scroll-bar>
+    </demo>
 </template>
 
 <style scoped>
@@ -75,5 +84,28 @@ const scrollBarMode = ref<'hover' | 'always' | 'hidden'>('hover');
     justify-content: center;
     background-color: var(--nue-primary-color-100);
     border-radius: var(--nue-primary-radius);
+}
+
+.nue-scroll-bar--custom {
+    --nue-scroll-bar-size: 12px;
+
+    &:deep(.nue-scroll-bar__track) {
+        border-radius: 0;
+        padding: 4px;
+        box-sizing: border-box;
+
+        &.nue-scroll-bar__track--vertical {
+            background-color: var(--nue-warning-color-50);
+        }
+
+        &.nue-scroll-bar__track--horizontal {
+            background-color: var(--nue-error-color-60);
+        }
+
+        .nue-scroll-bar__thumb {
+            background-color: white;
+            border-radius: 0;
+        }
+    }
 }
 </style>
