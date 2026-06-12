@@ -4,7 +4,7 @@
 
 ## 基础用法
 
-通过标签 `<NueScrollBar>` 包裹需要滚动的内容，默认启用垂直滚动。
+通过标签 `<NueScrollBar>` 包裹需要滚动的内容，通过属性 `vertical` 开启水平滚动。
 
 ::: preview
 demo-preview=./basic.vue
@@ -24,14 +24,6 @@ demo-preview=./horizontal.vue
 
 ::: preview
 demo-preview=./mode.vue
-:::
-
-## 拇指粗细
-
-通过属性 `thumb-size` 调整滚动条拇指的粗细，可选值为 `small`、`default` 和 `large`。
-
-::: preview
-demo-preview=./thumb-size.vue
 :::
 
 ## 主题与自定义样式
