@@ -1,4 +1,4 @@
-# ScrollBar 滚动条
+# ScrollBar 滚动条 <Badge type="warning" text="1.10.57 +" />
 
 自定义滚动条组件，替换浏览器原生滚动条，提供统一样式和交互。
 
