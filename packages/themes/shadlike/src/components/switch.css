@@ -2,7 +2,7 @@
     --nue-switch-height: var(--nue-box-size-xs);
     --nue-switch-width: fit-content;
     --nue-switch-min-width: calc(var(--nue-switch-height) * 2);
-    --nue-switch-state-width: auto;
+    --nue-switch-state-width: var(--nue-switch-min-width);
     --nue-switch-background-color: var(--nue-primary-color-200);
     --nue-switch-background-active-color: var(--nue-primary-color-800);
     --nue-switch-circle-size: calc(var(--nue-switch-height) - 0.25rem);
