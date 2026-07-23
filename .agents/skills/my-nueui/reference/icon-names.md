@@ -4,7 +4,7 @@ All 106 available icon names for `NueIcon` and component `icon` props.
 
 Usage: `<NueIcon name="search" />` or `<NueButton icon="plus">Add</NueButton>` renders `<i class="iconfont icon-search">`.
 
-```
+```text
 account          arrow-left-more    blank            calendar-wrap     chat
 ai-chat-fill     arrow-right        board            check             circle
 archive          arrow-right-circle calendar         clear             clear-circle

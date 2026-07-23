@@ -168,3 +168,47 @@ All form components support `v-model` for two-way binding.
 <NueDatePicker v-model="birthday" placeholder="Select date" clearable />
 <NueDatePicker v-model="appointment" type="datetime" />
 ```
+
+## NueCalendar
+
+Standalone calendar panel — no input field, no dropdown. Renders the calendar grid directly inline. Useful for custom date-picking UIs, booking systems, or embedding a calendar in a page layout.
+
+| Prop      | Type                   | Default  | Description                   |
+| --------- | ---------------------- | -------- | ----------------------------- |
+| modelValue| `string \| null`       | `null`   | Selected ISO date (v-model)   |
+| type      | `'date' \| 'datetime'` | `'date'` | Calendar mode                 |
+| size      | `'small' \| 'large'`   | -        | Size                          |
+| minDate   | `string`               | `''`     | Earliest selectable date      |
+| maxDate   | `string`               | `''`     | Latest selectable date        |
+
+**Emits**: `update:modelValue(value)`, `change(value)`, `clear()`
+
+**Slots**: `cell` (scoped: `{ date, dateStr, isCurrentMonth }`), `footer` (scoped: `{ clear }`)
+
+```vue
+<NueCalendar v-model="selectedDate" :minDate="'2026-01-01'" :maxDate="'2026-12-31'" />
+<NueCalendar v-model="appointment" type="datetime">
+  <template #cell="{ date, dateStr, isCurrentMonth }">
+    <div :class="{ 'other-month': !isCurrentMonth }">{{ date }}</div>
+  </template>
+  <template #footer="{ clear }">
+    <NueButton @click="clear">Reset</NueButton>
+  </template>
+</NueCalendar>
+```
+
+### Sub-Components
+
+The following are exported but NOT globally registered — import directly from `nue-ui` for custom calendar building:
+
+| Component                | Role                           |
+| ------------------------ | ------------------------------ |
+| `NueCalendarHeader`      | Year/month navigation + view toggle |
+| `NueCalendarBody`        | Day grid (7×6)                 |
+| `NueCalendarYear`        | Year picker grid               |
+| `NueCalendarMonth`       | Month picker grid              |
+| `NueCalendarTimePicker`  | Hour/minute selector           |
+
+```ts
+import { NueCalendarHeader, NueCalendarBody, NueCalendarTimePicker } from 'nue-ui';
+```

@@ -12,7 +12,7 @@ description: >-
 
 # NueUI Skill
 
-Vue 3 component library (~30+ components). All components use the `Nue` prefix and are globally registered via `app.use(NueUI)`.
+Vue 3 component library (33 components). All components use the `Nue` prefix and are globally registered via `app.use(NueUI)`.
 
 ## Package Ecosystem
 
@@ -47,7 +47,7 @@ import 'nue-ui-theme-shadlike/dist/index.css'; // Theme (strongly recommended)
 // Or per-component: import 'nue-ui-theme-shadlike/dist/components/button.css';
 
 const app = createApp(App);
-app.use(NueUI); // Registers all ~30+ components globally as <nue-*>
+app.use(NueUI); // Registers all 33 components globally as <nue-*>
 app.mount('#app');
 ```
 
@@ -158,7 +158,7 @@ Use these levels to determine the complexity of your output. Match the user's re
 **Rules:**
 
 - Every form input must have `v-model` for two-way binding
-- Use the right input type: `NueInput` for text/password/email, `NueSelect` for choices, `NueSwitch` for toggles, `NueCheckboxGroup` for multi-select, `NueDatePicker` for dates
+- Use the right input type: `NueInput` for text/password/email, `NueSelect` for choices, `NueSwitch` for toggles, `NueCheckboxGroup` for multi-select, `NueDatePicker` for dates, `NueCalendar` for standalone calendar
 - Submit button should show `loading` state during async operations
 - Use `debounceTime` on search inputs, `useThrottle` on submit buttons for rate limiting
 - Handle validation errors inline (red text via `NueText` with theme), not just alerts
@@ -316,6 +316,8 @@ Always prefer NueUI components over raw HTML equivalents:
 | Button          | `<NueButton>`         | `<button>`                     |
 | Text input      | `<NueInput>`          | `<input>`                      |
 | Select/dropdown | `<NueSelect>`         | `<select>`                     |
+| Date picker     | `<NueDatePicker>`     | `<input type="date">`          |
+| Calendar panel  | `<NueCalendar>`       | Manual calendar grid           |
 | Toggle          | `<NueSwitch>`         | Custom checkbox                |
 | Multi-select    | `<NueCheckboxGroup>`  | Manual checkbox array          |
 | Flex layout     | `<NueDiv>`            | `<div style="display:flex">`   |
@@ -335,6 +337,7 @@ Always prefer NueUI components over raw HTML equivalents:
 | Infinite scroll | `<NueInfiniteScroll>` | Manual `IntersectionObserver`  |
 | Breadcrumb      | `<NueBreadcrumb>`     | Manual link list               |
 | Marquee         | `<NueMarquee>`        | Manual CSS animation           |
+| Resizable panel | `<NueSeparator>`      | Manual drag handlers           |
 
 **Exception:** Use a raw `<div>` only when you need a pure container with no flex/styling — and even then, consider whether `<NueContent>` or `<NueDiv>` would be better.
 
@@ -497,6 +500,7 @@ Complete details for each component are in the reference files. This table is a 
 | `NueSwitch`        | Toggle switch with async guard   | [form](reference/components-form.md) |
 | `NueSelect`        | Dropdown select (parent-child)   | [form](reference/components-form.md) |
 | `NueDatePicker`    | Date/datetime picker             | [form](reference/components-form.md) |
+| `NueCalendar`      | Standalone calendar panel        | [form](reference/components-form.md) |
 
 ### Data Display
 

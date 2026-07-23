@@ -157,7 +157,10 @@ Full registration with validation and async submission.
             <NueSelectOption label="Manager" value="manager" />
         </NueSelect>
 
-        <NueSwitch v-model="form.newsletter" label="Subscribe to newsletter" :disabled="loading" />
+        <NueDiv align="center" gap="8px">
+            <NueSwitch v-model="form.newsletter" :disabled="loading" />
+            <NueText size="sm">Subscribe to newsletter</NueText>
+        </NueDiv>
 
         <NueButton theme="primary" :loading="loading" :useThrottle="true" @click="handleRegister">
             Create Account
@@ -382,14 +385,26 @@ A slide-in settings panel with form controls and save/cancel.
     <NueDrawer v-model="open" title="Settings" openFrom="right" :span="'400px'" allowCloseByOverlay>
         <NueDiv vertical gap="16px">
             <NueText weight="bold">Notifications</NueText>
-            <NueSwitch v-model="settings.emailNotifications" label="Email notifications" />
-            <NueSwitch v-model="settings.pushNotifications" label="Push notifications" />
-            <NueSwitch v-model="settings.desktopNotifications" label="Desktop notifications" />
+            <NueDiv align="center" justify="space-between">
+                <NueText>Email notifications</NueText>
+                <NueSwitch v-model="settings.emailNotifications" />
+            </NueDiv>
+            <NueDiv align="center" justify="space-between">
+                <NueText>Push notifications</NueText>
+                <NueSwitch v-model="settings.pushNotifications" />
+            </NueDiv>
+            <NueDiv align="center" justify="space-between">
+                <NueText>Desktop notifications</NueText>
+                <NueSwitch v-model="settings.desktopNotifications" />
+            </NueDiv>
 
             <NueDivider />
 
             <NueText weight="bold">Appearance</NueText>
-            <NueSwitch v-model="settings.darkMode" label="Dark mode" @change="toggleDarkMode" />
+            <NueDiv align="center" justify="space-between">
+                <NueText>Dark mode</NueText>
+                <NueSwitch v-model="settings.darkMode" @change="toggleDarkMode" />
+            </NueDiv>
             <NueSelect v-model="settings.language" placeholder="Language">
                 <NueSelectOption label="English" value="en" />
                 <NueSelectOption label="中文" value="zh" />
