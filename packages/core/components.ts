@@ -38,7 +38,8 @@ import {
     NueSeparator,
     NueText,
     NueTextarea,
-    NueTooltip
+    NueTooltip,
+    NueScrollBar
 } from '@nue-ui/components';
 
 import type { Plugin } from 'vue';
@@ -83,5 +84,6 @@ export default [
     NueSeparator,
     NueText,
     NueTextarea,
-    NueTooltip
+    NueTooltip,
+    NueScrollBar
 ] as Plugin[];

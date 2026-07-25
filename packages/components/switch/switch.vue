@@ -80,10 +80,9 @@ const handleSwitch = () => {
 const handleSetStateWidth = () => {
     nextTick(() => {
         if (!switchRef.value) return;
-        switchRef.value.style.setProperty(
-            '--nue-switch-state-width',
-            `${switchRef.value.clientWidth}px`
-        );
+        const width = switchRef.value.clientWidth;
+        if (width <= 0) return;
+        switchRef.value.style.setProperty('--nue-switch-state-width', `${width}px`);
     });
 };
 

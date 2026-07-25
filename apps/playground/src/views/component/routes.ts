@@ -60,6 +60,10 @@ const routes: RouteRecordRaw = {
         {
             path: '/component/date-picker',
             component: () => import('@/layouts/component/date-picker.vue')
+        },
+        {
+            path: '/component/scroll-bar',
+            component: () => import('@/layouts/component/scroll-bar.vue')
         }
     ]
 };

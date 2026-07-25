@@ -60,11 +60,27 @@
             </template>
         </nue-switch>
     </demo>
+    <demo title="条件渲染">
+        <nue-div align="center">
+            <nue-button @click="showDemo = !showDemo" size="small">
+                {{ showDemo ? '隐藏' : '显示' }}
+            </nue-button>
+            <template v-if="showDemo">
+                <nue-switch
+                    v-model="demoVal"
+                    show-text
+                    active-text="已开启"
+                    inactive-text="已关闭"
+                />
+                <nue-text size="sm">圆圈位置正常 ✓</nue-text>
+            </template>
+        </nue-div>
+    </demo>
 </template>
 
 <script lang="ts" setup>
 import { ref, reactive } from 'vue';
-import { NueDiv, NueSwitch } from '@nue-ui/components';
+import { NueDiv, NueSwitch, NueButton, NueText } from '@nue-ui/components';
 import Demo from '@/components/demo.vue';
 
 const sw1 = ref(false);
@@ -72,6 +88,8 @@ const sw2 = reactive({ loading: true });
 const sw3 = reactive({ value: false, loading: false });
 const sw4 = reactive({ s1: false, s2: true });
 const sw5 = ref(false);
+const showDemo = ref(false);
+const demoVal = ref(true);
 
 const handleBeforeSwitch = async () => {
     sw3.loading = true;
