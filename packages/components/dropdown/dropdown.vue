@@ -214,7 +214,11 @@ const handleSwitchByMouseEvent = (event: MouseEvent) => {
             break;
         case 'click':
         default:
-            visible.value ? handleDropdownClose() : handleDropdownOpen();
+            if (visible.value) {
+                handleDropdownClose();
+            } else {
+                handleDropdownOpen();
+            }
             break;
     }
 };

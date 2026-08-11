@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach, type MockInstance } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach, type MockInstance } from 'vite-plus/test';
 import { ref } from 'vue';
 import usePopper from '../use-popper';
 
@@ -135,16 +135,19 @@ describe('usePopper', () => {
     });
 
     describe('ResizeObserver 功能', () => {
-        let resizeObserverSpy: MockInstance;
+        let resizeObserverSpy: MockInstance<typeof ResizeObserver>;
+        let observe: ReturnType<typeof vi.fn>;
+        let disconnect: ReturnType<typeof vi.fn>;
 
         beforeEach(() => {
-            resizeObserverSpy = vi.spyOn(window, 'ResizeObserver').mockImplementation(
-                () =>
-                    ({
-                        observe: vi.fn(),
-                        disconnect: vi.fn()
-                    }) as unknown as ResizeObserver
-            );
+            observe = vi.fn();
+            disconnect = vi.fn();
+            resizeObserverSpy = vi.spyOn(window, 'ResizeObserver').mockImplementation(function () {
+                return {
+                    observe,
+                    disconnect
+                } as unknown as ResizeObserver;
+            });
         });
 
         afterEach(() => {
@@ -160,9 +163,8 @@ describe('usePopper', () => {
             startResizeObserver(callback);
 
             expect(resizeObserverSpy).toHaveBeenCalled();
-            const observerInstance = resizeObserverSpy.mock.results[0].value as ResizeObserver;
-            expect(observerInstance.observe).toHaveBeenCalledWith(popperEl);
-            expect(observerInstance.observe).toHaveBeenCalledWith(wrapperEl);
+            expect(observe).toHaveBeenCalledWith(popperEl);
+            expect(observe).toHaveBeenCalledWith(wrapperEl);
         });
 
         it('stopResizeObserver 应该断开 ResizeObserver', () => {
@@ -179,8 +181,7 @@ describe('usePopper', () => {
             startResizeObserver(callback);
             stopResizeObserver();
 
-            const observerInstance = resizeObserverSpy.mock.results[0].value as ResizeObserver;
-            expect(observerInstance.disconnect).toHaveBeenCalled();
+            expect(disconnect).toHaveBeenCalled();
         });
     });
 

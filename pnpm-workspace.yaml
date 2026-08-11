@@ -6,3 +6,18 @@ packages:
 allowBuilds:
     '@parcel/watcher': true
     esbuild: true
+catalog:
+    vite: npm:@voidzero-dev/vite-plus-core@0.2.6
+    vitest: 4.1.10
+    vite-plus: 0.2.6
+    '@vitest/coverage-v8': 4.1.10
+overrides:
+    vite: 'catalog:'
+    vitest: 'catalog:'
+peerDependencyRules:
+    allowAny:
+        - vite
+        - vitest
+    allowedVersions:
+        vite: '*'
+        vitest: '*'

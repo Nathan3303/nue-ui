@@ -1,9 +1,9 @@
 import { TEXT_SIZE_VALUES } from './constants';
 import type { GlobalProps } from '@nue-ui/utils';
 
-export type NueTextTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'span' | 'p' | 'strong' | string;
+export type NueTextTag = string;
 
-export type NueTextSize = keyof typeof TEXT_SIZE_VALUES | string;
+export type NueTextSize = keyof typeof TEXT_SIZE_VALUES;
 
 export type NueTextWeight = 'normal' | 'bold' | 'bolder' | 'lighter' | number;
 

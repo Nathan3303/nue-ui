@@ -69,7 +69,7 @@ const handleExpandAnimation = () => {
     styleVO.height = '0px';
     nextTick(() => {
         if (!contentRef.value) return;
-        contentRef.value.scrollHeight;
+        void contentRef.value.scrollHeight;
         styleVO.height = `max(${props.minHeight || '0px'}, min(${props.maxHeight || '9999px'}, ${contentRef.value.scrollHeight}px))`;
         styleVO.overflow = props.maxHeight ? 'auto' : 'hidden';
     });
@@ -81,7 +81,7 @@ const handleCollapseAnimation = () => {
     styleVO.minHeight = 'unset';
     nextTick(() => {
         if (!contentRef.value) return;
-        contentRef.value.clientHeight;
+        void contentRef.value.clientHeight;
         styleVO.height = '0px';
         styleVO.overflow = 'hidden';
     });
