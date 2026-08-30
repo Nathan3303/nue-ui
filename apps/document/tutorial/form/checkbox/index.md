@@ -151,3 +151,23 @@ demo-preview=./cg-min-max.vue
 | `change`            | `value: boolean` | 状态变化事件 |
 | `checked`           | -                | 选中事件     |
 | `unchecked`         | -                | 取消选中事件 |
+
+### NueCheckboxGroup 属性
+
+| 属性              | Type                                            | 默认值     | 说明                           |
+| ----------------- | ----------------------------------------------- | ---------- | ------------------------------ |
+| `modelValue`      | `string[]`                                      | -          | 选中项的 name 数组             |
+| `size`            | `'small' \| 'large'`                            | -          | 组内复选框尺寸                 |
+| `disabled`        | `boolean`                                       | `false`    | 是否禁用                       |
+| `name`            | `string`                                        | -          | 名称（用于组内复选框记录）     |
+| `useController`   | `boolean`                                       | `false`    | 是否启用全选控制器             |
+| `controllerLabel` | `string`                                        | -          | 全选控制器标签文字             |
+| `min`             | `number`                                        | `0`        | 最少选中数量                   |
+| `max`             | `number`                                        | `Infinity` | 最多选中数量                   |
+| `theme`           | `string \| string[] \| Record<string, boolean>` | -          | 主题样式（继承自 GlobalProps） |
+
+### NueCheckboxGroup 事件
+
+| 事件                | 参数              | 说明       |
+| ------------------- | ----------------- | ---------- |
+| `update:modelValue` | `value: string[]` | 值更新事件 |

@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
-import { usePopupPool } from '@nue-ui/components';
+import { usePopupPool } from '@nue-ui/components/popup-pool';
 import { generateElementId } from '@nue-ui/utils';
 
 const usePopupAnchor = (popupPoolId?: string) => {

@@ -73,8 +73,8 @@ demo-preview=./slots.vue
 | `modelValue` | `string`                                        | -      | 绑定值                              |
 | `type`       | `'date' \| 'datetime'`                          | `date` | 日历类型                            |
 | `size`       | `'small' \| 'large'`                            | -      | 尺寸                                |
-| `min-date`   | `string`                                        | -      | 可选的最小日期（`YYYY-MM-DD` 格式） |
-| `max-date`   | `string`                                        | -      | 可选的最大日期（`YYYY-MM-DD` 格式） |
+| `minDate`    | `string`                                        | -      | 可选的最小日期（`YYYY-MM-DD` 格式） |
+| `maxDate`    | `string`                                        | -      | 可选的最大日期（`YYYY-MM-DD` 格式） |
 | `theme`      | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps）      |
 
 ### 事件

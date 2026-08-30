@@ -59,10 +59,10 @@ demo-preview=./theme.vue
 
 ### 属性
 
-| 属性           | Type                                            | 默认值 | 说明                           |
-| -------------- | ----------------------------------------------- | ------ | ------------------------------ |
-| `content`      | `string`                                        | -      | 提示内容                       |
-| `placement`    | `string`                                        | -      | 弹出位置，格式：`方向-对齐`    |
-| `size`         | `'small' \| 'normal' \| 'large'`                | -      | 提示框尺寸                     |
-| `showTriangle` | `boolean`                                       | `true` | 是否显示三角箭头               |
-| `theme`        | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+| 属性           | Type                                            | 默认值        | 说明                           |
+| -------------- | ----------------------------------------------- | ------------- | ------------------------------ |
+| `content`      | `string`                                        | `No content.` | 提示内容                       |
+| `placement`    | `string`                                        | `top-center`  | 弹出位置，格式：`方向-对齐`    |
+| `size`         | `'small' \| 'normal' \| 'large'`                | -             | 提示框尺寸                     |
+| `showTriangle` | `boolean`                                       | `false`       | 是否显示三角箭头               |
+| `theme`        | `string \| string[] \| Record<string, boolean>` | -             | 主题样式（继承自 GlobalProps） |

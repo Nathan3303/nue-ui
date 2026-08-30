@@ -51,7 +51,8 @@ import NueIcon from '../icon/icon.vue';
 import NueOverlay from '../overlay/overlay.vue';
 import { parseTheme } from '@nue-ui/utils';
 import { throttle, debounce } from 'lodash-es';
-import { usePopupAnchor, usePopperV2 } from '@nue-ui/hooks';
+import { usePopupAnchor } from '@nue-ui/hooks/use-popup-anchor';
+import { usePopperV2 } from '@nue-ui/hooks/use-popper-v2';
 import { register, unregister, closeDropdownsInGroup } from './dropdown-group';
 import type {
     NueDropdownProps,

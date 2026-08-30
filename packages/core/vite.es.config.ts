@@ -3,12 +3,27 @@ import dts from 'vite-plugin-dts';
 import terser from '@rollup/plugin-terser';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { mcComponentNames } from './utils.ts';
+import { existsSync, readdirSync } from 'fs';
 import type { PluginOption } from 'vite';
 
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = process.env.NODE_ENV === 'development';
 const isTest = process.env.NODE_ENV === 'test';
+
+const componentsRoot = resolve(__dirname, '../components');
+
+// 每个组件目录作为一个独立入口（按需引入：nue-ui/es/<name>.js）
+const componentEntries = readdirSync(componentsRoot, { withFileTypes: true })
+    .filter(d => d.isDirectory() && !d.name.startsWith('__') && !d.name.startsWith('.'))
+    .map(d => d.name)
+    .filter(name => existsSync(resolve(componentsRoot, name, 'index.ts')))
+    .reduce<Record<string, string>>((acc, name) => {
+        acc[name] = resolve(componentsRoot, name, 'index.ts');
+        return acc;
+    }, {});
+
+// 全量入口（保留 `import { X } from 'nue-ui'` 的既有用法）
+const entries = { ...componentEntries, index: resolve(__dirname, './index.ts') };
 
 export default defineConfig({
     plugins: [
@@ -50,38 +65,21 @@ export default defineConfig({
         cssCodeSplit: true,
         cssMinify: true,
         lib: {
-            entry: resolve(__dirname, './index.ts'),
+            entry: entries,
             name: 'nue-ui',
-            fileName: 'index',
+            fileName: (_format, entryName) => `${entryName}.js`,
             formats: ['es']
         },
         rollupOptions: {
             external: ['vue'],
             output: {
                 assetFileNames: assetInfo => {
-                    console.log(assetInfo);
                     if (assetInfo.name?.endsWith('.css')) {
                         return 'styles/[name].[ext]';
                     }
                     return 'assets/[name]-[hash][extname]';
                 },
-                manualChunks: id => {
-                    // console.log(id);
-                    if (id.includes('node_modules')) return 'vendor';
-                    else if (id.includes('/packages/hooks')) return 'hooks';
-                    else if (id.includes('/packages/utils')) return 'utils';
-                    else {
-                        const names = mcComponentNames.map(n => n.replace(/(nue-)/g, ''));
-                        for (const name of names) {
-                            if (id.includes(name)) return name;
-                        }
-                        return 'index';
-                    }
-                },
-                chunkFileNames: () => {
-                    if (isProd) return '[name].[hash].js';
-                    return '[name].js';
-                }
+                chunkFileNames: isProd ? '[name]-[hash].js' : '[name].js'
             }
         }
     }

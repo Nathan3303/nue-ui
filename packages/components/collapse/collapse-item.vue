@@ -27,7 +27,8 @@
 
 <script lang="ts" setup>
 import { computed, inject, nextTick, onMounted, reactive, ref, watch } from 'vue';
-import { NueButton, NueText } from '@nue-ui/components';
+import NueButton from '../button/button.vue';
+import NueText from '../text/text.vue';
 import { generateId, parseTheme } from '@nue-ui/utils';
 import { NUE_COLLAPSE_CONTEXT_KEY } from './constants';
 import type { NueCollapseContext, NueCollapseItemName, NueCollapseItemProps } from './types';

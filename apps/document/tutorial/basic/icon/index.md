@@ -66,4 +66,5 @@ demo-preview=./icons.vue
 | `color`     | `string`             | -       | 图标颜色，接受 CSS Color 值    |
 | `spin`      | `boolean`            | `false` | 是否旋转                       |
 | `spinSpeed` | `string`             | `2s`    | 旋转速度，接受 CSS Duration 值 |
+| `hinting`   | `boolean`            | `true`  | 是否启用字体抗锯齿（hinting）  |
 | `theme`     | `string \| string[]` | -       | 主题样式（继承自 GlobalProps） |

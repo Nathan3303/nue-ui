@@ -49,7 +49,7 @@ import NueText from '../text/text.vue';
 import NueButton from '../button/button.vue';
 import NueOverlay from '../overlay/overlay.vue';
 import { parseTheme } from '@nue-ui/utils';
-import { usePopupAnchor } from '@nue-ui/hooks';
+import { usePopupAnchor } from '@nue-ui/hooks/use-popup-anchor';
 import type { NueDrawerProps, NueDrawerEmits } from './types';
 
 defineOptions({ name: 'NueDrawer' });
