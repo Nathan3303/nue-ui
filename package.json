@@ -10,8 +10,6 @@
         "test:ui": "vp test --ui",
         "test:run": "vp test run",
         "test:coverage": "vp test run --coverage",
-        "lint": "npx eslint -c eslint.config.mjs",
-        "lint-on-debug": "npx eslint -c eslint.config.mjs --debug",
         "lint:lint-staged": "vp staged",
         "format": "vp fmt .",
         "prepare": "vp config",

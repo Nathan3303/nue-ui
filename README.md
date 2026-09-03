@@ -108,8 +108,8 @@ pnpm test:coverage     # 生成测试覆盖率报告
 #### 代码质量
 
 ```bash
-pnpm lint              # 运行 ESLint
-pnpm format            # 运行 Prettier 格式化
+pnpm exec vp lint     # 运行代码检查（vite-plus 内置 oxlint + 类型检查）
+pnpm format           # 运行代码格式化
 ```
 
 #### 构建
