@@ -436,6 +436,8 @@ importers:
 
   packages/hooks: {}
 
+  packages/nue-ui-skill: {}
+
   packages/plugins: {}
 
   packages/plugins/resolver:
