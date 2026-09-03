@@ -1,6 +1,6 @@
 {
     "name": "nue-ui-skill",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "使用 NueUI 组件库编写界面的 Agent Skill（nue-ui + nue-ui-theme-shadlike），pi / Claude Code / Codex 等 Agent 加载后可用于按需选型、拼页面与定制样式",
     "keywords": [
         "pi-package",

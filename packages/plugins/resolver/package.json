@@ -1,6 +1,6 @@
 {
     "name": "nue-ui-resolver",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "NueUI resolver for unplugin-vue-components",
     "type": "module",
     "main": "index.ts",
