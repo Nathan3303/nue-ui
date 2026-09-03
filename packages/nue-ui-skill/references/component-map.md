@@ -56,15 +56,16 @@
 
 ## 数据展示
 
-| 组件                                     | 用途                 | 核心                                                                                        | 文档                 |
-| ---------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------- | -------------------- |
-| `<nue-badge>`                            | 角标/徽标            | `value`、`max`（超出折叠如 99+）、`dot`（小红点）、`hidden`                                 | data/badge           |
-| `<nue-avatar>`                           | 头像                 | `src`、`icon`、`size`、`rounded`                                                            | data/avatar          |
-| `<nue-progress>`                         | 进度（线/环/仪表盘） | `type`（line/circle/dashboard）、`percentage`、`color`、`show-inner-text`；满时 `full` 事件 | data/progress        |
-| `<nue-empty>`                            | 空状态占位           | `description`、`image-src`、`image-size`                                                    | data/empty           |
-| `<nue-collapse>` + `<nue-collapse-item>` | 折叠面板/手风琴      | collapse：v-model（激活 name 数组）、`accordion`；item：`title`/`name`                      | data/collapse        |
-| `<nue-marquee>`                          | 跑马灯               | 看文档                                                                                      | data/marquee         |
-| `<nue-infinite-scroll>`                  | 滚动到底加载         | `height`、`loading`、`disabled`；事件 `load-more`                                           | data/infinite-scroll |
+| 组件                                     | 用途                 | 核心                                                                                                                                                           | 文档                 |
+| ---------------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| `<nue-badge>`                            | 角标/徽标            | `value`、`max`（超出折叠如 99+）、`dot`（小红点）、`hidden`                                                                                                    | data/badge           |
+| `<nue-avatar>`                           | 头像                 | `src`、`icon`、`size`、`rounded`                                                                                                                               | data/avatar          |
+| `<nue-progress>`                         | 进度（线/环/仪表盘） | `type`（line/circle/dashboard）、`percentage`、`color`、`show-inner-text`；满时 `full` 事件                                                                    | data/progress        |
+| `<nue-table>`                            | 表格                 | `:data` 行数组 + `:columns`（key/title/width/align/sortable）；`cell-{key}`/`header-{key}`/`empty` 插槽；排序 `sort-change`、行点击 `row-click`；空态/加载内置 | data/table           |
+| `<nue-empty>`                            | 空状态占位           | `description`、`image-src`、`image-size`                                                                                                                       | data/empty           |
+| `<nue-collapse>` + `<nue-collapse-item>` | 折叠面板/手风琴      | collapse：v-model（激活 name 数组）、`accordion`；item：`title`/`name`                                                                                         | data/collapse        |
+| `<nue-marquee>`                          | 跑马灯               | 看文档                                                                                                                                                         | data/marquee         |
+| `<nue-infinite-scroll>`                  | 滚动到底加载         | `height`、`loading`、`disabled`；事件 `load-more`                                                                                                              | data/infinite-scroll |
 
 ## 导航
 

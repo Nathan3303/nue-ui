@@ -1,6 +1,6 @@
 ---
 name: nue-ui-dev
-description: NueUI 组件库（Vue3 + TS，Monorepo）的「开发/更新」指南。当用户要求在本仓库中开发组件库本身——新增或修改组件（packages/components）、主题样式（packages/themes/shadlike 或 nue-ui-theme-shadlike）、单元测试（__tests__）、组件文档（apps/document）、或新增/修改 @nue-ui/utils 与 @nue-ui/hooks——请使用本技能。任务往往很口语化，例如"帮我加个 NueXxx 组件""这个按钮样式不对""给 Select 加个功能""补个测试""写组件文档"。注意：若目标是消费方项目里用现有 NueUI 组件写界面，应使用已发布的使用向技能 nue-ui（npm 包 nue-ui-skill），而非本技能。本技能揭示仓库最反直觉的架构事实：组件 SFC 本身不带任何样式、样式由主题包的 CSS 变量与 BEM 类名提供，以及"新增组件需要完成三处接线"等规则。
+description: NueUI 组件库（Vue3 + TS，Monorepo）的「开发/更新」指南。当用户要求在本仓库中开发组件库本身——新增或修改组件（packages/components）、主题样式（packages/themes/shadlike 或 nue-ui-theme-shadlike）、单元测试（__tests__）、组件文档（apps/document）、或新增/修改 @nue-ui/utils 与 @nue-ui/hooks——请使用本技能。任务往往很口语化，例如"帮我加个 NueXxx 组件""这个按钮样式不对""给 Select 加个功能""补个测试""写组件文档"。注意：若目标是消费方项目里用现有 NueUI 组件写界面，应使用已发布的使用向技能 nue-ui（npm 包 nue-ui-skill），而非本技能。本技能揭示仓库最反直觉的架构事实：组件 SFC 本身不带任何样式、样式由主题包的 CSS 变量与 BEM 类名提供，以及"新增组件需要完成多处固定接线（聚合导出/全量安装/resolver 映射/主题 CSS）"等规则。
 ---
 
 # NueUI 组件库开发技能
@@ -24,13 +24,15 @@ description: NueUI 组件库（Vue3 + TS，Monorepo）的「开发/更新」指�
 - 改了 .vue 后"没样式变化"是正常的，除非你也动了结构/类名/变量；
 - 主题源码改动需要 `pnpm shadlike-theme build` 重建 dist 后，文档站/演练场等引入 dist 的地方才生效。
 
-**2. 新增/修改组件都有固定的"接线"点，漏接是最常见 bug。**
+**2. 新增/修改组件都有固定的“接线”点，漏接是最常见 bug。**
 一个组件要被外部可用，需要出现在：
 
 1. 组件目录自己的 `index.ts`（`withInstall` 导出 + 类型再导出）；
 2. `packages/components/index.ts`（聚合导出，供 `import { NueXxx } from '...'`）；
-3. 若要支持 `app.use(NueUI)` 全量安装：`packages/core/components.ts` 的 import + 数组（另见核心包 `packages/core/index.ts` 的默认导出 installer）。
-   可见样式还需要 4. 主题包 `src/components/<name>.css` + `src/components/index.css` 里的 `@import`。
+3. 若要支持 `app.use(NueUI)` 全量安装：`packages/core/components.ts` 的 import + 数组（另见核心包 `packages/core/index.ts` 的默认导出 installer）；
+4. 可见样式：主题包 `src/components/<name>.css` + `src/components/index.css` 里的 `@import`；
+5. 若要支持 unplugin-vue-components 自动导入：`packages/plugins/resolver/index.ts` 的 `COMPONENT_ENTRIES` 补 `NueXxx: '<name>'`（并同步 resolver README 的支持清单）。
+   发布前还需同步各组件清单文档：根 `README.md`、核心包与主题包的 README（见 add-component 收尾步骤）。
 
 **3. 每个新组件都应该有一个"近亲"作参照。**
 本仓库的约定是"就近相似"式的：写之前先找到最接近的现有组件并完整读一遍，而不是凭记忆凭空造。参照物速查：
@@ -48,7 +50,7 @@ description: NueUI 组件库（Vue3 + TS，Monorepo）的「开发/更新」指�
 
 1. **读参照组件** → 决定组件形态（普通 SFC / 分组子组件 / 函数式调用 / 纯布局），复制其文件骨架。
 2. **实现结构** → 写 `types.ts`（Props/Emits/Size 等）与 `.vue`（或 `.ts`）；组件内部引用其它组件时从 `../<x>` 目录 import。
-3. **接线** → 目录 `index.ts` → `packages/components/index.ts` → （全量安装需要时）`packages/core/components.ts`。
+3. **接线** → 目录 `index.ts` → `packages/components/index.ts` → （全量安装需要时）`packages/core/components.ts`；需要自动导入时再补 resolver 的 `COMPONENT_ENTRIES`。
 4. **样式** → 需要视觉呈现时在主题包写 `<name>.css` 并注册 `@import`，然后 build 主题。
 5. **测试** → `__tests__/<name>.test.ts`，跑单文件测试验证。
 6. **文档** → `apps/document/tutorial/<类别>/<name>/` 下 index.md + 演示 vue。

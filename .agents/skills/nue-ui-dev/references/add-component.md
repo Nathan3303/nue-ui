@@ -75,15 +75,16 @@ export type { NueXxxProps, NueXxxEmits };
 
 子组件形态：父在目录 index.ts 一并导出（如 container/index.ts、select/index.ts 导出 `NueSelect` + `NueSelectOption`）；分组上下文再补 `constants.ts`。函数式形态参考 message/confirm（见 conventions §6），且 index.ts 不包 withInstall。
 
-## 2. 接线（三处 + 检查）
+## 2. 接线（多处 + 检查）
 
-| 文件                           | 改动                             | 为什么                         |
-| ------------------------------ | -------------------------------- | ------------------------------ |
-| `<name>/index.ts`              | withInstall 导出 + `export type` | 组件自带 install               |
-| `packages/components/index.ts` | 增加 `export * from './<name>';` | 库入口可具名导入               |
-| `packages/core/components.ts`  | import + 数组里加 `NueXxx`       | 支持 `app.use(NueUI)` 全量安装 |
+| 文件                                           | 改动                             | 为什么                         |
+| ---------------------------------------------- | -------------------------------- | ------------------------------ |
+| `<name>/index.ts`                              | withInstall 导出 + `export type` | 组件自带 install               |
+| `packages/components/index.ts`                 | 增加 `export * from './<name>';` | 库入口可具名导入               |
+| `packages/core/components.ts`                  | import + 数组里加 `NueXxx`       | 支持 `app.use(NueUI)` 全量安装 |
+| resolver `COMPONENT_ENTRIES`（需要自动导入时） | 加 `NueXxx: '<name>'`            | 支持 unplugin-vue-components   |
 
-注意：`packages/core/index.ts` 已 `export * from '@nue-ui/components'`，**不用**再改；函数式调用组件（message/confirm/prompt）不进 `components.ts` 的安装数组（它们是函数不是组件），但在 `components/index.ts` 与核心包的 `export *` 链上照常出现（因为类型/函数被 re-export）。
+注意：`packages/core/index.ts` 已 `export * from '@nue-ui/components'`，**不用**再改；函数式调用组件（message/confirm/prompt）不进 `components.ts` 的安装数组（它们是函数不是组件），但在 `components/index.ts` 与核心包的 `export *` 链上照常出现（因为类型/函数被 re-export）。resolver 的 `COMPONENT_ENTRIES` 在 `packages/plugins/resolver/index.ts`，子组件映射到所属入口（如 `NueSelectOption` → `'select'`）。
 
 验证：`grep -n "NueXxx" packages/components/index.ts packages/core/components.ts`，两个文件都出现即接线完成。
 
@@ -115,13 +116,15 @@ pnpm test:run                                       # 全量（提交前）
 
 - 全量校验：`pnpm exec vp lint`（或 `vp check`）、`pnpm test:run` 全绿；
 - 若组件进入核心 README 的组件总表（`packages/core/README.md`、根 `README.md`），顺手更新（大型新增一般要）；
+- 需要自动导入时，同步 resolver README 的“支持的组件”清单与映射；
 - `git diff --stat` 自查改动范围，多余文件撤掉；
 - 按 `.agents/commands/commit.md` 的格式提交（feat 前缀 + 变更点列表）。
 
 ## 常见遗漏自查
 
 - [ ] SFC 有 `defineOptions({ name: 'NueXxx' })`
-- [ ] 目录 `index.ts`、`components/index.ts`、`core/components.ts` 三处齐了
+- [ ] 目录 `index.ts`、`components/index.ts`、`core/components.ts` 接齐了
+- [ ] 需要自动导入时，resolver `COMPONENT_ENTRIES` 有 `NueXxx: '<name>'`
 - [ ] 主题 css 文件建了且 `@import` 注册了
 - [ ] 用了 `theme` 类或状态类后，主题 css 里有对应规则（否则无样式）
 - [ ] types 里没写死、与 props 实际用法一致；文档表与 types 一致
