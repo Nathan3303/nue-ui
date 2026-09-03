@@ -72,7 +72,7 @@ NueUI 提供了 30+ 个高质量组件，分为以下几类：
 
 - **基础组件** - Button、Icon、Link、Text、Div 等
 - **布局组件** - Container、Header、Aside、Main、Footer 等
-- **数据展示** - Avatar、Badge、Collapse、Empty、Progress 等
+- **数据展示** - Avatar、Badge、Collapse、Empty、Progress、Table 等
 - **表单组件** - Input、Textarea、Select、Checkbox、Switch、DatePicker 等
 - **反馈组件** - Dialog、Drawer、Message、Tooltip 等
 - **导航组件** - Breadcrumb、Dropdown 等

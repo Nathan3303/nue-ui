@@ -77,6 +77,7 @@ const NueUI = require('nue-ui');
 | `NueEmpty`          | 空状态     |
 | `NueMarquee`        | 跑马灯     |
 | `NueProgress`       | 进度条     |
+| `NueTable`          | 表格       |
 | `NueInfiniteScroll` | 无限滚动   |
 
 ### 表单组件

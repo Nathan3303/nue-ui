@@ -227,6 +227,7 @@ NueUI Theme Shadlike 是 NueUI 组件库的 Shadcn-like 风格主题包，提供
 - Infinite Scroll（无限滚动）
 - Marquee（跑马灯）
 - Progress（进度条）
+- Table（表格）
 
 ### 表单组件
 
@@ -383,6 +384,7 @@ dist/
     ├── prompt.css
     ├── select.css
     ├── switch.css
+    ├── table.css
     ├── text.css
     ├── textarea.css
     └── tooltip.css
