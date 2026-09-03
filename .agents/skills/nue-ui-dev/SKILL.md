@@ -55,6 +55,28 @@ description: NueUI 组件库（Vue3 + TS，Monorepo）的「开发/更新」指�
 5. **测试** → `__tests__/<name>.test.ts`，跑单文件测试验证。
 6. **文档** → `apps/document/tutorial/<类别>/<name>/` 下 index.md + 演示 vue。
 7. **校验** → `pnpm exec vp lint`、`pnpm exec vp fmt`、相关测试全绿。
+8. **发布配套** → 新组件落地后必须同步各发布包的清单文档与版本号（见下节，NueTable 为参照样例）。
+
+## 新组件落地后的发布配套（必做）
+
+新增组件后、发布相关包之前，必须完成以下同步：
+
+1. **组件清单文档登记**：
+    - 根 `README.md` 组件概览 + `packages/core/README.md` 导出组件表；
+    - `packages/themes/shadlike/README.md` 的组件样式清单与 dist 产物树（新组件必有主题 css）；
+    - 若新增了 resolver 映射：`packages/plugins/resolver/README.md` 支持清单；
+    - 使用向技能 `packages/nue-ui-skill` 的 `references/component-map.md` 同步新组件行。
+2. **文档站版本徽标**：新组件文档页标题加 `<Badge type="warning" text="X.Y.Z +" />`，X.Y.Z 取本次 `nue-ui` 发布版本（如 Table → 1.12.0 +）。
+3. **版本号提升**（包内容有对应变化才升，按 semver）：
+
+    | 包                           | 触发                       | 建议                                              |
+    | ---------------------------- | -------------------------- | ------------------------------------------------- |
+    | `nue-ui`（packages/core）    | 新增组件                   | minor（1.11.0 → 1.12.0），同步 core README 版本号 |
+    | `nue-ui-theme-shadlike`      | 主题 css 新增/修改         | minor 或 patch                                    |
+    | `nue-ui-resolver`            | COMPONENT_ENTRIES 新增映射 | minor                                             |
+    | `nue-ui-skill`（使用向技能） | component-map 等更新       | minor 或 patch                                    |
+
+4. **校验收尾**：`pnpm document build`（文档与徽标可渲染）、`pnpm build` 无 TS 错误；按 commit.md 提交。
 
 ## 任务路由表
 

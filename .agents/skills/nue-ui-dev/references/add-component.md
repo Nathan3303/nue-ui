@@ -117,8 +117,18 @@ pnpm test:run                                       # 全量（提交前）
 - 全量校验：`pnpm exec vp lint`（或 `vp check`）、`pnpm test:run` 全绿；
 - 若组件进入核心 README 的组件总表（`packages/core/README.md`、根 `README.md`），顺手更新（大型新增一般要）；
 - 需要自动导入时，同步 resolver README 的“支持的组件”清单与映射；
+- 按下方“发布配套”完成各发布包文档与版本号同步（**新组件必做**）；
 - `git diff --stat` 自查改动范围，多余文件撤掉；
 - 按 `.agents/commands/commit.md` 的格式提交（feat 前缀 + 变更点列表）。
+
+## 6.5 发布配套（新组件落地后必做）
+
+参照样例：NueTable（新增于 nue-ui 1.12.0 / shadlike 0.13.25）。新组件完成后，发布前依次：
+
+1. **清单文档**：根 `README.md`、`packages/core/README.md`（导出表 + 版本号镜像）、`packages/themes/shadlike/README.md`（样式清单 + dist 树）登记；新增 resolver 映射时同步 resolver README；使用向技能 `packages/nue-ui-skill/references/component-map.md` 补行。
+2. **版本徽标**：文档页标题 `<Badge type="warning" text="<nue-ui 发布版本> +" />`。
+3. **版本号**：按 SKILL.md“新组件落地后的发布配套”表格提升 nue-ui（minor）/ shadlike / resolver / nue-ui-skill。
+4. **验证**：`pnpm document build`、`pnpm build` 无错；文档徽标文字与 nue-ui 版本一致。
 
 ## 常见遗漏自查
 
@@ -129,4 +139,6 @@ pnpm test:run                                       # 全量（提交前）
 - [ ] 用了 `theme` 类或状态类后，主题 css 里有对应规则（否则无样式）
 - [ ] types 里没写死、与 props 实际用法一致；文档表与 types 一致
 - [ ] 测试从 `vite-plus/test` 导入
+- [ ] 新组件文档页标题有版本徽标（对应 nue-ui 发布版本）
+- [ ] 相关发布包版本号已提升（nue-ui / shadlike / resolver / nue-ui-skill）且清单文档已登记
 - [ ] 提交信息按仓库规范
