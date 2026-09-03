@@ -1,0 +1,131 @@
+.nue-table {
+    --nue-table-font-size: var(--nue-text-sm);
+    --nue-table-color: var(--nue-primary-text-color);
+    --nue-table-header-color: var(--nue-secondary-text-color);
+    --nue-table-header-bg-color: var(--nue-primary-color-100);
+    --nue-table-header-font-weight: bold;
+    --nue-table-row-hover-bg-color: var(--nue-primary-color-200);
+    --nue-table-stripe-bg-color: var(--nue-primary-color-100);
+    --nue-table-border-color: var(--nue-divider-color);
+    --nue-table-radius: var(--nue-radius-df);
+    --nue-table-row-padding: var(--nue-padding-sm) var(--nue-padding-df);
+    --nue-table-compact-row-padding: var(--nue-padding-2xs) var(--nue-padding-sm);
+    --nue-table-state-color: var(--nue-secondary-text-color);
+    --nue-table-state-padding: 2.5rem 0;
+    --nue-table-sort-icon-gap: var(--nue-gap-xs);
+}
+
+.nue-table {
+    width: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    font-size: var(--nue-table-font-size);
+    color: var(--nue-table-color);
+    border-radius: var(--nue-table-radius);
+}
+
+.nue-table__table {
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+.nue-table__head .nue-table__head-cell {
+    color: var(--nue-table-header-color);
+    background-color: var(--nue-table-header-bg-color);
+    font-weight: var(--nue-table-header-font-weight);
+    text-align: left;
+    padding: var(--nue-table-row-padding);
+    border-bottom: 1px solid var(--nue-table-border-color);
+    white-space: nowrap;
+}
+
+.nue-table__head-cell--sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.nue-table__head-cell--sortable:hover {
+    color: var(--nue-primary-text-color);
+}
+
+.nue-table__head-cell__content {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--nue-table-sort-icon-gap);
+}
+
+.nue-table__sort-icon {
+    font-size: 0.85em;
+    opacity: 0.85;
+}
+
+.nue-table__body .nue-table__cell {
+    padding: var(--nue-table-row-padding);
+    text-align: left;
+    border-bottom: 1px solid var(--nue-table-border-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.nue-table__body .nue-table__row:last-child > .nue-table__cell {
+    border-bottom: none;
+}
+
+.nue-table__body .nue-table__row:hover > .nue-table__cell {
+    background-color: var(--nue-table-row-hover-bg-color);
+}
+
+.nue-table__head-cell--center,
+.nue-table__cell--center {
+    text-align: center;
+}
+
+.nue-table__head-cell--right,
+.nue-table__cell--right {
+    text-align: right;
+}
+
+.nue-table__cell--state {
+    text-align: center;
+    white-space: normal;
+    padding: var(--nue-table-state-padding);
+}
+
+.nue-table__state-icon {
+    vertical-align: -0.15em;
+    margin-right: var(--nue-table-sort-icon-gap);
+    color: var(--nue-table-state-color);
+}
+
+.nue-table--loading {
+    cursor: progress;
+}
+
+/* 修饰类（经 theme 属性启用，如 theme="striped,border,compact"）。
+   优先级刻意低于 hover 规则，保证斑马纹不吞 hover 高亮。 */
+
+.nue-table--striped .nue-table__body tr:nth-child(even) > td {
+    background-color: var(--nue-table-stripe-bg-color);
+}
+
+.nue-table--border .nue-table__table {
+    border: 1px solid var(--nue-table-border-color);
+}
+
+.nue-table--border .nue-table__head .nue-table__head-cell,
+.nue-table--border .nue-table__body .nue-table__cell {
+    border-right: 1px solid var(--nue-table-border-color);
+}
+
+.nue-table--border .nue-table__head .nue-table__head-cell:last-child,
+.nue-table--border .nue-table__body .nue-table__cell:last-child {
+    border-right: none;
+}
+
+.nue-table--compact .nue-table__head .nue-table__head-cell,
+.nue-table--compact .nue-table__body .nue-table__cell {
+    padding: var(--nue-table-compact-row-padding);
+}
