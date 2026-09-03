@@ -5,7 +5,7 @@ NueUI Core 是 NueUI 组件库的核心构建包，负责组件的打包、构�
 ## 包信息
 
 - **名称**: `nue-ui`
-- **版本**: `1.11.0`
+- **版本**: `1.12.0`
 - **描述**: Components library by Vue3 + TS
 - **作者**: Nathan33
 - **许可证**: MIT
