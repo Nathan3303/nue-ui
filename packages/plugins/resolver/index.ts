@@ -53,6 +53,7 @@ const COMPONENT_ENTRIES: Record<string, string> = {
     NueSelectOption: 'select',
     NueSeparator: 'container',
     NueSwitch: 'switch',
+    NueTable: 'table',
     NueText: 'text',
     NueTextarea: 'input',
     NueTooltip: 'tooltip'
