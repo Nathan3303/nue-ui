@@ -2,8 +2,9 @@ import { describe, it, expect } from 'vite-plus/test';
 import { mount } from '@vue/test-utils';
 import { h } from 'vue';
 import { NueTable } from '../index';
+import type { NueTableColumn, NueTableCellScope } from '../index';
 
-const columns = [
+const columns: NueTableColumn[] = [
     { key: 'name', title: '姓名', width: 120, sortable: true },
     { key: 'age', title: '年龄', width: 80, align: 'right' }
 ];
@@ -64,8 +65,12 @@ describe('NueTable', () => {
             const wrapper = mount(NueTable, {
                 props: { data: rows, columns },
                 slots: {
-                    'cell-name': (scope: { row: { name: string } }) =>
-                        h('span', { class: 'custom-cell' }, `${scope.row.name}!`)
+                    'cell-name': (scope: NueTableCellScope) =>
+                        h(
+                            'span',
+                            { class: 'custom-cell' },
+                            `${(scope.row as { name: string }).name}!`
+                        )
                 }
             });
             expect(wrapper.find('.custom-cell').exists()).toBe(true);
@@ -173,7 +178,9 @@ describe('NueTable', () => {
         });
 
         it('null 值行在数值列排序时应排到最后', async () => {
-            const numericColumns = [{ key: 'age', title: '年龄', sortable: true }];
+            const numericColumns: NueTableColumn[] = [
+                { key: 'age', title: '年龄', sortable: true }
+            ];
             const wrapper = mount(NueTable, {
                 props: { data: sortRows, columns: numericColumns }
             });
