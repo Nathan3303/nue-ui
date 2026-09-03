@@ -1,7 +1,7 @@
 <template>
-    <nue-div direction="column" gap="var(--nue-gap-df)">
-        <nue-table :data="emptyData" :columns="columns" />
-        <nue-table :data="emptyData" :columns="columns">
+    <nue-div class="vp-raw" gap="var(--nue-gap-df)">
+        <nue-table :data="emptyData" :columns="columns" theme="border" />
+        <nue-table :data="emptyData" :columns="columns" theme="border">
             <template #empty>
                 <nue-empty description="没有可展示的数据">
                     <nue-button theme="primary" size="small" @click="refresh">重新加载</nue-button>
@@ -12,10 +12,11 @@
 </template>
 
 <script setup lang="ts">
+import type { NueTableColumn } from 'nue-ui';
 import { ref } from 'vue';
 import { NueMessage } from 'nue-ui';
 
-const columns = [
+const columns: NueTableColumn[] = [
     { key: 'name', title: '姓名' },
     { key: 'age', title: '年龄' }
 ];

@@ -1,13 +1,14 @@
 <template>
-    <nue-table :data="loading ? [] : data" :columns="columns" :loading="loading">
+    <nue-table class="vp-raw" :data="loading ? [] : data" :columns="columns" :loading="loading">
         <template #empty>等待加载…</template>
     </nue-table>
 </template>
 
 <script setup lang="ts">
+import type { NueTableColumn } from 'nue-ui';
 import { onMounted, ref } from 'vue';
 
-const columns = [
+const columns: NueTableColumn[] = [
     { key: 'name', title: '姓名' },
     { key: 'age', title: '年龄' }
 ];
