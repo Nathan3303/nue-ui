@@ -1,0 +1,1 @@
+import{d as a,C as t,b as p,o as s,p as u}from"./framework.BCVse_G_.js";const _=a({__name:"disabled",setup(d){const e=u("");return(r,o)=>{const n=t("nue-input");return s(),p(n,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=l=>e.value=l),placeholder:"禁用状态",disabled:""},null,8,["modelValue"])}}});export{_ as default};

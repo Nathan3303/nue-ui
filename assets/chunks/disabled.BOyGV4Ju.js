@@ -1,1 +1,0 @@
-import{d as n,p as t,C as d,b as s,o as p}from"./framework.D5rG3MdX.js";const m=n({__name:"disabled",setup(r){const e=t("2026-03-05");return(u,o)=>{const a=d("nue-date-picker");return p(),s(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=l=>e.value=l),disabled:"",placeholder:"禁用状态"},null,8,["modelValue"])}}});export{m as default};

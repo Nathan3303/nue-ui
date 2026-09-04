@@ -1,0 +1,1 @@
+import{C as l,b as n,o as r,p as s}from"./framework.BCVse_G_.js";const _={__name:"autosize",setup(u){const e=s("");return(p,o)=>{const a=l("nue-textarea");return r(),n(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),placeholder:"请输入内容",autosize:""},null,8,["modelValue"])}}};export{_ as default};

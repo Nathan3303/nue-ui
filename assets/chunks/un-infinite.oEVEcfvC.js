@@ -1,0 +1,1 @@
+import{_ as s,C as r,b as o,o as e,w as c,c as _,F as u,B as l,j as i,t as m}from"./framework.BCVse_G_.js";const d={};function f(p,B){const t=r("nue-marquee");return e(),o(t,null,{default:c(()=>[(e(),_(u,null,l(12,(a,n)=>i("div",{key:n,class:"nue-marquee-item"},m(a),1)),64))]),_:1})}const x=s(d,[["render",f],["__scopeId","data-v-2793b7f1"]]);export{x as default};

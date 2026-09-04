@@ -1,0 +1,1 @@
+import{C as n,b as s,o as l,w as r,a as u,p as c}from"./framework.BCVse_G_.js";const d={__name:"loading",setup(i){const e=c(!1),t=()=>{e.value=!0,setTimeout(()=>e.value=!1,3e3)};return(_,o)=>{const a=n("nue-button");return l(),s(a,{loading:e.value,icon:"search",onClick:t},{default:r(()=>[...o[0]||(o[0]=[u("搜索",-1)])]),_:1},8,["loading"])}}};export{d as default};

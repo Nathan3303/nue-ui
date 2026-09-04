@@ -1,0 +1,1 @@
+import{d as n,C as t,b as d,o as s,p}from"./framework.BCVse_G_.js";const m=n({__name:"disabled",setup(r){const e=p("2026-03-05");return(u,o)=>{const a=t("nue-date-picker");return s(),d(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=l=>e.value=l),disabled:"",placeholder:"禁用状态"},null,8,["modelValue"])}}});export{m as default};

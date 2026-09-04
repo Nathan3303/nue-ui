@@ -1,0 +1,1 @@
+import{d as a,C as l,b as p,o as u,p as s}from"./framework.BCVse_G_.js";const d=a({__name:"basic",setup(r){const e=s("");return(m,o)=>{const n=l("nue-input");return u(),p(n,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),placeholder:"请输入内容 ..."},null,8,["modelValue"])}}});export{d as default};

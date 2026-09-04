@@ -1,0 +1,1 @@
+import{C as l,b as r,o as n,p as s}from"./framework.BCVse_G_.js";const _={__name:"rows-autosize",setup(u){const e=s("");return(p,o)=>{const a=l("nue-textarea");return n(),r(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),placeholder:"请输入内容（3行最大高度）",autosize:"",rows:3},null,8,["modelValue"])}}};export{_ as default};

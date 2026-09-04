@@ -1,1 +1,0 @@
-import{d as n,p as l,C as p,b as r,o as d}from"./framework.D5rG3MdX.js";const c=n({__name:"datetime",setup(m){const e=l("");return(s,t)=>{const o=p("nue-date-picker");return d(),r(o,{modelValue:e.value,"onUpdate:modelValue":t[0]||(t[0]=a=>e.value=a),type:"datetime",placeholder:"选择日期和时间"},null,8,["modelValue"])}}});export{c as default};

@@ -1,0 +1,1 @@
+import{C as n,b as a,o as r,w as s,a as u,t as l,p as c}from"./framework.BCVse_G_.js";const f={__name:"throttle",setup(p){const t=c(0);return(_,e)=>{const o=n("nue-button");return r(),a(o,{"use-throttle":"","throttle-duration":600,onClick:e[0]||(e[0]=i=>t.value++)},{default:s(()=>[u(" 节流计数："+l(t.value),1)]),_:1})}}};export{f as default};

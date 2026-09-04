@@ -1,0 +1,1 @@
+import{d as n,C as t,b as r,o as p,p as s}from"./framework.BCVse_G_.js";const m=n({__name:"clearable",setup(u){const e=s("2026-03-05");return(c,a)=>{const o=t("nue-date-picker");return p(),r(o,{modelValue:e.value,"onUpdate:modelValue":a[0]||(a[0]=l=>e.value=l),clearable:""},null,8,["modelValue"])}}});export{m as default};

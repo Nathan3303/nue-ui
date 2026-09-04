@@ -1,1 +1,0 @@
-import{d as n,p as t,C as r,b as p,o as s}from"./framework.D5rG3MdX.js";const m=n({__name:"clearable",setup(u){const e=t("2026-03-05");return(c,a)=>{const o=r("nue-date-picker");return s(),p(o,{modelValue:e.value,"onUpdate:modelValue":a[0]||(a[0]=l=>e.value=l),clearable:""},null,8,["modelValue"])}}});export{m as default};

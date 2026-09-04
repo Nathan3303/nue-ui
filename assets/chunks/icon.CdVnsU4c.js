@@ -1,0 +1,1 @@
+import{d as t,C as l,b as p,o as u,p as r}from"./framework.BCVse_G_.js";const d=t({__name:"icon",setup(s){const e=r("");return(c,o)=>{const n=l("nue-input");return u(),p(n,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=a=>e.value=a),placeholder:"Search",icon:"search"},null,8,["modelValue"])}}});export{d as default};

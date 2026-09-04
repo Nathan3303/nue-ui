@@ -1,0 +1,1 @@
+import{d as n,C as l,b as p,o as r,p as d}from"./framework.BCVse_G_.js";const c=n({__name:"datetime",setup(m){const e=d("");return(s,t)=>{const o=l("nue-date-picker");return r(),p(o,{modelValue:e.value,"onUpdate:modelValue":t[0]||(t[0]=a=>e.value=a),type:"datetime",placeholder:"选择日期和时间"},null,8,["modelValue"])}}});export{c as default};

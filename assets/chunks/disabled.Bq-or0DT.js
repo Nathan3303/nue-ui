@@ -1,0 +1,1 @@
+import{C as l,b as n,o as r,p as s}from"./framework.BCVse_G_.js";const m={__name:"disabled",setup(u){const e=s("");return(d,a)=>{const o=l("nue-textarea");return r(),n(o,{modelValue:e.value,"onUpdate:modelValue":a[0]||(a[0]=t=>e.value=t),disabled:"",placeholder:"禁用状态"},null,8,["modelValue"])}}};export{m as default};

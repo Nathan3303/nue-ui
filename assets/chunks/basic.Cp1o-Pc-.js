@@ -1,0 +1,1 @@
+import{d as l,C as t,b as s,o as r,p as u}from"./framework.BCVse_G_.js";const m=l({__name:"basic",setup(p){const e=u("");return(c,a)=>{const o=t("nue-calendar");return r(),s(o,{modelValue:e.value,"onUpdate:modelValue":a[0]||(a[0]=n=>e.value=n)},null,8,["modelValue"])}}});export{m as default};
