@@ -117,10 +117,6 @@ demo-preview=./append.vue
 demo-preview=./button-group-basic.vue
 :::
 
-### 按钮组类型
-
-按钮组同样支持 `type` 属性，可以设置按钮组内所有按钮的原生类型。
-
 ### 按钮组禁用状态
 
 按钮组的禁用状态会继承到组内的所有按钮，当按钮组被禁用时，组内所有按钮都将不可点击。
@@ -166,5 +162,4 @@ demo-preview=./button-group-basic.vue
 | ---------- | ----------------------------------------------- | ------- | -------- |
 | `size`     | `'small' \| 'large'`                            | -       | 按钮尺寸 |
 | `disabled` | `boolean`                                       | `false` | 是否禁用 |
-| `type`     | `'submit' \| 'reset' \| 'button'`               | -       | 按钮类型 |
 | `theme`    | `string \| string[] \| Record<string, boolean>` | -       | 主题样式 |

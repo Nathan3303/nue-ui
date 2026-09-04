@@ -97,17 +97,17 @@ demo-preview=./scale.vue
 
 ### 属性
 
-| 属性            | Type                                            | 默认值  | 说明                           |
-| --------------- | ----------------------------------------------- | ------- | ------------------------------ |
-| `type`          | `'line' \| 'circle' \| 'dashboard'`             | `line`  | 进度条类型                     |
-| `color`         | `string \| string[]`                            | -       | 进度颜色，支持渐变色           |
-| `strokeWidth`   | `number`                                        | `6`     | 进度条粗细（px）               |
-| `percentage`    | `number`                                        | -       | 百分比值（0-100）              |
-| `showInnerText` | `boolean`                                       | `false` | 显示内部文字                   |
-| `hideText`      | `boolean`                                       | `false` | 隐藏文字                       |
-| `scale`         | `number`                                        | `1`     | 缩放比例（环形进度条）         |
-| `formatter`     | `(p: string) => void \| string`                 | -       | 百分比格式化函数               |
-| `theme`         | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps） |
+| 属性            | Type                                            | 默认值    | 说明                           |
+| --------------- | ----------------------------------------------- | --------- | ------------------------------ |
+| `type`          | `'line' \| 'circle' \| 'dashboard'`             | `line`    | 进度条类型                     |
+| `color`         | `string \| string[]`                            | `#757575` | 进度颜色，支持渐变色           |
+| `strokeWidth`   | `number`                                        | `6`       | 进度条粗细（px）               |
+| `percentage`    | `number`                                        | `0`       | 百分比值（0-100）              |
+| `showInnerText` | `boolean`                                       | `false`   | 显示内部文字                   |
+| `hideText`      | `boolean`                                       | `false`   | 隐藏文字                       |
+| `scale`         | `number`                                        | `1`       | 缩放比例（环形进度条）         |
+| `formatter`     | `(p: string) => void \| string`                 | -         | 百分比格式化函数               |
+| `theme`         | `string \| string[] \| Record<string, boolean>` | -         | 主题样式（继承自 GlobalProps） |
 
 ### 事件
 

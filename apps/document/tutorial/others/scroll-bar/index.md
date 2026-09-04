@@ -4,7 +4,7 @@
 
 ## 基础用法
 
-通过标签 `<NueScrollBar>` 包裹需要滚动的内容，通过属性 `vertical` 开启水平滚动。
+通过标签 `<NueScrollBar>` 包裹需要滚动的内容，通过属性 `vertical` 开启垂直滚动，通过属性 `horizontal` 开启水平滚动。
 
 ::: preview
 demo-preview=./basic.vue
@@ -56,7 +56,7 @@ demo-preview=./theme-custom.vue
 | 属性           | 类型                                            | 默认值      | 说明                           |
 | -------------- | ----------------------------------------------- | ----------- | ------------------------------ |
 | `mode`         | `'always' \| 'hover' \| 'hidden'`               | `'hover'`   | 滚动条显示模式                 |
-| `vertical`     | `boolean`                                       | `true`      | 启用垂直滚动                   |
+| `vertical`     | `boolean`                                       | `false`     | 启用垂直滚动                   |
 | `horizontal`   | `boolean`                                       | `false`     | 启用水平滚动                   |
 | `thumbSize`    | `'small' \| 'default' \| 'large'`               | `'default'` | 滚动条拇指大小                 |
 | `minThumbSize` | `number`                                        | `20`        | 拇指最小像素值                 |

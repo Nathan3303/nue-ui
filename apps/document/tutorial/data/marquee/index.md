@@ -39,9 +39,9 @@ demo-preview=./speed-ratio.vue
 
 ### 属性
 
-| 属性         | 类型                                            | 默认值 | 说明                           |
-| ------------ | ----------------------------------------------- | ------ | ------------------------------ |
-| `infinite`   | `boolean`                                       | -      | 循环播放                       |
-| `speedRatio` | `number`                                        | -      | 速度比率                       |
-| `direction`  | `'left' \| 'right'`                             | -      | 方向                           |
-| `theme`      | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+| 属性         | 类型                                            | 默认值  | 说明                           |
+| ------------ | ----------------------------------------------- | ------- | ------------------------------ |
+| `infinite`   | `boolean`                                       | `false` | 循环播放                       |
+| `speedRatio` | `number`                                        | `1`     | 速度比率                       |
+| `direction`  | `'left' \| 'right'`                             | `left`  | 方向                           |
+| `theme`      | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps） |

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'vite-plus/test';
 import { mount } from '@vue/test-utils';
 import { NueCalendar } from '../index';
 
@@ -42,7 +42,7 @@ describe('NueCalendar', () => {
             await dateCell.trigger('click');
             const emitted = wrapper.emitted('update:modelValue');
             expect(emitted).toBeTruthy();
-            expect(emitted![0][0]).toEqual(expect.any(String));
+            expect(emitted![0]![0]).toEqual(expect.any(String));
         });
 
         it('点击日期单元格应该触发 change 事件', async () => {
@@ -52,7 +52,7 @@ describe('NueCalendar', () => {
 
             const emitted = wrapper.emitted('change');
             expect(emitted).toBeTruthy();
-            expect(emitted![0][0]).toEqual(expect.any(String));
+            expect(emitted![0]![0]).toEqual(expect.any(String));
         });
     });
 
@@ -145,7 +145,7 @@ describe('NueCalendar', () => {
             // 点击清除按钮
             await wrapper.find('.clear-btn').trigger('click');
             const emitted = wrapper.emitted('update:modelValue');
-            expect(emitted![1][0]).toBeNull();
+            expect(emitted![1]![0]).toBeNull();
         });
     });
 

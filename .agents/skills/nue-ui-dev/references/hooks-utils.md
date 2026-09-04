@@ -1,0 +1,35 @@
+# @nue-ui/utils 与 @nue-ui/hooks 速查
+
+两个包的源码都很短，**用之前先读对应文件**（尤其签名与返回结构），这里是索引与常见用途。组件内 import 用别名：`@nue-ui/utils`、`@nue-ui/hooks/use-popup-anchor`（hooks 支持子路径）。
+
+## @nue-ui/utils（packages/utils）
+
+| 文件            | 导出                                                                                                            | 用途                                                                                                                                                                      |
+| --------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `install.ts`    | `withInstall(comp)`                                                                                             | 给 SFC 附加 `install`（读 `comp.name` 注册全局组件）。每个组件目录 index.ts 都用到                                                                                        |
+| `install.ts`    | `makeInstaller(components)`                                                                                     | 把一批插件打包成单个 installer（核心包 `packages/core/index.ts` 默认导出用）                                                                                              |
+| `component.ts`  | `parseTheme(value, prefix)`                                                                                     | **theme prop 解析器**：`string` 按逗号拆分、`string[]` 原样、`Record<string,boolean>` 取真值 key；返回 `[`${prefix}--${item}`]`。几乎所有组件的 `classes` computed 都在用 |
+| `parsers.ts`    | `parseFlex` / `parseFlexWrap`                                                                                   | 把 `''` 归一为 `auto` / `wrap`；给 div/button 等 flex 字符串 prop 用（注释标注"后续将禁用"，少用于新代码）                                                                |
+| `parsers.ts`    | `parseAnimationDurationToNumber`                                                                                | `'0.3s'`/数字 → 毫秒                                                                                                                                                      |
+| `parsers.ts`    | `parsePopupItemAnimation(value)`                                                                                | 弹层动画 props → `{ name?, duration? }`（duration 补 'ms'）；overlay/drawer 等用                                                                                          |
+| `utils.ts`      | `isString/isNumber/isArray/isFunction`                                                                          | lodash 之外的轻量守卫（部分代码直接用 lodash-es 的 isFunction）                                                                                                           |
+| `utils.ts`      | `debounce(fn, delay)` / `throttle(fn, delay)`                                                                   | 防抖/节流（use-window-resize 与 button 的 useThrottle 都在用）                                                                                                            |
+| `utils.ts`      | `generateId(len=6)` / `generateElementId`                                                                       | 随机短 id（checkbox 默认 name、DOM 节点 id 等）                                                                                                                           |
+| `types.ts`      | `GlobalProps` / `ObjectLikeThemes`                                                                              | `{ theme?: string \| string[] \| Record<string,boolean> }`；组件 props 类型 `extends GlobalProps`                                                                         |
+| `types.ts`      | `NuePopupItemAnimation` / `NueGlobalPopupItemProps`                                                             | 弹层动画类型（animation/closeAnimation props 基类）                                                                                                                       |
+| `types.ts`      | `Optional<T>`                                                                                                   | 全部可选的映射类型                                                                                                                                                        |
+| `date-utils.ts` | `formatDate/formatDateFriendly/formatDateISO/formatDateTimeISO/formatDateByType/parseDate/detectDateFormat/...` | 日期字符串格式化与解析、`getDaysInMonth/getWeekday/addDays/addMonths/isSameDay/isInRange/getDateRange/getRecentDays`                                                      | calendar/date-picker 内部日期逻辑用它，别重复造轮子 |
+
+## @nue-ui/hooks（packages/hooks）
+
+| hook                                            | 文件                 | 一句话用途                                                                                                                                                                        |
+| ----------------------------------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `useBoolState(initial)`                         | `use-bool-state/`    | 返回 `[ref, switchState, setState]`：布尔状态 + 切换/设置                                                                                                                         |
+| `useLoadingState(initial?)`                     | `use-loading-state/` | `{ isLoading, done, load(cb), loadSync(action) }`：异步加载态管理                                                                                                                 |
+| `useWindowResize()`                             | `use-window-resize/` | `{ addCallback, removeCallback }`：组件卸载自动清理的 resize 监听（内部 debounce + 全局单监听）                                                                                   |
+| `usePopupAnchor(wrapperId?)`                    | `use-popup-anchor/`  | `{ tpState, mountPopupAnchor, unmountPopupAnchor }`：弹层挂载锚点/teleport 目标状态。**弹层与函数式调用组件（dialog/drawer/confirm/prompt/dropdown）都在用**，是写弹层必读的 hook |
+| `usePopper` / `usePopperController`             | `use-popper/`        | 浮层定位（PopperJS 封装），`PopperPlacement` 类型在此；v1 用法参照 `tooltip/tooltip.vue`                                                                                          |
+| `usePopperV2`（= `use-popper-v2` 的 usePopper） | `use-popper-v2/`     | Popper v2 版本封装，`PopperPlacementV2` 类型。dropdown.vue 是 v2 的现行用法参照。**新写的浮层定位先看 v2（usePopperV2 + dropdown.vue）**                                          |
+| `useCalendar(options)`                          | `use-calendar/`      | 日历状态机（currentYear/Month、selectedDate、date/datetime、emit update:modelValue/change/clear…），calendar 组件用它                                                             |
+
+判断"该用哪个 hook / 它返回什么"的最快路径：`grep -rn "usePopperV2\|usePopper\|usePopupAnchor" packages/components --include=*.vue -l` 找到正在用它的组件，照抄用法。hook 源码都很短，直接读比猜快。

@@ -27,7 +27,8 @@
 
 <script lang="ts" setup>
 import { computed, inject, nextTick, onMounted, reactive, ref, watch } from 'vue';
-import { NueButton, NueText } from '@nue-ui/components';
+import NueButton from '../button/button.vue';
+import NueText from '../text/text.vue';
 import { generateId, parseTheme } from '@nue-ui/utils';
 import { NUE_COLLAPSE_CONTEXT_KEY } from './constants';
 import type { NueCollapseContext, NueCollapseItemName, NueCollapseItemProps } from './types';
@@ -69,7 +70,7 @@ const handleExpandAnimation = () => {
     styleVO.height = '0px';
     nextTick(() => {
         if (!contentRef.value) return;
-        contentRef.value.scrollHeight;
+        void contentRef.value.scrollHeight;
         styleVO.height = `max(${props.minHeight || '0px'}, min(${props.maxHeight || '9999px'}, ${contentRef.value.scrollHeight}px))`;
         styleVO.overflow = props.maxHeight ? 'auto' : 'hidden';
     });
@@ -81,7 +82,7 @@ const handleCollapseAnimation = () => {
     styleVO.minHeight = 'unset';
     nextTick(() => {
         if (!contentRef.value) return;
-        contentRef.value.clientHeight;
+        void contentRef.value.clientHeight;
         styleVO.height = '0px';
         styleVO.overflow = 'hidden';
     });

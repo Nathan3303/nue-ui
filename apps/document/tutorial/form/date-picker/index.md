@@ -89,7 +89,7 @@ demo-preview=./slots.vue
 | `type`        | `'date' \| 'datetime'`                          | `date`     | 选择器类型                     |
 | `placeholder` | `string`                                        | `选择日期` | 占位符                         |
 | `disabled`    | `boolean`                                       | `false`    | 是否禁用                       |
-| `readonly`    | `boolean`                                       | `false`    | 是否只读                       |
+| `size`        | `'small' \| 'large'`                            | -          | 尺寸                           |
 | `clearable`   | `boolean`                                       | `false`    | 是否可清除                     |
 | `theme`       | `string \| string[] \| Record<string, boolean>` | -          | 主题样式（继承自 GlobalProps） |
 

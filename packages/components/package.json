@@ -3,6 +3,7 @@
     "description": "NueUI components package",
     "private": true,
     "main": "index.ts",
+    "sideEffects": false,
     "author": "Nathan Lee",
     "license": "MIT"
 }

@@ -1,6 +1,6 @@
 import NueConfirm from './confirm.vue';
 import { createVNode, render, type VNode } from 'vue';
-import { usePopupAnchor } from '@nue-ui/hooks';
+import { usePopupAnchor } from '@nue-ui/hooks/use-popup-anchor';
 import type { NueConfirmCallerPayload, NueConfirmCallerResult, NueConfirmProps } from './types';
 
 const NueConfirmCaller = (payload: NueConfirmCallerPayload): Promise<NueConfirmCallerResult> => {

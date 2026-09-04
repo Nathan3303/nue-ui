@@ -93,8 +93,6 @@ demo-preview=./slots.vue
 | `disabled` | `boolean`                                       | -      | 是否禁用                       |
 | `icon`     | `string`                                        | -      | 图标名称                       |
 | `route`    | `Record<string, unknown> \| string`             | -      | 路由对象，用于 VueRouter 跳转  |
-| `flex`     | `string`                                        | -      | 弹性布局                       |
-| `align`    | `string`                                        | -      | 对齐方式                       |
 | `size`     | `string`                                        | -      | 尺寸                           |
 | `title`    | `string`                                        | -      | 标题（原生 title 属性）        |
 | `theme`    | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |

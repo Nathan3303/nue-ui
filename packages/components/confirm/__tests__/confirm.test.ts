@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'vite-plus/test';
 import { mount } from '@vue/test-utils';
 import { NueConfirm } from '../index';
 import ConfirmInner from '../confirm.vue';

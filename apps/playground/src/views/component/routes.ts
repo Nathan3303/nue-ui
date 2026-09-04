@@ -29,6 +29,7 @@ const routes: RouteRecordRaw = {
             path: '/component/progress',
             component: () => import('@/layouts/component/progress.vue')
         },
+        { path: '/component/table', component: () => import('@/layouts/component/table.vue') },
         { path: '/component/empty', component: () => import('@/layouts/component/empty.vue') },
         { path: '/component/input', component: () => import('@/layouts/component/input.vue') },
         {

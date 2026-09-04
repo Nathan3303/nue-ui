@@ -141,21 +141,21 @@ demo-preview=./dropdown-item-append.vue
 
 ### NueDropdown 属性
 
-| 属性                | Type                                            | 默认值  | 说明                           |
-| ------------------- | ----------------------------------------------- | ------- | ------------------------------ |
-| `transparent`       | `boolean`                                       | `false` | 背景层穿透                     |
-| `teleportTo`        | `string`                                        | -       | 传送到指定 DOM 节点            |
-| `text`              | `string`                                        | -       | 触发按钮文本                   |
-| `triggerText`       | `string`                                        | -       | 触发按钮文本（备用）           |
-| `disabled`          | `boolean`                                       | `false` | 是否禁用                       |
-| `triggerType`       | `'click' \| 'hover'`                            | `click` | 触发方式                       |
-| `size`              | `'small' \| 'large'`                            | -       | 尺寸                           |
-| `placement`         | `string`                                        | -       | 弹出位置                       |
-| `closeWhenExecuted` | `boolean`                                       | `true`  | 执行后关闭                     |
-| `group`             | `string`                                        | -       | 分组ID，用于分组管理           |
-| `beforeExecute`     | `() => void`                                    | -       | 执行前回调                     |
-| `afterExecute`      | `() => void`                                    | -       | 执行后回调                     |
-| `theme`             | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps） |
+| 属性                | Type                                            | 默认值         | 说明                           |
+| ------------------- | ----------------------------------------------- | -------------- | ------------------------------ |
+| `transparent`       | `boolean`                                       | `false`        | 背景层穿透                     |
+| `teleportTo`        | `string`                                        | -              | 传送到指定 DOM 节点            |
+| `text`              | `string`                                        | -              | 触发按钮文本                   |
+| `triggerText`       | `string`                                        | -              | 触发按钮文本（备用）           |
+| `disabled`          | `boolean`                                       | `false`        | 是否禁用                       |
+| `triggerType`       | `'click' \| 'hover'`                            | `click`        | 触发方式                       |
+| `size`              | `'small' \| 'large'`                            | -              | 尺寸                           |
+| `placement`         | `string`                                        | `bottom-start` | 弹出位置                       |
+| `closeWhenExecuted` | `boolean`                                       | `false`        | 执行后自动关闭（默认不关闭）   |
+| `group`             | `string`                                        | -              | 分组ID，用于分组管理           |
+| `beforeExecute`     | `() => void`                                    | -              | 执行前回调                     |
+| `afterExecute`      | `() => void`                                    | -              | 执行后回调                     |
+| `theme`             | `string \| string[] \| Record<string, boolean>` | -              | 主题样式（继承自 GlobalProps） |
 
 ### NueDropdown 事件
 
