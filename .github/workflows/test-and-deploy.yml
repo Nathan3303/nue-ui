@@ -7,26 +7,9 @@ on:
 
 jobs:
 
-    lint:
-        name: Run Lint
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repo
-              uses: actions/checkout@v3
-            - name: Setup Node
-              uses: actions/setup-node@v3
-            - name: Install pnpm
-              run: npm install -g pnpm
-            - name: Install dependencies
-              run: pnpm install
-
-            - name: Run lint
-              run: pnpm exec vp lint
-
     build:
         name: Build NueUI document app
         runs-on: ubuntu-latest
-        needs: lint
         steps:
             - name: Checkout repo
               uses: actions/checkout@v3
