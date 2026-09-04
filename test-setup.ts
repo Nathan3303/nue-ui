@@ -1,11 +1,13 @@
-import { vi } from 'vitest';
+import { vi } from 'vite-plus/test';
 import '@testing-library/jest-dom';
 
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-    disconnect: vi.fn()
-}));
+global.ResizeObserver = vi.fn(function () {
+    return {
+        observe: vi.fn(),
+        unobserve: vi.fn(),
+        disconnect: vi.fn()
+    };
+}) as unknown as typeof ResizeObserver;
 
 Object.defineProperty(window, 'matchMedia', {
     writable: true,
@@ -21,11 +23,13 @@ Object.defineProperty(window, 'matchMedia', {
     }))
 });
 
-global.IntersectionObserver = vi.fn().mockImplementation(() => ({
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-    disconnect: vi.fn()
-}));
+global.IntersectionObserver = vi.fn(function () {
+    return {
+        observe: vi.fn(),
+        unobserve: vi.fn(),
+        disconnect: vi.fn()
+    };
+}) as unknown as typeof IntersectionObserver;
 
 window.getComputedStyle = vi.fn().mockImplementation(() => ({
     getPropertyValue: vi.fn(() => ''),

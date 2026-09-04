@@ -48,12 +48,12 @@ demo-preview=./text-default.vue
 
 ### 属性
 
-| 属性        | Type                                            | 默认值   | 说明                           |
-| ----------- | ----------------------------------------------- | -------- | ------------------------------ |
-| `vertical`  | `boolean`                                       | `false`  | 垂直方向                       |
-| `alignment` | `'start' \| 'center' \| 'end'`                  | `center` | 文字对齐方式                   |
-| `lineWidth` | `string`                                        | -        | 线条宽度                       |
-| `lineStyle` | `'solid' \| 'dashed' \| 'dotted'`               | `solid`  | 线条样式                       |
-| `lineColor` | `string`                                        | -        | 线条颜色                       |
-| `text`      | `string`                                        | -        | 分隔线中间文字                 |
-| `theme`     | `string \| string[] \| Record<string, boolean>` | -        | 主题样式（继承自 GlobalProps） |
+| 属性        | Type                                            | 默认值  | 说明                           |
+| ----------- | ----------------------------------------------- | ------- | ------------------------------ |
+| `vertical`  | `boolean`                                       | `false` | 垂直方向                       |
+| `alignment` | `'start' \| 'center' \| 'end'`                  | `start` | 文字对齐方式                   |
+| `lineWidth` | `string`                                        | -       | 线条宽度                       |
+| `lineStyle` | `'solid' \| 'dashed' \| 'dotted'`               | `solid` | 线条样式                       |
+| `lineColor` | `string`                                        | -       | 线条颜色                       |
+| `text`      | `string`                                        | -       | 分隔线中间文字                 |
+| `theme`     | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps） |

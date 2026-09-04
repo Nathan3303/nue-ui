@@ -74,18 +74,19 @@ demo-preview=./slots.vue
 
 ### 属性
 
-| 属性           | Type                                            | 默认值  | 说明                              |
-| -------------- | ----------------------------------------------- | ------- | --------------------------------- |
-| `modelValue`   | `boolean`                                       | -       | 绑定值                            |
-| `size`         | `'small' \| 'normal' \| 'large'`                | -       | 尺寸                              |
-| `disabled`     | `boolean`                                       | `false` | 是否禁用                          |
-| `loading`      | `boolean`                                       | `false` | 加载状态                          |
-| `loadingIcon`  | `string`                                        | -       | 加载图标                          |
-| `showText`     | `boolean`                                       | `false` | 显示状态文字                      |
-| `activeText`   | `string`                                        | -       | 开启状态显示的文字                |
-| `inactiveText` | `string`                                        | -       | 关闭状态显示的文字                |
-| `beforeSwitch` | `(value: boolean) => Promise<boolean>`          | -       | 切换前回调，返回 false 可阻止切换 |
-| `theme`        | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps）    |
+| 属性           | Type                                            | 默认值    | 说明                              |
+| -------------- | ----------------------------------------------- | --------- | --------------------------------- |
+| `modelValue`   | `boolean`                                       | -         | 绑定值                            |
+| `icon`         | `string`                                        | -         | 开关上的图标（未开启文字显示时）  |
+| `size`         | `'small' \| 'normal' \| 'large'`                | -         | 尺寸                              |
+| `disabled`     | `boolean`                                       | `false`   | 是否禁用                          |
+| `loading`      | `boolean`                                       | `false`   | 加载状态                          |
+| `loadingIcon`  | `string`                                        | `loading` | 加载图标                          |
+| `showText`     | `boolean`                                       | `false`   | 显示状态文字                      |
+| `activeText`   | `string`                                        | -         | 开启状态显示的文字                |
+| `inactiveText` | `string`                                        | -         | 关闭状态显示的文字                |
+| `beforeSwitch` | `(value: boolean) => Promise<boolean>`          | -         | 切换前回调，返回 false 可阻止切换 |
+| `theme`        | `string \| string[] \| Record<string, boolean>` | -         | 主题样式（继承自 GlobalProps）    |
 
 ### 事件
 

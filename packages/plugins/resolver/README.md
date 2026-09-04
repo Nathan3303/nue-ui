@@ -5,7 +5,7 @@ NueUI Resolver 是一个用于 `unplugin-vue-components` 的组件解析器，�
 ## 包信息
 
 - **名称**: `nue-ui-resolver`
-- **版本**: `0.2.1`
+- **版本**: `0.3.0`
 - **描述**: NueUI resolver for unplugin-vue-components
 - **作者**: Nathan Lee
 - **许可证**: MIT
@@ -24,13 +24,13 @@ NueUI Resolver 是一个用于 `unplugin-vue-components` 的组件解析器，�
 
 ```bash
 # npm
-npm install @nue-ui/resolver -D
+npm install nue-ui-resolver -D
 
 # pnpm
-pnpm add @nue-ui/resolver -D
+pnpm add nue-ui-resolver -D
 
 # yarn
-yarn add @nue-ui/resolver -D
+yarn add nue-ui-resolver -D
 ```
 
 ## 依赖
@@ -48,7 +48,7 @@ yarn add @nue-ui/resolver -D
 // vite.config.ts
 import { defineConfig } from 'vite';
 import Components from 'unplugin-vue-components/vite';
-import { NueUiResolver } from '@nue-ui/resolver';
+import { NueUiResolver } from 'nue-ui-resolver';
 
 export default defineConfig({
     plugins: [
@@ -64,7 +64,7 @@ export default defineConfig({
 ```ts
 // webpack.config.js
 const Components = require('unplugin-vue-components/webpack');
-const { NueUiResolver } = require('@nue-ui/resolver');
+const { NueUiResolver } = require('nue-ui-resolver');
 
 module.exports = {
     plugins: [
@@ -81,14 +81,14 @@ module.exports = {
 // vite.config.ts
 import { defineConfig } from 'vite';
 import Components from 'unplugin-vue-components/vite';
-import { NueUiResolver } from '@nue-ui/resolver';
+import { NueUiResolver } from 'nue-ui-resolver';
 
 export default defineConfig({
     plugins: [
         Components({
             resolvers: [
                 NueUiResolver({
-                    importPath: '@nue-ui/components'
+                    importPath: '@nue-ui/components' // 源码模式（monorepo / workspace）
                 })
             ]
         })
@@ -96,13 +96,17 @@ export default defineConfig({
 });
 ```
 
+> `importPath` 默认值为 `'nue-ui/es'`（指向已发布包 `nue-ui` 的 ES 产物，
+> 生成 `nue-ui/es/button.js` 这类精确子路径）。源码模式下传入
+> `'@nue-ui/components'`，生成 `@nue-ui/components/button` 目录导入。
+
 ### 与其他解析器一起使用
 
 ```ts
 // vite.config.ts
 import { defineConfig } from 'vite';
 import Components from 'unplugin-vue-components/vite';
-import { NueUiResolver } from '@nue-ui/resolver';
+import { NueUiResolver } from 'nue-ui-resolver';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 export default defineConfig({
@@ -116,29 +120,25 @@ export default defineConfig({
 
 ## 重要提示：手动导入样式
 
-此解析器仅处理 **组件的自动导入**，您仍需手动导入组件样式：
+此解析器仅处理 **组件的自动导入**，您仍需手动导入组件样式（组件库不内置样式，
+样式由主题包 `nue-ui-theme-shadlike` 提供）：
 
 ### 全量导入样式
 
 ```ts
 // main.ts
-import 'nue-ui/dist/index.css';
+import 'nue-ui-theme-shadlike/dist/index.css';
 ```
 
 ### 按需导入样式
 
 ```ts
 // main.ts
-import 'nue-ui/dist/theme/button.css';
-import 'nue-ui/dist/theme/dialog.css';
-import 'nue-ui/dist/theme/input.css';
-```
-
-### 使用 Shadlike 主题
-
-```ts
-// main.ts
-import 'nue-ui-theme-shadlike/dist/index.css';
+// 全局变量与基础样式（必须）
+import 'nue-ui-theme-shadlike/dist/global/index.css';
+// 所用组件的样式（含其依赖组件的样式，见组件文档）
+import 'nue-ui-theme-shadlike/dist/components/button.css';
+import 'nue-ui-theme-shadlike/dist/components/dialog.css';
 ```
 
 ## 支持的组件
@@ -176,6 +176,7 @@ import 'nue-ui-theme-shadlike/dist/index.css';
 | `NueEmpty`          | 空状态   |
 | `NueMarquee`        | 跑马灯   |
 | `NueProgress`       | 进度条   |
+| `NueTable`          | 表格     |
 | `NueInfiniteScroll` | 无限滚动 |
 
 ### 表单组件
@@ -221,15 +222,15 @@ import 'nue-ui-theme-shadlike/dist/index.css';
 
 ### NueUiResolverOptions
 
-| 参数         | 类型     | 默认值                 | 说明           |
-| ------------ | -------- | ---------------------- | -------------- |
-| `importPath` | `string` | `'@nue-ui/components'` | 组件的导入路径 |
+| 参数         | 类型     | 默认值        | 说明                         |
+| ------------ | -------- | ------------- | ---------------------------- |
+| `importPath` | `string` | `'nue-ui/es'` | 组件构建产物的导入路径根目录 |
 
 ### 示例
 
 ```ts
 NueUiResolver({
-    importPath: '@nue-ui/components'
+    importPath: 'nue-ui/es'
 });
 ```
 
@@ -249,21 +250,25 @@ Resolver 会根据组件名称自动生成正确的导入路径：
 
 ```ts
 // 组件: NueButton
-// 生成的导入: import { NueButton } from '@nue-ui/components/button'
+// 生成的导入: import { NueButton } from 'nue-ui/es/button.js'
 
 // 组件: NueDialog
-// 生成的导入: import { NueDialog } from '@nue-ui/components/dialog'
+// 生成的导入: import { NueDialog } from 'nue-ui/es/dialog.js'
 ```
+
+容器子组件（NueHeader/NueAside/NueMain/NueContent/NueFooter/NueSeparator）统一指向
+`container` 入口；NueTextarea 指向 `input` 入口；NueSelectOption 指向 `select` 入口；
+NueScrollBar 指向 `scroll-bar` 入口，以此类推。
 
 ## TypeScript 支持
 
 此包包含完整的 TypeScript 类型定义，无需额外配置即可获得完整的类型提示。
 
 ```ts
-import { NueUiResolver, NueUiResolverOptions } from '@nue-ui/resolver';
+import { NueUiResolver, NueUiResolverOptions } from 'nue-ui-resolver';
 
 const options: NueUiResolverOptions = {
-    importPath: '@nue-ui/components'
+    importPath: 'nue-ui/es'
 };
 
 const resolver = NueUiResolver(options);
@@ -289,7 +294,7 @@ my-project/
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import Components from 'unplugin-vue-components/vite';
-import { NueUiResolver } from '@nue-ui/resolver';
+import { NueUiResolver } from 'nue-ui-resolver';
 
 export default defineConfig({
     plugins: [
@@ -309,7 +314,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 
 // 导入样式
-import 'nue-ui/dist/index.css';
+import 'nue-ui-theme-shadlike/dist/index.css';
 
 createApp(App).mount('#app');
 ```
@@ -349,7 +354,7 @@ const visible = ref(false);
 A: Resolver 只处理组件的自动导入，您需要手动导入样式文件：
 
 ```ts
-import 'nue-ui/dist/index.css';
+import 'nue-ui-theme-shadlike/dist/index.css';
 ```
 
 ### Q: 如何自定义组件的导入路径？

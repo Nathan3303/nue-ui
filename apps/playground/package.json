@@ -6,9 +6,9 @@
     "type": "module",
     "main": "index.ts",
     "scripts": {
-        "dev": "vite",
-        "build": "vue-tsc -b && vite build",
-        "preview": "vite preview"
+        "dev": "vp dev",
+        "build": "vue-tsc -b && vp build",
+        "preview": "vp preview"
     },
     "author": "Nathan Lee",
     "license": "MIT",
@@ -20,7 +20,8 @@
     "devDependencies": {
         "@vitejs/plugin-vue": "^5.2.4",
         "typescript": "~5.6.2",
-        "vite": "6.3.4",
-        "vue-tsc": "^2.1.8"
+        "vite": "catalog:",
+        "vue-tsc": "^2.1.8",
+        "vite-plus": "catalog:"
     }
 }

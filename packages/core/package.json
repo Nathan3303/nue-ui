@@ -1,6 +1,6 @@
 {
     "name": "nue-ui",
-    "version": "1.10.58",
+    "version": "1.12.0",
     "description": "Components library by Vue3 + TS",
     "author": "Nathan33",
     "license": "MIT",
@@ -8,9 +8,7 @@
     "files": [
         "dist"
     ],
-    "sideEffects": [
-        "./dist/theme/index.css"
-    ],
+    "sideEffects": false,
     "main": "./dist/umd/index.umd.cjs",
     "module": "./dist/es/index.js",
     "types": "./dist/types/core/index.d.ts",
@@ -20,6 +18,11 @@
             "require": "./dist/umd/index.umd.cjs",
             "import": "./dist/es/index.js"
         },
+        "./es/*.js": {
+            "types": "./dist/types/components/*/index.d.ts",
+            "import": "./dist/es/*.js"
+        },
+        "./es/*": "./dist/es/*",
         "./dist/": {
             "require": "./dist/",
             "import": "./dist/"
@@ -28,10 +31,10 @@
     "scripts": {
         "remove-dist": "node ./scripts/remove-dist.js",
         "touch-dts-file": "node ./scripts/touch-dts-file.js",
-        "build-es": "cross-env NODE_ENV=production vite build --config vite.es.config.ts",
-        "build-umd": "cross-env NODE_ENV=production vite build --config vite.umd.config.ts",
+        "build-es": "cross-env NODE_ENV=production vp build --config vite.es.config.ts",
+        "build-umd": "cross-env NODE_ENV=production vp build --config vite.umd.config.ts",
         "before-build": "pnpm remove-dist",
-        "after-build": "pnpm touch-dts-file",
+        "after-build": "pnpm touch-dts-file && node ./scripts/check-ondemand.js",
         "build": "pnpm before-build && run-p build-es build-umd && pnpm after-build"
     },
     "keywords": [

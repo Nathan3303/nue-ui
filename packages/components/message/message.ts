@@ -51,8 +51,8 @@ export function handlePop(node: HTMLElement, wrapper: HTMLElement) {
                     wrapperRef.value = null;
                 }
             }
-        } catch (e) {
-            return e;
+        } catch {
+            // 移除节点失败时静默忽略
         }
     }, time) as unknown as number;
 }
@@ -63,7 +63,7 @@ const NueMessage: NueMessageCaller = (payload: NueMessageCallerPayload) => {
         if (!externalWrapperRef.value) {
             let target = document.getElementById('app');
             if (!target) {
-                target = document.getElementsByTagName('body')[0];
+                target = document.body;
             }
             target.style.position = 'relative';
             wrapperRef.value = createMessageWrapper(target);

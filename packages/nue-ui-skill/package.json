@@ -1,0 +1,25 @@
+{
+    "name": "nue-ui-skill",
+    "version": "0.2.0",
+    "description": "使用 NueUI 组件库编写界面的 Agent Skill（nue-ui + nue-ui-theme-shadlike），pi / Claude Code / Codex 等 Agent 加载后可用于按需选型、拼页面与定制样式",
+    "keywords": [
+        "pi-package",
+        "agent-skills",
+        "nue-ui",
+        "vue3",
+        "ui"
+    ],
+    "license": "MIT",
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/"
+    },
+    "files": [
+        "SKILL.md",
+        "references"
+    ],
+    "pi": {
+        "skills": [
+            "."
+        ]
+    }
+}

@@ -90,23 +90,25 @@ demo-preview=./on-confirm.vue
 
 ### 参数
 
-| 属性                | 类型                                                                                                | 默认值 | 说明                           |
-| ------------------- | --------------------------------------------------------------------------------------------------- | ------ | ------------------------------ |
-| `title`             | `string`                                                                                            | -      | 标题                           |
-| `description`       | `string`                                                                                            | -      | 描述                           |
-| `placeholder`       | `string`                                                                                            | -      | 占位符                         |
-| `inputType`         | `'text' \| 'password' \| 'number' \| 'email' \| 'textarea'`                                         | -      | 输入类型                       |
-| `inputValue`        | `string \| number`                                                                                  | -      | 输入值                         |
-| `confirmButtonText` | `string`                                                                                            | -      | 确认按钮文字                   |
-| `cancelButtonText`  | `string`                                                                                            | -      | 取消按钮文字                   |
-| `animation`         | `string \| { name: string; duration?: number }`                                                     | -      | 打开动画                       |
-| `closeAnimation`    | `string \| { name: string; duration?: number }`                                                     | -      | 关闭动画                       |
-| `validator`         | `(value: unknown) => string \| Error \| null \| Promise<string \| Error \| null>`                   | -      | 验证器                         |
-| `onConfirm`         | `(value: unknown, done: () => void) => string \| Error \| null \| Promise<string \| Error \| null>` | -      | 确认回调                       |
-| `afterConfirm`      | `() => void \| Promise<void>`                                                                       | -      | 确认后回调                     |
-| `afterCancel`       | `() => void \| Promise<void>`                                                                       | -      | 取消后回调                     |
-| `beforeOpen`        | `() => void`                                                                                        | -      | 打开前回调                     |
-| `afterOpen`         | `() => void`                                                                                        | -      | 打开后回调                     |
-| `beforeClose`       | `() => void`                                                                                        | -      | 关闭前回调                     |
-| `afterClose`        | `() => void`                                                                                        | -      | 关闭后回调                     |
-| `theme`             | `string \| string[] \| Record<string, boolean>`                                                     | -      | 主题样式（继承自 GlobalProps） |
+| 属性                    | 类型                                                                                                | 默认值   | 说明                           |
+| ----------------------- | --------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
+| `title`                 | `string`                                                                                            | -        | 标题                           |
+| `description`           | `string`                                                                                            | -        | 描述                           |
+| `placeholder`           | `string`                                                                                            | `请输入` | 占位符                         |
+| `inputType`             | `'text' \| 'password' \| 'number' \| 'email' \| 'textarea'`                                         | `text`   | 输入类型                       |
+| `inputValue`            | `string \| number`                                                                                  | -        | 输入值                         |
+| `confirmButtonText`     | `string`                                                                                            | `确认`   | 确认按钮文字                   |
+| `cancelButtonText`      | `string`                                                                                            | `取消`   | 取消按钮文字                   |
+| `animation`             | `string \| { name: string; duration?: number }`                                                     | -        | 打开动画                       |
+| `closeAnimation`        | `string \| { name: string; duration?: number }`                                                     | -        | 关闭动画                       |
+| `overlayAnimation`      | `string \| { name: string; duration?: number }`                                                     | -        | 遮罩层打开动画                 |
+| `overlayCloseAnimation` | `string \| { name: string; duration?: number }`                                                     | -        | 遮罩层关闭动画                 |
+| `validator`             | `(value: unknown) => string \| Error \| null \| Promise<string \| Error \| null>`                   | -        | 验证器                         |
+| `onConfirm`             | `(value: unknown, done: () => void) => string \| Error \| null \| Promise<string \| Error \| null>` | -        | 确认回调                       |
+| `afterConfirm`          | `() => void \| Promise<void>`                                                                       | -        | 确认后回调                     |
+| `afterCancel`           | `() => void \| Promise<void>`                                                                       | -        | 取消后回调                     |
+| `beforeOpen`            | `() => void`                                                                                        | -        | 打开前回调                     |
+| `afterOpen`             | `() => void`                                                                                        | -        | 打开后回调                     |
+| `beforeClose`           | `() => void`                                                                                        | -        | 关闭前回调                     |
+| `afterClose`            | `() => void`                                                                                        | -        | 关闭后回调                     |
+| `theme`                 | `string \| string[] \| Record<string, boolean>`                                                     | -        | 主题样式（继承自 GlobalProps） |

@@ -125,15 +125,15 @@ demo-preview=./option-append-slot.vue
 
 ### NueSelect 属性
 
-| 属性          | Type                                                                  | 默认值  | 说明                           |
-| ------------- | --------------------------------------------------------------------- | ------- | ------------------------------ |
-| `modelValue`  | `string \| number \| boolean \| object \| array \| null \| undefined` | -       | 绑定值                         |
-| `placeholder` | `string`                                                              | -       | 占位符                         |
-| `size`        | `'small' \| 'large'`                                                  | -       | 尺寸                           |
-| `disabled`    | `boolean`                                                             | `false` | 是否禁用                       |
-| `clearable`   | `boolean`                                                             | `false` | 可清除                         |
-| `persistent`  | `boolean`                                                             | `false` | 选择后保持打开                 |
-| `theme`       | `string \| string[] \| Record<string, boolean>`                       | -       | 主题样式（继承自 GlobalProps） |
+| 属性          | Type                                                                  | 默认值       | 说明                           |
+| ------------- | --------------------------------------------------------------------- | ------------ | ------------------------------ |
+| `modelValue`  | `string \| number \| boolean \| object \| array \| null \| undefined` | -            | 绑定值                         |
+| `placeholder` | `string`                                                              | `请选择 ...` | 占位符                         |
+| `size`        | `'small' \| 'large'`                                                  | -            | 尺寸                           |
+| `disabled`    | `boolean`                                                             | `false`      | 是否禁用                       |
+| `clearable`   | `boolean`                                                             | `false`      | 可清除                         |
+| `persistent`  | `boolean`                                                             | `false`      | 选择后保持打开                 |
+| `theme`       | `string \| string[] \| Record<string, boolean>`                       | -            | 主题样式（继承自 GlobalProps） |
 
 ### NueSelect 事件
 

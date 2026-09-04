@@ -42,17 +42,15 @@
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import NueOverlay from '../overlay/overlay.vue';
-import {
-    NueText,
-    NueContainer,
-    NueHeader,
-    NueMain,
-    NueContent,
-    NueFooter,
-    NueButton
-} from '@nue-ui/components';
+import NueText from '../text/text.vue';
+import NueContainer from '../container/container.vue';
+import NueHeader from '../container/header.vue';
+import NueMain from '../container/main.vue';
+import NueContent from '../container/content.vue';
+import NueFooter from '../container/footer.vue';
+import NueButton from '../button/button.vue';
 import { parseTheme } from '@nue-ui/utils';
-import { usePopupAnchor } from '@nue-ui/hooks';
+import { usePopupAnchor } from '@nue-ui/hooks/use-popup-anchor';
 import type { NueDialogEmits, NueDialogProps } from './types';
 
 defineOptions({ name: 'NueDialog' });

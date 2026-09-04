@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-
-# nvm 管理的 Node.js 路径可能不在默认 PATH 中，需要手动添加
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-pnpm run lint:lint-staged
-pnpm run format
-pnpm run test:run

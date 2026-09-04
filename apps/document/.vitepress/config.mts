@@ -85,6 +85,10 @@ export default defineConfig({
                         {
                             text: 'Progress 进度',
                             link: '/tutorial/data/progress/index.md'
+                        },
+                        {
+                            text: 'Table 表格',
+                            link: '/tutorial/data/table/index.md'
                         }
                     ]
                 },

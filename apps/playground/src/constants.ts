@@ -21,6 +21,7 @@ export const componentLayoutAsideLinks = [
             { route: '/component/infinite-scroll', text: 'Infinite Scroll 无限滚动' },
             { route: '/component/marquee', text: 'Marquee 跑马灯' },
             { route: '/component/progress', text: 'Progress 进度' },
+            { route: '/component/table', text: 'Table 表格' },
             { route: '/component/empty', text: 'Empty 空状态' },
             { route: '/component/breadcrumb', text: 'Breadcrumb 面包屑' }
         ]

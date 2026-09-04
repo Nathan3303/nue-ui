@@ -11,7 +11,7 @@ export const usePopperController = (visible: Ref<boolean>) => {
         }
         if (beforeShow) beforeShow();
         visible.value = true;
-        nextTick(() => {
+        void nextTick(() => {
             if (afterShow) afterShow();
         });
     };

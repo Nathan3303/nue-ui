@@ -42,7 +42,7 @@ demo-preview=./duration.vue
 
 ## 确定类型的快速使用
 
-通过 `NueMessage` 中的子方法 `success`、`info`、`warn`、`error`、`log` 可以快速创建不同类型的消息提示。这些子方法都拥有同样的形参，包括 `message`、`duration` 以及 `icon` 。
+通过 `NueMessage` 中的子方法 `success`、`info`、`warn`、`error`、`log` 可以快速创建不同类型的消息提示。这些子方法都拥有同样的形参，包括 `message`、`duration`、`icon` 以及 `size` 。
 
 ::: preview
 demo-preview=./quick-use.vue

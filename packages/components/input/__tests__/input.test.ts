@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'vite-plus/test';
 import { mount } from '@vue/test-utils';
 import { NueInput } from '../index';
 
@@ -121,7 +121,7 @@ describe('NueInput', () => {
             const wrapper = mount(NueInput, {
                 props: { modelValue: 'test', clearable: true }
             });
-            const clearButton = wrapper.findAll('.nue-input__icon-button')[0];
+            const clearButton = wrapper.findAll('.nue-input__icon-button')[0]!;
             await clearButton.trigger('click');
             expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['']);
         });
@@ -146,7 +146,7 @@ describe('NueInput', () => {
             const wrapper = mount(NueInput, {
                 props: { type: 'password', modelValue: '123456', allowShowPassword: true }
             });
-            const iconButton = wrapper.findAll('.nue-input__icon-button')[0];
+            const iconButton = wrapper.findAll('.nue-input__icon-button')[0]!;
             await iconButton.trigger('click');
             expect(wrapper.find('input').attributes('type')).toBe('text');
             await iconButton.trigger('click');

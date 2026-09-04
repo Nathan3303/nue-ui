@@ -1,4 +1,4 @@
-import { isString } from 'lodash-es';
+import { isString } from './utils';
 import type { ObjectLikeThemes } from './types';
 
 /**

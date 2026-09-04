@@ -6,3 +6,21 @@ packages:
 allowBuilds:
     '@parcel/watcher': true
     esbuild: true
+catalog:
+    vite: npm:@voidzero-dev/vite-plus-core@0.2.6
+    vitest: 4.1.10
+    vite-plus: 0.2.6
+    '@vitest/coverage-v8': 4.1.10
+overrides:
+    vite: 'catalog:'
+    vitest: 'catalog:'
+    # VitePress v1 不兼容 rolldown-vite（vite-plus 的 vite 实现），
+    # 文档站单独使用官方 vite（Vitepress v1 的依赖为 vite ^5.4.14）
+    'vitepress>vite': '^5.4.14'
+peerDependencyRules:
+    allowAny:
+        - vite
+        - vitest
+    allowedVersions:
+        vite: '*'
+        vitest: '*'

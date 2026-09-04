@@ -1,13 +1,12 @@
 import type { App, Component, Plugin } from 'vue';
-import { each } from 'lodash-es';
 
 type SFCWithInstall<T> = T & Plugin;
 
 export function makeInstaller(components: Plugin[]) {
     const installer = (app: App) => {
-        return each(components, (comp: Plugin) => {
+        for (const comp of components) {
             app.use(comp);
-        });
+        }
     };
     return installer;
 }

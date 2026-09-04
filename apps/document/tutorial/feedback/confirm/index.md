@@ -76,23 +76,23 @@ demo-preview=./theme.vue
 
 ### 参数
 
-| 属性                    | Type                                            | 默认值 | 说明                           |
-| ----------------------- | ----------------------------------------------- | ------ | ------------------------------ |
-| `title`                 | `string`                                        | -      | 标题                           |
-| `content`               | `string \| VNode`                               | -      | 内容                           |
-| `confirmButtonText`     | `string`                                        | -      | 确认按钮文字                   |
-| `cancelButtonText`      | `string`                                        | -      | 取消按钮文字                   |
-| `unuseCancelButton`     | `boolean`                                       | -      | 不显示取消按钮                 |
-| `loading`               | `boolean`                                       | -      | 加载状态                       |
-| `animation`             | `string \| { name: string; duration?: number }` | -      | 打开动画                       |
-| `closeAnimation`        | `string \| { name: string; duration?: number }` | -      | 关闭动画                       |
-| `overlayAnimation`      | `string \| { name: string; duration?: number }` | -      | 遮罩层打开动画                 |
-| `overlayCloseAnimation` | `string \| { name: string; duration?: number }` | -      | 遮罩层关闭动画                 |
-| `onConfirm`             | `() => unknown`                                 | -      | 确认回调                       |
-| `beforeOpen`            | `() => unknown`                                 | -      | 打开前回调                     |
-| `afterOpen`             | `() => unknown`                                 | -      | 打开后回调                     |
-| `afterConfirm`          | `() => unknown`                                 | -      | 确认后回调                     |
-| `afterCancel`           | `() => unknown`                                 | -      | 取消后回调                     |
-| `beforeClose`           | `() => unknown`                                 | -      | 关闭前回调                     |
-| `afterClose`            | `() => unknown`                                 | -      | 关闭后回调                     |
-| `theme`                 | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+| 属性                    | Type                                            | 默认值    | 说明                           |
+| ----------------------- | ----------------------------------------------- | --------- | ------------------------------ |
+| `title`                 | `string`                                        | `Confirm` | 标题                           |
+| `content`               | `string \| VNode`                               | -         | 内容                           |
+| `confirmButtonText`     | `string`                                        | `Confirm` | 确认按钮文字                   |
+| `cancelButtonText`      | `string`                                        | `Cancel`  | 取消按钮文字                   |
+| `unuseCancelButton`     | `boolean`                                       | -         | 不显示取消按钮                 |
+| `loading`               | `boolean`                                       | -         | 加载状态                       |
+| `animation`             | `string \| { name: string; duration?: number }` | -         | 打开动画                       |
+| `closeAnimation`        | `string \| { name: string; duration?: number }` | -         | 关闭动画                       |
+| `overlayAnimation`      | `string \| { name: string; duration?: number }` | -         | 遮罩层打开动画                 |
+| `overlayCloseAnimation` | `string \| { name: string; duration?: number }` | -         | 遮罩层关闭动画                 |
+| `onConfirm`             | `() => unknown`                                 | -         | 确认回调                       |
+| `beforeOpen`            | `() => unknown`                                 | -         | 打开前回调                     |
+| `afterOpen`             | `() => unknown`                                 | -         | 打开后回调                     |
+| `afterConfirm`          | `() => unknown`                                 | -         | 确认后回调                     |
+| `afterCancel`           | `() => unknown`                                 | -         | 取消后回调                     |
+| `beforeClose`           | `() => unknown`                                 | -         | 关闭前回调                     |
+| `afterClose`            | `() => unknown`                                 | -         | 关闭后回调                     |
+| `theme`                 | `string \| string[] \| Record<string, boolean>` | -         | 主题样式（继承自 GlobalProps） |

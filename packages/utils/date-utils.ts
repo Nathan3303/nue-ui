@@ -100,7 +100,7 @@ export function formatDateByType(
             return formatDateTimeISO(date);
         }
         // 对于只包含日期的 ISO 格式，我们取日期部分
-        return date.toISOString().split('T')[0];
+        return date.toISOString().split('T')[0]!;
     }
 
     // standard 格式
@@ -147,6 +147,10 @@ export function parseDate(str: string): Date | null {
     }
 
     const [year, month, day] = str.split('-').map(Number);
+    // 正则已保证三段均为数字，此处仅作类型收窄
+    if (year === undefined || month === undefined || day === undefined) {
+        return null;
+    }
     const parsedDate = new Date(year, month - 1, day);
 
     // 验证日期有效性

@@ -105,9 +105,9 @@ demo-preview=./on-close.vue
 | --------------------- | ----------------------------------------------- | ------- | ------------------------------ |
 | `modelValue`          | `boolean`                                       | -       | 控制显示隐藏                   |
 | `title`               | `string`                                        | -       | 抽屉标题                       |
-| `span`                | `string`                                        | -       | 展开范围（宽度或高度）         |
-| `minSpan`             | `string`                                        | -       | 最小展开范围                   |
-| `allowCloseByOverlay` | `boolean`                                       | `true`  | 允许点击遮罩层关闭             |
+| `span`                | `string`                                        | `36%`   | 展开范围（宽度或高度）         |
+| `minSpan`             | `string`                                        | `240px` | 最小展开范围                   |
+| `allowCloseByOverlay` | `boolean`                                       | `false` | 允许点击遮罩层关闭             |
 | `openFrom`            | `'left' \| 'right' \| 'top' \| 'bottom'`        | `right` | 打开方向                       |
 | `teleportTo`          | `string`                                        | -       | 传送到指定 DOM 节点            |
 | `onClose`             | `(done: () => void) => unknown`                 | -       | 关闭前回调，用于异步关闭       |
