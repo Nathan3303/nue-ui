@@ -1284,6 +1284,12 @@ export default defineConfig({
         },
         overrides: [
             {
+                files: ['packages/nue-ui-skill/bin/*.mjs'],
+                globals: {
+                    process: 'readonly'
+                }
+            },
+            {
                 files: ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'],
                 rules: {
                     'constructor-super': 'off',
