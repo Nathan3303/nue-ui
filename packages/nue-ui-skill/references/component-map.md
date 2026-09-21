@@ -2,9 +2,9 @@
 
 按"这个界面块想实现什么"选组件。**动手前务必打开该组件的文档页**看完整 API 与演示：
 
-- 文档页位置：`apps/document/tutorial/<类别>/<组件>/index.md`（在线：https://nathan3303.github.io/nue-ui/ ）
+- 文档页：在线 https://nathan3303.github.io/nue-ui/ （**消费方项目的权威出处**）；本仓库内为同源的 `apps/document/tutorial/<类别>/<组件>/index.md`。
 - 组件文档目录类别：basic（基础）/ data（数据展示）/ form（表单）/ feedback（反馈）/ navigation（导航）/ others（其他）；使用姿势见 `tutorial/usage/*`。
-- 仓库内"现成用法样例"可以直接抄：同目录下的 `*.vue` 演示文件。
+- 仓库内“现成用法样例”可以直接抄：同目录下的 `*.vue` 演示文件（仅本仓库内可用）。
 
 通用速记（所有组件）：
 
@@ -19,7 +19,7 @@
 | `<nue-div>`                                                            | 万能 flex 容器：横排/竖排、对齐、间距、分割线。几乎每个画面都在用   | `direction`/`vertical`、`align`、`justify`、`flex`、`wrap`、`gap`、`divider`、`inline`                              | basic/div         |
 | `<nue-text>`                                                           | 排版文本：标签(tag)、字号、颜色、字重、对齐、多行截断               | `tag`、`size`、`color`、`weight`、`clamped`（行数）、`decoration`                                                   | basic/text        |
 | `<nue-container>` + `<nue-header/aside/main/content/footer/separator>` | 应用壳：上/下/左/右区域布局；aside 可设宽/折叠，content `fill` 撑满 | container 设 `height`；header/footer 设 `height`；aside 设 `width`/`min-width`/`collapsed-width`；content 设 `fill` | basic/container   |
-| `<nue-divider>`                                                        | 分割线（水平/垂直、带文字）                                         | `direction`、`content-position` 等（看文档）                                                                        | others/divider    |
+| `<nue-divider>`                                                        | 分割线（水平/垂直、带文字）                                         | `vertical`、`alignment`（start/center/end）、`text`、`lineWidth`、`lineStyle`、`lineColor`                          | others/divider    |
 | `<nue-scroll-bar>`                                                     | 自定义滚动条区域                                                    | `height` 等                                                                                                         | others/scroll-bar |
 
 ## 基础交互元素
@@ -45,14 +45,14 @@
 
 ## 反馈
 
-| 组件                         | 用途                                           | 核心                                                                                                                                              | 文档             |
-| ---------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| `<nue-dialog>`               | 模态对话框                                     | `v-model`(boolean)、`title`；插槽 `header`/`content`/`footer`（都解构出 `close`）/`reset`；事件 `before-open/after-open/before-close/after-close` | feedback/dialog  |
-| `<nue-drawer>`               | 抽屉                                           | `v-model`、`title`、`open-from`（left/right/top/bottom）、`span`、`allow-close-by-overlay`；插槽同 dialog                                         | feedback/drawer  |
-| `<nue-tooltip>`              | 悬浮提示（包裹目标）                           | `content`、`placement`（top/bottom/left/right 及 -start/-center/-end）、`show-triangle`                                                           | feedback/tooltip |
-| `NueMessage(...)` **方法**   | 轻提示（toast）                                | `NueMessage({ message, type: 'success'                                                                                                            | 'error'          | 'warning' | 'info' | 'log', duration, icon })`；快捷 `NueMessage.success(message, duration?, icon?, size?)` 等 | feedback/message |
-| `NueConfirm({...})` **方法** | 确认框，返回 Promise `[isByCancel, result]`    | payload：`title`/`content`/`confirm-button-text`/`cancel-button-text`/`on-confirm`（支持异步）/`unuse-cancel-button`/`animation`                  | feedback/confirm |
-| `NuePrompt({...})` **方法**  | 输入确认框，Promise `[isByCancel, inputValue]` | payload：`title`/`placeholder`/按钮文案                                                                                                           | feedback/prompt  |
+| 组件                         | 用途                                           | 核心                                                                                                                                                                               | 文档             |
+| ---------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| `<nue-dialog>`               | 模态对话框                                     | `v-model`(boolean)、`title`；插槽 `header`/`content`/`footer`（都解构出 `close`）/`reset`；事件 `before-open/after-open/before-close/after-close`                                  | feedback/dialog  |
+| `<nue-drawer>`               | 抽屉                                           | `v-model`、`title`、`open-from`（left/right/top/bottom）、`span`、`allow-close-by-overlay`；插槽同 dialog                                                                          | feedback/drawer  |
+| `<nue-tooltip>`              | 悬浮提示（包裹目标）                           | `content`、`placement`（top/bottom/left/right 及 -start/-center/-end）、`show-triangle`                                                                                            | feedback/tooltip |
+| `NueMessage(...)` **方法**   | 轻提示（toast）                                | `NueMessage({ message, type: 'success'/'error'/'warning'/'info'/'log', duration, icon })`；快捷 `NueMessage.success(message, duration?, icon?, size?)` 等（`warn` 对应 `warning`） | feedback/message |
+| `NueConfirm({...})` **方法** | 确认框，返回 Promise `[isByCancel, result]`    | payload（camelCase）：`title`/`content`/`confirmButtonText`/`cancelButtonText`/`onConfirm`（支持异步）/`unuseCancelButton`/`overlayAnimation`                                      | feedback/confirm |
+| `NuePrompt({...})` **方法**  | 输入确认框，Promise `[isByCancel, inputValue]` | payload：`title`/`placeholder`/按钮文案                                                                                                                                            | feedback/prompt  |
 
 ## 数据展示
 
@@ -69,11 +69,10 @@
 
 ## 导航
 
-| 组件                                         | 用途                   | 核心                                                                                                                                                          | 文档                            |
-| -------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
-| `<nue-dropdown>` + `<nue-dropdown-item>`     | 下拉菜单（点击/hover） | dropdown：`trigger-text`/`text`、`trigger-type`（click/hover）、`placement`、`close-when-executed`；item：`text`/`icon`/`execute-id`；dropdown 事件 `execute` | navigation/dropdown             |
-| `<nue-breadcrumb>` + `<nue-breadcrumb-item>` | 面包屑                 | 看文档                                                                                                                                                        | —（组件存在；文档页以站内为准） |
+| 组件                                     | 用途                   | 核心                                                                                                                                                          | 文档                |
+| ---------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `<nue-dropdown>` + `<nue-dropdown-item>` | 下拉菜单（点击/hover） | dropdown：`trigger-text`/`text`、`trigger-type`（click/hover）、`placement`、`close-when-executed`；item：`text`/`icon`/`execute-id`；dropdown 事件 `execute` | navigation/dropdown |
 
 ## 未文档化但存在（谨慎使用）
 
-`<nue-checkbox-group>`/`<nue-button-group>` 之外的组件如 `NuePopupPool`、`NueOverlay` 多用于库内弹层基建，日常写画面基本用不到；`nue-checkbox-group`（把若干 NueCheckbox 按 name 聚合）在库内无文档页，需要时可参考源码 `packages/components/checkbox-group/` 的注释与其测试再决定是否使用。
+`<nue-checkbox-group>`/`<nue-button-group>` 之外的组件如 `NuePopupPool`、`NueOverlay` 多用于库内弹层基建，日常写画面基本用不到；`nue-checkbox-group`（把若干 NueCheckbox 按 name 聚合）在库内无文档页，需要时可参考源码 `packages/components/checkbox-group/` 的注释与其测试再决定是否使用。`nue-breadcrumb` + `nue-breadcrumb-item` 同理：组件存在、库内暂无文档页，需要时看源码 `packages/components/breadcrumb/`。

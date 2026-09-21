@@ -1,6 +1,6 @@
 ---
 name: nue-ui-dev
-description: NueUI 组件库（Vue3 + TS，Monorepo）的「开发/更新」指南。当用户要求在本仓库中开发组件库本身——新增或修改组件（packages/components）、主题样式（packages/themes/shadlike 或 nue-ui-theme-shadlike）、单元测试（__tests__）、组件文档（apps/document）、或新增/修改 @nue-ui/utils 与 @nue-ui/hooks——请使用本技能。任务往往很口语化，例如"帮我加个 NueXxx 组件""这个按钮样式不对""给 Select 加个功能""补个测试""写组件文档"。注意：若目标是消费方项目里用现有 NueUI 组件写界面，应使用已发布的使用向技能 nue-ui（npm 包 nue-ui-skill），而非本技能。本技能揭示仓库最反直觉的架构事实：组件 SFC 本身不带任何样式、样式由主题包的 CSS 变量与 BEM 类名提供，以及"新增组件需要完成多处固定接线（聚合导出/全量安装/resolver 映射/主题 CSS）"等规则。
+description: NueUI 组件库（Vue3 + TS，Monorepo）的「开发/更新」指南。当用户要求在本仓库中开发组件库本身——新增或修改组件（packages/components）、主题样式（packages/themes/shadlike 或 nue-ui-theme-shadlike）、单元测试（__tests__）、组件文档与演示（apps/document）、或新增/修改 @nue-ui/utils 与 @nue-ui/hooks——请使用本技能。任务往往很口语化，例如"帮我加个 NueXxx 组件""这个按钮样式不对""给 Select 加个功能""补个测试""写组件文档"。注意：若目标是消费方项目里用现有 NueUI 组件写界面，应使用已发布的使用向技能 nue-ui（npm 包 nue-ui-skill），而非本技能。本技能揭示仓库最反直觉的架构事实：组件 SFC 本身不带任何样式、样式由主题包的 CSS 变量与 BEM 类名提供，以及"新增组件需要完成多处固定接线（聚合导出/全量安装/resolver 映射/主题 CSS）"等规则。
 ---
 
 # NueUI 组件库开发技能

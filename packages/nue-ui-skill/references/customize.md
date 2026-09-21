@@ -6,9 +6,11 @@ NueUI 视觉由"设计 token（CSS 变量）+ 组件级 CSS 变量 + theme 修�
 2. **覆盖 CSS 变量**（换色/间距/圆角等 token）；
 3. **scoped 样式 + 类名**（最后手段）。
 
+> 下文提到的 `packages/themes/shadlike/...` 源码路径仅在本仓库内可用；消费方项目可改看 `node_modules/nue-ui-theme-shadlike/dist/**` 或在线文档。
+
 ## 1. theme 属性：给组件换风格
 
-`theme` 是全库组件通用的 prop，接受：
+`theme` 是绝大多数组件通用的 prop（少数组件如 InfiniteScroll/Breadcrumb 没有），接受：
 
 - 字符串：`theme="primary"`；
 - 多个主题逗号分隔：`theme="primary,round"`（等同于数组/对象形式，见 features/theme 文档）。

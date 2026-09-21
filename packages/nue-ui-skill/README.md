@@ -2,7 +2,9 @@
 
 使用 **NueUI**（Vue 3 组件库：`nue-ui` + `nue-ui-theme-shadlike`）编写界面的 [Agent Skill](https://agentskills.io/specification)。
 
-本技能面向**使用方**：告诉 AI Agent 如何用现有 NueUI 组件搭页面/画面——组件选型、引入方式、v-model 与事件约定、theme 与 CSS 变量定制、暗色模式、可复制的画面套路（应用壳、表单、弹窗、消息/确认流、列表加载、下拉菜单等）。不涉及组件库源码的二次开发。
+本技能面向**使用方**：告诉 AI Agent 如何用现有 NueUI 组件搭页面/画面——组件选型、引入方式、v-model 与事件约定、theme 与 CSS 变量定制、暗色模式、可复制的画面套路（应用壳、表单、弹窗、消息/确认流、列表加载、下拉菜单等）。不涉及组件库源码的二次开发（仓库内开发请用 `nue-ui-dev` 技能）。
+
+> 本技能对齐 `nue-ui@1.12.x` / `nue-ui-theme-shadlike@0.13.x`；组件 API 以 [官方在线文档](https://nathan3303.github.io/nue-ui/) 为准。
 
 > 技能本体即本包：`SKILL.md` 位于包根，`references/` 为按需加载的深度文档。
 

@@ -1,6 +1,6 @@
 # 画面编写套路（recipes）
 
-可复制片段。用法与 props 名称**以文档为准**（本仓库 `apps/document/tutorial/...` 或在线文档）；这里示范结构。仓库内的演示文件路径已标注，可以直接打开抄。
+可复制片段。用法与 props 名称**以在线文档为准**（https://nathan3303.github.io/nue-ui/ ）；这里示范结构。文中标注的“来源演示”路径（`apps/document/tutorial/...`）仅在 NueUI 仓库内可打开，消费方项目可到在线文档看同源演示。
 
 约定：片段假设已全量注册（见 get-started.md），方法类组件需 `import { NueMessage } from 'nue-ui';`。
 
@@ -123,6 +123,11 @@ import { ref } from 'vue';
 
 const dialogVisible = ref(false);
 const drawerVisible = ref(false);
+const name = ref('');
+const saveUser = (close: () => void) => {
+    // 真正的保存逻辑...
+    close();
+};
 </script>
 
 <template>
@@ -132,7 +137,7 @@ const drawerVisible = ref(false);
     <!-- 对话框：title + footer 插槽（可解构 close）做操作按钮 -->
     <nue-dialog v-model="dialogVisible" title="编辑用户">
         <nue-div direction="column" gap="var(--nue-gap-df)">
-            <nue-input v-model="form.name" placeholder="姓名" />
+            <nue-input v-model="name" placeholder="姓名" />
         </nue-div>
         <template #footer="{ close }">
             <nue-button theme="ghost" @click="close">取消</nue-button>
@@ -193,7 +198,7 @@ const askName = () => {
 要点：
 
 - Confirm/Prompt 返回 Promise；点击确认或取消都会 resolve，用 `[isByCancel, result]` 判断，出错才 reject；
-- Confirm 支持 `on-confirm`（异步亦可，执行期间按钮 loading）；`unuse-cancel-button` 可去掉取消钮；
+- Confirm 支持 `onConfirm`（异步亦可，执行期间按钮 loading）；`unuseCancelButton` 可去掉取消钮；
 - Message：`NueMessage.success/info/warn/error/log`；`duration: 0` 表示不自动消失；
 - 用 tooltip 做轻量就地说明：`<nue-tooltip content="提示文字"><nue-button>?</nue-button></nue-tooltip>`。
 
