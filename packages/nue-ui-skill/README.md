@@ -12,7 +12,7 @@
 
 ### 复制到项目 `.agents/skills`（通用，推荐）
 
-包带一个 `nue-ui-skill` CLI，一条命令把 `SKILL.md` + `references/` 复制到目标项目，pi / Claude Code / Codex 等都能识别：
+包带一个 `nue-ui-skill` CLI，一条命令把 `SKILL.md` + `references/` 复制到目标项目，Pi / Claude Code / Codex 等都能识别：
 
 ```bash
 nue-ui-skill install                  # 复制到当前项目 .agents/skills/nue-ui/
@@ -22,7 +22,7 @@ nue-ui-skill install --force          # 目标已存在时覆盖（默认拒绝�
 
 未全局安装时用 `npx`：`npx nue-ui-skill install`。
 
-### pi（自动发现）
+### Pi（自动发现）
 
 ```bash
 pi install npm:nue-ui-skill     # 全局

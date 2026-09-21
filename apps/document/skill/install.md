@@ -1,6 +1,12 @@
 # 安装
 
-## 方式一：pi（自动发现）
+## Pi 是什么
+
+[Pi](https://pi.dev) 是一个运行在终端中的编码代理（AI coding agent）：像 Claude Code / Codex 一样，在命令行里通过对话帮你完成编码任务。Pi 支持安装并加载 **Agent Skill**——技能安装后，Pi 会在合适的时机自动读取其内容，获得"如何用 NueUI 写界面"这类特定领域的操作指南。
+
+> 下文命令中的 `pi` 是 Pi 的命令行入口（命令名本身是小写）；正文提及产品时统一写作 **Pi**。
+
+## 方式一：Pi（自动发现）
 
 ```bash
 pi install npm:nue-ui-skill     # 全局
@@ -10,7 +16,7 @@ pi -e npm:nue-ui-skill          # 临时试用不落盘
 
 ## 方式二：CLI 复制到项目（通用）
 
-包自带 `nue-ui-skill` 命令，把 `SKILL.md` + `references/` 复制到目标项目的 `.agents/skills/nue-ui/`，pi / Claude Code / Codex 等都能识别：
+包自带 `nue-ui-skill` 命令，把 `SKILL.md` + `references/` 复制到目标项目的 `.agents/skills/nue-ui/`，Pi / Claude Code / Codex 等都能识别：
 
 ```bash
 nue-ui-skill install                  # 复制到当前项目 .agents/skills/nue-ui/

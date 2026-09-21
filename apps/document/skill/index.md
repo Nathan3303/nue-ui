@@ -1,6 +1,6 @@
 # 技能（Agent Skill）
 
-`nue-ui-skill` 是一个 **Agent Skill 包**：安装后，AI Agent（pi、Claude Code、Codex 等）能获得一份"如何使用 NueUI 写界面"的操作指南，包括组件选型、引入方式、v-model 与事件约定、theme 与 CSS 变量定制、暗色模式，以及可复制的画面套路（应用壳、表单、弹窗、消息/确认流、列表加载、下拉菜单等）。
+`nue-ui-skill` 是一个 **Agent Skill 包**：安装后，AI Agent（Pi、Claude Code、Codex 等）能获得一份"如何使用 NueUI 写界面"的操作指南，包括组件选型、引入方式、v-model 与事件约定、theme 与 CSS 变量定制、暗色模式，以及可复制的画面套路（应用壳、表单、弹窗、消息/确认流、列表加载、下拉菜单等）。
 
 > 当前版本：`nue-ui-skill@0.3.x`
 
@@ -30,7 +30,7 @@
 ## 快速开始
 
 ```bash
-# 方式一：pi 安装后自动发现
+# 方式一：Pi 安装后自动发现
 pi install npm:nue-ui-skill
 
 # 方式二：复制到项目（任何 harness 可用）
