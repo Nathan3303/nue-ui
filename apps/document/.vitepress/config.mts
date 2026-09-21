@@ -13,7 +13,9 @@ export default defineConfig({
         nav: [
             { text: '主页', link: '/' },
             { text: '教程', link: '/tutorial', activeMatch: '/tutorial' },
-            { text: '进阶', link: '/enhance', activeMatch: '/enhance' }
+            { text: '主题', link: '/theme', activeMatch: '/theme' },
+            { text: '进阶', link: '/enhance', activeMatch: '/enhance' },
+            { text: '技能', link: '/skill', activeMatch: '/skill' }
         ],
         sidebar: {
             '/tutorial/': [
@@ -177,6 +179,21 @@ export default defineConfig({
                     ]
                 }
             ],
+            '/theme/': [
+                {
+                    items: [{ text: '主题章节引入', link: '/theme/index.md' }]
+                },
+                {
+                    text: '主题',
+                    items: [
+                        { text: '安装与引入', link: '/theme/install.md' },
+                        { text: '设计系统（Design Tokens）', link: '/theme/design-tokens.md' },
+                        { text: '深色模式', link: '/theme/dark-mode.md' },
+                        { text: '定制主题', link: '/theme/customize.md' },
+                        { text: '按需引入组件样式', link: '/theme/components-css.md' }
+                    ]
+                }
+            ],
             '/enhance/': [
                 {
                     items: [{ text: '进阶章节引入', link: '/enhance/index.md' }]
@@ -184,6 +201,19 @@ export default defineConfig({
                 {
                     text: '反馈组件',
                     items: [{ text: '下拉列表进阶', link: '/enhance/dropdown/index.md' }]
+                }
+            ],
+            '/skill/': [
+                {
+                    items: [{ text: '技能章节引入', link: '/skill/index.md' }]
+                },
+                {
+                    text: '技能',
+                    items: [
+                        { text: '安装', link: '/skill/install.md' },
+                        { text: 'CLI 用法', link: '/skill/cli.md' },
+                        { text: '使用技能', link: '/skill/usage.md' }
+                    ]
                 }
             ]
         },

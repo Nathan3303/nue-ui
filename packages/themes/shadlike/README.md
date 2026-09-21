@@ -5,7 +5,7 @@ NueUI Theme Shadlike 是 NueUI 组件库的 Shadcn-like 风格主题包，提供
 ## 包信息
 
 - **名称**: `nue-ui-theme-shadlike`
-- **版本**: `0.11.15`
+- **版本**: `0.13.25`
 - **描述**: A shadcn-like theme for NueUI
 - **作者**: Nathan Lee
 - **许可证**: MIT
