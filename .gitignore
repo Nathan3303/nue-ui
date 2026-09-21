@@ -29,8 +29,8 @@ dist/*
 *.sw?
 
 # Custom ignore files
-/packages/docs/.vitepress/dist
-/packages/docs/.vitepress/cache
+/apps/document/.vitepress/dist
+/apps/document/.vitepress/cache
 .backup
 
 # OhMyOpenCode
