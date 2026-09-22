@@ -5,9 +5,20 @@ import type {
     NueMessageNodeProps,
     NueMessageCallerPayload,
     NueMessageCaller,
-    NueMessageSubCaller
+    NueMessageSubCaller,
+    NueMessageExtension,
+    NueMessageExtensionCtx,
+    NueMessageHandle
 } from './types';
 
 export const NueMessageWrapper = withInstall(MessageWrapper);
 export const NueMessage = Message as NueMessageCaller;
-export type { NueMessageNodeProps, NueMessageCallerPayload, NueMessageCaller, NueMessageSubCaller };
+export type {
+    NueMessageNodeProps,
+    NueMessageCallerPayload,
+    NueMessageCaller,
+    NueMessageSubCaller,
+    NueMessageExtension,
+    NueMessageExtensionCtx,
+    NueMessageHandle
+};

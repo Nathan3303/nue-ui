@@ -55,6 +55,13 @@
         font-size: var(--nue-message-node-inner-font-size);
         color: var(--nue-message-node-inner-color);
     }
+
+    .nue-message-node-inner__extension {
+        display: inline-flex;
+        align-items: center;
+        padding-left: calc(var(--nue-message-node-inner-vgap) * 0.5);
+        border-left: 1px solid var(--nue-message-node-inner-border-color);
+    }
 }
 
 .nue-message-node-inner.nue-message-node-inner--push {

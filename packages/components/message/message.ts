@@ -80,6 +80,9 @@ const NueMessage: NueMessageCaller = (payload: NueMessageCallerPayload) => {
         wrapper: wrapperRef.value
     });
     render(VNode, div);
+    return {
+        close: () => VNode.component?.exposed?.close?.()
+    };
 };
 
 // 魔术方法

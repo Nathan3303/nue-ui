@@ -1,6 +1,18 @@
+import type { VNode } from 'vue';
+
 export type NueMessageType = 'success' | 'error' | 'warning' | 'info' | 'log';
 
 export type NueMessageSize = 'small' | 'large';
+
+export type NueMessageExtensionCtx = {
+    close: () => void;
+};
+
+export type NueMessageExtension = string | VNode | ((ctx: NueMessageExtensionCtx) => VNode);
+
+export interface NueMessageHandle {
+    close: () => void;
+}
 
 export type NueMessageNodeProps = {
     wrapper: HTMLElement;
@@ -10,6 +22,7 @@ export type NueMessageNodeProps = {
     size?: NueMessageSize;
     message?: string;
     duration?: number;
+    extension?: NueMessageExtension;
 };
 
 export type NueMessageCallerPayload = {
@@ -18,6 +31,7 @@ export type NueMessageCallerPayload = {
     duration?: number;
     icon?: string;
     size?: NueMessageSize;
+    extension?: NueMessageExtension;
 };
 
 export type NueMessageSubCaller = (
@@ -28,7 +42,7 @@ export type NueMessageSubCaller = (
 ) => void;
 
 export interface NueMessageCaller {
-    (payload: NueMessageCallerPayload): void;
+    (payload: NueMessageCallerPayload): NueMessageHandle;
 
     success: NueMessageSubCaller;
     error: NueMessageSubCaller;

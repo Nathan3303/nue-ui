@@ -4,6 +4,14 @@
         <nue-text class="nue-message-node-inner__text">
             <slot>{{ message }}</slot>
         </nue-text>
+        <span v-if="$slots.extension || extension" class="nue-message-node-inner__extension">
+            <slot name="extension">
+                <template v-if="typeof extensionContent === 'string'">{{
+                    extensionContent
+                }}</template>
+                <component :is="extensionContent" v-else-if="extensionContent" />
+            </slot>
+        </span>
         <nue-icon v-if="!duration" name="clear" @click="handlePopAnimation" />
     </div>
 </template>
@@ -25,6 +33,7 @@ const props = withDefaults(defineProps<NueMessageNodeProps>(), {
 
 const nodeInnerRef = ref();
 const timer = ref<number | null>(null);
+const closed = ref(false);
 
 const classes = computed(() => {
     const prefix = 'nue-message-node-inner';
@@ -33,6 +42,13 @@ const classes = computed(() => {
         props.type && `${prefix}--${props.type}`,
         props.size && `${prefix}--${props.size}`
     ];
+});
+
+// 归一化扩展内容：渲染函数在渲染时调用，并注入 { close } 上下文
+const extensionContent = computed(() => {
+    const { extension } = props;
+    if (typeof extension === 'function') return extension({ close: handlePopAnimation });
+    return extension;
 });
 
 function createTimer(callback: () => void, delay: number) {
@@ -47,10 +63,14 @@ function handleAnimation() {
 }
 
 function handlePopAnimation() {
+    if (closed.value) return;
+    closed.value = true;
     const { node, wrapper } = props;
     nodeInnerRef.value.classList.remove('nue-message-node-inner--push');
     createTimer(() => handlePop(node, wrapper), 500);
 }
+
+defineExpose({ close: handlePopAnimation });
 
 watch(
     () => timer.value,
