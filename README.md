@@ -16,7 +16,7 @@ NueUI 是一个基于 Vue 3 的 UI 组件库，采用 Monorepo 架构，旨在�
 ## 项目信息
 
 - **名称**: `@nue-ui/repo`
-- **仓库版本**: `0.2.4`
+- **仓库版本**: `0.4.0`
 - **作者**: Nathan Lee
 - **许可证**: MIT
 - **仓库**: [GitHub](https://github.com/Nathan3303/nue-ui)

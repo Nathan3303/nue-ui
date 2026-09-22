@@ -40,7 +40,7 @@ demo-preview=./icon.vue
 demo-preview=./duration.vue
 :::
 
-### 扩展内容（操作区）
+### 扩展内容（操作区） <Badge text="1.13.0 以上版本" type="warning" />
 
 通过 `extension` 属性为消息提示添加扩展内容，通常用于在消息弹出时提供操作入口（如“撤销”、“查看”等）。
 `extension` 接受 `string`、由 `h()` 创建的 `VNode`，或返回 `VNode` 的渲染函数，渲染在消息文本右侧。
@@ -51,7 +51,7 @@ demo-preview=./duration.vue
 demo-preview=./extension.vue
 :::
 
-### 手动关闭
+### 手动关闭 <Badge text="1.13.0 以上版本" type="warning" />
 
 `NueMessage` 方法会返回一个 `{ close }` 句柄，调用 `close()` 可立即关闭对应的消息提示（带弹出动画），常用于
 配合扩展内容或定时器手动控制消息的关闭时机。

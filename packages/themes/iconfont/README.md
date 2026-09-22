@@ -5,7 +5,7 @@ NueUI Iconfont 是 NueUI 组件库的图标字体包，提供了一套精美的�
 ## 包信息
 
 - **名称**: `nue-ui-iconfont`
-- **版本**: `0.2.5`
+- **版本**: `0.2.6`
 - **描述**: Iconfonts for NueUI
 - **作者**: Nathan Lee
 - **许可证**: MIT
