@@ -9,7 +9,7 @@ description: 使用 NueUI 组件库（Vue3，nue-ui + nue-ui-theme-shadlike）�
 
 > 若任务目标是**开发/修改组件库本身**（改 packages/components 源码、主题 CSS 内部、加新 NueXxx 组件），这不是本技能的范围，请用 `nue-ui-dev`。
 
-> 本技能对齐 `nue-ui@1.12.x` / `nue-ui-theme-shadlike@0.13.x`；组件 API 以官方在线文档为准，版本升级后请核对。
+> 本技能对齐 `nue-ui@1.13.x` / `nue-ui-theme-shadlike@0.13.x`；组件 API 以官方在线文档为准，版本升级后请核对。
 
 先读"三条心智模型"与"编写流程"，再按"任务路由表"按需读取 references/。完整组件 API 以在线文档为准（https://nathan3303.github.io/nue-ui/ ）——每个组件都有一页带**实时演示**的文档，那才是权威出处；下面的内容负责告诉你该读哪页、以及组件用法有哪些共性。仅当你在本仓库内开发时，才改用本地同源路径 `apps/document/tutorial/<类别>/<组件>/index.md`。
 
