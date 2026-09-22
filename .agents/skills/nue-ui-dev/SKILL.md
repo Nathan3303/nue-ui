@@ -97,7 +97,7 @@ description: NueUI 组件库（Vue3 + TS，Monorepo）的「开发/更新」指�
 
 - **组件渲染出来了但完全没样式** → 主题包缺 `<name>.css`，或漏了 `src/components/index.css` 的 `@import`；本地看效果需先 build 主题。
 - **`<nue-xxx>` 在模板中无法解析 / app.use(NueUI) 后仍未注册** → SFC 少了 `defineOptions({ name: 'NueXxx' })`（`withInstall` 依赖组件 name 注册全局），或漏接 `packages/core/components.ts`。
-- **改完 .vue 布局无变化** → 先确认是不是只改了视觉（应改主题 CSS）；.vue 结构改动在文档站/演练场经 Vite HMR 即时生效，而**主题 src 改动必须 `pnpm shadlike-theme build` 重建 dist** 才可见（这些应用 import 的是 dist）。
+- **改完 .vue / .ts 后文档站或演练场无变化** → 先确认是不是只改了视觉（应改主题 CSS）；**文档站/演练场 import 的是 dist**（`nue-ui` → `packages/core/dist`，主题 → shadlike dist），因此组件源码（packages/components）改动需 `pnpm core build` 重建 `nue-ui` dist，主题 src 改动需 `pnpm shadlike-theme build` 重建主题 dist；改完若仍不生效，清掉 `node_modules/.vite` 缓存并重启 dev server。
 - **测试报找不到模块/规则报错** → 测试里 `describe/it/expect/vi` 必须从 `'vite-plus/test'` 导入（不要直接 import 'vitest'）；组件从 `'../index'` 导入。
 - **不知道提交信息怎么写** → 仓库内已有约定，见 `.agents/commands/commit.md`（feat/fix/chore/change 前缀 + 变更点列表）。
 

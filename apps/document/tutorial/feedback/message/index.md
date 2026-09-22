@@ -75,6 +75,7 @@ demo-preview=./quick-use.vue
 2. **快速方法**：可以通过 `NueMessage.success()`、`NueMessage.error()` 等快速创建对应类型的消息。
 3. **持续时间**：`duration` 为 0 时消息不会自动消失，需要手动关闭。
 4. **图标**：图标使用组件库的 Icon 组件，值需要是有效的图标名称。
+5. **手动关闭**：`NueMessage` 返回 `{ close }` 句柄，调用 `close()` 可立即关闭对应消息；`extension` 渲染函数也会收到 `{ close }` 上下文。
 
 ## 组件属性与事件
 
@@ -82,11 +83,11 @@ demo-preview=./quick-use.vue
 
 ### 参数
 
-| 属性        | Type                                                   | 默认值 | 说明                                       |
-| ----------- | ------------------------------------------------------ | ------ | ------------------------------------------ |
-| `message`   | `string`                                               | -      | 消息内容                                   |
-| `type`      | `'success' \| 'error' \| 'warning' \| 'info' \| 'log'` | -      | 消息类型                                   |
-| `duration`  | `number`                                               | `3000` | 显示持续时间（毫秒），0 为不自动关闭       |
-| `icon`      | `string`                                               | -      | 自定义图标                                 |
-| `size`      | `'small' \| 'large'`                                   | -      | 消息提示尺寸                               |
-| `extension` | `string \| VNode \| ((ctx) => VNode)`                  | -      | 扩展内容（如操作按钮），渲染在消息文本右侧 |
+| 属性        | Type                                                         | 默认值 | 说明                                       |
+| ----------- | ------------------------------------------------------------ | ------ | ------------------------------------------ |
+| `message`   | `string`                                                     | -      | 消息内容                                   |
+| `type`      | `'success' \| 'error' \| 'warning' \| 'info' \| 'log'`       | -      | 消息类型                                   |
+| `duration`  | `number`                                                     | `3000` | 显示持续时间（毫秒），0 为不自动关闭       |
+| `icon`      | `string`                                                     | -      | 自定义图标                                 |
+| `size`      | `'small' \| 'large'`                                         | -      | 消息提示尺寸                               |
+| `extension` | `string \| VNode \| ((ctx: { close: () => void }) => VNode)` | -      | 扩展内容（如操作按钮），渲染在消息文本右侧 |
