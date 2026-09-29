@@ -40,6 +40,27 @@ demo-preview=./icon.vue
 demo-preview=./duration.vue
 :::
 
+### 扩展内容（操作区） <Badge text="1.13.0 以上版本" type="warning" />
+
+通过 `extension` 属性为消息提示添加扩展内容，通常用于在消息弹出时提供操作入口（如“撤销”、“查看”等）。
+`extension` 接受 `string`、由 `h()` 创建的 `VNode`，或返回 `VNode` 的渲染函数，渲染在消息文本右侧。
+
+渲染函数会接收到一个上下文对象 `{ close }`，在操作完成后调用 `close()` 可以立即关闭当前消息提示。
+
+::: preview
+demo-preview=./extension.vue
+:::
+
+### 手动关闭 <Badge text="1.13.0 以上版本" type="warning" />
+
+`NueMessage` 方法会返回一个 `{ close }` 句柄，调用 `close()` 可立即关闭对应的消息提示（带弹出动画），常用于
+配合扩展内容或定时器手动控制消息的关闭时机。
+
+```typescript
+const handle = NueMessage({ message: '内容已保存', duration: 0 });
+handle.close();
+```
+
 ## 确定类型的快速使用
 
 通过 `NueMessage` 中的子方法 `success`、`info`、`warn`、`error`、`log` 可以快速创建不同类型的消息提示。这些子方法都拥有同样的形参，包括 `message`、`duration`、`icon` 以及 `size` 。
@@ -54,6 +75,7 @@ demo-preview=./quick-use.vue
 2. **快速方法**：可以通过 `NueMessage.success()`、`NueMessage.error()` 等快速创建对应类型的消息。
 3. **持续时间**：`duration` 为 0 时消息不会自动消失，需要手动关闭。
 4. **图标**：图标使用组件库的 Icon 组件，值需要是有效的图标名称。
+5. **手动关闭**：`NueMessage` 返回 `{ close }` 句柄，调用 `close()` 可立即关闭对应消息；`extension` 渲染函数也会收到 `{ close }` 上下文。
 
 ## 组件属性与事件
 
@@ -61,10 +83,11 @@ demo-preview=./quick-use.vue
 
 ### 参数
 
-| 属性       | Type                                                   | 默认值 | 说明                                 |
-| ---------- | ------------------------------------------------------ | ------ | ------------------------------------ |
-| `message`  | `string`                                               | -      | 消息内容                             |
-| `type`     | `'success' \| 'error' \| 'warning' \| 'info' \| 'log'` | -      | 消息类型                             |
-| `duration` | `number`                                               | `3000` | 显示持续时间（毫秒），0 为不自动关闭 |
-| `icon`     | `string`                                               | -      | 自定义图标                           |
-| `size`     | `'small' \| 'large'`                                   | -      | 消息提示尺寸                         |
+| 属性        | Type                                                         | 默认值 | 说明                                       |
+| ----------- | ------------------------------------------------------------ | ------ | ------------------------------------------ |
+| `message`   | `string`                                                     | -      | 消息内容                                   |
+| `type`      | `'success' \| 'error' \| 'warning' \| 'info' \| 'log'`       | -      | 消息类型                                   |
+| `duration`  | `number`                                                     | `3000` | 显示持续时间（毫秒），0 为不自动关闭       |
+| `icon`      | `string`                                                     | -      | 自定义图标                                 |
+| `size`      | `'small' \| 'large'`                                         | -      | 消息提示尺寸                               |
+| `extension` | `string \| VNode \| ((ctx: { close: () => void }) => VNode)` | -      | 扩展内容（如操作按钮），渲染在消息文本右侧 |

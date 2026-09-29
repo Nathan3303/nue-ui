@@ -5,7 +5,7 @@ NueUI Resolver 是一个用于 `unplugin-vue-components` 的组件解析器，�
 ## 包信息
 
 - **名称**: `nue-ui-resolver`
-- **版本**: `0.3.0`
+- **版本**: `0.4.0`
 - **描述**: NueUI resolver for unplugin-vue-components
 - **作者**: Nathan Lee
 - **许可证**: MIT

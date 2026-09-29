@@ -55,6 +55,13 @@
         font-size: var(--nue-message-node-inner-font-size);
         color: var(--nue-message-node-inner-color);
     }
+
+    .nue-message-node-inner__extension {
+        display: inline-flex;
+        align-items: center;
+        padding-left: calc(var(--nue-message-node-inner-vgap) * 0.5);
+        border-left: 1px solid var(--nue-message-node-inner-border-color);
+    }
 }
 
 .nue-message-node-inner.nue-message-node-inner--push {
@@ -75,22 +82,25 @@
     --nue-message-node-inner-font-size: var(--nue-text-df);
 }
 
+/* 语义变体：文字/图标对底色需 ≥4.5:1，边框需 ≥3:1（浅色与深色两套阶梯均需满足）。
+   各色相亮度不同，故命中同一对比度所需色阶不同（绿最亮、红最暗）。
+   详见 packages/themes/shadlike/__tests__/contrast.test.ts。 */
 .nue-message-node-inner.nue-message-node-inner--success {
-    --nue-message-node-inner-color: var(--nue-success-color-70);
+    --nue-message-node-inner-color: var(--nue-success-color-100);
     --nue-message-node-inner-background-color: var(--nue-success-color-10);
-    --nue-message-node-inner-border-color: var(--nue-success-color-60);
+    --nue-message-node-inner-border-color: var(--nue-success-color-80);
 }
 
 .nue-message-node-inner.nue-message-node-inner--warning {
-    --nue-message-node-inner-color: var(--nue-warning-color-70);
+    --nue-message-node-inner-color: var(--nue-warning-color-90);
     --nue-message-node-inner-background-color: var(--nue-warning-color-10);
-    --nue-message-node-inner-border-color: var(--nue-warning-color-60);
+    --nue-message-node-inner-border-color: var(--nue-warning-color-80);
 }
 
 .nue-message-node-inner.nue-message-node-inner--error {
-    --nue-message-node-inner-color: var(--nue-error-color-70);
+    --nue-message-node-inner-color: var(--nue-error-color-90);
     --nue-message-node-inner-background-color: var(--nue-error-color-10);
-    --nue-message-node-inner-border-color: var(--nue-error-color-60);
+    --nue-message-node-inner-border-color: var(--nue-error-color-80);
 }
 
 .nue-message-node-inner.nue-message-node-inner--info {
