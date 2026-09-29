@@ -19,7 +19,8 @@
         "build-css": "postcss src/**/*.css --dir dist --base src --no-map --verbose",
         "move-woff2": "node ./scripts/move-woff2.js",
         "remove-dist": "node ./scripts/remove-dist.js",
-        "build": "pnpm remove-dist && pnpm build-css && pnpm move-woff2"
+        "build": "pnpm remove-dist && pnpm build-css && pnpm move-woff2",
+        "prepublishOnly": "node ../../../scripts/check-lf.mjs"
     },
     "repository": {
         "type": "git",

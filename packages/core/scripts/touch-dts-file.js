@@ -13,17 +13,17 @@ import fs from 'node:fs';
         if (!dtsComponentNames || dtsComponentNames.length === 0) return;
         const globalCompsText = dtsComponentNames
             .map(name => `\t\t${name}: (typeof import('nue-ui'))['${name}'];`)
-            .join('\r\n');
+            .join('\n');
         // 创建全局类型文件
-        fs.appendFile('./global.d.ts.temp', '\r\n', err => {
+        fs.appendFile('./global.d.ts.temp', '\n', err => {
             // 处理创建文件错误
             if (err) return;
             // 写入全局类型文件内容
             const ws = fs.createWriteStream('./global.d.ts.temp');
             ws.write(
-                `declare module 'vue' {\r\n\texport interface GlobalComponents {\r\n` +
+                `declare module 'vue' {\n\texport interface GlobalComponents {\n` +
                     globalCompsText +
-                    `\r\n\t}\r\n}\r\n\r\nexport {};`
+                    `\n\t}\n}\n\nexport {};`
             );
             ws.close(() => {
                 // 移动全局类型文件
