@@ -5,13 +5,13 @@
  * - 正文/图标等文本：对比度 ≥ 4.5:1（1.4.3 AA）
  * - 边框/图形等非文本：对比度 ≥ 3:1（1.4.11 AA）
  *
- * 实现方式：直接解析主题源码 `src/global/variables.css` 的令牌定义与
- * `src/components/message.css` 的映射，再按 `--nue-dark-switch` 的 0/1 两套阶梯
- * 实算对比度。**不做期望值快照**——任何把映射改回低对比色阶、或改动共享色阶
- * 导致配对比度下降的行为都会让本测试失败。
+ * 实现方式：直接解析主题源码 `src/global/variables.css` 的令牌定义与各组件的
+ * 映射（`message.css` / `button.css` / `prompt.css` / `badge.css`），再按
+ * `--nue-dark-switch` 的 0/1 两套阶梯实算对比度。**不做期望值快照**——任何把
+ * 映射改回低对比色阶、或改动共享色阶导致配对比度下降的行为都会让本测试失败。
  *
- * 注意：本文件只覆盖 `message.css`（本次修复范围）。其余组件若存在不达标配对，
- * 需要先修复再纳入，否则本自检无法保持常绿。
+ * 覆盖范围：Message 全部变体、Button 语义实心/描边按钮、Prompt 校验错误文案、Badge。
+ * 其余组件若存在不达标配对，需先修复再纳入，否则本自检无法保持常绿。
  */
 import { describe, it, expect } from 'vite-plus/test';
 import { readFileSync } from 'node:fs';
@@ -24,6 +24,9 @@ type DarkSwitch = 0 | 1;
 const srcDir = resolve(process.cwd(), 'packages/themes/shadlike/src');
 const variablesCss = readFileSync(`${srcDir}/global/variables.css`, 'utf8');
 const messageCss = readFileSync(`${srcDir}/components/message.css`, 'utf8');
+const buttonCss = readFileSync(`${srcDir}/components/button.css`, 'utf8');
+const promptCss = readFileSync(`${srcDir}/components/prompt.css`, 'utf8');
+const badgeCss = readFileSync(`${srcDir}/components/badge.css`, 'utf8');
 
 /* ------------------------------ 颜色计算 ------------------------------ */
 
@@ -169,8 +172,18 @@ function resolveColorToken(name: string, dark: DarkSwitch): RGB {
     );
 }
 
+/** 从某条规则里取自定义属性并解析成令牌名。 */
+function tokenFromRule(css: string, selector: string, prop: string, file: string): string {
+    const rule = extractRules(css).find(item => item.selector === selector);
+    if (!rule) throw new Error(`${file} 中找不到规则 ${selector}`);
+    const value = parseDeclarations(rule.body).get(prop);
+    if (value === undefined) throw new Error(`${file} 的 ${selector} 缺少 --${prop}`);
+    return varName(value);
+}
+
 /* ------------------------------ 断言数据 ------------------------------ */
 
+// Message：基础令牌块 + 各语义变体覆盖。
 const VARIANTS = ['success', 'warning', 'error', 'info', 'log'] as const;
 
 const messageRules = extractRules(messageCss);
@@ -202,6 +215,73 @@ function resolveVariant(variant: (typeof VARIANTS)[number], dark: DarkSwitch): V
     };
 }
 
+// Button：实心语义按钮（文字对填充）与 destructive 描边按钮（文字/描边对页面底与 hover 底）。
+const SOLID_BUTTONS = ['success', 'warning', 'error'] as const;
+const DESTRUCTIVE_SELECTOR = '.nue-button.nue-button--destructive';
+
+function resolveSolidButton(variant: (typeof SOLID_BUTTONS)[number], dark: DarkSwitch) {
+    const selector = `.nue-button.nue-button--${variant}`;
+    return {
+        text: resolveColorToken(
+            tokenFromRule(buttonCss, selector, 'nue-button-color', 'button.css'),
+            dark
+        ),
+        fill: resolveColorToken(
+            tokenFromRule(buttonCss, selector, 'nue-button-base-color', 'button.css'),
+            dark
+        )
+    };
+}
+
+function resolveDestructiveButton(dark: DarkSwitch) {
+    return {
+        text: resolveColorToken(
+            tokenFromRule(buttonCss, DESTRUCTIVE_SELECTOR, 'nue-button-color', 'button.css'),
+            dark
+        ),
+        border: resolveColorToken(
+            tokenFromRule(buttonCss, DESTRUCTIVE_SELECTOR, 'nue-button-border-color', 'button.css'),
+            dark
+        ),
+        hoverBackground: resolveColorToken(
+            tokenFromRule(
+                buttonCss,
+                DESTRUCTIVE_SELECTOR,
+                'nue-button-hover-bg-color',
+                'button.css'
+            ),
+            dark
+        ),
+        // destructive 背景透明，实际底色为页面表面色。
+        pageBackground: resolveColorToken('nue-primary-color-0', dark)
+    };
+}
+
+// Prompt：校验错误文案（嵌套规则，单独按块解析）。
+function resolvePromptErrorText(dark: DarkSwitch) {
+    const block = promptCss.match(/\.nue-prompt__value-error\s*\{([^}]*)\}/);
+    const color = block?.[1]?.match(/color\s*:\s*var\(--([\w-]+)\)/);
+    if (!color?.[1]) throw new Error('prompt.css 中找不到 .nue-prompt__value-error 的 color 令牌');
+    return {
+        text: resolveColorToken(color[1], dark),
+        background: resolveColorToken('nue-primary-color-0', dark)
+    };
+}
+
+// Badge：文字对底色。
+function resolveBadge(dark: DarkSwitch) {
+    return {
+        text: resolveColorToken(
+            tokenFromRule(badgeCss, '.nue-badge', 'nue-badge-color', 'badge.css'),
+            dark
+        ),
+        background: resolveColorToken(
+            tokenFromRule(badgeCss, '.nue-badge', 'nue-badge-background-color', 'badge.css'),
+            dark
+        )
+    };
+}
+
 /* ------------------------------ 用例 ------------------------------ */
 
 describe('主题语义色对比度自检', () => {
@@ -223,6 +303,78 @@ describe('主题语义色对比度自检', () => {
                     ).toBeGreaterThanOrEqual(3);
                 });
             }
+        }
+    });
+
+    describe('语义按钮（解析 button.css 实算）', () => {
+        for (const variant of SOLID_BUTTONS) {
+            for (const dark of [0, 1] as const) {
+                const mode = dark === 0 ? '浅色' : '深色';
+                it(`实心 ${variant} 在${mode}下文字 ≥4.5:1`, () => {
+                    const { text, fill } = resolveSolidButton(variant, dark);
+                    const ratio = contrastRatio(text, fill);
+                    expect(
+                        ratio,
+                        `实心 ${variant}(${mode}) 文字对比度 ${ratio.toFixed(2)}:1 < 4.5:1`
+                    ).toBeGreaterThanOrEqual(4.5);
+                });
+            }
+        }
+
+        for (const dark of [0, 1] as const) {
+            const mode = dark === 0 ? '浅色' : '深色';
+            it(`destructive 在${mode}下文字 ≥4.5:1（页面底与 hover 底）且描边 ≥3:1`, () => {
+                const { text, border, hoverBackground, pageBackground } =
+                    resolveDestructiveButton(dark);
+                const pageText = contrastRatio(text, pageBackground);
+                const hoverText = contrastRatio(text, hoverBackground);
+                const pageBorder = contrastRatio(border, pageBackground);
+                const hoverBorder = contrastRatio(border, hoverBackground);
+                expect(
+                    pageText,
+                    `destructive(${mode}) 页面底文字 ${pageText.toFixed(2)}:1 < 4.5:1`
+                ).toBeGreaterThanOrEqual(4.5);
+                expect(
+                    hoverText,
+                    `destructive(${mode}) hover 底文字 ${hoverText.toFixed(2)}:1 < 4.5:1`
+                ).toBeGreaterThanOrEqual(4.5);
+                expect(
+                    pageBorder,
+                    `destructive(${mode}) 页面底描边 ${pageBorder.toFixed(2)}:1 < 3:1`
+                ).toBeGreaterThanOrEqual(3);
+                expect(
+                    hoverBorder,
+                    `destructive(${mode}) hover 底描边 ${hoverBorder.toFixed(2)}:1 < 3:1`
+                ).toBeGreaterThanOrEqual(3);
+            });
+        }
+    });
+
+    describe('Prompt 校验错误文案（解析 prompt.css 实算）', () => {
+        for (const dark of [0, 1] as const) {
+            const mode = dark === 0 ? '浅色' : '深色';
+            it(`在${mode}下文字 ≥4.5:1`, () => {
+                const { text, background } = resolvePromptErrorText(dark);
+                const ratio = contrastRatio(text, background);
+                expect(
+                    ratio,
+                    `prompt 错误文案(${mode}) 对比度 ${ratio.toFixed(2)}:1 < 4.5:1`
+                ).toBeGreaterThanOrEqual(4.5);
+            });
+        }
+    });
+
+    describe('Badge（解析 badge.css 实算）', () => {
+        for (const dark of [0, 1] as const) {
+            const mode = dark === 0 ? '浅色' : '深色';
+            it(`在${mode}下文字 ≥4.5:1`, () => {
+                const { text, background } = resolveBadge(dark);
+                const ratio = contrastRatio(text, background);
+                expect(
+                    ratio,
+                    `badge(${mode}) 文字对比度 ${ratio.toFixed(2)}:1 < 4.5:1`
+                ).toBeGreaterThanOrEqual(4.5);
+            });
         }
     });
 });
