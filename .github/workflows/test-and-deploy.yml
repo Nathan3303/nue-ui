@@ -1,14 +1,17 @@
-name: Build and deploy documentation
+name: Test, build and deploy documentation
 
 on:
     push:
+        branches:
+            - master
+    pull_request:
         branches:
             - master
 
 jobs:
 
     build:
-        name: Build NueUI document app
+        name: Test and build NueUI packages
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repo
@@ -19,6 +22,9 @@ jobs:
               run: npm install -g pnpm
             - name: Install dependencies
               run: pnpm install
+
+            - name: Run tests
+              run: pnpm test:run
 
             - name: Build NueUI Core
               run: pnpm core build
@@ -54,6 +60,8 @@ jobs:
 
     deploy:
         name: Deploy documentation to GitHub Pages
+        # 仅在 master 的 push 上部署，PR 只跑上面的测试/构建，绝不触发部署
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         runs-on: ubuntu-latest
         needs: build
         permissions:
