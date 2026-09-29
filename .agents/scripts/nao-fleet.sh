@@ -3,9 +3,9 @@
 # nao-fleet.sh — 按角色一键拉起 pi 会话窗口（nao 团队工具箱）
 #
 # 用法
-#   nao-fleet.sh check [--strict] [-v]            静态体检：roles.yaml/缩进/EOL/角色卡/交叉引用/PR 模板/白名单/布局
+#   nao-fleet.sh check [--strict] [-v]            静态体检：roles.yaml/缩进/EOL/角色卡/交叉引用/PR 模板/qq-notify/白名单/布局
 #                                                 默认单行摘要（含 warn 计数）；-v 展开完整报告；失败始终展开
-#   nao-fleet.sh status                           角色会话在线状态（权威名单见 intercom list）
+#   nao-fleet.sh status                           角色会话在线状态（按终端标题/名册判定；权威名单见 intercom list）
 #   nao-fleet.sh ensure <别名>[@<repo>] [更多...]  拉起角色窗口（默认工作区=roles.yaml workspace）
 #   nao-fleet.sh ensure -m <model> <别名>...       显式指定模型（须命中白名单）
 #   nao-fleet.sh ensure --task <编号> <别名>[@<repo>]   任务派生会话：--name <别名>-<编号>（并行隔离，避免同名冲突）
@@ -14,24 +14,38 @@
 #                                                 回收已完成会话（闸门：在跑 turn / tasks-state 未推进 → 拒绝，--force 跳过）
 #
 # 角色别名 → 角色卡：见 .agents/roles.yaml（单一事实来源）
-#   当前：pm / arch-designer(arch) / rd-fe / rd-be / qa
+#   当前：pm / arch-designer(arch) / rd-fe / rd-be / qa / rd-infra(infra)
 #
 # 环境变量
 #   NAO_TERMINAL=ghostty|ptyxis|tmux|screen   强制宿主
-#   NAO_TMUX_LAYOUT=main-row2|grid            tmux 布局（默认 main-row2）
-#   NAO_TMUX_MAIN_WIDTH=<10..90>              main-row2 主 pane 宽度百分比（默认 35）
+#   NAO_TMUX_LAYOUT=main-row2|main-col|grid   tmux 布局（默认 main-row2）
+#   NAO_TMUX_MAIN_WIDTH=<10..90>             主 pane 宽度百分比（默认 35；main-row2/main-col 共用）
+#   NAO_TMUX_MIN_PANE_WIDTH=<10..80>         最小非主 pane 列宽守卫（默认 30；低于则回退）
 #   NAO_SKILLS=<dir>                          角色卡根目录（默认 <脚本>/../..）
 #   NAO_MODEL_WHITELIST=<glob,...>            -m 白名单（默认空=不校验，支持 glob）
 #   NAO_CLOSE_BUSY_PATTERN=<ERE>             close 的在跑 turn 判定正则（默认内置 pi 状态行标记）
 #   NAO_TASKS_STATE=<path>                   任务状态文件（默认 docs/tasks-state.md，供残留检测/回收闸门）
 #
+# 在线判定（status / close / ensure 判重共用）
+#   pi 启动后用 OSC 0 把终端标题设为 "π - <会话名> - <cwd basename>" 并改写 argv
+#   （/proc/<pid>/cmdline 只剩 "pi"）⇒ 判定一律面向「终端标题 / pi-intercom 名册 /
+#   tmux·screen 会话名」，不使用 `pgrep --name`（历史假阴性根因）。
+#   名册经 $PI_AGENT_DIR/npm/node_modules/pi-intercom/cli.ts（一次调用、进程内缓存），
+#   不可用时回退 tmux/screen；仍无法确认「不在线」时 close 不做静默 no-op（exit 非 0）。
+#
 # tmux 宿主行为
 #   - 已在 tmux 内（$TMUX 存在）：当前窗口分屏拉起，不新建窗口。
 #   - 不在 tmux 内：创建 detached 会话 nao-<角色>，需 tmux attach -t nao-<角色>。
-#   - main-row2：第 1 个 pane 全高占左，后续每角色往右开列、每列上下 2 个：
+#   - main-row2：第 1 个 pane 全高占左，后续每角色往右开列、每列上下 2 个（默认）：
 #                 1 | 2 | 4
 #                 1 | 3 | 5
-#   - grid：所有 pane 等大网格（tmux 内建 tiled）。
+#   - main-col：第 1 个 pane 全高占左，其余 pane 在右列纵向堆叠（委托内建 main-vertical）：
+#                 1 | 2
+#                 1 | 3
+#                 1 | 4
+#   - grid：所有 pane 等大网格（tmux 内建 tiled），宽度最优。
+#   - 窄列守卫：main-row2 的最窄非主 pane < NAO_TMUX_MIN_PANE_WIDTH ⇒ 回退 main-col；
+#              回退后右列仍不足 ⇒ 再回退 grid（带 warn，不中断 ensure）。
 # =============================================================================
 set -euo pipefail
 
@@ -50,6 +64,9 @@ TMUX_LAYOUT="${NAO_TMUX_LAYOUT:-main-row2}"
 # main-row2 主 pane 宽度百分比：默认值与非法值回退共用同一常量（防三处漂移）
 TMUX_MAIN_WIDTH_DEFAULT=35
 TMUX_MAIN_WIDTH="${NAO_TMUX_MAIN_WIDTH:-$TMUX_MAIN_WIDTH_DEFAULT}"
+# 最小非主 pane 列宽守卫：默认值与非法值回退共用同一常量（防漂移）
+TMUX_MIN_PANE_WIDTH_DEFAULT=30
+TMUX_MIN_PANE_WIDTH="${NAO_TMUX_MIN_PANE_WIDTH:-$TMUX_MIN_PANE_WIDTH_DEFAULT}"
 # check 输出契约：默认单行摘要（省 PM 上下文），-v 展开完整报告；失败始终展开
 VERBOSE=false
 # close 的在跑 turn 判定（pi 默认状态行：Working (esc to interrupt) / Thinking... / Retrying / Compacting）
@@ -185,6 +202,50 @@ check_roles_indent() {
   ' "$MANIFEST"
 }
 
+# qq-notify 主动推送器契约：存在 + 可执行 + EOL 全 LF + 无 Tab + node --check 语法
+check_qq_notify() {
+  local rc=0 f="$SKILLS_DIR/.agents/scripts/qq-notify"
+  if [[ ! -f "$f" ]]; then
+    printf '  ✗ 缺失: .agents/scripts/qq-notify\n'
+    return 1
+  fi
+  printf '  ✓ 存在: .agents/scripts/qq-notify\n'
+  if [[ -x "$f" ]]; then
+    printf '  ✓ 可执行位已设置\n'
+  else
+    printf '  ✗ 缺少可执行位（修复：chmod +x .agents/scripts/qq-notify）\n'; rc=1
+  fi
+  if grep -Iq $'\r' "$f"; then
+    printf '  ✗ 含 CR（须转 LF；CRLF 会破坏 shebang/管道）\n'; rc=1
+  else
+    printf '  ✓ 行尾 LF\n'
+  fi
+  if grep -Iq $'\t' "$f"; then
+    printf '  ✗ 含 Tab（禁止 Tab 缩进）\n'; rc=1
+  else
+    printf '  ✓ 无 Tab\n'
+  fi
+  # shell 转交守卫：禁止 `bash/sh <本脚本>` 逐行解释注释（防误执行示例/误发）
+  local l1 l2
+  l1="$(head -n 1 "$f")"
+  l2="$(sed -n '2p' "$f")"
+  if [[ "$l1" == '#!/bin/sh' ]] && [[ "$l2" == *'exec node "$0" "$@"'* ]]; then
+    printf '  ✓ shell 转交守卫（#!/bin/sh + exec node）\n'
+  else
+    printf '  ✗ 缺少 shell 转交守卫（第 1 行须 #!/bin/sh、第 2 行须含 exec node "$0" "$@"）\n'; rc=1
+  fi
+  if command -v node >/dev/null 2>&1; then
+    if node --check "$f" >/dev/null 2>&1; then
+      printf '  ✓ node --check 语法通过\n'
+    else
+      printf '  ✗ node --check 语法失败\n'; rc=1
+    fi
+  else
+    printf '  ! node 未安装（跳过语法校验）\n'
+  fi
+  return $rc
+}
+
 # CodeGraph 索引健康（ensure 拉起前 / check 用；缺失或过期仅 warn，不阻塞）
 check_codegraph() {
   local repo="$1" name st
@@ -223,25 +284,128 @@ detect_host() {
   echo screen
 }
 
-# 该会话名对应的真实 pi 进程 PID（过滤 shell/tmux 等误匹配，避免误命中宿主命令行、误杀包装进程）
+# ---------------------------------------------------------------------------
+# 会话在线判定
+#
+# 历史假阴性根因：pi 启动后用 OSC 0 把终端标题设为
+#   "π - <会话名> - <cwd basename>"（pi 源码 updateTerminalTitle），
+# 并同步改写 argv —— /proc/<pid>/cmdline 只剩 "pi"，`pgrep -f --name` 恒失配，
+# 于是 status/close 长期判「不在线」（close 退化为静默空转、exit 0）。
+# 现改为按「终端标题契约」取句柄，argv 扫描一律不用：
+#   ① pi-intercom 名册（权威在线名单；跨 tmux/ghostty/ptyxis/screen 宿主）
+#   ② tmux pane_title（pi 自设；与 pane_start_command 是否为空无关）
+#   ③ tmux detached 会话 / screen 会话名 nao-<会话名>
+# repo（可选）：给出时要求标题 basename / 名册 cwd 一致，避免跨项目同名会话互串。
+
+PI_AGENT_DIR="${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}"
+PI_TITLE="π"
+_INTERCOM_JSON=""; _INTERCOM_PROBED=0
+
+repo_abspath() { ( cd "$1" >/dev/null 2>&1 && pwd ) 2>/dev/null || true; }
+repo_basename() {
+  local abs; abs="$(repo_abspath "$1")"
+  [[ -n "$abs" ]] && printf '%s\n' "${abs##*/}"
+  return 0
+}
+
+# intercom 名册 JSON（一次调用、进程内缓存）；不可用返回 1（不 die）
+intercom_list_json() {
+  if (( _INTERCOM_PROBED )); then
+    [[ -n "$_INTERCOM_JSON" ]] && printf '%s' "$_INTERCOM_JSON"
+    return
+  fi
+  _INTERCOM_PROBED=1
+  local dir="$PI_AGENT_DIR/npm/node_modules/pi-intercom"
+  local tsx="$PI_AGENT_DIR/npm/node_modules/tsx/dist/cli.mjs"
+  [[ -f "$dir/cli.ts" && -f "$tsx" ]] || return 1
+  command -v node >/dev/null 2>&1 || return 1
+  local out
+  if command -v timeout >/dev/null 2>&1; then
+    out="$(timeout 15 node "$tsx" "$dir/cli.ts" list --json 2>/dev/null)" || return 1
+  else
+    out="$(node "$tsx" "$dir/cli.ts" list --json 2>/dev/null)" || return 1
+  fi
+  [[ -n "$out" ]] || return 1
+  _INTERCOM_JSON="$out"
+  printf '%s' "$out"
+}
+
+# 名册 → "会话名<TAB>cwd"（每行一条）
+intercom_roster() {
+  local json; json="$(intercom_list_json)" || return 1
+  awk '
+    /"name":[[:space:]]*"/ { s=$0; sub(/.*"name":[[:space:]]*"/,"",s); sub(/".*/,"",s); n=s }
+    /"cwd":[[:space:]]*"/  { s=$0; sub(/.*"cwd":[[:space:]]*"/,"",s);  sub(/".*/,"",s);  print n "\t" s }
+  ' <<< "$json"
+}
+
+# 名册中是否在线；repo 给出时须 cwd 精确匹配
+intercom_online() {
+  local name="$1" repo="${2:-}" abs="" n c
+  intercom_list_json >/dev/null 2>&1 || return 1
+  if [[ -n "$repo" ]]; then abs="$(repo_abspath "$repo")"; fi
+  while IFS=$'\t' read -r n c; do
+    [[ "$n" == "$name" ]] || continue
+    if [[ -z "$abs" || "$c" == "$abs" ]]; then return 0; fi
+  done < <(intercom_roster)
+  return 1
+}
+
+# 会话所在的 tmux pane（pi 自设标题 "π - <会话名> - <repo basename>"）
+find_pane_for() {
+  local name="$1" repo="${2:-}" base=""
+  command -v tmux >/dev/null 2>&1 || return 0
+  if [[ -n "$repo" ]]; then base="$(repo_basename "$repo")"; fi
+  tmux list-panes -a -F "#{pane_id}"$'\t'"#{pane_title}" 2>/dev/null \
+    | awk -F'\t' -v p="$PI_TITLE" -v n="$name" -v b="$base" '
+        { t=$2
+          if (b != "") { if (t == p " - " n " - " b) { print $1; exit } }
+          else if (index(t, p " - " n " - ") == 1) { print $1; exit }
+        }'
+}
+
+# 该会话名对应的 pi 进程 PID（经 pane 句柄取 pane_pid 及其子进程中 comm=pi 者）
 pi_pids_for() {
-  local pid comm
-  pgrep -f -- "pi[[:space:]].*--name $1([[:space:]]|$)" 2>/dev/null | while IFS= read -r pid; do
-    comm="$(ps -o comm= -p "$pid" 2>/dev/null | tr -d ' ')"
-    case "$comm" in
-      bash|sh|dash|zsh|fish|tmux|screen|sudo|env) continue ;;
-    esac
+  local pane root pid
+  pane="$(find_pane_for "$1" "${2:-}")"
+  [[ -n "$pane" ]] || return 0
+  root="$(tmux display-message -p -t "$pane" '#{pane_pid}' 2>/dev/null)"
+  [[ -n "$root" ]] || return 0
+  { printf '%s\n' "$root"; pgrep -P "$root" 2>/dev/null || true; } | while IFS= read -r pid; do
+    [[ "$(ps -o comm= -p "$pid" 2>/dev/null | tr -d ' ')" == "pi" ]] || continue
     printf '%s\n' "$pid"
   done
 }
 
-running() { [[ -n "$(pi_pids_for "$1")" ]]; }
+running() {
+  local name="$1" repo="${2:-}"
+  if intercom_online "$name" "$repo"; then return 0; fi
+  if [[ -n "$(find_pane_for "$name" "$repo")" ]]; then return 0; fi
+  if command -v tmux >/dev/null 2>&1 && tmux has-session -t "nao-$name" 2>/dev/null; then return 0; fi
+  if command -v screen >/dev/null 2>&1 && screen -ls 2>/dev/null | grep -q "[0-9]\.nao-$name\b"; then return 0; fi
+  return 1
+}
 
-# 定位会话所在 tmux pane（靠启动命令里的 --name；边界避免 rd-be 误命中 rd-be-T1）
-find_pane_for() {
-  command -v tmux >/dev/null 2>&1 || return 0
-  tmux list-panes -a -F '#{pane_id} #{pane_start_command}' 2>/dev/null \
-    | awk -v n="$1" '$0 ~ ("--name[ =]" n "([^A-Za-z0-9_-]|$)") { print $1; exit }'
+# 能否可信地断言「不在线」：名册可用（完整），或本机就是 tmux/screen 宿主（句柄可枚举）
+offline_verifiable() {
+  intercom_list_json >/dev/null 2>&1 && return 0
+  [[ -n "${TMUX:-}" ]] && return 0
+  case "${NAO_TERMINAL:-}" in tmux|screen) return 0 ;; esac
+  return 1
+}
+
+# 本机可见的会话名（tmux 标题 + tmux/screen 会话 + 名册），供 status 枚举；已去重
+visible_session_names() {
+  { if command -v tmux >/dev/null 2>&1; then
+      tmux list-panes -a -F '#{pane_title}' 2>/dev/null \
+        | sed -n "s/^${PI_TITLE} - \([A-Za-z0-9_-]*\) - .*/\1/p"
+      tmux list-sessions -F '#{session_name}' 2>/dev/null | sed -n 's/^nao-//p'
+    fi
+    if command -v screen >/dev/null 2>&1; then
+      screen -ls 2>/dev/null | sed -n 's/.*[0-9]\.nao-\([A-Za-z0-9_-]*\).*/\1/p'
+    fi
+    intercom_roster 2>/dev/null | awk -F'\t' 'NF {print $1}'
+  } | awk '!seen[$0]++'
 }
 
 # 该 pane 末 3 行是否显示在跑 turn（启发式：状态行标记；回执/产物以 PM 核对清单为准）
@@ -252,23 +416,34 @@ pane_busy() {
   grep -qE "$CLOSE_BUSY_PATTERN" <<< "$tail3"
 }
 
-# 任务在 tasks-state 的归处：active（进行态）/ closed（已验收·已归档）/ absent（无记录）/ nofile
+# 任务在 tasks-state 的归处：
+#   active（在表内进行态）/ closed（在归档区表内）/ mentioned（仅散文提及）
+#   / absent（全文无记录）/ nofile
+# 归一处：表内单元格可选带反引号/**（常见写法 `T157` / **T157**）→ 去首尾空白与标记后比较。
+# 标题级别不限（`##` 与 `###` 子表都算）；归档区 = 标题含「已验收|已归档|归档」。
+# 边界：先按非 [A-Za-z0-9_-] 切词再比较，避免 T15 命中 T155。
 task_state_class() {
   local id="$1"
   [[ -f "$TASKS_STATE" ]] || { echo nofile; return; }
   awk -v id="$id" '
-    /^## / { sec=$0; sub(/^##[[:space:]]*/, "", sec); next }
+    function norm(s) { gsub(/^[[:space:]]+|[[:space:]]+$/, "", s); gsub(/`/, "", s); gsub(/\*\*/, "", s); return s }
+    /^#+[[:space:]]/ { sec=$0; sub(/^#+[[:space:]]*/, "", sec); next }
     {
       n=split($0, cells, "|")
       for (i=1;i<=n;i++) {
-        c=cells[i]; gsub(/^[[:space:]]+|[[:space:]]+$/, "", c)
-        if (c==id) { hit=sec; break }
+        if (norm(cells[i]) != id) continue
+        if (sec ~ /已验收|已归档|归档/) arch=1; else cell=1
+        break
       }
+      line=$0; gsub(/[^A-Za-z0-9_-]/, " ", line)
+      m=split(line, toks, " ")
+      for (j=1;j<=m;j++) if (toks[j]==id) { seen=1; break }
     }
     END {
-      if (hit=="") { print "absent"; exit }
-      if (hit ~ /已验收|已归档/) { print "closed"; exit }
-      print "active"
+      if (arch) { print "closed"; exit }
+      if (cell) { print "active"; exit }
+      if (seen) { print "mentioned"; exit }
+      print "absent"
     }
   ' "$TASKS_STATE"
 }
@@ -301,6 +476,48 @@ _layout_checksum() {
   printf '%04x' "$c"
 }
 
+# main-row2 / main-col 共用几何（单一源头，防守卫与构建两处漂移）
+# 输入：窗口宽 win_w · pane 数 n · 主宽百分比 pct
+# 输出（空格分隔）：main_w right_w right_x cols cw_base cw_last
+main_row2_geom() {
+  local win_w="$1" n="$2" pct="$3"
+  local usable_w=$(( win_w - 1 ))
+  (( usable_w < 2 )) && usable_w=2
+  local main_w=$(( usable_w * pct / 100 ))
+  (( main_w < 1 )) && main_w=1
+  (( main_w > usable_w - 1 )) && main_w=$(( usable_w - 1 ))
+  local right_w=$(( usable_w - main_w ))
+  (( right_w < 1 )) && right_w=1
+  local right_x=$(( main_w + 1 ))
+  local m=$(( n - 1 ))
+  (( m < 1 )) && m=1
+  local cols=$(( (m + 1) / 2 ))
+  (( cols < 1 )) && cols=1
+  local r_usable=$(( right_w - (cols - 1) ))
+  (( r_usable < 1 )) && r_usable=1
+  local cw_base=$(( r_usable / cols ))
+  (( cw_base < 1 )) && cw_base=1
+  local cw_last=$(( r_usable - cw_base * (cols - 1) ))
+  (( cw_last < 1 )) && cw_last=1
+  printf '%s %s %s %s %s %s' "$main_w" "$right_w" "$right_x" "$cols" "$cw_base" "$cw_last"
+}
+
+# main-row2 最窄非主 pane 列宽（窄列守卫用；与 build 共用 main_row2_geom）
+main_row2_min_col() {
+  local win_w="$1" n="$2" pct="$3"
+  (( n >= 2 )) || { printf '%s' "$win_w"; return 0; }
+  local main_w right_w right_x cols cw_base cw_last
+  read -r main_w right_w right_x cols cw_base cw_last < <(main_row2_geom "$win_w" "$n" "$pct")
+  if (( cw_base < cw_last )); then printf '%s' "$cw_base"; else printf '%s' "$cw_last"; fi
+}
+
+# main-col 右列宽（tmux main-vertical 百分比语义；与 main_row2_geom 的 right_w 同源）
+main_col_right_w() {
+  local main_w right_w right_x cols cw_base cw_last
+  read -r main_w right_w right_x cols cw_base cw_last < <(main_row2_geom "$1" 2 "$2")
+  printf '%s' "$right_w"
+}
+
 # main-row2：主 pane 全高占左；往右每列 2 个上下堆叠
 #   1 | 2 | 4
 #   1 | 3 | 5
@@ -316,26 +533,9 @@ build_main_row2_layout() {
     return 0
   fi
 
-  # 根：水平分割，主 pane + 右侧容器，中间 1 gap
-  local usable_w=$(( win_w - 1 ))
-  (( usable_w < 2 )) && usable_w=2
-  local main_w=$(( usable_w * pct / 100 ))
-  (( main_w < 1 )) && main_w=1
-  (( main_w > usable_w - 1 )) && main_w=$(( usable_w - 1 ))
-  local right_w=$(( usable_w - main_w ))
-  (( right_w < 1 )) && right_w=1
-  local right_x=$(( main_w + 1 ))
-
-  # 右侧 cols 列
-  local m=$(( n - 1 ))
-  local cols=$(( (m + 1) / 2 ))
-  (( cols < 1 )) && cols=1
-  local r_usable=$(( right_w - (cols - 1) ))
-  (( r_usable < 1 )) && r_usable=1
-  local cw_base=$(( r_usable / cols ))
-  (( cw_base < 1 )) && cw_base=1
-  local cw_last=$(( r_usable - cw_base * (cols - 1) ))
-  (( cw_last < 1 )) && cw_last=1
+  # 几何统一来自 main_row2_geom（守卫与构建同源，防漂移）
+  local main_w right_w right_x cols cw_base cw_last
+  read -r main_w right_w right_x cols cw_base cw_last < <(main_row2_geom "$win_w" "$n" "$pct")
 
   # 每列内部：上下 2 个，中间 1 gap
   local v_usable=$(( win_h - 1 ))
@@ -375,6 +575,31 @@ build_main_row2_layout() {
     "$right_body"
 }
 
+# main-col：委托 tmux 内建 main-vertical（主 pane 左全高 + 右列纵向堆叠）
+#   坑：tmux 默认 main-pane-width=80（格）⇒ 必须显式设百分比
+apply_main_col() {
+  local pct="$1" n="$2" min_w="$3" win_w="$4" from="$5"
+  if (( n >= 2 )); then
+    local right_w; right_w="$(main_col_right_w "$win_w" "$pct")"
+    if (( right_w < min_w )); then
+      if [[ "$from" == "main-col" ]]; then
+        warn "main-col 右列 ${right_w} < 最小 ${min_w}（${n} pane @ ${win_w} 列）→ 回退 grid"
+      else
+        warn "${from} → main-col 右列 ${right_w} < 最小 ${min_w}（${n} pane @ ${win_w} 列）→ 再回退 grid"
+      fi
+      tmux select-layout tiled >/dev/null 2>&1 || true
+      return 0
+    fi
+  fi
+  tmux set-window-option main-pane-width "${pct}%" >/dev/null 2>&1 || true
+  local err
+  if ! err=$(tmux select-layout main-vertical 2>&1); then
+    warn "main-col（main-vertical）应用失败，回退 grid"
+    warn "  tmux:   ${err:-<no message>}"
+    tmux select-layout tiled >/dev/null 2>&1 || true
+  fi
+}
+
 apply_tmux_layout() {
   [[ -n "${TMUX:-}" ]] || return 0
   if [[ "$TMUX_LAYOUT" == "grid" ]]; then
@@ -391,12 +616,31 @@ apply_tmux_layout() {
   while IFS= read -r line; do
     [[ -n "$line" ]] && pane_ids+=("$line")
   done < <(tmux list-panes -F '#{pane_id}' 2>/dev/null | sed 's/^%//')
-  (( ${#pane_ids[@]} >= 1 )) || return 0
+  local n=${#pane_ids[@]}
+  (( n >= 1 )) || return 0
 
   local pct="$TMUX_MAIN_WIDTH"
   [[ "$pct" =~ ^[0-9]+$ ]] || pct="$TMUX_MAIN_WIDTH_DEFAULT"
   (( pct < 10 )) && pct=10
   (( pct > 90 )) && pct=90
+
+  local min_w="$TMUX_MIN_PANE_WIDTH"
+  [[ "$min_w" =~ ^[0-9]+$ ]] || min_w="$TMUX_MIN_PANE_WIDTH_DEFAULT"
+  (( min_w < 10 )) && min_w=10
+  (( min_w > 80 )) && min_w=80
+
+  if [[ "$TMUX_LAYOUT" == "main-col" ]]; then
+    apply_main_col "$pct" "$n" "$min_w" "$win_w" "main-col"
+    return
+  fi
+
+  # 窄列守卫：main-row2 最窄非主 pane < 阈值 ⇒ 回退 main-col（再不足⇒grid）
+  local narrow; narrow="$(main_row2_min_col "$win_w" "$n" "$pct")"
+  if (( narrow < min_w )); then
+    warn "${n} pane @ ${win_w} 列：main-row2 最窄列 ${narrow} < 最小 ${min_w} → 回退 main-col"
+    apply_main_col "$pct" "$n" "$min_w" "$win_w" "main-row2"
+    return
+  fi
 
   local full; full="$(build_main_row2_layout "$win_w" "$win_h" "$pct" "${pane_ids[@]}")"
   [[ -n "$full" ]] || return 0
@@ -414,12 +658,19 @@ apply_tmux_layout() {
 spawn_tmux() {
   local name="$1" inner="$2"
   case "$TMUX_LAYOUT" in
-    main-row2|grid) ;;
-    *) die "NAO_TMUX_LAYOUT 无效: $TMUX_LAYOUT（可选 main-row2|grid）" ;;
+    main-row2|main-col|grid) ;;
+    *) die "NAO_TMUX_LAYOUT 无效: $TMUX_LAYOUT（可选 main-row2|main-col|grid）" ;;
   esac
   local wrapped="bash -lc $(printf %q "$inner")"
   if [[ -n "${TMUX:-}" ]]; then
-    tmux split-window -h "$wrapped" >/dev/null
+    # 窄窗口/宿主上限会让 split-window 失败（no space for new pane）；
+    # 捕获后 warn 并继续，不因单个 pane 失败中断整轮 ensure。
+    local serr
+    if ! serr=$(tmux split-window -h "$wrapped" 2>&1); then
+      warn "pane 创建失败（窗口过窄或宿主已达上限）：${serr:-<no message>}"
+      warn "  已跳过该 pane，其余角色继续拉起；可放大窗口后重跑 ensure"
+      return 0
+    fi
     apply_tmux_layout
   else
     tmux new-session -d -s "nao-$name" "$wrapped"
@@ -484,6 +735,9 @@ cmd_check() {
     printf '  ✗ roles.yaml 缺失: %s\n' "$MANIFEST"; rc=1
   fi
   check_eol || rc=1
+
+  echo "== 主动推送器（qq-notify，可选能力）=="
+  check_qq_notify || rc=1
 
   echo "== 角色清单 roles.yaml =="
   load_manifest
@@ -639,17 +893,22 @@ cmd_check() {
     echo "  （当前不在 tmux 内；若宿主命中 tmux 会创建 detached 会话）"
   fi
   case "$TMUX_LAYOUT" in
-    main-row2|grid)
+    main-row2|main-col|grid)
       printf '  ✓ NAO_TMUX_LAYOUT=%-10s 合法\n' "$TMUX_LAYOUT" ;;
     *)
-      printf '  ✗ NAO_TMUX_LAYOUT=%-10s 非法（可选 main-row2|grid）\n' "$TMUX_LAYOUT"; rc=1 ;;
+      printf '  ✗ NAO_TMUX_LAYOUT=%-10s 非法（可选 main-row2|main-col|grid）\n' "$TMUX_LAYOUT"; rc=1 ;;
   esac
-  if [[ "$TMUX_LAYOUT" == "main-row2" ]]; then
+  if [[ "$TMUX_LAYOUT" == "main-row2" || "$TMUX_LAYOUT" == "main-col" ]]; then
     if [[ "$TMUX_MAIN_WIDTH" =~ ^[0-9]+$ ]] && (( TMUX_MAIN_WIDTH >= 10 && TMUX_MAIN_WIDTH <= 90 )); then
       printf '  ✓ NAO_TMUX_MAIN_WIDTH=%-3s%% 合法\n' "$TMUX_MAIN_WIDTH"
     else
       printf '  ! NAO_TMUX_MAIN_WIDTH=%-3s  非法（10..90）：越界夹取到 10/90，非数字回退 %s\n' "$TMUX_MAIN_WIDTH" "$TMUX_MAIN_WIDTH_DEFAULT"
     fi
+  fi
+  if [[ "$TMUX_MIN_PANE_WIDTH" =~ ^[0-9]+$ ]] && (( TMUX_MIN_PANE_WIDTH >= 10 && TMUX_MIN_PANE_WIDTH <= 80 )); then
+    printf '  ✓ NAO_TMUX_MIN_PANE_WIDTH=%-3s 合法\n' "$TMUX_MIN_PANE_WIDTH"
+  else
+    printf '  ! NAO_TMUX_MIN_PANE_WIDTH=%-3s 非法（10..80）：越界夹取到 10/80，非数字回退 %s\n' "$TMUX_MIN_PANE_WIDTH" "$TMUX_MIN_PANE_WIDTH_DEFAULT"
   fi
 
   if [[ "$strict" == "true" && $wl_problems -gt 0 ]]; then
@@ -663,33 +922,33 @@ cmd_check() {
 # ---------------------------------------------------------------------------
 cmd_status() {
   local a
-  echo "== 角色会话在线状态（权威名单以 intercom({action:'list'}) 为准）=="
+  intercom_list_json >/dev/null 2>&1 || true   # 预热名册缓存（后续子 shell 复用）
+  echo "== 角色会话在线状态（权威名单见 intercom({action:'list'})；本表按终端标题/名册判定）=="
   for a in "${ROLE_ORDER[@]}"; do
-    if running "$a"; then
+    if running "$a" "${ROLE_WS[$a]:-}"; then
       printf '  ✓ %-14s 在线（--name %s；卡片 %s）\n' "$a" "$a" "${ROLE_CARDS[$a]}"
     else
       printf '  · %-14s 未运行（ensure 拉起）\n' "$a"
     fi
   done
-  echo "== 任务派生会话（--task 拉起，如 rd-be-T1）=="
-  local found=0 line dname role id cls tag
-  while IFS= read -r line; do
-    [[ -n "$line" ]] || continue
-    dname="$(awk '{for(i=1;i<=NF;i++) if($i=="--name") {print $(i+1); exit}}' <<< "$line")"
+  echo "== 任务派生会话（--task 拉起，如 rd-be-T1 / rd-infra-T1）=="
+  local found=0 dname role id cls tag
+  while IFS= read -r dname; do
     [[ -n "$dname" ]] || continue
-    id=""; tag=""
+    id=""
     for role in "${ROLE_ORDER[@]}"; do [[ "$dname" == "$role-"* ]] && { id="${dname#"$role"-}"; break; }; done
-    if [[ -n "$id" ]]; then
-      cls="$(task_state_class "$id")"
-      case "$cls" in
-        closed) tag="  ! 残留（$id 已归档）→ close --task $id ${dname%-*}" ;;
-        absent) tag="  ! 残留（tasks-state 无 $id 记录）→ 核对后 close --task $id ${dname%-*}" ;;
-        active) tag="  · $id 进行态" ;;
-      esac
-    fi
+    [[ -n "$id" ]] || continue
+    cls="$(task_state_class "$id")"
+    tag=""
+    case "$cls" in
+      closed)    tag="  ! 残留（$id 已归档）→ close --task $id ${dname%-*}" ;;
+      active)    tag="  · $id 进行态" ;;
+      mentioned) tag="  ? $id 仅散文提及（非表内记录）→ 核对后 close --task $id ${dname%-*}" ;;
+      absent)    tag="  ! 残留（tasks-state 无 $id 记录）→ 核对后 close --task $id ${dname%-*}" ;;
+    esac
     printf '  · %s%s\n' "$dname" "$tag"
     found=1
-  done < <(pgrep -af "pi[[:space:]].*--name (pm|arch-designer|rd-fe|rd-be|qa)-[A-Za-z0-9_-]+" 2>/dev/null | head -10)
+  done < <(visible_session_names)
   (( found )) || echo '  （无）'
   [[ -f "$TASKS_STATE" ]] || echo "  （$TASKS_STATE 不存在，残留判定已跳过）"
 }
@@ -698,8 +957,9 @@ cmd_status() {
 # 回收已完成会话：闸门（tasks-state 已推进 + 无在跑 turn）+ 落地（pane/会话/screen/进程）
 cmd_close() {
   local force="$1" task="$2" target="$3"
-  [[ -n "$target" ]] || die "close 需要目标：角色别名或派生会话名（如 rd-be / rd-be-T1）"
+  [[ -n "$target" ]] || die "close 需要目标：角色别名或派生会话名（如 rd-be / rd-be-T1 或 rd-infra / rd-infra-T1）"
   local name repo cls bus pane pids r ok
+  intercom_list_json >/dev/null 2>&1 || true   # 预热名册缓存
   if [[ -n "$task" ]]; then
     resolve_role "$target"
     name="${NAME}-${task}"
@@ -711,7 +971,8 @@ cmd_close() {
       warn "  先把 $task 移入「已验收/已归档」再回收（或 --force：将丢失打回返工所需上下文）"
       return 1
     fi
-    [[ "$cls" == "absent" ]] && warn "tasks-state 无 $task 记录（仅按会话名回收）"
+    [[ "$cls" == "absent" ]] && warn "tasks-state 全文无 $task 记录（仅按会话名回收）"
+    [[ "$cls" == "mentioned" ]] && log "tasks-state 仅散文提及 $task（非表内记录，不阻塞回收）"
     [[ "$cls" == "nofile" ]] && log "未启用 $TASKS_STATE（跳过状态闸门）"
   elif [[ -n "${ALIAS_ROLE[$target]:-}" ]]; then
     name="${ALIAS_ROLE[$target]}"; repo="${ROLE_WS[$name]:-$PWD}"
@@ -722,16 +983,30 @@ cmd_close() {
     # 非别名的目标必须是 <已知角色>-<编号>，否则视为拼错（防静默 no-op）
     ok=0
     for r in "${ROLE_ORDER[@]}"; do [[ "$name" == "$r-"* ]] && ok=1; done
-    (( ok )) || die "未知角色或派生会话名: $name（可用: ${ROLE_ORDER[*]}；派生名形如 rd-be-T1）"
+    (( ok )) || die "未知角色或派生会话名: $name（可用: ${ROLE_ORDER[*]}；派生名形如 rd-be-T1 / rd-infra-T1）"
     repo="$PWD"
   fi
 
-  running "$name" || { log "$name 未运行（无需回收）"; return 0; }
+  if ! running "$name" "$repo"; then
+    if offline_verifiable; then
+      log "$name 未运行（无需回收）"; return 0
+    fi
+    warn "无法确认 $name 在线状态：宿主无 tmux/screen 句柄，且 pi-intercom 名册不可用"
+    warn "  pi 启动后 argv 被改写为 \"pi\"，进程扫描不可信 ⇒ 不做静默 no-op（本命令 exit 非 0）"
+    warn "  请用 intercom list 人工核对；确认已退出后忽略本提示，或用 --force 跳过闸门"
+    return 1
+  fi
 
   # 闸门②：在跑 turn（tmux 可判；非 tmux 宿主无法判 → 需 --force）
-  pane="$(find_pane_for "$name")"
+  pane="$(find_pane_for "$name" "$repo")"
   if [[ -n "$pane" ]]; then
-    pane_busy "$pane" && bus="tmux pane $pane 末行显示在跑 turn"
+    # 显式双分支赋值：pane 空闲时 bus 必须落为 ""。
+    # 曾用 `pane_busy "$pane" && bus=…`：pane_busy 为假时 && 短路，bus 在 set -u 下未绑定 → 行 1007 崩溃。
+    if pane_busy "$pane"; then
+      bus="tmux pane $pane 末行显示在跑 turn"
+    else
+      bus=""
+    fi
   else
     bus="非 tmux 宿主，无法确认是否在跑 turn"
   fi
@@ -750,7 +1025,7 @@ cmd_close() {
   if command -v screen >/dev/null 2>&1 && screen -ls 2>/dev/null | grep -q "nao-$name" && screen -S "nao-$name" -X quit 2>/dev/null; then
     log "已回收 $name（screen 会话 nao-$name）@ $repo"; return 0
   fi
-  pids="$(pi_pids_for "$name" | tr '\n' ' ')"
+  pids="$(pi_pids_for "$name" "$repo" | tr '\n' ' ')"
   if [[ -n "$pids" ]] && kill $pids 2>/dev/null; then
     log "已回收 $name（结束进程: $pids）@ $repo"; return 0
   fi
@@ -762,7 +1037,7 @@ cmd_ensure() {
   local force="$1" model="$2" task="$3"; shift 3
   local spec role repo key seen k
   local -a cg_done=()
-  [[ $# -eq 0 ]] && die "ensure 需要至少一个角色，如: nao-fleet.sh ensure arch rd-fe"
+  [[ $# -eq 0 ]] && die "ensure 需要至少一个角色，如: nao-fleet.sh ensure arch rd-fe rd-infra"
   for spec in "$@"; do
     if [[ "$spec" == *"@"* ]]; then
       role="${spec%%@*}"; repo="${spec#*@}"
@@ -778,8 +1053,8 @@ cmd_ensure() {
     key="$repo"; seen=0
     for k in "${cg_done[@]:-}"; do [[ "$k" == "$key" ]] && seen=1; done
     if (( ! seen )); then check_codegraph "$repo"; cg_done+=("$key"); fi
-    if [[ "$force" != "true" ]] && running "$disp"; then
-      warn "$disp 已在运行（--name 识别），跳过；确需重开请加 --force"
+    if [[ "$force" != "true" ]] && running "$disp" "$repo"; then
+      warn "$disp 已在运行（终端标题/名册命中），跳过；确需重开请加 --force"
       continue
     fi
     spawn_one "$disp" "$repo" "$model"
