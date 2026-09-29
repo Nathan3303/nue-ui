@@ -98,9 +98,9 @@
 }
 
 .nue-message-node-inner.nue-message-node-inner--error {
-    --nue-message-node-inner-color: var(--nue-error-color-70);
+    --nue-message-node-inner-color: var(--nue-error-color-90);
     --nue-message-node-inner-background-color: var(--nue-error-color-10);
-    --nue-message-node-inner-border-color: var(--nue-error-color-60);
+    --nue-message-node-inner-border-color: var(--nue-error-color-80);
 }
 
 .nue-message-node-inner.nue-message-node-inner--info {
