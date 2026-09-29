@@ -46,7 +46,7 @@
     }
 
     .nue-prompt__value-error {
-        color: var(--nue-error-color-30);
+        color: var(--nue-error-color-70);
         font-size: var(--nue-text-sm);
     }
 

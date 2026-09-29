@@ -108,29 +108,32 @@
     --nue-button-base-color: var(--nue-primary-color-200);
 }
 
+/* 语义按钮需满足 AA：文字对填充 ≥4.5:1、描边/图形对底色 ≥3:1（浅色与深色两套阶梯均需满足）。
+   实心语义按钮的填充/文字均取令牌，使其随深色模式翻转（浅色=深底浅字，深色=浅底深字）。
+   详见 packages/themes/shadlike/__tests__/contrast.test.ts。 */
 .nue-button.nue-button--destructive {
     --nue-button-base-color: transparent;
-    --nue-button-color: var(--nue-error-color-40);
-    --nue-button-border-color: var(--nue-error-color-40);
+    --nue-button-color: var(--nue-error-color-80);
+    --nue-button-border-color: var(--nue-error-color-80);
     --nue-button-hover-bg-color: var(--nue-error-color-10);
     --nue-button-lo: 3;
 }
 
 .nue-button.nue-button--success {
-    --nue-button-color: white;
-    --nue-button-base-color: var(--nue-success-color-40);
+    --nue-button-color: var(--nue-success-color-0);
+    --nue-button-base-color: var(--nue-success-color-100);
     --nue-button-border-color: transparent;
 }
 
 .nue-button.nue-button--warning {
-    --nue-button-color: white;
-    --nue-button-base-color: var(--nue-warning-color-40);
+    --nue-button-color: var(--nue-warning-color-0);
+    --nue-button-base-color: var(--nue-warning-color-100);
     --nue-button-border-color: transparent;
 }
 
 .nue-button.nue-button--error {
-    --nue-button-color: white;
-    --nue-button-base-color: var(--nue-error-color-40);
+    --nue-button-color: var(--nue-error-color-0);
+    --nue-button-base-color: var(--nue-error-color-100);
     --nue-button-border-color: transparent;
 }
 

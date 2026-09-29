@@ -1,7 +1,5 @@
 .nue-badge {
-    --nue-badge-background-color: hsl(
-        from var(--nue-warning-color-50) h s calc(l + var(--nue-dark-switch) * 20)
-    );
+    --nue-badge-background-color: var(--nue-warning-color-80);
     --nue-badge-font-size: var(--nue-text-xs);
     --nue-badge-color: var(--nue-primary-color-0);
 }
