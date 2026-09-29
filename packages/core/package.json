@@ -35,7 +35,8 @@
         "build-umd": "cross-env NODE_ENV=production vp build --config vite.umd.config.ts",
         "before-build": "pnpm remove-dist",
         "after-build": "pnpm touch-dts-file && node ./scripts/check-ondemand.js",
-        "build": "pnpm before-build && run-p build-es build-umd && pnpm after-build"
+        "build": "pnpm before-build && run-p build-es build-umd && pnpm after-build",
+        "prepublishOnly": "node ../../scripts/check-lf.mjs"
     },
     "keywords": [
         "NueUI",

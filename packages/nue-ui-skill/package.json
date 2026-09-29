@@ -18,6 +18,9 @@
         "references",
         "bin"
     ],
+    "scripts": {
+        "prepublishOnly": "node ../../scripts/check-lf.mjs"
+    },
     "bin": {
         "nue-ui-skill": "./bin/nue-ui-skill.mjs"
     },

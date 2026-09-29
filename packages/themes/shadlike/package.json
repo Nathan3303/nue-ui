@@ -18,7 +18,8 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "build-css": "postcss src/index.css src/**/*.css --dir dist --base src --no-map --verbose",
         "remove-dist": "node ./scripts/remove-dist.js",
-        "build": "pnpm remove-dist && pnpm build-css"
+        "build": "pnpm remove-dist && pnpm build-css",
+        "prepublishOnly": "node ../../../scripts/check-lf.mjs"
     },
     "repository": {
         "type": "git",

@@ -18,7 +18,8 @@
         "playground": "pnpm --filter @nue-ui/playground",
         "shadlike-theme": "pnpm --filter nue-ui-theme-shadlike",
         "iconfont": "pnpm --filter nue-ui-iconfont",
-        "build": "pnpm core build && pnpm shadlike-theme build && pnpm iconfont build"
+        "build": "pnpm core build && pnpm shadlike-theme build && pnpm iconfont build",
+        "check:lf": "node scripts/check-lf.mjs --all"
     },
     "repository": {
         "type": "git",
