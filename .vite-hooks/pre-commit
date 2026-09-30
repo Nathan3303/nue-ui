@@ -6,4 +6,3 @@ export NVM_DIR="$HOME/.nvm"
 
 pnpm run lint:lint-staged
 pnpm run test:run
-vp staged
