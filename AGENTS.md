@@ -68,3 +68,25 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
+---
+
+## 项目约定：上游同步资产与 Git 钩子
+
+### 上游同步资产（`.agents/**`）以「原始未格式化」形态存储
+
+`.agents/**` 是从上游（nao 协作舰队框架）逐字节同步的资产，**保持上游原始形态**，不随本仓格式化规则改写。
+
+- 因此本仓完整 `vp check`（含 fmt）会**稳定报 3 个文件**的格式差异：
+    1. `.agents/roles.yaml`
+    2. `.agents/scripts/intercom-probe.mts`
+    3. `packages/nue-ui-skill/bin/nue-ui-skill.mjs`
+- ⛔ **不要为了通过 fmt 而去格式化前两个文件**（`.agents/roles.yaml`、`.agents/scripts/intercom-probe.mts`）——那会破坏「sha 与上游逐字节一致」的同步校验。同步完成后必须用 `sha256sum` 与上游同名文件逐字节对比。
+- 判定口径：**前两个文件的格式差异不属缺陷**，是同步策略的有意结果；第三个文件（`packages/nue-ui-skill/bin/nue-ui-skill.mjs`）属**本仓自身**的格式债，可另单处理。
+
+### Git 钩子职责划分
+
+- `.vite-hooks/pre-commit`：只做 **staged 范围**的格式/lint（`pnpm run lint:lint-staged`）。
+- `.vite-hooks/pre-push`：跑**全量测试**（`pnpm run test:run`）。
+- 理由：提交要保持快（每次提交不必等全量测试），推送前把关（全量测试在进入远端前拦截）。
+- 附注：staged 规则（`vite.config.ts` 的 `staged`）只匹配 `*.{js,jsx,ts,tsx,vue}` 与 `*.{json,css,scss,md}`，**不含 `.mts`/`.yaml`** ⇒ 这类文件不会被钩子归一化。这是**有意保留**的现状（理由同上：不改写上游同步资产）。
