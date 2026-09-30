@@ -14,7 +14,21 @@
 //
 // 兼容性：pi-intercom 内部 API 若变化 → 本探针非 0 退出，nao-fleet 回退官方 CLI
 //   （无 tmuxPane）再叠加「仓库内未认领 pi pane 唯一兜底」，不静默 no-op。
+//
+// 类型自检：`npm run check:agents`（tsconfig.agents.json）。动态 import 使 list 结果为
+//   any，下游 TS 项目（nao-todo/nue-ui 的 `vp check` 扫 `.agents/**`）会报 TS7006，
+//   故此处用本地 ProbeSession 给 filter/map 显式定型（strict/noImplicitAny 下必需）。
 import { join } from "node:path";
+
+type ProbeSession = {
+  id: string;
+  name?: string;
+  model?: string;
+  status?: string;
+  cwd: string;
+  tmuxPane?: string;
+  pid?: number;
+};
 
 const agentDir = process.argv[2];
 if (!agentDir) {
@@ -39,7 +53,7 @@ try {
     name: PROBE_NAME,
     status: "idle",
   });
-  const sessions = await client.listSessions();
+  const sessions = (await client.listSessions()) as ProbeSession[];
   const rows = sessions
     .filter((s) => s.id !== client.sessionId)
     .map((s) => ({
