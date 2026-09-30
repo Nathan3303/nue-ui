@@ -14,14 +14,14 @@ description: pi-intercom 多会话协作协议（常驻引用）
 
 ## 别名与工作区（fleet.sh，以 .agents/roles.yaml 为准）
 
-| 别名                             | 角色卡                | 默认工作区                      |
-| :------------------------------- | :-------------------- | :------------------------------ |
-| `pm`                             | product-manager       | 当前项目目录                    |
-| `arch` / `arch-designer`（同义） | architecture-designer | 当前项目目录                    |
-| `rd-fe`                          | frontend-developer    | 当前项目目录                    |
-| `rd-be`                          | backend-developer     | 前后端分离时显式 `rd-be@<repo>` |
-| `infra` / `rd-infra`（同义）     | infra-engineer        | 当前项目目录                    |
-| `qa`                             | test-engineer         | 当前项目目录                    |
+| 别名 | 角色卡 | 默认工作区 |
+| :--- | :--- | :--- |
+| `pm` | product-manager | 当前项目目录 |
+| `arch` / `arch-designer`（同义） | architecture-designer | 当前项目目录 |
+| `rd-fe` | frontend-developer | 当前项目目录 |
+| `rd-be` | backend-developer | 前后端分离时显式 `rd-be@<repo>` |
+| `infra` / `rd-infra`（同义） | infra-engineer | 当前项目目录 |
+| `qa` | test-engineer | 当前项目目录 |
 
 拉起：`bash .agents/scripts/nao-fleet.sh ensure <别名>[@<repo>]`
 
@@ -129,9 +129,9 @@ bash .agents/scripts/nao-fleet.sh check
 
 - **前置判定**：先 `status`/`list` 确认 PM 是否可达；**PM 可达必须回执，不降级**；仅当 intercom 不可用或无法送达 PM 时才降级。
 - intercom 不可用或未被调度：
-    - PM → 直接输出 PRD/人工分派清单，**绝不亲自写码**。
-    - 架构师 → 本会话直接输出完整评审报告，由用户转交 PM。
-    - RD/测试 → 本会话正常执行，产出交用户转交。
+  - PM → 直接输出 PRD/人工分派清单，**绝不亲自写码**。
+  - 架构师 → 本会话直接输出完整评审报告，由用户转交 PM。
+  - RD/测试 → 本会话正常执行，产出交用户转交。
 
 ## 归档约定
 

@@ -17,16 +17,16 @@ PM 在**立项 / 终签 / 发布**时读取；RD 在**起分支 / 开 PR / 合�
 
 ## 八阶段
 
-| #   | 阶段     | 主责               | 动作                                                                | 产出               |
-| :-- | :------- | :----------------- | :------------------------------------------------------------------ | :----------------- |
-| 1   | 立项     | PM                 | 建 Issue（用户故事 / AC / 优先级 / 里程碑）+ PRD 正文落 `docs/prds` | 可追踪 Issue       |
-| 2   | 拆分排期 | PM                 | 拆任务、定 PR owner / Reviewer / 分支名                             | 开工确认卡         |
-| 3   | 起分支   | RD                 | 从 main 拉 `feat/<issue-id>-<slug>`，开 **Draft PR**                | Draft PR + CI      |
-| 4   | 开发提交 | RD                 | 小步 `wip(<编号>):` 提交，push 触发 CI                              | 增量代码 + CI 结果 |
-| 5   | 评审测试 | RD / QA / Reviewer | 填 PR 模板、QA 跑全量门禁、预览环境验证                             | Review 通过        |
-| 6   | 验收合并 | PM → RD            | PM 逐条核 AC 并在 PR 评论；**通过后由 RD squash 合并、删分支**      | main 上 1 条提交   |
-| 7   | 发布     | PM                 | 版本号 + tag + Release notes（优先 `gh`）                           | Release 记录       |
-| 8   | 复盘     | PM                 | 监控指标、关 Issue、归档 PRD                                        | 复盘 + 归档        |
+| # | 阶段 | 主责 | 动作 | 产出 |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | 立项 | PM | 建 Issue（用户故事 / AC / 优先级 / 里程碑）+ PRD 正文落 `docs/prds` | 可追踪 Issue |
+| 2 | 拆分排期 | PM | 拆任务、定 PR owner / Reviewer / 分支名 | 开工确认卡 |
+| 3 | 起分支 | RD | 从 main 拉 `feat/<issue-id>-<slug>`，开 **Draft PR** | Draft PR + CI |
+| 4 | 开发提交 | RD | 小步 `wip(<编号>):` 提交，push 触发 CI | 增量代码 + CI 结果 |
+| 5 | 评审测试 | RD / QA / Reviewer | 填 PR 模板、QA 跑全量门禁、预览环境验证 | Review 通过 |
+| 6 | 验收合并 | PM → RD | PM 逐条核 AC 并在 PR 评论；**通过后由 RD squash 合并、删分支** | main 上 1 条提交 |
+| 7 | 发布 | PM | 版本号 + tag + Release notes（优先 `gh`） | Release 记录 |
+| 8 | 复盘 | PM | 监控指标、关 Issue、归档 PRD | 复盘 + 归档 |
 
 ## 分支与提交
 
@@ -61,13 +61,13 @@ PM 在**立项 / 终签 / 发布**时读取；RD 在**起分支 / 开 PR / 合�
 
 无 `gh` / 无远端 / 未认证时**不阻断交付**，按同构降级（**保持「main = 1 条/需求」不变**）：
 
-| 环节 | 正常                     | 降级                                                                      |
-| :--- | :----------------------- | :------------------------------------------------------------------------ |
-| 立项 | GitHub Issue             | 摘要写 `docs/prds` + tasks-state，跳过 Issue                              |
-| 分支 | `feat/<issue-id>-<slug>` | `nao/<批次-slug>`                                                         |
-| 评审 | PR + CI + 预览环境       | 本地全量门禁 + PM 读 diff                                                 |
-| 合并 | PR squash merge          | PM 验收通过后，RD 本地 `git merge --squash feat/… && git commit` + 删分支 |
-| 发布 | `gh release create`      | `git tag -a` + notes 落 `docs/releases/`                                  |
+| 环节 | 正常 | 降级 |
+| :--- | :--- | :--- |
+| 立项 | GitHub Issue | 摘要写 `docs/prds` + tasks-state，跳过 Issue |
+| 分支 | `feat/<issue-id>-<slug>` | `nao/<批次-slug>` |
+| 评审 | PR + CI + 预览环境 | 本地全量门禁 + PM 读 diff |
+| 合并 | PR squash merge | PM 验收通过后，RD 本地 `git merge --squash feat/… && git commit` + 删分支 |
+| 发布 | `gh release create` | `git tag -a` + notes 落 `docs/releases/` |
 
 降级须在 `tasks-state` 与回执中标注「降级」。
 
