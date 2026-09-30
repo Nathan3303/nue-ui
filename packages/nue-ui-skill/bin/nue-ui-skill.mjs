@@ -120,7 +120,8 @@ export function main(argv = process.argv) {
 // 仅直接执行（而非被 import）时运行 CLI
 let isMain = false;
 try {
-    isMain = process.argv[1] != null && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
+    isMain =
+        process.argv[1] != null && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
 } catch {
     // argv[1] 不可解析时按非主入口处理
 }
