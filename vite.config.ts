@@ -2140,7 +2140,10 @@ export default defineConfig({
             '.vitepress/cache',
             '**/.vitepress/cache',
             'pnpm-lock.yaml',
-            'apps/document/vitepress-demo-preview-component'
+            'apps/document/vitepress-demo-preview-component',
+            '.agents/**',
+            '.codegraph/**',
+            '.pi/**'
         ]
     }
 });
