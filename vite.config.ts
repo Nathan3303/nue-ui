@@ -2,7 +2,7 @@ import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
     staged: {
-        '*.{js,jsx,ts,tsx,vue}': ['vp lint --fix', 'vp fmt'],
+        '*.{js,jsx,ts,tsx,vue}': ['vp lint --fix', 'vp fmt --no-error-on-unmatched-pattern'],
         '*.{json,css,scss,md}': ['vp fmt --no-error-on-unmatched-pattern']
     },
     lint: {
