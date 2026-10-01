@@ -42,3 +42,7 @@ dist/*
 
 # Omo
 .omo/*
+
+# Python 生成物（勿入库）
+__pycache__/
+*.pyc
