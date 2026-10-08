@@ -46,3 +46,8 @@ dist/*
 # Python 生成物（勿入库）
 __pycache__/
 *.pyc
+
+# nao 舰队机制（0.12.0 pi 包形态）：只入库 pin，包本体与备份不入库
+.pi/*
+!.pi/settings.json
+.agents/.nao-obsolete/
