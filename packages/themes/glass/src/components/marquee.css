@@ -1,5 +1,5 @@
 .nue-marquee {
-    --nue-marquee-gap: 36px;
+    --nue-marquee-gap: var(--nue-gap-lg);
     --nue-marquee-width: unset;
     --nue-marquee-track-width: unset;
 }
@@ -12,7 +12,7 @@
     .nue-marquee__track {
         display: flex;
         align-items: center;
-        gap: 36px;
+        gap: var(--nue-marquee-gap);
         background: transparent;
         animation-name: marquee-slide;
         animation-timing-function: linear;

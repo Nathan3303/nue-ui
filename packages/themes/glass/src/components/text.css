@@ -19,38 +19,43 @@
 
 .nue-text:is(h1) {
     --nue-text-font-size: var(--nue-text-3xl);
-    --nue-text-font-weight: 800;
-    --nue-text-line-height: 3;
-    margin: var(--nue-padding-sm) 0;
+    --nue-text-font-weight: 500;
+    --nue-text-line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin: var(--nue-gap-md) 0;
 }
 
 .nue-text:is(h2) {
     --nue-text-font-size: var(--nue-text-2xl);
-    --nue-text-font-weight: 700;
-    --nue-text-line-height: 2.75;
-    margin: var(--nue-padding-sm) 0;
+    --nue-text-font-weight: 500;
+    --nue-text-line-height: 1.35;
+    letter-spacing: -0.02em;
+    margin: var(--nue-gap-md) 0;
 }
 
 .nue-text:is(h3) {
     --nue-text-font-size: var(--nue-text-xl);
-    --nue-text-font-weight: 600;
-    --nue-text-line-height: 2.25;
+    --nue-text-font-weight: 500;
+    --nue-text-line-height: 1.4;
+    letter-spacing: -0.01em;
 }
 
 .nue-text:is(h4) {
     --nue-text-font-size: var(--nue-text-md);
-    --nue-text-font-weight: 600;
-    --nue-text-line-height: 1.75;
+    --nue-text-font-weight: 500;
+    --nue-text-line-height: 1.45;
 }
 
 .nue-text:is(h5) {
     --nue-text-font-size: var(--nue-text-df);
-    --nue-text-font-weight: 600;
+    --nue-text-font-weight: 500;
+    --nue-text-line-height: 1.5;
 }
 
 .nue-text:is(p) {
     --nue-text-font-size: var(--nue-text-df);
-    --nue-text-line-height: 1.5;
+    /* CJK 正文 1.6：中文密度靠行高，不靠字重 */
+    --nue-text-line-height: 1.6;
 }
 
 .nue-text--clamped {

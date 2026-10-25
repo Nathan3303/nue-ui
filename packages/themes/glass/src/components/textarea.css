@@ -9,7 +9,8 @@
     );
     --nue-textarea-min-width: unset;
     --nue-textarea-padding: var(--nue-padding-xs) var(--nue-padding-sm);
-    --nue-textarea-line-height: 1.4;
+    /* CJK 正文 1.6（PM 硬约束：中文行高不靠字重撑） */
+    --nue-textarea-line-height: 1.6;
 
     --nue-textarea-rows: 3;
     --nue-textarea-max-rows: 3;
@@ -22,16 +23,16 @@
     --nue-textarea-icon-color: var(--nue-textarea-color);
 
     --nue-textarea-border-color: var(--nue-border-color);
-    --nue-textarea-background-color: transparent;
+    --nue-textarea-background-color: var(--nue-primary-color-0);
 
     --nue-textarea-hover-border-color: var(--nue-primary-color-600);
-    --nue-textarea-hover-background-color: transparent;
+    --nue-textarea-hover-background-color: var(--nue-primary-color-100);
 
     --nue-textarea-focus-border-color: var(--nue-primary-color-600);
-    --nue-textarea-focus-background-color: transparent;
-    --nue-textarea-focus-shadow: var(--nue-primary-shadow);
+    --nue-textarea-focus-background-color: var(--nue-primary-color-0);
+    --nue-textarea-focus-shadow: 0 0 0 2px hsl(var(--nue-brand-hue), 38%, 44%, 0.28);
 
-    --nue-textarea-disabled-color: var(--nue-primary-color-500);
+    --nue-textarea-disabled-color: var(--nue-secondary-text-color);
     --nue-textarea-disabled-border-color: var(--nue-divider-color);
     --nue-textarea-disabled-background-color: var(--nue-primary-color-100);
 }
@@ -51,7 +52,9 @@
     overflow: hidden;
     -webkit-user-select: none;
     user-select: none;
-    transition: all var(--nue-animation-duration-short) ease-in;
+    transition:
+        border-color var(--nue-animation-duration-short) ease-in,
+        box-shadow var(--nue-animation-duration-short) ease-in;
     flex: 0 0 auto;
     font-size: var(--nue-textarea-font-size);
 
@@ -134,7 +137,9 @@
         }
 
         > .word-counter {
-            font-size: var(--nue-text-sm);
+            font-family: var(--nue-font-mono);
+            font-size: var(--nue-text-xs);
+            font-variant-numeric: tabular-nums;
         }
 
         & + * {

@@ -1,22 +1,22 @@
 .nue-breadcrumb {
     --nue-breadcrumb-font-size: var(--nue-text-sm);
     --nue-breadcrumb-color: var(--nue-secondary-text-color);
-    --nue-breadcrumb-sperator-color: gray;
+    --nue-breadcrumb-sperator-color: var(--nue-secondary-text-color);
 }
 
 .nue-breadcrumb {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--nue-gap-df);
     flex-wrap: wrap;
-    padding: 0.5rem 0;
+    padding: var(--nue-padding-xs) 0;
     margin: 0;
     list-style: none;
 
     .nue-breadcrumb-item {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: var(--nue-gap-sm);
         flex-wrap: nowrap;
         font-size: var(--nue-breadcrumb-font-size);
         user-select: none;
@@ -40,7 +40,7 @@
 
 .nue-breadcrumb .nue-breadcrumb-item .nue-link {
     --nue-link-font-size: var(--nue-text-sm);
-    --nue-link-hover-color: var(--nue-primary-color-900);
+    --nue-link-hover-color: var(--nue-primary-color-800);
 
     &.nue-link--actived {
         --nue-link-hover-text-decoration: none;
