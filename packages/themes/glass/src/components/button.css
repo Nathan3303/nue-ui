@@ -111,9 +111,11 @@
    详见 packages/themes/shadlike/__tests__/contrast.test.ts。 */
 .nue-button.nue-button--destructive {
     --nue-button-base-color: transparent;
-    --nue-button-color: var(--nue-error-color-80);
-    --nue-button-border-color: var(--nue-error-color-80);
+    --nue-button-color: var(--nue-error-color-100);
+    --nue-button-border-color: var(--nue-error-color-100);
     --nue-button-hover-bg-color: var(--nue-error-color-10);
+    --nue-button-hover-border-color: var(--nue-error-color-100);
+    --nue-button-active-border-color: var(--nue-error-color-100);
     --nue-button-lo: 3;
 }
 

@@ -66,7 +66,13 @@
         95%,
         calc(40% + var(--nue-dark-switch) * 5%)
     );
-    --nue-primary-color-700: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l30));
+    /* 700 暗阶上提至 75%（原 l30 阶梯=70%）：玻璃最坏背景下达 5.09，
+       满足 AC-09 的 4.5 阈值；饱和用字面 90%（阶梯的 s90 在暗色会降到 80%） */
+    --nue-primary-color-700: hsl(
+        var(--nue-brand-hue),
+        90%,
+        calc(30% + var(--nue-dark-switch) * 45%)
+    );
     --nue-primary-color-800: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l20));
     --nue-primary-color-900: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l10));
     --nue-primary-color-1000: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l0));
