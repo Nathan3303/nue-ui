@@ -15,6 +15,7 @@
     width: var(--nue-switch-width);
     min-width: var(--nue-switch-min-width);
     height: var(--nue-switch-height);
+    border: 1px solid var(--nue-border-color);
     border-radius: var(--nue-switch-height);
     background-color: var(--nue-switch-background-color);
     box-sizing: border-box;
@@ -34,7 +35,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        border: 1px solid var(--nue-border-color);
         border-radius: 50%;
+        box-sizing: border-box;
         flex: none;
         background-color: var(--nue-switch-circle-color);
         transition: all var(--nue-animation-duration-short) ease-out;
@@ -54,7 +57,7 @@
         white-space: nowrap;
         font-size: var(--nue-switch-font-size);
         flex: auto;
-        color: var(--nue-switch-background-active-color);
+        color: var(--nue-primary-color-900);
         padding: 0 var(--nue-padding-xs);
         line-height: var(--nue-switch-height);
         text-align: center;
