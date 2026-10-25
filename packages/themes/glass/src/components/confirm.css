@@ -1,0 +1,68 @@
+.nue-confirm {
+    --nue-confirm-animation-name: fade-in;
+    --nue-confirm-animation-duration: var(--nue-overlay-animation-duration, 0.24s);
+    --nue-confirm-close-animation-name: fade-out;
+    --nue-confirm-close-animation-duration: var(--nue-overlay-close-animation-duration, 0.24s);
+}
+
+.nue-confirm {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    max-width: calc(100vw - 2rem);
+    height: auto;
+    max-height: calc(100vh - 2rem);
+    padding: var(--nue-padding-df);
+    background-color: var(--nue-glass-bg);
+    backdrop-filter: var(--nue-glass-blur);
+    border: 1px solid var(--nue-glass-border);
+    border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-glass-shadow);
+    box-sizing: border-box;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+
+    > .nue-confirm__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: var(--nue-text-df);
+        color: var(--nue-primary-text-color);
+    }
+
+    > .nue-confirm__content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--nue-gap-sm);
+        width: 100%;
+        flex: auto;
+        margin: var(--nue-gap-xs) 0 var(--nue-gap-df);
+        font-size: var(--nue-text-sm);
+        color: var(--nue-secondary-text-color);
+    }
+
+    > .nue-confirm__footer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: var(--nue-gap-sm);
+    }
+
+    &[data-visible='true'] {
+        animation-name: var(--nue-confirm-animation-name);
+        animation-duration: var(--nue-confirm-animation-duration);
+    }
+
+    &[data-visible='false'] {
+        animation-name: var(--nue-confirm-close-animation-name);
+        animation-duration: var(--nue-confirm-close-animation-duration);
+    }
+}
+
+/* 同一叠加链 ≤1 层模糊：确认框内的二次浮层降级为实底 */
+.nue-confirm .nue-dropdown,
+.nue-confirm .nue-tooltip {
+    --nue-glass-blur: none;
+    --nue-glass-bg: var(--nue-glass-solid);
+}

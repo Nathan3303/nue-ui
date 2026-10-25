@@ -1,0 +1,93 @@
+.nue-dialog {
+    --nue-dialog-open-animation-name: slide-in-from-top;
+    --nue-dialog-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-dialog-close-animation-name: slide-out-to-top;
+    --nue-dialog-close-animation-duration: var(--nue-overlay-animation-duration);
+
+    --nue-container-inner-border-color: transparent;
+}
+
+.nue-dialog {
+    width: max-content;
+    max-width: 100vw;
+    height: max-content;
+    max-height: 100vh;
+    padding: var(--nue-padding-df);
+    border: 1px solid var(--nue-glass-border);
+    border-radius: var(--nue-primary-radius);
+    background-color: var(--nue-glass-bg);
+    backdrop-filter: var(--nue-glass-blur);
+    box-shadow: var(--nue-glass-shadow);
+    box-sizing: border-box;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    gap: var(--nue-gap-xs);
+
+    > .nue-dialog__header {
+        height: auto;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: var(--nue-text-df);
+        overflow: visible;
+        border: none;
+    }
+
+    > .nue-dialog__main {
+        border: none;
+        font-size: var(--nue-text-sm);
+    }
+
+    > .nue-dialog__footer {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        font-size: var(--nue-text-sm);
+        gap: var(--nue-gap-sm);
+        height: auto;
+        padding: 0;
+    }
+
+    &[data-visible='true'] {
+        animation-name: var(--nue-dialog-open-animation-name);
+        animation-duration: var(--nue-dialog-open-animation-duration);
+    }
+
+    &[data-visible='false'] {
+        animation-name: var(--nue-dialog-close-animation-name);
+        animation-duration: var(--nue-dialog-close-animation-duration);
+    }
+}
+
+/* 同一叠加链 ≤1 层模糊：面板内的二次浮层降级为实底 */
+.nue-dialog .nue-dropdown,
+.nue-dialog .nue-tooltip {
+    --nue-glass-blur: none;
+    --nue-glass-bg: var(--nue-glass-solid);
+}
+
+.nue-dialog.nue-dialog--fullscreen {
+    --nue-dialog-open-animation-name: slide-in-from-bottom;
+    --nue-dialog-close-animation-name: slide-out-to-bottom;
+
+    margin-top: 1.5rem;
+    width: 100vw;
+    min-width: 16vw;
+    max-width: 100vw;
+    height: calc(100vh - 1.5rem);
+    min-height: 16vh;
+    max-height: calc(100vh - 1.5rem);
+    overflow: hidden;
+    border-radius: var(--nue-primary-radius) var(--nue-primary-radius) 0 0;
+}
+
+.nue-dialog.nue-dialog--large {
+    width: 72vw;
+    height: 72vh;
+    max-width: 72vw;
+    max-height: 72vh;
+    min-width: 16vw;
+    min-height: 16vh;
+    overflow: hidden;
+}

@@ -1,0 +1,183 @@
+.nue-button {
+    --nue-button-flex: none;
+    --nue-button-alignment: start;
+    --nue-button-base-color: var(--nue-primary-color-0);
+    --nue-button-font-size: var(--nue-text-sm);
+    --nue-button-lo: 5;
+
+    --nue-button-color: var(--nue-primary-text-color);
+    --nue-button-bg-color: var(--nue-button-base-color);
+    /* 功能性边框：识别可操作控件所必需的边界，对比度 ≥3:1（AC-08） */
+    --nue-button-border-color: var(--nue-border-color);
+
+    --nue-button-hover-color: var(--nue-button-color);
+    --nue-button-hover-bg-color: var(--nue-primary-color-100);
+    --nue-button-hover-border-color: var(--nue-border-color);
+
+    --nue-button-active-color: var(--nue-button-color);
+    --nue-button-active-bg-color: var(--nue-primary-color-200);
+    --nue-button-active-border-color: var(--nue-border-color);
+
+    --nue-button-disable-color: var(--nue-button-color);
+    --nue-button-disable-bg-color: var(--nue-button-hover-bg-color);
+    --nue-button-disable-border-color: var(--nue-button-hover-border-color);
+}
+
+.nue-button {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    flex: var(--nue-button-flex);
+    justify-content: var(--nue-button-alignment);
+    border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-secondary-shadow);
+
+    font-family: var(--nue-primary-font-family);
+    font-size: var(--nue-button-font-size);
+
+    width: auto;
+    height: var(--nue-box-size-df);
+    padding: 0 var(--nue-padding-sm);
+    gap: var(--nue-gap-xs);
+
+    color: var(--nue-button-color);
+    border: 1px solid var(--nue-button-border-color);
+    background-color: var(--nue-button-bg-color);
+
+    &:hover {
+        color: var(--nue-button-hover-color);
+        border-color: var(--nue-button-hover-border-color);
+        background-color: var(--nue-button-hover-bg-color);
+    }
+
+    &:active {
+        color: var(--nue-button-active-color);
+        border-color: var(--nue-button-active-border-color);
+        background-color: var(--nue-button-active-bg-color);
+    }
+
+    &.nue-button--disabled {
+        opacity: 0.8;
+        cursor: not-allowed;
+        color: var(--nue-button-disable-color);
+        border-color: var(--nue-button-disable-border-color);
+        background-color: var(--nue-button-disable-bg-color);
+    }
+}
+
+.nue-button.nue-button--small {
+    --nue-button-font-size: var(--nue-text-xs);
+    height: var(--nue-box-size-xs);
+    padding: 0 var(--nue-padding-xs);
+    gap: var(--nue-gap-2xs);
+}
+
+.nue-button.nue-button--large {
+    --nue-button-font-size: var(--nue-text-df);
+    height: var(--nue-box-size-md);
+    padding: 0 var(--nue-padding-df);
+    gap: var(--nue-padding-xs);
+}
+
+.nue-button.nue-button--primary {
+    --nue-button-color: hsl(0, 0%, 100%);
+    --nue-button-base-color: var(--nue-primary-color-600);
+    --nue-button-border-color: transparent;
+    --nue-button-lo: 15;
+
+    --nue-button-hover-bg-color: hsl(
+        var(--nue-brand-hue),
+        95%,
+        calc(34% + var(--nue-dark-switch) * 5%)
+    );
+    --nue-button-hover-border-color: transparent;
+    --nue-button-active-bg-color: hsl(
+        var(--nue-brand-hue),
+        95%,
+        calc(30% + var(--nue-dark-switch) * 4%)
+    );
+    --nue-button-active-border-color: transparent;
+}
+
+.nue-button.nue-button--secondary {
+    --nue-button-border-color: transparent;
+    --nue-button-base-color: var(--nue-primary-color-200);
+}
+
+/* 语义按钮需满足 AA：文字对填充 ≥4.5:1、描边/图形对底色 ≥3:1（浅色与深色两套阶梯均需满足）。
+   实心语义按钮的填充/文字均取令牌，使其随深色模式翻转（浅色=深底浅字，深色=浅底深字）。
+   详见 packages/themes/shadlike/__tests__/contrast.test.ts。 */
+.nue-button.nue-button--destructive {
+    --nue-button-base-color: transparent;
+    --nue-button-color: var(--nue-error-color-100);
+    --nue-button-border-color: var(--nue-error-color-100);
+    --nue-button-hover-bg-color: var(--nue-error-color-10);
+    --nue-button-hover-border-color: var(--nue-error-color-100);
+    --nue-button-active-border-color: var(--nue-error-color-100);
+    --nue-button-lo: 3;
+}
+
+.nue-button.nue-button--success {
+    --nue-button-color: hsl(0, 0%, 100%);
+    --nue-button-base-color: hsl(120, 70%, 30%);
+    --nue-button-border-color: transparent;
+
+    --nue-button-hover-bg-color: hsl(120, 70%, 26%);
+    --nue-button-hover-border-color: transparent;
+    --nue-button-active-bg-color: hsl(120, 70%, 22%);
+    --nue-button-active-border-color: transparent;
+}
+
+.nue-button.nue-button--warning {
+    --nue-button-color: hsl(0, 0%, 100%);
+    --nue-button-base-color: hsl(30, 80%, 32%);
+    --nue-button-border-color: transparent;
+
+    --nue-button-hover-bg-color: hsl(30, 80%, 28%);
+    --nue-button-hover-border-color: transparent;
+    --nue-button-active-bg-color: hsl(30, 80%, 24%);
+    --nue-button-active-border-color: transparent;
+}
+
+.nue-button.nue-button--error {
+    --nue-button-color: hsl(0, 0%, 100%);
+    --nue-button-base-color: hsl(10, 80%, 40%);
+    --nue-button-border-color: transparent;
+
+    --nue-button-hover-bg-color: hsl(10, 80%, 36%);
+    --nue-button-hover-border-color: transparent;
+    --nue-button-active-bg-color: hsl(10, 80%, 32%);
+    --nue-button-active-border-color: transparent;
+}
+
+.nue-button.nue-button--ghost {
+    box-shadow: none;
+    --nue-button-border-color: transparent;
+}
+
+.nue-button.nue-button--icon {
+    --nue-button-alignment: center;
+    aspect-ratio: 1;
+
+    .nue-button__text {
+        display: none;
+    }
+}
+
+.nue-button.nue-button--round {
+    border-radius: 9999px;
+}
+
+.nue-button.nue-button--pure {
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+
+    --nue-button-base-color: transparent;
+    --nue-button-color: var(--nue-primary-text-color);
+    --nue-button-hover-color: var(--nue-primary-color-800);
+    --nue-button-active-color: var(--nue-primary-color-700);
+}

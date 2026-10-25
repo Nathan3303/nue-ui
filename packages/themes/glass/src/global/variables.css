@@ -1,0 +1,297 @@
+/* Colors */
+:root {
+    /* Dark theme switch */
+    --nue-dark-switch: 0;
+    --nue-dark-prefix: calc(var(--nue-dark-switch) * 2 - 1);
+
+    /* Saturations */
+    --nue-hsl-s0: 0%;
+    --nue-hsl-s10: calc(10% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s20: calc(20% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s30: calc(30% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s40: calc(40% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s50: calc(50% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s60: calc(60% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s70: calc(70% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s80: calc(80% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s90: calc(90% - var(--nue-dark-switch) * 10%);
+    --nue-hsl-s100: calc(100% - var(--nue-dark-switch) * 10%);
+
+    /* Lightness */
+    --nue-hsl-l0: calc(0% + var(--nue-dark-switch) * 90%);
+    --nue-hsl-l5: calc(5% + var(--nue-dark-switch) * 85%);
+    --nue-hsl-l10: calc(10% + var(--nue-dark-switch) * 80%);
+    --nue-hsl-l15: calc(15% + var(--nue-dark-switch) * 70%);
+    --nue-hsl-l20: calc(20% + var(--nue-dark-switch) * 60%);
+    --nue-hsl-l25: calc(25% + var(--nue-dark-switch) * 50%);
+    --nue-hsl-l30: calc(30% + var(--nue-dark-switch) * 40%);
+    --nue-hsl-l35: calc(35% + var(--nue-dark-switch) * 30%);
+    --nue-hsl-l40: calc(40% + var(--nue-dark-switch) * 20%);
+    --nue-hsl-l45: calc(45% + var(--nue-dark-switch) * 10%);
+    --nue-hsl-l50: calc(50% + var(--nue-dark-switch) * 0%);
+    --nue-hsl-l55: calc(55% + var(--nue-dark-switch) * -10%);
+    --nue-hsl-l60: calc(60% + var(--nue-dark-switch) * -20%);
+    --nue-hsl-l65: calc(65% + var(--nue-dark-switch) * -30%);
+    --nue-hsl-l70: calc(70% + var(--nue-dark-switch) * -40%);
+    --nue-hsl-l75: calc(75% + var(--nue-dark-switch) * -50%);
+    --nue-hsl-l80: calc(80% + var(--nue-dark-switch) * -60%);
+    --nue-hsl-l85: calc(85% + var(--nue-dark-switch) * -70%);
+    --nue-hsl-l90: calc(90% + var(--nue-dark-switch) * -75%);
+    --nue-hsl-l95: calc(95% + var(--nue-dark-switch) * -80%);
+    --nue-hsl-l100: calc(100% + var(--nue-dark-switch) * -90%);
+
+    /* Opacity */
+    --nue-hsl-o0: 0%;
+    --nue-hsl-o20: 20%;
+    --nue-hsl-o40: 40%;
+    --nue-hsl-o60: 60%;
+    --nue-hsl-o80: 80%;
+    --nue-hsl-o100: 100%;
+
+    /* Hues */
+    --nue-brand-hue: 211;
+    --nue-success-hue: 120;
+    --nue-warning-hue: 30;
+    --nue-error-hue: 10;
+
+    /* Primary（系统蓝：500 品牌色，600 实心填充，700 文字，800 主文本） */
+    --nue-primary-color-0: hsl(var(--nue-brand-hue), var(--nue-hsl-s0), var(--nue-hsl-l100));
+    --nue-primary-color-100: hsl(var(--nue-brand-hue), var(--nue-hsl-s60), var(--nue-hsl-l90));
+    --nue-primary-color-200: hsl(var(--nue-brand-hue), var(--nue-hsl-s60), var(--nue-hsl-l80));
+    --nue-primary-color-300: hsl(var(--nue-brand-hue), var(--nue-hsl-s60), var(--nue-hsl-l70));
+    --nue-primary-color-400: hsl(var(--nue-brand-hue), var(--nue-hsl-s70), var(--nue-hsl-l60));
+    --nue-primary-color-500: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l50));
+    --nue-primary-color-600: hsl(
+        var(--nue-brand-hue),
+        95%,
+        calc(40% + var(--nue-dark-switch) * 5%)
+    );
+    /* 700 暗阶上提至 75%（原 l30 阶梯=70%）：玻璃最坏背景下达 5.09，
+       满足 AC-09 的 4.5 阈值；饱和用字面 90%（阶梯的 s90 在暗色会降到 80%） */
+    --nue-primary-color-700: hsl(
+        var(--nue-brand-hue),
+        90%,
+        calc(30% + var(--nue-dark-switch) * 45%)
+    );
+    --nue-primary-color-800: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l20));
+    --nue-primary-color-900: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l10));
+    --nue-primary-color-1000: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l0));
+
+    /* Success */
+    --nue-success-color-0: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l100));
+    --nue-success-color-10: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l90));
+    --nue-success-color-20: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l80));
+    --nue-success-color-30: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l70));
+    --nue-success-color-40: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l60));
+    --nue-success-color-50: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l50));
+    --nue-success-color-60: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l45));
+    --nue-success-color-70: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l40));
+    --nue-success-color-80: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l35));
+    --nue-success-color-90: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l30));
+    --nue-success-color-100: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l25));
+
+    /* Warning */
+    --nue-warning-color-0: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l100));
+    --nue-warning-color-10: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l90));
+    --nue-warning-color-20: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l80));
+    --nue-warning-color-30: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l70));
+    --nue-warning-color-40: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l60));
+    --nue-warning-color-50: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l50));
+    --nue-warning-color-60: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l45));
+    --nue-warning-color-70: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l40));
+    --nue-warning-color-80: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l35));
+    --nue-warning-color-90: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l30));
+    --nue-warning-color-100: hsl(var(--nue-warning-hue), var(--nue-hsl-s80), var(--nue-hsl-l25));
+
+    /* Error */
+    --nue-error-color-0: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l100));
+    --nue-error-color-10: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l90));
+    --nue-error-color-20: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l80));
+    --nue-error-color-30: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l70));
+    --nue-error-color-40: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l60));
+    --nue-error-color-50: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l50));
+    --nue-error-color-60: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l45));
+    --nue-error-color-70: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l40));
+    --nue-error-color-80: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l35));
+    --nue-error-color-90: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l30));
+    --nue-error-color-100: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l25));
+
+    /* Theme */
+    /* 链接与次文本同值（亮 30% / 暗 75%）：700 的玻璃最坏（暗 4.39）低于 AC-09，
+       且消费方直接引用该 token 时不应踩坑 */
+    --nue-link-color: hsl(
+        var(--nue-brand-hue),
+        var(--nue-hsl-s90),
+        calc(30% + var(--nue-dark-switch) * 45%)
+    );
+    --nue-divider-color: hsl(var(--nue-brand-hue), 30%, calc(88% - var(--nue-dark-switch) * 64%));
+    /* 功能性边框：识别控件所必需的边界，对比度 ≥3:1（见 PRD AC-08/AC-09） */
+    --nue-border-color: hsl(
+        var(--nue-brand-hue),
+        calc(30% + var(--nue-dark-switch) * 5%),
+        calc(40% + var(--nue-dark-switch) * 28%)
+    );
+    --nue-disabled-color: var(--nue-primary-color-500);
+    --nue-primary-text-color: var(--nue-primary-color-800);
+    /* 次要正文：亮 30% / 暗 75%（比 arch 报告的 700 暗阶再上一步，
+       使玻璃最坏背景（叠纯白）下仍 ≥4.5:1，满足 AC-09 硬阈值） */
+    --nue-secondary-text-color: hsl(
+        var(--nue-brand-hue),
+        var(--nue-hsl-s90),
+        calc(30% + var(--nue-dark-switch) * 45%)
+    );
+
+    /* Shadows */
+    --nue-primary-shadow-color: hsl(
+        var(--nue-brand-hue),
+        40%,
+        calc(10% + var(--nue-dark-switch) * 20%),
+        0.5
+    );
+    --nue-secondary-shadow-color: hsl(
+        var(--nue-brand-hue),
+        40%,
+        calc(10% + var(--nue-dark-switch) * 20%),
+        0.35
+    );
+}
+
+/* Typography */
+
+:root {
+    /* Fonts */
+    --nue-primary-font-size-base: 16px;
+    --nue-primary-font-size: 1rem;
+    --nue-primary-font-family:
+        -apple-system, 'PingFang SC', 'Noto Sans SC', 'Noto Sans CJK SC', 'Microsoft YaHei',
+        'Source Han Sans SC', sans-serif;
+
+    /* Text sizes */
+    --nue-text-2xs: calc(var(--nue-text-df) * 0.625);
+    --nue-text-xs: calc(var(--nue-text-df) * 0.75);
+    --nue-text-sm: calc(var(--nue-text-df) * 0.875);
+    --nue-text-df: var(--nue-primary-font-size);
+    --nue-text-md: calc(var(--nue-text-df) * 1.125);
+    --nue-text-lg: calc(var(--nue-text-df) * 1.25);
+    --nue-text-xl: calc(var(--nue-text-df) * 1.375);
+    --nue-text-2xl: calc(var(--nue-text-df) * 1.5);
+    --nue-text-3xl: calc(var(--nue-text-df) * 1.75);
+}
+
+/* Layout */
+
+:root {
+    /* Paddings */
+    --nue-primary-padding: 1rem;
+    --nue-secondary-padding: 0.75rem;
+    --nue-padding-2xs: 0.25rem;
+    --nue-padding-xs: 0.5rem;
+    --nue-padding-sm: 0.75rem;
+    --nue-padding-df: 1rem;
+    --nue-padding-md: 1.25rem;
+    --nue-padding-lg: 1.5rem;
+
+    /* Gaps */
+    --nue-primary-gap: 1rem;
+    --nue-secondary-gap: 0.75rem;
+    --nue-gap-2xs: 0.25rem;
+    --nue-gap-xs: 0.5rem;
+    --nue-gap-sm: 0.75rem;
+    --nue-gap-df: 1rem;
+    --nue-gap-md: 1.25rem;
+    --nue-gap-lg: 1.5rem;
+
+    /* Radius（HIG 连续圆角，R8） */
+    --nue-primary-radius: 0.625rem;
+    --nue-radius-sm: 0.375rem;
+    --nue-radius-df: 0.625rem;
+    --nue-radius-lg: 0.875rem;
+
+    /* Shadows（多层低透明度，R9） */
+    --nue-primary-shadow:
+        0 1px 2px var(--nue-primary-shadow-color), 0 8px 24px var(--nue-secondary-shadow-color);
+    --nue-secondary-shadow:
+        0 1px 2px var(--nue-secondary-shadow-color), 0 4px 12px var(--nue-secondary-shadow-color);
+
+    /* Box sizes */
+    --nue-primary-box-size: 2.25rem;
+    --nue-secondary-box-size: 2rem;
+    --nue-box-size-2xs: 1.5rem;
+    --nue-box-size-xs: 1.75rem;
+    --nue-box-size-sm: 2rem;
+    --nue-box-size-df: 2.25rem;
+    --nue-box-size-md: 2.5rem;
+    --nue-box-size-lg: 2.75rem;
+}
+
+/* Animation */
+
+:root {
+    /* Durations */
+    --nue-animation-duration-xshort: 0.06s;
+    --nue-animation-duration-short: 0.18s;
+    --nue-animation-duration: 0.36s;
+    --nue-animation-duration-long: 0.54s;
+
+    /* Timing function */
+    --nue-animation-timing-function: ease-in-out;
+}
+
+/* Glass（3 主 + 3 辅助；模糊**只**由 --nue-glass-blur 驱动，R5/D2） */
+
+:root {
+    /* 主：半透明底 / 唯一模糊来源 / 装饰高光描边 */
+    --nue-glass-bg: hsl(
+        var(--nue-brand-hue),
+        calc(45% - var(--nue-dark-switch) * 5%),
+        calc(100% - var(--nue-dark-switch) * 92%),
+        calc(0.76 + var(--nue-dark-switch) * 0.04)
+    );
+    --nue-glass-blur: blur(20px) saturate(180%);
+    --nue-glass-border: hsl(
+        var(--nue-brand-hue),
+        calc(35% + var(--nue-dark-switch) * 10%),
+        calc(25% + var(--nue-dark-switch) * 70%),
+        calc(0.16 + var(--nue-dark-switch) * 0.06)
+    );
+
+    /* 辅助：退化/嵌套的唯一落点 / 全屏遮罩 / 浮层投影 */
+    --nue-glass-solid: var(--nue-primary-color-0);
+    --nue-glass-scrim: hsl(
+        var(--nue-brand-hue),
+        45%,
+        calc(22% - var(--nue-dark-switch) * 14%),
+        calc(0.3 + var(--nue-dark-switch) * 0.25)
+    );
+    --nue-glass-shadow:
+        inset 0 1px 0 hsl(0, 0%, 100%, calc(0.55 - var(--nue-dark-switch) * 0.3)),
+        0 1px 2px hsl(var(--nue-brand-hue), 40%, 10%, calc(0.06 + var(--nue-dark-switch) * 0.1)),
+        0 8px 24px hsl(var(--nue-brand-hue), 40%, 10%, calc(0.1 + var(--nue-dark-switch) * 0.14)),
+        0 24px 64px hsl(var(--nue-brand-hue), 40%, 10%, calc(0.08 + var(--nue-dark-switch) * 0.12));
+}
+
+/* 三条退化路径（同构、单点覆写 3 条；必须位于基值之后，R6/D4） */
+
+@supports not (backdrop-filter: blur(1px)) {
+    :root {
+        --nue-glass-blur: none;
+        --nue-glass-bg: var(--nue-glass-solid);
+        --nue-glass-border: var(--nue-border-color);
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    :root {
+        --nue-glass-blur: none;
+        --nue-glass-bg: var(--nue-glass-solid);
+        --nue-glass-border: var(--nue-border-color);
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --nue-glass-blur: none;
+        --nue-glass-bg: var(--nue-glass-solid);
+        --nue-glass-border: var(--nue-border-color);
+    }
+}

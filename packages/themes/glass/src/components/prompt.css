@@ -1,0 +1,72 @@
+.nue-prompt {
+    --nue-prompt-open-animation-name: slide-in-from-top;
+    --nue-prompt-open-animation-duration: var(--nue-overlay-animation-duration);
+    --nue-prompt-close-animation-name: slide-out-to-top;
+    --nue-prompt-close-animation-duration: var(--nue-overlay-close-animation-duration);
+
+    display: flex;
+    flex-direction: column;
+    width: 32%;
+    min-width: 24rem;
+    padding: var(--nue-padding-df);
+    box-sizing: border-box;
+    gap: var(--nue-gap-df);
+    background-color: var(--nue-glass-bg);
+    backdrop-filter: var(--nue-glass-blur);
+    border: 1px solid var(--nue-glass-border);
+    border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-glass-shadow);
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+
+    .nue-prompt__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: var(--nue-text-df);
+        color: var(--nue-primary-text-color);
+    }
+
+    .nue-prompt__content {
+        display: flex;
+        flex-direction: column;
+        flex: auto;
+        gap: var(--nue-gap-sm);
+        font-size: var(--nue-text-sm);
+        font-family: var(--nue-primary-font-family);
+
+        .nue-prompt__description {
+            font-size: var(--nue-text-xs);
+            color: var(--nue-secondary-text-color);
+        }
+    }
+
+    .nue-prompt__footer {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: var(--nue-gap-sm);
+    }
+
+    .nue-prompt__value-error {
+        color: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l20));
+        font-size: var(--nue-text-sm);
+    }
+
+    &[data-visible='true'] {
+        animation-name: var(--nue-prompt-open-animation-name);
+        animation-duration: var(--nue-prompt-open-animation-duration);
+    }
+
+    &[data-visible='false'] {
+        animation-name: var(--nue-prompt-close-animation-name);
+        animation-duration: var(--nue-prompt-close-animation-duration);
+    }
+}
+
+/* 同一叠加链 ≤1 层模糊：输入浮层内的二次浮层降级为实底 */
+.nue-prompt .nue-dropdown,
+.nue-prompt .nue-tooltip {
+    --nue-glass-blur: none;
+    --nue-glass-bg: var(--nue-glass-solid);
+}
