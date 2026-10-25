@@ -1,0 +1,160 @@
+.nue-link {
+    --nue-link-font-size: var(--nue-text-df);
+    --nue-link-base-color: transparent;
+    --nue-link-lo: calc(var(--nue-dark-prefix) * 10);
+    --nue-link-lop: calc(var(--nue-dark-prefix) * 10%);
+
+    /* 文字步进：次文本（暗 75%）/ 800 hover / 900 active。
+       全局 --nue-link-color 保持 700，但其玻璃最坏（暗 4.39）低于 AC-09 阈值，
+       故组件映射走亮度更高一档的次文本 token（4.89 / 5.11）。 */
+    --nue-link-color: var(--nue-secondary-text-color);
+    --nue-link-text-decoration: none;
+    --nue-link-background-color: var(--nue-link-base-color);
+    --nue-link-border-color: transparent;
+
+    --nue-link-hover-color: var(--nue-primary-color-800);
+    --nue-link-hover-text-decoration: underline;
+    --nue-link-hover-background-color: var(--nue-link-base-color);
+    --nue-link-hover-border-color: var(--nue-link-border-color);
+
+    --nue-link-active-color: var(--nue-primary-color-900);
+    --nue-link-active-text-decoration: var(--nue-link-hover-text-decoration);
+    --nue-link-active-background-color: var(--nue-primary-color-100);
+    --nue-link-active-border-color: transparent;
+
+    --nue-link-actived-color: var(--nue-link-active-color);
+    --nue-link-actived-text-decoration: var(--nue-link-active-text-decoration);
+    --nue-link-actived-background-color: var(--nue-link-active-background-color);
+    --nue-link-actived-border-color: var(--nue-link-active-border-color);
+
+    --nue-link-disable-color: var(--nue-primary-color-500);
+    --nue-link-disable-text-decoration: var(--nue-link-text-decoration);
+    --nue-link-disable-background-color: var(--nue-link-background-color);
+    --nue-link-disable-border-color: var(--nue-link-border-color);
+}
+
+.nue-link {
+    display: inline-flex;
+    cursor: pointer;
+    gap: var(--nue-gap-2xs);
+    text-decoration: var(--nue-link-text-decoration);
+    color: var(--nue-link-color);
+    font-size: var(--nue-link-font-size);
+
+    &:hover {
+        color: var(--nue-link-hover-color);
+        background-color: var(--nue-link-hover-background-color);
+
+        > .nue-link__content {
+            text-decoration: var(--nue-link-hover-text-decoration);
+        }
+    }
+
+    &:active {
+        color: var(--nue-link-active-color);
+        background-color: var(--nue-link-active-background-color);
+        text-decoration: var(--nue-link-active-text-decoration);
+    }
+
+    &.nue-link--actived {
+        color: var(--nue-link-actived-color);
+        background-color: var(--nue-link-actived-background-color);
+        text-decoration: var(--nue-link-actived-text-decoration);
+    }
+
+    &.nue-link--disabled {
+        opacity: 0.8;
+        cursor: not-allowed;
+        color: var(--nue-link-disable-color);
+        background-color: var(--nue-link-disable-background-color);
+        text-decoration: var(--nue-link-disable-text-decoration);
+    }
+}
+
+.nue-link--route {
+    --nue-link-font-size: var(--nue-text-df);
+
+    --nue-link-color: var(--nue-primary-text-color);
+
+    --nue-link-hover-text-decoration: none;
+    --nue-link-hover-background-color: var(--nue-primary-color-200);
+    --nue-link-hover-border-color: transparent;
+
+    --nue-link-actived-color: var(--nue-primary-color-0);
+    --nue-link-actived-background-color: var(--nue-primary-color-900);
+}
+
+.nue-link--route {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    box-sizing: border-box;
+    border-radius: var(--nue-primary-radius);
+    font-family: var(--nue-primary-font-family);
+
+    width: auto;
+    height: var(--nue-box-size-md);
+    padding: 0 var(--nue-padding-df);
+    gap: var(--nue-gap-sm);
+
+    border: 1px solid var(--nue-link-border-color);
+    background-color: var(--nue-link-background-color);
+
+    transition-property: background-color;
+    transition-duration: var(--nue-animation-duration-short);
+    transition-timing-function: ease-in;
+
+    > .nue-link__icon,
+    > .nue-link__content {
+        padding: 0;
+    }
+
+    &.nue-link--route-small {
+        --nue-link-font-size: var(--nue-text-sm);
+        height: var(--nue-box-size-df);
+        padding: 0 var(--nue-padding-sm);
+        gap: var(--nue-gap-xs);
+    }
+
+    &.nue-link--route-large {
+        --nue-link-font-size: var(--nue-text-md);
+        height: var(--nue-box-size-lg);
+        padding: 0 var(--nue-padding-md);
+        gap: var(--nue-padding-df);
+    }
+}
+
+.nue-link--route.nue-link--route-icon {
+    --nue-link-font-size: var(--nue-text-2xl);
+
+    --nue-link-color: var(--nue-primary-color-600);
+
+    --nue-link-hover-text-decoration: none;
+    --nue-link-hover-background-color: transparent;
+    --nue-link-hover-border-color: transparent;
+
+    --nue-link-actived-color: var(--nue-primary-color-900);
+    --nue-link-actived-background-color: transparent;
+}
+
+.nue-link--route.nue-link--route-icon {
+    height: auto;
+    padding: 0;
+    gap: var(--nue-padding-df);
+    aspect-ratio: 1;
+    justify-content: center;
+
+    > .nue-link__content {
+        display: none;
+    }
+
+    &.nue-link--route-small {
+        --nue-link-font-size: var(--nue-text-df);
+    }
+
+    &.nue-link--route-large {
+        --nue-link-font-size: var(--nue-text-2xl);
+    }
+}

@@ -60,16 +60,16 @@
     --nue-primary-color-200: hsl(var(--nue-brand-hue), var(--nue-hsl-s60), var(--nue-hsl-l80));
     --nue-primary-color-300: hsl(var(--nue-brand-hue), var(--nue-hsl-s60), var(--nue-hsl-l70));
     --nue-primary-color-400: hsl(var(--nue-brand-hue), var(--nue-hsl-s70), var(--nue-hsl-l60));
-    --nue-primary-color-500: hsl(var(--nue-brand-hue), var(--nue-hsl-s90), var(--nue-hsl-l50));
+    --nue-primary-color-500: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l50));
     --nue-primary-color-600: hsl(
         var(--nue-brand-hue),
         95%,
         calc(40% + var(--nue-dark-switch) * 5%)
     );
-    --nue-primary-color-700: hsl(var(--nue-brand-hue), var(--nue-hsl-s90), var(--nue-hsl-l30));
-    --nue-primary-color-800: hsl(var(--nue-brand-hue), var(--nue-hsl-s90), var(--nue-hsl-l20));
-    --nue-primary-color-900: hsl(var(--nue-brand-hue), var(--nue-hsl-s90), var(--nue-hsl-l10));
-    --nue-primary-color-1000: hsl(var(--nue-brand-hue), var(--nue-hsl-s90), var(--nue-hsl-l0));
+    --nue-primary-color-700: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l30));
+    --nue-primary-color-800: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l20));
+    --nue-primary-color-900: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l10));
+    --nue-primary-color-1000: hsl(var(--nue-brand-hue), 90%, var(--nue-hsl-l0));
 
     /* Success */
     --nue-success-color-0: hsl(var(--nue-success-hue), var(--nue-hsl-s70), var(--nue-hsl-l100));
@@ -121,7 +121,13 @@
     );
     --nue-disabled-color: var(--nue-primary-color-500);
     --nue-primary-text-color: var(--nue-primary-color-800);
-    --nue-secondary-text-color: var(--nue-primary-color-700);
+    /* 次要正文：亮 30% / 暗 75%（比 arch 报告的 700 暗阶再上一步，
+       使玻璃最坏背景（叠纯白）下仍 ≥4.5:1，满足 AC-09 硬阈值） */
+    --nue-secondary-text-color: hsl(
+        var(--nue-brand-hue),
+        var(--nue-hsl-s90),
+        calc(30% + var(--nue-dark-switch) * 45%)
+    );
 
     /* Shadows */
     --nue-primary-shadow-color: hsl(

@@ -123,14 +123,14 @@
         }
 
         &.nue-dropdown-item--loading {
-            color: var(--nue-primary-color-600);
+            color: var(--nue-secondary-text-color);
             cursor: default;
         }
     }
 
     .nue-dropdown__empty-text {
         font-size: var(--nue-text-sm);
-        color: var(--nue-primary-color-500);
+        color: var(--nue-secondary-text-color);
         cursor: default;
         justify-content: center;
 
@@ -214,7 +214,7 @@
         .nue-text--title {
             font-size: var(--nue-text-sm);
             font-weight: 500;
-            color: var(--nue-primary-color-500);
+            color: var(--nue-secondary-text-color);
             padding: 2px 6px;
             margin-bottom: 4px;
             cursor: default;

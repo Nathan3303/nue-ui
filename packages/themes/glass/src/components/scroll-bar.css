@@ -1,0 +1,112 @@
+/* ===== ScollBar 组件样式 ===== */
+
+.nue-scroll-bar {
+    --nue-scroll-bar-size: 6px;
+    --nue-scroll-bar-size--small: 4px;
+    --nue-scroll-bar-size--large: 8px;
+    --nue-scroll-bar-track-bg: transparent;
+    --nue-scroll-bar-thumb-bg: var(--nue-primary-color-400);
+    --nue-scroll-bar-thumb-hover-bg: var(--nue-primary-color-500);
+    --nue-scroll-bar-thumb-radius: var(--nue-primary-radius);
+    --nue-scroll-bar-opacity: 0;
+    --nue-scroll-bar-transition-duration: var(--nue-animation-duration);
+
+    position: relative;
+    overflow: hidden;
+
+    /* 视口 — 实际滚动的容器，隐藏原生滚动条 */
+    .nue-scroll-bar__viewport {
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+    }
+
+    /* 轨道 */
+    .nue-scroll-bar__track {
+        position: absolute;
+        z-index: 1;
+        background: var(--nue-scroll-bar-track-bg);
+        border-radius: var(--nue-scroll-bar-thumb-radius);
+        transition: opacity var(--nue-scroll-bar-transition-duration) ease-in-out;
+        opacity: var(--nue-scroll-bar-opacity);
+
+        &.nue-scroll-bar__track--vertical {
+            top: 0;
+            right: 0;
+            width: var(--nue-scroll-bar-size);
+            bottom: 0;
+
+            &[data-both='true'] {
+                /* 当水平滚动条存在时，右下角留出空间 */
+                margin-bottom: var(--nue-scroll-bar-size, 0);
+            }
+        }
+
+        &.nue-scroll-bar__track--horizontal {
+            bottom: 0;
+            left: 0;
+            height: var(--nue-scroll-bar-size);
+            right: 0;
+
+            &[data-both='true'] {
+                /* 当垂直滚动条存在时，右下角留出空间 */
+                margin-right: var(--nue-scroll-bar-size, 0);
+            }
+        }
+
+        /* 拇指 */
+        .nue-scroll-bar__thumb {
+            background: var(--nue-scroll-bar-thumb-bg);
+            border-radius: var(--nue-scroll-bar-thumb-radius);
+            cursor: pointer;
+            transition: background var(--nue-scroll-bar-transition-duration) ease-in-out;
+            width: 100%;
+            height: 100%;
+            user-select: none;
+        }
+
+        .nue-scroll-bar__thumb:hover {
+            background: var(--nue-scroll-bar-thumb-hover-bg);
+        }
+    }
+
+    /* === 模式 === */
+
+    /* always — 始终显示 */
+    &.nue-scroll-bar--always {
+        --nue-scroll-bar-opacity: 1;
+    }
+
+    /* hover — 悬停显示 */
+    &.nue-scroll-bar--hover {
+        --nue-scroll-bar-opacity: 0;
+
+        &:hover,
+        &:focus-within {
+            --nue-scroll-bar-opacity: 1;
+        }
+    }
+
+    /* hidden — 隐藏 */
+    &.nue-scroll-bar--hidden {
+        --nue-scroll-bar-opacity: 0;
+        pointer-events: none;
+    }
+
+    /* === thumbSize 变体 === */
+
+    &.nue-scroll-bar--thumb-small {
+        --nue-scroll-bar-size: var(--nue-scroll-bar-size--small);
+    }
+
+    &.nue-scroll-bar--thumb-large {
+        --nue-scroll-bar-size: var(--nue-scroll-bar-size--large);
+    }
+}
