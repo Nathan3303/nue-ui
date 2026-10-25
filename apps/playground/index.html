@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <link href="/vite.svg" rel="icon" type="image/svg+xml" />
         <link href="/fonts/pf/font.css" rel="stylesheet" />
-        <link href="/fonts/poppins/font.css" rel="stylesheet" />
+        <link href="/fonts/plex/font.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>NueUI Playground</title>
     </head>
@@ -14,7 +14,12 @@
     </body>
     <style>
         :root {
-            --nue-primary-font-family: 'Poppins-Regular', 'pf';
+            /* Frostline 演示字体：IBM Plex Sans（工程感中性字）× Plex Mono（读数）。
+               中文仍走 pf 切片；pf 只有 400，禁用合成粗体以免 500 被“涂糊”。 */
+            --nue-primary-font-family: 'IBM Plex Sans', 'pf';
+            --nue-font-mono:
+                'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-synthesis-weight: none;
         }
     </style>
 </html>
