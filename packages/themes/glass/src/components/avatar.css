@@ -12,6 +12,8 @@
     width: var(--nue-avatar-width);
     height: var(--nue-avatar-height);
     background-color: var(--nue-primary-color-200);
+    color: var(--nue-primary-color-800);
+    font-family: var(--nue-primary-font-family);
     flex: none;
     border-radius: var(--nue-primary-radius);
     -webkit-user-select: none;

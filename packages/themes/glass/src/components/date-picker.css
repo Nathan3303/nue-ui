@@ -17,7 +17,9 @@
     flex-direction: column;
     width: max-content;
     background-color: var(--nue-primary-color-0);
+    border: 1px solid var(--nue-border-color);
     border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-secondary-shadow);
     box-sizing: border-box;
     user-select: none;
     -webkit-user-select: none;
@@ -78,8 +80,9 @@
                 width: var(--nue-calendar-cell-size);
                 height: var(--nue-calendar-cell-size);
                 font-size: var(--nue-calendar-font-size);
-                color: var(--nue-primary-color-700);
-                text-transform: uppercase;
+                color: var(--nue-secondary-text-color);
+                letter-spacing: 0.02em;
+                font-variant-numeric: tabular-nums;
             }
         }
 
@@ -97,6 +100,7 @@
                 height: var(--nue-calendar-cell-size);
                 font-size: var(--nue-calendar-font-size);
                 color: var(--nue-primary-color-900);
+                font-variant-numeric: tabular-nums;
                 background-color: transparent;
                 border: 1px solid transparent;
                 border-radius: var(--nue-primary-radius);
@@ -115,13 +119,14 @@
 
                 /* Selected state */
                 &.selected {
-                    color: var(--nue-primary-color-0);
-                    background-color: var(--nue-primary-color-900);
-                    border-color: var(--nue-primary-color-900);
+                    /* 表面 C：填充档 600 + 白字（两模式恒定，与 primary 按钮同语言） */
+                    color: hsl(0, 0%, 100%);
+                    background-color: var(--nue-primary-color-600);
+                    border-color: var(--nue-primary-color-600);
 
                     &:hover {
-                        background-color: var(--nue-primary-color-900);
-                        border-color: var(--nue-primary-color-900);
+                        background-color: var(--nue-primary-color-600);
+                        border-color: var(--nue-primary-color-600);
                     }
                 }
 
@@ -139,7 +144,7 @@
 
                 /* Today indicator */
                 &.today {
-                    border-color: var(--nue-primary-color-900);
+                    border-color: var(--nue-primary-color-600);
 
                     &:not(.selected):not(.disabled) {
                         color: var(--nue-primary-color-700);
@@ -179,12 +184,12 @@
             }
 
             &.selected {
-                color: var(--nue-primary-color-0);
-                background-color: var(--nue-primary-color-900);
+                color: hsl(0, 0%, 100%);
+                background-color: var(--nue-primary-color-600);
             }
 
             &.selected:hover {
-                background-color: var(--nue-primary-color-900);
+                background-color: var(--nue-primary-color-600);
             }
         }
     }
@@ -219,12 +224,12 @@
             }
 
             &.selected {
-                color: var(--nue-primary-color-0);
-                background-color: var(--nue-primary-color-900);
+                color: hsl(0, 0%, 100%);
+                background-color: var(--nue-primary-color-600);
             }
 
             &.selected:hover {
-                background-color: var(--nue-primary-color-900);
+                background-color: var(--nue-primary-color-600);
             }
         }
     }
@@ -305,7 +310,7 @@
 
         .nue-calendar-time-picker__separator {
             font-size: var(--nue-calendar-font-size);
-            font-weight: 600;
+            font-weight: 500;
             color: var(--nue-primary-color-700);
             margin: 0.25rem;
         }

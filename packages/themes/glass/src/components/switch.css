@@ -4,7 +4,7 @@
     --nue-switch-min-width: calc(var(--nue-switch-height) * 2);
     --nue-switch-state-width: var(--nue-switch-min-width);
     --nue-switch-background-color: var(--nue-primary-color-200);
-    --nue-switch-background-active-color: var(--nue-primary-color-800);
+    --nue-switch-background-active-color: var(--nue-primary-color-600);
     --nue-switch-circle-size: calc(var(--nue-switch-height) - 0.25rem);
     --nue-switch-circle-color: var(--nue-primary-color-0);
     --nue-switch-circle-active-color: var(--nue-primary-color-0);
@@ -19,7 +19,7 @@
     background-color: var(--nue-switch-background-color);
     box-sizing: border-box;
     padding: 2px;
-    transition: all 0.18s ease-out;
+    transition: all var(--nue-animation-duration-short) ease-out;
     cursor: pointer;
     box-shadow: var(--nue-secondary-shadow);
     overflow: hidden;
@@ -37,7 +37,7 @@
         border-radius: 50%;
         flex: none;
         background-color: var(--nue-switch-circle-color);
-        transition: all 0.18s ease-out;
+        transition: all var(--nue-animation-duration-short) ease-out;
         overflow: hidden;
 
         .nue-switch__loading-icon {
@@ -47,7 +47,7 @@
     }
 
     .nue-switch__text {
-        transition: all 0.18s ease-out;
+        transition: all var(--nue-animation-duration-short) ease-out;
         transform: translateX(0);
         text-overflow: ellipsis;
         overflow: hidden;
@@ -78,7 +78,8 @@
         .nue-switch__text {
             text-align: center;
             transform: translateX(calc(var(--nue-switch-height) * -0.8));
-            color: var(--nue-primary-color-0);
+            /* 固定白字：600 填充上亮/暗都 4.89 / 4.99（不再依赖 primary-0 翻转） */
+            color: hsl(0, 0%, 100%);
         }
     }
 }

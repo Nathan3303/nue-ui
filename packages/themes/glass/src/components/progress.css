@@ -3,8 +3,8 @@
     --nue-progress-stroke-width: 6px;
     --nue-progress-outerbar-background-color: var(--nue-primary-color-200);
     --nue-progress-innerbar-background-color: var(--nue-primary-color-600);
-    /* 条内文字固定在蓝底上：白字两模式恒定（primary-color-0 在暗色=近黑，
-       会使 600 底上只有 3.63；固定白字 = 5.82 / 4.82，与 D12 目标一致） */
+    /* 条内文字固定在 600 填充上：白字两模式恒定（primary-color-0 在暗色=近黑会失效；
+       白字实测 4.89 / 4.99） */
     --nue-progress-text-color: hsl(0, 0%, 100%);
     --nue-progress-circle-size: 100px;
     --nue-progress-stroke-dash-array: 314;
@@ -29,7 +29,7 @@
 
             .nue-progress__inner-bar {
                 box-sizing: border-box;
-                transition: width 0.24s linear;
+                transition: width var(--nue-animation-duration) linear;
                 display: flex;
                 align-items: center;
                 justify-content: end;
@@ -40,7 +40,8 @@
                 .nue-text {
                     color: var(--nue-progress-text-color);
                     font-size: calc(0.6 * var(--nue-progress-stroke-width));
-                    margin-right: 0.5rem;
+                    font-variant-numeric: tabular-nums;
+                    margin-right: var(--nue-gap-xs);
                 }
             }
         }
@@ -56,7 +57,7 @@
             fill: transparent;
             transform-origin: center;
             transform: scale(0.9) rotate(-90deg);
-            transition: stroke-dashoffset 0.24s linear;
+            transition: stroke-dashoffset var(--nue-animation-duration) linear;
         }
 
         .nue-progress__outer-path {
@@ -76,6 +77,7 @@
         text-align: right;
         color: inherit;
         font-size: var(--nue-text-sm);
+        font-variant-numeric: tabular-nums;
     }
 }
 
