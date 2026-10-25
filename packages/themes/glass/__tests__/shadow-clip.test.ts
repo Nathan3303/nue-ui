@@ -261,6 +261,17 @@ function overflowSubjects(css: string): string[] {
     return [...subjects].sort();
 }
 
+/**
+ * S4–S6 全部按**最终计算值**断言（subject + specificity + 源码顺序），
+ * 不依赖「某条分组规则存在」——合并/拆分/重排规则既不会假红也不会假绿。
+ *
+ * T79（2026-10-25，用户要求）：`.nue-content` 不再是滚动容器。
+ * 理由：**阴影完整优先于 content 区内滚动**，滚动职责上移到使用方（页面层）；
+ * glass README 已把「滚动由使用方承担」写成契约。
+ * ⇒ `.nue-content` 必须有意的 `overflow: visible`（本文件显式断言），
+ *   S6 除了拦「值对不对」，还拦「有人把滚动职责偷偷塞回 content」——
+ *   把它改回 `auto`（哪怕只是不加思考地恢复旧值）S6 立刻红。
+ */
 describe('S4–S6 包装层 overflow（按最终计算值，src + dist 双证）', () => {
     for (const [label, css] of [
         ['src', containerSrc],
@@ -285,7 +296,7 @@ describe('S4–S6 包装层 overflow（按最终计算值，src + dist 双证）
             }
         });
 
-        it(`S6 ${label}：最终 overflow:auto 仅 .nue-content / .nue-aside`, () => {
+        it(`S6 ${label}：最终 overflow:auto 恰为 .nue-aside；.nue-content 必须 visible`, () => {
             const subjects = overflowSubjects(css);
             expect(
                 subjects.length,
@@ -294,12 +305,35 @@ describe('S4–S6 包装层 overflow（按最终计算值，src + dist 双证）
             const autos = subjects.filter(
                 subject => resolveCascade(css, subject, 'overflow').value === 'auto'
             );
-            expect(autos, `${label} 最终为 auto 的滚动容器`).toEqual([
-                '.nue-aside',
-                '.nue-content'
+            expect(autos, `${label} 最终为 auto 的滚动容器（content 已取消滚动职责）`).toEqual([
+                '.nue-aside'
             ]);
+
+            // 显式断言 content = visible（不是「不在 auto 集合里」的宽松写法）：
+            // 若有人把滚动职责塞回 content（auto/scroll），这里必须红。
+            const content = resolveCascade(css, '.nue-content', 'overflow');
+            expect(
+                content.value,
+                `${label} .nue-content 最终 overflow=${content.value ?? '(无声明)'}；` +
+                    'T79 要求 visible（阴影完整优先，滚动由使用方承担）'
+            ).toBe('visible');
         });
     }
+
+    it('变异自证：把 .nue-content 改回 auto 后 S6 判据会红（防滚动职责回流）', () => {
+        const mutated = containerSrc.replace(
+            /(\.nue-content \{[\s\S]*?)overflow: visible/,
+            '$1overflow: auto'
+        );
+        const content = resolveCascade(mutated, '.nue-content', 'overflow');
+        expect(content.value).toBe('auto');
+        expect(content.value).not.toBe('visible');
+        expect(
+            [...overflowSubjects(mutated)].filter(
+                subject => resolveCascade(mutated, subject, 'overflow').value === 'auto'
+            )
+        ).toEqual(['.nue-aside', '.nue-content']);
+    });
 
     it('变异自证：把 visible 改成 hidden 后 S4 判据会红', () => {
         const mutated = containerSrc.replace('overflow: visible', 'overflow: hidden');
