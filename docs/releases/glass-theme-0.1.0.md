@@ -20,6 +20,31 @@ import 'nue-ui-theme-glass/dist/index.css';
 - **系统蓝主色**：`#007AFF` 系（`--nue-brand-hue: 211`）
 - **一套开关切双模式**：`--nue-dark-switch: 0 | 1`，与 shadlike 同机制，不引入 `prefers-color-scheme`
 
+## 本版本包含的修复（相对初次合并）
+
+- **浮层内阴影不再被裁剪**：
+    - 根因一：`backdrop-filter` 会把元素渲染成离屏纹理，**纹理边界 = border-box**，子元素 `box-shadow` 越界部分被丢弃。已收敛阴影（输入框 focus 光晕 24→12px、浮层投影 64→32px）并把面板内边距提到 1.25rem。
+    - 根因二：`.nue-container` 的 `> .nue-footer` 等包装层带 `overflow: hidden`，且 dialog footer 的 `padding: 0` —— **只加面板内边距修不了 footer 里的按钮阴影**。已将 `header / main / footer` 放行为 `visible`（容器本体与 `--nested` 仍保留 `hidden` 兜底）。
+- **`content` 区域不再裁剪内部阴影**：`.nue-content` 从 `overflow: auto` 改为 `visible`。
+
+## ⚠️ 行为变更（升级必读）
+
+**`.nue-content` 不再是滚动容器。**
+
+|        | 旧行为             | 新行为                                                          |
+| ------ | ------------------ | --------------------------------------------------------------- |
+| 长内容 | `content` 内部滚动 | `content` 允许溢出，**滚动职责由使用方承担**                    |
+| 原因   | —                  | 滚动容器会裁掉超出 padding box 的绘制，内部元素阴影无法完整显示 |
+
+迁移方式二选一：
+
+1. **页面级滚动**：让外壳高度自适应（`height: auto`），由 `html`/`body` 承担滚动
+2. **自建滚动区**：在 `content` 外层包一个 `overflow: auto` 的容器
+
+若你用 `.nue-container` 做锁高度的全屏布局，升级后长内容可能看不见——请按上面任一种方式补滚动层。
+
+另：**非 teleport 渲染的浮层**（自定义 `to` 指向带 `overflow: hidden` 的容器）仍可能被该容器裁剪，这是浏览器语义，主题层不修。
+
 ## 三条退化路径（同一组覆写）
 
 玻璃会在下列任一条件下自动退化为不透明实底，功能与可读性不受损：
@@ -42,6 +67,15 @@ import 'nue-ui-theme-glass/dist/index.css';
 ## 包内容
 
 仅 `dist/`（41 个 CSS）+ README + LICENSE，无源码与测试。压缩后约 19 kB，gzip 后 CSS 约 13 kB。
+
+## 质量门禁
+
+`packages/themes/glass/__tests__/` 共 **287 个用例**（全仓 645），包含：
+
+- 对比度 **148 组**（含 10 组「组件自有不透明底」）+ 退化态重算 **64 组**
+- 结构断言 A1–A11（7 条 `backdrop-filter` / 424 个定义名 / 0 悬空 / 3 块退化 × 3 条）
+- 阴影裁剪断言 S1–S8（面板内边距 ≥ 子元素最大阴影外溢 + 4px、`content` 必须显式 `visible` 等）
+- 每组断言带**防假绿自证**（含变异自证：把正确值改坏，断言必须变红）
 
 ## 相关文档
 
