@@ -101,7 +101,8 @@
             height: fit-content;
             max-height: 100%;
             flex: 1 1 auto;
-            overflow: auto;
+            /* 用户要求 content 不参与裁剪：滚动交由页面层，子元素阴影不再被裁 */
+            overflow: visible;
 
             &.nue-content--fill {
                 height: 100%;

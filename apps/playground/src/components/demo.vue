@@ -16,7 +16,7 @@
             </nue-div>
         </nue-header>
         <nue-main>
-            <nue-content style="padding: 1rem; overflow: hidden">
+            <nue-content style="padding: 1rem">
                 <slot />
             </nue-content>
         </nue-main>
