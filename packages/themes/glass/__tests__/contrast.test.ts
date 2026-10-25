@@ -138,6 +138,73 @@ function declaredColor(
     return dark => resolveColor(value, dark, store, scope).rgb;
 }
 
+/**
+ * 嵌套短名（`&.selected` / `&.today` / `&.nue-switch__circle`）在文件里重复出现，
+ * `ruleProperty` 只按未展开的 selector 取最后一条会取错；按展开后的完整选择器后缀定位。
+ */
+function propertyBySuffix(
+    file: ComponentFile,
+    selectorSuffix: string,
+    prop: string
+): string | undefined {
+    const rules = extractRules(cssOf(file)).map(rule => ({
+        rule,
+        selectors: splitSelectorList(rule.fullSelector)
+    }));
+    // 先找完整选择器的**精确匹配**（避免 `--border` 变体规则的后缀也跟着命中），
+    // 再退到后缀匹配（嵌套 `&.selected` 用完整路径写出来太长，且没有变体歧义）。
+    const exact = rules.filter(item => item.selectors.includes(selectorSuffix));
+    const matched = exact.length
+        ? exact
+        : rules.filter(item => item.selectors.some(selector => selector.endsWith(selectorSuffix)));
+    return matched
+        .flatMap(item => parseDeclarations(item.rule.body))
+        .filter(declaration => declaration.prop === prop)
+        .at(-1)?.value;
+}
+
+function requiredProperty(file: ComponentFile, selectorSuffix: string, prop: string): string {
+    const value = propertyBySuffix(file, selectorSuffix, prop);
+    if (value === undefined) throw new Error(`${file}.css 的 ${selectorSuffix} 缺少 ${prop}`);
+    return value;
+}
+
+/** 嵌套规则里的 `color` / `background-color` / `border-color` 声明 → 颜色。 */
+function declaredColorBySuffix(
+    file: ComponentFile,
+    selectorSuffix: string,
+    prop = 'color',
+    scopeSelectors: string[] = []
+): (dark: DarkSwitch) => RGB {
+    const value = requiredProperty(file, selectorSuffix, prop);
+    const scope = scopeSelectors.length
+        ? ruleCustomProps(cssOf(file), ...scopeSelectors)
+        : undefined;
+    return dark => resolveColor(value, dark, store, scope).rgb;
+}
+
+/** `border` / `border-*` 简写里的颜色 → 颜色（描边类配对用）。 */
+function borderColor(file: ComponentFile, selectorSuffix: string): (dark: DarkSwitch) => RGB {
+    const shorthand = [
+        'border',
+        'border-top',
+        'border-right',
+        'border-bottom',
+        'border-left',
+        'border-color'
+    ]
+        .map(prop => propertyBySuffix(file, selectorSuffix, prop))
+        .find(value => value !== undefined);
+    if (shorthand === undefined) {
+        throw new Error(`${file}.css 的 ${selectorSuffix} 缺少 border 声明`);
+    }
+    const color = /var\(\s*--[\w-]+\s*\)|hsl\([^)]*\)|#[0-9a-fA-F]{3,8}/.exec(shorthand)?.[0];
+    if (color === undefined) {
+        throw new Error(`${file}.css 的 ${selectorSuffix} border 无颜色：${shorthand}`);
+    }
+    return dark => resolveColor(color, dark, store).rgb;
+}
+
 /** textarea 的 `::placeholder` 是 A11 的关键回归点：颜色 + opacity 必须一起读。 */
 const textareaPlaceholderOpacity = (() => {
     const raw = ruleProperty(cssOf('textarea'), '&::placeholder', 'opacity');
@@ -180,6 +247,11 @@ interface TextScenario {
     color: (dark: DarkSwitch) => RGB;
     /** 文本链路有效 opacity（默认 1）；A11 要求先合成再算对比度。 */
     opacity?: number;
+    /**
+     * 组件自带的不透明表面（表面 A / C）：底由组件自身提供，与 `--nue-glass-bg` 无关，
+     * 因此不参与 A8 退化重算（退化只影响玻璃底）。
+     */
+    ownSurface?: (dark: DarkSwitch) => Surface[];
 }
 
 /**
@@ -271,9 +343,17 @@ const GLASS_TEXT_SCENARIOS: TextScenario[] = [
         color: localColor('input', '--nue-input-color', '.nue-input')
     },
     {
+        // T18 口径修正（v0.2 批 3）：input 已是**表面 A**（不透明 primary-0 底），
+        // placeholder 的真实底是 input 自身底，不再是玻璃两端（旧口径只剩理论意义）。
         id: 'T18',
-        selector: '.nue-input__input::placeholder',
-        color: declaredColor('input', '&::placeholder', 'color', ['.nue-input'])
+        selector: '.nue-input__input::placeholder（表面 A：input 自身底）',
+        color: declaredColor('input', '&::placeholder', 'color', ['.nue-input']),
+        ownSurface: dark => [
+            {
+                label: 'input 自身底',
+                color: localColor('input', '--nue-input-background-color', '.nue-input')(dark)
+            }
+        ]
     },
     {
         id: 'T19',
@@ -336,7 +416,8 @@ interface TextPairScenario extends TextScenario {
 const glassTextPairs = (): TextPairScenario[] =>
     GLASS_TEXT_SCENARIOS.map(scenario => ({
         ...scenario,
-        backdrops: (dark, degraded) => glassBackdrops(dark, degraded),
+        backdrops: (dark, degraded) =>
+            scenario.ownSurface?.(dark) ?? glassBackdrops(dark, degraded),
         min: 4.5
     }));
 
@@ -346,6 +427,8 @@ interface NonTextScenario {
     selector: string;
     color: (dark: DarkSwitch) => RGB;
     min: number;
+    /** 组件自带的不透明底（面板 / 滑块）：只在常规矩阵测一次，不参与 A8 退化重算。 */
+    ownSurface?: (dark: DarkSwitch) => Surface[];
 }
 
 const GLASS_NON_TEXT_SCENARIOS: NonTextScenario[] = [
@@ -378,6 +461,78 @@ const GLASS_NON_TEXT_SCENARIOS: NonTextScenario[] = [
             '.nue-button.nue-button--destructive'
         ),
         min: 3
+    },
+    /* ---------- v0.2 批 3：rd-fe 建议的 10 组补充配对（非文本部分） ---------- */
+    {
+        // today 描边：600 对日历面板的 primary-0 实底
+        id: 'N06',
+        selector: '.nue-calendar .date-cell.today（描边 / 面板底）',
+        color: declaredColorBySuffix('calendar', '.date-cell.today', 'border-color'),
+        min: 3,
+        ownSurface: dark => [
+            {
+                label: '面板 primary-0',
+                color: declaredColorBySuffix('calendar', '.nue-calendar', 'background-color')(dark)
+            }
+        ]
+    },
+    {
+        // date-picker 面板描边（border-color）对自身 primary-0 底
+        id: 'N07',
+        selector: '.nue-date-picker-panel（描边 / 面板底）',
+        color: borderColor('date-picker', '.nue-date-picker-panel'),
+        min: 3,
+        ownSurface: dark => [
+            {
+                label: '面板 primary-0',
+                color: declaredColorBySuffix(
+                    'date-picker',
+                    '.nue-date-picker-panel',
+                    'background-color'
+                )(dark)
+            }
+        ]
+    },
+    {
+        // switch 滑块描边对滑块自身 primary-0 底
+        id: 'N08',
+        selector: '.nue-switch__circle（描边 / 滑块底）',
+        color: borderColor('switch', '.nue-switch .nue-switch__circle'),
+        min: 3,
+        ownSurface: dark => [
+            {
+                label: '滑块 primary-0',
+                color: localColor('switch', '--nue-switch-circle-color', '.nue-switch')(dark)
+            }
+        ]
+    },
+    {
+        // switch 轨道描边：外缘落在玻璃面上（两端取最坏）
+        id: 'N09',
+        selector: '.nue-switch 轨道描边（--nue-border-color / 玻璃）',
+        color: borderColor('switch', '.nue-switch'),
+        min: 3
+    },
+    {
+        // scroll-bar 拇指：轨道透明，拇指实际落在玻璃面上（两端取最坏）
+        id: 'N10',
+        selector: '.nue-scroll-bar__thumb（--nue-scroll-bar-thumb-bg / 玻璃）',
+        color: localColor('scroll-bar', '--nue-scroll-bar-thumb-bg', '.nue-scroll-bar'),
+        min: 3
+    },
+    {
+        // table 表头刻线：唯一用功能性描边色的结构性分界（落在玻璃面上）
+        id: 'N11',
+        selector: '.nue-table__head-cell 刻线（--nue-border-color / 玻璃）',
+        color: borderColor('table', '.nue-table__head .nue-table__head-cell'),
+        min: 3
+    },
+    {
+        // badge 圆点：状态指示图形，填充落在玻璃面上（文本配对已在 O04）
+        id: 'N12',
+        selector: '.nue-badge--dot（--nue-badge-background-color / 玻璃）',
+        color: localColor('badge', '--nue-badge-background-color', '.nue-badge'),
+        min: 3
     }
 ];
 
@@ -385,8 +540,8 @@ const GLASS_NON_TEXT_SCENARIOS: NonTextScenario[] = [
  * 自有不透明底的配对（不参与纯白/纯黑两端合成）。
  *
  * ⚠️ 口径与保留决定（PM 2026-10-25 裁决 A，**不得移除**）：
- * - 这些组件自带不透明底（按钮 / badge / date-picker 面板 / progress 填充），
- *   不属于 arch「玻璃两端」的字面口径，但它们承载的是**真实可见文本**，
+ * - 这些组件自带不透明底（按钮 / badge / 日历与 date-picker 面板 / progress 填充 / switch 轨道 /
+ *   avatar / divider 内容块），不属于 arch「玻璃两端」的字面口径，但它们承载的是**真实可见文本**，
  *   AC-08「文本 ≥4.5:1，仅 .other-month / .disabled 豁免」同样适用。
  * - O08 / O09 / O10 是 T75-5 门禁**实算抓到**的真缺陷（4.05 / 4.30），
  *   不是口径问题：把场景删掉只会让门禁变绿、缺陷照旧上线。
@@ -568,6 +723,78 @@ const OPAQUE_SCENARIOS: OpaqueScenario[] = [
                 ruleCustomProps(cssOf('progress'), '.nue-progress')
             ).rgb,
         min: 4.5
+    },
+    /* ---------- v0.2 批 3：rd-fe 建议的 10 组补充配对（自有不透明底部分） ---------- */
+    // 日历 / 日期面板选中态：表面 C（600 填充 + 白字）
+    {
+        id: 'O11',
+        selector: '.nue-calendar .date-cell.selected（白字 / 600 填充）',
+        color: declaredColorBySuffix('calendar', '.date-cell.selected', 'color'),
+        background: declaredColorBySuffix('calendar', '.date-cell.selected', 'background-color'),
+        min: 4.5
+    },
+    {
+        id: 'O12',
+        selector: '.nue-date-picker-panel .date-cell.selected（白字 / 600 填充）',
+        color: declaredColorBySuffix('date-picker', '.date-cell.selected', 'color'),
+        background: declaredColorBySuffix('date-picker', '.date-cell.selected', 'background-color'),
+        min: 4.5
+    },
+    // 周表头（date-picker 面板副本）：次文本对面板 primary-0
+    {
+        id: 'O13',
+        selector: '.nue-date-picker-panel .weekday-item（次文本 / 面板底）',
+        color: declaredColorBySuffix('date-picker', '.weekday-item', 'color'),
+        background: declaredColorBySuffix(
+            'date-picker',
+            '.nue-date-picker-panel',
+            'background-color'
+        ),
+        min: 4.5
+    },
+    // switch 关态文字（700 档）对轨道 200
+    {
+        id: 'O14',
+        selector: '.nue-switch__text（关态文字 / 轨道 200）',
+        color: declaredColorBySuffix('switch', '.nue-switch .nue-switch__text', 'color'),
+        background: localColor('switch', '--nue-switch-background-color', '.nue-switch'),
+        min: 4.5
+    },
+    // switch 开态文字（白）对轨道 600
+    {
+        id: 'O15',
+        selector: '.nue-switch--actived .nue-switch__text（白字 / 600 轨道）',
+        color: declaredColorBySuffix(
+            'switch',
+            '.nue-switch.nue-switch--actived .nue-switch__text',
+            'color'
+        ),
+        background: localColor('switch', '--nue-switch-background-active-color', '.nue-switch'),
+        min: 4.5
+    },
+    // link route 当前项：表面 C（600 填充 + 白字），仅非 icon 变体
+    {
+        id: 'O16',
+        selector: '.nue-link--route.nue-link--actived（白字 / 600 填充）',
+        color: localColor('link', '--nue-link-actived-color', '.nue-link--route'),
+        background: localColor('link', '--nue-link-actived-background-color', '.nue-link--route'),
+        min: 4.5
+    },
+    // avatar 文字（800）对自身 200 底
+    {
+        id: 'O17',
+        selector: '.nue-avatar（文字 / 200 底）',
+        color: declaredColorBySuffix('avatar', '.nue-avatar', 'color'),
+        background: declaredColorBySuffix('avatar', '.nue-avatar', 'background-color'),
+        min: 4.5
+    },
+    // divider 内容：primary-text 对内容块自身的 primary-0 底
+    {
+        id: 'O18',
+        selector: '.nue-divider__content（主文本 / 内容块底）',
+        color: declaredColorBySuffix('divider', '.nue-divider__content', 'color'),
+        background: declaredColorBySuffix('divider', '.nue-divider__content', 'background-color'),
+        min: 4.5
     }
 ];
 
@@ -576,6 +803,8 @@ function buildMatrix(degraded: boolean): Pair[] {
 
     for (const dark of MODES) {
         for (const scenario of glassTextPairs()) {
+            // 表面 A/C 的配对（T18）与 --nue-glass-bg 无关：A8 退化重算不重复计入。
+            if (degraded && scenario.ownSurface) continue;
             const declared = scenario.color(dark);
             const opacity = scenario.opacity ?? 1;
             for (const surface of scenario.backdrops(dark, degraded)) {
@@ -593,7 +822,12 @@ function buildMatrix(degraded: boolean): Pair[] {
         }
 
         for (const scenario of GLASS_NON_TEXT_SCENARIOS) {
-            for (const surface of glassBackdrops(dark, degraded)) {
+            // 面板 / 滑块自身实底的配对同理：只在常规矩阵测一次。
+            if (degraded && scenario.ownSurface) continue;
+            const surfaces = scenario.ownSurface
+                ? scenario.ownSurface(dark)
+                : glassBackdrops(dark, degraded);
+            for (const surface of surfaces) {
                 pairs.push({
                     id: `${scenario.id}-${dark}-${surface.label}`,
                     selector: scenario.selector,
@@ -1108,8 +1342,8 @@ describe('A11 文本链路 opacity（白名单外一律红；解析到 opacity �
 /* ------------------------------ 对比度矩阵 ------------------------------ */
 
 describe('AC-08 / AC-09 玻璃面对比度矩阵（从 token 实算，无快照）', () => {
-    it('矩阵规模 ≥130 组', () => {
-        expect(MATRIX.length, `实际配对 ${MATRIX.length} 组`).toBeGreaterThanOrEqual(130);
+    it('矩阵规模 ≥148 组（AC-04 下限；v0.2 批 3 补入新配对后应显著高于此数）', () => {
+        expect(MATRIX.length, `实际配对 ${MATRIX.length} 组`).toBeGreaterThanOrEqual(148);
     });
 
     assertPairs(MATRIX, '');

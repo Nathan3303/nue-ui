@@ -5,9 +5,10 @@
     --nue-scroll-bar-size--small: 4px;
     --nue-scroll-bar-size--large: 8px;
     --nue-scroll-bar-track-bg: transparent;
-    /* 拇指是功能性可操作图形：600 对底 4.89 / 4.99（500 只有 2.56） */
-    --nue-scroll-bar-thumb-bg: var(--nue-primary-color-600);
-    --nue-scroll-bar-thumb-hover-bg: var(--nue-primary-color-700);
+    /* 拇指是功能性可操作图形：玻璃两端取最坏 → 700（4.74 浅·叠黑 / 5.53 深·叠白）；
+     * 600 在深色叠白端只有 2.25（T81-3 实算抓到，PM 授权改档）。 */
+    --nue-scroll-bar-thumb-bg: var(--nue-primary-color-700);
+    --nue-scroll-bar-thumb-hover-bg: var(--nue-primary-color-800);
     --nue-scroll-bar-thumb-radius: var(--nue-primary-radius);
     --nue-scroll-bar-opacity: 0;
     --nue-scroll-bar-transition-duration: var(--nue-animation-duration);

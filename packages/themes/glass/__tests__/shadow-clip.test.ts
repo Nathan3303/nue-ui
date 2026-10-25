@@ -130,11 +130,9 @@ describe('S1 子元素阴影最大外溢 maxChildExtent', () => {
         const files = [...new Set(focus.map(source => source.file))].sort();
         expect(files, 'focus 阴影来源').toEqual(['input', 'textarea']);
         for (const source of focus) {
-            // input 已是 Frostline 锐环（2px）；textarea 仍属批 2，暂用近地影（3px）。
-            expect(source.extent, `${source.file} focus extent`).toBeLessThanOrEqual(
-                maxChildExtent
-            );
-            expect(source.extent, `${source.file} focus extent`).toBeGreaterThan(0);
+            // Frostline：input / textarea 都是同一枚 2px 锐环（PRD §七.4）。
+            // 这里保留**精确值**断言（不写成 ≤ maxChildExtent，否则锐环退回 12px 光晕也能绿）。
+            expect(source.extent, `${source.file} focus extent`).toBe(2);
         }
     });
 

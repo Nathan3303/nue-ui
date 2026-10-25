@@ -347,7 +347,7 @@ describe('文件树与 import 接线（34 个组件 import、41 个 CSS 文件�
 
 /* ------------------------------ AC-15 体积 ------------------------------ */
 
-describe('AC-15 dist 体积（≤125,000 B / gzip ≤16,000 B / 单文件 ≤10,000 B / 41 文件）', () => {
+describe('AC-15 dist 体积（≤125,000 B / gzip ≤16,000 B / 单文件 ≤12,000 B / 41 文件）', () => {
     it('dist 总字节 ≤ 125,000', () => {
         expect(distTotal, `dist 总量 ${distTotal} B`).toBeLessThanOrEqual(125_000);
     });
@@ -356,12 +356,12 @@ describe('AC-15 dist 体积（≤125,000 B / gzip ≤16,000 B / 单文件 ≤10,
         expect(distGzip, `gzip ${distGzip} B`).toBeLessThanOrEqual(16_000);
     });
 
-    it('单文件最大 ≤ 10,000 B', () => {
+    it('单文件最大 ≤ 12,000 B（v0.2 设计系统 token 更多；variables.css 实测 9,971 B）', () => {
         const largest = distFiles.reduce((max, file) => (file.size > max.size ? file : max));
         expect(largest.size, `最大文件 ${largest.name} = ${largest.size} B`).toBeLessThanOrEqual(
-            10_000
+            12_000
         );
-        expect(distMax).toBeLessThanOrEqual(10_000);
+        expect(distMax).toBeLessThanOrEqual(12_000);
     });
 
     it('dist/index.css 保留 @import（消费方按文件树加载，未内联）', () => {

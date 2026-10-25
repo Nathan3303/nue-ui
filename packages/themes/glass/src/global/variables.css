@@ -106,11 +106,12 @@
         calc(30% - var(--nue-dark-switch) * 4%),
         40%
     );
-    /* 700 = 文本档：亮色 L 30%（PRD 目标 32% 在玻璃最坏背景只有 4.13，RF-1 下调） */
+    /* 700 = 文本档：亮色 L 29%（PRD 目标 32% → 30% → 29%，RF-1 余量要求：
+     * 29% 在玻璃最坏叠黑端 4.74，余量 0.24；暗色仍 68%）。 */
     --nue-primary-color-700: hsl(
         var(--nue-brand-hue),
         calc(38% - var(--nue-dark-switch) * 6%),
-        calc(30% + var(--nue-dark-switch) * 38%)
+        calc(29% + var(--nue-dark-switch) * 39%)
     );
     --nue-primary-color-800: hsl(
         var(--nue-brand-hue),
