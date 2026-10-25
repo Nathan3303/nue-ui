@@ -14,6 +14,10 @@
             "import": "./dist/"
         }
     },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build-css": "postcss src/index.css src/**/*.css --dir dist --base src --no-map --verbose",
