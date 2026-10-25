@@ -24,10 +24,14 @@
 
     > .nue-header,
     > .nue-main,
-    > .nue-main > .nue-aside,
     > .nue-footer {
         box-sizing: border-box;
         position: relative;
+        /* 放行子元素阴影（C2）：面板本体的 overflow: hidden 仍作最后兜底 */
+        overflow: visible;
+    }
+
+    > .nue-main > .nue-aside {
         overflow: hidden;
     }
 
