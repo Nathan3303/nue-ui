@@ -23,6 +23,15 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
+            # glass 门禁测试读取构建产物 dist/（AC-05 / AC-15），必须先于 `pnpm test:run`
+            - name: Build NueUI glass theme package
+              run: pnpm glass-theme build
+            - name: Upload NueUI glass theme dist as artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: nueui-glass-theme-dist
+                  path: ./packages/themes/glass/dist
+
             - name: Run tests
               run: pnpm test:run
 
@@ -41,14 +50,6 @@ jobs:
               with:
                   name: nueui-shadlike-theme-dist
                   path: ./packages/themes/shadlike/dist
-
-            - name: Build NueUI glass theme package
-              run: pnpm glass-theme build
-            - name: Upload NueUI glass theme dist as artifact
-              uses: actions/upload-artifact@v4
-              with:
-                  name: nueui-glass-theme-dist
-                  path: ./packages/themes/glass/dist
 
             - name: Build NueUI iconfont package
               run: pnpm iconfont build
