@@ -78,6 +78,10 @@ export interface FlatRule {
     start: number;
     /** 祖先 at-rule 条件（由外到内），用于识别 `@keyframes` 内的瞬态规则。 */
     atRules: string[];
+    /** 展开后的完整选择器列表（嵌套规则已把 `&` / 父选择器补全）。 */
+    fullSelector: string;
+    /** 逐层展开的祖先选择器（用于取变量作用域）。 */
+    ancestors: string[];
 }
 
 export function stripComments(css: string): string {
@@ -131,27 +135,45 @@ function isAtRule(prelude: string): boolean {
     return prelude.trim().startsWith('@');
 }
 
+/** 展开嵌套选择器：`&` 替换为父选择器；无 `&` 时按后代/子代拼接。 */
+function expandSelectors(parents: string[], raw: string): string[] {
+    const own = splitTopLevel(raw, ',')
+        .map(selector => selector.trim().replace(/\s+/g, ' '))
+        .filter(Boolean);
+    if (!parents.length) return own;
+    const expanded: string[] = [];
+    for (const parent of parents) {
+        for (const child of own) {
+            expanded.push(child.includes('&') ? child.replace(/&/g, parent) : `${parent} ${child}`);
+        }
+    }
+    return expanded;
+}
+
 /** 递归展开所有规则（含 at-rule 内部、嵌套规则），selector 保留原始层级文本。 */
 export function extractRules(css: string): FlatRule[] {
     const source = stripComments(css);
     const rules: FlatRule[] = [];
-    const walk = (text: string, offset: number, atRules: string[]) => {
+    const walk = (text: string, offset: number, atRules: string[], parents: string[]) => {
         for (const block of extractBlocks(text)) {
             const prelude = block.prelude.trim().replace(/\s+/g, ' ');
             if (isAtRule(prelude)) {
-                walk(block.body, offset + block.bodyStart, [...atRules, prelude]);
+                walk(block.body, offset + block.bodyStart, [...atRules, prelude], parents);
             } else {
+                const full = expandSelectors(parents, prelude);
                 rules.push({
                     selector: normalizeSelector(prelude),
                     body: block.body,
                     start: offset + block.start,
-                    atRules
+                    atRules,
+                    fullSelector: full.join(', '),
+                    ancestors: parents
                 });
-                walk(block.body, offset + block.bodyStart, atRules);
+                walk(block.body, offset + block.bodyStart, atRules, full);
             }
         }
     };
-    walk(source, 0, []);
+    walk(source, 0, [], []);
     return rules;
 }
 
@@ -621,6 +643,242 @@ export function degradedSurface(dark: number, store: TokenStore): RGB {
         store
     );
     return compositeColor(solid, WHITE);
+}
+
+/* ------------------------------ 几何：阴影 / padding / 层叠 ------------------------------ */
+
+/** 根字号（`--nue-primary-font-size-base: 16px`）；T77 的 1.25rem = 20px。 */
+export const ROOT_FONT_PX = 16;
+
+export function toPx(numeric: Numeric): number {
+    switch (numeric.unit) {
+        case '': // 无单位长度（`0`）按 px
+        case 'px':
+            return numeric.value;
+        case 'rem':
+            return numeric.value * ROOT_FONT_PX;
+        default:
+            throw new Error(`无法换算成 px 的单位：${numeric.unit}`);
+    }
+}
+
+/** 按**顶层空白**切 token（`hsl(…)` / `calc(…)` / `var(…)` 内部的空格不拆）。 */
+export function splitWhitespaceTopLevel(input: string): string[] {
+    const tokens: string[] = [];
+    let depth = 0;
+    let start = 0;
+    for (let i = 0; i < input.length; i++) {
+        const char = input.charAt(i);
+        if (char === '(') depth++;
+        else if (char === ')') depth--;
+        else if (/\s/.test(char) && depth === 0) {
+            const token = input.slice(start, i).trim();
+            if (token) tokens.push(token);
+            start = i + 1;
+        }
+    }
+    const tail = input.slice(start).trim();
+    if (tail) tokens.push(tail);
+    return tokens;
+}
+
+/** 整条阴影值是单个 `var(--shadow-token)` 时，解到实际列表再切层。 */
+function resolveShadowValue(value: string, store: TokenStore, scope?: Map<string, string>): string {
+    const single = /^var\(\s*(--[\w-]+)\s*\)$/.exec(value.trim());
+    if (!single) return value.trim();
+    const name = single[1] as string;
+    const resolved = scope?.get(name) ?? store.raw.get(name);
+    if (resolved === undefined) throw new Error(`找不到阴影令牌 ${name}`);
+    return resolveShadowValue(resolved, store, scope);
+}
+
+export interface ShadowLayer {
+    inset: boolean;
+    offsetX: number;
+    offsetY: number;
+    blur: number;
+    spread: number;
+}
+
+/** 长度 token → px；颜色（`hsl(…)` / `#hex` / 命名色）返回 null。 */
+function parseLengthToken(
+    token: string,
+    dark: number,
+    store: TokenStore,
+    scope?: Map<string, string>
+): number | null {
+    if (/^-?(?:\d+\.?\d*|\.\d+)(px|rem)?$/.test(token)) {
+        return toPx(resolveNumeric(token, dark, store, scope));
+    }
+    if (token.startsWith('calc(') || token.startsWith('var(')) {
+        try {
+            return toPx(resolveNumeric(token, dark, store, scope));
+        } catch {
+            return null;
+        }
+    }
+    return null;
+}
+
+/**
+ * 解析 `box-shadow` 为层（T77 §4.1 口径）：
+ * `<offset-x> <offset-y> <blur> <spread>`，缺省 blur/spread = 0；`inset` 标志单独记。
+ * 颜色 token 不参与几何计算（`hsl(…)`/`var(--color)`/`#hex` 均被忽略）。
+ */
+export function parseShadowLayers(
+    value: string,
+    dark: number,
+    store: TokenStore,
+    scope?: Map<string, string>
+): ShadowLayer[] {
+    const raw = resolveShadowValue(value.replace(/!important/g, '').trim(), store, scope);
+    if (!raw || raw === 'none') return [];
+    return splitTopLevel(raw, ',').map(layer => {
+        const tokens = splitWhitespaceTopLevel(layer);
+        let inset = false;
+        const lengths: number[] = [];
+        for (const token of tokens) {
+            if (token === 'inset') {
+                inset = true;
+                continue;
+            }
+            const length = parseLengthToken(token, dark, store, scope);
+            if (length !== null) lengths.push(length);
+        }
+        if (lengths.length < 2) {
+            throw new Error(`阴影层缺少 offset-x/offset-y：${layer}`);
+        }
+        return {
+            inset,
+            offsetX: lengths[0] as number,
+            offsetY: lengths[1] as number,
+            blur: lengths[2] ?? 0,
+            spread: lengths[3] ?? 0
+        };
+    });
+}
+
+/**
+ * 阴影外溢半径：`inset` 层记 0；其余 `blur + spread + max(|offset-x|, |offset-y|)`；
+ * 多层取 **max，不相加**（T77 §4.1）。
+ */
+export function shadowExtent(
+    value: string,
+    dark: number,
+    store: TokenStore,
+    scope?: Map<string, string>
+): number {
+    return parseShadowLayers(value, dark, store, scope).reduce((max, layer) => {
+        if (layer.inset) return max;
+        const extent =
+            layer.blur + layer.spread + Math.max(Math.abs(layer.offsetX), Math.abs(layer.offsetY));
+        return Math.max(max, extent);
+    }, 0);
+}
+
+export interface PaddingSides {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+}
+
+/** 解析某选择器的最终 padding（简写展开 + 长写覆盖，全部换算 px）。 */
+export function resolvePadding(
+    css: string,
+    selector: string,
+    dark: number,
+    store: TokenStore
+): PaddingSides {
+    const sides: PaddingSides = { top: 0, right: 0, bottom: 0, left: 0 };
+    const expand = (value: string): number[] =>
+        splitWhitespaceTopLevel(value).map(token => toPx(resolveNumeric(token, dark, store)));
+    const keys = ['top', 'right', 'bottom', 'left'] as const;
+    for (const declaration of ruleDeclarations(css, selector)) {
+        if (declaration.prop === 'padding') {
+            const values = expand(declaration.value);
+            if (values.length === 1) {
+                sides.top = sides.right = sides.bottom = sides.left = values[0] as number;
+            } else if (values.length === 2) {
+                sides.top = sides.bottom = values[0] as number;
+                sides.right = sides.left = values[1] as number;
+            } else if (values.length === 3) {
+                sides.top = values[0] as number;
+                sides.right = sides.left = values[1] as number;
+                sides.bottom = values[2] as number;
+            } else if (values.length === 4) {
+                sides.top = values[0] as number;
+                sides.right = values[1] as number;
+                sides.bottom = values[2] as number;
+                sides.left = values[3] as number;
+            } else {
+                throw new Error(`无法解析的 padding 简写：${declaration.value}`);
+            }
+        } else {
+            const key = keys.find(side => declaration.prop === `padding-${side}`);
+            if (key) sides[key] = expand(declaration.value)[0] as number;
+        }
+    }
+    return sides;
+}
+
+/** CSS specificity 近似值（ID/class/元素三级；足够比较 container.css 内的冲突规则）。 */
+export function specificity(selector: string): number {
+    const ids = (selector.match(/#[\w-]+/g) ?? []).length;
+    const classes = (selector.match(/\.[\w-]+|\[[^\]]*\]|:(?!:)[\w-]+/g) ?? []).length;
+    const elements = (selector.match(/(?:^|[\s>+~])([a-z][\w-]*)/g) ?? []).length;
+    return ids * 10_000 + classes * 100 + elements;
+}
+
+/** 选择器的 subject（最后一个复合选择器，忽略括号内的组合符）。 */
+export function selectorSubject(selector: string): string {
+    let depth = 0;
+    let start = 0;
+    for (let i = 0; i < selector.length; i++) {
+        const char = selector.charAt(i);
+        if (char === '(' || char === '[') depth++;
+        else if (char === ')' || char === ']') depth--;
+        else if (depth === 0 && /[\s>+~]/.test(char)) start = i + 1;
+    }
+    return selector.slice(start).trim();
+}
+
+export interface CascadeMatch {
+    selector: string;
+    value: string;
+    specificity: number;
+    order: number;
+}
+
+/**
+ * 按「subject + specificity + 源码顺序」求某元素选择器的最终声明值。
+ * 用于 S4–S6：断言**最终计算值**而不是「某条分组规则存在」，
+ * 这样合并/拆分规则既不会假红也不会假绿。
+ */
+export function resolveCascade(
+    css: string,
+    subject: string,
+    prop: string
+): { value: string | undefined; matches: CascadeMatch[] } {
+    const matches: CascadeMatch[] = [];
+    for (const rule of extractRules(css)) {
+        const hits = splitSelectorList(rule.fullSelector).filter(
+            selector => selectorSubject(selector) === subject
+        );
+        if (hits.length === 0) continue;
+        const declarations = parseDeclarations(rule.body).filter(
+            declaration => declaration.prop === prop
+        );
+        if (declarations.length === 0) continue;
+        matches.push({
+            selector: hits.join(', '),
+            value: declarations.at(-1)!.value,
+            specificity: Math.max(...hits.map(specificity)),
+            order: rule.start
+        });
+    }
+    matches.sort((a, b) => a.specificity - b.specificity || a.order - b.order);
+    return { value: matches.at(-1)?.value, matches };
 }
 
 /* ------------------------------ opacity ------------------------------ */
