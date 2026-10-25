@@ -1,0 +1,126 @@
+.nue-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 0;
+    width: 0;
+    position: fixed;
+    top: var(--nue-gap-df);
+    left: 50%;
+    z-index: 100;
+}
+
+.nue-message-node {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    z-index: 100;
+}
+
+.nue-message-node-inner {
+    --nue-message-node-inner-vgap: var(--nue-gap-df);
+    --nue-message-node-inner-height: var(--nue-box-size-df);
+    --nue-message-node-inner-font-size: var(--nue-text-sm);
+    --nue-message-node-inner-color: var(--nue-primary-text-color);
+    --nue-message-node-inner-icon-size: var(--nue-message-node-inner-font-size);
+    --nue-message-node-inner-icon-color: var(--nue-message-node-inner-color);
+    --nue-message-node-inner-border-color: var(--nue-glass-border);
+    --nue-message-node-inner-background-color: var(--nue-glass-bg);
+    --nue-message-node-inner-shadow-color: var(--nue-primary-shadow-color);
+}
+
+.nue-message-node-inner {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--nue-message-node-inner-vgap) * 0.5);
+    height: var(--nue-message-node-inner-height);
+    padding: 0 var(--nue-message-node-inner-vgap);
+    background-color: var(--nue-glass-bg);
+    backdrop-filter: var(--nue-glass-blur);
+    border: 1px solid var(--nue-glass-border);
+    border-radius: var(--nue-primary-radius);
+    box-shadow: var(--nue-glass-shadow);
+    box-sizing: border-box;
+    /* 只过渡入场位移与不透明度：不对 backdrop-filter 做过渡（模糊逐帧重采样） */
+    transition:
+        margin-top var(--nue-animation-duration-long) ease-in,
+        opacity var(--nue-animation-duration-long) ease-in;
+    margin-top: -3rem;
+    margin-bottom: var(--nue-gap-xs);
+    opacity: 0;
+    font-size: var(--nue-message-node-inner-font-size);
+    color: var(--nue-message-node-inner-color);
+
+    .nue-message-node-inner__text {
+        font-size: var(--nue-message-node-inner-font-size);
+        color: var(--nue-message-node-inner-color);
+    }
+
+    .nue-message-node-inner__extension {
+        display: inline-flex;
+        align-items: center;
+        padding-left: calc(var(--nue-message-node-inner-vgap) * 0.5);
+        border-left: 1px solid var(--nue-message-node-inner-border-color);
+    }
+}
+
+.nue-message-node-inner.nue-message-node-inner--push {
+    transition:
+        margin-top var(--nue-animation-duration-short) ease-out,
+        opacity var(--nue-animation-duration-short) ease-out;
+    margin-top: 0 !important;
+    opacity: 1;
+}
+
+.nue-message-node-inner.nue-message-node-inner--small {
+    --nue-message-node-inner-vgap: var(--nue-gap-sm);
+    --nue-message-node-inner-height: var(--nue-box-size-sm);
+    --nue-message-node-inner-font-size: var(--nue-text-xs);
+}
+
+.nue-message-node-inner.nue-message-node-inner--large {
+    --nue-message-node-inner-vgap: var(--nue-gap-md);
+    --nue-message-node-inner-height: var(--nue-box-size-md);
+    --nue-message-node-inner-font-size: var(--nue-text-df);
+}
+
+/* 语义变体：玻璃底不变（bg/border 保持玻璃基元），只换文字与图标色。
+   文字色走 l20 单步（亮 20% / 暗 80%），对玻璃最坏背景仍 ≥4.5:1（AC-08/09）。 */
+.nue-message-node-inner.nue-message-node-inner--success {
+    --nue-message-node-inner-color: hsl(
+        var(--nue-success-hue),
+        var(--nue-hsl-s70),
+        var(--nue-hsl-l20)
+    );
+    --nue-message-node-inner-icon-color: var(--nue-message-node-inner-color);
+}
+
+.nue-message-node-inner.nue-message-node-inner--warning {
+    --nue-message-node-inner-color: hsl(
+        var(--nue-warning-hue),
+        var(--nue-hsl-s80),
+        var(--nue-hsl-l20)
+    );
+    --nue-message-node-inner-icon-color: var(--nue-message-node-inner-color);
+}
+
+.nue-message-node-inner.nue-message-node-inner--error {
+    --nue-message-node-inner-color: hsl(
+        var(--nue-error-hue),
+        var(--nue-hsl-s80),
+        var(--nue-hsl-l20)
+    );
+    --nue-message-node-inner-icon-color: var(--nue-message-node-inner-color);
+}
+
+.nue-message-node-inner.nue-message-node-inner--info {
+    --nue-message-node-inner-color: var(--nue-primary-text-color);
+    --nue-message-node-inner-icon-color: var(--nue-message-node-inner-color);
+}
+
+.nue-message-node-inner.nue-message-node-inner--log {
+    --nue-message-node-inner-color: var(--nue-primary-text-color);
+    --nue-message-node-inner-icon-color: var(--nue-message-node-inner-color);
+}

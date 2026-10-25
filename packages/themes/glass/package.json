@@ -1,0 +1,35 @@
+{
+    "name": "nue-ui-theme-glass",
+    "version": "0.1.0",
+    "description": "An Apple HIG glassmorphism theme for NueUI",
+    "author": "Nathan Lee",
+    "license": "MIT",
+    "type": "module",
+    "files": [
+        "./dist"
+    ],
+    "exports": {
+        "./dist/": {
+            "require": "./dist/",
+            "import": "./dist/"
+        }
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build-css": "postcss src/index.css src/**/*.css --dir dist --base src --no-map --verbose",
+        "remove-dist": "node ./scripts/remove-dist.js",
+        "build": "pnpm remove-dist && pnpm build-css",
+        "prepublishOnly": "node ../../../scripts/check-lf.mjs"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Nathan3303/nue-ui.git"
+    },
+    "devDependencies": {
+        "cssnano": "^7.1.2",
+        "cssnano-preset-advanced": "^7.0.10",
+        "postcss": "^8.5.6",
+        "postcss-cli": "^11.0.1",
+        "postcss-nested": "^7.0.2"
+    }
+}
