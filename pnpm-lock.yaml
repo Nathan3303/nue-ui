@@ -248,6 +248,9 @@ importers:
       nue-ui-resolver:
         specifier: workspace:*
         version: link:packages/plugins/resolver
+      nue-ui-theme-glass:
+        specifier: workspace:*
+        version: link:packages/themes/glass
       nue-ui-theme-shadlike:
         specifier: workspace:*
         version: link:packages/themes/shadlike
