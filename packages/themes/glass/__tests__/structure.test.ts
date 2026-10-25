@@ -3,11 +3,15 @@
  *
  * 与 `contrast.test.ts` 的分工：
  * - 对比度 / A1–A11 在 `contrast.test.ts`；
- * - 本文件只锁**结构数字**：7 条 `backdrop-filter`、424 个 `--nue-*` 定义名、
+ * - 本文件只锁**结构数字**：7 条 `backdrop-filter`、425 个 `--nue-*` 定义名、
  *   0 悬空、34 个组件 import、6 个 `--nue-glass-*` 基元、dist 体积与文件数。
  *
+ * v0.2 Frostline：PRD §四 放开了「只许新增 `--nue-glass-*`」的限制，允许新增
+ * `--nue-font-mono`。因此全量定义名 424 → 425、全局 149 → 150；新增名白名单
+ * 从「6 个 glass 基元」变为「6 个 glass 基元 + `--nue-font-mono`」（AC-07 仍闭集）。
+ *
  * 所有数字来自实读源码 / `dist`，不写死 rd-fe 的快照；`418` 这个基线也从
- * shadlike 源码现算（AC-12 要求 glass ⊇ shadlike），只有 424 / 7 / 41 等
+ * shadlike 源码现算（AC-12 要求 glass ⊇ shadlike），只有 425 / 7 / 41 等
  * **契约常量**才写死。
  */
 import { describe, expect, it } from 'vite-plus/test';
@@ -161,9 +165,9 @@ describe('AC-05 / AC-13 模糊入口结构（7 条声明，overlay/popup-pool/se
 
 /* ------------------------------ AC-10 / AC-12 ------------------------------ */
 
-describe('AC-10 / AC-12 变量契约（424 定义名、⊇418、0 悬空、6 个 glass 基元）', () => {
-    it('全 src 定义名 = 424（= shadlike 418 + 6 个 glass 基元）', () => {
-        expect(glassDefinitions.size, 'glass 定义名总数').toBe(424);
+describe('AC-10 / AC-12 变量契约（425 定义名、⊇418、0 悬空、6 个 glass 基元 + font-mono）', () => {
+    it('全 src 定义名 = 425（= shadlike 418 + 6 个 glass 基元 + --nue-font-mono）', () => {
+        expect(glassDefinitions.size, 'glass 定义名总数').toBe(425);
         expect(shadlikeDefinitions.size, 'shadlike 基线定义名（现算）').toBe(418);
     });
 
@@ -172,9 +176,9 @@ describe('AC-10 / AC-12 变量契约（424 定义名、⊇418、0 悬空、6 个
         expect(missing.sort(), 'glass 缺少的 shadlike 定义名').toEqual([]);
     });
 
-    it('glass 比 shadlike 多出的名字恰好是 6 个 --nue-glass-* 基元', () => {
+    it('glass 比 shadlike 多出的名字恰好是 6 个 --nue-glass-* 基元 + --nue-font-mono', () => {
         const extra = [...glassDefinitions].filter(name => !shadlikeDefinitions.has(name)).sort();
-        expect(extra).toEqual([...GLASS_PRIMITIVES].sort());
+        expect(extra).toEqual([...GLASS_PRIMITIVES, '--nue-font-mono'].sort());
     });
 
     it('引用未定义 = 0（shadlike 的 --nue-hsl-90 / --nue-text-font-style 不得继承）', () => {
@@ -190,17 +194,19 @@ describe('AC-10 / AC-12 变量契约（424 定义名、⊇418、0 悬空、6 个
         ).toBeGreaterThan(0);
     });
 
-    it('主门禁：global/variables.css 定义名 = 149（143 + 6），新增名仅 --nue-glass-*', () => {
+    it('主门禁：global/variables.css 定义名 = 150（143 + 6 + font-mono），新增名闭集', () => {
         const glassGlobal = new Set(collectDefinitions(readCss(GLASS_SRC, 'global/variables.css')));
         const shadlikeGlobal = new Set(
             collectDefinitions(readCss(SHADLIKE_SRC, 'global/variables.css'))
         );
-        expect(glassGlobal.size, 'glass 全局定义名').toBe(149);
+        expect(glassGlobal.size, 'glass 全局定义名').toBe(150);
         expect(shadlikeGlobal.size, 'shadlike 全局定义名').toBe(143);
         const missing = [...shadlikeGlobal].filter(name => !glassGlobal.has(name));
         expect(missing, '全局层缺失名').toEqual([]);
         const extra = [...glassGlobal].filter(name => !shadlikeGlobal.has(name)).sort();
-        expect(extra, '全局层新增名必须是 6 个 glass 基元').toEqual([...GLASS_PRIMITIVES].sort());
+        expect(extra, '全局层新增名必须是 6 个 glass 基元 + --nue-font-mono').toEqual(
+            [...GLASS_PRIMITIVES, '--nue-font-mono'].sort()
+        );
     });
 
     it('组件层：每个文件的定义名 ⊆ shadlike 同文件 ∪ 6 个 glass 基元', () => {
@@ -400,12 +406,12 @@ describe('AC-13 同链 ≤1：dialog / drawer / confirm / prompt 各 1 条后代
 /* ------------------------------ 自证：解析器不是空转 ------------------------------ */
 
 describe('结构断言自证（防止解析器空转导致假绿）', () => {
-    it('解析器自证：variables.css 读出 149 个定义名；select.css 为无局部变量的薄封装', () => {
+    it('解析器自证：variables.css 读出 150 个定义名；select.css 为无局部变量的薄封装', () => {
         expect(shadlikeDefinitions.size).toBe(418);
         expect(
             collectDefinitions(readCss(GLASS_SRC, 'global/variables.css')).length,
             'variables.css 定义名'
-        ).toBe(149);
+        ).toBe(150);
         expect(
             collectDefinitions(readCss(GLASS_SRC, 'components/select.css')),
             'select.css 不定义局部变量（浮层由 dropdown.css 承担）'
