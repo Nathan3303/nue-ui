@@ -101,7 +101,7 @@
 
     > .word-counter {
         flex-shrink: 0;
-        color: var(--nue-primary-color-500);
+        color: var(--nue-secondary-text-color);
         font-size: var(--nue-text-xs);
     }
 

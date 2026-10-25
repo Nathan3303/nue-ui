@@ -102,8 +102,8 @@
         }
 
         &::placeholder {
-            color: inherit;
-            opacity: 0.36;
+            color: var(--nue-secondary-text-color);
+            opacity: 1;
         }
     }
 
@@ -125,7 +125,7 @@
         margin-top: var(--nue-gap-xs);
 
         font-size: var(--nue-textarea-font-size);
-        color: var(--nue-primary-color-500);
+        color: var(--nue-secondary-text-color);
 
         > .nue-textarea__actions {
             flex: auto;
