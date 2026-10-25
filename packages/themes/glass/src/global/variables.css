@@ -209,7 +209,7 @@
 
     /* Shadows（多层低透明度，R9） */
     --nue-primary-shadow:
-        0 1px 2px var(--nue-primary-shadow-color), 0 8px 24px var(--nue-secondary-shadow-color);
+        0 1px 2px var(--nue-primary-shadow-color), 0 4px 12px var(--nue-secondary-shadow-color);
     --nue-secondary-shadow:
         0 1px 2px var(--nue-secondary-shadow-color), 0 4px 12px var(--nue-secondary-shadow-color);
 
@@ -265,9 +265,8 @@
     );
     --nue-glass-shadow:
         inset 0 1px 0 hsl(0, 0%, 100%, calc(0.55 - var(--nue-dark-switch) * 0.3)),
-        0 1px 2px hsl(var(--nue-brand-hue), 40%, 10%, calc(0.06 + var(--nue-dark-switch) * 0.1)),
-        0 8px 24px hsl(var(--nue-brand-hue), 40%, 10%, calc(0.1 + var(--nue-dark-switch) * 0.14)),
-        0 24px 64px hsl(var(--nue-brand-hue), 40%, 10%, calc(0.08 + var(--nue-dark-switch) * 0.12));
+        0 2px 6px hsl(var(--nue-brand-hue), 40%, 10%, calc(0.06 + var(--nue-dark-switch) * 0.1)),
+        0 12px 32px hsl(var(--nue-brand-hue), 40%, 10%, calc(0.1 + var(--nue-dark-switch) * 0.14));
 }
 
 /* 三条退化路径（同构、单点覆写 3 条；必须位于基值之后，R6/D4） */

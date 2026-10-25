@@ -8,7 +8,7 @@
     flex-direction: column;
     width: 32%;
     min-width: 24rem;
-    padding: var(--nue-padding-df);
+    padding: 1.25rem;
     box-sizing: border-box;
     gap: var(--nue-gap-df);
     background-color: var(--nue-glass-bg);
