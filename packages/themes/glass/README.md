@@ -92,6 +92,19 @@ import 'nue-ui-theme-glass/dist/index.css';
 
 退化后浮层为不透明实底，文本对比度仍 ≥4.5:1、功能性边框 ≥3:1。
 
+## 使用注意：全屏布局的滚动职责
+
+`.nue-container` 的 `.nue-content` **默认不参与裁剪**（`overflow: visible`），以保证仓内子元素阴影不被
+`backdrop-filter` 纹理边界或容器 `overflow` 裁掉。因此：
+
+- `content` **不是滚动容器**；长内容不会在内部出现滚动条；
+- 用 `.nue-container` 搭「锁全屏高度」的布局时，**滚动要由使用方承担**：要么让外层页面滚动
+  （把 `html/body/#app` 与容器的 `height` 放开为 `auto`，如本仓 `apps/playground` 的做法），
+  要么在自己的页面层另建滚动区；
+- 若把浮层渲染进自建 `overflow: hidden` 容器（非 teleport），阴影仍会被该容器裁掉——属消费方用法问题。
+
+参考实现：`apps/playground/src/playground.css` + `App.vue`（页面级滚动）。
+
 ## 构建
 
 ```bash

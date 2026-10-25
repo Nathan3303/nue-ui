@@ -39,7 +39,8 @@ const handleSwitchDarkTheme = () => {
 
 <style scoped>
 #PlaygroundAppContainer {
-    height: 100%;
+    height: auto;
+    min-height: 100vh;
     background-color: var(--nue-primary-color-0);
 }
 </style>
