@@ -3,7 +3,7 @@
 .nue-date-picker {
     .nue-text--placeholder {
         font-size: inherit;
-        color: var(--nue-primary-color-500);
+        color: var(--nue-secondary-text-color);
     }
 }
 
@@ -245,7 +245,7 @@
 
             .nue-calendar-time-picker__label {
                 font-size: var(--nue-text-xs);
-                color: var(--nue-primary-color-500);
+                color: var(--nue-secondary-text-color);
             }
 
             .nue-calendar-time-picker__controls {

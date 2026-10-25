@@ -2,8 +2,10 @@
     --nue-progress-flex: auto;
     --nue-progress-stroke-width: 6px;
     --nue-progress-outerbar-background-color: var(--nue-primary-color-200);
-    --nue-progress-innerbar-background-color: var(--nue-primary-color-500);
-    --nue-progress-text-color: var(--nue-primary-color-0);
+    --nue-progress-innerbar-background-color: var(--nue-primary-color-600);
+    /* 条内文字固定在蓝底上：白字两模式恒定（primary-color-0 在暗色=近黑，
+       会使 600 底上只有 3.63；固定白字 = 5.82 / 4.82，与 D12 目标一致） */
+    --nue-progress-text-color: hsl(0, 0%, 100%);
     --nue-progress-circle-size: 100px;
     --nue-progress-stroke-dash-array: 314;
     --nue-progress-stroke-dash-offset: 314;
