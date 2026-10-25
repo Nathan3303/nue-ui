@@ -1,6 +1,6 @@
 .nue-breadcrumb {
     --nue-breadcrumb-font-size: var(--nue-text-sm);
-    --nue-breadcrumb-color: var(--nue-primary-color-600);
+    --nue-breadcrumb-color: var(--nue-secondary-text-color);
     --nue-breadcrumb-sperator-color: gray;
 }
 
@@ -40,7 +40,6 @@
 
 .nue-breadcrumb .nue-breadcrumb-item .nue-link {
     --nue-link-font-size: var(--nue-text-sm);
-    --nue-link-color: var(--nue-primary-color-500);
     --nue-link-hover-color: var(--nue-primary-color-900);
 
     &.nue-link--actived {

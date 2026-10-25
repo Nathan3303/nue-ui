@@ -68,10 +68,10 @@
 
     .nue-collapse-item {
         .nue-collapse-item__header {
-            color: var(--nue-primary-color-600);
+            color: var(--nue-primary-text-color);
 
             .nue-collapse-item__title {
-                color: var(--nue-primary-color-500);
+                color: var(--nue-secondary-text-color);
                 font-size: var(--nue-text-sm);
             }
 

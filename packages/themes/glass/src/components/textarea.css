@@ -21,7 +21,7 @@
     --nue-textarea-icon-size: var(--nue-textarea-font-size);
     --nue-textarea-icon-color: var(--nue-textarea-color);
 
-    --nue-textarea-border-color: var(--nue-divider-color);
+    --nue-textarea-border-color: var(--nue-border-color);
     --nue-textarea-background-color: transparent;
 
     --nue-textarea-hover-border-color: var(--nue-primary-color-600);

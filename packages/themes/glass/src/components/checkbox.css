@@ -1,6 +1,6 @@
 .nue-checkbox {
     --nue-checkbox-label-size: var(--nue-text-sm);
-    --nue-checkbox-label-color: var(--nue-primary-color-500);
+    --nue-checkbox-label-color: var(--nue-secondary-text-color);
     --nue-checkbox-icon-size: calc(var(--nue-checkbox-label-size) * 1.4);
     --nue-checkbox-icon-color: var(--nue-primary-color-700);
 }

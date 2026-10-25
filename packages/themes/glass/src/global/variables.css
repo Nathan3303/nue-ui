@@ -111,7 +111,13 @@
     --nue-error-color-100: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l25));
 
     /* Theme */
-    --nue-link-color: hsl(var(--nue-brand-hue), var(--nue-hsl-s90), var(--nue-hsl-l30));
+    /* 链接与次文本同值（亮 30% / 暗 75%）：700 的玻璃最坏（暗 4.39）低于 AC-09，
+       且消费方直接引用该 token 时不应踩坑 */
+    --nue-link-color: hsl(
+        var(--nue-brand-hue),
+        var(--nue-hsl-s90),
+        calc(30% + var(--nue-dark-switch) * 45%)
+    );
     --nue-divider-color: hsl(var(--nue-brand-hue), 30%, calc(88% - var(--nue-dark-switch) * 64%));
     /* 功能性边框：识别控件所必需的边界，对比度 ≥3:1（见 PRD AC-08/AC-09） */
     --nue-border-color: hsl(

@@ -4,10 +4,6 @@
     --nue-link-lo: calc(var(--nue-dark-prefix) * 10);
     --nue-link-lop: calc(var(--nue-dark-prefix) * 10%);
 
-    /* 文字步进：次文本（暗 75%）/ 800 hover / 900 active。
-       全局 --nue-link-color 保持 700，但其玻璃最坏（暗 4.39）低于 AC-09 阈值，
-       故组件映射走亮度更高一档的次文本 token（4.89 / 5.11）。 */
-    --nue-link-color: var(--nue-secondary-text-color);
     --nue-link-text-decoration: none;
     --nue-link-background-color: var(--nue-link-base-color);
     --nue-link-border-color: transparent;

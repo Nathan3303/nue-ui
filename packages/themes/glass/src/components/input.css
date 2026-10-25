@@ -5,11 +5,11 @@
 
     --nue-input-font-size: var(--nue-text-sm);
     --nue-input-color: var(--nue-primary-color-900);
-    --nue-input-placeholder-color: var(--nue-primary-color-500);
+    --nue-input-placeholder-color: var(--nue-secondary-text-color);
     --nue-input-icon-size: var(--nue-input-font-size);
     --nue-input-icon-color: var(--nue-input-color);
 
-    --nue-input-border-color: var(--nue-divider-color);
+    --nue-input-border-color: var(--nue-border-color);
     --nue-input-background-color: transparent;
 
     --nue-input-hover-border-color: var(--nue-primary-color-600);
