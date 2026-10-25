@@ -12,6 +12,7 @@
     max-width: calc(100vw - 2rem);
     height: auto;
     max-height: calc(100vh - 2rem);
+    /* 1.25rem：Class-1 面板 padding 预算（S2：≥20px 且 ≥ maxChildExtent+4），不得下调 */
     padding: 1.25rem;
     background-color: var(--nue-glass-bg);
     backdrop-filter: var(--nue-glass-blur);
@@ -22,11 +23,16 @@
     animation-timing-function: ease-in;
     animation-fill-mode: forwards;
 
+    font-family: var(--nue-primary-font-family);
+    color: var(--nue-primary-text-color);
+
     > .nue-confirm__header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         font-size: var(--nue-text-df);
+        font-weight: 500;
+        letter-spacing: -0.01em;
         color: var(--nue-primary-text-color);
     }
 

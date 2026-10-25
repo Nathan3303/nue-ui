@@ -23,15 +23,21 @@
     width: auto;
     height: auto;
     overflow: hidden;
+    /* 1.25rem：Class-1 面板 padding 预算（S2：≥20px 且 ≥ maxChildExtent+4），不得下调 */
     padding: 1.25rem;
     background-color: var(--nue-glass-bg);
     backdrop-filter: var(--nue-glass-blur);
     border: 1px solid var(--nue-glass-border);
+    border-radius: var(--nue-primary-radius);
     box-shadow: var(--nue-glass-shadow);
     box-sizing: border-box;
     position: absolute;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
+
+    font-family: var(--nue-primary-font-family);
+    font-size: var(--nue-text-sm);
+    color: var(--nue-primary-text-color);
 
     &[data-direction='top'] {
         top: 0;
