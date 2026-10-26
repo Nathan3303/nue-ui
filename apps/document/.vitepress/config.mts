@@ -1,12 +1,16 @@
 import { defineConfig } from 'vitepress';
 import { componentPreview, containerPreview } from '@vitepress-demo-preview/plugin';
+// 纯 JS 实现（Node 自证脚本与浏览器共用），类型见 theme-css.d.mts
+import { createThemeBootScript } from './theme/theme-css.mjs';
+
+const base = '/nue-ui/';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
     lang: 'zh-CN',
     title: 'NueUI',
     description: '一个基于 Vue3 的 UI 组件库',
-    base: '/nue-ui/',
+    base,
     appearance: true,
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
@@ -234,7 +238,11 @@ export default defineConfig({
             copyright: 'Copyright © 2026-present Nathan Lee'
         }
     },
-    head: [['link', { rel: 'icon', href: '/nue-ui/favicon.ico' }]],
+    head: [
+        ['link', { rel: 'icon', href: `${base}favicon.ico` }],
+        // 首屏主题引导：在样式生效前写入唯一一条主题 <link>，避免先闪 shadlike 再跳 glass
+        ['script', {}, createThemeBootScript(base)]
+    ],
     markdown: {
         config(md) {
             md.use(containerPreview, { clientOnly: true });

@@ -5,9 +5,11 @@
     "author": "Nathan Lee",
     "license": "MIT",
     "scripts": {
-        "dev": "vitepress dev",
-        "build": "vitepress build",
-        "preview": "vitepress preview"
+        "dev": "node scripts/sync-themes.mjs && vitepress dev",
+        "build": "node scripts/sync-themes.mjs && vitepress build && node scripts/verify-theme-switch.mjs",
+        "preview": "vitepress preview",
+        "sync-themes": "node scripts/sync-themes.mjs",
+        "verify-theme-switch": "node scripts/verify-theme-switch.mjs"
     },
     "devDependencies": {
         "@types/markdown-it": "^14.1.2",
