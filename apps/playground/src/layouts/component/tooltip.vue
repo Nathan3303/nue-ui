@@ -58,9 +58,10 @@
 
 <script lang="ts" setup>
 import { NueDiv, NueText, NueButton, NueTooltip, NueLink } from '@nue-ui/components';
+import type { NueTooltipPlacement } from '@nue-ui/components';
 import Demo from '@/components/demo.vue';
 
-const tooltips = [
+const tooltips: { placement: NueTooltipPlacement; content: string; buttonText: string }[] = [
     { placement: 'top-start', content: '上方左对齐', buttonText: '上左' },
     { placement: 'top-center', content: '上方居中', buttonText: '上中' },
     { placement: 'top-end', content: '上方右对齐', buttonText: '上右' },
