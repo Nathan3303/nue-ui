@@ -87,8 +87,13 @@
             gap: var(--nue-aside-gap);
 
             &[data-collapsed='true'] {
-                /*min-width: 4.5rem;*/
-                /*width: 4.5rem !important;*/
+                /* 折叠宽度由组件内联的 --nue-aside-width / -min-width / -max-width 承载
+                   （aside.vue），主题只负责把「收起后仍然占位」的东西清掉，不用 !important。 */
+                /* aside 是 content-box：内边距/间距不清零，宽度收到 0 仍会留下 2 × padding */
+                padding: 0;
+                gap: 0;
+                /* 收起后内容必须裁掉，否则会溢出到 content 上 */
+                overflow: hidden;
                 transition: width var(--nue-aside-animation-duration) ease-out;
             }
         }

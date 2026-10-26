@@ -98,6 +98,8 @@ demo-preview=./nested.vue
     - `NueHeader` 和 `NueFooter` 支持设置宽高
     - `NueMain` 不支持直接设置宽高，通过父容器控制
     - `NueAside` 支持 `width`、`minWidth`、`maxWidth` 控制宽度范围
+    - `NueAside` 的 `collapsed` 是受控折叠开关：默认收窄到 `4.5rem`（图标模式），
+      配合 `collapsed-width="0"` 则完全隐藏
 3. **拖拽调整**：`NueSeparator` 组件需要与 `NueAside` 配合使用，通过 `opTarget` 属性指定操作目标。
 4. **嵌套布局**：使用 `nested` 系列主题时，需要为不同容器应用不同的主题类。
 
@@ -130,13 +132,14 @@ demo-preview=./nested.vue
 
 ### NueAside 属性
 
-| 属性             | Type                                            | 默认值 | 说明                           |
-| ---------------- | ----------------------------------------------- | ------ | ------------------------------ |
-| `width`          | `string`                                        | -      | 宽度                           |
-| `minWidth`       | `string`                                        | -      | 最小宽度                       |
-| `maxWidth`       | `string`                                        | -      | 最大宽度                       |
-| `collapsedWidth` | `string`                                        | -      | 折叠宽度                       |
-| `theme`          | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+| 属性             | Type                                            | 默认值  | 说明                                                |
+| ---------------- | ----------------------------------------------- | ------- | --------------------------------------------------- |
+| `width`          | `string`                                        | -       | 宽度                                                |
+| `minWidth`       | `string`                                        | -       | 最小宽度                                            |
+| `maxWidth`       | `string`                                        | -       | 最大宽度                                            |
+| `collapsed`      | `boolean`                                       | `false` | 是否折叠（受控）                                    |
+| `collapsedWidth` | `string`                                        | -       | 折叠宽度；缺省 `4.5rem`（图标模式），`0` 为完全隐藏 |
+| `theme`          | `string \| string[] \| Record<string, boolean>` | -       | 主题样式（继承自 GlobalProps）                      |
 
 ### NueContent 属性
 
