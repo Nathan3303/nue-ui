@@ -3,6 +3,7 @@
         <nue-aside
             id="pg-component-aside"
             class="pg-aside"
+            :class="{ 'pg-aside--collapsed': !asideVisible }"
             :width="asideWidth"
             :min-width="asideWidth"
             :max-width="asideWidth"
@@ -77,7 +78,9 @@
                 </nue-collapse>
             </nue-div>
         </nue-aside>
-        <nue-separator v-show="asideVisible" op-target="previous" />
+        <!-- 0.2.2：aside 宽度由外壳固定（240px / 窄屏 0），分隔线不能再拖；
+             禁用后既不会空拖，也不会把主题的 data-collapsed 写脏（会打断 aside 滚动） -->
+        <nue-separator v-show="asideVisible" op-target="previous" disabled />
         <nue-content>
             <router-view />
         </nue-content>
@@ -195,8 +198,9 @@ watch(
     box-sizing: border-box;
 }
 
-/* data-collapsed 由主题定义过渡，这里补上「收起时不外溢」 */
-.pg-aside[data-collapsed='true'] {
+/* 收起时不外溢。刻意用外壳自己的类而不是主题的 data-collapsed 属性：
+   `nue-separator` 拖拽也会写这个属性，会把 aside 的 overflow 打回 hidden。 */
+.pg-aside--collapsed {
     overflow: hidden;
 }
 
