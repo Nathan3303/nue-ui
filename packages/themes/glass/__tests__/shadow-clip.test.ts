@@ -28,6 +28,7 @@ import {
     resolveCascade,
     resolveNumeric,
     resolvePadding,
+    resolvePaddingBySubject,
     selectorSubject,
     shadowExtent,
     splitSelectorList,
@@ -377,6 +378,59 @@ describe('S4–S6 包装层 overflow（按最终计算值，src + dist 双证）
 
         expect(specificity('.a > .b > .c')).toBe(300);
         expect(specificity('.a')).toBe(100);
+    });
+});
+
+/* ------------------------------ S9 ------------------------------ */
+
+/**
+ * S9（T88）：`.nue-content` 自身是滚动容器，而滚动容器会裁掉溢出 padding box 的绘制
+ * ⇒ padding 必须 ≥ `maxChildExtent + 4`，否则 content 内子元素阴影被裁。
+ *
+ * 与 S2 同构（同一套简写/长写解析），但按 **subject + 级联** 取值：
+ * content 的 padding 声明写在 `.nue-container > .nue-main > .nue-content` 这类嵌套规则里，
+ * 按精确选择器匹配的 `resolvePadding` 拿不到 —— 这也正是这条契约此前没有门禁的原因。
+ */
+describe('S9 .nue-content padding 预算（min ≥ maxChildExtent+4）', () => {
+    for (const [label, css] of [
+        ['src', containerSrc],
+        ['dist', containerDist]
+    ] as const) {
+        it(`S9 ${label}：.nue-content 四边最小 padding ≥ ${maxChildExtent}+4`, () => {
+            const { sides, matches } = resolvePaddingBySubject(css, '.nue-content', 0, store);
+            expect(
+                matches.length,
+                `${label} .nue-content 的 padding 候选规则数（非空自证）`
+            ).toBeGreaterThan(0);
+            const min = Math.min(sides.top, sides.right, sides.bottom, sides.left);
+            expect(
+                min,
+                `${label} .nue-content padding = ${JSON.stringify(sides)}；候选：${matches
+                    .map(match => `${match.selector}{${match.value}}`)
+                    .join(' / ')}`
+            ).toBeGreaterThanOrEqual(maxChildExtent + 4);
+        });
+    }
+
+    it('变异自证：content padding 改成 0 后 S9 判据会红', () => {
+        const mutated = containerSrc.replace(
+            /padding: var\(--nue-padding-sm\);\s*overflow: auto;/,
+            'padding: 0;\n            overflow: auto;'
+        );
+        expect(mutated, '变异未生效（源码形状变了？）—— 否则本自证空转').not.toBe(containerSrc);
+        const { sides } = resolvePaddingBySubject(mutated, '.nue-content', 0, store);
+        const min = Math.min(sides.top, sides.right, sides.bottom, sides.left);
+        expect(min, `变异后 .nue-content padding = ${JSON.stringify(sides)}`).toBe(0);
+        expect(min).toBeLessThan(maxChildExtent + 4);
+    });
+
+    it('解析器自证：subject 级联下简写 + 长写取到最终值（合成样本）', () => {
+        const synthetic =
+            '.c { padding-left: 0.5rem; } .p > .c { padding: 0.625rem; padding-left: 2rem; }';
+        const { sides, matches } = resolvePaddingBySubject(synthetic, '.c', 0, store);
+        // spec 100 在前、spec 200 在后（级联升序）；后者简写把所有边重置 10，再被长写改回 left 32
+        expect(matches.map(match => match.specificity)).toEqual([100, 200]);
+        expect(sides).toEqual({ top: 10, right: 10, bottom: 10, left: 32 });
     });
 });
 
