@@ -50,7 +50,7 @@
                 <nue-divider vertical class="pg-header__divider" />
                 <nue-div width="fit-content" align="center" gap=".75rem" class="pg-header__meta">
                     <nue-text size="xs" color="var(--nue-secondary-text-color)">
-                        {{ componentCount }} 组件 · v{{ version }}
+                        {{ componentCount }} 个演示 · v{{ version }}
                     </nue-text>
                     <nue-link
                         href="https://github.com/Nathan3303/nue-ui"
