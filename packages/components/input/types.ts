@@ -24,6 +24,8 @@ export interface NueInputProps extends GlobalProps {
     debounceTime?: number;
     flex?: string | boolean;
     name?: string;
+    /** 透传给内部 <input> 的附加属性（如 aria-label、autocomplete、inputmode）；组件自身属性优先。 */
+    inputAttrs?: Record<string, string | number | boolean | undefined>;
 }
 
 export type NueInputEmits = {

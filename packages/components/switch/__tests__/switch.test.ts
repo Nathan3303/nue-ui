@@ -64,6 +64,53 @@ describe('NueSwitch', () => {
         });
     });
 
+    describe('可访问性', () => {
+        it('应该暴露 switch 语义与可访问名', () => {
+            const wrapper = mount(NueSwitch, {
+                props: { modelValue: false },
+                attrs: { 'aria-label': '通知开关' }
+            });
+            const switchEl = wrapper.find('.nue-switch');
+            expect(switchEl.attributes('role')).toBe('switch');
+            expect(switchEl.attributes('aria-checked')).toBe('false');
+            expect(switchEl.attributes('tabindex')).toBe('0');
+            expect(switchEl.attributes('aria-label')).toBe('通知开关');
+        });
+
+        it('aria-checked 应该跟随状态变化', async () => {
+            const wrapper = mount(NueSwitch, { props: { modelValue: false } });
+            const switchEl = wrapper.find('.nue-switch');
+            await wrapper.setProps({ modelValue: true });
+            expect(switchEl.attributes('aria-checked')).toBe('true');
+        });
+
+        it('禁用时应该不可聚焦且标记 aria-disabled', () => {
+            const wrapper = mount(NueSwitch, { props: { disabled: true } });
+            const switchEl = wrapper.find('.nue-switch');
+            expect(switchEl.attributes('tabindex')).toBe('-1');
+            expect(switchEl.attributes('aria-disabled')).toBe('true');
+        });
+
+        it('Space 应该切换状态', async () => {
+            const wrapper = mount(NueSwitch, { props: { modelValue: false } });
+            await wrapper.find('.nue-switch').trigger('keydown', { key: ' ' });
+            expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([true]);
+            expect(wrapper.emitted('change')?.[0]).toEqual([true]);
+        });
+
+        it('Enter 应该切换状态', async () => {
+            const wrapper = mount(NueSwitch, { props: { modelValue: false } });
+            await wrapper.find('.nue-switch').trigger('keydown', { key: 'Enter' });
+            expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([true]);
+        });
+
+        it('禁用时键盘不应该切换状态', async () => {
+            const wrapper = mount(NueSwitch, { props: { modelValue: false, disabled: true } });
+            await wrapper.find('.nue-switch').trigger('keydown', { key: ' ' });
+            expect(wrapper.emitted('update:modelValue')).toBeFalsy();
+        });
+    });
+
     describe('插槽渲染', () => {
         it('应该渲染 circle 插槽', () => {
             const wrapper = mount(NueSwitch, {

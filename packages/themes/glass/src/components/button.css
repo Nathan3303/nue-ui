@@ -181,7 +181,9 @@
     --nue-button-base-color: transparent;
     --nue-button-border-color: transparent;
     --nue-button-hover-bg-color: var(--nue-primary-color-100);
-    --nue-button-active-bg-color: var(--nue-primary-color-200);
+    --nue-button-hover-border-color: transparent;
+    --nue-button-active-bg-color: var(--nue-primary-color-300);
+    --nue-button-active-border-color: transparent;
 }
 
 .nue-button.nue-button--icon {

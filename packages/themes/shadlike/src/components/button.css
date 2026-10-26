@@ -140,6 +140,10 @@
 .nue-button.nue-button--ghost {
     box-shadow: none;
     --nue-button-border-color: transparent;
+    --nue-button-hover-bg-color: var(--nue-primary-color-100);
+    --nue-button-hover-border-color: transparent;
+    --nue-button-active-bg-color: var(--nue-primary-color-200);
+    --nue-button-active-border-color: transparent;
 }
 
 .nue-button.nue-button--icon {

@@ -122,6 +122,12 @@
         &:hover {
             color: var(--nue-input-opbtn-hover-color);
         }
+
+        &:focus-visible {
+            outline: 2px solid var(--nue-input-focus-border-color);
+            outline-offset: -2px;
+            border-radius: 2px;
+        }
     }
 
     > .nue-input__suffix {

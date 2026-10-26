@@ -242,6 +242,73 @@ describe('NueInput', () => {
         });
     });
 
+    describe('可访问性', () => {
+        it('inputAttrs 应该透传到内部 input', () => {
+            const wrapper = mount(NueInput, {
+                props: {
+                    inputAttrs: {
+                        'aria-label': '用户名',
+                        autocomplete: 'username',
+                        inputmode: 'text'
+                    }
+                }
+            });
+            const input = wrapper.find('input');
+            expect(input.attributes('aria-label')).toBe('用户名');
+            expect(input.attributes('autocomplete')).toBe('username');
+            expect(input.attributes('inputmode')).toBe('text');
+        });
+
+        it('inputAttrs 不应覆盖组件自身属性', () => {
+            const wrapper = mount(NueInput, {
+                props: { placeholder: '请输入', inputAttrs: { placeholder: '冲突值' } }
+            });
+            expect(wrapper.find('input').attributes('placeholder')).toBe('请输入');
+        });
+
+        it('未使用 inputAttrs 时，普通 attrs 仍落在根元素', () => {
+            const wrapper = mount(NueInput, { attrs: { 'data-test': 'root' } });
+            expect(wrapper.find('.nue-input').attributes('data-test')).toBe('root');
+            expect(wrapper.find('input').attributes('data-test')).toBeUndefined();
+        });
+
+        it('clear 按钮应该可聚焦且有可访问名', () => {
+            const wrapper = mount(NueInput, { props: { modelValue: 'test', clearable: true } });
+            const clearButton = wrapper.find('.nue-input__icon-button');
+            expect(clearButton.attributes('role')).toBe('button');
+            expect(clearButton.attributes('tabindex')).toBe('0');
+            expect(clearButton.attributes('aria-label')).toBe('清除输入');
+        });
+
+        it('clear 按钮应该支持 Enter 与 Space', async () => {
+            const wrapper = mount(NueInput, { props: { modelValue: 'test', clearable: true } });
+            const clearButton = wrapper.find('.nue-input__icon-button');
+            await clearButton.trigger('keydown', { key: 'Enter' });
+            expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['']);
+            await clearButton.trigger('keydown', { key: ' ' });
+            expect(wrapper.emitted('update:modelValue')?.[1]).toEqual(['']);
+        });
+
+        it('密码切换按钮应该支持键盘操作并可感知开关状态', async () => {
+            const wrapper = mount(NueInput, {
+                props: { type: 'password', modelValue: '123456', allowShowPassword: true }
+            });
+            const eyeButton = wrapper.find('.nue-input__icon-button');
+            expect(eyeButton.attributes('role')).toBe('button');
+            expect(eyeButton.attributes('tabindex')).toBe('0');
+            expect(eyeButton.attributes('aria-label')).toBe('显示密码');
+            expect(eyeButton.attributes('aria-pressed')).toBe('false');
+
+            await eyeButton.trigger('keydown', { key: 'Enter' });
+            expect(wrapper.find('input').attributes('type')).toBe('text');
+            expect(eyeButton.attributes('aria-label')).toBe('隐藏密码');
+            expect(eyeButton.attributes('aria-pressed')).toBe('true');
+
+            await eyeButton.trigger('keydown', { key: ' ' });
+            expect(wrapper.find('input').attributes('type')).toBe('password');
+        });
+    });
+
     describe('插槽渲染', () => {
         it('应该渲染 prefix 插槽', () => {
             const wrapper = mount(NueInput, {
