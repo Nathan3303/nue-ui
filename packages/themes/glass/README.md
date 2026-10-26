@@ -179,6 +179,6 @@ pnpm --filter nue-ui-theme-glass build
 
 ## 状态
 
-已发布 `0.1.0`（Apple HIG 临摹版）；`0.2.0`（Frostline 重设计）在 PR 中。
+已发布 `0.1.0`（Apple HIG 临摹版）与 `0.2.0`（Frostline 重设计）。
 质量门禁：687 例测试、254 组对比度配对、11 条结构断言（A1–A11）+ 8 条阴影裁剪断言（S1–S8），
 每组均带「防假绿自证」。
