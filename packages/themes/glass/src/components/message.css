@@ -50,6 +50,7 @@
     margin-top: -3rem;
     margin-bottom: var(--nue-gap-xs);
     opacity: 0;
+    font-family: var(--nue-primary-font-family);
     font-size: var(--nue-message-node-inner-font-size);
     color: var(--nue-message-node-inner-color);
 
@@ -87,31 +88,20 @@
 }
 
 /* 语义变体：玻璃底不变（bg/border 保持玻璃基元），只换文字与图标色。
-   文字色走 l20 单步（亮 20% / 暗 80%），对玻璃最坏背景仍 ≥4.5:1（AC-08/09）。 */
+   文字统一走语义文本档（*-color-100，亮 27% / 暗 73%）：三色同档，
+   任一处调色都不会让 success/warning/error 错位。 */
 .nue-message-node-inner.nue-message-node-inner--success {
-    --nue-message-node-inner-color: hsl(
-        var(--nue-success-hue),
-        var(--nue-hsl-s70),
-        var(--nue-hsl-l20)
-    );
+    --nue-message-node-inner-color: var(--nue-success-color-100);
     --nue-message-node-inner-icon-color: var(--nue-message-node-inner-color);
 }
 
 .nue-message-node-inner.nue-message-node-inner--warning {
-    --nue-message-node-inner-color: hsl(
-        var(--nue-warning-hue),
-        var(--nue-hsl-s80),
-        var(--nue-hsl-l20)
-    );
+    --nue-message-node-inner-color: var(--nue-warning-color-100);
     --nue-message-node-inner-icon-color: var(--nue-message-node-inner-color);
 }
 
 .nue-message-node-inner.nue-message-node-inner--error {
-    --nue-message-node-inner-color: hsl(
-        var(--nue-error-hue),
-        var(--nue-hsl-s80),
-        var(--nue-hsl-l20)
-    );
+    --nue-message-node-inner-color: var(--nue-error-color-100);
     --nue-message-node-inner-icon-color: var(--nue-message-node-inner-color);
 }
 

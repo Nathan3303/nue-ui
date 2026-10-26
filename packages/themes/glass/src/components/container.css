@@ -2,7 +2,7 @@
     --nue-container-width: 100%;
     --nue-container-height: 100%;
     --nue-container-inner-border-color: var(--nue-divider-color);
-    --nue-container-inner-gap: 1rem;
+    --nue-container-inner-gap: var(--nue-gap-df);
 }
 
 .nue-container {

@@ -50,6 +50,8 @@
     animation-fill-mode: forwards;
     box-sizing: border-box;
 
+    font-family: var(--nue-primary-font-family);
+
     .nue-tooltip__padding {
         position: absolute;
     }

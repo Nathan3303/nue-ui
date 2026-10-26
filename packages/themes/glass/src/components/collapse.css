@@ -1,5 +1,5 @@
 .nue-collapse {
-    --nue-collapse-gap: 0.5rem;
+    --nue-collapse-gap: var(--nue-gap-sm);
 
     .nue-collapse-item {
         --nue-collapse-item-height: auto;
@@ -35,7 +35,7 @@
             }
 
             .nue-collapse-item__title {
-                font-size: 0.95rem;
+                font-size: var(--nue-text-sm);
 
                 &:hover {
                     text-decoration: underline;
@@ -64,7 +64,7 @@
 }
 
 .nue-collapse.nue-collapse--menu {
-    --nue-collapse-gap: 1rem;
+    --nue-collapse-gap: var(--nue-gap-df);
 
     .nue-collapse-item {
         .nue-collapse-item__header {
@@ -78,7 +78,7 @@
             .nue-collapse-item__toggle-button,
             .outter-toggle-button {
                 .nue-icon {
-                    --icon-color: var(--nue-primary-color-500);
+                    --icon-color: var(--nue-secondary-text-color);
                 }
             }
         }
@@ -89,7 +89,7 @@
         }
 
         &[data-collapsed='false'] .nue-collapse-item__content {
-            margin-top: 1rem;
+            margin-top: var(--nue-gap-df);
         }
     }
 }

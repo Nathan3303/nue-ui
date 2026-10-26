@@ -1,26 +1,35 @@
+/* Frostline · Button
+ *
+ * 表面分类（PRD §七）：
+ * - default / secondary = 表面 A：primary-color-0 底 + border-color 描边 + 0 1px 2px
+ * - primary / success / warning / error = 表面 C：600（或语义实心色）底 + 白字，无阴影
+ * - destructive = 表面 A 的错误变体：透明底 + Ember 描边 + Ember 文字
+ * - ghost / pure = 无面（只有文字）
+ * 强调一律用描边（hover/active 改 border-color 与底色），不叠影。
+ */
 .nue-button {
     --nue-button-flex: none;
     --nue-button-alignment: start;
     --nue-button-base-color: var(--nue-primary-color-0);
     --nue-button-font-size: var(--nue-text-sm);
+    /* shadlike 同名占位变量（glass 不参与 calc 派生，仅保持定义名契约） */
     --nue-button-lo: 5;
 
     --nue-button-color: var(--nue-primary-text-color);
     --nue-button-bg-color: var(--nue-button-base-color);
-    /* 功能性边框：识别可操作控件所必需的边界，对比度 ≥3:1（AC-08） */
     --nue-button-border-color: var(--nue-border-color);
 
     --nue-button-hover-color: var(--nue-button-color);
     --nue-button-hover-bg-color: var(--nue-primary-color-100);
-    --nue-button-hover-border-color: var(--nue-border-color);
+    --nue-button-hover-border-color: var(--nue-primary-color-600);
 
     --nue-button-active-color: var(--nue-button-color);
     --nue-button-active-bg-color: var(--nue-primary-color-200);
-    --nue-button-active-border-color: var(--nue-border-color);
+    --nue-button-active-border-color: var(--nue-primary-color-700);
 
-    --nue-button-disable-color: var(--nue-button-color);
-    --nue-button-disable-bg-color: var(--nue-button-hover-bg-color);
-    --nue-button-disable-border-color: var(--nue-button-hover-border-color);
+    --nue-button-disable-color: var(--nue-secondary-text-color);
+    --nue-button-disable-bg-color: var(--nue-primary-color-100);
+    --nue-button-disable-border-color: var(--nue-divider-color);
 }
 
 .nue-button {
@@ -36,6 +45,7 @@
 
     font-family: var(--nue-primary-font-family);
     font-size: var(--nue-button-font-size);
+    font-weight: 500;
 
     width: auto;
     height: var(--nue-box-size-df);
@@ -58,12 +68,18 @@
         background-color: var(--nue-button-active-bg-color);
     }
 
+    &:focus-visible {
+        outline: none;
+        border-color: var(--nue-primary-color-600);
+        box-shadow: 0 0 0 2px hsl(var(--nue-brand-hue), 38%, 44%, 0.28);
+    }
+
     &.nue-button--disabled {
-        opacity: 0.8;
         cursor: not-allowed;
         color: var(--nue-button-disable-color);
         border-color: var(--nue-button-disable-border-color);
         background-color: var(--nue-button-disable-bg-color);
+        box-shadow: none;
     }
 }
 
@@ -78,83 +94,94 @@
     --nue-button-font-size: var(--nue-text-df);
     height: var(--nue-box-size-md);
     padding: 0 var(--nue-padding-df);
-    gap: var(--nue-padding-xs);
+    gap: var(--nue-gap-xs);
 }
 
+/* 表面 C：实心填充（白字 4.87 / 4.99；hover/active 加深，不用影） */
 .nue-button.nue-button--primary {
     --nue-button-color: hsl(0, 0%, 100%);
     --nue-button-base-color: var(--nue-primary-color-600);
     --nue-button-border-color: transparent;
     --nue-button-lo: 15;
 
-    --nue-button-hover-bg-color: hsl(
-        var(--nue-brand-hue),
-        95%,
-        calc(34% + var(--nue-dark-switch) * 5%)
-    );
+    --nue-button-hover-bg-color: hsl(var(--nue-brand-hue), 30%, 34%);
     --nue-button-hover-border-color: transparent;
-    --nue-button-active-bg-color: hsl(
-        var(--nue-brand-hue),
-        95%,
-        calc(30% + var(--nue-dark-switch) * 4%)
-    );
+    --nue-button-active-bg-color: hsl(var(--nue-brand-hue), 30%, 30%);
     --nue-button-active-border-color: transparent;
+
+    box-shadow: none;
 }
 
+/* 次级：淡青底，无描边（视觉权重低于 default 的可点面） */
 .nue-button.nue-button--secondary {
     --nue-button-border-color: transparent;
     --nue-button-base-color: var(--nue-primary-color-200);
+    --nue-button-hover-bg-color: var(--nue-primary-color-300);
+    --nue-button-active-bg-color: var(--nue-primary-color-400);
+
+    box-shadow: none;
 }
 
-/* 语义按钮需满足 AA：文字对填充 ≥4.5:1、描边/图形对底色 ≥3:1（浅色与深色两套阶梯均需满足）。
-   实心语义按钮的填充/文字均取令牌，使其随深色模式翻转（浅色=深底浅字，深色=浅底深字）。
-   详见 packages/themes/shadlike/__tests__/contrast.test.ts。 */
+/* 错误描边（Ember）：文字/描边对自身底 10.76 / 7.88，hover 底 9.87 / 8.25 */
 .nue-button.nue-button--destructive {
     --nue-button-base-color: transparent;
     --nue-button-color: var(--nue-error-color-100);
     --nue-button-border-color: var(--nue-error-color-100);
     --nue-button-hover-bg-color: var(--nue-error-color-10);
     --nue-button-hover-border-color: var(--nue-error-color-100);
+    --nue-button-active-bg-color: var(--nue-error-color-20);
     --nue-button-active-border-color: var(--nue-error-color-100);
     --nue-button-lo: 3;
+
+    box-shadow: none;
 }
 
+/* 语义实心填充：两模式固定（PRD §三「语义填充色不翻转」，白字才稳） */
 .nue-button.nue-button--success {
     --nue-button-color: hsl(0, 0%, 100%);
-    --nue-button-base-color: hsl(120, 70%, 30%);
+    --nue-button-base-color: hsl(var(--nue-success-hue), 28%, 30%);
     --nue-button-border-color: transparent;
 
-    --nue-button-hover-bg-color: hsl(120, 70%, 26%);
+    --nue-button-hover-bg-color: hsl(var(--nue-success-hue), 28%, 26%);
     --nue-button-hover-border-color: transparent;
-    --nue-button-active-bg-color: hsl(120, 70%, 22%);
+    --nue-button-active-bg-color: hsl(var(--nue-success-hue), 28%, 22%);
     --nue-button-active-border-color: transparent;
+
+    box-shadow: none;
 }
 
 .nue-button.nue-button--warning {
     --nue-button-color: hsl(0, 0%, 100%);
-    --nue-button-base-color: hsl(30, 80%, 32%);
+    --nue-button-base-color: hsl(var(--nue-warning-hue), 48%, 30%);
     --nue-button-border-color: transparent;
 
-    --nue-button-hover-bg-color: hsl(30, 80%, 28%);
+    --nue-button-hover-bg-color: hsl(var(--nue-warning-hue), 48%, 26%);
     --nue-button-hover-border-color: transparent;
-    --nue-button-active-bg-color: hsl(30, 80%, 24%);
+    --nue-button-active-bg-color: hsl(var(--nue-warning-hue), 48%, 22%);
     --nue-button-active-border-color: transparent;
+
+    box-shadow: none;
 }
 
 .nue-button.nue-button--error {
     --nue-button-color: hsl(0, 0%, 100%);
-    --nue-button-base-color: hsl(10, 80%, 40%);
+    --nue-button-base-color: hsl(var(--nue-error-hue), 47%, 38%);
     --nue-button-border-color: transparent;
 
-    --nue-button-hover-bg-color: hsl(10, 80%, 36%);
+    --nue-button-hover-bg-color: hsl(var(--nue-error-hue), 47%, 34%);
     --nue-button-hover-border-color: transparent;
-    --nue-button-active-bg-color: hsl(10, 80%, 32%);
+    --nue-button-active-bg-color: hsl(var(--nue-error-hue), 47%, 30%);
     --nue-button-active-border-color: transparent;
+
+    box-shadow: none;
 }
 
 .nue-button.nue-button--ghost {
     box-shadow: none;
+    --nue-button-base-color: transparent;
     --nue-button-border-color: transparent;
+    --nue-button-hover-bg-color: var(--nue-primary-color-100);
+    --nue-button-active-bg-color: var(--nue-primary-color-200);
 }
 
 .nue-button.nue-button--icon {
@@ -177,7 +204,10 @@
     box-shadow: none;
 
     --nue-button-base-color: transparent;
+    --nue-button-border-color: transparent;
     --nue-button-color: var(--nue-primary-text-color);
-    --nue-button-hover-color: var(--nue-primary-color-800);
-    --nue-button-active-color: var(--nue-primary-color-700);
+    --nue-button-hover-color: var(--nue-secondary-text-color);
+    --nue-button-hover-bg-color: transparent;
+    --nue-button-active-color: var(--nue-secondary-text-color);
+    --nue-button-active-bg-color: transparent;
 }

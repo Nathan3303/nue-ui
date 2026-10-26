@@ -3,15 +3,16 @@
     --nue-table-color: var(--nue-primary-text-color);
     --nue-table-header-color: var(--nue-secondary-text-color);
     --nue-table-header-bg-color: transparent;
-    --nue-table-header-font-weight: bold;
+    /* 只允许 400/500：表头层级由颜色与分隔线承担，不靠粗体 */
+    --nue-table-header-font-weight: 500;
     --nue-table-row-hover-bg-color: var(--nue-primary-color-100);
     --nue-table-stripe-bg-color: transparent;
-    --nue-table-border-color: transparent;
+    --nue-table-border-color: var(--nue-divider-color);
     --nue-table-radius: 0;
     --nue-table-row-padding: var(--nue-padding-xs) var(--nue-padding-sm);
     --nue-table-compact-row-padding: var(--nue-padding-2xs) var(--nue-padding-sm);
     --nue-table-state-color: var(--nue-secondary-text-color);
-    --nue-table-state-padding: 2.5rem 0;
+    --nue-table-state-padding: var(--nue-padding-lg) 0;
     --nue-table-sort-icon-gap: var(--nue-gap-xs);
 }
 
@@ -21,6 +22,9 @@
     box-sizing: border-box;
     font-size: var(--nue-table-font-size);
     color: var(--nue-table-color);
+    font-family: var(--nue-primary-font-family);
+    /* 表格是数据面：数字一律等宽对齐（AC-09 允许的数据场景） */
+    font-variant-numeric: tabular-nums;
     border-radius: var(--nue-table-radius);
 }
 
@@ -39,7 +43,8 @@
     font-weight: var(--nue-table-header-font-weight);
     text-align: left;
     padding: var(--nue-table-row-padding);
-    border-bottom: 1px solid var(--nue-table-border-color);
+    /* 表头刻线：唯一一处用功能性描边色（结构性分界） */
+    border-bottom: 1px solid var(--nue-border-color);
     white-space: nowrap;
 }
 
@@ -121,7 +126,7 @@
 
 .nue-table.nue-table--border {
     --nue-table-radius: 0;
-    --nue-table-border-color: var(--nue-primary-color-200);
+    --nue-table-border-color: var(--nue-border-color);
 }
 
 .nue-table--border .nue-table__table {

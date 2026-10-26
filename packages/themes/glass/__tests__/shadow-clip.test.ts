@@ -115,14 +115,14 @@ const shadowSources: ShadowSource[] = SHADOW_COMPONENT_FILES.flatMap(file => {
 const maxChildExtent = Math.max(...shadowSources.map(source => source.extent));
 
 describe('S1 子元素阴影最大外溢 maxChildExtent', () => {
-    it('= 16px（7 类可嵌套组件 + focus 变体，var() 链解到底）', () => {
+    it('= 3px（Frostline：唯一近地影 0 1px 2px；focus 锐环 2px 不更大）', () => {
         expect(
             maxChildExtent,
             `实测 ${maxChildExtent}px；来源：${shadowSources
                 .filter(source => source.extent === maxChildExtent)
                 .map(source => `${source.file}:${source.selector}`)
                 .join(' / ')}`
-        ).toBe(16);
+        ).toBe(3);
     });
 
     it('focus 变体确实被收集（非空转）：input/textarea 的 :focus-within 各 1 条', () => {
@@ -130,7 +130,9 @@ describe('S1 子元素阴影最大外溢 maxChildExtent', () => {
         const files = [...new Set(focus.map(source => source.file))].sort();
         expect(files, 'focus 阴影来源').toEqual(['input', 'textarea']);
         for (const source of focus) {
-            expect(source.extent, `${source.file} focus extent`).toBe(16);
+            // Frostline：input / textarea 都是同一枚 2px 锐环（PRD §七.4）。
+            // 这里保留**精确值**断言（不写成 ≤ maxChildExtent，否则锐环退回 12px 光晕也能绿）。
+            expect(source.extent, `${source.file} focus extent`).toBe(2);
         }
     });
 

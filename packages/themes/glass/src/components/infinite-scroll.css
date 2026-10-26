@@ -24,16 +24,16 @@
         > .nue-infinite-scroll__loading-bar,
         > .nue-infinite-scroll__disable-bar {
             display: flex;
-            gap: 0.5rem;
+            gap: var(--nue-gap-sm);
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            padding: var(--nue-padding-df);
             user-select: none;
             -webkit-user-select: none;
         }
 
         > .nue-infinite-scroll__disable-bar {
-            color: gray;
+            color: var(--nue-secondary-text-color);
         }
     }
 }

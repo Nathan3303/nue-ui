@@ -19,7 +19,7 @@
         max-height: 100%;
         padding: var(--nue-padding-2xs) var(--nue-padding-xs);
         background-color: var(--nue-badge-background-color);
-        border-radius: 0.375rem;
+        border-radius: var(--nue-radius-df);
         box-sizing: border-box;
 
         &:is(sup) {
@@ -62,6 +62,6 @@
 .nue-badge.nue-badge--dot.nue-badge--for-ico-btn > .nue-badge__content {
     &:is(sup) {
         transform: translate(0%, -0%);
-        border: 1px solid white;
+        border: 1px solid var(--nue-primary-color-0);
     }
 }

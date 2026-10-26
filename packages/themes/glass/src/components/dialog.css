@@ -1,3 +1,8 @@
+/* Frostline · Dialog
+ *
+ * 表面 B：霜面玻璃（6 基元）。padding 1.25rem 是阴影裁剪的既定约束（S2，不得下调）。
+ * 文本显式落到 primary-text，避免依赖外层继承而绕过对比度核算。
+ */
 .nue-dialog {
     --nue-dialog-open-animation-name: slide-in-from-top;
     --nue-dialog-open-animation-duration: var(--nue-overlay-animation-duration);
@@ -21,7 +26,10 @@
     box-sizing: border-box;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
-    gap: var(--nue-gap-xs);
+    gap: var(--nue-gap-sm);
+
+    font-family: var(--nue-primary-font-family);
+    color: var(--nue-primary-text-color);
 
     > .nue-dialog__header {
         height: auto;
@@ -30,6 +38,8 @@
         align-items: center;
         justify-content: space-between;
         font-size: var(--nue-text-df);
+        font-weight: 500;
+        letter-spacing: -0.01em;
         overflow: visible;
         border: none;
     }

@@ -8,6 +8,7 @@
     flex-direction: column;
     width: 32%;
     min-width: 24rem;
+    /* 1.25rem：Class-1 面板 padding 预算（S2），不得下调 */
     padding: 1.25rem;
     box-sizing: border-box;
     gap: var(--nue-gap-df);
@@ -19,11 +20,16 @@
     animation-timing-function: ease-in;
     animation-fill-mode: forwards;
 
+    font-family: var(--nue-primary-font-family);
+    color: var(--nue-primary-text-color);
+
     .nue-prompt__header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         font-size: var(--nue-text-df);
+        font-weight: 500;
+        letter-spacing: -0.01em;
         color: var(--nue-primary-text-color);
     }
 
@@ -49,7 +55,8 @@
     }
 
     .nue-prompt__value-error {
-        color: hsl(var(--nue-error-hue), var(--nue-hsl-s80), var(--nue-hsl-l20));
+        /* 语义文本档：与 message/error 文本同一档（error-100），不再单开字面值 */
+        color: var(--nue-error-color-100);
         font-size: var(--nue-text-sm);
     }
 

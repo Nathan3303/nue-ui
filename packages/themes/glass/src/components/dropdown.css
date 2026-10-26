@@ -116,8 +116,8 @@
         }
 
         &.nue-dropdown-item--disabled {
-            background-color: var(--nue-primary-color-200);
-            color: var(--nue-primary-color-500);
+            background-color: var(--nue-primary-color-100);
+            color: var(--nue-secondary-text-color);
             cursor: default;
             opacity: 0.8;
         }
@@ -203,7 +203,7 @@
 }
 
 .nue-dropdown.nue-dropdown--menu {
-    padding: 2px 0;
+    padding: var(--nue-padding-2xs) 0;
 
     > .nue-div--block {
         gap: var(--nue-gap-xs);
@@ -215,8 +215,8 @@
             font-size: var(--nue-text-sm);
             font-weight: 500;
             color: var(--nue-secondary-text-color);
-            padding: 2px 6px;
-            margin-bottom: 4px;
+            padding: var(--nue-padding-2xs) var(--nue-padding-xs);
+            margin-bottom: var(--nue-gap-2xs);
             cursor: default;
             user-select: none;
             -webkit-user-select: none;

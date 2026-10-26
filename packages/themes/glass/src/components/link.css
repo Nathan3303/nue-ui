@@ -23,7 +23,7 @@
     --nue-link-actived-background-color: var(--nue-link-active-background-color);
     --nue-link-actived-border-color: var(--nue-link-active-border-color);
 
-    --nue-link-disable-color: var(--nue-primary-color-500);
+    --nue-link-disable-color: var(--nue-secondary-text-color);
     --nue-link-disable-text-decoration: var(--nue-link-text-decoration);
     --nue-link-disable-background-color: var(--nue-link-background-color);
     --nue-link-disable-border-color: var(--nue-link-border-color);
@@ -73,11 +73,12 @@
     --nue-link-color: var(--nue-primary-text-color);
 
     --nue-link-hover-text-decoration: none;
-    --nue-link-hover-background-color: var(--nue-primary-color-200);
+    --nue-link-hover-background-color: var(--nue-primary-color-100);
     --nue-link-hover-border-color: transparent;
 
-    --nue-link-actived-color: var(--nue-primary-color-0);
-    --nue-link-actived-background-color: var(--nue-primary-color-900);
+    /* 当前路由 = 表面 C：填充档 600 + 白字（与 primary 按钮 / 日历选中同一语言） */
+    --nue-link-actived-color: hsl(0, 0%, 100%);
+    --nue-link-actived-background-color: var(--nue-primary-color-600);
 }
 
 .nue-link--route {
