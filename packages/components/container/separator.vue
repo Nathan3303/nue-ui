@@ -31,6 +31,9 @@ const classes = computed(() => {
 const handleMouseDown = (event: MouseEvent) => {
     event.preventDefault();
     if (!opElement.value || props.disabled) return;
+    // `data-collapsed` 是 NueAside 的公共契约（受控折叠）：
+    // 宽度由 collapsed / collapsedWidth 决定，拖拽只会写出与 prop 不一致的宽度，直接不响应。
+    if (opElement.value.dataset.collapsed === 'true') return;
     tempAttrs.originalX = event.clientX;
     tempAttrs.originalWidth = opElement.value.offsetWidth;
     document.documentElement.addEventListener('mousemove', resizeOpElement, false);
@@ -55,8 +58,9 @@ const resizeOpElement = (event: MouseEvent) => {
     }
 };
 
-const convertPercentageWidth = (width: string) => {
-    width = width.trim();
+const convertPercentageWidth = (rawWidth: string | undefined) => {
+    // 有些环境（jsdom）对未声明的 min-width 返回 undefined，直接 trim 会抛错
+    const width = (rawWidth ?? '').trim();
     if (!separatorRef.value) return parseInt(width);
     const parentElement = separatorRef.value.parentElement;
     if (!parentElement || !width.endsWith('%')) return parseInt(width);
@@ -68,7 +72,8 @@ const convertPercentageWidth = (width: string) => {
 const setOpElementWidth = (newWidth: number) => {
     if (!opElement.value) return;
     const isMinimal = newWidth < opElementAttrs.minWidth;
-    opElement.value.dataset.collapsed = `${isMinimal}`;
+    // 私有属性：不动 `data-collapsed`（那是 aside 的公共契约，会误触发其折叠样式）
+    opElement.value.dataset.resizeCollapsed = `${isMinimal}`;
     if (isMinimal) return;
     (opElement.value as HTMLElement).style.width = newWidth + 'px';
     // console.log('[NueSeparator/setOpElementWidth] newWidth', newWidth);
@@ -76,6 +81,8 @@ const setOpElementWidth = (newWidth: number) => {
 
 const handleResetOpElementWidth = () => {
     if (!opElement.value) return;
+    // 同上：受控折叠的目标不写内联宽度（双击复位会留下一份与 collapsed 不一致的宽度）
+    if (opElement.value.dataset.collapsed === 'true') return;
     (opElement.value as HTMLElement).style.width = opElementAttrs.width + 'px';
 };
 

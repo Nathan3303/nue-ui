@@ -18,6 +18,7 @@ export interface NueAsideProps extends GlobalProps {
     width?: string;
     minWidth?: string;
     maxWidth?: string;
+    collapsed?: boolean;
     collapsedWidth?: string;
 }
 
