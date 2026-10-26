@@ -190,6 +190,7 @@ export default defineConfig({
                 {
                     text: '主题',
                     items: [
+                        { text: 'Glass 主题（Frostline）', link: '/theme/glass.md' },
                         { text: '安装与引入', link: '/theme/install.md' },
                         { text: '设计系统（Design Tokens）', link: '/theme/design-tokens.md' },
                         { text: '深色模式', link: '/theme/dark-mode.md' },
