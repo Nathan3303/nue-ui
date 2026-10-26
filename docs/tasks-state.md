@@ -1,20 +1,20 @@
 # 任务状态（接续快照）
 
-> 重开会话先读本文件。更新时间：2026-10-25 → 2026-10-26（**v0.2.0 已合并并打 tag**）
+> 重开会话先读本文件。更新时间：2026-10-25 → 2026-10-26（**v0.2.1 已发布 npm**）
 
-## 当前：Glass v0.2.0 Frostline（重新设计）
+## 当前：Glass v0.2.1 Frostline（重新设计）
 
-| 项       | 内容                                                                                   |
-| -------- | -------------------------------------------------------------------------------------- |
-| 包       | `nue-ui-theme-glass@0.2.0` — 代码已合并、tag/Release 已建，**npm 待发**（token 401）   |
-| Issue    | [#81](https://github.com/Nathan3303/nue-ui/issues/81) CLOSED                           |
-| PR       | [#82](https://github.com/Nathan3303/nue-ui/pull/82) MERGED（squash，8 提交 / 40 文件） |
-| 合并提交 | `4b03151e`                                                                             |
-| tag      | `glass-theme-v0.2.0` → `4b03151e`                                                      |
-| Release  | https://github.com/Nathan3303/nue-ui/releases/tag/glass-theme-v0.2.0                   |
-| 设计文档 | `docs/prds/2026-10-25-glass-v0.2-frostline.md`                                         |
-| 发布说明 | `docs/releases/glass-theme-0.2.0.md`                                                   |
-| 用户走查 | ✅ 通过（34 组件全套）                                                                 |
+| 项       | 内容                                                                                                                    |
+| -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| 包       | `nue-ui-theme-glass@0.2.1` — **已发布 npm**（`0.2.0` 因 description 元数据错误撤销；npm 锁号 24h 不可重发，故走 PATCH） |
+| Issue    | [#81](https://github.com/Nathan3303/nue-ui/issues/81) CLOSED                                                            |
+| PR       | [#82](https://github.com/Nathan3303/nue-ui/pull/82) MERGED（squash，8 提交 / 40 文件）                                  |
+| 合并提交 | `4b03151e`                                                                                                              |
+| tag      | `glass-theme-v0.2.1` → `84040e66`（`v0.2.0` 的 tag/Release 已删，因 npm 上无该版本）                                    |
+| Release  | https://github.com/Nathan3303/nue-ui/releases/tag/glass-theme-v0.2.1                                                    |
+| 设计文档 | `docs/prds/2026-10-25-glass-v0.2-frostline.md`                                                                          |
+| 发布说明 | `docs/releases/glass-theme-0.2.1.md`                                                                                    |
+| 用户走查 | ✅ 通过（34 组件全套）                                                                                                  |
 
 ### 设计系统（v0.1 → v0.2）
 
