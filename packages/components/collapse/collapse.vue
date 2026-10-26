@@ -28,7 +28,9 @@ watch(
     newValue => {
         if (!newValue || !newValue.length) return;
         if (props.accordion) {
-            active(newValue[0]);
+            const [first] = newValue;
+            // length > 0 已保证首项存在，此处仅作类型收窄
+            if (first !== undefined) active(first);
             return;
         }
         activedItemNames.value = [...newValue];
