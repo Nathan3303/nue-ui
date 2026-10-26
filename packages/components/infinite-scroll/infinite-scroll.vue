@@ -51,7 +51,8 @@ onMounted(() => {
     observer.value = new IntersectionObserver(
         entries => {
             if (props.disabled) return;
-            if (!entries[0].isIntersecting) return;
+            const [entry] = entries;
+            if (!entry?.isIntersecting) return;
             emit('loadMore');
         },
         {

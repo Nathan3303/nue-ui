@@ -85,7 +85,10 @@ const realPlaceholder = computed(() => {
 
 const isInvalidDate = computed(() => {
     if (!props.modelValue) return false;
-    return parseDate(props.modelValue.split(' ')[0]) === null;
+    const [datePart] = props.modelValue.split(' ');
+    // split 结果至少一段，此处仅作类型收窄
+    if (datePart === undefined) return false;
+    return parseDate(datePart) === null;
 });
 
 const displayValue = computed(() => {

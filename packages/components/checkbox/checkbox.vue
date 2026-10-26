@@ -90,8 +90,8 @@ const handleClick = async () => {
         try {
             const result = await beforeCheck(checked.value);
             if (!result) return;
-        } catch (e) {
-            return e;
+        } catch {
+            return;
         }
     }
     handleSetState();

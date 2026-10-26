@@ -64,8 +64,8 @@ const handleClick = async () => {
         try {
             const result = await beforeSwitch(state.value);
             if (!result) return;
-        } catch (error) {
-            return error;
+        } catch {
+            return;
         }
     }
     handleSwitch();

@@ -194,5 +194,23 @@ describe('NueCalendar', () => {
             });
             expect(wrapper.find('.nue-calendar-time-picker').exists()).toBe(false);
         });
+
+        it('modelValue 缺秒（YYYY-MM-DD HH:mm）时应回填小时与分钟', () => {
+            const wrapper = mount(NueCalendar, {
+                props: { type: 'datetime', modelValue: '2024-05-06 12:30' }
+            });
+            const values = wrapper.findAll('.nue-calendar-time-picker__value');
+            expect(values[0]!.text()).toBe('12');
+            expect(values[1]!.text()).toBe('30');
+        });
+
+        it('modelValue 缺分钟（YYYY-MM-DD HH）时分钟应回退到当前分钟', () => {
+            const wrapper = mount(NueCalendar, {
+                props: { type: 'datetime', modelValue: '2024-05-06 12' }
+            });
+            const values = wrapper.findAll('.nue-calendar-time-picker__value');
+            expect(values[0]!.text()).toBe('12');
+            expect(values[1]!.text()).toBe(String(new Date().getMinutes()).padStart(2, '0'));
+        });
     });
 });
