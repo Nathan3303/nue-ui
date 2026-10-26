@@ -3,7 +3,7 @@
 | 项       | 内容                                                                                                                                                |
 | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 日期     | 2026-10-25                                                                                                                                          |
-| 状态     | 提议（待 PM 批准后转已接受）                                                                                                                        |
+| 状态     | **已接受**（2026-10-25 随 PR #78 落地并发布）                                                                                                       |
 | 关联     | Issue #77 · 报告 `docs/reports/2026-10-25-T77-shadow-clip.md` · 依赖 ADR `2026-10-25-glass-theme-tokens-degradation.md`（D2/D9/D10）                |
 | 决策者   | arch-designer（技术裁定）· PM（trade-off）                                                                                                          |
 | 影响范围 | `packages/themes/glass/src/global/variables.css`、`components/{dialog,confirm,prompt,drawer,container}.css`；**不涉及组件 SFC/TS，不涉及 shadlike** |
