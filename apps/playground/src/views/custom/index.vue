@@ -1,6 +1,6 @@
 <template>
     <nue-main>
-        <nue-aside>
+        <nue-aside width="240px" min-width="240px" max-width="240px">
             <nue-div align="stretch" gap=".25rem" vertical>
                 <nue-link
                     v-for="(link, idx) in customLayoutAsideLinks"

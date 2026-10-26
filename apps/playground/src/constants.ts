@@ -73,3 +73,8 @@ export const customLayoutAsideLinks = [
     { route: '/custom/custom2', text: '自定义演练 2' },
     { route: '/custom/custom3', text: '自定义演练 3' }
 ];
+/** 扁平化的组件链接：搜索只认这一份，避免与分类列表出现两份真相。 */
+export const componentLinks = componentLayoutAsideLinks.flatMap(group => group.links);
+
+/** header 的「组件数量」由数据派生，不写死（Issue #85 P1-5）。 */
+export const componentCount = componentLinks.length;
