@@ -1,5 +1,15 @@
 <template>
-    <div ref="switchRef" :class="classes" @click.stop="handleClick">
+    <div
+        ref="switchRef"
+        :aria-checked="state"
+        :aria-disabled="disabled || undefined"
+        :class="classes"
+        :tabindex="disabled ? -1 : 0"
+        role="switch"
+        @click.stop="handleClick"
+        @keydown.enter="handleClick"
+        @keydown.space.prevent="handleClick"
+    >
         <div class="nue-switch__circle">
             <slot name="circle" :loading="loading">
                 <nue-icon

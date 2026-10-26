@@ -3,6 +3,7 @@
         <nue-icon v-if="icon" :name="icon" :hinting="false" class="nue-input__icon" />
         <slot name="prefix" />
         <input
+            v-bind="inputAttrs"
             :id="id"
             ref="inputRef"
             :disabled="disabled"
@@ -29,14 +30,25 @@
         <nue-icon
             v-if="passwordVisible"
             :name="isShowPassword ? 'eye-close' : 'eye'"
+            :aria-label="isShowPassword ? '隐藏密码' : '显示密码'"
+            :aria-pressed="isShowPassword"
             class="nue-input__icon-button"
+            role="button"
+            tabindex="0"
             @click.stop="() => switchIsShowPassword()"
+            @keydown.enter.stop="() => switchIsShowPassword()"
+            @keydown.space.prevent.stop="() => switchIsShowPassword()"
         />
         <nue-icon
             v-if="clearButtonVisible"
+            aria-label="清除输入"
             class="nue-input__icon-button"
             name="clear"
+            role="button"
+            tabindex="0"
             @click.stop="handleClear"
+            @keydown.enter.stop="handleClear"
+            @keydown.space.prevent.stop="handleClear"
         />
     </div>
 </template>
