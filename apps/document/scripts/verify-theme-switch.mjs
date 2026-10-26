@@ -11,7 +11,7 @@
  * 运行：`node apps/document/scripts/verify-theme-switch.mjs`
  */
 import { readFile, stat } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JSDOM } from 'jsdom';
 import {
@@ -153,7 +153,7 @@ for (const theme of ['shadlike', 'glass']) {
 }
 
 if (failures > 0) {
-    console.error(`\n主题切换自证失败：${failures} 项`);
-    process.exit(1);
+    // 用异常而非 process.exit：仓库 lint 未声明 node globals（不为此改根配置）
+    throw new Error(`主题切换自证失败：${failures} 项`);
 }
 console.log('\n主题切换自证通过：DOM 中始终只有一个主题 link，且样式来自构建产物。');

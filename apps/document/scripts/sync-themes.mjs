@@ -37,11 +37,11 @@ for (const theme of THEMES) {
     try {
         await stat(entry);
     } catch {
-        console.error(
+        // 用异常而非 process.exit：仓库 lint 未声明 node globals（不为此改根配置）
+        throw new Error(
             `[themes] 缺少构建产物：${entry}\n` +
                 `[themes] 先执行 \`pnpm --filter ${theme.packageName} build\``
         );
-        process.exit(1);
     }
 
     const target = join(publicThemesDir, theme.slug);
