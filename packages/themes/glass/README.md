@@ -8,7 +8,7 @@ NueUI 组件库的玻璃拟态主题包，视觉语言为 **Frostline（霜线�
 ## 包信息
 
 - **名称**: `nue-ui-theme-glass`
-- **版本**: `0.2.1`
+- **版本**: `0.2.2`
 - **描述**: An Apple HIG glassmorphism theme for NueUI
 - **作者**: Nathan Lee
 - **许可证**: MIT
@@ -139,18 +139,49 @@ box-shadow:
 
 退化后浮层为不透明实底，文本对比度仍 ≥4.5:1、功能性边框 ≥3:1。
 
-## 使用注意：全屏布局的滚动职责
+## 滚动契约回归（0.2.2）
 
-`.nue-content` **默认不参与裁剪**（`overflow: visible`），以保证子元素阴影不被 `backdrop-filter`
-纹理边界或容器 `overflow` 裁掉。因此：
+**0.2.1 的取舍被推翻。** 那一版为了让子元素阴影不被裁，把 `.nue-content` 设成
+`overflow: visible`，滚动交给外层页面；实际使用时「锁全屏高度」的布局更常见，
+而页面级滚动会让 header / aside 跟着滚走，侧栏很长时尤其难用。
 
-- `content` **不是滚动容器**；长内容不会在内部出现滚动条；
-- 用 `.nue-container` 搭「锁全屏高度」的布局时，**滚动由使用方承担**：要么让外层页面滚动
-  （把 `html/body/#app` 与容器 `height` 放开为 `auto`，如本仓 `apps/playground` 的做法），
-  要么在自己的页面层另建滚动区；
-- 若把浮层渲染进自建 `overflow: hidden` 容器（非 teleport），阴影仍会被该容器裁掉——属消费方用法问题。
+0.2.2 恢复**容器内滚动**：
 
-参考实现：`apps/playground/src/playground.css` + `App.vue`（页面级滚动）。
+| 选择器         | 0.2.2 的行为                                        | 说明                                                 |
+| -------------- | --------------------------------------------------- | ---------------------------------------------------- |
+| `.nue-content` | `overflow: auto` + `padding: var(--nue-padding-sm)` | 自身滚动；padding 给「非贴边」阴影留空间             |
+| `.nue-aside`   | `overflow: auto` / `overflow-x: hidden`             | 侧栏自身可滚（0.2.1 的整体 `overflow: hidden` 取消） |
+| `.nue-main`    | **`min-height: 0`**                                 | 前提条件，缺它 `overflow: auto` 永远不会触发         |
+
+**`min-height: 0` 是这条契约的技术关键**：flex 子项默认 `min-height: auto`，会被内容撑到
+自然高度，父级再怎么写 `overflow: auto` 也没有可滚动的高度差。
+
+### 已知代价（接受，不回头）
+
+content 内元素**紧贴滚动边缘**时，阴影仍会被滚动容器裁掉一半——这是滚动容器的固有行为。
+padding 只保证非贴边状态完整。**不要**为消除它把 `overflow` 改回 `visible`（那就退回 0.2.1 的页面级滚动）。
+
+### 用法
+
+给 `.nue-container` 一个确定高度，页面本身不滚，滚动落在内部：
+
+```css
+html,
+body,
+#app {
+    height: 100vh;
+    overflow: hidden;
+}
+```
+
+```vue
+<nue-container style="height: 100vh">
+    <nue-header>…</nue-header>
+    <nue-main>…</nue-main>
+</nue-container>
+```
+
+参考实现：`apps/playground/src/playground.css` + `App.vue`（外壳 100vh，content / aside 内滚）。
 
 ## 从 v0.1.0 升级：**这是重新设计，不是迭代**
 
@@ -179,6 +210,6 @@ pnpm --filter nue-ui-theme-glass build
 
 ## 状态
 
-已发布 `0.1.0`（Apple HIG 临摹版）与 `0.2.1`（Frostline 重设计；`0.2.0` 因 description 元数据错误已撤销，内容与 0.2.1 一致）。
+已发布 `0.1.0`（Apple HIG 临摹版）、`0.2.1`（Frostline 重设计；`0.2.0` 因 description 元数据错误已撤销，内容与 0.2.1 一致）与 `0.2.2`（滚动契约回归：content / aside 恢复容器内滚动）。
 质量门禁：687 例测试、254 组对比度配对、11 条结构断言（A1–A11）+ 8 条阴影裁剪断言（S1–S8），
 每组均带「防假绿自证」。

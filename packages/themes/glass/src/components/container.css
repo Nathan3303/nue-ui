@@ -32,7 +32,9 @@
     }
 
     > .nue-main > .nue-aside {
-        overflow: hidden;
+        /* 滚动契约回归（0.2.2）：aside 自身是滚动容器，#79 的整体裁剪取消 */
+        overflow: auto;
+        overflow-x: hidden;
     }
 
     > .nue-header {
@@ -57,6 +59,9 @@
         flex-wrap: nowrap;
         width: 100%;
         height: 100%;
+        /* 必须是 0：flex 子项默认 min-height: auto 会被内容撑高，
+           content 的 overflow: auto 就永远不会触发（0.2.2 的核心坑） */
+        min-height: 0;
 
         & > .nue-aside + .nue-content,
         & > .nue-content + .nue-aside {
@@ -77,8 +82,7 @@
             display: flex;
             flex-direction: column;
             flex: none;
-            overflow: auto;
-            overflow-x: hidden;
+            /* overflow 由容器层统一声明（见上方 .nue-main > .nue-aside） */
             padding: var(--nue-aside-gap);
             gap: var(--nue-aside-gap);
 
@@ -101,8 +105,11 @@
             height: fit-content;
             max-height: 100%;
             flex: 1 1 auto;
-            /* 用户要求 content 不参与裁剪：滚动交由页面层，子元素阴影不再被裁 */
-            overflow: visible;
+            box-sizing: border-box;
+            /* 滚动契约回归（0.2.2）：content 自身滚动；
+               padding 让「非贴边」状态的阴影完整，贴边仍会被滚动容器裁一半（固有行为，接受） */
+            padding: var(--nue-padding-sm);
+            overflow: auto;
 
             &.nue-content--fill {
                 height: 100%;

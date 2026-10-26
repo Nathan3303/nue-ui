@@ -1,20 +1,18 @@
 /* Playground 专用样式（不进主题包）：
-   glass 主题的 .nue-content 为“不参与裁剪、可视溢出”（保证子元素阴影完整），
-   因此演示站由**页面级滚动**承担可达性，而不是 content 内滚。 */
+   glass 0.2.2 起 content / aside 自身是滚动容器（滚动契约回归），
+   因此演示站把外壳锁成 100vh —— 页面本身不滚，滚动只发生在 content / aside 内部。 */
 
 html.nue-html {
-    height: auto;
-    min-height: 100vh;
-    overflow-y: auto;
+    height: 100vh;
+    overflow: hidden;
 }
 
 html.nue-html body {
-    height: auto;
-    min-height: 100vh;
-    overflow: visible;
+    height: 100vh;
+    overflow: hidden;
 }
 
 html.nue-html body #app {
-    height: auto;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 }

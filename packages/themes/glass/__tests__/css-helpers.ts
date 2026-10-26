@@ -783,6 +783,46 @@ export interface PaddingSides {
     left: number;
 }
 
+const PADDING_SIDES = ['top', 'right', 'bottom', 'left'] as const;
+
+function isPaddingProp(prop: string): boolean {
+    return prop === 'padding' || PADDING_SIDES.some(side => prop === `padding-${side}`);
+}
+
+/** 把一条 padding 简写/长写声明写进 `sides`（顶层空格切分，简写按 1–4 值展开）。 */
+function applyPaddingDeclaration(
+    sides: PaddingSides,
+    declaration: Declaration,
+    dark: number,
+    store: TokenStore
+): void {
+    const expand = (value: string): number[] =>
+        splitWhitespaceTopLevel(value).map(token => toPx(resolveNumeric(token, dark, store)));
+    if (declaration.prop !== 'padding') {
+        const side = PADDING_SIDES.find(item => declaration.prop === `padding-${item}`);
+        if (side) sides[side] = expand(declaration.value)[0] as number;
+        return;
+    }
+    const values = expand(declaration.value);
+    if (values.length === 1) {
+        sides.top = sides.right = sides.bottom = sides.left = values[0] as number;
+    } else if (values.length === 2) {
+        sides.top = sides.bottom = values[0] as number;
+        sides.right = sides.left = values[1] as number;
+    } else if (values.length === 3) {
+        sides.top = values[0] as number;
+        sides.right = sides.left = values[1] as number;
+        sides.bottom = values[2] as number;
+    } else if (values.length === 4) {
+        sides.top = values[0] as number;
+        sides.right = values[1] as number;
+        sides.bottom = values[2] as number;
+        sides.left = values[3] as number;
+    } else {
+        throw new Error(`无法解析的 padding 简写：${declaration.value}`);
+    }
+}
+
 /** 解析某选择器的最终 padding（简写展开 + 长写覆盖，全部换算 px）。 */
 export function resolvePadding(
     css: string,
@@ -791,35 +831,56 @@ export function resolvePadding(
     store: TokenStore
 ): PaddingSides {
     const sides: PaddingSides = { top: 0, right: 0, bottom: 0, left: 0 };
-    const expand = (value: string): number[] =>
-        splitWhitespaceTopLevel(value).map(token => toPx(resolveNumeric(token, dark, store)));
-    const keys = ['top', 'right', 'bottom', 'left'] as const;
     for (const declaration of ruleDeclarations(css, selector)) {
-        if (declaration.prop === 'padding') {
-            const values = expand(declaration.value);
-            if (values.length === 1) {
-                sides.top = sides.right = sides.bottom = sides.left = values[0] as number;
-            } else if (values.length === 2) {
-                sides.top = sides.bottom = values[0] as number;
-                sides.right = sides.left = values[1] as number;
-            } else if (values.length === 3) {
-                sides.top = values[0] as number;
-                sides.right = sides.left = values[1] as number;
-                sides.bottom = values[2] as number;
-            } else if (values.length === 4) {
-                sides.top = values[0] as number;
-                sides.right = values[1] as number;
-                sides.bottom = values[2] as number;
-                sides.left = values[3] as number;
-            } else {
-                throw new Error(`无法解析的 padding 简写：${declaration.value}`);
-            }
-        } else {
-            const key = keys.find(side => declaration.prop === `padding-${side}`);
-            if (key) sides[key] = expand(declaration.value)[0] as number;
-        }
+        applyPaddingDeclaration(sides, declaration, dark, store);
     }
     return sides;
+}
+
+/**
+ * 按 **subject + specificity + 源码顺序** 求最终 padding，并回传候选链。
+ *
+ * 与 `resolvePadding` 的解析口径**完全一致**（同一个 `applyPaddingDeclaration`），
+ * 差别只有两点：① 跨规则按级联排序（嵌套规则也计入）；② 回传候选，失败信息能带链。
+ * 用于「声明写在嵌套规则里、且可能被多处覆盖」的 subject（如 `.nue-content`）。
+ */
+export function resolvePaddingBySubject(
+    css: string,
+    subject: string,
+    dark: number,
+    store: TokenStore
+): { sides: PaddingSides; matches: CascadeMatch[] } {
+    const candidates: { specificity: number; order: number; declarations: Declaration[] }[] = [];
+    const matches: CascadeMatch[] = [];
+    for (const rule of extractRules(css)) {
+        const hits = splitSelectorList(rule.fullSelector).filter(
+            selector => selectorSubject(selector) === subject
+        );
+        if (hits.length === 0) continue;
+        const declarations = parseDeclarations(rule.body).filter(declaration =>
+            isPaddingProp(declaration.prop)
+        );
+        if (declarations.length === 0) continue;
+        const weight = Math.max(...hits.map(specificity));
+        candidates.push({ specificity: weight, order: rule.start, declarations });
+        matches.push({
+            selector: hits.join(', '),
+            value: declarations
+                .map(declaration => `${declaration.prop}: ${declaration.value}`)
+                .join(' / '),
+            specificity: weight,
+            order: rule.start
+        });
+    }
+    candidates.sort((a, b) => a.specificity - b.specificity || a.order - b.order);
+    matches.sort((a, b) => a.specificity - b.specificity || a.order - b.order);
+    const sides: PaddingSides = { top: 0, right: 0, bottom: 0, left: 0 };
+    for (const candidate of candidates) {
+        for (const declaration of candidate.declarations) {
+            applyPaddingDeclaration(sides, declaration, dark, store);
+        }
+    }
+    return { sides, matches };
 }
 
 /** CSS specificity 近似值（ID/class/元素三级；足够比较 container.css 内的冲突规则）。 */
