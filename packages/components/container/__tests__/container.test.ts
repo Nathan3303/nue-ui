@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vite-plus/test';
 import { mount } from '@vue/test-utils';
-import { NueAside, NueContainer, NueSeparator } from '../index';
+import { NueAside, NueContainer, NueMain, NueSeparator } from '../index';
 
 describe('NueContainer', () => {
     describe('Props 渲染', () => {
@@ -91,6 +91,62 @@ describe('NueSeparator', () => {
                 slots: { default: '<span class="grip-icon">||</span>' }
             });
             expect(wrapper.find('.grip-icon').exists()).toBe(true);
+        });
+    });
+
+    /**
+     * Issue #97：separator 曾把「拖到最小宽度」写进 opTarget 的 `data-collapsed`，
+     * 与 NueAside 的受控 `collapsed` 抢同一个属性（拖拽后 aside 变成折叠宽度 + 原内边距）。
+     * 现在 separator 只写私有属性 `data-resize-collapsed`，并跳过受控折叠的目标。
+     */
+    describe('与折叠 Aside 的属性隔离', () => {
+        const mountShell = (asideProps: Record<string, unknown> = {}) =>
+            mount({
+                components: { NueMain, NueAside, NueSeparator },
+                template: `
+                    <nue-main>
+                        <nue-aside v-bind="asideProps" />
+                        <nue-separator op-target="previous" />
+                    </nue-main>
+                `,
+                data: () => ({ asideProps })
+            });
+
+        const dragTo = async (wrapper: ReturnType<typeof mountShell>, toX: number) => {
+            await wrapper.find('.nue-separator').trigger('mousedown', { clientX: 300 });
+            document.documentElement.dispatchEvent(new MouseEvent('mousemove', { clientX: toX }));
+            await wrapper.find('.nue-separator').trigger('mouseup');
+        };
+
+        it('拖到最小宽度时只写私有属性，不改写 aside 的 data-collapsed', async () => {
+            const wrapper = mountShell({ width: '240px' });
+            const aside = wrapper.find('.nue-aside');
+            expect(aside.attributes('data-collapsed')).toBe('false');
+
+            await wrapper.find('.nue-separator').trigger('mousedown', { clientX: 300 });
+            await dragTo(wrapper, 350); // newWidth 50 < minWidth(72) → 最小态
+
+            expect(aside.attributes('data-resize-collapsed')).toBe('true');
+            expect(aside.attributes('data-collapsed'), '公共属性不得被 separator 改写').toBe(
+                'false'
+            );
+            expect(aside.attributes('style') ?? '').not.toContain('width: 50px');
+        });
+
+        it('受控 collapsed 的 aside 拖拽后仍保持折叠宽度，不产生内联宽度', async () => {
+            const wrapper = mountShell({ collapsed: true, width: '240px' });
+            const aside = wrapper.find('.nue-aside');
+            expect(aside.attributes('data-collapsed')).toBe('true');
+
+            await wrapper.find('.nue-separator').trigger('mousedown', { clientX: 300 });
+            await dragTo(wrapper, 400);
+            await wrapper.find('.nue-separator').trigger('dblclick');
+
+            const style = aside.attributes('style') ?? '';
+            expect(aside.attributes('data-collapsed')).toBe('true');
+            expect(aside.attributes('data-resize-collapsed'), '折叠目标不参与拖拽').toBeUndefined();
+            expect(style).toContain('--nue-aside-width: 4.5rem');
+            expect(style).not.toContain('width: 100px');
         });
     });
 });
