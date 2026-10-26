@@ -263,16 +263,22 @@ function overflowSubjects(css: string): string[] {
     return [...subjects].sort();
 }
 
+/** 取某份 CSS 中最终计算值为 `auto` 的 subject（升序）。 */
+function autosOf(css: string): string[] {
+    return overflowSubjects(css).filter(
+        subject => resolveCascade(css, subject, 'overflow').value === 'auto'
+    );
+}
+
 /**
  * S4–S6 全部按**最终计算值**断言（subject + specificity + 源码顺序），
  * 不依赖「某条分组规则存在」——合并/拆分/重排规则既不会假红也不会假绿。
  *
- * T79（2026-10-25，用户要求）：`.nue-content` 不再是滚动容器。
- * 理由：**阴影完整优先于 content 区内滚动**，滚动职责上移到使用方（页面层）；
- * glass README 已把「滚动由使用方承担」写成契约。
- * ⇒ `.nue-content` 必须有意的 `overflow: visible`（本文件显式断言），
- *   S6 除了拦「值对不对」，还拦「有人把滚动职责偷偷塞回 content」——
- *   把它改回 `auto`（哪怕只是不加思考地恢复旧值）S6 立刻红。
+ * T88（2026-10-26，Issue #88）：滚动契约回归 —— `.nue-content` **是**滚动容器，
+ * `.nue-header` / `.nue-aside` 固定（T79 的「content 遮挡阴影，滚动上移」已被推翻）。
+ * 理由：content 内部溢出必须就地滚动，上移到页面层会导致 header/aside 跟着滚。
+ * ⇒ 最终 `overflow: auto` 的集合恰为 `.nue-aside` + `.nue-content`，两者都显式断言；
+ *   S6 除了拦「值对不对」，还拦「滚动职责被悄悄拿走」（改回 visible/hidden 立刻红）。
  */
 describe('S4–S6 包装层 overflow（按最终计算值，src + dist 双证）', () => {
     for (const [label, css] of [
@@ -298,43 +304,52 @@ describe('S4–S6 包装层 overflow（按最终计算值，src + dist 双证）
             }
         });
 
-        it(`S6 ${label}：最终 overflow:auto 恰为 .nue-aside；.nue-content 必须 visible`, () => {
+        it(`S6 ${label}：最终 overflow:auto 恰为 .nue-aside / .nue-content（滚动容器集合）`, () => {
             const subjects = overflowSubjects(css);
             expect(
                 subjects.length,
                 `${label} 带 overflow 声明的 subject 数（非空自证）`
             ).toBeGreaterThan(0);
-            const autos = subjects.filter(
-                subject => resolveCascade(css, subject, 'overflow').value === 'auto'
-            );
-            expect(autos, `${label} 最终为 auto 的滚动容器（content 已取消滚动职责）`).toEqual([
-                '.nue-aside'
-            ]);
-
-            // 显式断言 content = visible（不是「不在 auto 集合里」的宽松写法）：
-            // 若有人把滚动职责塞回 content（auto/scroll），这里必须红。
-            const content = resolveCascade(css, '.nue-content', 'overflow');
+            const autos = autosOf(css);
             expect(
-                content.value,
-                `${label} .nue-content 最终 overflow=${content.value ?? '(无声明)'}；` +
-                    'T79 要求 visible（阴影完整优先，滚动由使用方承担）'
-            ).toBe('visible');
+                autos,
+                `${label} 最终为 auto 的滚动容器（T88 契约：content + aside 各自滚动）`
+            ).toEqual(['.nue-aside', '.nue-content']);
+
+            // 逐个显式断言 = auto（不写成「集合长度 = 2」或「不在此集合里」的宽松形式）：
+            // 任一被改成 visible/hidden/scroll，这里必须红，且错误信息带上候选链。
+            for (const subject of ['.nue-aside', '.nue-content']) {
+                const { value, matches } = resolveCascade(css, subject, 'overflow');
+                expect(
+                    value,
+                    `${label} ${subject} 最终 overflow=${value ?? '(无声明)'}；候选：${matches
+                        .map(match => `${match.selector}→${match.value}`)
+                        .join(' / ')}`
+                ).toBe('auto');
+            }
         });
     }
 
-    it('变异自证：把 .nue-content 改回 auto 后 S6 判据会红（防滚动职责回流）', () => {
+    it('变异自证：content 的 auto 改回 visible（T79 回归）后 S6 判据会红', () => {
+        // 用「声明 + 紧随其后的下一个 token」定位 content 的 overflow，避免误伤 aside 的同名声明。
         const mutated = containerSrc.replace(
-            /(\.nue-content \{[\s\S]*?)overflow: visible/,
-            '$1overflow: auto'
+            /overflow: auto;(\s*&\.nue-content--fill)/,
+            'overflow: visible;$1'
         );
-        const content = resolveCascade(mutated, '.nue-content', 'overflow');
-        expect(content.value).toBe('auto');
-        expect(content.value).not.toBe('visible');
-        expect(
-            [...overflowSubjects(mutated)].filter(
-                subject => resolveCascade(mutated, subject, 'overflow').value === 'auto'
-            )
-        ).toEqual(['.nue-aside', '.nue-content']);
+        expect(mutated, '变异未生效（源码形状变了？）—— 否则本自证空转').not.toBe(containerSrc);
+        expect(resolveCascade(mutated, '.nue-content', 'overflow').value).toBe('visible');
+        expect(autosOf(mutated)).toEqual(['.nue-aside']);
+        expect(autosOf(mutated)).not.toEqual(['.nue-aside', '.nue-content']);
+    });
+
+    it('变异自证：aside 的 auto 改回 hidden 后 S6 判据会红', () => {
+        const mutated = containerSrc.replace(
+            /overflow: auto;(\s*overflow-x: hidden;)/,
+            'overflow: hidden;$1'
+        );
+        expect(mutated, '变异未生效（源码形状变了？）—— 否则本自证空转').not.toBe(containerSrc);
+        expect(resolveCascade(mutated, '.nue-aside', 'overflow').value).toBe('hidden');
+        expect(autosOf(mutated)).toEqual(['.nue-content']);
     });
 
     it('变异自证：把 visible 改成 hidden 后 S4 判据会红', () => {
@@ -344,14 +359,24 @@ describe('S4–S6 包装层 overflow（按最终计算值，src + dist 双证）
         expect(resolveCascade(mutated, '.nue-footer', 'overflow').value).toBe('hidden');
     });
 
-    it('自证：级联解析能区分「先 hidden 后被 auto 覆盖」（aside 实测 auto）', () => {
-        const { matches } = resolveCascade(containerSrc, '.nue-aside', 'overflow');
-        expect(matches.length, 'aside 的 overflow 候选规则数').toBeGreaterThanOrEqual(2);
-        expect(matches.map(match => match.value)).toContain('hidden');
-        expect(matches.at(-1)?.value).toBe('auto');
-        // specificity 同分时按源码顺序（后写的 auto 胜出）；三 compound 300 > 单 compound 100
-        expect(specificity('.nue-container > .nue-main > .nue-aside')).toBe(300);
-        expect(specificity('.nue-aside')).toBe(100);
+    it('自证：级联解析能区分「先 hidden 后被 auto 覆盖」（合成样本，不依赖被测 CSS 形状）', () => {
+        // 自证只证明**解析器能力**。样本一律自造：拿真实 CSS 当样本的话，
+        // 被测代码一改结构自证就红 —— 那是工具能力之外的信息，反而掩盖真问题。
+        const order = '.a { overflow: hidden; } .a { overflow: auto; }';
+        const ordered = resolveCascade(order, '.a', 'overflow');
+        expect(ordered.matches.length, '同选择器的 overflow 候选规则数').toBe(2);
+        expect(ordered.matches.map(match => match.value)).toEqual(['hidden', 'auto']);
+        expect(ordered.matches.at(-1)?.value, 'specificity 同分 ⇒ 源码顺序后者胜出').toBe('auto');
+        expect(ordered.value).toBe('auto');
+
+        // specificity 优先于源码顺序：低分规则写在后也压不过高分规则
+        const bySpecificity = '.x .a { overflow: auto; } .a { overflow: hidden; }';
+        const resolved = resolveCascade(bySpecificity, '.a', 'overflow');
+        expect(resolved.value, 'spec 200 的 auto 应压过其后声明的 spec 100 hidden').toBe('auto');
+        expect(resolved.matches.map(match => match.specificity)).toEqual([100, 200]);
+
+        expect(specificity('.a > .b > .c')).toBe(300);
+        expect(specificity('.a')).toBe(100);
     });
 });
 
