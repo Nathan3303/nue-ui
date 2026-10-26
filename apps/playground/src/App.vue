@@ -169,4 +169,10 @@ const currentTitle = computed(() => {
         display: none;
     }
 }
+#PlaygroundAppContainer {
+    /* 外壳锁全屏高度：页面不滚，滚动落在 content / aside 内部（0.2.2 滚动契约） */
+    height: 100vh;
+    min-height: 100vh;
+    background-color: var(--nue-primary-color-0);
+}
 </style>
