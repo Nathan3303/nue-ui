@@ -104,6 +104,18 @@ demo-preview=./debounce.vue
 4. **密码显示**：`allowShowPassword` 属性仅在 `type="password"` 时生效。
 5. **清除按钮**：`clearable` 属性在有值时显示清除按钮，点击后可清空输入内容。
 
+## 可访问性
+
+`NueInput` 的外层是 `<div>`，原生 attrs（如 `aria-*`、`autocomplete`、`inputmode`）默认落在**外层 div** 上，不会到内部 `<input>`。需要给输入框本身命名或加属性时，用 **`inputAttrs`**：
+
+```vue
+<nue-input v-model="kw" :input-attrs="{ 'aria-label': '搜索组件', autocomplete: 'off' }" />
+```
+
+**优先级**：`inputAttrs` 通过 `v-bind` 绑定在组件自身属性**之前**，因此 `type` / `placeholder` / `disabled` 等组件属性优先，`inputAttrs` 不会覆盖它们。
+
+清除按钮与密码显示按钮均为**键盘可达**（`Tab` 聚焦、`Enter` / `Space` 触发），并带 `aria-label`；密码按钮另有 `aria-pressed` 反映当前状态。
+
 ## 组件属性与事件
 
 下方涵盖了 `NueInput` 组件所有的可用属性与事件。
@@ -129,6 +141,7 @@ demo-preview=./debounce.vue
 | `debounceTime`      | `number`                                                    | `0`     | 防抖时间(ms)                   |
 | `flex`              | `string \| boolean`                                         | -       | 弹性布局                       |
 | `name`              | `string`                                                    | -       | 名称（原生属性）               |
+| `inputAttrs`        | `Record<string, string \| number \| boolean \| undefined>`  | -       | 透传给内部 `<input>` 的属性    |
 | `theme`             | `string \| string[] \| Record<string, boolean>`             | -       | 主题样式（继承自 GlobalProps） |
 
 ### 事件
