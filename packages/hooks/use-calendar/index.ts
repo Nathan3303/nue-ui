@@ -51,10 +51,16 @@ export function useCalendar(options: {
         const parts = value.split(' ');
         if (parts.length === 2) {
             const [datePart, timePart] = parts;
-            let [hour, minute] = timePart.split(':').map(Number);
-            if (isNaN(hour) || hour < 0 || hour > 23) hour = now.getHours();
-            if (isNaN(minute) || minute < 0 || minute > 59) minute = now.getMinutes();
-            return { date: datePart, hour, minute };
+            // length === 2 已保证两段都存在，此处仅作类型收窄
+            if (datePart !== undefined && timePart !== undefined) {
+                // 缺省段（如 `12` 缺分）回退到当前时间
+                let [hour = now.getHours(), minute = now.getMinutes()] = timePart
+                    .split(':')
+                    .map(Number);
+                if (isNaN(hour) || hour < 0 || hour > 23) hour = now.getHours();
+                if (isNaN(minute) || minute < 0 || minute > 59) minute = now.getMinutes();
+                return { date: datePart, hour, minute };
+            }
         }
         return { date: value, hour: now.getHours(), minute: now.getMinutes() };
     }
@@ -119,7 +125,9 @@ export function useCalendar(options: {
         currentMinute.value = time.minute;
 
         if (selectedDate.value && autoEmitOnTimeChange) {
-            const dateStr = selectedDate.value.split(' ')[0].split('T')[0];
+            // 取日期部分：兼容 `YYYY-MM-DD HH:mm` 与 ISO `YYYY-MM-DDTHH:mm:ss`
+            const [datePart = selectedDate.value] = selectedDate.value.split(' ');
+            const dateStr = datePart.split('T')[0] ?? datePart;
             const dateObj = new Date(dateStr);
             dateObj.setHours(time.hour, time.minute, 0, 0);
             const value = dateObj.toISOString();

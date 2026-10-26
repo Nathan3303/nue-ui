@@ -64,7 +64,8 @@ const usePopper = (
         for (let i = 1; i < directions.length; i++) {
             const nextIndex = (currentIndex + i) % directions.length;
             const nextDir = directions[nextIndex];
-            if (isDirectionAvailable(nextDir)) {
+            // 下标已模运算收敛到数组范围内，此处仅作类型收窄
+            if (nextDir && isDirectionAvailable(nextDir)) {
                 return nextDir;
             }
         }
