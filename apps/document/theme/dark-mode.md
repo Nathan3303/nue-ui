@@ -4,7 +4,16 @@
 
 ## 原理
 
-`--nue-dark-switch`（`0` 浅色 / `1` 深色）控制整套 HSL 明度/饱和度刻度（`--nue-hsl-l*`、`--nue-hsl-s*`）是否翻转；`--nue-dark-prefix` 由 `cos(pi * switch) * -1` 得到 `-1`（浅色）或 `+1`（深色），状态色用它加减明度生成 hover/active 等派生色。
+`--nue-dark-switch`（`0` 浅色 / `1` 深色）控制整套 HSL 明度/饱和度刻度（`--nue-hsl-l*`、`--nue-hsl-s*`）是否翻转；`--nue-dark-prefix` 是方向因子，在 `switch ∈ {0, 1}` 上取 `-1`（浅色）/ `+1`（深色），状态色用它加减明度生成 hover/active 等派生色。
+
+两个主题的**实现不同、结果相同**：
+
+| 主题     | `--nue-dark-prefix`                           |
+| -------- | --------------------------------------------- |
+| shadlike | `calc(cos(pi * var(--nue-dark-switch)) * -1)` |
+| glass    | `calc(var(--nue-dark-switch) * 2 - 1)`        |
+
+后者不依赖三角函数，在旧引擎上更稳。**引用 token 的样式两者通用**，不需要为哪个主题特殊处理。
 
 因此**只要样式引用了 token，深浅色下都会自动协调**；写死色值的地方则不会。
 

@@ -2,10 +2,12 @@
 
 主题包发布物 `dist/` 保留与源码同构的目录结构，可按需引入单个组件的样式。
 
+> **两个主题的 `dist/` 目录结构完全一致**，只是文件名里的包名不同。下文的 `<theme-package>` 可以是 `nue-ui-theme-shadlike` 或 `nue-ui-theme-glass`。
+
 ## dist 产物结构
 
 ```
-nue-ui-theme-shadlike/dist/
+<theme-package>/dist/
 ├── index.css                    # 全量聚合（@import global + components）
 ├── global/
 │   ├── index.css                # 全局基线聚合（推荐先引这个）
@@ -33,7 +35,7 @@ nue-ui-theme-shadlike/dist/
 
 - 组件样式可能依赖其它组件的样式（弹层类如 `dialog`/`drawer`/`tooltip` 依赖 `overlay`、`container`、`text` 等）；
 - 按需引入时若出现"部分样式缺失"，先补 `global/index.css`，再补依赖组件 css；
-- 拿不准依赖关系时，直接全量 `import 'nue-ui-theme-shadlike/dist/index.css'`。
+- 拿不准依赖关系时，直接全量 `import '<theme-package>/dist/index.css'`。
 
 ## 查组件级变量
 

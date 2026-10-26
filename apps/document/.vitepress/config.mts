@@ -190,6 +190,7 @@ export default defineConfig({
                 {
                     text: '主题',
                     items: [
+                        { text: 'Shadlike 主题', link: '/theme/shadlike.md' },
                         { text: 'Glass 主题（Frostline）', link: '/theme/glass.md' },
                         { text: '安装与引入', link: '/theme/install.md' },
                         { text: '设计系统（Design Tokens）', link: '/theme/design-tokens.md' },

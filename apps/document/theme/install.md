@@ -1,18 +1,17 @@
 # 安装与引入
 
-`nue-ui-theme-shadlike` 与组件库 `nue-ui` 分开安装。组件的安装方式见[教程 - 安装](../tutorial/usage/install.md)，本章只讲主题样式怎么引。
+主题包与组件库 `nue-ui` 分开安装。组件的安装方式见[教程 - 安装](../tutorial/usage/install.md)，本章只讲主题样式怎么引。
+
+> **先选主题，再按本章安装**：[shadlike](./shadlike.md) 或 [Glass（Frostline）](./glass.md)。下文示例以 `nue-ui-theme-shadlike` 写成——把包名换成 `nue-ui-theme-glass` 即可，**两者的 `dist/` 结构与引入方式完全一致**。
 
 ## 安装
 
 ```shell
-# npm
-npm install nue-ui-theme-shadlike
+# 二选一（两者不可同时引入）
+pnpm add nue-ui-theme-shadlike     # 无彩灰阶，后台系统首选
+pnpm add nue-ui-theme-glass        # Frostline 玻璃，落地页首选
 
-# pnpm
-pnpm add nue-ui-theme-shadlike
-
-# yarn
-yarn add nue-ui-theme-shadlike
+# npm / yarn 同理：npm install <包名> / yarn add <包名>
 ```
 
 ## 方式一：全量引入（省事）
