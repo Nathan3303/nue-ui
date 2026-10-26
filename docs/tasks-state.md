@@ -47,6 +47,18 @@
 1. `--nue-scroll-bar-thumb-bg` 600→700 / hover 700→800
 2. `--nue-primary-color-700` 亮色 L 30%→29%（余量 0.04 → 0.238）
 
+## 文档站（#83，已交付）
+
+| 项    | 内容                                                                                      |
+| ----- | ----------------------------------------------------------------------------------------- |
+| Issue | [#83](https://github.com/Nathan3303/nue-ui/issues/83) CLOSED                              |
+| PR    | [#84](https://github.com/Nathan3303/nue-ui/pull/84) MERGED（squash）· 合并提交 `d9ce2457` |
+| 上线  | https://nathan3303.github.io/nue-ui/ （部署 ✅）                                          |
+
+文档站现在支持 **glass / shadlike 二选一运行时切换**，默认仍是 shadlike（naotodo 仍在用，两者并列而非新旧关系）。
+
+实现要点：主题 CSS 改为**静态资源 + 运行时 `<link>`**（原 `import '.../dist/index.css'` 会进 bundle、无法运行时移除）；切换时先 `querySelectorAll('link[data-nue-theme-css]').remove()` 再插入唯一新 link；`head` 内联引导脚本消除 FOUC；`scripts/sync-themes.mjs` 从 `dist/` 整棵复制；`verify-theme-switch.mjs` **14 项断言**接在 build 末尾。
+
 ## 历史：Glass v0.1.0（已发布 npm）
 
 见 `docs/prds/2026-10-25-glass-theme.md` / `docs/releases/glass-theme-0.1.0.md`。三轮：主题包本体（#76）· backdrop-filter 阴影裁剪（#78）· content 裁剪 + 滚动职责契约（#80）。
@@ -78,6 +90,6 @@ cd packages/themes/glass && npm publish
 
 ## 后续可选
 
-- playground 的 header/aside 加 `position: sticky`（v0.1 的 P1 改造后它们随页面滚动）
+- playground 的 header/aside 加 `position: sticky`（v0.1 的 P1 改造后它们随页面滚动；用户未要求，搁置）
 - 结构分离：外层承载 `backdrop-filter`、内层承载内容（彻底解决滤镜裁剪，需改组件 SFC）
 - `variables.css` 9,971 B 距上限 12,000 已不多，审查新 token 需求
