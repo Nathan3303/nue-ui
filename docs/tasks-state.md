@@ -2,19 +2,19 @@
 
 > 重开会话先读本文件。更新时间：2026-10-25 → 2026-10-26（**v0.2.1 已发布 npm**）
 
-## 当前：Glass v0.2.1 Frostline（重新设计）
+## 当前：Glass v0.2.2 Frostline（重新设计 + 滚动契约）
 
-| 项       | 内容                                                                                                                    |
-| -------- | ----------------------------------------------------------------------------------------------------------------------- |
-| 包       | `nue-ui-theme-glass@0.2.1` — **已发布 npm**（`0.2.0` 因 description 元数据错误撤销；npm 锁号 24h 不可重发，故走 PATCH） |
-| Issue    | [#81](https://github.com/Nathan3303/nue-ui/issues/81) CLOSED                                                            |
-| PR       | [#82](https://github.com/Nathan3303/nue-ui/pull/82) MERGED（squash，8 提交 / 40 文件）                                  |
-| 合并提交 | `4b03151e`                                                                                                              |
-| tag      | `glass-theme-v0.2.1` → `84040e66`（`v0.2.0` 的 tag/Release 已删，因 npm 上无该版本）                                    |
-| Release  | https://github.com/Nathan3303/nue-ui/releases/tag/glass-theme-v0.2.1                                                    |
-| 设计文档 | `docs/prds/2026-10-25-glass-v0.2-frostline.md`                                                                          |
-| 发布说明 | `docs/releases/glass-theme-0.2.1.md`                                                                                    |
-| 用户走查 | ✅ 通过（34 组件全套）                                                                                                  |
+| 项       | 内容                                                                                                                 |
+| -------- | -------------------------------------------------------------------------------------------------------------------- |
+| 包       | `nue-ui-theme-glass@0.2.2` — **已发布 npm**（`0.2.0` 因 description 元数据错误撤销、转 0.2.1；0.2.2 为滚动契约回归） |
+| Issue    | [#81](https://github.com/Nathan3303/nue-ui/issues/81) CLOSED                                                         |
+| PR       | [#82](https://github.com/Nathan3303/nue-ui/pull/82) MERGED（squash，8 提交 / 40 文件）                               |
+| 合并提交 | `4b03151e`                                                                                                           |
+| tag      | `glass-theme-v0.2.2` → `8a498519`（历史：`v0.2.1` → `84040e66`；`v0.2.0` 已删）                                      |
+| Release  | https://github.com/Nathan3303/nue-ui/releases/tag/glass-theme-v0.2.2                                                 |
+| 设计文档 | `docs/prds/2026-10-25-glass-v0.2-frostline.md`                                                                       |
+| 发布说明 | `docs/releases/glass-theme-0.2.2.md`                                                                                 |
+| 用户走查 | ✅ 通过（34 组件全套）                                                                                               |
 
 ### 设计系统（v0.1 → v0.2）
 
@@ -46,6 +46,19 @@
 
 1. `--nue-scroll-bar-thumb-bg` 600→700 / hover 700→800
 2. `--nue-primary-color-700` 亮色 L 30%→29%（余量 0.04 → 0.238）
+
+## 应用层（#85 / #88，已交付）
+
+| 项  | 内容                                                                                                                                                                                                                                                                                                           |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| #85 | Playground 外壳优化 → PR [#89](https://github.com/Nathan3303/nue-ui/pull/89) MERGED（`326c2f8a`）：搜索（中英文 + `⌘K` + `Esc` + 空态）、aside 固定 240px + ≤900px 折叠、当前项高亮（沿用 `nue-link route` 的 `active-class`）、暗色 `aria-label`/`aria-pressed` + 持久化、header「30 个演示 · 版本 · GitHub」 |
+| #88 | 滚动契约回归 → PR [#90](https://github.com/Nathan3303/nue-ui/pull/90) MERGED（`8a498519`）：**`.nue-content` 恢复为滚动容器**（`overflow: auto` + padding 10px）、`.nue-aside` 回 `auto`、`.nue-main` 补 **`min-height: 0`**；playground 外壳 `100vh`，页面不滚、header 固定                                   |
+
+**#88 是行为反转**：0.2.x 曾把 content 改为 `visible`（为阴影完整），代价是 header/aside 跟着页面滚。0.2.2 把语义拿回来，用 padding 补视觉。消费方若做过「页面级滚动」适配，升级后会出现双层滚动条 —— 迁移表见 `docs/releases/glass-theme-0.2.2.md`。
+
+**#85 的副产物**：撞出 6 项组件缺口 → [#86](https://github.com/Nathan3303/nue-ui/issues/86)（前两条为可访问性缺陷：`NueInput` 无法命名内部 input、clear 按钮键盘不可达）。
+
+**#89 的静默回归（rebase 时发现并补回）**：合并后 `#PlaygroundAppContainer` 整块样式丢失，容器高度/底色靠主题默认值兜着；22/22 的 CDP 验收没发现——**门禁测的是行为，不是「某个样式块还在不在」**。
 
 ## 文档站（#83，已交付）
 
