@@ -52,15 +52,30 @@ demo-preview=./slots.vue
 ## 注意事项
 
 1. **v-model**：组件使用 `v-model` 双向绑定数据，底层实现为 `modelValue` 属性和 `update:modelValue` 事件。
-2. **日期格式**：
-    - 组件统一输出 ISO 8601 格式
-    - `type="date"` 时，返回格式为 `YYYY-MM-DDTHH:mm:ss.sssZ`（时间部分固定为 00:00:00）
-    - `type="datetime"` 时，返回格式为 `YYYY-MM-DDTHH:mm:ss.sssZ`（时间部分为用户选择的时间）
+2. **日期格式与 `valueFormat`**（**易踩坑，务必读**）：
+
+    默认 `valueFormat="iso"` 输出 ISO 8601 UTC 时间戳，**该格式在东八区会「差一天」**：选 `2024-05-06` 得到
+    `2024-05-05T16:00:00.000Z`。若直接取前 10 位当日期用，会拿到 `2024-05-05`。
+
+    | `valueFormat`      | 输出（三时区恒定）                              | 说明                                                   |
+    | ------------------ | ----------------------------------------------- | ------------------------------------------------------ |
+    | `'iso'`（默认）    | 随浏览器时区漂移，如 `2024-05-05T16:00:00.000Z` | 既有行为，仅为兼容保留                                 |
+    | **`'date'`**       | **`2024-05-06`**                                | **推荐**：`type="date"` 的语义正确形态，且不受时区影响 |
+    | `'local-datetime'` | `2024-05-06 14:05:00`                           | `type="datetime"` 且需要本地时刻时使用                 |
+
+    ```vue
+    <!-- 推荐：选哪一天就存哪一天 -->
+    <nue-calendar v-model="date" value-format="date" />
+    ```
+
+    `'date'` 与 `'local-datetime'` 的实现**不经过 `Date` 的时区换算**，因此在任意时区下结果一致。
+
 3. **输入格式支持**：
     - 支持基本格式：`YYYY-MM-DD`、`YYYY-MM-DD HH:mm`
     - 支持 ISO 格式：`YYYY-MM-DDTHH:mm:ss`、`YYYY-MM-DDTHH:mm:ssZ`、`YYYY-MM-DDTHH:mm:ss.SSS+08:00` 等
-4. **年份/月份选择**：点击年份或月份可快速切换到对应选择视图，再次点击即可返回。
-5. **与 DatePicker 的区别**：Calendar 内联渲染，始终显示日历；DatePicker 通过按钮触发下拉弹出日历面板。
+4. **非法日期不会清空你的数据**：`modelValue` 为非法值（如 `'abc'`、`'2024-02-31'`）时，点击日期**不生效且不发事件**，原值保持不变。日历是受控组件，不会在你没有成功选择时销毁已存数据。
+5. **年份/月份选择**：点击年份或月份可快速切换到对应选择视图，再次点击即可返回。
+6. **与 DatePicker 的区别**：Calendar 内联渲染，始终显示日历；DatePicker 通过按钮触发下拉弹出日历面板。
 
 ## 组件属性与事件
 
@@ -68,14 +83,15 @@ demo-preview=./slots.vue
 
 ### 属性
 
-| 属性         | Type                                            | 默认值 | 说明                                |
-| ------------ | ----------------------------------------------- | ------ | ----------------------------------- |
-| `modelValue` | `string`                                        | -      | 绑定值                              |
-| `type`       | `'date' \| 'datetime'`                          | `date` | 日历类型                            |
-| `size`       | `'small' \| 'large'`                            | -      | 尺寸                                |
-| `minDate`    | `string`                                        | -      | 可选的最小日期（`YYYY-MM-DD` 格式） |
-| `maxDate`    | `string`                                        | -      | 可选的最大日期（`YYYY-MM-DD` 格式） |
-| `theme`      | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps）      |
+| 属性          | Type                                            | 默认值 | 说明                                                   |
+| ------------- | ----------------------------------------------- | ------ | ------------------------------------------------------ |
+| `modelValue`  | `string`                                        | -      | 绑定值                                                 |
+| `type`        | `'date' \| 'datetime'`                          | `date` | 日历类型                                               |
+| `valueFormat` | `'iso' \| 'date' \| 'local-datetime'`           | `iso`  | 输出格式；**推荐 `date`**（默认 `iso` 会因时区差一天） |
+| `size`        | `'small' \| 'large'`                            | -      | 尺寸                                                   |
+| `minDate`     | `string`                                        | -      | 可选的最小日期（`YYYY-MM-DD` 格式）                    |
+| `maxDate`     | `string`                                        | -      | 可选的最大日期（`YYYY-MM-DD` 格式）                    |
+| `theme`       | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps）                         |
 
 ### 事件
 
