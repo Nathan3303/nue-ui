@@ -42,6 +42,10 @@ demo-preview=./disabled.vue
 demo-preview=./clearable.vue
 :::
 
+::: tip 可访问性
+清除按钮是触发按钮**同级**的独立 `<button>`（不嵌套在触发按钮内部），可 `Tab` 聚焦、`Enter` / `Space` 触发，并带 `aria-label="清除日期"`；`disabled` 时同步禁用。它占用触发按钮右缘**始终预留**的槽位，因此出现 / 消失都不会挤动按钮尺寸。
+:::
+
 ## 生命周期 <Badge text="1.8.28 以上版本" type="warning" />
 
 通过事件 `close` 可以在日期选择器关闭时触发回调。

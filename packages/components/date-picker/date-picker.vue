@@ -6,20 +6,33 @@
         @close="emit('close')"
     >
         <template #trigger="{ trigger }">
-            <nue-button :disabled="disabled" :size="size" @click="trigger">
-                <template v-if="modelValue">
-                    {{ displayValue || '无效日期' }}
-                </template>
-                <nue-text theme="placeholder" v-else>{{ realPlaceholder }}</nue-text>
-                <template #append>
-                    <nue-icon name="calendar" />
-                    <nue-icon
-                        v-if="clearable && modelValue"
-                        name="clear"
-                        @click.stop="handleClear"
-                    />
-                </template>
-            </nue-button>
+            <div
+                :class="[
+                    'nue-date-picker__trigger',
+                    clearable && 'nue-date-picker__trigger--clearable',
+                    size && `nue-date-picker__trigger--${size}`
+                ]"
+            >
+                <nue-button :disabled="disabled" :size="size" @click="trigger">
+                    <template v-if="modelValue">
+                        {{ displayValue || '无效日期' }}
+                    </template>
+                    <nue-text theme="placeholder" v-else>{{ realPlaceholder }}</nue-text>
+                    <template #append>
+                        <nue-icon name="calendar" />
+                    </template>
+                </nue-button>
+                <button
+                    v-if="clearable && modelValue"
+                    aria-label="清除日期"
+                    class="nue-date-picker__clear"
+                    :disabled="disabled"
+                    type="button"
+                    @click="handleClear"
+                >
+                    <nue-icon name="clear" />
+                </button>
+            </div>
         </template>
         <date-picker-panel
             :size="size"
