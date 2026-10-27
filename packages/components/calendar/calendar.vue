@@ -75,6 +75,7 @@ defineOptions({ name: 'NueCalendar' });
 
 const props = withDefaults(defineProps<NueCalendarProps>(), {
     type: 'date',
+    valueFormat: 'iso',
     modelValue: null,
     minDate: '',
     maxDate: ''
@@ -90,6 +91,7 @@ provide<NueCalendarContext>(NUE_CALENDAR_CTX_KEY, {
 const calendar = useCalendar({
     modelValue: toRef(props, 'modelValue'),
     type: toRef(props, 'type'),
+    valueFormat: toRef(props, 'valueFormat'),
     emit: emit as unknown as (event: string, ...args: unknown[]) => void
 });
 
