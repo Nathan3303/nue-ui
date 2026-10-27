@@ -8,7 +8,7 @@ NueUI 组件库的玻璃拟态主题包，视觉语言为 **Frostline（霜线�
 ## 包信息
 
 - **名称**: `nue-ui-theme-glass`
-- **版本**: `0.2.3`
+- **版本**: `0.2.4`
 - **描述**: An Apple HIG glassmorphism theme for NueUI
 - **作者**: Nathan Lee
 - **许可证**: MIT

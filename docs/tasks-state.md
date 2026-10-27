@@ -60,33 +60,37 @@
 
 **#89 的静默回归（rebase 时发现并补回）**：合并后 `#PlaygroundAppContainer` 整块样式丢失，容器高度/底色靠主题默认值兜着；22/22 的 CDP 验收没发现——**门禁测的是行为，不是「某个样式块还在不在」**。
 
-## 组件库缺陷治理（2026-10-26 进行中）
+## 组件库缺陷治理（2026-10-27 全部收口）
 
-用户授权「不打扰、完成即可、停在发布前一步」。范围：#86 + #87。
+用户授权「不打扰、完成即可、停在发布前一步」，按优先级顺序处理 4 个 issue。
 
-| Issue   | 内容                                                                 | 状态                                                                                                                                                           |
-| ------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **#87** | `vue-tsc` 20 条类型错误（跨 hooks 14 / components 5 / playground 1） | ✅ MERGED（PR [#92](https://github.com/Nathan3303/nue-ui/pull/92)，master `4ea5b47c`）· 分诊 **A19 / B0 / C1** · 新增 5 例，697 例 0 红                        |
-| **#86** | 6 项组件缺口                                                         | ✅ **批 1 CLOSED**（PR [#96](https://github.com/Nathan3303/nue-ui/pull/96)，`b922e13d`）· 新增 12 例，709 例 0 红                                              |
-| **#97** | `NueAside` 折叠能力（#86 批 2）                                      | ✅ MERGED（PR [#98](https://github.com/Nathan3303/nue-ui/pull/98)，`52c2e9b0`）· `collapsed` + `collapsedWidth` + separator 属性隔离 · 新增 12 例，721 例 0 红 |
+| Issue   | 内容                                                                                     | 合并                                                                  |
+| ------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **#91** | calendar 日期序列化：`toISOString()` 导致东八区差一天 + 非法输入 `RangeError`            | PR [#99](https://github.com/Nathan3303/nue-ui/pull/99) · `3057a7d6`   |
+| **#95** | glass 暗色色阶五档撞底（`l80`–`l100` 全 10.0%）⇒ primary-0/100/200 同色                  | PR [#101](https://github.com/Nathan3303/nue-ui/pull/101) · `81d0074f` |
+| **#94** | 同类可访问性：message 关闭键 · textarea `inputAttrs` · select/date-picker 清除按钮去嵌套 | PR [#102](https://github.com/Nathan3303/nue-ui/pull/102) · `ab2ad15a` |
+| **#93** | CI 不检查 playground / hooks 类型                                                        | PR [#103](https://github.com/Nathan3303/nue-ui/pull/103) · `2995c0ff` |
 
-**已发布（2026-10-27）**：`nue-ui@1.14.0` · `nue-ui-theme-glass@0.2.3` · `nue-ui-theme-shadlike@0.13.29`
-tag：`v1.14.0` / `glass-theme-v0.2.3` / `shadlike-v0.13.29` → `5bab921d`
-发布前补的坑：`nue-ui` 与 `nue-ui-theme-shadlike` 原先都无 `publishConfig`，会被根 `.npmrc` 的 npmmirror 带走 → 已固定官方源
-| **#91** | `use-calendar` 的 UTC 偏移（东八区选 5-6 得 5-5）+ 非法日期 RangeError | OPEN · 需产品决策（三个口径选项），**未擅自改** |
-| **#93** | CI 不跑 playground 的 `vue-tsc`，#87 能积累 20 条的根因 | OPEN · 需决策 CI 时长影响 |
-| **#94** | select/date-picker 清除按钮（**嵌在 button 内，补 role 会形成嵌套控件**）· message-inner 关闭 · textarea 缺 `inputAttrs` | OPEN · 修 #86 时发现 |
-| **#95** | glass 暗色 `primary-100` 与 `-200` 几乎同色（`rgb(22,27,29)` vs `rgb(23,27,28)`）⇒ 状态层次失效 | OPEN · 需改 L 阶梯 + 重算 254 组对比度 |
+### 关键决策与验证方式
 
-### #86 的分批与取舍
+- **#91 默认行为未改**：新增 `valueFormat: 'iso'（默认）| 'date'（推荐）| 'local-datetime'`。默认 `iso` 用**旧算式当 oracle 逐字符比对**证明零变化；跨 4 时区（UTC/上海/纽约/Kiritimati）41/41 绿。
+- **#95 亮色端零变化**：8 个 `calc()` 亮色首项（99/97.5/96/94/92/89/86/81）逐条 grep 确认未动 ⇒ 数学上不可能变。暗色端改为 8/9.5/11/12.5/14/16/18/20.5（ΔL ≥1.5）。
+- **#94 A1 视觉零变化**：清除按钮槽位**始终预留**（非「有值时加 padding」）⇒ 出现/消失对按钮尺寸贡献 **0px**，空值↔清除回空值 **Δ0.00px**。新增 `button button === 0` 回归锁。
+- **#93 有失败演练**：临时 PR 注入 hooks 类型错误 ⇒ CI 红且日志指名 `packages/hooks/use-calendar/index.ts(245,14)`；演练产物已清理。emit 移到 `node_modules/.cache/tsc`（改前会往源码树写 339 个 `.d.ts`）。
 
-| 批       | 内容                                                                                                                           | 状态                                                                              |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
-| 批 1     | `NueInput` 的 `inputAttrs`（不动 `inheritAttrs`）· clear/eye 按钮键盘可达 · `NueSwitch` role+键盘 · ghost pressed 态（两主题） | 进行中                                                                            |
-| 批 2     | `NueAside` 折叠（`collapsed` + `collapsedWidth`）+ separator 私有属性隔离                                                      | ✅ 已合并（`52c2e9b0`，issue #97）                                                |
-| **不做** | 图标 sun / moon / github                                                                                                       | **需新增字形**（SVG + iconfont 重生成），非代码范围；实测 `iconfont.css` 无这三个 |
+### 待发布（版本已改，构建已完成）
 
-**#87 的三处「疑似真 bug」经论证都不是真隐患**（A 类 19 条）：`TS7030` 是 `catch { return e }` 让 Promise 以 Error resolve（无 unhandled rejection）；`use-calendar` 的 `hour/minute` 本有 `isNaN` 回落守卫；`infinite-scroll` 单 target 下 IO 至少投递 1 条 entry。
+| 包                      | 版本        | 类型                                             |
+| ----------------------- | ----------- | ------------------------------------------------ |
+| `nue-ui`                | **1.15.0**  | MINOR（`valueFormat` / `inputAttrs` / 结构改动） |
+| `nue-ui-theme-glass`    | **0.2.4**   | PATCH（暗色色阶 + 清除按钮/message 样式）        |
+| `nue-ui-theme-shadlike` | **0.13.30** | PATCH（清除按钮/message 样式）                   |
+
+`core/dist` 410,743 B · glass 109,835 B · shadlike 104,468 B · lockfile 干净
+
+### 仍 OPEN
+
+- **#100**：`TZ=America/New_York` 下 date-picker 显示错一天（**master 上同样红**，既有）。hooks 的 tsconfig 部分已由 #93 顺带解决。
 
 ## 文档章节（已交付，无单独 Issue）
 
