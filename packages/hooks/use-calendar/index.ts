@@ -3,16 +3,85 @@ import type { Ref } from 'vue';
 
 export type CalendarViewMode = 'date' | 'month' | 'year';
 export type CalendarType = 'date' | 'datetime';
+/**
+ * modelValue 的序列化格式
+ * - `'iso'`（默认）：本地时刻转 UTC 的 ISO 字符串，保持既有行为
+ * - `'date'`：本地日期 `YYYY-MM-DD`，纯字符串处理、不做时区换算
+ * - `'local-datetime'`：本地时刻 `YYYY-MM-DD HH:mm:ss`
+ */
+export type CalendarValueFormat = 'iso' | 'date' | 'local-datetime';
+
+function pad2(n: number): string {
+    return String(n).padStart(2, '0');
+}
+
+/**
+ * 校验并归一化 `YYYY-MM-DD` 本地日期串，纯字符串处理、不经过 Date 的时区换算。
+ * 格式不符或日期不存在（如 `2024-02-31`）时返回 null。
+ */
+function normalizeDateOnly(dateStr: string): string | null {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr.trim());
+    if (!match) return null;
+
+    const yearStr = match[1];
+    const monthStr = match[2];
+    const dayStr = match[3];
+    if (!yearStr || !monthStr || !dayStr) return null;
+
+    const year = Number(yearStr);
+    const month = Number(monthStr);
+    const day = Number(dayStr);
+    // 本地构造器会把溢出日期「滚动」到别的日子（如 2024-02-31 → 03-02），回读比对即可判真伪
+    const probe = new Date(year, month - 1, day);
+    if (probe.getFullYear() !== year || probe.getMonth() !== month - 1 || probe.getDate() !== day) {
+        return null;
+    }
+    return `${yearStr}-${monthStr}-${dayStr}`;
+}
+
+/** 用本地时间构造 `YYYY-MM-DD`，避免 `new Date(dateStr)` 按 UTC 解析；非法返回 null */
+function createLocalDate(dateStr: string): Date | null {
+    const dateOnly = normalizeDateOnly(dateStr);
+    if (!dateOnly) return null;
+    const [yearStr = '', monthStr = '', dayStr = ''] = dateOnly.split('-');
+    return new Date(Number(yearStr), Number(monthStr) - 1, Number(dayStr));
+}
+
+/**
+ * 把「选中日期 + 时刻」序列化为 modelValue 字符串。
+ * 返回 null 表示输入无法解析为合法日期，调用方应保持原值、不 emit（不抛 RangeError）。
+ */
+function serializeValue(
+    dateStr: string,
+    hour: number,
+    minute: number,
+    format: CalendarValueFormat
+): string | null {
+    if (format === 'date') return normalizeDateOnly(dateStr);
+
+    if (format === 'local-datetime') {
+        const dateOnly = normalizeDateOnly(dateStr);
+        return dateOnly ? `${dateOnly} ${pad2(hour)}:${pad2(minute)}:00` : null;
+    }
+
+    // 'iso'：保持既有行为（本地时刻 → UTC ISO），仅补非法日期保护
+    const dateObj = new Date(dateStr);
+    if (isNaN(dateObj.getTime())) return null;
+    dateObj.setHours(hour, minute, 0, 0);
+    return dateObj.toISOString();
+}
 
 export function useCalendar(options: {
     modelValue: Ref<string | null | undefined>;
     type?: Ref<CalendarType>;
+    valueFormat?: Ref<CalendarValueFormat>;
     emit: (event: string, ...args: unknown[]) => void;
     /* 当时间变化且已有选中日期时，是否自动 emit（Calendar 内联场景下可能需要手动控制） */
     autoEmitOnTimeChange?: boolean;
 }) {
     const { modelValue, emit, autoEmitOnTimeChange = true } = options;
     const type = options.type || ref<CalendarType>('date');
+    const valueFormat = options.valueFormat || ref<CalendarValueFormat>('iso');
 
     const currentYear = ref(new Date().getFullYear());
     const currentMonth = ref(new Date().getMonth() + 1);
@@ -74,8 +143,8 @@ export function useCalendar(options: {
             if (val) {
                 const parsed = parseDateTime(val);
                 if (parsed) {
-                    const date = new Date(parsed.date);
-                    if (!isNaN(date.getTime())) {
+                    const date = createLocalDate(parsed.date);
+                    if (date) {
                         currentYear.value = date.getFullYear();
                         currentMonth.value = date.getMonth() + 1;
                     } else {
@@ -96,18 +165,17 @@ export function useCalendar(options: {
     );
 
     function handleDateSelect(date: string) {
+        const isDateTime = type.value === 'datetime';
+        const value = serializeValue(
+            date,
+            isDateTime ? currentHour.value : 0,
+            isDateTime ? currentMinute.value : 0,
+            valueFormat.value
+        );
+        // 非法日期：保持原值、不 emit（不清空用户已有数据，也不抛 RangeError）
+        if (value === null) return;
+
         selectedDate.value = date;
-
-        const dateObj = new Date(date);
-        let value: string;
-        if (type.value === 'datetime') {
-            dateObj.setHours(currentHour.value, currentMinute.value, 0, 0);
-            value = dateObj.toISOString();
-        } else {
-            dateObj.setHours(0, 0, 0, 0);
-            value = dateObj.toISOString();
-        }
-
         emit('update:modelValue', value);
         emit('change', value);
     }
@@ -128,9 +196,8 @@ export function useCalendar(options: {
             // 取日期部分：兼容 `YYYY-MM-DD HH:mm` 与 ISO `YYYY-MM-DDTHH:mm:ss`
             const [datePart = selectedDate.value] = selectedDate.value.split(' ');
             const dateStr = datePart.split('T')[0] ?? datePart;
-            const dateObj = new Date(dateStr);
-            dateObj.setHours(time.hour, time.minute, 0, 0);
-            const value = dateObj.toISOString();
+            const value = serializeValue(dateStr, time.hour, time.minute, valueFormat.value);
+            if (value === null) return;
 
             emit('update:modelValue', value);
             emit('change', value);

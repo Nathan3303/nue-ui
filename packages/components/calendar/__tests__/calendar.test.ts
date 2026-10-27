@@ -2,6 +2,14 @@ import { describe, it, expect } from 'vite-plus/test';
 import { mount } from '@vue/test-utils';
 import { NueCalendar } from '../index';
 
+/** 本地今天的 `YYYY-MM-DD`，与被测组件同一取洋（本地日期） */
+function localTodayStr() {
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${today.getFullYear()}-${month}-${day}`;
+}
+
 describe('NueCalendar', () => {
     describe('渲染', () => {
         it('应该渲染默认日历组件', () => {
@@ -211,6 +219,53 @@ describe('NueCalendar', () => {
             const values = wrapper.findAll('.nue-calendar-time-picker__value');
             expect(values[0]!.text()).toBe('12');
             expect(values[1]!.text()).toBe(String(new Date().getMinutes()).padStart(2, '0'));
+        });
+    });
+
+    describe('valueFormat 日期序列化', () => {
+        it('默认（iso）仍输出 UTC ISO 字符串', async () => {
+            const wrapper = mount(NueCalendar);
+            await wrapper.find('.date-cell.today').trigger('click');
+
+            expect(wrapper.emitted('update:modelValue')![0]![0]).toMatch(
+                /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+            );
+        });
+
+        it('valueFormat="date" 时输出本地日期 YYYY-MM-DD', async () => {
+            const wrapper = mount(NueCalendar, { props: { valueFormat: 'date' } });
+            await wrapper.find('.date-cell.today').trigger('click');
+
+            expect(wrapper.emitted('update:modelValue')![0]![0]).toBe(localTodayStr());
+        });
+
+        it('valueFormat="local-datetime" + type="datetime" 时输出本地时刻', async () => {
+            const wrapper = mount(NueCalendar, {
+                props: { valueFormat: 'local-datetime', type: 'datetime' }
+            });
+            await wrapper.find('.date-cell.today').trigger('click');
+
+            const value = wrapper.emitted('update:modelValue')![0]![0] as string;
+            expect(value.startsWith(`${localTodayStr()} `)).toBe(true);
+            expect(value).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:00$/);
+        });
+
+        it('valueFormat="date" 时可回填选中态与当月视图', () => {
+            const wrapper = mount(NueCalendar, {
+                props: { valueFormat: 'date', modelValue: '2024-06-01' }
+            });
+
+            expect(wrapper.findAll('.date-cell.selected').length).toBeGreaterThanOrEqual(1);
+            expect(wrapper.find('.date-cell.selected').text()).toBe('1');
+        });
+
+        it('非法 modelValue 不触发 RangeError，选择日期后仍能输出合法值', async () => {
+            const wrapper = mount(NueCalendar, {
+                props: { modelValue: 'abc', type: 'datetime', valueFormat: 'date' }
+            });
+
+            await wrapper.find('.date-cell.today').trigger('click');
+            expect(wrapper.emitted('update:modelValue')![0]![0]).toBe(localTodayStr());
         });
     });
 });
