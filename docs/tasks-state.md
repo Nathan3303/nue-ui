@@ -1,18 +1,19 @@
 # 任务状态（接续快照）
 
-> 重开会话先读本文件。更新时间：2026-10-27（**交接给新 pm 会话**）
+> 重开会话先读本文件。更新时间：2026-10-27（**pm-HO 接手 · #105 已发布收口**）
 
 ## 交接说明（新 pm 必读）
 
-- **本仓 pm 的窗口代号 = `nu`**（tmux window `0:2`）。`tmux rename-window -t 0:2 nu` 已执行。
-- **派生会话必须开在 `nu` 窗口**：`fleet ensure` 用的是「tmux 活动窗口」，所以派发前先确认：
+- **本仓 pm 的窗口代号 = `nu`**（tmux window `0:2`）。`nu` 里**有用户自己的 shell**，PM 只在此运行，**不要动其它 pane**。
+- **派生会话开独立 window，不碰 `nu`**：
     ```bash
-    tmux select-window -t 0:2    # 或 -t nu
+    tmux new-window -d -t 0: -n work-<编号>
+    tmux select-window -t work-<编号>
     bash .agents/scripts/nao-fleet.sh ensure --task <编号> <角色>
     ```
-    否则会落到 nao-todo 的窗口（已踩过 3 次）。
-- **不要把工作 pane `join` 进用户自己的窗口**：用户会在 `nu` 里开自己的 shell，塞进去会挤压他的空间。
-- 当前窗口里除本 pm 外，还有一个用户自己的 shell pane（`packages/core`），**不要动它**。
+    **理由（别再重犯）**：`ensure` 在 tmux 内拆的是**当前活跃窗格**（`split-window -h`）并**全窗重排**（`apply_tmux_layout`），不是「往指定窗口追加一个 pane」。所以在 `nu` 里 `ensure` 会把用户 shell 压到约 1/3 宽（已踩过 1 次）；把 `nu` 设成活动窗口来实现「开在 nu」这个思路本身就是错的。
+- 历史踩坑：活动窗口是 nao-todo 时 `ensure` → 派生会话落到 nao-todo 窗口（3 次）。另开窗口即同时解决这两类问题。
+- 当前 `nu` 里的 pane：PM（%103）+ 用户 shell（%99，`packages/core`）。**不要动用户 pane**。
 
 ## 当前：Glass v0.2.2 Frostline（重新设计 + 滚动契约）
 
@@ -94,19 +95,31 @@
 
 | 包                      | 版本        | 类型                                                                                           |
 | ----------------------- | ----------- | ---------------------------------------------------------------------------------------------- |
-| `nue-ui`                | **1.15.1**  | PATCH（#100 date-picker 显示修复）；1.15.0 为 MINOR（`valueFormat` / `inputAttrs` / 结构改动） | `v1.15.1` |
+| `nue-ui`                | **1.15.2**  | PATCH（#105 date-only 时刻口径统一：面板与触发器同为 `00:00`）                                 |
+| `nue-ui`                | 1.15.1      | PATCH（#100 date-picker 显示修复）；1.15.0 为 MINOR（`valueFormat` / `inputAttrs` / 结构改动） |
 | `nue-ui-theme-glass`    | **0.2.4**   | PATCH（暗色色阶 + 清除按钮/message 样式）                                                      |
 | `nue-ui-theme-shadlike` | **0.13.30** | PATCH（清除按钮/message 样式）                                                                 |
 
-`core/dist` 410,743 B · glass 109,835 B · shadlike 104,468 B · lockfile 干净
+`core/dist` 410,909 B · glass 109,835 B · shadlike 104,468 B · lockfile 干净
 
-### 仍 OPEN
+### #105 已收口（2026-10-27 发布）
 
-- **#105**：`type="datetime"` + date-only 值时，**触发器显示 `00:00`、面板时间选择器显示当前时刻**（同一值两处不同）。
+`type="datetime"` + date-only 值时，触发器与面板对同一值显示不同时刻（`00:00` vs 当前时刻）。
 
-    **口径已定：方案 A（统一补 00:00）**，用户已批准。根因是 `packages/hooks/use-calendar/index.ts` 第 133 行的兜底（`hour: now.getHours(), minute: now.getMinutes()`），改为 `hour: 0, minute: 0`。
+| 项       | 内容                                                                                                                          |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| 口径     | **方案 A**（date-only 无时刻信息 ⇒ 统一按 `00:00` 解释），用户已批准                                                          |
+| 根因     | `packages/hooks/use-calendar/index.ts` 的 `parseDateTime` 兜底（原取 `now.getHours()/getMinutes()`）                          |
+| PR       | [#107](https://github.com/Nathan3303/nue-ui/pull/107) · 合并提交 `5da96222`（squash，4 files / +125 −2）                      |
+| 发布     | `v1.15.2` → `e0ca3a70` · [Release](https://github.com/Nathan3303/nue-ui/releases/tag/v1.15.2) · npm `nue-ui@1.15.2`（latest） |
+| 发布说明 | `docs/releases/nue-ui-1.15.2.md`（nue-ui 首篇）                                                                               |
+| 门禁     | 774/774（38 files，+8 例）· America/New_York 亦 774/774 · 反例演练 4 红                                                       |
+| breaking | **非 breaking，PATCH**；属可见行为变更，已由发布说明明示 3 条感知点                                                           |
+| 追加锁   | PM 要求补的 `invalid-date` 用例（锁「无效值与 date-only 走同一兜底 ⇒ 时分归零」这一已知副作用）                               |
 
-    **状态：未派发**。上一轮 `rd-fe-T105` 会话已随 pane 关闭而断开（任务未发出）。新 pm 直接派发即可。
+PM 验收记录：PR 评论 `6443283731` · Issue 收口评论 `6443604202`。
+
+**squash 正文的 wip 行**：`gh pr merge --squash` 未指定 body 时会把原 `wip(105):` 提交标题拼进合并提交**正文**（不是提交历史）。`git log --grep='wip('` 会命中该正文 ⇒ 误报为「有 wip 提交」。下次合并加 `--subject/--body` 即可；本次未 amend/force-push（禁 push main）。
 
 ## 文档章节（已交付，无单独 Issue）
 
