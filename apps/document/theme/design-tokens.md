@@ -14,19 +14,20 @@
 
 变量名一致、值不同。下表是**实读两份 `variables.css`** 的结果：
 
-| Token                       | shadlike                | Glass（Frostline）                     |
-| --------------------------- | ----------------------- | -------------------------------------- |
-| `--nue-brand-hue`           | `0`（红）               | **`192`**（冷灰青）                    |
-| `--nue-padding-df`          | `1rem`                  | **`0.875rem`**                         |
-| `--nue-gap-df`              | `1rem`                  | **`0.75rem`**                          |
-| `--nue-box-size-df`         | `2.25rem`               | **`2rem`**                             |
-| `--nue-primary-shadow`      | `1px 1px 2px`           | **`0 1px 2px`**                        |
-| `--nue-secondary-shadow`    | `1px 1px 2px`           | **`0 1px 2px`**                        |
-| `--nue-dark-prefix`         | `cos(pi * switch) * -1` | **`calc(switch * 2 - 1)`**             |
-| `--nue-primary-radius`      | `0.375rem`              | `0.375rem`（**相同**）                 |
-| `--nue-radius-sm / df / lg` | `0.25 / 0.375 / 0.5rem` | 同左                                   |
-| `--nue-font-mono`           | 无                      | **新增**（等宽栈，用于数据/代码/数字） |
-| `--nue-glass-*`             | 无                      | **6 个**（见下）                       |
+| Token                        | shadlike                                               | Glass（Frostline）                                                                                            |
+| ---------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `--nue-brand-hue`            | `0`（红）                                              | **`192`**（冷灰青）                                                                                           |
+| `--nue-padding-df`           | `1rem`                                                 | **`0.875rem`**                                                                                                |
+| `--nue-gap-df`               | `1rem`                                                 | **`0.75rem`**                                                                                                 |
+| `--nue-box-size-df`          | `2.25rem`                                              | **`2rem`**                                                                                                    |
+| `--nue-primary-shadow`       | `1px 1px 2px`                                          | **`0 1px 2px`**                                                                                               |
+| `--nue-secondary-shadow`     | `1px 1px 2px`                                          | **`0 1px 2px`**                                                                                               |
+| `--nue-dark-prefix`          | `cos(pi * switch) * -1`                                | **`calc(switch * 2 - 1)`**                                                                                    |
+| `--nue-primary-radius`       | `0.375rem`                                             | `0.375rem`（**相同**）                                                                                        |
+| `--nue-radius-sm / df / lg`  | `0.25 / 0.375 / 0.5rem`                                | 同左                                                                                                          |
+| `--nue-font-mono`            | 无                                                     | **新增**（等宽栈，用于数据/代码/数字）                                                                        |
+| `--nue-hsl-l*`（暗色高亮端） | `l100 10 / l95 15 / l90 15 / l85 15 / l80 20 / l70 30` | **`l100 8 / l95 9.5 / l90 11 / l85 12.5 / l80 14 / l75 16 / l70 18`**（相邻 ΔL ≥ 1.5%，0/100/200/300 不撞色） |
+| `--nue-glass-*`              | 无                                                     | **6 个**（见下）                                                                                              |
 
 `--nue-dark-prefix` 的算法差异值得单独说：shadlike 用 `cos(pi * switch) * -1`，Glass 用 `calc(switch * 2 - 1)`。两者在 `switch ∈ {0,1}` 上都得到 `-1 / +1`，但后者不依赖三角函数，在旧引擎上更稳。
 
