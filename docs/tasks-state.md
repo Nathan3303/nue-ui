@@ -64,15 +64,19 @@
 
 用户授权「不打扰、完成即可、停在发布前一步」。范围：#86 + #87。
 
-| Issue   | 内容                                                                                                                     | 状态                                                                                                                                                           |
-| ------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **#87** | `vue-tsc` 20 条类型错误（跨 hooks 14 / components 5 / playground 1）                                                     | ✅ MERGED（PR [#92](https://github.com/Nathan3303/nue-ui/pull/92)，master `4ea5b47c`）· 分诊 **A19 / B0 / C1** · 新增 5 例，697 例 0 红                        |
-| **#86** | 6 项组件缺口                                                                                                             | ✅ **批 1 CLOSED**（PR [#96](https://github.com/Nathan3303/nue-ui/pull/96)，`b922e13d`）· 新增 12 例，709 例 0 红                                              |
-| **#97** | `NueAside` 折叠能力（#86 批 2）                                                                                          | ✅ MERGED（PR [#98](https://github.com/Nathan3303/nue-ui/pull/98)，`52c2e9b0`）· `collapsed` + `collapsedWidth` + separator 属性隔离 · 新增 12 例，721 例 0 红 |
-| **#91** | `use-calendar` 的 UTC 偏移（东八区选 5-6 得 5-5）+ 非法日期 RangeError                                                   | OPEN · 需产品决策（三个口径选项），**未擅自改**                                                                                                                |
-| **#93** | CI 不跑 playground 的 `vue-tsc`，#87 能积累 20 条的根因                                                                  | OPEN · 需决策 CI 时长影响                                                                                                                                      |
-| **#94** | select/date-picker 清除按钮（**嵌在 button 内，补 role 会形成嵌套控件**）· message-inner 关闭 · textarea 缺 `inputAttrs` | OPEN · 修 #86 时发现                                                                                                                                           |
-| **#95** | glass 暗色 `primary-100` 与 `-200` 几乎同色（`rgb(22,27,29)` vs `rgb(23,27,28)`）⇒ 状态层次失效                          | OPEN · 需改 L 阶梯 + 重算 254 组对比度                                                                                                                         |
+| Issue   | 内容                                                                 | 状态                                                                                                                                                           |
+| ------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **#87** | `vue-tsc` 20 条类型错误（跨 hooks 14 / components 5 / playground 1） | ✅ MERGED（PR [#92](https://github.com/Nathan3303/nue-ui/pull/92)，master `4ea5b47c`）· 分诊 **A19 / B0 / C1** · 新增 5 例，697 例 0 红                        |
+| **#86** | 6 项组件缺口                                                         | ✅ **批 1 CLOSED**（PR [#96](https://github.com/Nathan3303/nue-ui/pull/96)，`b922e13d`）· 新增 12 例，709 例 0 红                                              |
+| **#97** | `NueAside` 折叠能力（#86 批 2）                                      | ✅ MERGED（PR [#98](https://github.com/Nathan3303/nue-ui/pull/98)，`52c2e9b0`）· `collapsed` + `collapsedWidth` + separator 属性隔离 · 新增 12 例，721 例 0 红 |
+
+**已发布（2026-10-27）**：`nue-ui@1.14.0` · `nue-ui-theme-glass@0.2.3` · `nue-ui-theme-shadlike@0.13.29`
+tag：`v1.14.0` / `glass-theme-v0.2.3` / `shadlike-v0.13.29` → `5bab921d`
+发布前补的坑：`nue-ui` 与 `nue-ui-theme-shadlike` 原先都无 `publishConfig`，会被根 `.npmrc` 的 npmmirror 带走 → 已固定官方源
+| **#91** | `use-calendar` 的 UTC 偏移（东八区选 5-6 得 5-5）+ 非法日期 RangeError | OPEN · 需产品决策（三个口径选项），**未擅自改** |
+| **#93** | CI 不跑 playground 的 `vue-tsc`，#87 能积累 20 条的根因 | OPEN · 需决策 CI 时长影响 |
+| **#94** | select/date-picker 清除按钮（**嵌在 button 内，补 role 会形成嵌套控件**）· message-inner 关闭 · textarea 缺 `inputAttrs` | OPEN · 修 #86 时发现 |
+| **#95** | glass 暗色 `primary-100` 与 `-200` 几乎同色（`rgb(22,27,29)` vs `rgb(23,27,28)`）⇒ 状态层次失效 | OPEN · 需改 L 阶梯 + 重算 254 组对比度 |
 
 ### #86 的分批与取舍
 
