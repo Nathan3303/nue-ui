@@ -264,5 +264,18 @@ describe('useCalendar · valueFormat 日期序列化', () => {
                 expect(calendar.currentMinute.value).toBe(30);
             });
         });
+
+        it('非法值回填：年月回退到当前，时分同样归零（与 date-only 同一兜底）', () => {
+            withSystemTime('2024-05-06T14:30:00', () => {
+                const { calendar } = setup({ type: 'datetime', modelValue: 'invalid-date' });
+
+                expect(calendar.currentYear.value).toBe(2024);
+                expect(calendar.currentMonth.value).toBe(5);
+                expect(calendar.currentHour.value).toBe(0);
+                expect(calendar.currentMinute.value).toBe(0);
+            });
+            // 意图：这条锁的是「无法解析的值与 date-only 走同一兜底」这一**已知副作用**
+            // （时分归零）。它已在发布说明里对使用者承诺，不要当成回归「修回去」。
+        });
     });
 });
