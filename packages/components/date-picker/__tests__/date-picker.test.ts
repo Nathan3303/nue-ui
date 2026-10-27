@@ -213,3 +213,25 @@ describe('NueDatePicker 可访问性', () => {
         expect(wrapper.find('.nue-date-picker__clear').exists()).toBe(false);
     });
 });
+
+describe('NueDatePicker date-only 值的时刻口径（#105）', () => {
+    it('type="datetime" + date-only：触发器与面板时间选择器同为 00:00', () => {
+        // 固定系统时刻，保证「面板取当前时刻」的旧行为在本用例下一定不是 00:00
+        vi.useFakeTimers();
+        vi.setSystemTime(new Date(2024, 4, 6, 14, 30));
+        try {
+            const picker = mount(NueDatePicker, {
+                props: { modelValue: '2024-04-20', type: 'datetime' }
+            });
+            expect(picker.text()).toContain('2024年04月20日 00:00');
+
+            // 面板随 dropdown 一并挂载，可直接在同一 wrapper 内取到
+            const times = picker
+                .findAll('.nue-calendar-time-picker__value')
+                .map(node => node.text());
+            expect(times).toEqual(['00', '00']);
+        } finally {
+            vi.useRealTimers();
+        }
+    });
+});
