@@ -1,4 +1,8 @@
 {
     "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "node_modules/.cache/tsc/components",
+        "tsBuildInfoFile": "node_modules/.cache/tsc/components.tsbuildinfo"
+    },
     "include": ["../../env.d.ts", "**/*.ts", "**/*.tsx", "**/*.vue"]
 }
