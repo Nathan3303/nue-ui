@@ -107,13 +107,23 @@ const isInvalidDate = computed(() => {
 const displayValue = computed(() => {
     if (!props.modelValue || isInvalidDate.value) return '';
 
-    const date = new Date(props.modelValue);
-    if (isNaN(date.getTime())) return props.modelValue;
+    const value = props.modelValue;
+    // 带 T/空格的串表示一个「时刻」，需保留时分；纯 date-only 串没有时刻语义
+    const hasTimePart = /^\d{4}-\d{2}-\d{2}(T| )/.test(value);
 
-    if (props.type === 'datetime') {
+    if (props.type === 'datetime' && hasTimePart) {
+        // 时刻用 Date 解析后按本地时区显示，时分才正确
+        const date = new Date(value);
+        if (isNaN(date.getTime())) return value;
         return formatDateTimeFriendly(date);
     }
-    return formatDateFriendly(date);
+
+    // date-only 串必须走 parseDate（本地构造），否则 new Date('2024-04-20')
+    // 按 UTC 午夜解析，西半球时区会显示成前一天
+    const date = parseDate(value);
+    if (!date) return value;
+
+    return props.type === 'datetime' ? formatDateTimeFriendly(date) : formatDateFriendly(date);
 });
 
 const handleClear = () => {
