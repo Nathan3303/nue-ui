@@ -108,3 +108,44 @@ describe('NueDatePickerPanel', () => {
         });
     });
 });
+describe('NueDatePicker 可访问性', () => {
+    it('清除按钮应该是触发按钮的同级原生 button，且有可访问名', () => {
+        const wrapper = mount(NueDatePicker, {
+            props: { modelValue: '2024-04-20', clearable: true }
+        });
+        expect(wrapper.find('.nue-date-picker__clear').exists()).toBe(true);
+        const clear = wrapper.find('.nue-date-picker__clear');
+        expect(clear.element.tagName).toBe('BUTTON');
+        expect(clear.attributes('type')).toBe('button');
+        expect(clear.attributes('aria-label')).toBe('清除日期');
+    });
+
+    it('不应该出现 button 内嵌 button', () => {
+        const wrapper = mount(NueDatePicker, {
+            props: { modelValue: '2024-04-20', clearable: true }
+        });
+        expect(wrapper.findAll('button button').length).toBe(0);
+    });
+
+    it('点击清除按钮应该清空值并派发 clear', async () => {
+        const wrapper = mount(NueDatePicker, {
+            props: { modelValue: '2024-04-20', clearable: true }
+        });
+        await wrapper.find('.nue-date-picker__clear').trigger('click');
+        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([null]);
+        expect(wrapper.emitted('change')?.[0]).toEqual([null]);
+        expect(wrapper.emitted('clear')).toBeTruthy();
+    });
+
+    it('禁用时清除按钮同步禁用', () => {
+        const wrapper = mount(NueDatePicker, {
+            props: { modelValue: '2024-04-20', clearable: true, disabled: true }
+        });
+        expect(wrapper.find('.nue-date-picker__clear').attributes('disabled')).toBeDefined();
+    });
+
+    it('无值时不渲染清除按钮', () => {
+        const wrapper = mount(NueDatePicker, { props: { clearable: true } });
+        expect(wrapper.find('.nue-date-picker__clear').exists()).toBe(false);
+    });
+});

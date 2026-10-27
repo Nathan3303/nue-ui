@@ -253,4 +253,50 @@ describe('NueMessage', () => {
             expect(() => NueMessage.log('日志消息', 5000, 'user', 'large')).not.toThrow();
         });
     });
+
+    describe('可访问性', () => {
+        const mountNode = (duration?: number) => {
+            const mockWrapper = document.createElement('div');
+            const mockNode = document.createElement('div');
+            mockWrapper.appendChild(mockNode);
+            const wrapper = mount(MessageNodeInner, {
+                props: {
+                    node: mockNode,
+                    wrapper: mockWrapper,
+                    message: '常驻消息',
+                    ...(duration === undefined ? {} : { duration })
+                }
+            });
+            return { wrapper, mockWrapper };
+        };
+
+        it('关闭图标应该可聚焦且有可访问名', () => {
+            const { wrapper } = mountNode(0);
+            const closeButton = wrapper.find('.nue-message-node-inner__close');
+            expect(closeButton.attributes('role')).toBe('button');
+            expect(closeButton.attributes('tabindex')).toBe('0');
+            expect(closeButton.attributes('aria-label')).toBe('关闭');
+        });
+
+        it('关闭图标应该支持 Enter 与 Space 关闭消息', async () => {
+            const { wrapper, mockWrapper } = mountNode(0);
+            const closeButton = wrapper.find('.nue-message-node-inner__close');
+            await closeButton.trigger('keydown', { key: 'Enter' });
+            await new Promise(resolve => setTimeout(resolve, 600));
+            expect(mockWrapper.children.length).toBe(0);
+        });
+
+        it('关闭图标应该支持 Space 关闭消息', async () => {
+            const { wrapper, mockWrapper } = mountNode(0);
+            const closeButton = wrapper.find('.nue-message-node-inner__close');
+            await closeButton.trigger('keydown', { key: ' ' });
+            await new Promise(resolve => setTimeout(resolve, 600));
+            expect(mockWrapper.children.length).toBe(0);
+        });
+
+        it('自动关闭的消息不渲染关闭图标', () => {
+            const { wrapper } = mountNode(3000);
+            expect(wrapper.find('.nue-message-node-inner__close').exists()).toBe(false);
+        });
+    });
 });

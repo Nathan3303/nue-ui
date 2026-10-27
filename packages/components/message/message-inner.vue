@@ -12,7 +12,17 @@
                 <component :is="extensionContent" v-else-if="extensionContent" />
             </slot>
         </span>
-        <nue-icon v-if="!duration" name="clear" @click="handlePopAnimation" />
+        <nue-icon
+            v-if="!duration"
+            aria-label="关闭"
+            class="nue-message-node-inner__close"
+            name="clear"
+            role="button"
+            tabindex="0"
+            @click="handlePopAnimation"
+            @keydown.enter="handlePopAnimation"
+            @keydown.space.prevent="handlePopAnimation"
+        />
     </div>
 </template>
 

@@ -49,6 +49,10 @@ demo-preview=./size.vue
 demo-preview=./clearable.vue
 :::
 
+::: tip 可访问性
+清除按钮是触发按钮**同级**的独立 `<button>`（不嵌套在触发按钮内部），可 `Tab` 聚焦、`Enter` / `Space` 触发，并带 `aria-label="清除选择"`；`disabled` 时同步禁用。它占用触发按钮右缘**始终预留**的槽位，因此出现 / 消失都不会挤动按钮尺寸。
+:::
+
 ## 选择后保持打开
 
 默认情况下，选择器会在选择后关闭，通过属性 `persistent` 启用选择后保持打开状态。

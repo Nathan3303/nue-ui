@@ -62,6 +62,17 @@
         padding-left: calc(var(--nue-message-node-inner-vgap) * 0.5);
         border-left: 1px solid var(--nue-message-node-inner-border-color);
     }
+
+    /* 关闭图标是键盘可达的 role=button，需有焦点环与手型提示 */
+    .nue-message-node-inner__close {
+        cursor: pointer;
+
+        &:focus-visible {
+            outline: 2px solid var(--nue-message-node-inner-color);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+    }
 }
 
 .nue-message-node-inner.nue-message-node-inner--push {

@@ -333,3 +333,69 @@
     --nue-calendar-padding: var(--nue-padding-df);
     --nue-calendar-gap: var(--nue-gap-sm);
 }
+
+/* 清除按钮与触发按钮同级（避免 button 内嵌 button）：
+   触发按钮在 clearable 时始终预留图标槽位，有无值宽度都不跳动。 */
+.nue-date-picker__trigger {
+    position: relative;
+    width: fit-content;
+}
+
+.nue-date-picker__trigger--clearable .nue-button {
+    padding-right: calc(var(--nue-padding-sm) + var(--nue-gap-sm) + 1.025 * var(--nue-text-sm));
+}
+
+.nue-date-picker__trigger--small.nue-date-picker__trigger--clearable .nue-button {
+    padding-right: calc(var(--nue-padding-xs) + var(--nue-gap-sm) + 1.025 * var(--nue-text-xs));
+}
+
+.nue-date-picker__trigger--large.nue-date-picker__trigger--clearable .nue-button {
+    padding-right: calc(var(--nue-padding-df) + var(--nue-gap-sm) + 1.025 * var(--nue-text-df));
+}
+
+.nue-date-picker__clear {
+    display: flex;
+    position: absolute;
+    top: 0;
+    /* 触发按钮有 1px 描边：清除槽位右缘对齐按钮内容盒，视觉与旧布局一致 */
+    right: calc(var(--nue-padding-sm) + 1px);
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    width: calc(1.025 * var(--nue-text-sm));
+    padding: 0;
+    font-size: var(--nue-text-sm);
+    color: var(--nue-primary-text-color);
+    background: none;
+    border: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: color var(--nue-animation-duration-short) ease-in;
+
+    &:hover {
+        color: var(--nue-primary-color-600);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--nue-primary-color-600);
+        outline-offset: -2px;
+        border-radius: 2px;
+    }
+
+    &:disabled {
+        color: var(--nue-secondary-text-color);
+        cursor: not-allowed;
+    }
+}
+
+.nue-date-picker__trigger--small .nue-date-picker__clear {
+    right: calc(var(--nue-padding-xs) + 1px);
+    width: calc(1.025 * var(--nue-text-xs));
+    font-size: var(--nue-text-xs);
+}
+
+.nue-date-picker__trigger--large .nue-date-picker__clear {
+    right: calc(var(--nue-padding-df) + 1px);
+    width: calc(1.025 * var(--nue-text-df));
+    font-size: var(--nue-text-df);
+}

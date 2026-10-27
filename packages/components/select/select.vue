@@ -7,23 +7,36 @@
         @execute="handleExecute"
     >
         <template #trigger="{ trigger }">
-            <nue-button
-                :icon="selectedOption?.icon"
-                :disabled="disabled"
-                :size="size"
-                @click="trigger"
+            <div
+                :class="[
+                    'nue-select__trigger',
+                    clearable && 'nue-select__trigger--clearable',
+                    size && `nue-select__trigger--${size}`
+                ]"
             >
-                <template v-if="label">{{ label }}</template>
-                <nue-text v-else color="gray">{{ placeholder }}</nue-text>
-                <template #append>
-                    <nue-icon name="select" />
-                    <nue-icon
-                        v-if="clearable && selectedOption"
-                        name="clear"
-                        @click.stop="handleClear"
-                    />
-                </template>
-            </nue-button>
+                <nue-button
+                    :icon="selectedOption?.icon"
+                    :disabled="disabled"
+                    :size="size"
+                    @click="trigger"
+                >
+                    <template v-if="label">{{ label }}</template>
+                    <nue-text v-else color="gray">{{ placeholder }}</nue-text>
+                    <template #append>
+                        <nue-icon name="select" />
+                    </template>
+                </nue-button>
+                <button
+                    v-if="clearable && selectedOption"
+                    aria-label="清除选择"
+                    class="nue-select__clear"
+                    :disabled="disabled"
+                    type="button"
+                    @click="handleClear"
+                >
+                    <nue-icon name="clear" />
+                </button>
+            </div>
         </template>
         <slot />
     </nue-dropdown>
