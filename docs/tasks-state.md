@@ -1,6 +1,18 @@
 # 任务状态（接续快照）
 
-> 重开会话先读本文件。更新时间：2026-10-25 → 2026-10-26（**v0.2.1 已发布 npm**）
+> 重开会话先读本文件。更新时间：2026-10-27（**交接给新 pm 会话**）
+
+## 交接说明（新 pm 必读）
+
+- **本仓 pm 的窗口代号 = `nu`**（tmux window `0:2`）。`tmux rename-window -t 0:2 nu` 已执行。
+- **派生会话必须开在 `nu` 窗口**：`fleet ensure` 用的是「tmux 活动窗口」，所以派发前先确认：
+    ```bash
+    tmux select-window -t 0:2    # 或 -t nu
+    bash .agents/scripts/nao-fleet.sh ensure --task <编号> <角色>
+    ```
+    否则会落到 nao-todo 的窗口（已踩过 3 次）。
+- **不要把工作 pane `join` 进用户自己的窗口**：用户会在 `nu` 里开自己的 shell，塞进去会挤压他的空间。
+- 当前窗口里除本 pm 外，还有一个用户自己的 shell pane（`packages/core`），**不要动它**。
 
 ## 当前：Glass v0.2.2 Frostline（重新设计 + 滚动契约）
 
@@ -90,7 +102,11 @@
 
 ### 仍 OPEN
 
-- **#105**：`type="datetime"` + date-only 值时，**触发器显示 `00:00`、面板时间选择器显示当前时刻**（同一值两处不同）。修它要动 `packages/hooks/use-calendar` 的 `parseDateTime`，属行为变更，**需口径决策**（A 统一补 00:00 / B 统一补当前时刻 / C 面板不预填）。PM 倾向 A。
+- **#105**：`type="datetime"` + date-only 值时，**触发器显示 `00:00`、面板时间选择器显示当前时刻**（同一值两处不同）。
+
+    **口径已定：方案 A（统一补 00:00）**，用户已批准。根因是 `packages/hooks/use-calendar/index.ts` 第 133 行的兜底（`hour: now.getHours(), minute: now.getMinutes()`），改为 `hour: 0, minute: 0`。
+
+    **状态：未派发**。上一轮 `rd-fe-T105` 会话已随 pane 关闭而断开（任务未发出）。新 pm 直接派发即可。
 
 ## 文档章节（已交付，无单独 Issue）
 
