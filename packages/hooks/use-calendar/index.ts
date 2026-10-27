@@ -242,3 +242,4 @@ export function useCalendar(options: {
         handleClear
     };
 }
+export const __faildrill: number = " bukan angka ";
