@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vite-plus/test';
+import { describe, it, expect, vi } from 'vite-plus/test';
 import { mount } from '@vue/test-utils';
 import { NueDatePicker } from '../index';
 import { NueCalendarBody } from '../../calendar';
@@ -69,6 +69,70 @@ describe('NueDatePicker', () => {
             expect(wrapper.text()).not.toContain('无效日期');
             expect(wrapper.text()).toContain('2024年04月20日');
         });
+    });
+});
+
+describe('NueDatePicker 时区无关显示', () => {
+    // 用 vi.stubEnv 切换时区：Node 会在 process.env.TZ 变更后重新读取，Date 随之切换
+    const withTZ = (tz: string, fn: () => void) => {
+        vi.stubEnv('TZ', tz);
+        try {
+            fn();
+        } finally {
+            vi.unstubAllEnvs();
+        }
+    };
+
+    it('西半球时区（America/New_York）下 date-only 值不应错一天', () => {
+        withTZ('America/New_York', () => {
+            const wrapper = mount(NueDatePicker, { props: { modelValue: '2024-04-20' } });
+            expect(wrapper.text()).toContain('2024年04月20日');
+        });
+    });
+
+    it('UTC / 东半球 / 极东时区下 date-only 值保持当天', () => {
+        for (const tz of ['UTC', 'Asia/Shanghai', 'Pacific/Kiritimati']) {
+            withTZ(tz, () => {
+                const wrapper = mount(NueDatePicker, { props: { modelValue: '2024-04-20' } });
+                expect(wrapper.text()).toContain('2024年04月20日');
+            });
+        }
+    });
+
+    it('type="datetime" 带时间串应显示本地时刻', () => {
+        withTZ('America/New_York', () => {
+            const wrapper = mount(NueDatePicker, {
+                props: { modelValue: '2024-04-20 14:30', type: 'datetime' }
+            });
+            expect(wrapper.text()).toContain('2024年04月20日 14:30');
+        });
+    });
+
+    it('type="datetime" ISO 时刻串按本地时区换算显示', () => {
+        withTZ('America/New_York', () => {
+            const wrapper = mount(NueDatePicker, {
+                props: { modelValue: '2024-04-20T18:30:00Z', type: 'datetime' }
+            });
+            expect(wrapper.text()).toContain('2024年04月20日 14:30');
+        });
+    });
+
+    it('type="datetime" date-only 值不应错一天（时刻补 00:00）', () => {
+        withTZ('America/New_York', () => {
+            const wrapper = mount(NueDatePicker, {
+                props: { modelValue: '2024-04-20', type: 'datetime' }
+            });
+            expect(wrapper.text()).toContain('2024年04月20日 00:00');
+        });
+    });
+
+    it('无效日期在各时区仍提示无效', () => {
+        for (const tz of ['America/New_York', 'Asia/Shanghai']) {
+            withTZ(tz, () => {
+                const wrapper = mount(NueDatePicker, { props: { modelValue: '2024-02-31' } });
+                expect(wrapper.text()).toContain('无效日期');
+            });
+        }
     });
 });
 
