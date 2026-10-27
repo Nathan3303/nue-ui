@@ -6,7 +6,8 @@
  * - 色相统一 192；主色饱和 ≤ 45%；暖色只出现在 Ember（error）
  *
  * 派生口径（PRD §三 / §五）：
- * - 11 档 primary：亮色 L 命中端点 99% → 8%，暗色 L ≈ 100 − L 并夹紧到 10% / 92%
+ * - 11 档 primary：亮色 L 命中端点 99% → 8%；暗色端不再夹紧到 10% 撞底，
+ *   而是从 8% 起按 ΔL ≥ 1.5% 重排（详见下方 Lightness 注释）
  * - 唯一例外：600 = 实心填充 + 白字。按 PRD 表翻转到 56% 时白字只有 2.92:1，
  *   故 600 两模式固定 L 40%（RF-1：对比度是最终裁判，调 L 阶梯而不是砍阈值）。
  */
@@ -30,9 +31,12 @@
     --nue-hsl-s90: calc(42% - var(--nue-dark-switch) * 6%);
     --nue-hsl-s100: calc(48% - var(--nue-dark-switch) * 6%);
 
-    /* Lightness：亮色为锚点，暗色 = 100 − L（夹紧 10% / 92%）
-       锚点（primary 用）：l100=99 l90=96 l80=92 l70=86 l60=76 l50=60
-                           l40=44 l30=32 l20=22 l10=15 l0=8，中间档线性内插。 */
+    /* Lightness：亮色为锚点（一律不改）；暗色 = 100 − L 后重排高亮端，
+       保证相邻档 ΔL ≥ 1.5%（否则 primary-0/100/200/300 会撞成同色）。
+       亮色锚点：l100=99 l95=97.5 l90=96 l85=94 l80=92 l75=89 l70=86 l65=81
+                 l60=76 l50=60 l40=44 l30=32 l20=22 l10=15 l0=8。
+       暗色锚点：l100=8 l95=9.5 l90=11 l85=12.5 l80=14 l75=16 l70=18
+                 l65=20.5 l60=24 l50=40 l40=56 l30=68 l20=78 l10=85 l0=92。 */
     --nue-hsl-l0: calc(8% + var(--nue-dark-switch) * 84%);
     --nue-hsl-l5: calc(11.5% + var(--nue-dark-switch) * 77%);
     --nue-hsl-l10: calc(15% + var(--nue-dark-switch) * 70%);
@@ -46,14 +50,14 @@
     --nue-hsl-l50: calc(60% - var(--nue-dark-switch) * 20%);
     --nue-hsl-l55: calc(68% - var(--nue-dark-switch) * 36%);
     --nue-hsl-l60: calc(76% - var(--nue-dark-switch) * 52%);
-    --nue-hsl-l65: calc(81% - var(--nue-dark-switch) * 62%);
-    --nue-hsl-l70: calc(86% - var(--nue-dark-switch) * 72%);
-    --nue-hsl-l75: calc(89% - var(--nue-dark-switch) * 78%);
-    --nue-hsl-l80: calc(92% - var(--nue-dark-switch) * 82%);
-    --nue-hsl-l85: calc(94% - var(--nue-dark-switch) * 84%);
-    --nue-hsl-l90: calc(96% - var(--nue-dark-switch) * 86%);
-    --nue-hsl-l95: calc(97.5% - var(--nue-dark-switch) * 87.5%);
-    --nue-hsl-l100: calc(99% - var(--nue-dark-switch) * 89%);
+    --nue-hsl-l65: calc(81% - var(--nue-dark-switch) * 60.5%);
+    --nue-hsl-l70: calc(86% - var(--nue-dark-switch) * 68%);
+    --nue-hsl-l75: calc(89% - var(--nue-dark-switch) * 73%);
+    --nue-hsl-l80: calc(92% - var(--nue-dark-switch) * 78%);
+    --nue-hsl-l85: calc(94% - var(--nue-dark-switch) * 81.5%);
+    --nue-hsl-l90: calc(96% - var(--nue-dark-switch) * 85%);
+    --nue-hsl-l95: calc(97.5% - var(--nue-dark-switch) * 88%);
+    --nue-hsl-l100: calc(99% - var(--nue-dark-switch) * 91%);
 
     /* Opacity */
     --nue-hsl-o0: 0%;
