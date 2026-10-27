@@ -80,17 +80,17 @@
 
 ### 已发布（2026-10-27）
 
-| 包                      | 版本        | 类型                                             |
-| ----------------------- | ----------- | ------------------------------------------------ |
-| `nue-ui`                | **1.15.0**  | MINOR（`valueFormat` / `inputAttrs` / 结构改动） |
-| `nue-ui-theme-glass`    | **0.2.4**   | PATCH（暗色色阶 + 清除按钮/message 样式）        |
-| `nue-ui-theme-shadlike` | **0.13.30** | PATCH（清除按钮/message 样式）                   |
+| 包                      | 版本        | 类型                                                                                           |
+| ----------------------- | ----------- | ---------------------------------------------------------------------------------------------- |
+| `nue-ui`                | **1.15.1**  | PATCH（#100 date-picker 显示修复）；1.15.0 为 MINOR（`valueFormat` / `inputAttrs` / 结构改动） | `v1.15.1` |
+| `nue-ui-theme-glass`    | **0.2.4**   | PATCH（暗色色阶 + 清除按钮/message 样式）                                                      |
+| `nue-ui-theme-shadlike` | **0.13.30** | PATCH（清除按钮/message 样式）                                                                 |
 
 `core/dist` 410,743 B · glass 109,835 B · shadlike 104,468 B · lockfile 干净
 
 ### 仍 OPEN
 
-- **#100**：`TZ=America/New_York` 下 date-picker 显示错一天（**master 上同样红**，既有）。hooks 的 tsconfig 部分已由 #93 顺带解决。
+- **#105**：`type="datetime"` + date-only 值时，**触发器显示 `00:00`、面板时间选择器显示当前时刻**（同一值两处不同）。修它要动 `packages/hooks/use-calendar` 的 `parseDateTime`，属行为变更，**需口径决策**（A 统一补 00:00 / B 统一补当前时刻 / C 面板不预填）。PM 倾向 A。
 
 ## 文档章节（已交付，无单独 Issue）
 
