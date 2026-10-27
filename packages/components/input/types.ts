@@ -52,6 +52,8 @@ export interface NueTextareaProps extends GlobalProps {
     size?: 'small' | 'large';
     debounceTime?: number;
     flex?: string;
+    /** 透传给内部 <textarea> 的附加属性（如 aria-label、autocomplete、spellcheck）；组件自身属性优先。 */
+    inputAttrs?: Record<string, string | number | boolean | undefined>;
 }
 
 export type NueTextareaEmits = {

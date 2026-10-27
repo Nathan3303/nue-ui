@@ -126,4 +126,35 @@ describe('NueTextarea', () => {
             expect(wrapper.find('.word-counter').exists()).toBe(false);
         });
     });
+
+    describe('可访问性', () => {
+        it('inputAttrs 应该透传到内部 textarea', () => {
+            const wrapper = mount(NueTextarea, {
+                props: {
+                    inputAttrs: {
+                        'aria-label': '备注',
+                        autocomplete: 'off',
+                        spellcheck: 'false'
+                    }
+                }
+            });
+            const textarea = wrapper.find('textarea');
+            expect(textarea.attributes('aria-label')).toBe('备注');
+            expect(textarea.attributes('autocomplete')).toBe('off');
+            expect(textarea.attributes('spellcheck')).toBe('false');
+        });
+
+        it('inputAttrs 不应覆盖组件自身属性', () => {
+            const wrapper = mount(NueTextarea, {
+                props: { placeholder: '请输入', inputAttrs: { placeholder: '冲突值' } }
+            });
+            expect(wrapper.find('textarea').attributes('placeholder')).toBe('请输入');
+        });
+
+        it('未使用 inputAttrs 时，普通 attrs 仍落在根元素', () => {
+            const wrapper = mount(NueTextarea, { attrs: { 'data-test': 'root' } });
+            expect(wrapper.find('.nue-textarea').attributes('data-test')).toBe('root');
+            expect(wrapper.find('textarea').attributes('data-test')).toBeUndefined();
+        });
+    });
 });

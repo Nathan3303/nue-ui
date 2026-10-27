@@ -2,6 +2,7 @@
     <div :class="classes" :style="style">
         <slot name="prefix" :length="textLength" :maxlength="maxlengthInt" :clear="handleClear" />
         <textarea
+            v-bind="inputAttrs"
             :id="id"
             ref="textareaRef"
             :disabled="disabled"

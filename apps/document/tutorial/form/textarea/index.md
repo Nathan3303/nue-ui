@@ -117,30 +117,41 @@ demo-preview=./slots.vue
 4. **防抖机制**：与 Input 组件类似，`debounceTime` 仅影响 `update:modelValue` 事件的触发。
 5. **字数统计**：需要配合 `maxlength` 属性使用才能显示统计效果。
 
+## 可访问性
+
+`NueTextarea` 的外层是 `<div>`，原生 attrs（如 `aria-*`、`autocomplete`、`spellcheck`）默认落在**外层 div** 上，不会到内部 `<textarea>`。需要给文本域本身命名或加属性时，用 **`inputAttrs`**：
+
+```vue
+<nue-textarea v-model="remark" :input-attrs="{ 'aria-label': '备注', autocomplete: 'off' }" />
+```
+
+**优先级**：`inputAttrs` 通过 `v-bind` 绑定在组件自身属性**之前**，因此 `placeholder` / `disabled` / `readonly` / `rows` 等组件属性优先，`inputAttrs` 不会覆盖它们。
+
 ## 组件属性与事件
 
 下方涵盖了 `NueTextarea` 组件所有的可用属性与事件。
 
 ### 属性
 
-| 属性           | Type                                              | 默认值  | 说明                           |
-| -------------- | ------------------------------------------------- | ------- | ------------------------------ |
-| `modelValue`   | `string`                                          | -       | 绑定值                         |
-| `id`           | `string`                                          | -       | ID（原生属性）                 |
-| `placeholder`  | `string`                                          | -       | 占位符                         |
-| `theme`        | `string \| string[]`                              | -       | 主题样式（继承自 GlobalProps） |
-| `shape`        | `'rounded' \| 'noshape'`                          | -       | 形状样式                       |
-| `disabled`     | `boolean`                                         | `false` | 是否禁用                       |
-| `readonly`     | `boolean`                                         | `false` | 只读                           |
-| `rows`         | `number`                                          | `3`     | 行数                           |
-| `resize`       | `boolean`                                         | -       | 调整大小                       |
-| `autosize`     | `boolean \| { minRows: number; maxRows: number }` | -       | 自动高度                       |
-| `maxlength`    | `string`                                          | -       | 最大长度                       |
-| `counter`      | `string`                                          | -       | 字数统计模式                   |
-| `width`        | `string`                                          | -       | 宽度                           |
-| `size`         | `'small' \| 'large'`                              | -       | 尺寸                           |
-| `debounceTime` | `number`                                          | `0`     | 防抖时间(ms)                   |
-| `flex`         | `string`                                          | -       | 弹性布局                       |
+| 属性           | Type                                                       | 默认值  | 说明                           |
+| -------------- | ---------------------------------------------------------- | ------- | ------------------------------ |
+| `modelValue`   | `string`                                                   | -       | 绑定值                         |
+| `id`           | `string`                                                   | -       | ID（原生属性）                 |
+| `placeholder`  | `string`                                                   | -       | 占位符                         |
+| `theme`        | `string \| string[]`                                       | -       | 主题样式（继承自 GlobalProps） |
+| `shape`        | `'rounded' \| 'noshape'`                                   | -       | 形状样式                       |
+| `disabled`     | `boolean`                                                  | `false` | 是否禁用                       |
+| `readonly`     | `boolean`                                                  | `false` | 只读                           |
+| `rows`         | `number`                                                   | `3`     | 行数                           |
+| `resize`       | `boolean`                                                  | -       | 调整大小                       |
+| `autosize`     | `boolean \| { minRows: number; maxRows: number }`          | -       | 自动高度                       |
+| `maxlength`    | `string`                                                   | -       | 最大长度                       |
+| `counter`      | `string`                                                   | -       | 字数统计模式                   |
+| `width`        | `string`                                                   | -       | 宽度                           |
+| `size`         | `'small' \| 'large'`                                       | -       | 尺寸                           |
+| `debounceTime` | `number`                                                   | `0`     | 防抖时间(ms)                   |
+| `flex`         | `string`                                                   | -       | 弹性布局                       |
+| `inputAttrs`   | `Record<string, string \| number \| boolean \| undefined>` | -       | 透传给内部 `<textarea>` 的属性 |
 
 ### 事件
 
