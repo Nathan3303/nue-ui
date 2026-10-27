@@ -23,6 +23,11 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
+            # 类型检查：components + hooks 两个 project（emit 落 node_modules/.cache，不污染工作区）
+            # 放在构建/测试之前，是为了让类型错误最快失败；不影响下方 glass → tests 的顺序约束
+            - name: Typecheck packages
+              run: pnpm typecheck
+
             # glass 门禁测试读取构建产物 dist/（AC-05 / AC-15），必须先于 `pnpm test:run`
             - name: Build NueUI glass theme package
               run: pnpm glass-theme build

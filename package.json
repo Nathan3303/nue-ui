@@ -20,7 +20,8 @@
         "glass-theme": "pnpm --filter nue-ui-theme-glass",
         "iconfont": "pnpm --filter nue-ui-iconfont",
         "build": "pnpm core build && pnpm shadlike-theme build && pnpm glass-theme build && pnpm iconfont build",
-        "check:lf": "node scripts/check-lf.mjs --all"
+        "check:lf": "node scripts/check-lf.mjs --all",
+        "typecheck": "vue-tsc -b packages/components packages/hooks"
     },
     "repository": {
         "type": "git",
@@ -59,7 +60,7 @@
         "typescript": "^5.8.3",
         "vite": "catalog:",
         "vitest": "catalog:",
-        "vue-tsc": "^1.8.27",
+        "vue-tsc": "^2.2.12",
         "vite-plus": "catalog:"
     },
     "dependencies": {
