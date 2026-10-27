@@ -26,6 +26,12 @@ demo-preview=./datetime.vue
 不管是什么输入格式，通过组件面板更新后都会转换为 ISO 8601 格式（`YYYY-MM-DDTHH:mm:ss.sssZ`）输出。当 `type="date"` 时，时间部分固定为 00:00:00。（可能因时区不同导致 “时” 部分有不同显示，本质为 00:00:00）
 :::
 
+:::tip date-only 值的时刻按 00:00 解释
+当 `type="datetime"` 而 `modelValue` 是 date-only 串（`YYYY-MM-DD`）时，值本身不含时刻信息，组件统一按 **00:00** 解释：触发器显示 `YYYY年MM月DD日 00:00`，面板时间选择器的初值也是 `00:00`，两处一致。
+
+带时刻的串（`YYYY-MM-DD HH:mm`、`YYYY-MM-DDTHH:mm:ss` 等）不受影响，仍按值里的时分回填；值只写了部分时刻（如 `YYYY-MM-DD 12`，缺分钟）时，缺的那一段仍回退到当前时刻。
+:::
+
 ### 禁用状态
 
 通过属性 `disabled` 设置禁用状态。
@@ -77,7 +83,7 @@ demo-preview=./slots.vue
     - 支持 ISO 格式：`YYYY-MM-DDTHH:mm:ss`、`YYYY-MM-DDTHH:mm:ssZ`、`YYYY-MM-DDTHH:mm:ss.SSS+08:00` 等
 4. **无效日期处理**：
     - 当传入的日期字符串无法正确解析时，按钮上会显示红色的"无效日期"字样
-    - 选择面板中的日期和时间默认从当前时间中取值
+    - 无 `modelValue` 时，选择面板中的日期和时间默认从当前时间中取值；date-only 值的时刻按 00:00 解释（见上文「date-only 值的时刻按 00:00 解释」）
 5. **时间选择**：当 `type="datetime"` 时，可以点击小时或分钟数值进行手动输入修改。
 6. **年份/月份选择**：点击年份或月份可快速切换到对应选择视图，再次点击即可返回。
 

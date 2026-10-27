@@ -131,7 +131,9 @@ export function useCalendar(options: {
                 return { date: datePart, hour, minute };
             }
         }
-        return { date: value, hour: now.getHours(), minute: now.getMinutes() };
+        // 走到这里说明值里没有可用的时刻段（date-only 或无法解析）：date-only 本身不含
+        // 时刻信息，统一按 00:00 解释，与触发器（parseDate → 本地午夜）口径一致（#105）
+        return { date: value, hour: 0, minute: 0 };
     }
 
     watch(

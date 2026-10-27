@@ -185,4 +185,97 @@ describe('useCalendar · valueFormat 日期序列化', () => {
             expect(calendar.currentMonth.value).toBe(now.getMonth() + 1);
         });
     });
+
+    describe('date-only 值的时刻口径：统一补 00:00（#105）', () => {
+        /** 固定系统时刻，保证「取当前时刻」的旧行为在本用例下一定不是 00:00（反例有效） */
+        function withSystemTime(iso: string, fn: () => void) {
+            vi.useFakeTimers();
+            vi.setSystemTime(new Date(iso));
+            try {
+                fn();
+            } finally {
+                vi.useRealTimers();
+            }
+        }
+
+        it('type=datetime + date-only modelValue：面板时间初值为 00:00（不取当前时刻）', () => {
+            withSystemTime('2024-05-06T14:30:00', () => {
+                const { calendar } = setup({ type: 'datetime', modelValue: '2024-05-06' });
+
+                expect(calendar.currentHour.value).toBe(0);
+                expect(calendar.currentMinute.value).toBe(0);
+            });
+        });
+
+        it("valueFormat='date' 回填后打开面板同样为 00:00", () => {
+            withSystemTime('2024-05-06T14:30:00', () => {
+                const { calendar } = setup({
+                    type: 'datetime',
+                    valueFormat: 'date',
+                    modelValue: '2024-06-01'
+                });
+
+                expect(calendar.currentYear.value).toBe(2024);
+                expect(calendar.currentMonth.value).toBe(6);
+                expect(calendar.currentHour.value).toBe(0);
+                expect(calendar.currentMinute.value).toBe(0);
+            });
+        });
+
+        it('date-only 回填后直接选日期：emit 的时刻为 00:00（与触发器显示一致）', () => {
+            withSystemTime('2024-05-06T14:30:00', () => {
+                const { calendar, emit } = setup({ type: 'datetime', modelValue: '2024-05-06' });
+
+                calendar.handleDateSelect('2024-07-08');
+
+                expect(emit).toHaveBeenCalledWith(
+                    'update:modelValue',
+                    legacyIsoValue('2024-07-08', 0, 0)
+                );
+            });
+        });
+
+        it('带时刻串（T 形式）行为不变：按值里的时分回填', () => {
+            withSystemTime('2024-05-06T14:30:00', () => {
+                const { calendar } = setup({
+                    type: 'datetime',
+                    modelValue: '2024-05-06T08:09:00'
+                });
+
+                expect(calendar.currentHour.value).toBe(8);
+                expect(calendar.currentMinute.value).toBe(9);
+            });
+        });
+
+        it('带时刻串（空格形式）行为不变：按值里的时分回填', () => {
+            withSystemTime('2024-05-06T14:30:00', () => {
+                const { calendar } = setup({ type: 'datetime', modelValue: '2024-05-06 08:09' });
+
+                expect(calendar.currentHour.value).toBe(8);
+                expect(calendar.currentMinute.value).toBe(9);
+            });
+        });
+
+        it('缺省段（如只有小时）仍回退当前时刻', () => {
+            withSystemTime('2024-05-06T14:30:00', () => {
+                const { calendar } = setup({ type: 'datetime', modelValue: '2024-05-06 12' });
+
+                expect(calendar.currentHour.value).toBe(12);
+                expect(calendar.currentMinute.value).toBe(30);
+            });
+        });
+
+        it('非法值回填：年月回退到当前，时分同样归零（与 date-only 同一兜底）', () => {
+            withSystemTime('2024-05-06T14:30:00', () => {
+                const { calendar } = setup({ type: 'datetime', modelValue: 'invalid-date' });
+
+                expect(calendar.currentYear.value).toBe(2024);
+                expect(calendar.currentMonth.value).toBe(5);
+                expect(calendar.currentHour.value).toBe(0);
+                expect(calendar.currentMinute.value).toBe(0);
+            });
+            // 意图：这条锁的是「无法解析的值与 date-only 走同一兜底」这一**已知副作用**
+            // （时分归零）。它已在发布说明里对使用者承诺，不要当成回归「修回去」。
+        });
+    });
 });
