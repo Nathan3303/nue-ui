@@ -339,6 +339,9 @@ importers:
       vitest:
         specifier: 4.1.10
         version: 4.1.10(@types/node@20.19.43)(@vitest/browser-preview@4.1.10)(@vitest/coverage-v8@4.1.10)(@voidzero-dev/vite-plus-core@0.2.6(@types/node@20.19.43)(esbuild@0.28.2)(sass@1.102.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.1))(jsdom@29.0.1)
+      vue-router:
+        specifier: ^4.4.5
+        version: 4.6.4(vue@3.5.41(typescript@5.9.3))
       vue-tsc:
         specifier: ^2.2.12
         version: 2.2.12(typescript@5.9.3)
@@ -9574,6 +9577,11 @@ snapshots:
     dependencies:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.41(typescript@5.6.3)
+
+  vue-router@4.6.4(vue@3.5.41(typescript@5.9.3)):
+    dependencies:
+      '@vue/devtools-api': 6.6.4
+      vue: 3.5.41(typescript@5.9.3)
 
   vue-sonner@2.0.9: {}
 
