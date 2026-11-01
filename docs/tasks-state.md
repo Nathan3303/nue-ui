@@ -15,18 +15,20 @@
 - 历史踩坑：活动窗口是 nao-todo 时 `ensure` → 派生会话落到 nao-todo 窗口（3 次）。另开窗口即同时解决这两类问题。
 - 当前 `nu` 里的 pane：PM（%103）+ 用户 shell（%99，`packages/core`）。**不要动用户 pane**。
 
-## 当前：#111 nao 机制包升级 0.13.0 → 0.20.4（进行中）
+## 当前：#111 nao 机制包升级 0.13.0 → 0.20.4（已收口）
 
-| 项    | 内容                                                                                         |
-| :---- | :------------------------------------------------------------------------------------------- |
-| Issue | [#111](https://github.com/Nathan3303/nue-ui/issues/111)                                      |
-| 分支  | `feat/111-nao-skill-0.20.4`（Issue 立项后确定）                                              |
-| 设计  | `docs/prds/2026-11-01-nao-skill-0.20.4-upgrade.md`（§八 含 AGENTS.md 逐字目标文本）          |
-| 执行  | `rd-infra-111`（pane `%52`，**开在 PM 窗口 `Development:3` 内分屏**，用户指定不新建 window） |
-| 范围  | `.pi/settings.json` pin · `AGENTS.md` 机制段 · `.agents/.nao-version`（3 文件，无业务码）    |
-| 回执  | `done(full)`（须列新旧版本 / `check` 精确数字 / 已删资产残留命中清单）                       |
-| 状态  | 2026-11-01 已派发，待回执                                                                    |
-| 前置  | 实测 pi 1.4.0 + tmux 内 ⇒ 满足 0.19.1 破坏性门槛                                             |
+| 项    | 内容                                                                                                               |
+| :---- | :----------------------------------------------------------------------------------------------------------------- |
+| Issue | [#111](https://github.com/Nathan3303/nue-ui/issues/111)                                                            |
+| 分支  | `feat/111-nao-skill-0.20.4`（Issue 立项后确定）                                                                    |
+| 设计  | `docs/prds/2026-11-01-nao-skill-0.20.4-upgrade.md`（§八 含 AGENTS.md 逐字目标文本）                                |
+| 执行  | `rd-infra-111`（pane `%52`，**开在 PM 窗口 `Development:3` 内分屏**，用户指定不新建 window）                       |
+| 范围  | `.pi/settings.json` pin · `AGENTS.md` 机制段 · `.agents/.nao-version`（3 文件，无业务码）                          |
+| 回执  | `done(full)`（须列新旧版本 / `check` 精确数字 / 已删资产残留命中清单）                                             |
+| 状态  | 2026-11-01 已合并收口（PR #112 + 收尾 PR）                                                                         |
+| 合并  | `3a61f8fb`（PR #112 squash，5 文件 / 主线恰 1 条提交）                                                             |
+| 校验  | `check` 升级前 `roles=6 · files=43` → 升级后 `roles=6 · files=50`（+7 = 新增 skills/extensions）· 业务门禁 774/774 |
+| 前置  | 实测 pi 1.4.0 + tmux 内 ⇒ 满足 0.19.1 破坏性门槛                                                                   |
 
 > `qa-T612` 残留属 nao-todo 仓，非本仓任务，勿在此回收。
 
