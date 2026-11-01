@@ -40,11 +40,13 @@ demo-preview=./icon.vue
 
 ## 路由连接
 
-通过 `route` 属性实现 VueRouter 路由跳转。`route` 属性接收 `string` 或
+通过 `route` 属性实现 VueRouter 路由跳转（`to` 属性等价）。`route` / `to` 属性接收 `string` 或
 `{ name: string, params?: any, query?: any }` 类型的值。
 
-当 `route` 属性存在时，组件渲染会使用 `<RouterLink>` 而非 `<a>` 标签；属性值会被转换为 `to` 用于匹配
-VueRouter 的路由，此时的 `href` 属性将失效（即使存在）。
+当 `route`（或 `to`）属性存在且未传入 `href` 时，组件渲染会使用 `<RouterLink>` 而非 `<a>`
+标签；属性值会被转换为 `to` 用于匹配 VueRouter 的路由。路由形态渲染出的 `<a>` 带有可用的
+`href`，可通过 Tab 聚焦、回车激活，并可「在新标签页打开」。若同时传入 `href`，则以 `href` 为准，
+`route` / `to` 均不生效。
 
 激活状态会在 `route` 属性存在时启用，主题名称为 `actived`。若想要修改激活状态的样式，通过
 `nue-link--actived` 类名进行样式修改，目前不支持自定其他的激活状态类名。
@@ -75,10 +77,10 @@ demo-preview=./slots.vue
 
 ## 注意事项
 
-1. **路由跳转**：`route` 属性需要项目配置了 VueRouter 才能使用，否则会导致渲染错误。
-2. **优先级**：当同时设置 `href` 和 `route` 属性时，`route` 优先，`href` 会失效。
-3. **激活状态**：激活状态仅在 `route` 属性存在时生效，CSS 类名为 `nue-link--actived`。
-4. **禁用状态**：禁用状态的链接不可点击，但仍然可以获取焦点（无障碍考虑）。
+1. **路由跳转**：`route`（或 `to`）属性需要项目配置了 VueRouter 才能使用，否则会导致渲染错误。
+2. **优先级**：当同时设置 `href` 与 `route`（或 `to`）时，以 `href` 为准，`route` / `to` 不生效。
+3. **激活状态**：激活状态仅在路由形态（`route` / `to`）下生效，CSS 类名为 `nue-link--actived`。
+4. **禁用状态**：禁用状态的链接不可点击，也不可聚焦（不渲染 `href`，也不带 `tabindex`）。
 5. **图标位置**：图标默认显示在链接文字的前方。
 
 ## 组件属性与事件
@@ -87,12 +89,13 @@ demo-preview=./slots.vue
 
 ### 属性
 
-| 属性       | Type                                            | 默认值 | 说明                           |
-| ---------- | ----------------------------------------------- | ------ | ------------------------------ |
-| `href`     | `string`                                        | -      | 链接地址                       |
-| `disabled` | `boolean`                                       | -      | 是否禁用                       |
-| `icon`     | `string`                                        | -      | 图标名称                       |
-| `route`    | `Record<string, unknown> \| string`             | -      | 路由对象，用于 VueRouter 跳转  |
-| `size`     | `string`                                        | -      | 尺寸                           |
-| `title`    | `string`                                        | -      | 标题（原生 title 属性）        |
-| `theme`    | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps） |
+| 属性       | Type                                            | 默认值 | 说明                                           |
+| ---------- | ----------------------------------------------- | ------ | ---------------------------------------------- |
+| `href`     | `string`                                        | -      | 链接地址                                       |
+| `disabled` | `boolean`                                       | -      | 是否禁用                                       |
+| `icon`     | `string`                                        | -      | 图标名称                                       |
+| `route`    | `Record<string, unknown> \| string`             | -      | 路由对象（或 `to`），用于 VueRouter 跳转       |
+| `to`       | `Record<string, unknown> \| string`             | -      | 路由对象，等价于 `route`（未传 `href` 时生效） |
+| `size`     | `string`                                        | -      | 尺寸                                           |
+| `title`    | `string`                                        | -      | 标题（原生 title 属性）                        |
+| `theme`    | `string \| string[] \| Record<string, boolean>` | -      | 主题样式（继承自 GlobalProps）                 |
