@@ -77,8 +77,8 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 nao 协作舰队机制（角色卡、闸门、脚本）**不再存于本仓副本**，由 pi 包 `npm:@nathan33/nao-skill` 提供；项目内只剩一个入口 shim。
 
-- **版本唯一事实来源 = 入库的 `.pi/settings.json`**：其 `packages` 字段 pin 机制版本（当前 `npm:@nathan33/nao-skill@0.12.0`）。新机器 clone 后执行 `pi install -l --approve`，即按该 pin 物化机制；升级机制 = 改 pin 后重装依赖。
-- **机制资产引用一律走 `$NAO_SKILLS` 前缀**（nao 机制包根），例如 `$NAO_SKILLS/.agents/scripts/qq-notify`、`$NAO_SKILLS/.agents/roles.yaml`。不要再把机制文件复制回项目内，也不要再引用仓内同名副本。
+- **版本唯一事实来源 = 入库的 `.pi/settings.json`**：其 `packages` 字段 pin 机制版本（当前 `npm:@nathan33/nao-skill@0.20.4`）。新机器 clone 后执行 `pi install -l --approve`，即按该 pin 物化机制；升级机制 = 改 pin 后重装依赖。机制包 0.19.1 起**只支持「tmux 内运行 + pi ≥ 1.4.0」**，升级前先核对这两项。
+- **机制资产引用一律走 `$NAO_SKILLS` 前缀**（nao 机制包根），例如 `$NAO_SKILLS/.agents/scripts/intercom-probe.mts`、`$NAO_SKILLS/.agents/roles.yaml`。不要再把机制文件复制回项目内，也不要再引用仓内同名副本。
 - **入口 shim**：迁移写入项目根机制目录下的 `scripts/nao-fleet.sh`，自行解析机制包根并原样转发；旧命令（`check` / `status` / `ensure <role>`）照常可用，勿手工编辑。
 - ⛔ **不再为对齐 fmt 而格式化机制资产目录**：`vite.config.ts` 的 `fmt.ignorePatterns` 已把机制资产目录、`.codegraph/**`、`.pi/**` 整目录排除，本仓 fmt 只作用于业务代码与文档。
 - ⚠️ **已退役的判据**：0.11.0 及更早要求「项目内机制文件与上游 `sha256sum` 逐字节一致 / 逐字节同步校验」，0.12.0 起该判据**作废**，机制正确性改由 **pin 版本**保证。实测订正：原「完整 `vp check` 稳定报 3 个文件」的说法不成立 —— 两个机制文件早已被 `fmt.ignorePatterns` 整目录排除，第三个（本仓自有 CLI 入口 `packages/nue-ui-skill/bin/nue-ui-skill.mjs`）已 fmt 干净。
