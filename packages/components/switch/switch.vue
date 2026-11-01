@@ -20,14 +20,20 @@
                 />
             </slot>
         </div>
-        <div v-if="showText || $slots.text" class="nue-switch__text">
-            <slot name="text">{{ text }}</slot>
+        <div
+            v-if="!isEmptySlot($slots.text) || showText || !isEmptySlot($slots.default)"
+            class="nue-switch__text"
+        >
+            <slot v-if="!isEmptySlot($slots.text)" name="text" />
+            <template v-else-if="showText">{{ text }}</template>
+            <slot v-else />
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch, Comment, Text } from 'vue';
+import type { VNode } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import { isFunction } from 'lodash-es';
 import { NueIcon } from '../icon';
@@ -66,6 +72,18 @@ const classes = computed(() => {
 const text = computed(() => {
     return state.value ? props.activeText : props.inactiveText;
 });
+
+// 插槽是否「空」：未传、空数组、仅注释占位（v-if 落空）、仅空白文本都算空，避免留下空文案占位
+const isEmptySlot = (slot?: () => VNode[]): boolean => {
+    if (!slot) return true;
+    const vnodes = slot();
+    if (vnodes.length === 0) return true;
+    return vnodes.every(vnode => {
+        if (vnode.type === Comment) return true;
+        if (vnode.type === Text) return String(vnode.children ?? '').trim() === '';
+        return false;
+    });
+};
 
 const handleClick = async () => {
     const { loading, disabled, beforeSwitch } = props;
