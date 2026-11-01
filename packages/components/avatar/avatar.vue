@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { parseTheme } from '@nue-ui/utils';
 import NueIcon from '../icon/icon.vue';
 import NueText from '../text/text.vue';
@@ -42,4 +42,12 @@ const handleError = (e: Event) => {
     error.value = true;
     emit('error', e);
 };
+
+// 错误态是针对某个 src 的状态：src 实际变化才复位重试（同一 src 不重复重试，避免坏图抖动）
+watch(
+    () => props.src,
+    () => {
+        error.value = false;
+    }
+);
 </script>
