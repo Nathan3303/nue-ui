@@ -9,8 +9,8 @@ NueUI 是一个基于 Vue 3 的 UI 组件库，采用 Monorepo 架构，旨在�
 - 🚀 **良好的文档和社区支持** - 拥有详细的文档，内容清晰，涵盖了从基础入门到高级用法的各个方面
 - ⚙️ **支持 TypeScript** - 组件库完全支持 TypeScript，提供了完整的类型定义文件
 - 📦 **按需引入** - 支持全量引入、按需引入和自动导入三种方式
-- 🌓 **主题定制** - 支持主题定制，提供 Shadlike 主题
-- 🧪 **单元测试** - 完善的单元测试覆盖
+- 🌓 **双主题** - 内置 `nue-ui-theme-shadlike`（Shadlike 风格）与 `nue-ui-theme-glass`（Frostline 玻璃拟态）两套成品主题，也可基于 CSS 变量自定义
+- 🧪 **单元测试** - 组件、hooks、主题与工具包均有单元测试覆盖（`pnpm test:run`）
 - 🏗️ **Monorepo 架构** - 采用 Monorepo 架构，便于统一管理和开发
 
 ## 项目信息
@@ -27,7 +27,9 @@ NueUI 是一个基于 Vue 3 的 UI 组件库，采用 Monorepo 架构，旨在�
 ### 安装组件库
 
 ```bash
-pnpm install nue-ui
+# 组件库本体 + 任选一套主题（组件本身不含样式，样式全部来自主题包）
+pnpm add nue-ui nue-ui-theme-shadlike   # Shadlike 风格
+pnpm add nue-ui nue-ui-theme-glass      # 或 Frostline 玻璃拟态风格
 ```
 
 ### 基本使用
@@ -51,31 +53,36 @@ NueUI 项目采用 Monorepo 结构，包含以下几个主要模块：
 
 - **`@nue-ui/document`** - 基于 VitePress 的文档站点，提供完整的组件使用文档和示例
 - **`@nue-ui/playground`** - 组件演练场，用于快速测试和演示组件功能
-- **`@nue-ui/histoire`** - 基于 Histoire 的组件测试和展示平台
 
 ### Packages（核心包）
 
-- **`@nue-ui/components`** - 所有组件的源码，包含 30+ 个高质量组件
+- **`@nue-ui/components`** - 所有组件的源码（30+ 组件，含组合型子组件）
 - **`@nue-ui/core`** - 组件库构建核心，负责打包、构建和发布，支持 ES Module 和 UMD 格式
 - **`@nue-ui/hooks`** - 功能钩子集合，提供常用的 Vue 3 组合式函数
-- **`@nue-ui/themes`** - 主题相关配置和样式
+- **`@nue-ui/utils`** - 通用工具函数（`parseTheme`、日期处理等）
+- **`@nue-ui/themes`** - 主题包源码（`glass` / `shadlike` / `iconfont`）
 - **`@nue-ui/plugins`** - 插件集合，包括自动导入 resolver 等
 
-### 独立包
+### 独立包（可单独安装）
 
+- **`nue-ui`** - 组件库发布包（由 `packages/core` 构建产出）
 - **`nue-ui-theme-shadlike`** - Shadlike 风格主题包
+- **`nue-ui-theme-glass`** - Glass「Frostline」玻璃拟态主题包
 - **`nue-ui-iconfont`** - 图标字体包
+- **`nue-ui-resolver`** - `unplugin-vue-components` 自动导入解析器
+- **`nue-ui-skill`** - 面向 AI Agent 的 NueUI 使用技能包（`packages/nue-ui-skill`）
 
 ## 组件概览
 
 NueUI 提供了 30+ 个高质量组件，分为以下几类：
 
 - **基础组件** - Button、Icon、Link、Text、Div 等
-- **布局组件** - Container、Header、Aside、Main、Footer 等
-- **数据展示** - Avatar、Badge、Collapse、Empty、Progress、Table 等
-- **表单组件** - Input、Textarea、Select、Checkbox、Switch、DatePicker 等
-- **反馈组件** - Dialog、Drawer、Message、Tooltip 等
+- **布局组件** - Container、Header、Aside、Content、Main、Footer、Separator 等
+- **数据展示** - Avatar、Badge、Collapse、Empty、Progress、Table、Marquee、Scroll Bar 等
+- **表单组件** - Input、Textarea、Select、Checkbox、Switch、DatePicker、Calendar 等
+- **反馈组件** - Dialog、Drawer、Message、Confirm、Prompt、Tooltip 等
 - **导航组件** - Breadcrumb、Dropdown 等
+- **其他** - Divider、Popup Pool、Infinite Scroll 等
 
 详细的组件列表和说明请参考 [packages/core/README.md](./packages/core/README.md)
 
@@ -84,7 +91,7 @@ NueUI 提供了 30+ 个高质量组件，分为以下几类：
 ### 环境要求
 
 - Node.js >= 18
-- pnpm >= 8
+- pnpm **11.21.0**（仓库 `devEngines` 锁定；版本不符时 `npx` / `npm` 会被直接拒绝，请统一用 `pnpm`）
 
 ### 安装依赖
 
@@ -108,8 +115,10 @@ pnpm test:coverage     # 生成测试覆盖率报告
 #### 代码质量
 
 ```bash
-pnpm exec vp lint     # 运行代码检查（vite-plus 内置 oxlint + 类型检查）
-pnpm format           # 运行代码格式化
+pnpm exec vp lint     # 代码检查（oxlint）
+pnpm exec vp fmt .    # 代码格式化（等价 pnpm format）
+pnpm typecheck        # 类型检查（vue-tsc -b components + hooks）
+pnpm check:lf         # 换行符守卫（全仓 LF）
 ```
 
 #### 构建
@@ -117,6 +126,7 @@ pnpm format           # 运行代码格式化
 ```bash
 pnpm core build        # 构建组件库
 pnpm shadlike-theme build  # 构建 Shadlike 主题
+pnpm glass-theme build     # 构建 Glass 主题
 pnpm iconfont build    # 构建图标字体
 pnpm build             # 构建全部
 ```
@@ -125,7 +135,6 @@ pnpm build             # 构建全部
 
 ```bash
 pnpm document dev      # 启动文档站点开发服务器
-pnpm histoire dev      # 启动 Histoire 开发服务器
 pnpm playground dev    # 启动演练开发服务器
 ```
 
@@ -133,17 +142,15 @@ pnpm playground dev    # 启动演练开发服务器
 
 ```bash
 pnpm document preview  # 预览文档站点
-pnpm histoire preview  # 预览 Histoire
 pnpm playground preview # 预览演练
 ```
 
 ### 开发规范
 
-- 使用 TypeScript 进行类型检查
-- 使用 ESLint 进行代码检查
-- 使用 Prettier 进行代码格式化
-- 使用 Vitest 进行单元测试
-- 提交前会自动运行 lint-staged 进行代码检查和格式化
+- 工具链统一为 **vite-plus**（`vp`）：`vp lint`（oxlint）+ `vp fmt`（oxfmt）+ `vp test`（Vitest）
+- 类型检查走 `pnpm typecheck`（`vue-tsc -b packages/components packages/hooks`）
+- Git 钩子分工：`pre-commit` 只对**暂存文件**做格式化/检查，`pre-push` 跑**全量测试**
+- 提交信息与分支约定见 `AGENTS.md` 与仓库 PR 模板
 
 ## 贡献
 
@@ -171,6 +178,8 @@ pnpm playground preview # 预览演练
 ## 相关文档
 
 - [组件库使用文档](./packages/core/README.md)
+- [Glass 主题（Frostline）](./packages/themes/glass/README.md)
+- [Shadlike 主题](./packages/themes/shadlike/README.md)
 - [Resolver 使用文档](./packages/plugins/resolver/README.md)
 - [在线文档](https://nathan3303.github.io/nue-ui/)
 

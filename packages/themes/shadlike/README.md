@@ -260,7 +260,7 @@ NueUI Theme Shadlike 是 NueUI 组件库的 Shadcn-like 风格主题包，提供
 ### 安装
 
 ```bash
-pnpm install nue-ui-theme-shadlike
+pnpm add nue-ui-theme-shadlike
 ```
 
 ### 引入样式

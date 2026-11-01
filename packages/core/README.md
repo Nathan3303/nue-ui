@@ -92,6 +92,7 @@ const NueUI = require('nue-ui');
 | `NueCheckboxGroup` | 复选框组   |
 | `NueSwitch`        | 开关       |
 | `NueDatePicker`    | 日期选择器 |
+| `NueCalendar`      | 日历       |
 
 ### 反馈组件
 
@@ -99,7 +100,10 @@ const NueUI = require('nue-ui');
 | ------------------- | ------------ |
 | `NueDialog`         | 对话框       |
 | `NueDrawer`         | 抽屉         |
+| `NueMessage`        | 消息提示     |
 | `NueMessageWrapper` | 消息提示容器 |
+| `NueConfirm`        | 确认框       |
+| `NuePrompt`         | 输入提示框   |
 | `NueTooltip`        | 文字提示     |
 
 ### 导航组件
@@ -116,6 +120,7 @@ const NueUI = require('nue-ui');
 | 组件名称       | 说明     |
 | -------------- | -------- |
 | `NueDivider`   | 分割线   |
+| `NueScrollBar` | 滚动条   |
 | `NuePopupPool` | 弹出层池 |
 
 ## 使用方式
@@ -161,6 +166,8 @@ import 'nue-ui-theme-shadlike/dist/components/text.css';
 > `NueMessage` 依赖 `icon.css`、`text.css`；`NueConfirm` 依赖
 > `overlay.css`、`button.css`、`text.css`、`popup-pool.css`、`div.css`、`divider.css`。
 > 也可以直接引入全量样式 `nue-ui-theme-shadlike/dist/index.css` 省心。
+
+> 提示：上面以 `nue-ui-theme-shadlike` 为例。仓库同时提供 `nue-ui-theme-glass`（Frostline 玻璃拟态），两者 CSS 目录结构一致，把样式路径里的主题包名换掉即可（例如 `nue-ui-theme-glass/dist/index.css`）。
 
 创建应用：
 
@@ -228,7 +235,7 @@ dist/
 ### Dev Dependencies
 
 - `@rollup/plugin-terser`: ^0.4.4
-- `shelljs`: ^0.5.5
+- `shelljs`: ^0.8.5
 - `vite-plugin-compression2`: ^2.3.1
 - `vite-plugin-dts`: ^4.5.4
 
