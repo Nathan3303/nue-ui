@@ -28,7 +28,7 @@
 ## 三、范围 / 非范围
 
 - **范围 1（#108）**：`NueLink` 的 `route` 形态与 `to` 形态渲染出的链接元素具备可用 `href`、可聚焦可回车激活；`to` 不再以未声明属性形式落到 DOM；同一 PR 同步组件文档（`apps/document/tutorial/basic/link/index.md`：优先级、禁用态可聚焦性、`to` 属性、路由形态可达性说明）。
-- **范围 2（#109）**：`NueAvatar` 在 `src` 变化时复位错误态并重试加载；`src` 置空时保持图标/首字母回退。
+- **范围 2（#109）**：`NueAvatar` 在 `src` 变化时复位错误态并重试加载；`src` 置空时保持图标回退（首字母路径现状不可达，见 #117）。
 - **范围 3（#110）**：`NueSwitch` 支持把默认插槽作为开关文案（等价 `show-text` + `slot#text`），并固化与 `#text` / 文案 prop 的优先级。
 - **非范围**：主题包 CSS（三处均复用既有类名，理由：本条是行为缺陷，不是设计变更）。
 - **非范围**：`href` 形态与 `<button>` 语义改造（理由：#108 的 `<button>` 备选未被采纳，保留超链接语义即可）。
@@ -69,9 +69,9 @@
 - AC-108-5（设计一致性）：Given 修复后，When 检查 `link.css`，Then 主题零改动（无新增类名/变量）。
 - AC-109-1（主路径）：Given 挂载 `src="/a.png"` 并触发 `error`，When `setProps({ src: '/b.png' })`，Then `img` 重新存在且 `src === '/b.png'`。
 - AC-109-2（异常）：Given `src` 为坏地址且未变化，When 再次渲染，Then 不重复发起加载（错误态保持，避免抖动）。
-- AC-109-3（边界）：Given 已处于错误态，When `src` 被置为 `undefined`/空串，Then 保持图标/首字母回退且不抛错。
+- AC-109-3（边界）：Given 已处于错误态，When `src` 被置为 `undefined`/空串，Then 保持图标回退且不抛错（首字母回退路径现状不可达，见 #117，不作本单判据）。
 - AC-109-4（负向闭环）：Given 新 `src` 成功加载，When 触发 `load` 事件，Then 错误态清零且不重复 emit `error`。
-- AC-109-5（设计一致性）：Given 复用既有 `.nue-avatar__icon` / 首字母回退路径，Then 主题零改动。
+- AC-109-5（设计一致性）：Given 复用既有 `.nue-avatar__icon` 回退路径，Then 主题零改动、不新增类名。
 - AC-110-1（主路径）：Given 挂载 `<nue-switch>开启通知</nue-switch>`，When 渲染，Then 开关旁出现文案「开启通知」，文案容器类名为既有 `.nue-switch__text`。
 - AC-110-2（异常）：Given 同时提供默认插槽与 `#text`，When 渲染，Then 仅渲染 `#text` 内容一次（无重复文案、无控制台报错）。
 - AC-110-3（边界）：Given 默认插槽为空字符串或仅空白，When 渲染，Then 不渲染文案容器（不出现空占位）。
