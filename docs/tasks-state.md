@@ -1,6 +1,6 @@
 # 任务状态（接续快照）
 
-> 重开会话先读本文件。更新时间：2026-11-01（**批次 C20261101 组件缺陷三连修已开工：qa 接缝确认中，rd-fe 待派发**）
+> 重开会话先读本文件。更新时间：2026-11-01（**批次 C20261101：108/109 已合并，110 实现中，等 PA 门禁后发 1.15.3**）
 
 ## 交接说明（新 pm 必读）
 
@@ -22,21 +22,24 @@
 | codegraph 索引                | 可选，未立项    | `nao-fleet.sh check` 报「codegraph 已就绪但当前仓无索引」。索引后每会话约 +70–90MB PSS；要开就单独立项，不混进业务 PR。                                                                                                       |
 | `qa-T612` / `rd-fe-T613` 残留 | 他仓，勿动      | 属 nao-todo 仓会话，本仓 `status` 会列出，**不要在本仓回收**。                                                                                                                                                                |
 
-## 当前：C20261101 组件缺陷三连修（#108 / #109 / #110 · 进行中）
+## 当前：C20261101 组件缺陷三连修（#108 / #109 / #110 · 3/4 进度：110 实现中）
 
-| 项     | 内容                                                                                                                                                                                                                             |
-| :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 批次   | `C20261101`（无父 Issue，三单各自成 PR；批次编号仅用于会话名与台账）                                                                                                                                                             |
-| Issues | [#108](https://github.com/Nathan3303/nue-ui/issues/108) NueLink href · [#109](https://github.com/Nathan3303/nue-ui/issues/109) NueAvatar error 复位 · [#110](https://github.com/Nathan3303/nue-ui/issues/110) NueSwitch 默认插槽 |
-| 设计   | `docs/prds/2026-11-01-components-defect-fixes.md`（9 模块 · 96 行 · AC 逐单五覆盖 · 无表格）                                                                                                                                     |
-| 分支   | `feat/108-link-route-href` · `feat/109-avatar-error-reset` · `feat/110-switch-default-slot`（均 base `master`）                                                                                                                  |
-| 执行   | `qa-C20261101`（接缝确认 + 用例清单 + 批末门禁）· `rd-fe-C20261101`（顺序做 108 → 109 → 110）                                                                                                                                    |
-| 口径   | #110 = **① 支持默认插槽**（优先级 `#text` > `text` prop > 默认插槽，自动等价 `show-text`）；#108 保留超链接语义、不改 `<button>`                                                                                                 |
-| 文档   | PRD + `docs/prds/README.md` 索引 + 本文件 + `.vite-hooks/pre-commit`（收编）由 PM 路径级提交到**第 1 条分支**，随该 PR squash 进 `master`                                                                                        |
-| 回执   | qa / rd-fe 均 `done(full)`（须列门禁精确数字 / 改动文件 / 用例覆盖）                                                                                                                                                             |
-| 门禁   | 基线 774 例 / 38 文件全绿 → 目标 ≥790 例全绿 · `pnpm run check:lf` · 三个 PR 各恰 1 条 squash 提交                                                                                                                               |
-| 版本   | 三单合并后一次性发 `nue-ui 1.15.3`（PATCH）· notes 落 `docs/releases/nue-ui-1.15.3.md`                                                                                                                                           |
-| 状态   | 2026-11-01 开工确认已过 · qa 接缝确认中                                                                                                                                                                                          |
+| 项     | 内容                                                                                                                                                                                                                                                                  |
+| :----- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 批次   | `C20261101`（无父 Issue，三单各自成 PR；批次编号仅用于会话名与台账）                                                                                                                                                                                                  |
+| Issues | [#108](https://github.com/Nathan3303/nue-ui/issues/108) NueLink href · [#109](https://github.com/Nathan3303/nue-ui/issues/109) NueAvatar error 复位 · [#110](https://github.com/Nathan3303/nue-ui/issues/110) NueSwitch 默认插槽                                      |
+| 设计   | `docs/prds/2026-11-01-components-defect-fixes.md`（9 模块 · 96 行 · AC 逐单五覆盖 · 无表格）                                                                                                                                                                          |
+| 分支   | `feat/108-link-route-href` · `feat/109-avatar-error-reset` · `feat/110-switch-default-slot`（均 base `master`）                                                                                                                                                       |
+| 执行   | `qa-C20261101`（接缝确认 + 用例清单 + 批末门禁）· `rd-fe-C20261101`（顺序做 108 → 109 → 110）                                                                                                                                                                         |
+| 口径   | #110 = **① 支持默认插槽**；文案优先级 = `#text` > （仅 `showText` 真时）`activeText`/`inactiveText` > 默认插槽；渲染条件 = `showText` 真 / `#text` / 默认插槽任一；**组件内 `text` 是 computed，无 `text` prop**（QA 实测订正）；#108 保留超链接语义、不改 `<button>` |
+| 文档   | PRD + `docs/prds/README.md` 索引 + 本文件 + `.vite-hooks/pre-commit`（收编）由 PM 路径级提交到**第 1 条分支**，随该 PR squash 进 `master`                                                                                                                             |
+| 回执   | qa / rd-fe 均 `done(full)`（须列门禁精确数字 / 改动文件 / 用例覆盖）                                                                                                                                                                                                  |
+| 门禁   | 基线 774 → 786（#108 +6 / #109 +6）→ 目标 **792**（#110 +6）· 均 38 文件 · `pnpm run check:lf` · 每个 PR 主干恰 1 条 squash 提交                                                                                                                                      |
+| 已合并 | #108 `74667ab8`（PR #115，11 文件，+403 −47）· #109 `820a36c9`（PR #116，2 文件，+107 −1）· 两单均无 `wip()`                                                                                                                                                          |
+| 遗留   | [#117](https://github.com/Nathan3303/nue-ui/issues/117) `NueAvatar` 的 `alt` 首字母回退在无默认插槽时不生效（#109 验收时发现，判范围外，缺口中立建档）                                                                                                                |
+| 遗留   | `.vite-hooks/pre-commit` 的 `vp staged` 行与上一行 `pnpm run lint:lint-staged`（脚本本体就是 `vp staged`）**重复**，每次提交 fmt 跑两遍；已按用户决定收编入库，建议后续删除（待用户确认）                                                                             |
+| 版本   | 三单合并后一次性发 `nue-ui 1.15.3`（PATCH）· notes 落 `docs/releases/nue-ui-1.15.3.md`                                                                                                                                                                                |
+| 状态   | 2026-11-01 开工确认已过 · qa 接缝确认 + 用例定稿完成 · #110 实现中 · 验收合并后：qa 跑批末门禁（792/38）→ PM 发 `nue-ui 1.15.3` → 归档 PRD                                                                                                                            |
 
 ## 当前：#111 nao 机制包升级 0.13.0 → 0.20.4（已收口）
 
