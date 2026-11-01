@@ -1,6 +1,6 @@
 # PRD：组件缺陷三连修（NueLink href / NueAvatar error 复位 / NueSwitch 默认插槽）
 
-- 状态：待确认（等用户开工确认） · Owner：PM
+- 状态：已定稿（2026-11-01 用户开工确认 · 验收中） · Owner：PM
 - 更新：2026-11-01
 - 指针：上游 Issue [#108](https://github.com/Nathan3303/nue-ui/issues/108) / [#109](https://github.com/Nathan3303/nue-ui/issues/109) / [#110](https://github.com/Nathan3303/nue-ui/issues/110) · 无 ADR · 基线 `packages/core@1.15.2`
 - 优先级：Must（三单均为消费者可见缺陷，走 PATCH 1.15.3）
@@ -9,7 +9,7 @@
 
 - **做什么**：修三处组件行为缺陷 —— `NueLink` 路由形态丢 `href`、`NueAvatar` 错误态不复位、`NueSwitch` 默认插槽被丢弃。
 - **给谁**：使用 NueUI 的业务方（尤其 `nao-todo`，`NueLink` 路由形态被用作主导航/侧栏）、键盘与读屏用户。
-- **成功标准**：三单各自 AC 全过，全量门禁从 774 例增至 ≥790 例且全绿，无既有用例改动。
+- **成功标准**：三单各自 AC 全过，全量门禁从 774 例增至 792 例且全绿，无既有用例改动。
 - **不做什么**：不动主题 CSS、不改 `href` 形态语义、不做组件 API 重构或新组件。
 
 ## 一、问题证据
