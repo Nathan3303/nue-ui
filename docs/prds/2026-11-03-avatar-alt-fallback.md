@@ -1,6 +1,6 @@
 # PRD：NueAvatar 的 alt 首字母回退生效（并订正 icon / 插槽优先级）
 
-- 状态：待用户开工确认（2026-11-03） · Owner：PM
+- 状态：已交付（2026-11-03 · PR #122 squash `14f4c2be` · tag `v1.16.0`） · Owner：PM
 - 更新：2026-11-03
 - 指针：上游 Issue [#117](https://github.com/Nathan3303/nue-ui/issues/117) · 无 ADR · 基线 `nue-ui@1.15.3`
 - 成熟度：命中 @.agents/skills/pm-to-spec.md §一 第 1 条（2026-11-03 用户拍板方向 = A、优先级 = 图片 > icon > alt > 插槽 > logo）

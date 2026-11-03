@@ -1,18 +1,18 @@
 # 任务状态（接续快照）
 
-> 重开会话先读本文件。更新时间：2026-11-03（**任务 #117 已开工：PRD 定稿 + 开工确认卡已过 · 分支 `feat/117-avatar-alt-fallback` · #1.15.3 已发布（tag + Release 均在远端）**）
+> 重开会话先读本文件。更新时间：2026-11-03（**#117 已收口：PR #122 squash `14f4c2be` · tag `v1.16.0` · GitHub Release 已发 · 派生会话已回收 · npm 由用户发布待核验**）
 
 ## PM 接续快照（会话重开后**先读本区**）
 
-- 当前阶段：已开工（qa-117 先行用例 → rd-fe-117 实现 → 批末门禁 → PM 验收）
-- 当前 PRD：`docs/prds/2026-11-03-avatar-alt-fallback.md`（状态：已开工）
-- 未决决策点：无（方向 A + 五档优先级已由用户 2026-11-03 拍板）
+- 当前阶段：**已归档待重开**（#117 已交付：PR #122 squash `14f4c2be` + tag `v1.16.0`；派生会话已回收）
+- 当前 PRD：`docs/prds/2026-11-03-avatar-alt-fallback.md`（状态：**已交付**）
+- 未决决策点：无
 - 待用户回答：无
-- 未派发队列：见下方「待派发队列」（共 0 项；qa 完成后派 rd-fe）
-- 下次唤醒条件：qa-117 / rd-fe-117 `done(full)` 回执
-- 口头约束已落盘：`alt` = 首字母回退（非仅 `img alt`）· 回退链五档 = 图片 → `icon` → `alt` → 默认插槽 → `logo` ⇒ PRD §五
-- 需求分支 / PR：`feat/117-avatar-alt-fallback` · PR owner `rd-fe-117` · Reviewer 无
-- 会话体检：contextTokens≈50k（窗口 5%）· 压缩 0 · 派生 `qa-117` / `rd-fe-117` 开在 PM 窗口内分屏
+- 未派发队列：无（0 项）
+- 下次唤醒条件：用户给新需求；或对 #121（`--round`/`--rounded` 主题类名）立项
+- 口头约束已落盘：`alt` = 首字母回退（非仅 `img alt`）· 回退链五档 = 图片 → `icon` → **默认插槽** → `alt` → `logo`（顺序经用户 2026-11-03 二次裁定为 B）⇒ PRD §五
+- 需求分支 / PR：`feat/117-avatar-alt-fallback`（已删）· PR [#122](https://github.com/Nathan3303/nue-ui/pull/122) 已合并
+- 会话体检：contextTokens≈70k（窗口 7%）· 压缩 0 · **建议批次终态后 `ensure --force pm` 重开**（contextTokens 已过窗口 7%，未超 40% 阈值，非强制）
 
 ## 交接说明（新 pm 必读）
 
@@ -34,7 +34,7 @@
 | codegraph 索引                | ✅ 已建         | `codegraph init` 2026-11-03 实测：496 文件 / 3,794 节点 / 8,351 边，1.3s。`.codegraph/` 已入 `.gitignore`（每会话约 +70–90MB PSS）。                                                                                          |
 | `qa-T612` / `rd-fe-T613` 残留 | 他仓，勿动      | 属 nao-todo 仓会话，本仓 `status` 会列出，**不要在本仓回收**。                                                                                                                                                                |
 
-## 当前：#117 NueAvatar alt 首字母回退（进行中）
+## 已归档：#117 NueAvatar alt 首字母回退（已收口 · 2026-11-03）
 
 | 项    | 内容                                                                                                                                                                                                                           |
 | :---- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -42,19 +42,22 @@
 | 设计  | `docs/prds/2026-11-03-avatar-alt-fallback.md`（9 模块 · 89 行 · AC 六条 · 无表格）                                                                                                                                             |
 | 分支  | `feat/117-avatar-alt-fallback`（base `master`；PM 文档提交先落，RD 在其上叠加实现）                                                                                                                                            |
 | 执行  | `qa-117`（接缝确认 + 用例清单 + 批末门禁）· `rd-fe-117`（实现 + 文档三处）                                                                                                                                                     |
-| 口径  | 回退链五档 = 图片 → `icon` prop → `alt` 首字母（`.nue-avatar__text`）→ 默认插槽 → `logo`；`alt` 空串/空白视为未提供；`alt` 不再顶替插槽内容                                                                                    |
+| 口径  | 回退链五档 = 图片 → `icon` prop → **默认插槽** → `alt` 首字母（`.nue-avatar__text`）→ `logo`；`alt` 空串/空白视为未提供；`alt` 不顶替插槽（顺序于 2026-11-03 由用户二次裁定为「插槽优先于 alt」，RD 发现 PRD 自相矛盾后裁定）  |
 | 版本  | `1.16.0`（MINOR：`alt` 回退属新增行为 + `icon` vs 插槽渲染结果变化）                                                                                                                                                           |
-| 门禁  | 基线 **792/38 文件** → 目标 **798/38 文件**（`avatar.test.ts` +6；A-03 断言经 PRD §三 授权订正）                                                                                                                               |
+| 门禁  | 基线 792/38 文件 → **798/38 文件**（`avatar.test.ts` 13 → 19，+6；A-03 仅改第三段断言）。PM 自证 `pnpm run test:run` = 798/38 · exit 0；反证（回滚实现）= 5 failed / 14 passed                                                 |
 | 回执  | qa / rd-fe 均 `done(full)`（须列门禁精确数字 / 改动文件 / AC 覆盖）                                                                                                                                                            |
 | 附带  | PM 提交：`.gitignore` 增 `.codegraph/` · `docs/prds/README.md` 索引 · 本文件 · release notes `docs/releases/nue-ui-1.16.0.md`（验收时补）· ~~删远端残留 `feat/119-readme-sync`~~（实测远端已无该分支，只清了本地陈旧跟踪引用） |
-| 状态  | 已开工（2026-11-03 开工确认卡已过）                                                                                                                                                                                            |
+| 合并  | PR [#122](https://github.com/Nathan3303/nue-ui/pull/122) squash → `master` `14f4c2be`（9 条分支提交压成 1 条，无 `wip()`，标题用户可读）· 分支已删                                                                             |
+| 发布  | tag `v1.16.0`（附注）· GitHub Release 标题 = 裸版本号 · notes `docs/releases/nue-ui-1.16.0.md` · `packages/core` 1.15.3 → 1.16.0                                                                                               |
+| 遗留  | [#121](https://github.com/Nathan3303/nue-ui/issues/121) `nue-avatar--round` vs `--rounded` 主题类名不匹配（两主题圆角均失效；本单按 AC-117-5 保持现状，未修）                                                                  |
+| 状态  | **已收口**（2026-11-03）                                                                                                                                                                                                       |
 | 降级  | **SSH 22 端口连 GitHub 超时**（`git push origin` 失败）；本单所有 push 走 `git push https://github.com/Nathan3303/nue-ui.git <branch>` + gh credential helper（exit 0）。仅影响推送通道，不影响交付口径                        |
 
 ## 待派发队列
 
-| 任务编号 | 目标会话 | 概要                          | 排队原因                     |
-| :------- | :------- | :---------------------------- | :--------------------------- |
-| #117     | rd-fe    | 五档回退链实现 + 文档三处订正 | 等 `qa-117` 用例清单确认接缝 |
+| 任务编号 | 目标会话 | 概要 | 排队原因 |
+| :------- | :------- | :--- | :------- |
+| 无       | —        | —    | —        |
 
 ## 已归档：C20261101 组件缺陷三连修（#108 / #109 / #110 · 已收口）
 
