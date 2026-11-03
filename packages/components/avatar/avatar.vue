@@ -7,11 +7,10 @@
             class="nue-avatar__image"
             @error="handleError($event)"
         />
-        <slot v-else-if="$slots.default">
-            <nue-text v-if="alt" class="nue-avatar__text">{{ alt }}</nue-text>
-            <nue-icon v-else class="nue-avatar__icon" name="logo" />
-        </slot>
-        <nue-icon v-else :name="icon" class="nue-avatar__icon" />
+        <nue-icon v-else-if="icon" :name="icon" class="nue-avatar__icon" />
+        <slot v-else-if="$slots.default" />
+        <nue-text v-else-if="hasAlt" class="nue-avatar__text">{{ alt }}</nue-text>
+        <nue-icon v-else class="nue-avatar__icon" name="logo" />
     </div>
 </template>
 
@@ -37,6 +36,9 @@ const styles = computed(() => ({
     '--nue-avatar-size': props.size,
     '--nue-avatar-object-fit': props.fit
 }));
+
+// alt 为空白串不算命中，继续下探到默认插槽 / logo
+const hasAlt = computed(() => Boolean(props.alt?.trim()));
 
 const handleError = (e: Event) => {
     error.value = true;
