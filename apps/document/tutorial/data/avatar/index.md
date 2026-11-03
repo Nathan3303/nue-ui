@@ -26,7 +26,7 @@ demo-preview=./size.vue
 
 通过属性 `icon` 设置头像的图标，该属性接受一个 `string` 类型的值。
 
-当属性 `src` 未指定或者所指定的图片无法显示时，`icon` 属性生效。
+当属性 `src` 未指定或者所指定的图片无法显示时，`icon` 属性生效，且优先于默认插槽与 `alt` 首字母回退。
 
 ::: preview
 demo-preview=./icon.vue
@@ -36,7 +36,8 @@ demo-preview=./icon.vue
 
 通过默认插槽插入内容。
 
-当属性 `src` 未指定或者所指定的图片无法显示，并且 `icon` 又同时未指定时，插槽内容将会生效。
+头像的完整回退顺序为「图片 → `icon` → 默认插槽 → `alt` 首字母 → `logo`」：
+当属性 `src` 未指定或者所指定的图片无法显示，并且 `icon` 又同时未指定时，插槽内容将会生效（插槽优先于 `alt` 首字母，`alt` 不会顶替插槽内容）。
 
 ::: preview
 demo-preview=./inner-text.vue
@@ -55,7 +56,7 @@ demo-preview=./fit.vue
 
 ## 注意事项
 
-1. **优先级**：图片加载成功时显示图片；图片加载失败时显示 `icon`；两者都没有时显示默认插槽内容。
+1. **优先级**：图片加载成功时显示图片；否则按「`icon` → 默认插槽 → `alt` 首字母 → `logo` 图标」逐档回退，命中即停止（`alt` 为空或全为空白时不算命中）。
 2. **填充方式**：`fit` 属性控制图片如何适应容器，类似于 CSS `object-fit` 属性。
 3. **尺寸单位**：`size` 属性接受任何有效的 CSS 宽度/高度值。
 4. **错误处理**：可以通过 `error` 事件监听图片加载失败，进行错误处理或显示占位图。
@@ -66,16 +67,16 @@ demo-preview=./fit.vue
 
 ### 属性
 
-| 属性      | Type                                                       | 默认值  | 说明                           |
-| --------- | ---------------------------------------------------------- | ------- | ------------------------------ |
-| `src`     | `string`                                                   | -       | 图片地址                       |
-| `icon`    | `string`                                                   | -       | 备用图标（图片加载失败时显示） |
-| `size`    | `string`                                                   | -       | 尺寸，接受 CSS 宽度/高度值     |
-| `title`   | `string`                                                   | -       | 标题（原生 title 属性）        |
-| `fit`     | `'fill' \| 'cover' \| 'contain' \| 'none' \| 'scale-down'` | -       | 图片填充方式                   |
-| `rounded` | `boolean`                                                  | `false` | 是否圆角                       |
-| `alt`     | `string`                                                   | -       | 图片替代文本                   |
-| `theme`   | `string \| string[] \| Record<string, boolean>`            | -       | 主题样式（继承自 GlobalProps） |
+| 属性      | Type                                                       | 默认值  | 说明                                  |
+| --------- | ---------------------------------------------------------- | ------- | ------------------------------------- |
+| `src`     | `string`                                                   | -       | 图片地址                              |
+| `icon`    | `string`                                                   | -       | 备用图标（图片加载失败时显示）        |
+| `size`    | `string`                                                   | -       | 尺寸，接受 CSS 宽度/高度值            |
+| `title`   | `string`                                                   | -       | 标题（原生 title 属性）               |
+| `fit`     | `'fill' \| 'cover' \| 'contain' \| 'none' \| 'scale-down'` | -       | 图片填充方式                          |
+| `rounded` | `boolean`                                                  | `false` | 是否圆角                              |
+| `alt`     | `string`                                                   | -       | 图片替代文本，无图/坏图时作首字母回退 |
+| `theme`   | `string \| string[] \| Record<string, boolean>`            | -       | 主题样式（继承自 GlobalProps）        |
 
 ### 事件
 
