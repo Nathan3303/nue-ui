@@ -108,13 +108,14 @@ describe('NueAvatar', () => {
             expect(wrapper.emitted('error')).toHaveLength(errorCount!);
             expect(wrapper.classes()).toContain('nue-avatar');
 
-            // 有 alt 时同样保持回退（注：既有实现里 alt 首字母文本在默认插槽的 fallback 内，
-            // 不传默认插槽时仍走图标回退，与本单修复无关，已回报 PM）
+            // 有 alt 且无插槽时走首字母文本回退
             const withAlt = mount(NueAvatar, { props: { src: '/a.png', alt: '李四' } });
             await withAlt.find('img').trigger('error');
             await withAlt.setProps({ src: '' });
             expect(withAlt.find('img').exists()).toBe(false);
-            expect(withAlt.find('.nue-avatar__icon').exists()).toBe(true);
+            expect(withAlt.find('.nue-avatar__text').exists()).toBe(true);
+            expect(withAlt.find('.nue-avatar__text').text()).toBe('李四');
+            expect(withAlt.find('.nue-avatar__icon').exists()).toBe(false);
             expect(withAlt.emitted('error')).toHaveLength(1);
             expect(withAlt.classes()).toContain('nue-avatar');
         });
@@ -157,6 +158,112 @@ describe('NueAvatar', () => {
             await wrapper.setProps({ src: '/a.png' });
             expect(wrapper.find('img').exists()).toBe(true);
             expect(wrapper.find('img').attributes('src')).toBe('/a.png');
+        });
+    });
+
+    describe('alt 回退链', () => {
+        it('AV-117-01 无插槽且有 alt 时应渲染首字母文本', async () => {
+            const wrapper = mount(NueAvatar, { props: { src: '/a.png', alt: '李四' } });
+            await wrapper.find('img').trigger('error');
+
+            expect(wrapper.find('img').exists()).toBe(false);
+            expect(wrapper.find('.nue-avatar__text').exists()).toBe(true);
+            expect(wrapper.find('.nue-avatar__text').text()).toBe('李四');
+            expect(wrapper.find('.nue-avatar__icon').exists()).toBe(false);
+            expect(wrapper.emitted('error')).toHaveLength(1);
+            expect(wrapper.classes()).toContain('nue-avatar');
+        });
+
+        it('AV-117-02 应该让 icon 优先于 alt 与默认插槽', async () => {
+            const noSlot = mount(NueAvatar, {
+                props: { src: '/a.png', alt: '李四', icon: 'location' }
+            });
+            await noSlot.find('img').trigger('error');
+
+            const icon = noSlot.find('.nue-avatar__icon');
+            expect(icon.exists()).toBe(true);
+            expect(icon.classes()).toContain('icon-location');
+            expect(noSlot.find('.nue-avatar__text').exists()).toBe(false);
+            expect(noSlot.find('img').exists()).toBe(false);
+            expect(noSlot.emitted('error')).toHaveLength(1);
+
+            const withSlot = mount(NueAvatar, {
+                props: { src: '/a.png', alt: '李四', icon: 'location' },
+                slots: { default: '<div class="slot-avatar">S</div>' }
+            });
+            await withSlot.find('img').trigger('error');
+
+            const iconWithSlot = withSlot.find('.nue-avatar__icon');
+            expect(iconWithSlot.exists()).toBe(true);
+            expect(iconWithSlot.classes()).toContain('icon-location');
+            expect(withSlot.find('.nue-avatar__text').exists()).toBe(false);
+            expect(withSlot.find('.slot-avatar').exists()).toBe(false);
+            expect(withSlot.text().trim()).toBe('');
+        });
+
+        it('AV-117-03 alt 为空串或全空白时应回退到默认插槽', () => {
+            ['', '   '].forEach(alt => {
+                const wrapper = mount(NueAvatar, {
+                    props: { alt, src: '' },
+                    slots: { default: '<div class="slot-avatar">S</div>' }
+                });
+
+                expect(wrapper.find('img').exists()).toBe(false);
+                expect(wrapper.find('.nue-avatar__text').exists()).toBe(false);
+                expect(wrapper.find('.slot-avatar').exists()).toBe(true);
+                expect(wrapper.find('.slot-avatar').text()).toBe('S');
+                expect(wrapper.find('.nue-avatar__icon').exists()).toBe(false);
+                expect(wrapper.text().trim()).toBe('S');
+            });
+        });
+
+        it('AV-117-04 alt 为空串或全空白且无插槽时应回退到 logo 图标', () => {
+            ['', '   '].forEach(alt => {
+                const wrapper = mount(NueAvatar, { props: { alt } });
+
+                expect(wrapper.find('img').exists()).toBe(false);
+                expect(wrapper.find('.nue-avatar__text').exists()).toBe(false);
+                const icon = wrapper.find('.nue-avatar__icon');
+                expect(icon.exists()).toBe(true);
+                expect(icon.classes()).toContain('icon-logo');
+                expect(wrapper.text().trim()).toBe('');
+            });
+        });
+
+        it('AV-117-05 应该让默认插槽压过 alt 而不被顶替', async () => {
+            const wrapper = mount(NueAvatar, {
+                props: { src: '/a.png', alt: '李四' },
+                slots: { default: '<div class="slot-avatar">A</div>' }
+            });
+
+            expect(wrapper.find('img').exists()).toBe(true);
+            expect(wrapper.find('img').attributes('alt')).toBe('李四');
+
+            await wrapper.find('img').trigger('error');
+
+            expect(wrapper.find('.slot-avatar').exists()).toBe(true);
+            expect(wrapper.find('.slot-avatar').text()).toBe('A');
+            expect(wrapper.find('.nue-avatar__text').exists()).toBe(false);
+            expect(wrapper.find('.nue-avatar__icon').exists()).toBe(false);
+            expect(wrapper.emitted('error')).toHaveLength(1);
+        });
+
+        it('AV-117-06 应该逐字符透传 img 的 alt，且无 src 时直接走回退', () => {
+            const withImage = mount(NueAvatar, { props: { src: '/ok.png', alt: '  李 四 ' } });
+            const img = withImage.find('img');
+            expect(img.exists()).toBe(true);
+            expect(img.classes()).toContain('nue-avatar__image');
+            expect(img.attributes('alt')).toBe('  李 四 ');
+            expect(img.attributes('src')).toBe('/ok.png');
+            expect(withImage.find('.nue-avatar__text').exists()).toBe(false);
+            expect(withImage.find('.nue-avatar__icon').exists()).toBe(false);
+
+            const noImage = mount(NueAvatar, { props: { alt: '李四' } });
+            expect(noImage.find('img').exists()).toBe(false);
+            expect(noImage.find('.nue-avatar__text').exists()).toBe(true);
+            expect(noImage.find('.nue-avatar__text').text()).toBe('李四');
+            expect(noImage.find('.nue-avatar__icon').exists()).toBe(false);
+            expect(noImage.emitted('error')).toBeUndefined();
         });
     });
 });
